@@ -12,7 +12,7 @@ export const FISH:Record<FishId,{name:string;atlas:number;rarity:string;min:numb
 };
 export interface FishCatch {id:number;fish:FishId;grams:number;value:number;day:number}
 export interface FishingState {atLake:boolean;bait:number;trips:number;pendingCast:boolean;nextId:number;basket:FishCatch[];collection:Record<FishId,{caught:number;best:number}>;lastCatch:FishCatch|null}
-export const LAKE:Place={id:'lake',name:'Hồ Sen ngoại ô',icon:'fish',x:0,y:0,summary:'Bến câu ven hồ · Tuyến xe buýt 07',detail:'Một hồ câu yên tĩnh ngoài thành phố. Đi tuyến 07 từ trạm xe buýt; cần câu được mượn tại hồ.'};
+export const LAKE:Place={id:'lake',name:'Hồ Sen ngoại ô',icon:'fish',x:0,y:0,summary:'Bến câu ven hồ Tuyến xe buýt 07',detail:'Một hồ câu yên tĩnh ngoài thành phố. Đi tuyến 07 từ trạm xe buýt; cần câu được mượn tại hồ.'};
 export const ROUND_TRIP_FARE=40000,BAIT_PRICE=10000;
 export function initialFishing():FishingState{return{atLake:false,bait:10,trips:0,pendingCast:false,nextId:1,basket:[],collection:Object.fromEntries(FISH_IDS.map(id=>[id,{caught:0,best:0}])) as FishingState['collection'],lastCatch:null}}
 export const fishingOf=(state:GameState):FishingState=>state.fishing??initialFishing();
@@ -28,7 +28,7 @@ export function takeBus(state:GameState,toLake:boolean):GameResult {
  if(toLake&&state.money<ROUND_TRIP_FARE)return{ok:false,error:'Cần 40.000đ cho vé khứ hồi. Lượt về đã được bao gồm.'};
  if(f.trips>=1e6)return{ok:false,error:'Đã tới giới hạn số chuyến.'};
  const timed=spendTime(state,45,toLake?'lake':'bus');if(!timed.ok)return timed;state=timed.state;
- const n=toLake?ledger(state,'Xe buýt 07 · Vé khứ hồi Hồ Sen',-ROUND_TRIP_FARE):state;
+ const n=toLake?ledger(state,'Xe buýt 07 Vé khứ hồi Hồ Sen',-ROUND_TRIP_FARE):state;
  return{ok:true,state:{...n,fishing:{...f,atLake:toLake,trips:f.trips+(toLake?1:0),pendingCast:false}}};
 }
 export function buyBait(state:GameState):GameResult {
@@ -36,7 +36,7 @@ export function buyBait(state:GameState):GameResult {
  if(state.money<BAIT_PRICE)return{ok:false,error:'Chưa đủ 10.000đ mua mồi.'};
  if(f.bait>989)return{ok:false,error:'Hộp mồi đã đầy.'};
  const timed=spendTime(state,5);if(!timed.ok)return timed;state=timed.state;
- return{ok:true,state:{...ledger(state,'Hồ Sen · Mua 10 mồi câu',-BAIT_PRICE),fishing:{...f,bait:f.bait+10}}};
+ return{ok:true,state:{...ledger(state,'Hồ Sen Mua 10 mồi câu',-BAIT_PRICE),fishing:{...f,bait:f.bait+10}}};
 }
 export function castLine(state:GameState):GameResult {
  const f=fishingOf(state);if(!f.atLake)return{ok:false,error:'Hãy đi xe buýt tới Hồ Sen trước.'};
@@ -64,7 +64,7 @@ export function sellFish(state:GameState):GameResult {
  if(!f.atLake||!f.basket.length)return{ok:false,error:'Chưa có cá trong giỏ để bán ở hồ.'};
  if(state.money+value>1e12)return{ok:false,error:'Số dư đã tới giới hạn.'};
  const timed=spendTime(state,5);if(!timed.ok)return timed;state=timed.state;
- return{ok:true,state:{...ledger(state,`Hồ Sen · Bán ${f.basket.length} cá`,value),fishing:{...f,basket:[]}}};
+ return{ok:true,state:{...ledger(state,`Hồ Sen Bán ${f.basket.length} cá`,value),fishing:{...f,basket:[]}}};
 }
 
 export const aimPosition=(milliseconds:number)=>{const t=(milliseconds%2400)/1200;return(t<=1?t:2-t)*100};
