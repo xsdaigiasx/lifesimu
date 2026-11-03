@@ -6,7 +6,7 @@
   ],
   "z_px": 32,
   "projection": "orthographic-2:1",
-  "anchor": "actual bottom footprint vertex; see README for rectangular-frame conflict",
+  "anchor": "actual bottom footprint vertex; rectangular footprints use their approved off-center anchor_px",
   "palette_reference": "app/public/assets/static-scenes/rental-diamond.png",
   "palette": [
     {
@@ -360,6 +360,30 @@
       ],
       "mount_origin_px": [
         128,
+        8
+      ]
+    },
+    {
+      "id": "rug-small",
+      "file": "rug-small_b_sage.png",
+      "source": "rug-small_b_sage.svg",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_z": 0,
+      "direction": "b",
+      "variant": "sage",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        128,
+        168
+      ],
+      "mount_origin_px": [
+        192,
         8
       ]
     },
