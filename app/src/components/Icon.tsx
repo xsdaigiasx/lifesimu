@@ -1,0 +1,30 @@
+export function Sprite(){return (<svg className="defs" xmlns="http://www.w3.org/2000/svg"><defs><symbol id="i-chop" viewBox="0 0 24 24"><rect x="2" y="13" width="20" height="8" rx="2"/><path d="m7 3 11 7-3 4L4 7zm-3 4L2 5m7 11h2m3 1h3"/></symbol><symbol id="i-pan" viewBox="0 0 24 24"><path d="M2 12h15l-2 7H5zm15 1 5-3M7 8c-2-2 2-3 0-5m5 5c-2-2 2-3 0-5"/></symbol><symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2c2 6 7 6 7 12a7 7 0 0 1-14 0c0-3 2-5 4-7 0 3 1 4 2 4 2-2 2-6 1-9Z"/><path d="M12 14c3 3 3 6 0 7-3-1-3-4 0-7Z"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol><symbol id="i-rotate" viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 0 7M4 3v6h6"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="m3 7 9-5 9 5v12l-9 3-9-3V7zm0 0 9 4 9-4m-9 4v11M8 4l9 5"/></symbol><symbol id="i-fish" viewBox="0 0 24 24"><path d="M3 12c5-9 12-8 15 0-3 8-10 9-15 0zm15 0 5-5v10z"/><circle cx="8" cy="11" r="1"/></symbol>
+<symbol id="i-city" viewBox="0 0 24 24"><path d="M3 21V9h6V3h7v9h5v9M6 12v2m0 3v1m6-12v2m0 3v2m0 3v2m6-3v3M1 21h22"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11H3zm6 11v-8h6v8"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 8h16l1 13H3zM8 9V6a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3v18h17M8 17v-5m5 5V8m5 9V4"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/></symbol>
+<symbol id="i-save" viewBox="0 0 24 24"><path d="M4 3h14l3 3v15H3V3zm3 0v7h10V3M7 21v-7h10v7"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4 20C1 5 9 3 21 3c0 13-5 20-15 13M4 21 17 7"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4m-4 14h4"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+<symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 4v3"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="m10 8 6 4-6 4z"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 5c-3-3-7-1-8 1-1-2-5-4-8-1-5 5 3 11 8 15 5-4 13-10 8-15z"/><path d="M4 12h4l2-4 3 8 2-4h5"/></symbol>
+<symbol id="i-message" viewBox="0 0 24 24"><path d="M20 3H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3v3l5-3h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/><path d="M6 8h12M6 12h9"/></symbol>
+<symbol id="i-call" viewBox="0 0 24 24"><path d="m5 2 4 5-3 3c2 4 4 6 8 8l3-3 5 4-2 3C10 23 1 14 2 5z"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M7 2v5m10-5v5M3 10h18m-14 5h2m4 0h2m-8 4h2"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M4 18h16l-2-4V9a6 6 0 0 0-12 0v5zm5 3h6M12 1v2"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 5v7l5 3"/></symbol>
+<symbol id="i-news" viewBox="0 0 24 24"><path d="M3 3h15v18H5a2 2 0 0 1-2-2zm15 4h4v12a2 2 0 0 1-4 0M6 7h9M6 11h3v4H6zm6 0h3m-3 4h3m-9 3h9"/></symbol>
+<symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M8 7V3h8v4M2 12l10 4 10-4m-10 1v5"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M4 2h16v20H4zm0 5h16M8 11h8m-8 4h8m-8 4h5"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="m2 5 7-3 6 3 7-3v17l-7 3-6-3-7 3zm7-3v17m6-14v17"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="m9 2-1 3-3 1-3 3 2 3-1 4 3 2 1 3 4-1 3 2 3-2 1-3 3-2-1-4 1-3-3-2-1-3-4 1z"/></symbol>
+<symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></symbol>
+<symbol id="i-cup" viewBox="0 0 24 24"><path d="M3 8h14v7a6 6 0 0 1-12 0V8m12 1h2a3 3 0 0 1 0 6h-2M2 22h18M7 2v3m5-3v3"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24"><path d="M4 22V3h16v19M2 22h20M8 7h2m4 0h2m-8 4h2m4 0h2m-8 4h2m4 0h2m-6 7v-4h4v4"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-mall" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="16" rx="2"/><path d="M8 6V3h8v3M7 10h2m6 0h2M7 14h2m6 0h2m-6 8v-4h4v4"/></symbol><symbol id="i-bank" viewBox="0 0 24 24"><path d="m2 8 10-6 10 6H2zm2 3v8m5-8v8m6-8v8m5-8v8M2 22h20M2 19h20"/></symbol><symbol id="i-hospital" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="19" rx="2"/><path d="M9 8h6m-3-3v6M7 15h2m6 0h2m-7 7v-4h4v4"/></symbol><symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="18" rx="3"/><path d="M4 7h16M4 14h16M8 3v3m8-3v3M7 20v2m10-2v2"/><circle cx="8" cy="17" r=".7"/><circle cx="16" cy="17" r=".7"/></symbol><symbol id="i-food" viewBox="0 0 24 24"><path d="M3 4h18l1 6H2l1-6zm1 7v10h16V11M8 21v-6h8v6M7 4l-1 6m6-6v6m5-6 1 6"/></symbol><symbol id="i-restaurant" viewBox="0 0 24 24"><path d="M4 2v6a3 3 0 0 0 6 0V2M7 2v20M17 2c-3 3-3 8 0 10h3V2h-3zm3 10v10"/></symbol><symbol id="i-villa" viewBox="0 0 24 24"><path d="m2 10 10-8 10 8M5 9v13h14V9M9 22v-7h6v7M8 10h2m4 0h2M18 5V2"/></symbol></defs></svg>);}
+export default function Icon({name}:{name:string}){return <svg aria-hidden="true"><use href={"#i-"+name}/></svg>;}

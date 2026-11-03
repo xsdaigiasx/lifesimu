@@ -1,0 +1,259 @@
+{
+  "version": 2,
+  "source": {
+    "width": 6144,
+    "height": 4096,
+    "file": "art/map-source/city-upscaled-6144.png",
+    "sha256": "718cea920f069a7a6b282247b47c6934e973e2eeba0b2cf73e8fee91cc91371e",
+    "userUpscaled": true,
+    "resizedDuringPreparation": false
+  },
+  "display": {
+    "width": 1440,
+    "height": 960
+  },
+  "columns": 4,
+  "rows": 4,
+  "tiles": [
+    {
+      "id": "r0-c0",
+      "row": 0,
+      "column": 0,
+      "url": "assets/map-tiles/r0-c0.webp?v=614809475f2d",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "sha256": "614809475f2d253baf020af30f91565bd1fbceec6692c8580d9fd3cea83ee648"
+    },
+    {
+      "id": "r0-c1",
+      "row": 0,
+      "column": 1,
+      "url": "assets/map-tiles/r0-c1.webp?v=b345928b3b42",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        1536,
+        0,
+        3072,
+        1024
+      ],
+      "sha256": "b345928b3b427d2e92a39cb6babac2664ab83056e0ba961e70bd70b585604006"
+    },
+    {
+      "id": "r0-c2",
+      "row": 0,
+      "column": 2,
+      "url": "assets/map-tiles/r0-c2.webp?v=47cf216f6ff9",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        3072,
+        0,
+        4608,
+        1024
+      ],
+      "sha256": "47cf216f6ff983b08d02686c0e16b1d051c5660402e83d6bf48950153ece85e9"
+    },
+    {
+      "id": "r0-c3",
+      "row": 0,
+      "column": 3,
+      "url": "assets/map-tiles/r0-c3.webp?v=9c198c72155d",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        4608,
+        0,
+        6144,
+        1024
+      ],
+      "sha256": "9c198c72155db1c2e65d8d1d48095f27670226c5364a390e5df316a53393479a"
+    },
+    {
+      "id": "r1-c0",
+      "row": 1,
+      "column": 0,
+      "url": "assets/map-tiles/r1-c0.webp?v=f2b49a33576f",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        0,
+        1024,
+        1536,
+        2048
+      ],
+      "sha256": "f2b49a33576f35c43ad27e85f6ae9bc0afdb310e86b69060fdf502db5622f8e4"
+    },
+    {
+      "id": "r1-c1",
+      "row": 1,
+      "column": 1,
+      "url": "assets/map-tiles/r1-c1.webp?v=11cb594c67f5",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        1536,
+        1024,
+        3072,
+        2048
+      ],
+      "sha256": "11cb594c67f52d78d2fe22a1f20ae659f6704b83660f5ce0524fc4060f1e6327"
+    },
+    {
+      "id": "r1-c2",
+      "row": 1,
+      "column": 2,
+      "url": "assets/map-tiles/r1-c2.webp?v=41c1eb86c63c",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        3072,
+        1024,
+        4608,
+        2048
+      ],
+      "sha256": "41c1eb86c63c00a098dbf3d7cdcf48044c6719e7ce9f85e977a2aeff8cb49e2f"
+    },
+    {
+      "id": "r1-c3",
+      "row": 1,
+      "column": 3,
+      "url": "assets/map-tiles/r1-c3.webp?v=c544d3067e0f",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        4608,
+        1024,
+        6144,
+        2048
+      ],
+      "sha256": "c544d3067e0f5cbb98a385a2e88e8bb2c8064c0e0aff0f7837618aca95a03d63"
+    },
+    {
+      "id": "r2-c0",
+      "row": 2,
+      "column": 0,
+      "url": "assets/map-tiles/r2-c0.webp?v=449d85c34bbe",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        0,
+        2048,
+        1536,
+        3072
+      ],
+      "sha256": "449d85c34bbe31fe3a2e032d6f204adc27605b919156c44c946ffa146cdaaa6d"
+    },
+    {
+      "id": "r2-c1",
+      "row": 2,
+      "column": 1,
+      "url": "assets/map-tiles/r2-c1.webp?v=84eb32b04c89",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        1536,
+        2048,
+        3072,
+        3072
+      ],
+      "sha256": "84eb32b04c899ffc6f4a395082a46c98f6e5aeb8d8a8657b2dda62619e9c98db"
+    },
+    {
+      "id": "r2-c2",
+      "row": 2,
+      "column": 2,
+      "url": "assets/map-tiles/r2-c2.webp?v=fe877776bb30",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        3072,
+        2048,
+        4608,
+        3072
+      ],
+      "sha256": "fe877776bb308dcfabb951db77398dd37b23ef3b2267dbaefaf5129f5ec222fd"
+    },
+    {
+      "id": "r2-c3",
+      "row": 2,
+      "column": 3,
+      "url": "assets/map-tiles/r2-c3.webp?v=a79003359f6a",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        4608,
+        2048,
+        6144,
+        3072
+      ],
+      "sha256": "a79003359f6a50e449b57b37bedde4cb34f47b70fcfcbfe9f13b49a0a10d0b15"
+    },
+    {
+      "id": "r3-c0",
+      "row": 3,
+      "column": 0,
+      "url": "assets/map-tiles/r3-c0.webp?v=eec8b09f52fe",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        0,
+        3072,
+        1536,
+        4096
+      ],
+      "sha256": "eec8b09f52fe804298c1c63aa50f93b7690c85c6e96571103477dc52b1e8c620"
+    },
+    {
+      "id": "r3-c1",
+      "row": 3,
+      "column": 1,
+      "url": "assets/map-tiles/r3-c1.webp?v=05a109229390",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        1536,
+        3072,
+        3072,
+        4096
+      ],
+      "sha256": "05a109229390b9a060441ac21a026eeef79a500998208a34a035267424e4a2fd"
+    },
+    {
+      "id": "r3-c2",
+      "row": 3,
+      "column": 2,
+      "url": "assets/map-tiles/r3-c2.webp?v=2fb9d4ea910c",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        3072,
+        3072,
+        4608,
+        4096
+      ],
+      "sha256": "2fb9d4ea910c9af3986edd964b203a7031420bafdd57614f9f506dbfe4351dbc"
+    },
+    {
+      "id": "r3-c3",
+      "row": 3,
+      "column": 3,
+      "url": "assets/map-tiles/r3-c3.webp?v=f221dfd01459",
+      "width": 1536,
+      "height": 1024,
+      "box": [
+        4608,
+        3072,
+        6144,
+        4096
+      ],
+      "sha256": "f221dfd014594c10b408808fec852c2e8361751701ac39da716ce0722dcfbe2b"
+    }
+  ]
+}

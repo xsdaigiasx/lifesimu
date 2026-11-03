@@ -1,0 +1,6 @@
+const a=require('node:assert/strict'),{engine}=require('../.test-build/domain/engine'),{initialOffice}=require('../.test-build/domain/office'),{clockOf}=require('../.test-build/domain/time'),w=require('../.test-build/domain/work');
+let s=engine.initial();s={...s,office:{...initialOffice(),role:'employee',employerId:'sen-code'},clock:{...clockOf(s),minute:720,location:'office'}};
+const lunch=w.lunchBreak(s);a(lunch.ok);a.equal(lunch.state.money,s.money-30000);a.equal(lunch.state.clock.minute,780);a(engine.valid(lunch.state));a(!w.lunchBreak(lunch.state).ok);a(!w.lunchBreak({...s,money:0}).ok);
+s={...s,clock:{...s.clock,minute:1020},work:{...w.workOf(s),finished:['0:am','0:pm'],seed:1}};
+while(!w.overtimeOffered(s))s.work.seed++;
+a(w.overtimeOffered(engine.parse(JSON.stringify(s))));let r=w.workAction(s,{kind:'overtime'});a(r.ok,r.error);s=r.state;a(engine.valid(s));a(w.canEnterOffice(s));a(!w.workAction(s,{kind:'overtime'}).ok);let n=0;while(s.work.active){s=w.workTick(s,30);a(engine.valid(s));a(++n<6)}a.equal(s.clock.minute,1140);a(s.work.finished.includes('0:ot'));a(!w.overtimeOffered(s));a(!w.canEnterOffice(s));a(s.work.periods[0].minutes===120);a(!w.workAction(s,{kind:'overtime'}).ok);console.log('PASS lunch cost/recovery/repeat guards and overtime stable offer/run/save/wages/close');

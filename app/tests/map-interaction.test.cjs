@@ -1,0 +1,43 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript');
+const geometry=require('../.test-build/map/geometry'),gestures=require('../.test-build/map/gestures'),layout=require('../.test-build/map/city-layout'),{places}=require('../.test-build/domain/places');
+const {pinchStart,pinchCamera}=gestures;
+const start=pinchStart({x:100,y:100},{x:200,y:100},1,300,200),next=pinchCamera(start,{x:50,y:100},{x:250,y:100},.6,1.15);assert.equal(next.zoom,1.15);assert(Math.abs((next.left+150)/next.zoom-start.world.x)<1e-8);assert(Math.abs((next.top+100)/next.zoom-start.world.y)<1e-8);
+assert.equal(layout.LOTS.length,12);assert.equal(new Set(layout.LOTS.map(l=>l.id)).size,12);
+for(const place of places){const expected=layout.pinPosition(place.id);assert.equal(place.x,expected.x);assert.equal(place.y,expected.y);assert(place.x>0&&place.x<100&&place.y>0&&place.y<100)}
+assert.equal(layout.cityAssets.length,16);
+for(const tile of layout.cityAssets){assert.equal(tile.width,1536);assert.equal(tile.height,1024);assert.equal(tile.box[0],tile.column*1536);assert.equal(tile.box[1],tile.row*1024)}
+assert.equal(layout.visibleCityAssets({left:0,top:0,width:1440,height:960}).length,16);
+const code=ts.transpileModule(fs.readFileSync('src/components/CityMap.tsx','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
+function find(node,predicate){if(!node)return;if(Array.isArray(node)){for(const n of node){const r=find(n,predicate);if(r)return r}}else if(typeof node==='object'){if(predicate(node))return node;return find(node.props?.children,predicate)}}
+function collect(node,predicate,result=[]){if(!node)return result;if(Array.isArray(node))node.forEach(n=>collect(n,predicate,result));else if(typeof node==='object'){if(predicate(node))result.push(node);collect(node.props?.children,predicate,result)}return result}
+function harness({width=390,height=550,currentLocation='home',playerName='Minh',gender='male'}={}){
+ const states=[],refs=[],effects=[],frames=new Map(),listeners=new Set(),captures=new Set(),decoded=new Set();let sc=0,rc=0,id=0,observer,tree;
+ const calls={ready:0,pending:0,errors:[],progress:[]};
+ const view={clientWidth:width,clientHeight:height,scrollLeft:0,scrollTop:0,scrollTo(p){this.scrollLeft=p.left;this.scrollTop=p.top},getBoundingClientRect:()=>({left:0,top:0}),setPointerCapture:n=>captures.add(n),addEventListener(){},removeEventListener(){}};
+ const world={style:{}};
+ const cache={status:id=>decoded.has(id)?'ready':'loading',ensure:()=>Promise.resolve(),retry:()=>Promise.resolve(),error:()=>null,subscribe:fn=>{listeners.add(fn);return()=>listeners.delete(fn)}};
+ let mounted=false;const module={exports:{}},react={useState:initial=>{const i=sc++;if(!(i in states))states[i]=initial;return[states[i],v=>states[i]=typeof v==='function'?v(states[i]):v]},useRef:value=>{const i=rc++;return refs[i]??(refs[i]={current:value})},useLayoutEffect:fn=>{if(!mounted)effects.push(fn)}};
+ const sandbox={exports:module.exports,module,Date,requestAnimationFrame:fn=>{frames.set(++id,fn);return id},cancelAnimationFrame:n=>frames.delete(n),ResizeObserver:class{constructor(fn){observer=fn}observe(){}disconnect(){}},require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})}:name==='../map/city-plan.json'?require('../src/map/city-plan.json'):name==='../map/city-tree.json'?require('../src/map/city-tree.json'):name==='../map/cache'?{cityCache:cache,cityAssets:layout.cityAssets}:name==='../map/city-layout'?layout:name==='../map/geometry'?geometry:name==='../map/gestures'?gestures:{default:()=>null}};
+ vm.runInNewContext(code,sandbox);
+ const props={places,currentLocation,playerName,gender,selected:'home',centerToken:0,retryToken:0,onSelect(){},onInitialReady:()=>calls.ready++,onInitialPending:()=>calls.pending++,onProgress:(...v)=>calls.progress.push(v),onInitialError:e=>calls.errors.push(e)};
+ const render=()=>{sc=0;rc=0;tree=module.exports.default(props);find(tree,n=>n.props?.id==='mapViewport').props.ref.current=view;find(tree,n=>n.props?.id==='cityWorld').props.ref.current=world;return tree};render();effects.forEach(fn=>fn());mounted=true;
+ const flush=()=>{let count=0;while(frames.size){assert(++count<20);const todo=[...frames.values()];frames.clear();todo.forEach(fn=>fn())}render()};
+ const notify=()=>{listeners.forEach(fn=>fn());flush()};
+ const input=find(tree,n=>n.props?.id==='mapViewport').props;
+ const event=(pointerId,x,y)=>({pointerId,clientX:x,clientY:y,pointerType:'touch',button:0,currentTarget:view,target:{closest:()=>null}});
+ const paint=async({fail=false,connected=true}={})=>{for(const n of collect(tree,n=>n.type==='img'&&n.props.onLoad))n.props.onLoad({currentTarget:{isConnected:connected,decode:()=>fail?Promise.reject(Error('decode')):Promise.resolve()}});await new Promise(r=>setImmediate(r));flush()};
+ return{calls,view,world,input,event,paint,tree:()=>tree,flush,panTo:(x,y)=>{view.scrollLeft=x;view.scrollTop=y;notify()},decodeAll:()=>{layout.cityAssets.forEach(a=>decoded.add(a.id));notify()},resize:(w,h)=>{view.clientWidth=w;view.clientHeight=h;observer();flush()}};
+}
+assert.equal(geometry.mapBearing(0,-1),0);assert.equal(geometry.mapBearing(1,0),90);assert.equal(geometry.mapBearing(0,1),180);assert.equal(geometry.mapBearing(-1,0),270);
+(async()=>{
+ const officeMap=harness({currentLocation:'office',playerName:'Linh',gender:'female'});const office=places.find(p=>p.id==='office');assert(Math.abs(officeMap.view.scrollLeft-geometry.cameraForPoint(office.x*14.4,office.y*9.6+48,390,550).left)<1e-8,'initial camera follows current location');officeMap.flush();const marker=()=>find(officeMap.tree(),n=>typeof n.props?.className==='string'&&n.props.className.split(' ').includes('map-player'));assert(marker());assert.equal(marker().props['data-current-location'],'office');assert(marker().props['aria-label'].includes('Linh'));assert.equal(collect(officeMap.tree(),n=>n.props?.className==='map-player-name').length,0);assert(find(officeMap.tree(),n=>n.props?.className==='map-player-direction'));assert(find(officeMap.tree(),n=>n.type==='img'&&n.props?.src==='/assets/player-bust.svg'));assert.equal(collect(officeMap.tree(),n=>typeof n.props?.className==='string'&&n.props.className.split(' ').includes('map-player')).length,1);officeMap.panTo(0,0);assert(marker().props.className.includes('is-at-edge'));assert.equal(marker().props.style.left,342);assert.equal(marker().props['data-bearing'],90);marker().props.onClick();officeMap.flush();assert(!marker().props.className.includes('is-at-edge'));assert(officeMap.view.scrollLeft>800);const css=fs.readFileSync('public/map-player.css','utf8');assert(css.includes('content:attr(data-name)'));assert(css.includes('opacity:1'));
+ assert.equal(layout.cityAssets.length,16);const h=harness();assert.equal(h.calls.ready,0);h.decodeAll();assert.equal(h.calls.ready,0,'cache decode alone must not release entry');await h.paint();assert.equal(h.calls.ready,1);
+ h.input.onPointerDown(h.event(1,100,100));h.input.onPointerDown(h.event(2,180,100));h.input.onPointerMove(h.event(2,260,100));assert(Math.abs(parseFloat(h.world.style.width)-1656)<.001);assert.equal(h.world.style.height,'1104px');
+ let blocked=false;h.input.onClickCapture({preventDefault(){blocked=true},stopPropagation(){}});assert(blocked);
+ h.input.onPointerUp(h.event(2,260,100));const before=h.view.scrollLeft;h.input.onPointerMove(h.event(1,120,100));assert.equal(h.view.scrollLeft,before-20);h.input.onPointerCancel(h.event(1,120,100));const after=h.view.scrollLeft;h.input.onPointerMove(h.event(1,150,100));assert.equal(h.view.scrollLeft,after);
+ const broken=harness();broken.decodeAll();await broken.paint({fail:true});assert.equal(broken.calls.ready,0);assert(broken.calls.errors.length>0);
+ const detached=harness();detached.decodeAll();await detached.paint({connected:false});assert.equal(detached.calls.ready,0);
+ const hidden=harness({width:0,height:0});hidden.decodeAll();await hidden.paint();assert.equal(hidden.calls.ready,0);hidden.resize(390,550);assert.equal(hidden.calls.ready,1);
+ console.log('PASS: 12 aligned destination anchors and 16 native-size map tiles, source/DOM decode gates, image failures, hidden viewport, 1.15 zoom cap, anchored pinch and drag/cancel/click suppression.');
+})().catch(error=>{console.error(error);process.exit(1)});
+

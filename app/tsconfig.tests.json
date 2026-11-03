@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable",
+      "ES2022.Intl"
+    ],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "ignoreDeprecations": "6.0",
+    "rootDir": "src",
+    "outDir": ".test-build",
+    "strict": true,
+    "noEmit": false,
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ],
+    "resolveJsonModule": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/domain/**/*.ts",
+    "src/map/geometry.ts",
+    "src/map/TileLoader.ts",
+    "src/components/Intro.tsx",
+    "src/map/gestures.ts"
+  ]
+}

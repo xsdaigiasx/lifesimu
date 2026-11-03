@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const P=require('../.test-build/domain/phone-data.js').phoneData;
+const a=P.initial();assert(P.valid(a));assert.deepEqual(P.parse(JSON.stringify(a)),a);
+const saved={...a,notes:'Học JavaScript & mua cây 🌿',appointments:[{id:'a',title:'Học thêm',date:'2026-11-03'}],alarms:[{id:'b',time:'07:30',label:'Dậy sớm',enabled:true}],lastSaved:'2026-10-29T06:00:00.000Z'};
+assert(P.valid(saved));assert.deepEqual(P.parse(JSON.stringify(saved)),saved);
+assert(!P.valid({...saved,notes:'x'.repeat(4001)}));assert(!P.valid({...saved,appointments:[{id:'a',title:'',date:'2026-11-03'}]}));
+assert(!P.valid({...saved,appointments:[{id:'a',title:'Test',date:'2026-02-30'}]}));assert(!P.valid({...saved,alarms:[{id:'a',time:'25:00',label:'No',enabled:true}]}));
+assert(!P.valid({...saved,lastSaved:'not-a-date'}));assert(!P.valid({...saved,alarms:Array(9).fill(saved.alarms[0])}));assert.equal(P.parse('bad json'),null);
+assert.notStrictEqual(P.initial().appointments,P.initial().appointments);
+console.log('PASS: phone preferences, Unicode notes, appointments, alarm configuration, save round-trip and invalid data rejection');

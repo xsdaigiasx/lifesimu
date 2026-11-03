@@ -1,0 +1,2 @@
+import type {GameState} from '../domain/types';
+export default function PackedOffice({onNpc}:{state:GameState;onNpc?:(id:string)=>void;focusPlayer?:boolean}){return <div className="static-office"><img src="/assets/static-scenes/office.webp" alt="Văn phòng IT với bàn làm việc của bạn và hai đồng nghiệp"/>{onNpc&&<div className="static-colleagues"><button onClick={()=>onNpc('dev-an')}>An</button><button onClick={()=>onNpc('dev-linh')}>Linh</button></div>}</div>}

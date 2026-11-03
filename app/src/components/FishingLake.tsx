@@ -1,0 +1,45 @@
+import {useEffect,useRef,useState} from 'react';
+import {FISH,FISH_IDS,fishingOf,BAIT_PRICE,ROUND_TRIP_FARE,aimPosition,canLand} from '../domain/fishing';
+import type {FishId} from '../domain/fishing';
+import type {GameState,GameResult} from '../domain/types';
+import {money} from '../domain/format';
+import Icon from './Icon';
+export function FishArt({id}:{id:FishId}){const index=FISH[id].atlas;return <span className="fish-art" role="img" aria-label={FISH[id].name} style={{backgroundPosition:`${index%3*50}% ${index>=3?100:0}%`}}/>}
+export function BusStop({state,onTravel}:{state:GameState;onTravel:()=>void}){const atLake=fishingOf(state).atLake;const [ready,setReady]=useState(false),[error,setError]=useState(false),[retry,setRetry]=useState(0);useEffect(()=>{let cancelled=false;setReady(false);setError(false);Promise.all(['/assets/fishing/lake.webp','/assets/fishing/fish-atlas.webp'].map(src=>{const img=new Image();img.src=src;return img.decode()})).then(()=>{if(!cancelled)setReady(true)}).catch(()=>{if(!cancelled)setError(true)});return()=>{cancelled=true}},[retry]);return <div className="bus-stop"><div className="bus-route-art"><img src="/assets/fishing/lake.webp" alt="Hồ Sen yên tĩnh với bến câu bằng gỗ"/><span className="bus-route-number">07</span></div><span className="eyebrow">TUYẾN NGOẠI Ô · XE BUÝT</span><h3>{atLake?'Hồ Sen → An Nhiên':'An Nhiên → Hồ Sen'}</h3><div className="bus-route-line"><b>{atLake?'Hồ Sen':'Trạm thành phố'}</b><span>07 →</span><b>{atLake?'Trạm thành phố':'Hồ Sen'}</b></div><div className="bus-price"><span>{atLake?'Lượt về đã trả trước':'Vé khứ hồi · Bao gồm lượt về'}</span><strong>{atLake?'0đ':money(ROUND_TRIP_FARE)}</strong></div><button className="primary wide" disabled={!ready||(!atLake&&state.money<ROUND_TRIP_FARE)} onClick={onTravel}><Icon name="bus"/>{!ready?'Đang chuẩn bị chuyến xe…':atLake?'Lên xe về thành phố':'Mua vé & lên xe'}</button>{error&&<p role="alert">Chưa tải được cảnh hồ. <button onClick={()=>setRetry(x=>x+1)}>Thử lại</button></p>}{!atLake&&state.money<ROUND_TRIP_FARE&&<p role="alert">Bạn cần đủ 40.000đ để mua vé khứ hồi.</p>}</div>}
+export function BusJourney({toLake}:{toLake:boolean}){return <section className="bus-journey" role="dialog" aria-modal="true" aria-label="Đang đi xe buýt"><div className="bus-window"><img src="/assets/fishing/lake.webp" alt="Phong cảnh ven đường đi Hồ Sen"/><div className="bus-window-frame"/></div><div className="bus-journey-copy"><span>TUYẾN 07</span><h2>{toLake?'Rời phố, ghé Hồ Sen':'Tạm biệt hồ, về An Nhiên'}</h2><p>Xe đang đưa bạn tới {toLake?'bến câu ngoại ô':'trạm xe buýt thành phố'}…</p><div className="bus-progress"><i/></div></div></section>}
+type Phase='idle'|'waiting'|'bite'|'aim'|'caught'|'miss';
+export default function FishingLake({state,onAction,onBus}:{state:GameState;onAction:(action:'cast'|'catch'|'miss'|'bait'|'sell')=>GameResult;onBus:()=>void}){
+ const [phase,setPhase]=useState<Phase>('idle'),[panel,setPanel]=useState<'basket'|'guide'|null>(null),[message,setMessage]=useState(''),[position,setPosition]=useState(0);
+ const aimStart=useRef(0),phaseRef=useRef<Phase>('idle'),settled=useRef(false),mounted=useRef(false);phaseRef.current=phase;
+ const f=fishingOf(state),busy=['waiting','bite','aim'].includes(phase),last=f.lastCatch,total=f.basket.reduce((n,c)=>n+c.value,0);
+ const changePhase=(next:Phase)=>{phaseRef.current=next;setPhase(next)};
+ const miss=(text:string)=>{if(settled.current)return;settled.current=true;onAction('miss');setMessage(text);changePhase('miss')};
+ useEffect(()=>{if(!mounted.current){mounted.current=true;if(f.pendingCast)onAction('miss')}},[]);
+ useEffect(()=>{
+  let timeout:ReturnType<typeof setTimeout>|undefined,frame=0;
+  if(phase==='waiting')timeout=setTimeout(()=>changePhase('bite'),2200+Math.random()*1500);
+  if(phase==='bite')timeout=setTimeout(()=>miss('Chậm rồi, cá đã nhả mồi!'),1900);
+  if(phase==='aim'){const update=()=>{if(phaseRef.current!=='aim')return;const elapsed=performance.now()-aimStart.current;if(elapsed>8000){miss('Cá đã vùng thoát. Thử lại nhé!');return}setPosition(aimPosition(elapsed));frame=requestAnimationFrame(update)};frame=requestAnimationFrame(update)}
+  return()=>{if(timeout)clearTimeout(timeout);cancelAnimationFrame(frame)};
+ },[phase]);
+ const act=()=>{
+  if(phaseRef.current==='waiting')return;
+  if(phaseRef.current==='bite'){aimStart.current=performance.now();setPosition(0);changePhase('aim');return}
+  if(phaseRef.current==='aim'){if(settled.current)return;if(!canLand(aimPosition(performance.now()-aimStart.current))){miss('Lực kéo chưa đúng, cá đã tuột khỏi lưỡi.');return}settled.current=true;const result=onAction('catch');if(result.ok){setMessage('Đã thêm cá vào giỏ · +3 XP');changePhase('caught')}else{setMessage(result.error);changePhase('miss')}return}
+  const result=onAction('cast');if(!result.ok){setMessage(result.error);return}settled.current=false;setMessage('');changePhase('waiting');
+ };
+ const purchase=()=>{const result=onAction('bait');setMessage(result.ok?'Đã mua thêm 10 mồi câu.':result.error)};
+ const sell=()=>{const result=onAction('sell');setMessage(result.ok?`Đã bán giỏ cá, nhận ${money(total)}.`:result.error)};
+ const title=phase==='waiting'?'Chờ cá đớp mồi…':phase==='bite'?'Phao chìm! Giật cần ngay!':phase==='aim'?'Canh vạch vào vùng xanh rồi kéo':phase==='caught'&&last?`${FISH[last.fish].name} · ${(last.grams/1000).toLocaleString('vi-VN')} kg`:phase==='miss'?'Cá đã tuột mất':'Một buổi câu bên Hồ Sen';
+ return <div className="fishing-lake" aria-label="Địa điểm câu cá Hồ Sen">
+ <img className="lake-background" src="/assets/fishing/lake.webp" alt="Bến câu Hồ Sen, mặt nước xanh và dãy núi phía xa"/>
+ <div className="lake-top"><span><small>NGOẠI Ô AN NHIÊN</small><strong>Hồ Sen</strong></span><button disabled={busy} onClick={onBus}><Icon name="bus"/>Xe về</button></div>
+ <div className="lake-tools"><span>Mồi <b>{f.bait}</b></span><span>Năng lượng <b>{state.energy}</b></span><button aria-label="Hướng dẫn câu cá" disabled={busy} onClick={()=>setPanel('guide')}>?</button></div>
+ <div className={`lake-bobber ${phase}`} aria-hidden="true"><span className="bobber-line"/><i/><span className="bobber-ripple"/>{phase==='bite'&&<b>!</b>}</div>
+ {phase==='caught'&&last&&!panel&&<div className="lake-catch"><FishArt id={last.fish}/><span>{FISH[last.fish].rarity} · Giá bán {money(last.value)}</span></div>}
+ <div className="lake-console"><h2 aria-live="polite">{title}</h2>{phase==='aim'?<div className="fishing-meter" role="meter" aria-label="Lực kéo cần" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(position)}><span className="fishing-target"/><i style={{left:`${position}%`}}/></div>:<p role="status">{message||(phase==='waiting'?'Quan sát phao. Khi phao chìm, giật cần thật nhanh.':phase==='bite'?'Bấm Giật cần trước khi cá nhả mồi.':'1 mồi + 2 năng lượng + 10 phút mỗi lần thả cần.')}</p>}
+ <button className={`lake-main-action ${phase==='bite'?'bite':''}`} disabled={phase==='waiting'||(!busy&&(f.bait<1||state.energy<2||f.basket.length>=60))} onClick={act}>{phase==='waiting'?'Đang chờ cá…':phase==='bite'?'Giật cần!':phase==='aim'?'Kéo cá':phase==='caught'||phase==='miss'?'Thả cần tiếp':'Thả cần'}</button>
+ <div className="lake-bottom-actions"><button disabled={busy} onClick={()=>setPanel('basket')}><Icon name="bag"/>Giỏ cá <b>{f.basket.length}</b></button><button disabled={busy||state.money<BAIT_PRICE} onClick={purchase}>10 mồi · {money(BAIT_PRICE)}</button></div></div>
+ {panel&&<section className="lake-panel" role="dialog" aria-modal="true" aria-label={panel==='basket'?'Giỏ cá & bộ sưu tập':'Hướng dẫn câu cá'}><header><h2>{panel==='basket'?'Giỏ cá & bộ sưu tập':'Một nhịp câu thư thái'}</h2><button aria-label="Đóng bảng hồ câu" onClick={()=>setPanel(null)}>×</button></header>{panel==='basket'?<><div className="fish-collection">{FISH_IDS.map(id=>{const count=f.basket.filter(c=>c.fish===id).length,record=f.collection[id];return <article key={id} className={record.caught?'discovered':''}><FishArt id={id}/><strong>{FISH[id].name}</strong><span>Trong giỏ: {count}</span><small>{record.caught?`Kỷ lục ${(record.best/1000).toLocaleString('vi-VN')} kg`:'Chưa bắt được'}</small></article>})}</div><p>{f.basket.length}/60 cá · Tổng giá bán <b>{money(total)}</b></p><button className="primary wide" disabled={!f.basket.length} onClick={sell}>Bán cá trong giỏ · {money(total)}</button><p className="lake-panel-note" role="status">{message||'Bán cá vẫn giữ thành tích sưu tập.'}</p></>:<div className="lake-guide"><p><b>1. Thả cần</b><span>Mỗi lần dùng 1 mồi và 2 năng lượng. Cần câu được mượn miễn phí tại hồ.</span></p><p><b>2. Nhìn phao</b><span>Khi phao chìm, bấm Giật cần trong khoảng 2 giây.</span></p><p><b>3. Canh lực</b><span>Chờ vạch vào vùng xanh rồi bấm Kéo cá. Cá bắt được nằm trong giỏ, chưa tự đổi thành tiền.</span></p><p><b>4. Giữ hoặc bán</b><span>Mở Giỏ cá để xem cân nặng kỷ lục và bán. Vé xe đã gồm lượt về thành phố.</span></p><button className="primary wide" onClick={()=>setPanel(null)}>Ra bến thả câu</button></div>}</section>}
+ </div>
+}

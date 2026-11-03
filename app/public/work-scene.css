@@ -1,0 +1,44 @@
+.office-work-scene{position:relative;display:flex;flex-direction:column;flex:1;min-height:340px;overflow:hidden;isolation:isolate;border:1px solid #bcab86;border-radius:10px;background:#e4d5b3;color:#344b3f}
+.office-work-scene button{display:inline-flex;align-items:center;justify-content:center;gap:5px;width:auto;min-height:36px;padding:7px 10px;border:1px solid #babf9b;border-radius:7px;background:#faf1da;color:inherit;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.office-work-scene button:disabled{opacity:.45;cursor:default}
+.office-work-scene button:focus-visible{outline:3px solid #d29a3a;outline-offset:2px}
+.office-work-scene button svg{width:17px;height:17px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8}
+.office-work-scene .ows-room{position:relative;flex:1;min-height:260px;overflow:hidden;background:#b49d77}
+.office-work-scene .ows-background{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%;image-rendering:auto;user-select:none}
+.office-work-scene .ows-colleagues{position:absolute;inset:0;pointer-events:none}
+.office-work-scene .ows-npc{position:absolute;pointer-events:auto;min-height:32px;padding:5px 8px;background:#fff4dbe8;border-color:#c9b47d;box-shadow:0 2px 8px #30291e33;font-size:11px}
+.office-work-scene .ows-npc-an{left:12%;top:48%}
+.office-work-scene .ows-npc-linh{right:12%;top:57%}
+.office-work-scene .ows-progress-card{position:absolute;left:12px;right:12px;bottom:12px;padding:11px 13px;border:1px solid #d6cca9;border-radius:9px;background:#fff6e7ed;box-shadow:0 3px 14px #2a33252b}
+.office-work-scene .ows-progress-card>strong{font-size:14px;display:block}
+.office-work-scene .ows-progress-caption{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;margin:6px 0;color:#5d6c55}
+.office-work-scene .ows-progress-caption b{font-size:14px;color:#345541;font-variant-numeric:tabular-nums}
+.office-work-scene .ows-progress{height:7px;background:#dddac1;border-radius:6px;overflow:hidden}
+.office-work-scene .ows-progress>span{display:block;height:100%;background:#719066;transition:width .15s linear}
+.office-work-scene .ows-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 12px;border-top:1px solid #c4b28d;background:#f8eed5}
+.office-work-scene.is-working .ows-footer{justify-content:center}
+.office-work-scene .ows-assignment{flex:1;min-width:110px;display:flex;flex-direction:column;gap:4px}
+.office-work-scene .ows-assignment strong{font-size:12px;line-height:1.3}
+.office-work-scene .ows-assignment small{font-size:11px;color:#6f775d}
+.office-work-scene .ows-idle-actions{display:flex;gap:6px;align-items:center}
+.office-work-scene .ows-start{background:#456b52;color:#fff9e8;border-color:#456b52}
+.office-work-scene .ows-skills{padding:7px;min-width:36px}
+.office-work-scene .ows-dialogue{position:absolute;inset:auto 9px 9px;padding:11px 12px;background:#fff7e6;border:1px solid #baad8b;border-radius:11px;box-shadow:0 -4px 20px #302d2336;max-height:70%;overflow:auto;z-index:2}
+.office-work-scene .ows-dialogue>header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.office-work-scene .ows-dialogue>header strong{font-size:14px}
+.office-work-scene .ows-dialogue>header button{border:0;background:transparent;min-height:30px;padding:5px}
+.office-work-scene .ows-dialogue>p{font-size:13px;line-height:1.5;margin:0 0 7px}
+.office-work-scene .ows-dialogue>small{font-size:11px;color:#6b775f}
+.office-work-scene .ows-chat-options{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.office-work-scene .ows-chat-options button{background:#eaf0d9}
+.office-work-scene .ows-chat-options small{font-weight:400;font-size:10px}
+.office-work-scene .ows-message{font-size:12px;line-height:1.4;margin:0;padding:7px 12px;background:#fff0d3;color:#805d36}
+.office-work-scene .ows-dialogue .ows-message{margin-top:8px;padding:7px 0;background:transparent}
+.office-space-screen .office-work-scene{flex:1;min-height:0}
+.office-space-screen .office-work-scene .ows-room{min-height:180px}
+@media(max-width:400px){.office-work-scene .ows-footer{padding:8px;gap:6px}.office-work-scene .ows-footer button{font-size:11px;padding:7px}.office-work-scene .ows-progress-card{left:8px;right:8px;bottom:8px;padding:10px}.office-work-scene .ows-assignment strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.office-work-scene .ows-progress>span{transition:none}}
+
+.office-work-scene .ows-npc-an{left:74%;right:auto;top:29%;transform:translateX(-50%)}.office-work-scene .ows-npc-linh{left:24%;right:auto;top:29%;transform:translateX(-50%)}
+
+.office-work-scene .ows-room{display:flex;align-items:stretch;justify-content:center}.ows-room>.packed-office{height:100%;min-height:0;border-radius:0}.ows-room>.packed-office>svg{height:100%;max-height:none;min-height:0;aspect-ratio:auto}.game-floor-preview:has(.packed-office){max-height:none;min-height:240px}.game-floor-preview>.packed-office{height:100%;min-height:0}.game-floor-preview>.packed-office>svg{height:100%;max-height:none;min-height:0;aspect-ratio:auto}
