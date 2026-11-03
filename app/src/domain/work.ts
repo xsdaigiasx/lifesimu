@@ -2,7 +2,7 @@ import {fullnessOf,vitalFactor,drainFullness,applyCoffeeCrash} from './vitals';
 import type {GameState,GameResult} from './types';
 import {post} from './money';
 import {clockOf,END,seedUnit} from './time';
-import {officeOf} from './office';
+import {officeOf,PROBATION_PASS_DAYS,PROBATION_SALARY,RETRY_AFTER_FAIL} from './office';
 import {dateAt,money} from './format';
 import {recordJournal} from './journal';
 import {SKILLS,xpNeeded,defaultSkills,gainXp,type SkillId,type Skills} from './skill-xp';
@@ -36,11 +36,11 @@ export function validWork(v:unknown,day:number):v is WorkState{if(!v||typeof v!=
 }
 export function workOf(s:GameState):WorkState{return s.work??{version:1,seed:0,trackingDay:s.day,serial:0,active:null,task:null,finished:clockOf(s).lastWorkDay===s.day?[`${s.day}:am`,`${s.day}:pm`]:[],periods:[],holidayDays:[],lastResult:''}}
 const monthOf=(day:number)=>dateAt(day).toISOString().slice(0,7);
-export const salaryFor=(id:string)=>id==='an-nhien-tech'?12000000:10000000;
+export const salaryFor=(id:string,probation=false)=>Math.round((id==='an-nhien-tech'?12000000:10000000)*(probation?PROBATION_SALARY:1));
 export function holidayName(day:number){const iso=dateAt(day).toISOString().slice(0,10);if(iso.startsWith('2026'))return holidays.holidayDates.find(h=>h.date===iso)?.name??null;const key=iso.slice(5);return ({'01-01':'Tết Dương lịch','04-30':'Ngày Chiến thắng','05-01':'Quốc tế Lao động','09-01':'Quốc khánh','09-02':'Quốc khánh','11-24':'Ngày Văn hóa Việt Nam'} as Record<string,string>)[key]??null;}
 export function isWorkday(day:number){const dow=dateAt(day).getUTCDay();return dow!==0&&dow!==6&&!holidayName(day)}
 function standardMinutes(month:string){const[y,m]=month.split('-').map(Number);let count=0;for(let d=1;d<=31;d++){const dt=new Date(Date.UTC(y!,m!-1,d));if(dt.getUTCMonth()!==m!-1)break;if(dt.getUTCDay()!==0&&dt.getUTCDay()!==6)count++}return count*480;}
-function credit(s:GameState,companyId:string,minutes:number){const w=s.work!,month=monthOf(s.day),key=companyId+':'+month;let p=w.periods.find(p=>p.key===key);if(!p){p={key,companyId,month,salary:salaryFor(companyId),minutes:0,paid:false,amount:0};w.periods.push(p)}if(!p.paid)p.minutes=Math.min(standardMinutes(month),p.minutes+minutes);}
+function credit(s:GameState,companyId:string,minutes:number){const w=s.work!,month=monthOf(s.day),key=companyId+':'+month;let p=w.periods.find(p=>p.key===key);if(!p){p={key,companyId,month,salary:salaryFor(companyId,!!officeOf(s).probation),minutes:0,paid:false,amount:0};w.periods.push(p)}if(!p.paid)p.minutes=Math.min(standardMinutes(month),p.minutes+minutes);}
 /** T12 (mục 12.2): d = Lv kỹ năng − Lv yêu cầu. Tốc độ s = clamp(1 + 0,12 d; 0,5; 1,6). */
 export const skillSpeed=(d:number)=>Math.max(.5,Math.min(1.6,1+.12*d));
 /** Tỷ lệ lỗi (%) = clamp(lỗi nền của việc − 5% × d + 30% × (1 − m) − 2% mỗi bậc máy; 3%; 60%). Căng thẳng, ngủ thiếu đã nằm trong m. */
@@ -77,7 +77,7 @@ export function workTick(s:GameState,minutes=4):GameState{const active=s.work?.a
  return n;
 }
 export function pendingWages(s:GameState){return workOf(s).periods.filter(p=>!p.paid).reduce((sum,p)=>sum+Math.round(p.salary*p.minutes/standardMinutes(p.month)),0)}
-export function settleNewDay(previous:GameState,next:GameState):GameState{let n=structuredClone(next);n.work=structuredClone(next.work??workOf(previous));const w=n.work,o=officeOf(previous),date=dateAt(previous.day);if(o.role==='employee'&&o.employerId&&holidayName(previous.day)&&date.getUTCDay()!==0&&date.getUTCDay()!==6&&!w.holidayDays.includes(previous.day)){const temp={...n,day:previous.day,work:w};credit(temp,o.employerId,480);w.holidayDays=[...w.holidayDays,previous.day].slice(-400)}w.finished=w.finished.filter(k=>Number(k.split(':')[0])>=next.day-30);w.periods=w.periods.filter(p=>!p.paid||p.month>=monthOf(next.day-366));
+export function settleNewDay(previous:GameState,next:GameState):GameState{let n=structuredClone(next);n.work=structuredClone(next.work??workOf(previous));const w=n.work,o=officeOf(previous),date=dateAt(previous.day);if(o.role==='employee'&&o.employerId&&holidayName(previous.day)&&date.getUTCDay()!==0&&date.getUTCDay()!==6&&!w.holidayDays.includes(previous.day)){const temp={...n,day:previous.day,work:w};credit(temp,o.employerId,480);w.holidayDays=[...w.holidayDays,previous.day].slice(-400)}{const po=n.office;if(po?.role==='employee'&&po.probation){const pr=po.probation;if(w.finished.some(k=>k.startsWith(previous.day+':')))pr.workDays++;if(n.day>=pr.end){const ok=pr.workDays>=PROBATION_PASS_DAYS;delete po.probation;if(ok){n=recordJournal(n,`probation:${pr.start}`,'Qua thử việc',`Bạn đi làm ${pr.workDays} ngày và trở thành nhân viên chính thức, lương đủ 100%.`)}else{po.role='visitor';po.employerId=null;po.application=null;po.retryDay=n.day+RETRY_AFTER_FAIL;n.mood=Math.max(0,n.mood-10);n.stress=Math.min(100,n.stress+8);n=recordJournal(n,`probation:${pr.start}`,'Không qua thử việc',`Bạn chỉ đi làm ${pr.workDays}/${PROBATION_PASS_DAYS} ngày cần thiết nên công ty chấm dứt hợp đồng. Bạn có thể nộp hồ sơ lại sau ${RETRY_AFTER_FAIL} ngày.`)}}}}w.finished=w.finished.filter(k=>Number(k.split(':')[0])>=next.day-30);w.periods=w.periods.filter(p=>!p.paid||p.month>=monthOf(next.day-366));
  if(dateAt(next.day).getUTCDate()===1){for(const p of w.periods){if(p.paid||p.month>=monthOf(next.day))continue;const amount=Math.round(p.salary*p.minutes/standardMinutes(p.month));if(post(n,{id:`salary:${p.key}`,name:`Lương tháng ${p.month}`,amount})!=='ok')continue;p.paid=true;p.amount=amount;n=recordJournal(n,`salary:${p.key}`,'Nhận lương',`${p.month}: ${money(amount)}`);}}
  return n;
 }

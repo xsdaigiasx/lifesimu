@@ -1,4 +1,4 @@
-import {canEnterOffice} from './work';
+import {canEnterOffice,skillsOf} from './work';
 import {post} from './money';
 import type {GameState,GameResult} from './types';
 import {spendTime,clockOf,HALF_DAY} from './time';
@@ -19,8 +19,13 @@ export const QUESTIONS=[
 {id:'code',text:'Hai người sửa cùng một lỗi. Cách nào tránh ghi đè công việc của nhau?',options:['Cùng sửa thẳng một bản rồi lưu liên tục','Dùng nhánh riêng, trao đổi và kiểm tra trước khi gộp','Xóa bản của người kia'],answer:1,why:'Nhánh riêng và trao đổi giúp phối hợp, kiểm tra thay đổi trước khi gộp.'}
 ] as const;
 export const questionFor=(id:string)=>QUESTIONS.find(q=>q.id===id)!;
-export function validApplication(v:unknown):v is Application{if(!v||typeof v!=='object')return false;const a=v as Application;const c=COMPANIES.find(c=>c.id===a.companyId);return !!c&&c.industry==='tech'&&['pending','interview','passed','failed','hired'].includes(a.status)&&Number.isInteger(a.submittedDay)&&a.submittedDay>=0&&a.submittedDay<=100000&&a.interviewDay===a.submittedDay+1&&a.startDay===a.interviewDay+1&&typeof a.cv==='string'&&a.cv.length>=20&&a.cv.length<=600&&Array.isArray(a.questions)&&a.questions.length===3&&new Set(a.questions).size===3&&a.questions.every(id=>QUESTIONS.some(q=>q.id===id))&&Array.isArray(a.answers)&&a.answers.length<=3&&a.answers.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&(a.status==='pending'?a.answers.length===0:a.status==='interview'?a.answers.length<3:a.answers.length===3)&&(a.status==='passed'||a.status==='hired'?a.answers.every((n,i)=>n===questionFor(a.questions[i]!).answer):a.status==='failed'?a.answers.some((n,i)=>n!==questionFor(a.questions[i]!).answer):true)}
-export interface OfficeState{application?:Application|null;role:'visitor'|'employee'|'owner';employerId:string|null;industry:Industry;size:OfficeSize;name:string;leaseUntil:number;workComputer:number;computers:number;printer:number;employeeDecor:Partial<Record<DecorId,number|null>>;ownerDecor:Partial<Record<DecorId,number|null>>;met:string[]}
+export function validApplication(v:unknown):v is Application{if(!v||typeof v!=='object')return false;const a=v as Application;const c=COMPANIES.find(c=>c.id===a.companyId);return !!c&&c.industry==='tech'&&['pending','interview','passed','failed','hired'].includes(a.status)&&Number.isInteger(a.submittedDay)&&a.submittedDay>=0&&a.submittedDay<=100000&&a.interviewDay===a.submittedDay+1&&a.startDay===a.interviewDay+1&&typeof a.cv==='string'&&a.cv.length>=20&&a.cv.length<=600&&Array.isArray(a.questions)&&a.questions.length===3&&new Set(a.questions).size===3&&a.questions.every(id=>QUESTIONS.some(q=>q.id===id))&&Array.isArray(a.answers)&&a.answers.length<=3&&a.answers.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&(a.status==='pending'?a.answers.length===0:a.status==='interview'?a.answers.length<3:a.answers.length===3)&&(a.status==='passed'||a.status==='hired'?a.answers.filter((n,i)=>n===questionFor(a.questions[i]!).answer).length>=2:a.status==='failed'?a.answers.some((n,i)=>n!==questionFor(a.questions[i]!).answer):true)}
+/** T11: thử việc 60 ngày, lương 85%; đủ 30 ngày đi làm thì qua, không đủ thì mất việc và 30 ngày sau mới nộp lại được. */
+/** Giao tiếp từ Lv2: đúng 2/3 câu vẫn qua phỏng vấn nhờ trình bày tốt. */
+export const INTERVIEW_COMM_RESCUE=2;
+export const PROBATION_DAYS=60,PROBATION_PASS_DAYS=30,PROBATION_SALARY=.85,RETRY_AFTER_FAIL=30;
+export interface Probation{start:number;end:number;workDays:number}
+export interface OfficeState{probation?:Probation;retryDay?:number;application?:Application|null;role:'visitor'|'employee'|'owner';employerId:string|null;industry:Industry;size:OfficeSize;name:string;leaseUntil:number;workComputer:number;computers:number;printer:number;employeeDecor:Partial<Record<DecorId,number|null>>;ownerDecor:Partial<Record<DecorId,number|null>>;met:string[]}
 export function initialOffice():OfficeState{return{role:'visitor',employerId:null,industry:'tech',size:'small',name:'Công ty của tôi',leaseUntil:0,workComputer:1,computers:1,printer:0,employeeDecor:{},ownerDecor:{},met:[]}}
 export const officeOf=(s:GameState)=>s.office??initialOffice();
 export const activeLease=(s:GameState)=>officeOf(s).role==='owner'&&officeOf(s).leaseUntil>s.day;
@@ -28,6 +33,7 @@ export function validOffice(value:unknown):value is OfficeState{
  if(!value||typeof value!=='object')return false;const o=value as OfficeState;
  const level=(v:number,min:number,max:number)=>Number.isInteger(v)&&v>=min&&v<=max;
  const decor=(v:OfficeState['ownerDecor'])=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.entries(v).every(([id,slot])=>Object.hasOwn(DECOR,id)&&(slot===null||level(slot!,0,2)))&&new Set(Object.values(v).filter(v=>v!==null)).size===Object.values(v).filter(v=>v!==null).length;
+ const pr=o.probation;if(pr!==undefined&&!(o.role==='employee'&&pr&&Number.isInteger(pr.start)&&pr.start>=0&&pr.end===pr.start+PROBATION_DAYS&&Number.isInteger(pr.workDays)&&pr.workDays>=0&&pr.workDays<=PROBATION_DAYS))return false;if(o.retryDay!==undefined&&!level(o.retryDay,0,100100))return false;
  return (o.application==null||validApplication(o.application))&&['visitor','employee','owner'].includes(o.role)&&(o.employerId===null||COMPANIES.some(c=>c.id===o.employerId))&&(o.role!=='employee'||o.employerId!==null)&&Object.hasOwn(INDUSTRIES,o.industry)&&Object.hasOwn(SIZES,o.size)&&typeof o.name==='string'&&o.name.trim().length>0&&o.name.length<=32&&level(o.leaseUntil,0,100007)&&level(o.workComputer,1,3)&&level(o.computers,1,3)&&level(o.printer,0,2)&&decor(o.employeeDecor)&&!Object.hasOwn(o.employeeDecor,'coffee')&&decor(o.ownerDecor)&&Array.isArray(o.met)&&o.met.length<=STAFF.length&&new Set(o.met).size===o.met.length&&o.met.every(id=>STAFF.some(n=>n.id===id));
 }
 export type OfficeAction={kind:'apply';id:string;cv:string}|{kind:'startInterview'}|{kind:'answer';choice:number}|{kind:'acceptOffer'}|{kind:'cancelApplication'}|{kind:'shift'}|{kind:'endLease'}|{kind:'leave'}|{kind:'rent';size:OfficeSize;industry:Industry;name:string}|{kind:'renew'}|{kind:'upgrade';item:'computer'|'printer'}|{kind:'buyDecor';id:DecorId}|{kind:'place';id:DecorId;slot:number|null}|{kind:'meet';id:string};
@@ -43,6 +49,7 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
   if(o.role!=='visitor')return fail('Bạn đang có văn phòng.');const c=COMPANIES.find(c=>c.id===a.id);if(!c||c.industry!=='tech')return fail('Bạn chỉ có bằng IT. Chứng chỉ ngành khác sẽ mở sau.');
   if(o.application&&['pending','interview','passed'].includes(o.application.status)&&!(o.application.status==='pending'&&s.day>o.application.interviewDay))return fail('Bạn đang có hồ sơ chờ xử lý.');
   if(o.application&&o.application.status==='failed'&&s.day<=o.application.interviewDay)return fail('Bạn có thể nộp lại CV từ ngày mai.');
+  if(o.retryDay!==undefined&&s.day<o.retryDay)return fail(`Công ty chưa nhận lại hồ sơ của bạn. Thử lại từ ngày ${o.retryDay+1}.`);
   if(typeof a.cv!=='string'||a.cv.trim().length<20||a.cv.trim().length>600)return fail('CV cần 20–600 ký tự giới thiệu.');
   const r=spendTime(n,15);if(!r.ok)return r;n=r.state;n.office=o;
   o.application={companyId:c.id,status:'pending',submittedDay:s.day,interviewDay:s.day+1,startDay:s.day+2,answers:[],questions:[0,1,2].map(i=>QUESTIONS[(s.day+i+(c.id==='sen-code'?0:2))%QUESTIONS.length]!.id),cv:a.cv.trim()};
@@ -54,12 +61,12 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
   const r=spendTime(n,HALF_DAY);if(!r.ok)return r;n=r.state;n.office=o;app.status='interview';
  }else if(a.kind==='answer'){
   const app=o.application;if(!app||app.status!=='interview'||!Number.isInteger(a.choice)||a.choice<0||a.choice>2)return fail('Câu trả lời không hợp lệ.');
-  app.answers.push(a.choice);if(app.answers.length===3)app.status=app.answers.every((n,i)=>n===questionFor(app.questions[i]!).answer)?'passed':'failed';
+  app.answers.push(a.choice);if(app.answers.length===3){const right=app.answers.filter((n,i)=>n===questionFor(app.questions[i]!).answer).length;app.status=right===3||(right===2&&skillsOf(s).communication.level>=INTERVIEW_COMM_RESCUE)?'passed':'failed'}
  }else if(a.kind==='acceptOffer'){
-  const app=o.application;if(!app||app.status!=='passed'||o.role!=='visitor')return fail('Bạn chưa có thư nhận việc.');if(s.day<app.startDay)return fail('Bạn bắt đầu đi làm từ ngày mai.');o.role='employee';o.employerId=app.companyId;app.status='hired';
+  const app=o.application;if(!app||app.status!=='passed'||o.role!=='visitor')return fail('Bạn chưa có thư nhận việc.');if(s.day<app.startDay)return fail('Bạn bắt đầu đi làm từ ngày mai.');o.role='employee';o.employerId=app.companyId;app.status='hired';o.probation={start:s.day,end:s.day+PROBATION_DAYS,workDays:0};
  }else if(a.kind==='shift'){return fail('Hãy chọn công việc để bắt đầu ca.');
  } else if(a.kind==='endLease'){if(o.role!=='owner')return fail('Bạn không có hợp đồng thuê.');o.role='visitor';o.leaseUntil=s.day;o.employerId=null}
- else if(a.kind==='leave'){if(o.role!=='employee')return fail('Bạn không ở vai nhân viên.');o.role='visitor';o.employerId=null;o.application=null}
+ else if(a.kind==='leave'){if(o.role!=='employee')return fail('Bạn không ở vai nhân viên.');o.role='visitor';o.employerId=null;o.application=null;delete o.probation}
  else if(a.kind==='rent'){
   if(o.role!=='visitor')return fail('Bạn đang có văn phòng.');if(o.application&&['pending','interview','passed'].includes(o.application.status))return fail('Hãy hủy hồ sơ tuyển dụng trước khi thuê.');
   if(!Object.hasOwn(SIZES,a.size)||!Object.hasOwn(INDUSTRIES,a.industry)||typeof a.name!=='string'||!a.name.trim()||a.name.trim().length>32)return fail('Hãy chọn ngành, diện tích và tên công ty tối đa 32 ký tự.');
