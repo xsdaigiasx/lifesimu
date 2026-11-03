@@ -13,7 +13,7 @@ import type { FormEvent, ReactNode } from 'react';
 import type { DailyAction, GameResult, GameState, PhoneState, PlayerProfile } from '../domain/types';
 import { phoneData as data } from '../domain/phone-data';
 
-type Action = 'report' | 'day' | 'city' | 'room' | 'save' | 'replay';
+type Action = 'report' | 'day' | 'city' | 'room' | 'save';
 type Page = 'baucua' | 'home' | 'health' | 'contacts' | 'shop' | 'calendar' | 'alarms' | 'clock' | 'news' | 'finance' | 'work' | 'notes' | 'save' | 'leisure' | 'calls' | 'messages' | 'settings' | 'weather' | 'map' | 'room';
 export interface PhoneProps {
   bauCuaShaking: boolean;
@@ -141,7 +141,7 @@ export default function Phone({ state, profile, onAction, onResetStart, onPlayBa
     case 'weather': body = <>{intro('Thời tiết An Nhiên', 'Một khoảng trời bên ô cửa.')}<div className="weather-page"><Icon id="sun" /><h2>26°</h2><h3>Trời trong</h3></div></>; break;
     case 'map': body = <>{intro('Khám phá An Nhiên', 'Những con đường, những cơ hội.')}<button className="primary wide" onClick={() => onAction('city')}>Mở bản đồ thành phố</button></>; break;
     case 'room': body = <>{intro('Nhà trọ Hẻm Nắng', `Phòng 03 Chốn về của ${profile.name}.`)}<div className="phone-map-preview"><img src="assets/room-master.webp" alt="Ảnh mẫu phòng đủ nội thất" /></div><button className="primary wide" onClick={() => onAction('room')}>Về nhà</button></>; break;
-    case 'settings': body = <><button className="primary wide" onClick={() => onAction('replay')}>Xem lại mở đầu</button>{intro('Cài đặt điện thoại', 'Một nơi cho các tiện ích của bạn.')}<InstallCard /><VersionCard /></>; break;
+    case 'settings': body = <>{intro('Cài đặt điện thoại', 'Một nơi cho các tiện ích của bạn.')}<InstallCard /><VersionCard /></>; break;
   }
   const title = APPS.find(app => app.page === page)?.label ?? TITLES[page] ?? 'Điện thoại';
   return <div className={`phone-shell ${page === 'home' ? 'is-home' : ''} ${page === 'baucua' ? 'is-baucua' : ''}`}><div className="phone-status"><span>{clockText(state)}</span><span className="phone-island" /><span>▮▮▮ <svg aria-hidden="true" viewBox="0 0 24 12"><rect x="1" y="1" width="19" height="10" rx="2" /><path d="M23 4v4M4 4h13v4H4z" /></svg></span></div><div className="phone-toolbar">{page === 'home' ? <span className="phone-owner">{profile.name} </span> : <><button className="phone-back" onClick={() => navigate(page === 'baucua' ? 'leisure' : 'home')} aria-label={page === 'baucua' ? 'Về mục Giải trí' : 'Về màn hình điện thoại'}>‹</button><strong>{title}</strong></>}</div><div className="phone-content" ref={contentRef} tabIndex={-1} role="region" aria-label="Nội dung điện thoại">{notice && <p className="phone-footnote" role="status">{notice}</p>}{body}</div><nav className="phone-dock" aria-label="Ứng dụng thường dùng">{DOCK.map(app => <button key={app.page} onClick={() => navigate(app.page)} className={`dock-app ${app.page}-app ${page === app.page ? 'selected' : ''}`} aria-label={app.label} aria-pressed={page === app.page}><Icon id={app.icon} /></button>)}</nav><button className="phone-homebar" onClick={() => navigate('home')} aria-label="Về màn hình chính điện thoại"><span /></button></div>;

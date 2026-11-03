@@ -137,12 +137,12 @@ function harness(overrides = {}) {
   assert.equal(h.button('TIẾP TỤC GAME ĐANG CHƠI'), null);
   h.start(); h.click('Bỏ qua đoạn mở đầu');
   const enter = h.button('BƯỚC VÀO THÀNH PHỐ');
-  assert.equal(enter.props.disabled, true);
+  assert.equal(enter.props['aria-disabled'], true);
   enter.props.onClick(); enter.props.onClick();
   assert.equal(h.calls.completed.length, 0);
   h.click('Thử tải lại bản đồ'); assert.equal(h.calls.retries, 1);
   h.props.mapError = null; h.props.initialMapReady = true; h.render();
-  const ready = h.button('BƯỚC VÀO THÀNH PHỐ'); assert.equal(ready.props.disabled, false);
+  const ready = h.button('BƯỚC VÀO THÀNH PHỐ'); assert.equal(ready.props['aria-disabled'], false);
   ready.props.onClick(); ready.props.onClick();
   assert.equal(h.calls.completed.length, 1);
   assert.equal(h.calls.completed[0].name, 'Nguyễn An');
@@ -186,8 +186,7 @@ function harness(overrides = {}) {
   h.advanceBeat(); assert.equal(city.seeks, citySeeks); assert.equal(music.seeks, seeks);
   h.click('Bỏ qua đoạn mở đầu');
   for (const element of h.media.values()) assert.equal(element.paused, true);
-  h.click('Xem lại đoạn mở đầu');
-  assert.equal(music.currentTime, 0); assert.equal(music.seeks, seeks + 1);
+  assert.equal(h.button('Xem lại đoạn mở đầu'), null);
 }
 
 for (const name of ['journey-new.ogg', 'morning-real.ogg', 'bus-start-real.ogg', 'street-real.ogg']) {
