@@ -8,7 +8,7 @@ import {recordJournal} from './domain/journal';
 import {overtimeOffered,lunchBreak,workAction,workTick,canEnterOffice,settleNewDay,studySkill,type WorkAction,type SkillId} from './domain/work';
 import {saveOfficeLayout,type OfficeLayout} from './domain/layout';
 import {SkillsPanel} from './components/WorkPanel';
-import {clockOf,clockText,route,travelQuote,goTo,finishDay,personalActivity} from './domain/time';
+import {clockOf,clockText,route,travelQuote,goTo,finishDay,personalActivity,faintIfLate} from './domain/time';
 import Office,{Relations} from './components/Office';
 import LocationVisit from './components/LocationVisit';
 import {officeAction,STAFF,COMPANIES,type OfficeAction} from './domain/office';
@@ -26,7 +26,7 @@ export default function App(){
  const [initial]=useState(initialSession),[state,setState]=useState<GameState>(initial.state),[profile,setProfile]=useState<PlayerProfile|null>(initial.profile),[view,setView]=useState<ViewId>(initial.profile?.complete&&fishingOf(initial.state).atLake?'lake':'city'),[modal,setModal]=useState<ModalId>(null),[selected,setSelected]=useState<PlaceId>(clockOf(initial.state).location==='lake'?'bus':clockOf(initial.state).location),[storageOK,setStorageOK]=useState(initial.storageOK),[notification,setNotification]=useState(''),[opening,setOpening]=useState(!initial.profile?.complete),[mapReady,setMapReady]=useState(false),[mapError,setMapError]=useState<string|null>(null),[retryToken,setRetryToken]=useState(0),[centerToken,setCenterToken]=useState(0);
  const liveState=useRef(state);liveState.current=state;
  const [bauCuaShaking,setBauCuaShaking]=useState(false);
- const [bauCuaSession]=useState(()=>createBauCuaSession(()=>liveState.current,next=>{liveState.current=next;setState(next);try{localStorage.setItem(engine.KEY,JSON.stringify(next));setStorageOK(true)}catch{setStorageOK(false);toast('Chưa lưu được ván chơi. Dữ liệu chỉ giữ trong phiên này.')}},setBauCuaShaking));
+ const [bauCuaSession]=useState(()=>createBauCuaSession(()=>liveState.current,raw=>{const next=faintIfLate(raw);if(next!==raw)setModal('summary');liveState.current=next;setState(next);try{localStorage.setItem(engine.KEY,JSON.stringify(next));setStorageOK(true)}catch{setStorageOK(false);toast('Chưa lưu được ván chơi. Dữ liệu chỉ giữ trong phiên này.')}},setBauCuaShaking));
  useEffect(()=>()=>bauCuaSession.cancel(),[bauCuaSession]);
  const [entering,setEntering]=useState(true),[mapProgress,setMapProgress]=useState({loaded:0,total:0});
  const [phoneClosing,setPhoneClosing]=useState(false),closeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
@@ -34,7 +34,7 @@ export default function App(){
  const toast=useCallback((message:string)=>{if(timer.current)clearTimeout(timer.current);setNotification(message);timer.current=setTimeout(()=>setNotification(''),3200)},[]);
  const [journalNpc,setJournalNpc]=useState<string|undefined>(undefined);
  const [trip,setTrip]=useState<boolean|null>(null),tripLock=useRef(false);
- const commitGame=(next:GameState)=>{liveState.current=next;setState(next);try{localStorage.setItem(engine.KEY,JSON.stringify(next));setStorageOK(true)}catch{setStorageOK(false);toast('Chưa lưu được. Tiến độ chỉ giữ trong phiên này.')}};
+ const commitGame=(raw:GameState)=>{const next=faintIfLate(raw);if(next!==raw){setModal('summary');if(view==='lake')setView('city')}liveState.current=next;setState(next);try{localStorage.setItem(engine.KEY,JSON.stringify(next));setStorageOK(true)}catch{setStorageOK(false);toast('Chưa lưu được. Tiến độ chỉ giữ trong phiên này.')}};
  const doOfficeAction=(action:OfficeAction)=>{const result=officeAction(liveState.current,action);if(result.ok){let n=result.state;if(action.kind==='meet'){const npc=STAFF.find(p=>p.id===action.id)!;n=recordJournal(n,`meet:${npc.id}`,'Làm quen '+npc.name,npc.role,npc.id)}else if(['apply','acceptOffer','rent','renew','upgrade','buyDecor','leave','endLease'].includes(action.kind)){n=recordJournal(n,`office:${action.kind}:${n.day}:${clockOf(n).minute}`,'Văn phòng',({apply:'Đã nộp CV',acceptOffer:'Đã nhận việc',rent:'Đã thuê văn phòng',renew:'Đã gia hạn',upgrade:'Đã nâng cấp thiết bị',buyDecor:'Đã mua nội thất',leave:'Đã rời công ty',endLease:'Đã trả mặt bằng'} as Record<string,string>)[action.kind]!)}if((action.kind==='leave'||action.kind==='acceptOffer')&&n.work)n={...n,work:{...n.work,task:null}};commitGame(n);return{ok:true,state:n} as const;}return result};
  const doWorkAction=(action:WorkAction)=>{const r=workAction(liveState.current,action);if(r.ok)commitGame(r.state);return r};
  const doChat=(id:string,minutes:5|15)=>{const r=chatCoworker(liveState.current,id,minutes);if(r.ok)commitGame(r.state);return r};

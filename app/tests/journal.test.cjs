@@ -22,7 +22,7 @@ assert.equal(appendJournal(timed,{key:'x',title:'A',detail:' '}),timed);
 const loaded=JSON.parse(JSON.stringify(result));
 assert(validJournal(loaded.journal,loaded.day));assert.deepEqual(journalOf(loaded),result.journal);
 assert(validJournal([],0));assert(!validJournal(undefined,0));
-for(const patch of [{day:30},{day:-1},{minute:419},{minute:1321},{minute:NaN},{title:''},{detail:'x'.repeat(1001)},{npcId:4},{id:''}])assert(!validJournal([{...e,...patch}],29),JSON.stringify(patch));
+for(const patch of [{day:30},{day:-1},{minute:419},{minute:1501},{minute:NaN},{title:''},{detail:'x'.repeat(1001)},{npcId:4},{id:''}])assert(!validJournal([{...e,...patch}],29),JSON.stringify(patch));
 assert(!validJournal([e,{...e,id:'other'}],29),'duplicate occurrence key rejected');
 assert(!validJournal([e,{...e,key:'other'}],29),'duplicate id rejected');
 let full=old;
