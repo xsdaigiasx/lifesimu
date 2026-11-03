@@ -1,0 +1,11 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const {vitalFactor,vitalWarnings,drainFullness,fullnessOf,dailyHealthPenalty}=require('../.test-build/domain/vitals.js');
+const {spendTime,finishDay}=require('../.test-build/domain/time.js');
+const base={version:1,day:0,money:5200000,energy:85,fullness:70,mood:75,health:90,stress:20,xp:0,owned:[],equipped:[],ledger:[],lastReport:null};
+test('chăm đủ thì m = 1,0 và không cảnh báo',()=>{assert.equal(vitalFactor(base),1);assert.deepEqual(vitalWarnings(base),[])});
+test('công thức m theo chỉ số thấp nhất',()=>{assert.equal(vitalFactor({...base,fullness:40}),.85);assert.equal(vitalFactor({...base,energy:10}),.5);assert.equal(vitalFactor({...base,mood:20}),.7)});
+test('hệ số phụ: sức khỏe thấp, căng thẳng cao',()=>{assert.equal(vitalFactor({...base,health:30}),.8);assert.equal(vitalFactor({...base,stress:75}),.9);assert.equal(vitalFactor({...base,stress:90}),.8)});
+test('cảnh báo sớm hiện trước ngưỡng phạt (dưới 60)',()=>{const w=vitalWarnings({...base,fullness:55});assert.equal(w.length,1);assert.equal(w[0].level,'soon');assert.equal(vitalWarnings({...base,fullness:30})[0].level,'low');assert.equal(vitalWarnings({...base,stress:65})[0].key,'stress')});
+test('đói dần 5 mỗi giờ khi thức, qua spendTime',()=>{const r=spendTime(base,120);assert.ok(r.ok);assert.equal(fullnessOf(r.state),60);assert.equal(fullnessOf(drainFullness(base,30)),67.5)});
+test('ngủ một đêm mất 16 No, không âm',()=>{const r=finishDay(base);assert.ok(r.ok);assert.equal(fullnessOf(r.state),54);assert.equal(fullnessOf(finishDay({...base,fullness:5}).state),0)});
+test('save cũ không có fullness vẫn chạy',()=>{const {fullness,...old}=base;assert.equal(fullnessOf(old),70);assert.equal(dailyHealthPenalty(old),0);assert.equal(dailyHealthPenalty({...old,fullness:10}),3)});

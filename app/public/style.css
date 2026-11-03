@@ -147,3 +147,6 @@ body.phone-active{overflow:hidden}
 .map-section{position:absolute;width:50%;height:50%;overflow:hidden;pointer-events:none}
 .map-section>img{position:absolute;width:200%;height:200%;max-width:none;object-fit:fill;image-rendering:auto;pointer-events:none;user-select:none}
 .map-viewport{padding-bottom:70px;background:#a5b37a}
+
+.phone-meter.orange i{background:#c98f5a}
+.phone-warnings{margin:12px 0 0;display:grid;gap:6px}.phone-warnings p{margin:0;padding:8px 10px;border-radius:10px;font-size:12.5px;line-height:1.35;background:#f4efdc;color:#6d5a24}.phone-warnings p.low{background:#f6e1dc;color:#7a3328}
