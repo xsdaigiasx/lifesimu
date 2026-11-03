@@ -20,5 +20,5 @@ Dự án **Một đời để sống**. Đọc `AGENTS.md` để biết vai trò
 - Dậy 07:00; được thức tới 01:00, đến 01:00 thì ngất (về nhà hoặc viện, có thể mất tối đa 20% tiền mặt, không mất tiền ngân hàng).
 - Sau phần mở đầu có màn trả tiền trọ hiện rõ; mỗi kỳ trả đều có thông báo.
 - Mỗi năm game có tổng kết; không có kết thúc cứng.
-- Phòng trọ 8×8 ô, phòng tắm 3×3. Kỹ năng cấp 1–50, Lv hiệu dụng = cấp / 5.
+- Phòng trọ 8×8 ô, phòng tắm 3×3. Kỹ năng Lv 1–10, XP lên Lv n = 80 × n^1,6 (chủ dự án chốt đổi từ hệ 1–50, 04/11).
 - Thiệt hại giao việc sai theo 5 mức và điểm lệch (workflow 12.2).
