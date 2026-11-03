@@ -3,7 +3,7 @@ import {validRent} from './rent';
 import {validHome} from './home';import {post,validTx} from './money';
 import {validOfficeItems} from './office-items';
 import {validSocial} from './social';
-import {validSkills,validWork} from './work';
+import {validSkills,validWork,SKILLS} from './work';import {MAX_LEVEL} from './skill-xp';
 import {validJournal} from './journal';
 import {validateLayout} from './layout';
 import {spendTime,validClock} from './time';
@@ -73,10 +73,14 @@ import type {GameState,GameResult,ItemId,Item,DailyAction,EngineApi} from './typ
         n.lastReport = { action, earn, cost: COST, xp, net: n.money - before, efficiency: Math.round(efficiency * 100), day: n.day };
         return { ok: true, state: n };
     }
+    /** Save cũ dùng cấp nội bộ 1–50: đổi sang Lv 1–10 (cấp / 5), XP dư bỏ đi. */
+    function migrateSkills(s: any): GameState | null { const k = s?.skills; if (!k || typeof k !== 'object' || validSkills(k)) return null; const out: any = {}; for (const id of Object.keys(SKILLS)) { const q = k[id]; if (q === undefined && id === 'cooking') continue; if (!q || !Number.isInteger(q.level) || q.level < 1 || q.level > 50) return null; out[id] = { level: Math.max(1, Math.min(MAX_LEVEL, Math.floor(q.level / 5))), xp: 0 }; } return { ...s, skills: out }; }
     function parse(raw: string | null): GameState | null { if (typeof raw !== 'string')
         return null; try {
         const s = JSON.parse(raw);
-        return valid(s) ? s : null;
+        if (valid(s)) return s;
+        const m = migrateSkills(s);
+        return m && valid(m) ? m : null;
     }
     catch {
         return null;
