@@ -1,0 +1,24 @@
+/* Cảm giác "ứng dụng/game" thay vì trang web: không chọn chữ, không giật khi kéo, không chớp khi chạm. */
+html,body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+button,a,[role=button],summary,select,label{touch-action:manipulation}
+input,textarea,[contenteditable=true],.selectable{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+img,svg,canvas{-webkit-user-drag:none;user-drag:none}
+img{-webkit-touch-callout:none}
+button{-webkit-appearance:none;appearance:none}
+:focus:not(:focus-visible){outline:none}
+/* Khi chạy như ứng dụng đã cài: chừa vùng tai thỏ và thanh trạng thái */
+@media (display-mode: standalone){
+  body{padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+}
+/* Thông báo phiên bản mới: nằm trên thanh điều hướng dưới, cùng kiểu thông báo của game */
+.update-banner{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top));transform:translateX(-50%);z-index:210;display:flex;align-items:center;gap:12px;width:min(440px,calc(100vw - 24px));padding:12px 12px 12px 16px;background:#193e35;color:#faf7e6;border-radius:14px;box-shadow:0 8px 28px #173e3855;animation:update-in .25s ease-out}
+.update-banner>div{flex:1;min-width:0}
+.update-banner strong{display:block;font-size:12px}
+.update-banner small{display:block;margin-top:3px;font-size:10px;color:#cfdcc9}
+.update-banner .update-now{flex:none;padding:10px 14px;border:0;border-radius:10px;background:#e8c98b;color:#173e38;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.update-banner .update-later{flex:none;width:30px;height:30px;border:0;border-radius:50%;background:#ffffff1f;color:#faf7e6;font-size:18px;line-height:1;cursor:pointer}
+@keyframes update-in{from{opacity:0;transform:translate(-50%,-14px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){.update-banner{animation:none}}
+.install-hint{margin-top:10px!important;font-size:10px;line-height:1.6;color:#6b7c63}
+.phone-info-card .phone-secondary{margin-top:12px}
