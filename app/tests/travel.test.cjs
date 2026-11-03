@@ -1,0 +1,10 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const {quoteTrip,isRush,MODES}=require('../.test-build/domain/travel.js');
+const {engine}=require('../.test-build/domain/engine');
+const {goTo,travelOptions,travelQuote,clockOf}=require('../.test-build/domain/time.js');
+test('ví dụ 6 km khớp mục 15.2',()=>{const t=m=>quoteTrip(m,6000,600).minutes;assert.equal(t('walk'),72);assert.equal(t('bicycle'),30);assert.equal(t('bus'),28);assert.equal(t('motorbike'),13);assert.equal(quoteTrip('motorbike',6000,480).minutes,19)});
+test('giờ cao điểm 7–9h và 17–19h, không ảnh hưởng đi bộ và xe đạp',()=>{assert.ok(isRush(420)&&isRush(539)&&!isRush(540)&&isRush(1020)&&!isRush(1140));assert.equal(quoteTrip('walk',3000,480).minutes,quoteTrip('walk',3000,600).minutes);assert.ok(quoteTrip('taxi',3000,480).minutes>quoteTrip('taxi',3000,600).minutes)});
+test('chi phí: bus 7 nghìn, xe máy xăng cộng gửi xe, taxi theo km, về nhà không gửi xe',()=>{assert.equal(quoteTrip('bus',6000,600).fare,7000);assert.equal(quoteTrip('motorbike',6000,600).fare,9000+5000);assert.equal(quoteTrip('motorbike',6000,600,true).fare,9000);assert.equal(quoteTrip('taxi',2000,600).fare,30000)});
+test('xe đạp và xe máy chỉ chọn được khi đã sở hữu; đi bộ, bus, taxi luôn có',()=>{const s=engine.initial();const modes=travelOptions(s,'home','office').map(o=>o.mode);assert.deepEqual(modes,['walk','bus','taxi']);const owned={...s,life:{...require('../.test-build/domain/life.js').lifeOf(s),owned:['bicycle']}};assert.ok(travelOptions(owned,'home','office').some(o=>o.mode==='bicycle'));assert.equal(goTo(s,'office','bicycle').ok,false)});
+test('đi taxi trừ tiền một lần và đến nơi đúng giờ',()=>{const s=engine.initial();const q=travelQuote(s,'home','office','taxi');const r=goTo(s,'office','taxi');assert.ok(r.ok);assert.equal(r.state.money,s.money-q.fare);assert.equal(clockOf(r.state).minute,clockOf(s).minute+q.minutes);assert.equal(clockOf(r.state).location,'office');assert.equal(r.state.ledger[0].name,'Taxi')});
+test('không đủ tiền thì không đi',()=>{const s={...engine.initial(),money:100};assert.equal(goTo(s,'office','taxi').ok,false);assert.ok(goTo(s,'office','walk').ok)});
