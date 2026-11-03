@@ -151,4 +151,12 @@ body.phone-active{overflow:hidden}
 .phone-meter.orange i{background:#c98f5a}
 .phone-warnings{margin:12px 0 0;display:grid;gap:6px}.phone-warnings p{margin:0;padding:8px 10px;border-radius:10px;font-size:12.5px;line-height:1.35;background:#f4efdc;color:#6d5a24}.phone-warnings p.low{background:#f6e1dc;color:#7a3328}
 
-.travel-modes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.travel-modes button{border:1px solid #d6dcc7;background:#fbfcf0;color:#46503a;border-radius:999px;padding:5px 10px;font-size:12px;line-height:1.2}.travel-modes button[aria-pressed=true]{background:#5f7b4a;border-color:#5f7b4a;color:#fff}
+
+.travel-pick{display:block;max-width:100%;margin-top:3px;border:1px solid #d6dcc7;background:#eef2e2;color:#3f5a37;border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;font-weight:600;line-height:1.2;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:auto}
+.travel-backdrop{position:fixed;inset:0;z-index:9;background:transparent;border:0;pointer-events:auto}
+.travel-sheet{position:absolute;left:0;right:0;bottom:calc(100% + 8px);z-index:10;display:grid;gap:4px;padding:10px;border-radius:14px;background:#fbfbf0;border:1px solid #e1e6d7;box-shadow:0 10px 30px #153d2b33;pointer-events:auto}
+.travel-sheet>small{padding:2px 6px 4px;color:#6d7a62;font-size:12px}
+.travel-sheet button{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;min-height:44px;padding:8px 10px;border:1px solid transparent;border-radius:10px;background:transparent;color:#2f4a2f;font:inherit;font-size:14px;text-align:left}
+.travel-sheet button[aria-selected=true]{background:#e4ecd3;border-color:#bccaa0}
+.travel-sheet button em{grid-column:1/-1;margin-top:-4px;font-style:normal;font-size:11.5px;color:#5f7b4a;font-weight:600}
+.travel-sheet button span{font-variant-numeric:tabular-nums;color:#4c5a43}
