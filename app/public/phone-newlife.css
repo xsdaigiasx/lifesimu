@@ -1,0 +1,10 @@
+/* Nút phụ trong điện thoại (Lưu game → Đời mới): cùng bo góc, cỡ chữ và màu với các thẻ khác của điện thoại */
+.phone-secondary{display:block;width:100%;margin-top:9px;padding:14px 12px;border:1px solid #d7dfcf;border-radius:13px;background:#fcfcf6;color:#294d3d;font:inherit;font-size:12px;font-weight:700;text-align:center;cursor:pointer;transition:background .15s,border-color .15s}
+.phone-secondary:hover{background:#eef3e6;border-color:#c3d0b6}
+.phone-secondary:focus-visible{outline:2px solid #9ebd8c;outline-offset:2px}
+.phone-secondary.phone-danger{background:#fbf1ec;border-color:#e6c8bb;color:#8a3b25}
+.phone-secondary.phone-danger:hover{background:#f6e3da}
+.phone-info-card .primary.wide{margin-top:12px}
+.phone-info-card .phone-form{padding-top:10px}
+.phone-info-card .phone-form label{display:grid;gap:6px}
+.phone-small-title+.phone-secondary{margin-top:0;margin-bottom:17px}
