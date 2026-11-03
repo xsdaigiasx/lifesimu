@@ -8,7 +8,7 @@ import {ActionRow,DataRow,GameScreen} from './GameUI';
 import Icon from './Icon';
 
 const timeText=(minute:number)=>`${String(Math.floor(minute/60)).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;
-const stamp=(entry:JournalEntry)=>`${shortDate(entry.day)}, ${timeText(entry.minute)}`;
+const stamp=(entry:JournalEntry)=>`${shortDate(entry.day)} ${timeText(entry.minute)}`;
 
 export default function Journal({state,onNpc}:{state:GameState;onNpc:(id:string)=>void}){
  const [selected,setSelected]=useState<string|null>(null),[people,setPeople]=useState(false);

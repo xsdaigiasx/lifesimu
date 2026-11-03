@@ -5,7 +5,7 @@ export const SIZES={small:{name:'Nhỏ',area:40,seats:6,rent:1200000},medium:{na
 export type OfficeSize=keyof typeof SIZES;
 export const INDUSTRIES={tech:{name:'Công nghệ',desc:'Phát triển phần mềm và sản phẩm số.',color:'#507e87'},design:{name:'Thiết kế',desc:'Thiết kế hình ảnh, thương hiệu và nội dung.',color:'#b98460'},trade:{name:'Thương mại',desc:'Kinh doanh, đơn hàng và chăm sóc khách hàng.',color:'#6f8b60'},accounting:{name:'Kế toán',desc:'Sổ sách, báo cáo và dịch vụ tài chính.',color:'#87819a'}} as const;
 export type Industry=keyof typeof INDUSTRIES;
-export const COMPANIES=[{id:'sen-code',name:'Sen Code',industry:'tech',size:'small',floor:'Tầng 2, Phòng 201'},{id:'an-nhien-tech',name:'An Nhiên Tech',industry:'tech',size:'large',floor:'Tầng 6, Toàn tầng'},{id:'net-studio',name:'Nét Studio',industry:'design',size:'small',floor:'Tầng 2, Phòng 202'},{id:'moc-creative',name:'Mộc Creative',industry:'design',size:'medium',floor:'Tầng 3, Phòng 301'},{id:'song-viet',name:'Sông Việt',industry:'trade',size:'large',floor:'Tầng 5, Toàn tầng'},{id:'can-bang',name:'Cân Bằng',industry:'accounting',size:'medium',floor:'Tầng 4, Phòng 401'}] as const;
+export const COMPANIES=[{id:'sen-code',name:'Sen Code',industry:'tech',size:'small',floor:'Tầng 2 Phòng 201'},{id:'an-nhien-tech',name:'An Nhiên Tech',industry:'tech',size:'large',floor:'Tầng 6 Toàn tầng'},{id:'net-studio',name:'Nét Studio',industry:'design',size:'small',floor:'Tầng 2 Phòng 202'},{id:'moc-creative',name:'Mộc Creative',industry:'design',size:'medium',floor:'Tầng 3 Phòng 301'},{id:'song-viet',name:'Sông Việt',industry:'trade',size:'large',floor:'Tầng 5 Toàn tầng'},{id:'can-bang',name:'Cân Bằng',industry:'accounting',size:'medium',floor:'Tầng 4 Phòng 401'}] as const;
 export const STAFF=[{id:'lan',name:'Mai Lan',role:'Lễ tân tòa nhà',initial:'L',color:'#ad7d69',line:'Chào bạn! Bảng tuyển dụng ở bên cạnh, ghế chờ ở phía trong.'},{id:'minh',name:'Đức Minh',role:'Quản lý mặt bằng',initial:'M',color:'#6c8790',line:'Tôi có mặt bằng từ 40 đến 160 m². Bạn muốn xem chỗ nào?'},{id:'ha',name:'Ngọc Hà',role:'Điều phối tuyển dụng',initial:'H',color:'#8c86a0',line:'Bạn mang CV chứ? Các công ty công nghệ đang nhận hồ sơ.'},{id:'bao',name:'Quốc Bảo',role:'Kỹ thuật viên',initial:'B',color:'#778a68',line:'Nhân viên sửa góc làm việc cá nhân, còn thiết bị chung do chủ công ty quản lý.'}] as const;
 export const DECOR={plant:{name:'Chậu cây',price:120000},lamp:{name:'Đèn bàn',price:180000},coffee:{name:'Góc cà phê',price:450000}} as const;
 export type DecorId=keyof typeof DECOR;
@@ -62,11 +62,11 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
  else if(a.kind==='rent'){
   if(o.role!=='visitor')return fail('Bạn đang có văn phòng.');if(o.application&&['pending','interview','passed'].includes(o.application.status))return fail('Hãy hủy hồ sơ tuyển dụng trước khi thuê.');
   if(!Object.hasOwn(SIZES,a.size)||!Object.hasOwn(INDUSTRIES,a.industry)||typeof a.name!=='string'||!a.name.trim()||a.name.trim().length>32)return fail('Hãy chọn ngành, diện tích và tên công ty tối đa 32 ký tự.');
-  if(!pay(SIZES[a.size].rent,`Thuê văn phòng ${SIZES[a.size].area} m², 7 ngày`))return fail('Chưa đủ tiền trả kỳ thuê 7 ngày.');o.role='owner';o.size=a.size;o.industry=a.industry;o.name=a.name.trim();o.leaseUntil=s.day+7;
+  if(!pay(SIZES[a.size].rent,`Thuê văn phòng ${SIZES[a.size].area} m² 7 ngày`))return fail('Chưa đủ tiền trả kỳ thuê 7 ngày.');o.role='owner';o.size=a.size;o.industry=a.industry;o.name=a.name.trim();o.leaseUntil=s.day+7;
  }
  else if(a.kind==='renew'){
   if(o.role!=='owner'||activeLease(s))return fail('Chỉ gia hạn khi hợp đồng đã hết hạn.');
-  if(!pay(SIZES[o.size].rent,'Gia hạn văn phòng, 7 ngày'))return fail('Chưa đủ tiền gia hạn.');o.leaseUntil=s.day+7;
+  if(!pay(SIZES[o.size].rent,'Gia hạn văn phòng 7 ngày'))return fail('Chưa đủ tiền gia hạn.');o.leaseUntil=s.day+7;
  }
  else{
   if(o.role==='visitor')return fail('Hãy nhận chỗ làm hoặc thuê văn phòng trước.');
@@ -76,11 +76,11 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
    if(a.item==='printer'&&o.role!=='owner')return fail('Máy in chung do chủ công ty quản lý.');
    const key=a.item==='printer'?'printer':o.role==='employee'?'workComputer':'computers',max=a.item==='printer'?2:3;
    if(o[key]>=max)return fail('Thiết bị đã ở mức cao nhất.');
-   const price=upgradePrice(s,a.item);if(!pay(price,a.item==='printer'?'Văn phòng, Nâng cấp máy in':o.role==='employee'?'Góc làm việc, Nâng cấp máy tính':'Văn phòng, Nâng cấp dàn máy tính'))return fail('Chưa đủ tiền nâng cấp.');o[key]++;
+   const price=upgradePrice(s,a.item);if(!pay(price,a.item==='printer'?'Văn phòng Nâng cấp máy in':o.role==='employee'?'Góc làm việc Nâng cấp máy tính':'Văn phòng Nâng cấp dàn máy tính'))return fail('Chưa đủ tiền nâng cấp.');o[key]++;
   }else{
    if(!Object.hasOwn(DECOR,a.id)||(o.role==='employee'&&a.id==='coffee'))return fail('Bạn không thể sửa hạng mục này.');
    const decor=o.role==='employee'?o.employeeDecor:o.ownerDecor;
-   if(a.kind==='buyDecor'){if(Object.hasOwn(decor,a.id))return fail('Bạn đã có món đồ này.');if(!pay(DECOR[a.id].price,'Văn phòng, '+DECOR[a.id].name))return fail('Chưa đủ tiền mua đồ.');decor[a.id]=null}
+   if(a.kind==='buyDecor'){if(Object.hasOwn(decor,a.id))return fail('Bạn đã có món đồ này.');if(!pay(DECOR[a.id].price,'Văn phòng '+DECOR[a.id].name))return fail('Chưa đủ tiền mua đồ.');decor[a.id]=null}
    else if(a.kind==='place'){if(!Object.hasOwn(decor,a.id))return fail('Hãy mua đồ trước.');if(a.slot!==null&&(!Number.isInteger(a.slot)||a.slot<0||a.slot>2))return fail('Vị trí không hợp lệ.');if(a.slot!==null&&Object.entries(decor).some(([id,slot])=>id!==a.id&&slot===a.slot))return fail('Vị trí này đang có đồ. Hãy cất món đó trước.');decor[a.id]=a.slot}
   }
  }
