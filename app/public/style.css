@@ -150,3 +150,5 @@ body.phone-active{overflow:hidden}
 
 .phone-meter.orange i{background:#c98f5a}
 .phone-warnings{margin:12px 0 0;display:grid;gap:6px}.phone-warnings p{margin:0;padding:8px 10px;border-radius:10px;font-size:12.5px;line-height:1.35;background:#f4efdc;color:#6d5a24}.phone-warnings p.low{background:#f6e1dc;color:#7a3328}
+
+.travel-modes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.travel-modes button{border:1px solid #d6dcc7;background:#fbfcf0;color:#46503a;border-radius:999px;padding:5px 10px;font-size:12px;line-height:1.2}.travel-modes button[aria-pressed=true]{background:#5f7b4a;border-color:#5f7b4a;color:#fff}

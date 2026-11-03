@@ -9,7 +9,7 @@ const basePlaces = [
     { id: 'hospital', name: 'Bệnh viện', icon: 'hospital', x: 30, y: 47, summary: 'Khám và điều trị', detail: 'Bệnh viện của thành phố, nơi chăm sóc sức khỏe cho người dân.' },
     { id: 'bus', name: 'Trạm xe buýt', icon: 'bus', x: 15, y: 86, summary: 'Tuyến 07 Đi Hồ Sen ngoại ô', detail: 'Tuyến 07 đi Hồ Sen. Vé khứ hồi 40.000đ; mỗi lượt đi 45 phút.' },
     { id: 'park', name: 'Công viên', icon: 'leaf', x: 55, y: 67, summary: 'Đi dạo, tập luyện và nghỉ ngơi', detail: 'Khoảng xanh giữa phố, có lối dạo và đài phun nước.' },
-    { id: 'streetfood', name: 'Quán ăn ven đường', icon: 'food', x: 32, y: 87, summary: 'Bữa ăn bình dân Chưa mở', detail: 'Quán ăn nhỏ ven đường, quen thuộc với người đi làm.' },
+    { id: 'streetfood', name: 'Quán ăn ven đường', icon: 'food', x: 32, y: 87, summary: 'Cà phê, bữa ăn bình dân', detail: 'Quán ăn nhỏ ven đường, quen thuộc với người đi làm.' },
     { id: 'restaurant', name: 'Nhà hàng', icon: 'restaurant', x: 88, y: 73, summary: 'Ăn uống, gặp gỡ Chưa mở', detail: 'Không gian ăn uống và gặp gỡ ở khu phố trung tâm.' },
     { id: 'apartments', name: 'Khu nhà phố', icon: 'building', x: 88, y: 32, summary: 'Nhà liền kề ven phố Chưa mở', detail: 'Khu nhà liền kề, phía dưới là cửa hàng và phía trên là chỗ ở.' },
     { id: 'villa', name: 'Biệt thự', icon: 'villa', x: 76, y: 51, summary: 'Khu nhà ở cao cấp Chưa mở', detail: 'Khu biệt thự yên tĩnh với sân vườn rộng.' }
