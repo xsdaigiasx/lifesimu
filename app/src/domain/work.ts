@@ -5,15 +5,13 @@ import {clockOf,END,seedUnit} from './time';
 import {officeOf,PROBATION_PASS_DAYS,PROBATION_SALARY,RETRY_AFTER_FAIL} from './office';
 import {dateAt,money} from './format';
 import {recordJournal} from './journal';
+import {SKILLS,xpNeeded,defaultSkills,gainXp,type SkillId,type Skills} from './skill-xp';
 import holidays from './calendar-2026.json';
-export const SKILLS={programming:'Lập trình',logic:'Logic',graphics:'Đồ họa',management:'Quản lý',communication:'Giao tiếp'} as const;
-export type SkillId=keyof typeof SKILLS;
-export interface Skill {level:number;xp:number}
-export type Skills=Record<SkillId,Skill>;
-export const xpNeeded=(level:number)=>100+25*(level-1);
-export function skillsOf(s:GameState):Skills{return s.skills??{programming:{level:3,xp:0},logic:{level:3,xp:0},graphics:{level:1,xp:0},management:{level:1,xp:0},communication:{level:1,xp:0}}}
-export function validSkills(v:unknown):v is Skills{if(!v||typeof v!=='object')return false;return Object.keys(SKILLS).every(k=>{const q=(v as Skills)[k as SkillId];return q&&Number.isInteger(q.level)&&q.level>=1&&q.level<=50&&Number.isInteger(q.xp)&&q.xp>=0&&(q.level===50?q.xp===0:q.xp<xpNeeded(q.level))})}
-export function addSkillXp(s:GameState,id:SkillId,xp:number):GameState{const skills=structuredClone(skillsOf(s)),q=skills[id];if(q.level===50)return s;q.xp+=xp;while(q.level<50&&q.xp>=xpNeeded(q.level)){q.xp-=xpNeeded(q.level);q.level++}if(q.level===50)q.xp=0;return{...s,skills}}
+export {SKILLS,xpNeeded,effectiveLevel} from './skill-xp';
+export type {SkillId,Skill,Skills} from './skill-xp';
+export function skillsOf(s:GameState):Skills{return{...defaultSkills(),...s.skills}}
+export function validSkills(v:unknown):v is Skills{if(!v||typeof v!=='object')return false;return Object.keys(SKILLS).every(k=>{const q=(v as Partial<Skills>)[k as SkillId];if(q===undefined)return k==='cooking';return!!q&&Number.isInteger(q.level)&&q.level>=1&&q.level<=50&&Number.isInteger(q.xp)&&q.xp>=0&&(q.level===50?q.xp===0:q.xp<xpNeeded(q.level))})}
+export function addSkillXp(s:GameState,id:SkillId,xp:number):GameState{if(skillsOf(s)[id].level>=50)return s;return{...s,skills:gainXp(skillsOf(s),id,xp)}}
 export const TASKS=[
 {id:'null-data',name:'Sửa lỗi dữ liệu rỗng',skill:'programming',secondary:'logic',level:1,minutes:60,error:5,xp:12},
 {id:'test-form',name:'Kiểm tra biểu mẫu',skill:'logic',secondary:'programming',level:2,minutes:90,error:8,xp:18},
