@@ -1,4 +1,5 @@
 import {spendTime} from './time';
+import {post} from './money';
 import type {GameState} from './types';
 export const FACES = ['bau', 'cua', 'tom', 'ca', 'ga', 'nai'] as const;
 export type Face = typeof FACES[number];
@@ -36,6 +37,8 @@ export function playBauCua(state: GameState, bets: Bets, roll: () => Dice = roll
  try {dice = roll()} catch {return {ok:false, error:'Chưa xóc được xúc xắc. Hãy thử lại.'}}
  if (!validDice(dice)) return {ok:false, error:'Kết quả xúc xắc không hợp lệ.'};
  const payout = payoutFor(bets, dice), round:BauCuaRound = {dice:[...dice], bets:{...bets}, stake, payout, day:state.day};
- const ledger = [{name:'Bầu cua Tiền cược', amount:-stake, day:state.day}, ...(payout ? [{name:'Bầu cua Hoàn cược và tiền thắng', amount:payout, day:state.day}] : [])].reverse();
- return {ok:true, round, state:{...timed.state, money:state.money - stake + payout, ledger:[...ledger, ...state.ledger].slice(0,100), bauCuaLast:round}};
+ const n:GameState={...timed.state, bauCuaLast:round};
+ if (post(n,{name:'Bầu cua Tiền cược', amount:-stake})!=='ok') return {ok:false, error:'Số dư không đủ cho lượt cược này.'};
+ if (payout && post(n,{name:'Bầu cua Hoàn cược và tiền thắng', amount:payout})!=='ok') return {ok:false, error:'Mức cược vượt giới hạn số dư của game.'};
+ return {ok:true, round, state:n};
 }

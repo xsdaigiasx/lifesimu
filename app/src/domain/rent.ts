@@ -1,4 +1,5 @@
 import {dateAt} from './format';
+import {post} from './money';
 import type {GameState} from './types';
 /** Tiền trọ: 1.500.000đ mỗi tháng, tính vào ngày 1; thiếu tiền được gia hạn 3 ngày, sau đó tâm trạng và căng thẳng xấu đi mỗi ngày cho đến khi trả đủ. */
 export const RENT=1500000,GRACE_DAYS=3;
@@ -10,7 +11,7 @@ export const monthLabel=(key:string)=>{const[y,m]=key.split('-');return `${Numbe
 export const rentOf=(s:GameState):RentState=>s.rent??{billedMonth:'',owed:0,dueDay:null,notice:null};
 const int=(n:unknown,lo:number,hi:number)=>Number.isInteger(n)&&(n as number)>=lo&&(n as number)<=hi;
 export function validRent(v:unknown,day:number):v is RentState{if(!v||typeof v!=='object')return false;const r=v as RentState;if(typeof r.billedMonth!=='string'||!(r.billedMonth===''||/^\d{4}-\d{2}$/.test(r.billedMonth))||!int(r.owed,0,1e9)||!(r.dueDay===null||int(r.dueDay,0,day+GRACE_DAYS+1)))return false;if(r.notice===null)return true;const n=r.notice;return !!n&&['first','paid','due','late'].includes(n.kind)&&/^\d{4}-\d{2}$/.test(n.month)&&int(n.amount,0,1e9)&&int(n.day,0,day)&&int(n.daysLeft,0,GRACE_DAYS)}
-const charge=(s:GameState,amount:number,label:string)=>{s.money-=amount;s.ledger=[{name:label,amount:-amount,day:s.day},...s.ledger].slice(0,100)};
+const charge=(s:GameState,amount:number,label:string)=>{post(s,{name:label,amount:-amount})};
 /** Sau phần mở đầu: trả tháng đầu tiên ngay và hiện rõ cho người chơi. */
 export function startRent(s:GameState):GameState{if(s.rent)return s;const key=monthKey(s.day),n=structuredClone(s);if(n.money>=RENT){charge(n,RENT,`Tiền trọ tháng ${monthLabel(key)}`);n.rent={billedMonth:key,owed:0,dueDay:null,notice:{kind:'first',month:key,amount:RENT,day:n.day,daysLeft:0}}}else n.rent={billedMonth:key,owed:RENT,dueDay:n.day+GRACE_DAYS,notice:{kind:'due',month:key,amount:RENT,day:n.day,daysLeft:GRACE_DAYS}};return n}
 /** Gọi một lần mỗi sáng sau khi đã sang ngày mới (sau khi lương ngày 1 đã vào ví). */

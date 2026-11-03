@@ -1,4 +1,5 @@
 import {spendTime} from './time';
+import {post} from './money';
 import type {GameState,GameResult,Place} from './types';
 export const FISH_IDS=['tilapia','carp','snakehead','catfish','grasscarp','redtilapia'] as const;
 export type FishId=typeof FISH_IDS[number];
@@ -22,7 +23,7 @@ export function validFishing(value:unknown,day:number):value is FishingState {
  const validCatch=(c:FishCatch)=>c&&integer(c.id,1e9)&&c.id>0&&c.id<f.nextId&&FISH_IDS.includes(c.fish)&&integer(c.grams,4500)&&c.grams>=FISH[c.fish].min&&c.grams<=FISH[c.fish].max&&integer(c.value,1e6)&&c.value===fishValue(c.fish,c.grams)&&integer(c.day,day);
  return typeof f.atLake==='boolean'&&typeof f.pendingCast==='boolean'&&(!f.pendingCast||f.atLake)&&integer(f.bait,999)&&integer(f.trips,1e6)&&integer(f.nextId,1e9)&&f.nextId>0&&Array.isArray(f.basket)&&f.basket.length<=60&&f.basket.every(validCatch)&&new Set(f.basket.map(c=>c.id)).size===f.basket.length&&!!f.collection&&FISH_IDS.every(id=>{const c=f.collection[id];return c&&integer(c.caught,1e9)&&integer(c.best,FISH[id].max)&&(c.caught===0?c.best===0:c.best>=FISH[id].min)})&&(f.lastCatch===null||validCatch(f.lastCatch));
 }
-function ledger(state:GameState,name:string,amount:number):GameState{return{...state,money:state.money+amount,ledger:[{name,amount,day:state.day},...state.ledger].slice(0,100)}}
+function ledger(state:GameState,name:string,amount:number):GameState{const n={...state};post(n,{name,amount});return n}
 export function takeBus(state:GameState,toLake:boolean):GameResult {
  const f=fishingOf(state);if(f.atLake===toLake)return{ok:false,error:'Bạn đã ở điểm đến này.'};
  if(toLake&&state.money<ROUND_TRIP_FARE)return{ok:false,error:'Cần 40.000đ cho vé khứ hồi. Lượt về đã được bao gồm.'};
