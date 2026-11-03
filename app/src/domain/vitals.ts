@@ -21,3 +21,10 @@ if(s.health<VITALS.sickHealth)w.push({key:'health',level:'low',text:'Sức khỏ
 return w}
 /** Cuối ngày: có chỉ số rơi dưới mức sàn thì Sức khỏe −3 (mục 11.1). */
 export const dailyHealthPenalty=(s:GameState)=>Math.min(s.energy,fullnessOf(s),s.mood)<VITALS.mFloor?3:0;
+/** T07: thời gian trôi hao Năng lượng 2,5/giờ (ca làm và học đã tự tính riêng); ngủ +10/giờ; nghỉ ngồi +3/giờ. */
+export const REST={idleEnergyPerHour:2.5,sleepEnergyPerHour:10,sitEnergyPerHour:3,fullBlock:90} as const;
+/** Số nguyên, cố định theo đồng hồ (không cần lưu phần lẻ): mỗi mốc 24 phút hao 1 năng lượng. */
+export const drainIdleEnergy=(s:GameState,from:number,to:number):GameState=>{const lost=Math.floor(to*REST.idleEnergyPerHour/60)-Math.floor(from*REST.idleEnergyPerHour/60);return lost<=0?s:{...s,energy:Math.max(0,s.energy-lost)}};
+/** Số phút ngủ thật nếu đi ngủ lúc `minute` (tính từ 00:00 hôm nay) đến lúc dậy 07:00 hôm sau. */
+export const sleepMinutes=(minute:number,wake:number)=>Math.max(0,1440+wake-minute);
+export const sleepEnergy=(minutes:number)=>Math.round(minutes/60*REST.sleepEnergyPerHour);
