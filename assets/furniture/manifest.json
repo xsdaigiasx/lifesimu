@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "tile_px": [
+    128,
+    64
+  ],
+  "z_px": 32,
+  "projection": "orthographic-2:1",
+  "anchor": "actual bottom footprint vertex; see README for rectangular-frame conflict",
+  "palette_reference": "app/public/assets/static-scenes/rental-diamond.png",
+  "palette": [
+    {
+      "name": "sage",
+      "hex": "#7a7751",
+      "sample": [
+        610,
+        450
+      ]
+    },
+    {
+      "name": "leaf",
+      "hex": "#8f8663",
+      "sample": [
+        966,
+        632
+      ]
+    },
+    {
+      "name": "cream",
+      "hex": "#fef0d7",
+      "sample": [
+        900,
+        598
+      ]
+    },
+    {
+      "name": "wall",
+      "hex": "#eacda4",
+      "sample": [
+        450,
+        350
+      ]
+    },
+    {
+      "name": "oak",
+      "hex": "#c28448",
+      "sample": [
+        601,
+        476
+      ]
+    },
+    {
+      "name": "warm",
+      "hex": "#f3b776",
+      "sample": [
+        550,
+        700
+      ]
+    },
+    {
+      "name": "metal",
+      "hex": "#bdae9c",
+      "sample": [
+        720,
+        480
+      ]
+    },
+    {
+      "name": "ink",
+      "hex": "#584c44",
+      "sample": [
+        627,
+        167
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "bed-basic",
+      "file": "bed-basic_a_sage.png",
+      "source": "bed-basic_a_sage.svg",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_z": 4,
+      "direction": "a",
+      "variant": "sage",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ]
+    },
+    {
+      "id": "bed-basic",
+      "file": "bed-basic_a_cream.png",
+      "source": "bed-basic_a_cream.svg",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_z": 4,
+      "direction": "a",
+      "variant": "cream",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ]
+    },
+    {
+      "id": "bed-basic",
+      "file": "bed-basic_b_sage.png",
+      "source": "bed-basic_b_sage.svg",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_z": 4,
+      "direction": "b",
+      "variant": "sage",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "bed-basic",
+      "file": "bed-basic_b_cream.png",
+      "source": "bed-basic_b_cream.svg",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_z": 4,
+      "direction": "b",
+      "variant": "cream",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "desk-work",
+      "file": "desk-work_a_oak.png",
+      "source": "desk-work_a_oak.svg",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_z": 4,
+      "direction": "a",
+      "variant": "oak",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ]
+    },
+    {
+      "id": "desk-work",
+      "file": "desk-work_b_oak.png",
+      "source": "desk-work_b_oak.svg",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_z": 4,
+      "direction": "b",
+      "variant": "oak",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "chair-work",
+      "file": "chair-work_a_sage.png",
+      "source": "chair-work_a_sage.svg",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 4,
+      "direction": "a",
+      "variant": "sage",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ]
+    },
+    {
+      "id": "chair-work",
+      "file": "chair-work_b_sage.png",
+      "source": "chair-work_b_sage.svg",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 4,
+      "direction": "b",
+      "variant": "sage",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ]
+    },
+    {
+      "id": "table-dining",
+      "file": "table-dining_a_oak.png",
+      "source": "table-dining_a_oak.svg",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_z": 3,
+      "direction": "a",
+      "variant": "oak",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ]
+    },
+    {
+      "id": "stool",
+      "file": "stool_a_sage.png",
+      "source": "stool_a_sage.svg",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 2,
+      "direction": "a",
+      "variant": "sage",
+      "frame_px": [
+        128,
+        128
+      ],
+      "anchor_px": [
+        64,
+        128
+      ],
+      "mount_origin_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "id": "lamp-desk",
+      "file": "lamp-desk_a_cream.png",
+      "source": "lamp-desk_a_cream.svg",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 4,
+      "direction": "a",
+      "variant": "cream",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ]
+    },
+    {
+      "id": "rug-small",
+      "file": "rug-small_a_sage.png",
+      "source": "rug-small_a_sage.svg",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_z": 0,
+      "direction": "a",
+      "variant": "sage",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        192,
+        168
+      ],
+      "mount_origin_px": [
+        128,
+        8
+      ]
+    },
+    {
+      "id": "plant-monstera",
+      "file": "plant-monstera_a_default.png",
+      "source": "plant-monstera_a_default.svg",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 4,
+      "direction": "a",
+      "variant": "default",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ]
+    }
+  ]
+}
