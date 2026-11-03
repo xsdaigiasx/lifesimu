@@ -1,0 +1,1 @@
+Cloudflare static build: index.html and assets at ZIP root. Source snapshot in source/. New shift choices and home sprites documented in source/docs/HANDOVER.md. Browser visual QA not performed. Not deployed.

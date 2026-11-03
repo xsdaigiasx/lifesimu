@@ -1,0 +1,18 @@
+import {HOME_ITEMS,HOME_TIERS,homePrice,homeOf,type HomeId,type HomeTier} from '../domain/home';
+import {PRODUCTS,lifeOf,type ProductId,type LifeAction} from '../domain/life';
+import type {GameState,GameResult} from '../domain/types';
+import {money} from '../domain/format';
+import {useState} from 'react';
+import HomeArt from './HomeArt';
+import Icon from './Icon';
+type Category='furniture'|'electronics'|'clothing'|'transport';
+export default function FurnitureShop({state,onBuy,onLife}:{state:GameState;onBuy:(id:HomeId,tier?:HomeTier)=>GameResult;onLife:(a:LifeAction)=>GameResult}){
+ const [notice,setNotice]=useState(''),[category,setCategory]=useState<Category>('furniture'),[tier,setTier]=useState<HomeTier>('basic');const owned=homeOf(state).items,l=lifeOf(state);
+ const run=(r:GameResult,success:string)=>setNotice(r.ok?success:r.error);
+ return <section className="furniture-shop" aria-label="Cửa hàng mua sắm"><header className="furniture-shop-balance"><span>Số dư<strong>{money(state.money)}</strong></span><small>{owned.length} món nội thất</small></header><nav className="shop-categories">{([['furniture','Nội thất'],['electronics','Đồ điện tử'],['clothing','Quần áo'],['transport','Phương tiện']] as const).map(([id,name])=><button key={id} aria-pressed={category===id} onClick={()=>{setCategory(id);setNotice('')}}>{name}</button>)}</nav><p className="furniture-shop-status" role="status" hidden={!notice}>{notice}</p>
+ {['furniture','electronics'].includes(category)&&<label className="shop-tier">Phân hạng<select value={tier} onChange={e=>setTier(e.target.value as HomeTier)}>{(Object.keys(HOME_TIERS) as HomeTier[]).map(t=><option key={t} value={t}>{HOME_TIERS[t].name}</option>)}</select></label>}
+ <div className="furniture-products">{(Object.keys(HOME_ITEMS) as HomeId[]).filter(id=>category==='furniture'?id!=='lamp':category==='electronics'&&id==='lamp').map(id=>{const item=HOME_ITEMS[id],old=owned.find(i=>i.id===id),has=!!old&&HOME_TIERS[old.tier??'basic'].comfort>=HOME_TIERS[tier].comfort,price=homePrice(id,tier)-(old?homePrice(id,old.tier??'basic'):0);return <article key={id} data-product={id}><HomeArt id={id}/><h3>{item.name}</h3><small>{id==='painting'?'Treo tường':id==='lamp'?'Đặt sàn hoặc mặt bàn':`${item.w/2} × ${item.h/2} m`}</small><small>{HOME_TIERS[tier].name}{HOME_TIERS[tier].comfort?` · nghỉ đêm -${HOME_TIERS[tier].comfort} stress`:''}</small><button type="button" aria-label={has?'Đã có '+item.name:(old?'Nâng cấp ':'Mua ')+item.name} disabled={has||state.money<price} onClick={()=>run(onBuy(id,tier),old?'Đã nâng cấp nội thất.':'Đã thêm vào kho.')}>{has?'Đã có':(old?'Nâng cấp · ':'')+money(price)}</button></article>})}
+ {(Object.keys(PRODUCTS) as ProductId[]).filter(id=>PRODUCTS[id].category===category).map(id=>{const item=PRODUCTS[id],has=l.owned.includes(id),active=l.outfit===id||l.transport===id;return <article key={id} data-product={id}><div className="product-glyph"><Icon name={item.icon}/></div><h3>{item.name}</h3><small>{item.tier}</small><small>{item.effect}</small>{has&&item.category!=='electronics'?<button disabled={active} onClick={()=>run(onLife({kind:'equip',id,category:item.category as 'clothing'|'transport'}),'Đã chọn '+item.name.toLocaleLowerCase('vi')+'.')}>{active?'Đang dùng':item.category==='clothing'?'Mặc':'Sử dụng'}</button>:<button disabled={has||state.money<item.price} onClick={()=>run(onLife({kind:'product',id}),'Đã mua '+item.name.toLocaleLowerCase('vi')+'.')}>{has?'Đã có':money(item.price)}</button>}</article>})}</div>
+ {category==='transport'&&<button className="life-secondary" disabled={!l.transport} onClick={()=>run(onLife({kind:'equip',id:null,category:'transport'}),'Đã chọn đi bộ.')}>Đi bộ</button>}
+ </section>
+}

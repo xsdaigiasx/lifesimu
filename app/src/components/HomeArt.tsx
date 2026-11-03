@@ -1,0 +1,3 @@
+import {HOME_ART,HOME_GROUND,homeArtProjection} from '../domain/home-art';
+import type {HomeId} from '../domain/home';
+export default function HomeArt({id,rotation=0,projected=false,wall='left'}:{id:HomeId;rotation?:number;projected?:boolean;wall?:'left'|'right'}){const art=HOME_ART[id][rotation?1:0],p=id==='painting'?{shearY:(wall==='left'?-1:1)*.67647,scaleY:1}:homeArtProjection(id,rotation),ground=HOME_GROUND[id][rotation?1:0];return <img className="home-art" draggable={false} src={art.src} style={projected?{transform:`matrix(1,${p.shearY},0,${p.scaleY},0,0)`,transformOrigin:`${ground.x}% ${ground.y}%`}:undefined} alt="" aria-hidden="true"/>}

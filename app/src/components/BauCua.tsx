@@ -1,0 +1,38 @@
+import {useRef, useState} from 'react';
+import {FACES, LABELS, emptyBets, totalBets} from '../domain/bau-cua';
+import type {Bets, Face, RoundResult} from '../domain/bau-cua';
+import type {GameState} from '../domain/types';
+import {money} from '../domain/format';
+export function FaceArt({face}: {face:Face}) {
+ const art = {
+ bau:<><path d="M49 22q-4-12 8-16" stroke="#547647" strokeWidth="5" fill="none"/><path d="M54 18c13 0 19 12 11 24 26 13 24 44-15 45-39-1-41-32-15-45-8-12-2-24 11-24z" fill="#d6ac4d" stroke="#937135" strokeWidth="2"/><path d="M44 25c-8 4-4 13-1 17-15 14-16 28-7 33" fill="none" stroke="#f8d780" strokeWidth="6" strokeLinecap="round"/></>,
+ cua:<><g stroke="#b24d36" strokeWidth="5" fill="none" strokeLinecap="round"><path d="M30 55 16 48 8 55m23 9L13 66 7 76m62-21 15-7 8 7M69 64l18 2 6 10M32 48 21 33m47 15 11-15"/></g><path d="M19 35C2 32 6 14 15 14l5 10 9-8c8 8 2 22-10 19m62 0c17-3 13-21 4-21l-5 10-9-8c-8 8-2 22 10 19" fill="#df7551"/><ellipse cx="50" cy="59" rx="29" ry="21" fill="#d56143"/><path d="M35 45v-9m30 9v-9" stroke="#773e2e" strokeWidth="4"/><circle cx="35" cy="34" r="4" fill="#3b352b"/><circle cx="65" cy="34" r="4" fill="#3b352b"/><path d="M39 66q11 8 22 0" fill="none" stroke="#a54330" strokeWidth="3"/></>,
+ tom:<><path d="M66 24Q88 11 89 6M62 25Q73 5 62 4" fill="none" stroke="#c85f3f" strokeWidth="2"/><path d="M69 24C36 14 17 38 22 61s32 33 51 17l-5-13c-14 11-27 1-25-10 1-10 14-13 27-8z" fill="#e38b60" stroke="#b96140" strokeWidth="2"/><path d="m34 31 10 10m-18 4 15 7m-15 9 17-1m-10 15 13-11m1 18 6-15" stroke="#f7c39c" strokeWidth="5"/><path d="m67 65 17-9 4 12-11 11 12 8-11 7-13-18" fill="#cb6949"/><circle cx="65" cy="30" r="3" fill="#302c29"/><path d="m44 47 10 8m-14 1 10 9" stroke="#b96140" strokeWidth="2"/></>,
+ ca:<><path d="m64 49 25-23v49L64 55" fill="#b17745"/><path d="m35 35 16-20 9 24m-19 30 10 15 10-20" fill="#be8751"/><path d="M12 51Q38 15 73 50 43 87 12 51" fill="#d1a15b" stroke="#977041" strokeWidth="2"/><path d="M32 34q13 17 0 34m16-32 5 9-7 7 8 8-5 7" fill="none" stroke="#f2ce8c" strokeWidth="3"/><circle cx="25" cy="47" r="4" fill="#363d36"/><path d="m13 53 7 1" stroke="#977041" strokeWidth="2"/></>,
+ ga:<><path d="M51 32c-9-9-4-21 2-16 0-14 12-15 15-4 12-4 16 9 8 15" fill="#bc4935"/><path d="m72 31 17 9-15 7" fill="#d7a449"/><path d="M56 40c-13-7-21 3-26 11L11 32 9 58l19 10c5 21 43 19 48-4 4-13-9-18-1-30-6-12-19-8-19 6" fill="#d6ae66" stroke="#9d7443" strokeWidth="2"/><path d="M37 55q22-15 24 6Q48 76 34 65" fill="#b78a4c"/><path d="m45 80-2 10-9 1m24-11 3 10 9 1" stroke="#9d7443" strokeWidth="3" fill="none"/><circle cx="68" cy="34" r="3" fill="#35342c"/><path d="M75 47q8 14-2 15" fill="#c0523d"/></>,
+ nai:<><path d="M41 29 29 11m4 8-13-3m10-4 1-9m28 25 12-17m-5 8 13-3m-9-4-1-9" stroke="#8b6843" strokeWidth="4" strokeLinecap="round"/><path d="M39 31Q16 11 19 32l17 13m26-14q23-20 20 1L66 45" fill="#c39359" stroke="#8b6843" strokeWidth="2"/><path d="M34 36q15-11 32 0l-3 32Q50 91 37 68z" fill="#c99a60" stroke="#947044" strokeWidth="2"/><path d="M42 51q8 9 16 0l-2 21H44z" fill="#f2d5a4"/><ellipse cx="50" cy="69" rx="6" ry="4" fill="#484236"/><circle cx="40" cy="47" r="3" fill="#36362e"/><circle cx="60" cy="47" r="3" fill="#36362e"/></>
+ };
+ return <svg viewBox="0 0 100 100" className="bc-face-art" aria-hidden="true">{art[face]}</svg>;
+}
+export default function BauCua({state,onPlay,shaking}: {state:GameState;onPlay:(bets:Bets)=>Promise<RoundResult>;shaking:boolean}) {
+ const [bets,setBets]=useState<Bets>(emptyBets),[chip,setChip]=useState(10000),[message,setMessage]=useState(''),[rulesOpen,setRulesOpen]=useState(false);
+ const lock=useRef(false),last=state.bauCuaLast;
+ const stake=totalBets(bets),left=state.money-stake;
+ const add=(face:Face)=>{if(lock.current||shaking)return;if(left<chip){setMessage('Số dư không đủ để thêm mức cược này.');return}setMessage('');setBets(previous=>({...previous,[face]:previous[face]+chip}))};
+ const subtract=(face:Face)=>{if(lock.current||shaking)return;setBets(previous=>({...previous,[face]:Math.max(0,previous[face]-chip)}));setMessage('')};
+ const play=async()=>{if(lock.current||shaking)return;lock.current=true;setMessage('');try{const result=await onPlay({...bets});if(result.ok)setBets(emptyBets());else setMessage(result.error)}finally{lock.current=false}};
+ const resultText=shaking?'Đang xóc…':last?`${last.payout>last.stake?'Thắng':last.payout===last.stake?'Hòa vốn':'Thua'}${last.payout===last.stake?'':' '+money(Math.abs(last.payout-last.stake))}`:'Chạm cửa để đặt cược';
+ if(rulesOpen)return <section className="bc-help-page" aria-label="Luật bầu cua"><h2>Cách chơi bầu cua</h2><p>Chọn mức 10k, 50k hoặc 100k, rồi chạm một hay nhiều cửa để đặt cược. Nút − giảm tiền ở từng cửa.</p><div className="bc-paytable"><span>Số mặt trùng</span><span>Tổng nhận lại</span><b>1 mặt</b><b>×2 tiền cược</b><b>2 mặt</b><b>×3 tiền cược</b><b>3 mặt</b><b>×4 tiền cược</b><b>Không trùng</b><b>Mất cược cửa đó</b></div><p>Ví dụ: đặt Cá 10.000đ, ra hai Cá thì nhận 30.000đ, lãi 20.000đ.</p><p>Chỉ dùng tiền trong game. Lắc xong mới hiện kết quả, cập nhật tiền và lưu ván chơi. Chơi không tự chuyển ngày.</p><button className="bc-roll" onClick={()=>setRulesOpen(false)}>Trở lại bàn chơi</button></section>;
+ return <section className="bau-cua" aria-label="Trò chơi bầu cua tôm cá">
+ <div className="bc-wallet"><span>Ví trong game<strong>{money(state.money)}</strong></span><span>Đang đặt<strong>{money(stake)}</strong></span><button className="bc-help" aria-label="Xem luật bầu cua" onClick={()=>setRulesOpen(true)}>?</button></div>
+ <div className={`bc-tray ${shaking?'is-shaking':''}`} aria-busy={shaking}>
+ <div className="bc-dice">{[0,1,2].map(index=><div key={index} className="bc-die">{!shaking&&last?<FaceArt face={last.dice[index]}/>:<span aria-hidden="true">✦</span>}</div>)}</div>
+ <div className={`bc-result ${last&&last.payout<last.stake?'loss':''}`} aria-live="polite" role="status"><strong>{resultText}</strong><span>{shaking?'Đợi một chút nhé':last?last.dice.map(face=>LABELS[face]).join(' · '):'Ba xúc xắc · Sáu cửa'}</span></div>
+ </div>
+ <fieldset className="bc-chips" disabled={shaking}><legend>Mức cược mỗi lần chạm</legend>{[10000,50000,100000].map(value=><button key={value} className={chip===value?'selected':''} aria-pressed={chip===value} onClick={()=>setChip(value)}>{value/1000}k</button>)}</fieldset>
+ <div className="bc-board">{FACES.map(face=>{const count=!shaking&&last?last.dice.filter(die=>die===face).length:0;return <div className={`bc-cell ${bets[face]?'has-bet':''} ${count?'hit':''}`} key={face}>
+ <button className="bc-pick" disabled={shaking||left<chip} aria-label={`Đặt ${money(chip)} vào ${LABELS[face]}`} onClick={()=>add(face)}><FaceArt face={face}/><strong>{LABELS[face]}</strong>{count>0&&<span className="bc-count" aria-label={`Ván trước có ${count} mặt ${LABELS[face]}`}>×{count}</span>}</button>
+ <div className="bc-bet"><button aria-label={`Giảm cược ${LABELS[face]}`} disabled={shaking||bets[face]===0} onClick={()=>subtract(face)}>−</button><span>{bets[face]?money(bets[face]):'Chưa đặt'}</span></div></div>})}</div>
+ <footer className="bc-controls"><div className="bc-total" role={message?'alert':undefined}>{message||<>Còn lại sau cược <b>{money(left)}</b></>}</div><div className="bc-actions"><button className="bc-clear" disabled={shaking||stake===0} onClick={()=>{setBets(emptyBets());setMessage('')}}>Xóa cược</button><button className="bc-roll" disabled={shaking||stake===0||stake>state.money} onClick={play}>{shaking?'Đang xóc…':`Xóc${stake?' · '+money(stake):' bầu cua'}`}</button></div></footer>
+ </section>;
+}

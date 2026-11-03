@@ -1,0 +1,463 @@
+{
+  "width": 1536,
+  "height": 1536,
+  "background": "/assets/offices/large/room-cleaned-v02.png",
+  "items": [
+    {
+      "id": "executive_desk",
+      "name": "Bàn giám đốc",
+      "filename": "executive_desk.png",
+      "category": "furniture",
+      "sprite_width": 306,
+      "sprite_height": 271,
+      "anchor_point": {
+        "x": 153,
+        "y": 257
+      }
+    },
+    {
+      "id": "executive_chair",
+      "name": "Ghế giám đốc",
+      "filename": "executive_chair.png",
+      "category": "furniture",
+      "sprite_width": 143,
+      "sprite_height": 222,
+      "anchor_point": {
+        "x": 72,
+        "y": 210
+      }
+    },
+    {
+      "id": "glass_conference_table",
+      "name": "Bàn họp kính",
+      "filename": "glass_conference_table.png",
+      "category": "furniture",
+      "sprite_width": 336,
+      "sprite_height": 250,
+      "anchor_point": {
+        "x": 168,
+        "y": 229
+      }
+    },
+    {
+      "id": "mesh_office_chair",
+      "name": "Ghế công thái học",
+      "filename": "mesh_office_chair.png",
+      "category": "furniture",
+      "sprite_width": 123,
+      "sprite_height": 192,
+      "anchor_point": {
+        "x": 62,
+        "y": 181
+      }
+    },
+    {
+      "id": "presentation_display",
+      "name": "Màn hình thuyết trình đứng",
+      "filename": "presentation_display.png",
+      "category": "electronics",
+      "sprite_width": 152,
+      "sprite_height": 248,
+      "anchor_point": {
+        "x": 76,
+        "y": 238
+      }
+    },
+    {
+      "id": "wide_presentation_display",
+      "name": "Màn hình họp có bánh xe",
+      "filename": "wide_presentation_display.png",
+      "category": "electronics",
+      "sprite_width": 174,
+      "sprite_height": 262,
+      "anchor_point": {
+        "x": 87,
+        "y": 252
+      }
+    },
+    {
+      "id": "low_storage_cabinet",
+      "name": "Tủ tài liệu thấp",
+      "filename": "low_storage_cabinet.png",
+      "category": "storage",
+      "sprite_width": 216,
+      "sprite_height": 208,
+      "anchor_point": {
+        "x": 108,
+        "y": 198
+      }
+    },
+    {
+      "id": "espresso_machine",
+      "name": "Máy pha cà phê",
+      "filename": "espresso_machine.png",
+      "category": "appliances",
+      "sprite_width": 156,
+      "sprite_height": 159,
+      "anchor_point": {
+        "x": 78,
+        "y": 149
+      }
+    },
+    {
+      "id": "tea_set",
+      "name": "Bộ ấm trà",
+      "filename": "tea_set.png",
+      "category": "decor",
+      "sprite_width": 172,
+      "sprite_height": 118,
+      "anchor_point": {
+        "x": 86,
+        "y": 109
+      }
+    },
+    {
+      "id": "bar_stool_left",
+      "name": "Ghế quầy trái",
+      "filename": "bar_stool_left.png",
+      "category": "furniture",
+      "sprite_width": 89,
+      "sprite_height": 156,
+      "anchor_point": {
+        "x": 44,
+        "y": 143
+      }
+    },
+    {
+      "id": "bar_stool_right",
+      "name": "Ghế quầy phải",
+      "filename": "bar_stool_right.png",
+      "category": "furniture",
+      "sprite_width": 90,
+      "sprite_height": 149,
+      "anchor_point": {
+        "x": 45,
+        "y": 135
+      }
+    },
+    {
+      "id": "workstation_four",
+      "name": "Cụm bàn bốn chỗ",
+      "filename": "workstation_four.png",
+      "category": "furniture",
+      "sprite_width": 274,
+      "sprite_height": 234,
+      "anchor_point": {
+        "x": 137,
+        "y": 223
+      }
+    },
+    {
+      "id": "workstation_pair",
+      "name": "Cụm bàn hai chỗ",
+      "filename": "workstation_pair.png",
+      "category": "furniture",
+      "sprite_width": 249,
+      "sprite_height": 221,
+      "anchor_point": {
+        "x": 124,
+        "y": 211
+      }
+    },
+    {
+      "id": "curved_monitor_desk",
+      "name": "Bàn máy tính màn hình cong",
+      "filename": "curved_monitor_desk.png",
+      "category": "electronics",
+      "sprite_width": 248,
+      "sprite_height": 236,
+      "anchor_point": {
+        "x": 124,
+        "y": 227
+      }
+    },
+    {
+      "id": "water_cooler_black",
+      "name": "Cây nước màu đen",
+      "filename": "water_cooler_black.png",
+      "category": "appliances",
+      "sprite_width": 89,
+      "sprite_height": 207,
+      "anchor_point": {
+        "x": 44,
+        "y": 195
+      }
+    },
+    {
+      "id": "water_cooler_white",
+      "name": "Cây nước màu trắng",
+      "filename": "water_cooler_white.png",
+      "category": "appliances",
+      "sprite_width": 89,
+      "sprite_height": 200,
+      "anchor_point": {
+        "x": 44,
+        "y": 188
+      }
+    },
+    {
+      "id": "monstera_plant",
+      "name": "Cây trầu bà",
+      "filename": "monstera_plant.png",
+      "category": "plants",
+      "sprite_width": 156,
+      "sprite_height": 205,
+      "anchor_point": {
+        "x": 78,
+        "y": 188
+      }
+    },
+    {
+      "id": "snake_plant",
+      "name": "Cây lưỡi hổ",
+      "filename": "snake_plant.png",
+      "category": "plants",
+      "sprite_width": 86,
+      "sprite_height": 158,
+      "anchor_point": {
+        "x": 43,
+        "y": 146
+      }
+    },
+    {
+      "id": "bonsai",
+      "name": "Cây bonsai",
+      "filename": "bonsai.png",
+      "category": "plants",
+      "sprite_width": 119,
+      "sprite_height": 148,
+      "anchor_point": {
+        "x": 60,
+        "y": 137
+      }
+    },
+    {
+      "id": "wall_art",
+      "name": "Tranh treo tường",
+      "filename": "wall_art.png",
+      "category": "decor",
+      "sprite_width": 115,
+      "sprite_height": 219,
+      "anchor_point": {
+        "x": 58,
+        "y": 110
+      }
+    },
+    {
+      "id": "certificate_top",
+      "name": "Bằng khen phía trên",
+      "filename": "certificate_top.png",
+      "category": "decor",
+      "sprite_width": 97,
+      "sprite_height": 76,
+      "anchor_point": {
+        "x": 48,
+        "y": 38
+      }
+    },
+    {
+      "id": "certificate_bottom",
+      "name": "Bằng khen phía dưới",
+      "filename": "certificate_bottom.png",
+      "category": "decor",
+      "sprite_width": 95,
+      "sprite_height": 75,
+      "anchor_point": {
+        "x": 48,
+        "y": 38
+      }
+    },
+    {
+      "id": "bookcase",
+      "name": "Tủ sách",
+      "filename": "bookcase.png",
+      "category": "storage",
+      "sprite_width": 172,
+      "sprite_height": 262,
+      "anchor_point": {
+        "x": 86,
+        "y": 253
+      }
+    },
+    {
+      "id": "putting_mat",
+      "name": "Thảm tập golf",
+      "filename": "putting_mat.png",
+      "category": "decor",
+      "sprite_width": 310,
+      "sprite_height": 173,
+      "anchor_point": {
+        "x": 155,
+        "y": 163
+      }
+    },
+    {
+      "id": "wine_cooler",
+      "name": "Tủ rượu",
+      "filename": "wine_cooler.png",
+      "category": "appliances",
+      "sprite_width": 139,
+      "sprite_height": 214,
+      "anchor_point": {
+        "x": 70,
+        "y": 201
+      }
+    },
+    {
+      "id": "leather_armchair",
+      "name": "Ghế bành da",
+      "filename": "leather_armchair.png",
+      "category": "furniture",
+      "sprite_width": 166,
+      "sprite_height": 172,
+      "anchor_point": {
+        "x": 83,
+        "y": 162
+      }
+    },
+    {
+      "id": "guest_chair",
+      "name": "Ghế tiếp khách",
+      "filename": "guest_chair.png",
+      "category": "furniture",
+      "sprite_width": 126,
+      "sprite_height": 148,
+      "anchor_point": {
+        "x": 63,
+        "y": 139
+      }
+    },
+    {
+      "id": "mesh_bin",
+      "name": "Thùng rác lưới",
+      "filename": "mesh_bin.png",
+      "category": "decor",
+      "sprite_width": 81,
+      "sprite_height": 108,
+      "anchor_point": {
+        "x": 40,
+        "y": 97
+      }
+    },
+    {
+      "id": "recycle_bin",
+      "name": "Thùng rác tái chế",
+      "filename": "recycle_bin.png",
+      "category": "decor",
+      "sprite_width": 98,
+      "sprite_height": 133,
+      "anchor_point": {
+        "x": 49,
+        "y": 120
+      }
+    },
+    {
+      "id": "mini_fridge",
+      "name": "Tủ lạnh mini",
+      "filename": "mini_fridge.png",
+      "category": "appliances",
+      "sprite_width": 135,
+      "sprite_height": 161,
+      "anchor_point": {
+        "x": 68,
+        "y": 149
+      }
+    },
+    {
+      "id": "silver_laptop",
+      "name": "Laptop bạc",
+      "filename": "silver_laptop.png",
+      "category": "electronics",
+      "sprite_width": 109,
+      "sprite_height": 111,
+      "anchor_point": {
+        "x": 54,
+        "y": 101
+      }
+    },
+    {
+      "id": "black_laptop",
+      "name": "Laptop đen",
+      "filename": "black_laptop.png",
+      "category": "electronics",
+      "sprite_width": 108,
+      "sprite_height": 110,
+      "anchor_point": {
+        "x": 54,
+        "y": 101
+      }
+    },
+    {
+      "id": "globe",
+      "name": "Quả địa cầu",
+      "filename": "globe.png",
+      "category": "decor",
+      "sprite_width": 99,
+      "sprite_height": 130,
+      "anchor_point": {
+        "x": 50,
+        "y": 113
+      }
+    },
+    {
+      "id": "safe",
+      "name": "Két sắt",
+      "filename": "safe.png",
+      "category": "security",
+      "sprite_width": 129,
+      "sprite_height": 135,
+      "anchor_point": {
+        "x": 64,
+        "y": 123
+      }
+    },
+    {
+      "id": "paper_shredder",
+      "name": "Máy hủy giấy",
+      "filename": "paper_shredder.png",
+      "category": "appliances",
+      "sprite_width": 96,
+      "sprite_height": 127,
+      "anchor_point": {
+        "x": 48,
+        "y": 116
+      }
+    },
+    {
+      "id": "desk_organizer",
+      "name": "Khay tài liệu trên bàn",
+      "filename": "desk_organizer.png",
+      "category": "furniture",
+      "sprite_width": 125,
+      "sprite_height": 121,
+      "anchor_point": {
+        "x": 62,
+        "y": 112
+      }
+    },
+    {
+      "id": "paper_tray",
+      "name": "Khay giấy nhiều tầng",
+      "filename": "paper_tray.png",
+      "category": "decor",
+      "sprite_width": 115,
+      "sprite_height": 122,
+      "anchor_point": {
+        "x": 58,
+        "y": 112
+      }
+    },
+    {
+      "id": "digital_clock",
+      "name": "Đồng hồ điện tử",
+      "filename": "digital_clock.png",
+      "category": "decor",
+      "sprite_width": 104,
+      "sprite_height": 96,
+      "anchor_point": {
+        "x": 52,
+        "y": 86
+      }
+    }
+  ]
+}

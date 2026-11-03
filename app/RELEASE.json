@@ -1,0 +1,28 @@
+{
+  "version": "0.35.0",
+  "date": "2026-11-01",
+  "deployment": "Not deployed by assistant",
+  "handover": "docs/HANDOVER.md",
+  "sourceIncludes": [
+    "src",
+    "public",
+    "tests",
+    "scripts",
+    "config"
+  ],
+  "sourceExcludes": [
+    "node_modules",
+    "dist",
+    "player saves",
+    "QA fixtures",
+    "credentials"
+  ],
+  "packages": [
+    "Mot_Doi_De_Song_v0.35_Source.zip",
+    "Mot_Doi_De_Song_v0.35_Upload.zip"
+  ],
+  "art": "public/assets/static-scenes/furniture-v2",
+  "room": "public/assets/static-scenes/rental-diamond.png",
+  "life": "docs/LIFE-v0.34.md",
+  "cooking": "docs/COOKING-v0.35.md"
+}

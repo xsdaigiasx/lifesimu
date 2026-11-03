@@ -1,0 +1,38 @@
+const assert=require('node:assert/strict');
+const {engine}=require('../.test-build/domain/engine');
+const {appendJournal,recordJournal,journalOf,validJournal,JOURNAL_LIMIT}=require('../.test-build/domain/journal');
+const {clockOf}=require('../.test-build/domain/time');
+const {dateAt,shortDate}=require('../.test-build/domain/format');
+
+const old=engine.initial(),snapshot=JSON.stringify(old);
+assert.deepEqual(journalOf(old),[]);
+assert.equal(JSON.stringify(old),snapshot,'reading an old save creates no events');
+const oldMet={...old,office:{...(old.office??{}),met:['mai-lan']}};
+assert.deepEqual(journalOf(oldMet),[],'old known NPCs have no invented meeting date');
+const timed={...old,day:29,clock:{...clockOf(old),minute:1095}};
+const result=recordJournal(timed,'meet:mai-lan','Gặp Mai Lan','Chào hỏi tại sảnh văn phòng.','mai-lan');
+assert.notEqual(result,timed);assert.equal(timed.journal,undefined);
+const e=result.journal[0];
+assert.equal(e.day,29);assert.equal(e.minute,1095);assert.equal(e.npcId,'mai-lan');
+assert.equal(e.key,'meet:mai-lan');assert(validJournal(result.journal,result.day));
+assert.equal(recordJournal(result,e.key,'Lặp','Không được ghi lại.'),result);
+assert.equal(recordJournal({...result,day:30},e.key,'Lặp','Không được ghi lại.').journal.length,1);
+assert.equal(appendJournal(timed,{key:'',title:'A',detail:'B'}),timed);
+assert.equal(appendJournal(timed,{key:'x',title:'A',detail:' '}),timed);
+const loaded=JSON.parse(JSON.stringify(result));
+assert(validJournal(loaded.journal,loaded.day));assert.deepEqual(journalOf(loaded),result.journal);
+assert(validJournal([],0));assert(!validJournal(undefined,0));
+for(const patch of [{day:30},{day:-1},{minute:419},{minute:1321},{minute:NaN},{title:''},{detail:'x'.repeat(1001)},{npcId:4},{id:''}])assert(!validJournal([{...e,...patch}],29),JSON.stringify(patch));
+assert(!validJournal([e,{...e,id:'other'}],29),'duplicate occurrence key rejected');
+assert(!validJournal([e,{...e,key:'other'}],29),'duplicate id rejected');
+let full=old;
+for(let i=0;i<305;i++)full=recordJournal(full,`action:${i}`,`Sự kiện ${i}`,'Đã hoàn tất.');
+assert.equal(full.journal.length,JOURNAL_LIMIT);assert.equal(full.journal[0].key,'action:304');assert.equal(full.journal.at(-1).key,'action:5');assert(validJournal(full.journal,0));
+assert(!validJournal(Array.from({length:301},(_,i)=>({...e,id:`id${i}`,key:`key${i}`})),29));
+// Shared calendar uses UTC from 02/11/2026 and crosses months/years exactly.
+assert.equal(dateAt(0).toISOString(),'2026-11-02T00:00:00.000Z');
+assert.equal(dateAt(29).toISOString(),'2026-12-01T00:00:00.000Z');
+assert.equal(dateAt(60).toISOString(),'2027-01-01T00:00:00.000Z');
+assert.equal(shortDate(e.day),'01/12/2026');
+assert.equal(JSON.stringify(old),snapshot,'records never mutate the source save');
+console.log('PASS: journal actual clock, immutable reads/records, occurrence dedupe, 300-entry cap, persistence validation, old-save unknown history and UTC calendar.');

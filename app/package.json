@@ -1,0 +1,32 @@
+{
+  "name": "mot-doi-de-song",
+  "private": true,
+  "version": "0.35.0",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node scripts/test.mjs",
+    "art:verify": "python scripts/verify-upscaled-map.py",
+    "deploy:workers": "npm run build && wrangler deploy --config wrangler.jsonc",
+    "deploy:check": "wrangler deploy --config wrangler.jsonc --dry-run --outdir .wrangler/dry-run"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "@types/node": "22.20.1",
+    "@vitejs/plugin-react": "6.0.5",
+    "typescript": "6.0.3",
+    "vite": "8.2.1",
+    "wrangler": "4.124.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}

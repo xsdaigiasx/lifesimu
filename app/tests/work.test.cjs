@@ -1,0 +1,32 @@
+const assert=require('node:assert/strict');const{engine}=require('../.test-build/domain/engine');const{initialOffice}=require('../.test-build/domain/office');const{clockOf,spendTime,finishDay}=require('../.test-build/domain/time');const{workAction,workTick,workOf,skillsOf,studySkill,addSkillXp,xpNeeded,pendingWages,settleNewDay,isWorkday,holidayName,errorChance,dailyTask,canEnterOffice}=require('../.test-build/domain/work');
+function employee(day=0,minute=480){const s=engine.initial();return{...s,day,office:{...initialOffice(),role:'employee',employerId:'sen-code'},work:{...workOf({...s,day}),assignment:{day,id:'null-data',companyId:'sen-code'}},clock:{...clockOf(s),minute,location:'office'}}}
+function good(r){assert(r.ok,r.error);assert(engine.valid(r.state),'invalid state');return r.state}
+function complete(s){let guard=0;while(s.work?.active){s=workTick(s,60);assert(engine.valid(s),'tick invalid');assert(++guard<10)}return s}
+let s=employee(),before=s.money;s=good(workAction(s,{kind:'start',taskId:'null-data'}));assert.equal(s.money,before);assert(!workAction(s,{kind:'start',taskId:'api'}).ok);assert(!spendTime(s,10).ok);assert(!finishDay(s).ok);const snap=JSON.stringify(s);assert.equal(JSON.stringify(workTick(s,0)),snap);s=workTick(s);assert.equal(clockOf(s).minute,484);assert.equal(s.work.active.minutes,4);assert(engine.valid(s));
+const restored=engine.parse(JSON.stringify(s));assert(restored);assert.deepEqual(workTick(restored),workTick(s));
+s=good(workAction(s,{kind:'pause'}));assert.strictEqual(workTick(s),s);s=good(workAction(s,{kind:'resume'}));s=complete(s);assert.equal(clockOf(s).minute,720);assert.equal(s.money,before);assert(pendingWages(s)>0);assert(s.work.finished.includes('0:am'));assert(skillsOf(s).programming.xp>0||skillsOf(s).programming.level>3);assert(s.journal.length>0);
+s=good(workAction(s,{kind:'start',taskId:'api'}));assert.equal(clockOf(s).minute,780);s=complete(s);assert.equal(clockOf(s).minute,1020);assert(!workAction(s,{kind:'start',taskId:'api'}).ok);assert.equal(s.money,before);assert(s.work.periods[0].minutes===480);
+let late=complete(good(workAction(employee(0,570),{kind:'start',taskId:'null-data'})));assert.equal(late.work.periods[0].minutes,150);assert.equal(clockOf(late).minute,720);
+let left=good(workAction(employee(),{kind:'start',taskId:'null-data'}));left=workTick(left,20);left=good(workAction(left,{kind:'leave'}));assert.equal(left.work.periods[0].minutes,20);assert.equal(left.work.finished.length,1);assert.equal(shiftSlot(left),'pm');function shiftSlot(s){return require('../.test-build/domain/work').shiftInfo(s).slot}
+// Forced errors: repair is persisted, never grants duplicate task XP.
+let repair=good(workAction(employee(),{kind:'start',taskId:'null-data'}));repair.work.task.roll=0;const oldxp=skillsOf(repair).programming.xp;repair=workTick(repair,60);assert.equal(repair.work.task.attempt,1);repair.work.task.roll=99;repair=workTick(repair,20);assert.equal(skillsOf(repair).programming.xp,oldxp);assert(engine.valid(repair));
+assert(!workAction(employee(5),{kind:'start',taskId:'api'}).ok);assert.equal(holidayName(22),'Ngày Văn hóa Việt Nam');assert(!isWorkday(22));assert(!workAction(employee(22),{kind:'start',taskId:'api'}).ok);
+let sick=employee();sick.energy=10;assert(!workAction(sick,{kind:'start',taskId:'api'}).ok);assert(!workAction({...employee(),office:initialOffice()},{kind:'start',taskId:'api'}).ok);
+// All November worked minutes and paid holiday; one transfer on December1.
+let month=employee();for(let day=0;day<29;day++){
+ month={...month,day,energy:100,stress:0,clock:{...clockOf(month),minute:480,location:'office'}};
+ if(isWorkday(day)){month=complete(good(workAction(month,{kind:'start',taskId:'null-data'})));month=complete(good(workAction(month,{kind:'start',taskId:'null-data'})));}
+ const previous=month;const next=good(finishDay(month));month=settleNewDay(previous,next);assert(engine.valid(month));
+}
+assert.equal(month.day,29);const wages=month.ledger.filter(e=>e.name.startsWith('Lương tháng'));assert.equal(wages.length,1);assert.equal(wages[0].amount,10000000);const cash=month.money;const again=settleNewDay({...month,day:28},month);assert.equal(again.money,cash);
+// Holiday credit only when employed; old saves do not acquire earlier salaries.
+let h=employee(22);h=settleNewDay(h,good(finishDay(h)));assert.equal(h.work.periods[0].minutes,480);assert.equal(workOf(employee(25)).periods.length,0);
+let learned=employee(0,1080);const original=JSON.stringify(learned);assert(!studySkill({...learned,money:0},'logic',1).ok);assert.equal(JSON.stringify(learned),original);learned=good(studySkill(learned,'logic',2));assert.equal(clockOf(learned).minute,1200);assert.equal(learned.money,employee().money-80000);assert.equal(skillsOf(learned).logic.xp,60);assert(!studySkill(learned,'logic',1).ok);assert(!studySkill(employee(0,600),'logic',1).ok);
+let lv=addSkillXp(employee(),'logic',xpNeeded(3)+10);assert.equal(skillsOf(lv).logic.level,4);assert.equal(skillsOf(lv).logic.xp,10);assert(errorChance({...employee(),skills:{...skillsOf(employee()),logic:{level:20,xp:0}}},'logs')<errorChance(employee(),'logs'));
+let old=employee();delete old.work;old.clock.lastWorkDay=0;assert.deepEqual(workOf(old).finished,['0:am','0:pm']);assert(!workAction(old,{kind:'start',taskId:'api'}).ok);
+assert(!engine.valid({...month,skills:{logic:{level:99,xp:0}}}));assert(!engine.valid({...month,work:{...month.work,periods:[{...month.work.periods[0],minutes:-1}]}}));
+console.log('PASS: timed work/save continuity, shift boundaries, pause/leave, error repair XP, skill growth, evening tuition, holidays, monthly payroll idempotency and legacy-save wage protection.');
+
+let fast=good(workAction(employee(),{kind:"start",taskId:"null-data"}));for(let i=0;i<8;i++){fast=workTick(fast,30);assert(engine.valid(fast));}assert.equal(fast.work.active,null);assert.equal(clockOf(fast).minute,720);assert.equal(fast.work.periods[0].minutes,240);
+
+let real=employee();delete real.work;const assigned=dailyTask(real);assert.equal(dailyTask(engine.parse(JSON.stringify(real))).id,assigned.id);let random=good(workAction(real,{kind:'start',taskId:'logs'}));assert.equal(random.work.task.id,assigned.id);assert.equal(dailyTask(random).id,assigned.id);assert(!canEnterOffice(employee(0,1020)));assert(!workAction(employee(0,1020),{kind:'start',taskId:'null-data'}).ok);assert(canEnterOffice(employee(0,1019)));assert(!canEnterOffice(employee(5,480)));assert(new Set(Array.from({length:14},(_,day)=>dailyTask({...real,day}).id)).size>1);

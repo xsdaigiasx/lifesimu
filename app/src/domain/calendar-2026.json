@@ -1,0 +1,110 @@
+{
+  "year": 2026,
+  "timezone": "Asia/Ho_Chi_Minh",
+  "companyCalendar": "private_IT_mon_fri_proposed_option",
+  "weekendISO": [
+    6,
+    7
+  ],
+  "workdayOverrides": [],
+  "holidayDates": [
+    {
+      "date": "2026-01-01",
+      "name": "Tết Dương lịch",
+      "holidayId": "new-year",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-02-16",
+      "name": "Tết Nguyên đán",
+      "holidayId": "tet",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Tết Nguyên đán",
+      "holidayId": "tet",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-02-18",
+      "name": "Tết Nguyên đán",
+      "holidayId": "tet",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-02-19",
+      "name": "Tết Nguyên đán",
+      "holidayId": "tet",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-02-20",
+      "name": "Tết Nguyên đán",
+      "holidayId": "tet",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-04-26",
+      "name": "Giỗ Tổ Hùng Vương",
+      "holidayId": "hung-kings",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-04-27",
+      "name": "Nghỉ bù Giỗ Tổ",
+      "holidayId": "hung-kings-observed",
+      "paid": true,
+      "observed": true
+    },
+    {
+      "date": "2026-04-30",
+      "name": "Ngày Chiến thắng",
+      "holidayId": "reunification",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Quốc tế Lao động",
+      "holidayId": "labour",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-09-01",
+      "name": "Quốc khánh",
+      "holidayId": "national-day",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-09-02",
+      "name": "Quốc khánh",
+      "holidayId": "national-day",
+      "paid": true,
+      "observed": false
+    },
+    {
+      "date": "2026-11-24",
+      "name": "Ngày Văn hóa Việt Nam",
+      "holidayId": "culture",
+      "paid": true,
+      "observed": false
+    }
+  ],
+  "civilServiceSwapsApplied": false,
+  "futureYears": "MUST supply annual calendar; never assume future lunar or swapped dates equal2026. Missing-year validation error in development, not technical text in player dialogue.",
+  "sources": [
+    "https://moha.gov.vn/tin-tuc/---oid57695",
+    "https://xaydungchinhsach.chinhphu.vn/chi-tiet-thoi-gian-ke-hoach-to-chuc-gio-to-hung-vuong-le-hoi-den-hung-va-tuan-van-hoa-du-lich-dat-to-2026-119260329161504959.htm",
+    "https://baochinhphu.vn/ngay-van-hoa-viet-nam-24-11-nguoi-lao-dong-duoc-nghi-lam-huong-nguyen-luong-102260424093821937.htm"
+  ]
+}
