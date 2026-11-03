@@ -21,8 +21,8 @@ export const QUESTIONS=[
 export const questionFor=(id:string)=>QUESTIONS.find(q=>q.id===id)!;
 export function validApplication(v:unknown):v is Application{if(!v||typeof v!=='object')return false;const a=v as Application;const c=COMPANIES.find(c=>c.id===a.companyId);return !!c&&c.industry==='tech'&&['pending','interview','passed','failed','hired'].includes(a.status)&&Number.isInteger(a.submittedDay)&&a.submittedDay>=0&&a.submittedDay<=100000&&a.interviewDay===a.submittedDay+1&&a.startDay===a.interviewDay+1&&typeof a.cv==='string'&&a.cv.length>=20&&a.cv.length<=600&&Array.isArray(a.questions)&&a.questions.length===3&&new Set(a.questions).size===3&&a.questions.every(id=>QUESTIONS.some(q=>q.id===id))&&Array.isArray(a.answers)&&a.answers.length<=3&&a.answers.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&(a.status==='pending'?a.answers.length===0:a.status==='interview'?a.answers.length<3:a.answers.length===3)&&(a.status==='passed'||a.status==='hired'?a.answers.filter((n,i)=>n===questionFor(a.questions[i]!).answer).length>=2:a.status==='failed'?a.answers.some((n,i)=>n!==questionFor(a.questions[i]!).answer):true)}
 /** T11: thử việc 60 ngày, lương 85%; đủ 30 ngày đi làm thì qua, không đủ thì mất việc và 30 ngày sau mới nộp lại được. */
-/** Giao tiếp từ cấp 10 (Lv2): đúng 2/3 câu vẫn qua phỏng vấn nhờ trình bày tốt. */
-export const INTERVIEW_COMM_RESCUE=10;
+/** Giao tiếp từ Lv2: đúng 2/3 câu vẫn qua phỏng vấn nhờ trình bày tốt. */
+export const INTERVIEW_COMM_RESCUE=2;
 export const PROBATION_DAYS=60,PROBATION_PASS_DAYS=30,PROBATION_SALARY=.85,RETRY_AFTER_FAIL=30;
 export interface Probation{start:number;end:number;workDays:number}
 export interface OfficeState{probation?:Probation;retryDay?:number;application?:Application|null;role:'visitor'|'employee'|'owner';employerId:string|null;industry:Industry;size:OfficeSize;name:string;leaseUntil:number;workComputer:number;computers:number;printer:number;employeeDecor:Partial<Record<DecorId,number|null>>;ownerDecor:Partial<Record<DecorId,number|null>>;met:string[]}
