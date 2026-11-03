@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 import type { DailyAction, GameResult, GameState, PhoneState, PlayerProfile } from '../domain/types';
 import { phoneData as data } from '../domain/phone-data';
+import { fullnessOf, vitalWarnings } from '../domain/vitals';
 
 type Action = 'report' | 'day' | 'city' | 'room' | 'save';
 type Page = 'baucua' | 'home' | 'health' | 'contacts' | 'shop' | 'calendar' | 'alarms' | 'clock' | 'news' | 'finance' | 'work' | 'notes' | 'save' | 'leisure' | 'calls' | 'messages' | 'settings' | 'weather' | 'map' | 'room';
@@ -98,6 +99,7 @@ export default function Phone({ state, profile, onAction, onResetStart, onPlayBa
   };
   const intro = (_title: string, _description: string): ReactNode => null;
   const actionRow = (icon: string, title: string, description: string, action: () => void) => <button onClick={action}><Icon id={icon} /><span><strong>{title}</strong>{description&&<small>{description}</small>}</span>↗</button>;
+  const vital = (key: 'energy' | 'fullness' | 'mood' | 'health' | 'stress') => key === 'fullness' ? fullnessOf(state) : state[key], warnings = vitalWarnings(state);
   let body: ReactNode = null;
   switch (page) {
     case 'home': body = <><div className="phone-widgets"><button className="clock-widget" onClick={() => navigate('clock')} aria-label="Mở đồng hồ"><Clock minute={clockOf(state).minute}/><span>Đồng hồ</span></button><button className="weather-widget" onClick={() => navigate('weather')}><small>AN NHIÊN ↗</small><strong>26°</strong><Icon id="sun" /><b>Trời trong</b><span>Ngày {state.day + 1}</span></button></div><div className="phone-home-date">{dateText(state.day)} {dateAt(state.day).getUTCFullYear()}</div><div className="phone-apps">{APPS.map(app => {
@@ -105,8 +107,8 @@ export default function Phone({ state, profile, onAction, onResetStart, onPlayBa
       return <button className="phone-app" key={app.page} onClick={() => navigate(app.page)}><span className={`app-glyph ${app.tone}`}>{app.page === 'calendar' ? <span className="calendar-icon"><small>THÁNG {dateAt(state.day).getUTCMonth() + 1}</small><b>{dateAt(state.day).getUTCDate()}</b></span> : <Icon id={app.icon} />}{count > 0 && <span className="app-badge">{count}</span>}</span><strong>{app.label}</strong></button>;
     })}</div><div className="phone-page-dots" aria-hidden="true"><i /></div></>; break;
     case 'health': body = <>{intro('Sức khỏe của bạn', 'Lắng nghe bản thân, từng ngày.')}<div className="phone-person"><span>{profile.gender === 'female' ? '👩🏻‍💻' : '🧑🏻‍💻'}</span><div><strong>{profile.name}</strong><small>Lập trình viên mới</small></div><b>LV {1 + Math.floor(state.xp / 100)}</b></div><div className="phone-stat-list">{([
-      ['energy', 'Năng lượng', '', 'gold'], ['mood', 'Tâm trạng', '', 'green'], ['health', 'Sức khỏe', '', 'teal'], ['stress', 'Stress', '', 'purple'],
-    ] as const).map(([key, label, description, tone]) => <div key={key}><header><strong>{label}</strong><b>{state[key]}<small>/100</small></b></header><div className={`phone-meter ${tone}`}><i style={{ width: `${state[key]}%` }} /></div></div>)}</div><div className="phone-info-card"><small>KINH NGHIỆM</small><h3>{state.xp} XP tích lũy</h3><p>Còn {100 - state.xp % 100} XP để lên cấp tiếp theo.</p></div></>; break;
+      ['energy', 'Năng lượng', '', 'gold'], ['fullness', 'No', '', 'orange'], ['mood', 'Tâm trạng', '', 'green'], ['health', 'Sức khỏe', '', 'teal'], ['stress', 'Stress', '', 'purple'],
+    ] as const).map(([key, label, description, tone]) => <div key={key}><header><strong>{label}</strong><b>{Math.round(vital(key))}<small>/100</small></b></header><div className={`phone-meter ${tone}`}><i style={{ width: `${vital(key)}%` }} /></div></div>)}</div>{warnings.length>0&&<div className="phone-warnings" role="status">{warnings.map(w=>(<p key={w.key} className={w.level}>{w.text}</p>))}</div>}<div className="phone-info-card"><small>KINH NGHIỆM</small><h3>{state.xp} XP tích lũy</h3><p>Còn {100 - state.xp % 100} XP để lên cấp tiếp theo.</p></div></>; break;
     case 'finance': {
       const date = dateAt(state.day), transactions = state.ledger.filter(entry => { const d = dateAt(entry.day); return d.getUTCMonth() === date.getUTCMonth() && d.getUTCFullYear() === date.getUTCFullYear(); });
       const income = transactions.filter(entry => entry.amount > 0).reduce((sum, entry) => sum + entry.amount, 0), expense = -transactions.filter(entry => entry.amount < 0).reduce((sum, entry) => sum + entry.amount, 0);
