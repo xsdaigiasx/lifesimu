@@ -1,5 +1,5 @@
 import type {GameState,GameResult} from './types';
-import {clockOf,spendTime} from './time';
+import {clockOf,spendTime,END} from './time';
 import {canEnterOffice} from './work';
 import {officeOf} from './office';
 import {recordJournal} from './journal';
@@ -10,7 +10,7 @@ export function validSocial(v:unknown,day:number):v is SocialState{if(!v||typeof
 export function chatCoworker(s:GameState,id:string,minutes:5|15):GameResult{
  if(s.work?.active)return{ok:false,error:'Không trò chuyện trong ca làm.'};
  if(!canEnterOffice(s)||clockOf(s).minute+minutes>1020)return{ok:false,error:'Đã hết giờ ở công ty.'};
- const npc=COWORKERS.find(p=>p.id===id);if(!npc||![5,15].includes(minutes))return{ok:false,error:'Cuộc trò chuyện không hợp lệ.'};if(clockOf(s).location!=='office'||officeOf(s).role!=='employee')return{ok:false,error:'Hãy đến công ty.'};const c=clockOf(s),old=socialOf(s),rel=old.relations[id];if(rel&&rel.lastDay===s.day&&c.minute-rel.minutes<60)return{ok:false,error:'Đợi một lát rồi trò chuyện tiếp.'};if(c.minute+minutes>1320)return{ok:false,error:'Đã muộn rồi.'};
+ const npc=COWORKERS.find(p=>p.id===id);if(!npc||![5,15].includes(minutes))return{ok:false,error:'Cuộc trò chuyện không hợp lệ.'};if(clockOf(s).location!=='office'||officeOf(s).role!=='employee')return{ok:false,error:'Hãy đến công ty.'};const c=clockOf(s),old=socialOf(s),rel=old.relations[id];if(rel&&rel.lastDay===s.day&&c.minute-rel.minutes<60)return{ok:false,error:'Đợi một lát rồi trò chuyện tiếp.'};if(c.minute+minutes>END)return{ok:false,error:'Đã muộn rồi.'};
  const r=spendTime(s,minutes);if(!r.ok)return r;let n=r.state;const dayMinutes=old.chatDay===s.day?old.chatMinutesDay:0;
  n.social={chatDay:s.day,chatMinutesDay:dayMinutes,relations:{...old.relations,[id]:{score:Math.min(100,(rel?.score??0)+(minutes===5?2:4)),lastDay:s.day,minutes:clockOf(n).minute}}};
  n=recordJournal(n,`chat:${s.day}:${c.minute}:${id}`,'Trò chuyện với '+npc.name,`Đã trò chuyện ${minutes} phút.`,id);return{ok:true,state:n};

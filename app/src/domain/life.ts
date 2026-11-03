@@ -1,5 +1,5 @@
 import type {GameState,GameResult,PlaceId} from './types';
-import {clockOf,spendTime} from './time';
+import {clockOf,spendTime,END} from './time';
 export const INGREDIENTS={rice:{name:'Gạo',price:10000,days:30},egg:{name:'Trứng',price:5000,days:5},vegetable:{name:'Rau củ',price:12000,days:2},pork:{name:'Thịt heo',price:35000,days:1},tofu:{name:'Đậu phụ',price:8000,days:2},fish:{name:'Cá tươi',price:30000,days:1}} as const;
 export type IngredientId=keyof typeof INGREDIENTS;
 export const RECIPES={eggRice:{name:'Cơm trứng',needs:{rice:1,egg:2},minutes:20,energy:24,health:0,mood:4},porkRice:{name:'Cơm thịt rau',needs:{rice:1,pork:1,vegetable:1},minutes:35,energy:36,health:2,mood:6},tofuRice:{name:'Cơm đậu rau',needs:{rice:1,tofu:2,vegetable:1},minutes:25,energy:30,health:3,mood:4},fishRice:{name:'Cơm cá kho',needs:{rice:1,fish:1,vegetable:1},minutes:40,energy:38,health:2,mood:7}} as const;
@@ -26,7 +26,7 @@ export function validLife(v:unknown,day:number):v is LifeState{if(!v||typeof v!=
  if(!Array.isArray(l.owned)||l.owned.length>Object.keys(PRODUCTS).length||!l.owned.every(id=>has(PRODUCTS,id))||new Set(l.owned).size!==l.owned.length)return false;
  if(l.outfit!==null&&(!l.owned.includes(l.outfit)||PRODUCTS[l.outfit]?.category!=='clothing'))return false;if(l.transport!==null&&(!l.owned.includes(l.transport)||PRODUCTS[l.transport]?.category!=='transport'))return false;
  if(!l.daily||typeof l.daily!=='object'||Array.isArray(l.daily)||!Object.entries(l.daily).every(([k,d])=>['walk','exercise','parkRest','music','tv','exam','checkup','outfit'].includes(k)&&int(d,0,day)))return false;
- return l.lastMeal===null||!!l.lastMeal&&int(l.lastMeal.day,0,day)&&int(l.lastMeal.minute,420,1320);
+ return l.lastMeal===null||!!l.lastMeal&&int(l.lastMeal.day,0,day)&&int(l.lastMeal.minute,420,END);
 }
 export function stock(s:GameState,id:IngredientId){return lifeOf(s).pantry.filter(a=>a.ingredient===id&&a.expiresDay>s.day).reduce((n,a)=>n+a.qty,0)}
 export function canCook(s:GameState,id:RecipeId){return Object.entries(RECIPES[id].needs).every(([key,qty])=>stock(s,key as IngredientId)>=qty)}
