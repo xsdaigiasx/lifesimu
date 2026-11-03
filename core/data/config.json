@@ -1,0 +1,25 @@
+{
+  "calendar": { "startDate": "2026-11-02" },
+  "clock": {
+    "dayStartMinute": 420,
+    "dayEndMinute": 1320,
+    "defaultStartMinute": 480,
+    "shifts": [
+      { "id": "morning", "start": 480, "end": 720 },
+      { "id": "afternoon", "start": 780, "end": 1020 }
+    ],
+    "paydayDayOfMonth": 1
+  },
+  "economy": { "startMoney": 5200000 },
+  "vitals": {
+    "max": 100,
+    "initial": { "energy": 85, "fullness": 70, "mood": 75, "stress": 20, "health": 90 }
+  },
+  "skills": {
+    "maxLevel": 50,
+    "xpBase": 100,
+    "xpStep": 25,
+    "ids": ["programming", "logic", "graphics", "management", "communication", "cooking"],
+    "initialLevels": { "programming": 3, "logic": 3, "graphics": 1, "management": 1, "communication": 1, "cooking": 1 }
+  }
+}
