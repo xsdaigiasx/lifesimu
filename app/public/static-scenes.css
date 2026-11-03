@@ -109,3 +109,13 @@
 .cooking-hit{min-height:48px;font-size:16px!important;touch-action:manipulation}.cooking-feedback{min-height:20px}.cooking-game>small{display:block;font-size:10px;color:#89947e}.cooking-game .life-secondary{margin-top:14px}
 @keyframes cook-steam{50%{transform:translateY(-7px);opacity:.5}}
 @media(prefers-reduced-motion:reduce){.cooking-steam{animation:none}}
+
+/* Mini game sửa bug */
+.bug-game{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;gap:10px;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));background:#141a26fa;color:#f2f5fb;overflow:auto}
+.bug-game header{display:flex;justify-content:space-between;gap:8px;font-size:13px;opacity:.85}
+.bug-game h3{margin:4px 0 0;font-size:20px}.bug-game p{margin:0;font-size:15px}.bug-game small{font-size:12px;opacity:.8}
+.bug-timer{height:8px;border-radius:4px;background:#ffffff26;overflow:hidden}.bug-timer i{display:block;height:100%;background:#4cc38a;transition:width .1s linear}.bug-timer i.slow{background:#e8a33d}
+.bug-options{display:flex;flex-direction:column;gap:8px}.bug-options button{display:flex;gap:10px;align-items:center;min-height:44px;padding:8px 12px;text-align:left;border-radius:8px;border:1px solid #ffffff33;background:#ffffff14;color:inherit;font:inherit}
+.bug-options.code button{font-family:ui-monospace,Menlo,monospace;font-size:13px}.bug-options.code em{font-style:normal;opacity:.5;min-width:1.2em}.bug-options.code span{white-space:pre-wrap;word-break:break-word}
+.bug-options button.dim{opacity:.3}
+.bug-layout{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:12px 0}.bug-layout button{aspect-ratio:1;border-radius:8px;border:1px solid #ffffff44;background:#3b6ea5;color:#fff;font:inherit;font-size:13px}
