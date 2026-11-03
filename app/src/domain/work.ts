@@ -6,13 +6,13 @@ import {officeOf,PROBATION_PASS_DAYS,PROBATION_SALARY,RETRY_AFTER_FAIL} from './
 import {dateAt,money} from './format';
 import {recordJournal} from './journal';
 import {bugPuzzle,repairFraction} from './bug-game';
-import {SKILLS,xpNeeded,defaultSkills,gainXp,type SkillId,type Skills} from './skill-xp';
+import {SKILLS,xpNeeded,defaultSkills,gainXp,MAX_LEVEL,type SkillId,type Skills} from './skill-xp';
 import holidays from './calendar-2026.json';
-export {SKILLS,xpNeeded,effectiveLevel} from './skill-xp';
+export {SKILLS,xpNeeded} from './skill-xp';
 export type {SkillId,Skill,Skills} from './skill-xp';
 export function skillsOf(s:GameState):Skills{return{...defaultSkills(),...s.skills}}
-export function validSkills(v:unknown):v is Skills{if(!v||typeof v!=='object')return false;return Object.keys(SKILLS).every(k=>{const q=(v as Partial<Skills>)[k as SkillId];if(q===undefined)return k==='cooking';return!!q&&Number.isInteger(q.level)&&q.level>=1&&q.level<=50&&Number.isInteger(q.xp)&&q.xp>=0&&(q.level===50?q.xp===0:q.xp<xpNeeded(q.level))})}
-export function addSkillXp(s:GameState,id:SkillId,xp:number):GameState{if(skillsOf(s)[id].level>=50)return s;return{...s,skills:gainXp(skillsOf(s),id,xp)}}
+export function validSkills(v:unknown):v is Skills{if(!v||typeof v!=='object')return false;return Object.keys(SKILLS).every(k=>{const q=(v as Partial<Skills>)[k as SkillId];if(q===undefined)return k==='cooking';return!!q&&Number.isInteger(q.level)&&q.level>=1&&q.level<=MAX_LEVEL&&Number.isInteger(q.xp)&&q.xp>=0&&(q.level===MAX_LEVEL?q.xp===0:q.xp<xpNeeded(q.level))})}
+export function addSkillXp(s:GameState,id:SkillId,xp:number):GameState{if(skillsOf(s)[id].level>=MAX_LEVEL)return s;return{...s,skills:gainXp(skillsOf(s),id,xp)}}
 export const TASKS=[
 {id:'null-data',name:'Sửa lỗi dữ liệu rỗng',skill:'programming',secondary:'logic',level:1,minutes:60,error:5,xp:12},
 {id:'test-form',name:'Kiểm tra biểu mẫu',skill:'logic',secondary:'programming',level:2,minutes:90,error:8,xp:18},
@@ -83,7 +83,7 @@ export function settleNewDay(previous:GameState,next:GameState):GameState{let n=
  if(dateAt(next.day).getUTCDate()===1){for(const p of w.periods){if(p.paid||p.month>=monthOf(next.day))continue;const amount=Math.round(p.salary*p.minutes/standardMinutes(p.month));if(post(n,{id:`salary:${p.key}`,name:`Lương tháng ${p.month}`,amount})!=='ok')continue;p.paid=true;p.amount=amount;n=recordJournal(n,`salary:${p.key}`,'Nhận lương',`${p.month}: ${money(amount)}`);}}
  return n;
 }
-export function studySkill(s:GameState,skill:SkillId,hours:1|2):GameResult{const c=clockOf(s);if(!Object.hasOwn(SKILLS,skill)||![1,2].includes(hours))return{ok:false,error:'Buổi học không hợp lệ.'};if(s.work?.active||s.office?.application?.status==='interview'||s.fishing?.atLake)return{ok:false,error:'Hãy hoàn thành hoạt động hiện tại.'};if(c.minute<1080)return{ok:false,error:'Lớp tối bắt đầu từ 18:00.'};if(c.minute+hours*60>END||c.lastStudyDay===s.day)return{ok:false,error:'Chưa thể học thêm hôm nay.'};if(skillsOf(s)[skill].level>=50)return{ok:false,error:'Kỹ năng đã đạt cấp cao nhất.'};const price=40000*hours;if(s.money<price||s.energy<5*hours)return{ok:false,error:'Chưa đủ tiền hoặc năng lượng.'};let n=structuredClone(s);n.clock={...c,minute:c.minute+hours*60,lastStudyDay:s.day};if(post(n,{name:`Học ${SKILLS[skill]}`,amount:-price})!=='ok')return{ok:false,error:'Chưa đủ tiền hoặc năng lượng.'};n.energy-=5*hours;n.stress=Math.min(100,n.stress+2*hours);const xp=30*hours*(s.energy<25?.5:1);n=addSkillXp(n,skill,xp);n=recordJournal(n,`study:${s.day}`,'Học '+SKILLS[skill],`${hours} giờ, +${xp} XP.`);return{ok:true,state:n};}
+export function studySkill(s:GameState,skill:SkillId,hours:1|2):GameResult{const c=clockOf(s);if(!Object.hasOwn(SKILLS,skill)||![1,2].includes(hours))return{ok:false,error:'Buổi học không hợp lệ.'};if(s.work?.active||s.office?.application?.status==='interview'||s.fishing?.atLake)return{ok:false,error:'Hãy hoàn thành hoạt động hiện tại.'};if(c.minute<1080)return{ok:false,error:'Lớp tối bắt đầu từ 18:00.'};if(c.minute+hours*60>END||c.lastStudyDay===s.day)return{ok:false,error:'Chưa thể học thêm hôm nay.'};if(skillsOf(s)[skill].level>=MAX_LEVEL)return{ok:false,error:'Kỹ năng đã đạt Lv tối đa.'};const price=40000*hours;if(s.money<price||s.energy<5*hours)return{ok:false,error:'Chưa đủ tiền hoặc năng lượng.'};let n=structuredClone(s);n.clock={...c,minute:c.minute+hours*60,lastStudyDay:s.day};if(post(n,{name:`Học ${SKILLS[skill]}`,amount:-price})!=='ok')return{ok:false,error:'Chưa đủ tiền hoặc năng lượng.'};n.energy-=5*hours;n.stress=Math.min(100,n.stress+2*hours);const xp=30*hours*(s.energy<25?.5:1);n=addSkillXp(n,skill,xp);n=recordJournal(n,`study:${s.day}`,'Học '+SKILLS[skill],`${hours} giờ, +${xp} XP.`);return{ok:true,state:n};}
 
 /** Mini game sửa bug: trả lời đúng và nhanh thì sửa nhanh (25% giờ chuẩn), chậm 33%, sai 40% (mục 12.2). */
 export function bugOf(s:GameState){const w=s.work;if(!w?.bug||!w.task)return null;const t=TASKS.find(t=>t.id===w.task!.id)!;return{task:t,seed:w.bug.seed,attempt:w.bug.attempt,puzzle:bugPuzzle(w.bug.seed,t.skill)}}
