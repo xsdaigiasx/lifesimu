@@ -55,3 +55,10 @@ Luồng tải mới và cử chỉ xem phần cuối README. Bộ đếm sẵn s
 ## Thay đổi do chủ dự án quyết định (Issue #2, 2026-11-03)
 
 Bỏ phí sinh hoạt 90.000đ/ngày. Thay bằng tiền trọ 1.500.000đ/tháng (`src/domain/rent.ts`): trả tháng đầu ngay sau phần mở đầu, các tháng sau tự trả vào ngày 1; thiếu tiền được gia hạn 3 ngày rồi bị giảm tâm trạng, tăng căng thẳng mỗi ngày. Save cũ không có `rent` không bị tính tiền ngay.
+
+## PWA và cập nhật phiên bản (v0.36)
+
+- `public/manifest.webmanifest`, `public/icons/*`, `public/sw.js`: cài lên màn hình chính, mở toàn màn hình, mở lại được khi mất mạng (mạng trước, bộ nhớ đệm sau, nên không bao giờ kẹt bản cũ). Icon hiện là **bản tạm** (ngôi nhà vàng trên nền xanh); icon chính thức do Codex làm theo Issue riêng.
+- `vite.config.ts` tạo `version.json` (`build` = 7 ký tự đầu của commit Cloudflare `WORKERS_CI_COMMIT_SHA`, `version` = package.json) và truyền `__BUILD_ID__`, `__APP_VERSION__` vào code. `src/domain/update.ts` so hai mã; khác nhau thì hiện thanh "Có phiên bản mới" ở đầu màn hình. Bản dev không bao giờ báo.
+- Mỗi lần phát hành đổi `version` trong `package.json` và `RELEASE.json` để người chơi thấy số bản mới.
+- `public/app-shell.css`: không chọn chữ, không giật khi kéo, không chớp khi chạm, chừa vùng tai thỏ khi chạy như ứng dụng đã cài.
