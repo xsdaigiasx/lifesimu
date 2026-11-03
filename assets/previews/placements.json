@@ -1,0 +1,101 @@
+{
+  "origin_px": [
+    576,
+    384
+  ],
+  "tile_px": [
+    128,
+    64
+  ],
+  "placement_coordinates": "top/back footprint corner; x,y in tiles, z in 32px units",
+  "placements": [
+    {
+      "id": "bed-basic",
+      "direction": "a",
+      "variant": "sage",
+      "x": 0.22,
+      "y": 4.55,
+      "z": 0
+    },
+    {
+      "id": "desk-work",
+      "direction": "b",
+      "variant": "oak",
+      "x": 0.18,
+      "y": 2.2,
+      "z": 0
+    },
+    {
+      "id": "chair-work",
+      "direction": "b",
+      "variant": "sage",
+      "x": 1.4,
+      "y": 2.8,
+      "z": 0
+    },
+    {
+      "id": "rug-small",
+      "direction": "a",
+      "variant": "sage",
+      "x": 2.8,
+      "y": 4.1,
+      "z": 0
+    },
+    {
+      "id": "table-dining",
+      "direction": "a",
+      "variant": "oak",
+      "x": 5.85,
+      "y": 4.15,
+      "z": 0
+    },
+    {
+      "id": "stool",
+      "direction": "a",
+      "variant": "sage",
+      "x": 5.25,
+      "y": 6.5,
+      "z": 0
+    },
+    {
+      "id": "lamp-desk",
+      "direction": "a",
+      "variant": "cream",
+      "x": 0.18,
+      "y": 2.4,
+      "z": 2.9
+    },
+    {
+      "id": "plant-monstera",
+      "direction": "a",
+      "variant": "default",
+      "x": 6.9,
+      "y": 6.9,
+      "z": 0
+    },
+    {
+      "id": "window",
+      "direction": "a",
+      "variant": "default",
+      "x": 0,
+      "y": 4.25,
+      "z": 4.3
+    },
+    {
+      "id": "door-main",
+      "direction": "closed",
+      "variant": "default",
+      "x": 0,
+      "y": 0.05,
+      "z": 0
+    },
+    {
+      "id": "door-bath",
+      "direction": "closed",
+      "variant": "default",
+      "x": 6.02,
+      "y": 3,
+      "z": 0
+    }
+  ]
+}

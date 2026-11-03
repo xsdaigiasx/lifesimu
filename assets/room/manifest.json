@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "tile_px": [
+    128,
+    64
+  ],
+  "z_px": 32,
+  "projection": "orthographic-2:1",
+  "anchor": "actual bottom footprint vertex; see README for rectangular-frame conflict",
+  "palette_reference": "app/public/assets/static-scenes/rental-diamond.png",
+  "palette": [
+    {
+      "name": "sage",
+      "hex": "#7a7751",
+      "sample": [
+        610,
+        450
+      ]
+    },
+    {
+      "name": "leaf",
+      "hex": "#8f8663",
+      "sample": [
+        966,
+        632
+      ]
+    },
+    {
+      "name": "cream",
+      "hex": "#fef0d7",
+      "sample": [
+        900,
+        598
+      ]
+    },
+    {
+      "name": "wall",
+      "hex": "#eacda4",
+      "sample": [
+        450,
+        350
+      ]
+    },
+    {
+      "name": "oak",
+      "hex": "#c28448",
+      "sample": [
+        601,
+        476
+      ]
+    },
+    {
+      "name": "warm",
+      "hex": "#f3b776",
+      "sample": [
+        550,
+        700
+      ]
+    },
+    {
+      "name": "metal",
+      "hex": "#bdae9c",
+      "sample": [
+        720,
+        480
+      ]
+    },
+    {
+      "name": "ink",
+      "hex": "#584c44",
+      "sample": [
+        627,
+        167
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "room-shell-tro",
+      "file": "room-shell-tro_a_default.png",
+      "source": "room-shell-tro_a_default.svg",
+      "footprint_tiles": [
+        8,
+        8
+      ],
+      "height_z": 9,
+      "direction": "a",
+      "variant": "default",
+      "frame_px": [
+        1152,
+        896
+      ],
+      "anchor_px": [
+        576,
+        896
+      ],
+      "mount_origin_px": [
+        576,
+        384
+      ]
+    },
+    {
+      "id": "door-main",
+      "file": "door-main_closed_default.png",
+      "source": "door-main_closed_default.svg",
+      "footprint_tiles": [
+        0,
+        2
+      ],
+      "height_z": 8,
+      "direction": "closed",
+      "variant": "default",
+      "frame_px": [
+        128,
+        320
+      ],
+      "anchor_px": [
+        0,
+        320
+      ],
+      "mount_origin_px": [
+        128,
+        256
+      ]
+    },
+    {
+      "id": "door-main",
+      "file": "door-main_open_default.png",
+      "source": "door-main_open_default.svg",
+      "footprint_tiles": [
+        0,
+        2
+      ],
+      "height_z": 8,
+      "direction": "open",
+      "variant": "default",
+      "frame_px": [
+        128,
+        320
+      ],
+      "anchor_px": [
+        0,
+        320
+      ],
+      "mount_origin_px": [
+        128,
+        256
+      ]
+    },
+    {
+      "id": "window",
+      "file": "window_a_default.png",
+      "source": "window_a_default.svg",
+      "footprint_tiles": [
+        0,
+        2
+      ],
+      "height_z": 4,
+      "direction": "a",
+      "variant": "default",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        0,
+        192
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "door-bath",
+      "file": "door-bath_closed_default.png",
+      "source": "door-bath_closed_default.svg",
+      "footprint_tiles": [
+        1,
+        0
+      ],
+      "height_z": 8,
+      "direction": "closed",
+      "variant": "default",
+      "frame_px": [
+        64,
+        288
+      ],
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        0,
+        256
+      ]
+    },
+    {
+      "id": "door-bath",
+      "file": "door-bath_open_default.png",
+      "source": "door-bath_open_default.svg",
+      "footprint_tiles": [
+        1,
+        0
+      ],
+      "height_z": 8,
+      "direction": "open",
+      "variant": "default",
+      "frame_px": [
+        64,
+        288
+      ],
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        0,
+        256
+      ]
+    }
+  ]
+}
