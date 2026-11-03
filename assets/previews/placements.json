@@ -7,70 +7,117 @@
     128,
     64
   ],
-  "placement_coordinates": "top/back footprint corner; x,y in tiles, z in 32px units",
+  "placement_coordinates": "top/back footprint corner; integer x,y in tiles, z in 32px units; lamp sits on desk top at z=2.9",
+  "clearance_rects": [
+    {
+      "id": "main-entry",
+      "x": 0,
+      "y": 1,
+      "w": 2,
+      "h": 2
+    },
+    {
+      "id": "bath-entry",
+      "x": 6,
+      "y": 3,
+      "w": 1,
+      "h": 1
+    }
+  ],
+  "walk_start": [
+    1,
+    1
+  ],
+  "walk_targets": [
+    [
+      0,
+      3
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      5,
+      4
+    ],
+    [
+      6,
+      6
+    ],
+    [
+      6,
+      3
+    ]
+  ],
   "placements": [
     {
       "id": "bed-basic",
-      "direction": "a",
+      "direction": "b",
       "variant": "sage",
-      "x": 0.22,
-      "y": 4.55,
+      "x": 0,
+      "y": 6,
       "z": 0
     },
     {
       "id": "desk-work",
       "direction": "b",
       "variant": "oak",
-      "x": 0.18,
-      "y": 2.2,
+      "x": 1,
+      "y": 4,
       "z": 0
     },
     {
       "id": "chair-work",
       "direction": "b",
       "variant": "sage",
-      "x": 1.4,
-      "y": 2.8,
+      "x": 0,
+      "y": 4,
       "z": 0
     },
     {
       "id": "rug-small",
       "direction": "a",
       "variant": "sage",
-      "x": 2.8,
-      "y": 4.1,
+      "x": 3,
+      "y": 4,
       "z": 0
     },
     {
       "id": "table-dining",
       "direction": "a",
       "variant": "oak",
-      "x": 5.85,
-      "y": 4.15,
+      "x": 6,
+      "y": 4,
       "z": 0
     },
     {
       "id": "stool",
       "direction": "a",
       "variant": "sage",
-      "x": 5.25,
-      "y": 6.5,
+      "x": 7,
+      "y": 6,
       "z": 0
     },
     {
       "id": "lamp-desk",
       "direction": "a",
       "variant": "cream",
-      "x": 0.18,
-      "y": 2.4,
-      "z": 2.9
+      "x": 1,
+      "y": 5,
+      "z": 2.9,
+      "support_id": "desk-work"
     },
     {
       "id": "plant-monstera",
       "direction": "a",
       "variant": "default",
-      "x": 6.9,
-      "y": 6.9,
+      "x": 4,
+      "y": 7,
       "z": 0
     },
     {
@@ -78,22 +125,22 @@
       "direction": "a",
       "variant": "default",
       "x": 0,
-      "y": 4.25,
-      "z": 4.3
+      "y": 4,
+      "z": 4
     },
     {
       "id": "door-main",
       "direction": "closed",
       "variant": "default",
       "x": 0,
-      "y": 0.05,
+      "y": 1,
       "z": 0
     },
     {
       "id": "door-bath",
       "direction": "closed",
       "variant": "default",
-      "x": 6.02,
+      "x": 6,
       "y": 3,
       "z": 0
     }

@@ -6,7 +6,7 @@
   ],
   "z_px": 32,
   "projection": "orthographic-2:1",
-  "anchor": "actual bottom footprint vertex; see README for rectangular-frame conflict",
+  "anchor": "actual bottom footprint vertex; rectangular footprints use their approved off-center anchor_px",
   "palette_reference": "app/public/assets/static-scenes/rental-diamond.png",
   "palette": [
     {

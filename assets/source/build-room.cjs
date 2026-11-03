@@ -66,19 +66,23 @@ function furniture(id,direction,variant) {
     for(let x=.52;x<2.7;x+=.48)s.poly([[x,.92,.009],[x+.12,.8,.009],[x+.24,.92,.009],[x+.12,1.04,.009]],C.leaf,'none');
   } else if(id==='plant-monstera') {
     const [cx,cy]=s.p(.5,.5,0);
+    // Keep the entire canopy inside the existing frame, around the same ground contact.
+    s.parts.push(`<g transform="translate(${cx} ${cy}) scale(.88) translate(${-cx} ${-cy})">`);
     s.parts.push(`<path d="M ${cx-17} ${cy-39} L ${cx+17} ${cy-39} L ${cx+12} ${cy-5} Q ${cx} ${cy+3} ${cx-12} ${cy-5} Z" fill="${C.cream}" stroke="${C.ink}" stroke-width="1.4"/>`);
     s.ellipse(.5,.5,1.22,17,6,C.wall);
     for(const [dx,dy,flip] of [[-29,-89,-1],[25,-107,1],[-18,-127,-1],[18,-72,1],[0,-148,1]]) {
       const lx=cx+dx,ly=cy+dy;s.parts.push(`<path d="M ${cx} ${cy-36} Q ${cx+dx/2} ${ly+10} ${lx} ${ly}" fill="none" stroke="${C.sage}" stroke-width="2.5"/><g transform="translate(${lx} ${ly}) scale(${flip} 1)"><path d="M 0 20 C -25 13 -27 -7 -13 -16 C -4 -23 17 -18 23 -7 L 10 -4 L 24 1 L 21 9 L 8 5 L 15 17 C 10 23 3 24 0 20 Z" fill="${C.leaf}" stroke="${C.ink}" stroke-width="1.2"/><path d="M 0 19 L 2 -11 M 1 7 L -10 0" fill="none" stroke="${C.sage}" stroke-width="1.2"/></g>`);
     }
+    s.parts.push('</g>');
   }
   return {s,footprint:[rot?y:x,rot?x:y],height_z:z};
 }
 function wallAsset(id,state) {
   const bath=id==='door-bath',win=id==='window',w=bath?64:128,h=win?192:bath?288:320;
   // Wall attachment assets use a vertical plane; zero-depth footprint is intentional.
-  const s=new Scene(w,h,bath?1:0,bath?0:2,bath); const span=bath?.96:1.96,high=win?3.95:7.95;
-  const x=.02,y=.02;
+  const s=new Scene(w,h,bath?1:0,bath?0:2,bath); const span=bath?.90:1.90,high=win?3.95:7.95;
+  // Recess the art inside its allocated wall span so the 1.4px outline isn't clipped.
+  const x=0,y=.05;
   s.poly([[x,y,.05],[x,y+span,.05],[x,y+span,high],[x,y,high]],C.oak);
   const inner=[[x,y+.08,.22],[x,y+span-.08,.22],[x,y+span-.08,high-.16],[x,y+.08,high-.16]];
   s.poly(inner,win?C.metal:C.ink);
@@ -138,9 +142,9 @@ async function main() {
    manifests[group].push({id,file:name+'.png',source:name+'.svg',footprint_tiles:obj.footprint,height_z:obj.height_z,direction,variant,frame_px:[obj.s.w,obj.s.h],anchor_px:[obj.s.w/2+(obj.footprint[0]-obj.footprint[1])*32,obj.s.h],mount_origin_px:obj.s.p(0,0,0)});
  }
  await save('room','room-shell-tro','a','default',room());
- for(const [id,dirs,variants] of [['bed-basic',['a','b'],['sage','cream']],['desk-work',['a','b'],['oak']],['chair-work',['a','b'],['sage']],['table-dining',['a'],['oak']],['stool',['a'],['sage']],['lamp-desk',['a'],['cream']],['rug-small',['a'],['sage']],['plant-monstera',['a'],['default']]])
+ for(const [id,dirs,variants] of [['bed-basic',['a','b'],['sage','cream']],['desk-work',['a','b'],['oak']],['chair-work',['a','b'],['sage']],['table-dining',['a'],['oak']],['stool',['a'],['sage']],['lamp-desk',['a'],['cream']],['rug-small',['a','b'],['sage']],['plant-monstera',['a'],['default']]])
    for(const direction of dirs)for(const variant of variants)await save('furniture',id,direction,variant,furniture(id,direction,variant));
  for(const [id,states] of [['door-main',['closed','open']],['window',['a']],['door-bath',['closed','open']]])for(const state of states)await save('room',id,state,'default',wallAsset(id,state));
- for(const [group,assets] of Object.entries(manifests)) fs.writeFileSync(path.join(root,group,'manifest.json'),JSON.stringify({schema_version:1,tile_px:[128,64],z_px:32,projection:'orthographic-2:1',anchor:'actual bottom footprint vertex; see README for rectangular-frame conflict',palette_reference:'app/public/assets/static-scenes/rental-diamond.png',palette,assets},null,2)+'\n');
+ for(const [group,assets] of Object.entries(manifests)) fs.writeFileSync(path.join(root,group,'manifest.json'),JSON.stringify({schema_version:1,tile_px:[128,64],z_px:32,projection:'orthographic-2:1',anchor:'actual bottom footprint vertex; rectangular footprints use their approved off-center anchor_px',palette_reference:'app/public/assets/static-scenes/rental-diamond.png',palette,assets},null,2)+'\n');
 }
 main().catch(e=>{console.error(e);process.exitCode=1});
