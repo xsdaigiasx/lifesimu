@@ -22,3 +22,5 @@
 .life-intro .intro-name-field:focus-within{border-color:#41684f;box-shadow:0 0 0 2px #41684f33}
 .life-intro .intro-name-field input{appearance:none;-webkit-appearance:none;box-shadow:none}
 .life-intro .intro-name-field input:focus,.life-intro .intro-name-field input:focus-visible{outline:none}
+
+.intro-primary.is-waiting{cursor:wait;opacity:.6}
