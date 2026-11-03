@@ -28,3 +28,9 @@ export const drainIdleEnergy=(s:GameState,from:number,to:number):GameState=>{con
 /** Số phút ngủ thật nếu đi ngủ lúc `minute` (tính từ 00:00 hôm nay) đến lúc dậy 07:00 hôm sau. */
 export const sleepMinutes=(minute:number,wake:number)=>Math.max(0,1440+wake-minute);
 export const sleepEnergy=(minutes:number)=>Math.round(minutes/60*REST.sleepEnergyPerHour);
+/** Cà phê: +10 năng lượng ngay, 3 giờ sau tụt lại 10; tối đa 2 ly mỗi ngày. */
+export const COFFEE={price:25000,minutes:10,boost:10,crashAfter:180,perDay:2} as const;
+export const coffeeToday=(s:GameState)=>s.coffee&&s.coffee.day===s.day?s.coffee.count:0;
+export function drinkCoffee(n:GameState,minuteNow:number){n.energy=clampVital(n.energy+COFFEE.boost);const c=n.coffee&&n.coffee.day===n.day?n.coffee:{day:n.day,count:0,crashAt:null as number|null};n.coffee={day:n.day,count:c.count+1,crashAt:minuteNow+COFFEE.crashAfter}}
+/** Khi đồng hồ qua mốc tụt thì trừ 10 năng lượng một lần. */
+export function applyCoffeeCrash(s:GameState,toMinute:number):GameState{const c=s.coffee;if(!c||c.crashAt===null||c.day!==s.day||toMinute<c.crashAt)return s;return{...s,energy:Math.max(0,s.energy-COFFEE.boost),coffee:{...c,crashAt:null}}}

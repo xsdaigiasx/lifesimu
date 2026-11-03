@@ -1,4 +1,4 @@
-import {eatFullness,dailyHealthPenalty,fullnessOf,REST} from './vitals';
+import {eatFullness,dailyHealthPenalty,fullnessOf,REST,COFFEE,coffeeToday,drinkCoffee} from './vitals';
 import type {GameState,GameResult,PlaceId} from './types';
 import {post} from './money';
 import {clockOf,spendTime,END} from './time';
@@ -32,7 +32,7 @@ export function validLife(v:unknown,day:number):v is LifeState{if(!v||typeof v!=
 }
 export function stock(s:GameState,id:IngredientId){return lifeOf(s).pantry.filter(a=>a.ingredient===id&&a.expiresDay>s.day).reduce((n,a)=>n+a.qty,0)}
 export function canCook(s:GameState,id:RecipeId){return Object.entries(RECIPES[id].needs).every(([key,qty])=>stock(s,key as IngredientId)>=qty)}
-export type LifeAction={kind:'ingredient';id:IngredientId;qty:number}|{kind:'discardFood'}|{kind:'cook';id:RecipeId}|{kind:'cookStep';id:string;stage:number;position:number}|{kind:'cancelCook';id:string}|{kind:'eat';id:string}|{kind:'deposit';amount:number;term:7|30|90}|{kind:'withdraw';id:string}|{kind:'borrow';amount:number}|{kind:'repay';amount:number}|{kind:'exam'}|{kind:'treat';id:ConditionId}|{kind:'checkup'}|{kind:'park';activity:'walk'|'exercise'|'parkRest'|'music'}|{kind:'product';id:ProductId}|{kind:'equip';id:ProductId|null;category:'clothing'|'transport'}|{kind:'tv'};
+export type LifeAction={kind:'ingredient';id:IngredientId;qty:number}|{kind:'discardFood'}|{kind:'cook';id:RecipeId}|{kind:'cookStep';id:string;stage:number;position:number}|{kind:'cancelCook';id:string}|{kind:'eat';id:string}|{kind:'deposit';amount:number;term:7|30|90}|{kind:'withdraw';id:string}|{kind:'borrow';amount:number}|{kind:'repay';amount:number}|{kind:'exam'}|{kind:'treat';id:ConditionId}|{kind:'checkup'}|{kind:'park';activity:'walk'|'exercise'|'parkRest'|'music'}|{kind:'product';id:ProductId}|{kind:'equip';id:ProductId|null;category:'clothing'|'transport'}|{kind:'tv'}|{kind:'coffee'};
 const clamp=(n:number)=>Math.min(100,Math.max(0,Math.round(n)));
 function transact(s:GameState,minutes:number,fee:number,place:PlaceId|null,label:string,change:(n:GameState,l:LifeState)=>void):GameResult{if(place&&clockOf(s).location!==place)return{ok:false,error:'Hãy đến đúng địa điểm.'};if(!int(fee,0)||s.money<fee)return{ok:false,error:'Chưa đủ tiền.'};const t=spendTime(s,minutes);if(!t.ok)return t;const n=structuredClone(t.state);n.life=structuredClone(lifeOf(s));if(fee&&post(n,{name:label,amount:-fee})!=='ok')return{ok:false,error:'Chưa đủ tiền.'};change(n,n.life);return{ok:true,state:n}}
 export function lifeAction(s:GameState,a:LifeAction):GameResult{const l=lifeOf(s),bad=(error:string):GameResult=>({ok:false,error});
@@ -53,6 +53,7 @@ export function lifeAction(s:GameState,a:LifeAction):GameResult{const l=lifeOf(s
  case'park':{const options={walk:{minutes:30,energy:-5,health:2,mood:8,stress:-10},exercise:{minutes:45,energy:-12,health:5,mood:5,stress:-8},parkRest:{minutes:30,energy:12,health:0,mood:4,stress:-8},music:{minutes:30,energy:0,health:0,mood:12,stress:-15}};if(!has(options,a.activity))return bad('Hoạt động chưa hợp lệ.');if(l.daily[a.activity]===s.day)return bad('Đã thực hiện hôm nay.');if(a.activity==='music'&&!l.owned.includes('headphones'))return bad('Cần tai nghe.');const o=options[a.activity];if(s.energy+o.energy<0||a.activity==='exercise'&&s.health<30)return bad('Cần nghỉ ngơi hoặc khám sức khỏe trước.');return transact(s,o.minutes,0,'park','',(n,v)=>{v.daily[a.activity]=s.day;n.energy=clamp(n.energy+o.energy);n.health=clamp(n.health+o.health);n.mood=clamp(n.mood+o.mood);n.stress=clamp(n.stress+o.stress)})}
  case'product':{if(!has(PRODUCTS,a.id)||l.owned.includes(a.id))return bad('Đã có món đồ này.');return transact(s,0,PRODUCTS[a.id].price,null,'Mua '+PRODUCTS[a.id].name,(_,v)=>v.owned.push(a.id))}
  case'equip':{if(a.id&&(!l.owned.includes(a.id)||PRODUCTS[a.id].category!==a.category))return bad('Chưa sở hữu món này.');return transact(s,0,0,null,'',(n,v)=>{if(a.category==='transport')v.transport=a.id;else{v.outfit=a.id;if(v.daily.outfit!==s.day){v.daily.outfit=s.day;n.mood=clamp(n.mood+2)}}})}
+ case'coffee':{if(coffeeToday(s)>=COFFEE.perDay)return bad('Hôm nay bạn đã uống đủ 2 ly, uống thêm sẽ khó ngủ.');return transact(s,COFFEE.minutes,COFFEE.price,'streetfood','Cà phê',(n)=>{drinkCoffee(n,clockOf(n).minute)})}
  case'tv':{if(!l.owned.includes('tv'))return bad('Cần TV.');if(l.daily.tv===s.day)return bad('Đã xem TV hôm nay.');return transact(s,30,0,'home','',(n,v)=>{v.daily.tv=s.day;n.energy=clamp(n.energy+8);n.mood=clamp(n.mood+6);n.stress=clamp(n.stress-10)})}
  }
 }

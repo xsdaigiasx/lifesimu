@@ -1,4 +1,4 @@
-import {fullnessOf,vitalFactor,drainFullness} from './vitals';
+import {fullnessOf,vitalFactor,drainFullness,applyCoffeeCrash} from './vitals';
 import type {GameState,GameResult} from './types';
 import {post} from './money';
 import {clockOf,END,seedUnit} from './time';
@@ -60,7 +60,7 @@ export function workAction(s:GameState,a:WorkAction):GameResult{const o=officeOf
  else {if(!w.active)return{ok:false,error:'Chưa có ca đang chạy.'};if(a.kind==='pause')w.active.paused=true;else if(a.kind==='resume')w.active.paused=false;else{w.finished=[...w.finished,`${s.day}:${w.active.slot}`].slice(-500);w.lastResult='Đã dừng ca. Phần việc được giữ lại.';w.active=null;n=recordJournal(n,`shift-leave:${s.day}:${s.clock?.minute}`,'Rời ca làm','Đã ghi nhận thời gian làm thực tế.');}}
  return{ok:true,state:n};}
 export function workTick(s:GameState,minutes=4):GameState{const active=s.work?.active;if(!active||active.paused||!integer(minutes,1,60))return s;let n=structuredClone(s);const w=n.work!,a=w.active!;if(officeOf(n).role!=='employee'||officeOf(n).employerId!==a.companyId)return{...n,work:{...w,active:null}};const step=Math.min(minutes,a.end-clockOf(n).minute);if(step<=0)return s;
- const old=a.minutes;a.minutes+=step;n.clock={...clockOf(n),minute:clockOf(n).minute+step,lastWorkDay:s.day};n.fullness=drainFullness(n,step).fullness;n.energy=Math.max(0,n.energy-(Math.floor(a.minutes*18/240)-Math.floor(old*18/240)));n.stress=Math.min(100,n.stress+Math.floor(a.minutes*10/240)-Math.floor(old*10/240));credit(n,a.companyId,step);
+ const old=a.minutes;a.minutes+=step;n.clock={...clockOf(n),minute:clockOf(n).minute+step,lastWorkDay:s.day};{const q=applyCoffeeCrash(n,clockOf(n).minute);n.energy=q.energy;if(q.coffee)n.coffee=q.coffee}n.fullness=drainFullness(n,step).fullness;n.energy=Math.max(0,n.energy-(Math.floor(a.minutes*18/240)-Math.floor(old*18/240)));n.stress=Math.min(100,n.stress+Math.floor(a.minutes*10/240)-Math.floor(old*10/240));credit(n,a.companyId,step);
  let remaining=step;while(remaining>0&&w.task){const task=w.task,t=TASKS.find(t=>t.id===task.id)!,used=Math.min(remaining,task.required-task.elapsed);task.elapsed+=used;remaining-=used;if(task.elapsed<task.required)break;
  const success=task.roll>=task.errorPct;
  if(success){if(task.attempt===0){n=addSkillXp(n,t.skill,t.xp);n=addSkillXp(n,t.secondary,Math.floor(t.xp/2));}w.lastResult=`${t.name}: đã hoàn thành${task.attempt?' sửa lỗi':''}.`;w.task=null;}
