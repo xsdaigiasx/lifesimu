@@ -3,6 +3,7 @@ import type {HomeTier} from '../domain/home';
 import FurnitureShop from './FurnitureShop';
 import {homeOf,type HomeId} from '../domain/home';
 import {clockText,clockOf} from '../domain/time';
+import {resetLife,restoreBackup,backupInfo,BACKUP_DAYS} from '../domain/reset';
 import {officeOf,STAFF} from '../domain/office';
 import BauCua from './BauCua';
 import type {Bets, RoundResult} from '../domain/bau-cua';
@@ -19,6 +20,7 @@ export interface PhoneProps {
   state: GameState;
   profile: PlayerProfile;
   onAction: (action: Action, choice?: DailyAction) => void;
+  onResetStart: (active: boolean) => void;
   onClose: () => void;
   onBuyFurniture:(id:HomeId,tier?:HomeTier)=>GameResult;
   onLifeAction:(a:LifeAction)=>GameResult;
@@ -57,11 +59,13 @@ function Clock({minute=480}:{minute?:number}) {
   })}<path d="M50 50V27" transform={`rotate(${minute/2} 50 50)`} stroke="#20332c" strokeWidth="5" strokeLinecap="round" /><path d="M50 50V17" transform={`rotate(${minute%60*6} 50 50)`} stroke="#20332c" strokeWidth="3" strokeLinecap="round" /><circle cx="50" cy="50" r="3" fill="#d6a34d" /></svg>;
 }
 
-export default function Phone({ state, profile, onAction, onPlayBauCua, bauCuaShaking, onBuyFurniture,onLifeAction }: PhoneProps) {
+export default function Phone({ state, profile, onAction, onResetStart, onPlayBauCua, bauCuaShaking, onBuyFurniture,onLifeAction }: PhoneProps) {
   const [phone, setPhone] = useState<PhoneState>(() => { try { return data.parse(localStorage.getItem(data.KEY)) ?? data.initial(); } catch { return data.initial(); } });
   const [page, setPage] = useState<Page>('home');
   const [dial, setDial] = useState('');
   const [notice, setNotice] = useState('');
+  const [resetStep, setResetStep] = useState<'idle' | 'confirm' | 'restore'>('idle');
+  const [resetText, setResetText] = useState('');
   const [notesDraft, setNotesDraft] = useState(phone.notes);
   const contentRef = useRef<HTMLDivElement>(null);
   const gameISO = dateAt(state.day).toISOString().slice(0, 10);
@@ -123,7 +127,14 @@ export default function Phone({ state, profile, onAction, onPlayBauCua, bauCuaSh
     case 'calls': body = <>{intro('Gọi điện', 'Kết nối với những người bạn quen.')}<div className="dial-display">{dial || 'Chưa có số'}</div><div className="dial-pad">{['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'].map(key => <button key={key} onClick={() => setDial(value => (value + key).slice(0, 16))}>{key}</button>)}</div><div className="dial-actions"><button onClick={() => setDial(value => value.slice(0, -1))} aria-label="Xóa số vừa nhập">⌫</button><button className="dial-call" disabled aria-label="Chưa thể gọi: chưa có liên hệ NPC"><Icon id="call" /></button><button onClick={() => navigate('contacts')} aria-label="Mở danh bạ"><Icon id="people" /></button></div></>; break;
     case 'news': body = <><div className="news-masthead"><small>BẢN TIN TRONG GAME</small><h2>An Nhiên hôm nay</h2><p>{shortDate(state.day)} · Đời sống & nhịp phố</p></div><article className="news-feature"><span className="news-skyline"><Icon id="city" /></span><small>CHUYỆN KHU PHỐ</small><h3>Hẻm Nắng có một người hàng xóm mới</h3><p>{profile.name} bắt đầu cuộc sống ở phòng 03. Một chiếc bàn làm việc, một ô cửa sổ và những dự định đang đợi phía trước.</p></article><article className="phone-news-item"><small>GÓC SỐNG</small><h3>{homeOf(state).items.length} món đồ, những thay đổi nhỏ</h3><p>{homeOf(state).items.length ? `Góc phòng của ${profile.name} đã có thêm dấu ấn riêng. Đồ đã mua có thể cất và đặt lại.` : 'Một góc xanh hay ngọn đèn ấm có thể là món đầu tiên cho căn phòng mới.'}</p></article><article className="phone-news-item"><small>NHỊP SỐNG</small><h3>Chừa một khoảng cho nghỉ ngơi</h3><p>Năng lượng và stress ảnh hưởng hiệu suất công việc. Một ngày nghỉ có thể giúp bạn lấy lại cân bằng.</p></article></>; break;
     case 'work': body = <>{intro(`Công việc của ${profile.name}`, 'Từng nhiệm vụ, thêm một chút kinh nghiệm.')}<div className="phone-info-card"><small>NGHỀ HIỆN TẠI</small><h3>Lập trình viên mới</h3><p>{state.xp} XP tích lũy · Cấp {1 + Math.floor(state.xp / 100)}</p></div><div className="phone-action-list">{actionRow('briefcase', 'Đến thành phố', 'Chọn địa điểm', () => onAction('city'))}{actionRow('calendar', 'Việc cần nhớ', `${phone.appointments.length} lịch hẹn đã lưu`, () => navigate('calendar'))}{actionRow('chart', 'Thù lao & chi tiêu', 'Xem giao dịch thực tế', () => navigate('finance'))}</div></>; break;
-    case 'save': body = <>{intro('Giữ lại hành trình', 'Căn phòng, công việc và những ngày đã qua.')}<div className="phone-info-card"><small>BẢN LƯU HIỆN TẠI</small><h3>{profile.name} · Ngày {state.day + 1}</h3><p>{shortDate(state.day)} · {money(state.money)}<br />{homeOf(state).items.length} món nội thất · {state.xp} XP</p></div><button className="primary wide" onClick={manualSave}><Icon id="save" /> Lưu game ngay</button></>; break;
+    case 'save': {
+      let backup: ReturnType<typeof backupInfo> = null;
+      try { backup = backupInfo(localStorage, Date.now()); } catch { backup = null; }
+      const run = (action: () => boolean, failMessage: string) => { onResetStart(true); try { if (action()) { location.reload(); return; } setNotice(failMessage); } catch { setNotice(failMessage); } onResetStart(false); };
+      body = <>{intro('Giữ lại hành trình', 'Căn phòng, công việc và những ngày đã qua.')}<div className="phone-info-card"><small>BẢN LƯU HIỆN TẠI</small><h3>{profile.name} · Ngày {state.day + 1}</h3><p>{shortDate(state.day)} · {money(state.money)}<br />{homeOf(state).items.length} món nội thất · {state.xp} XP</p></div><button className="primary wide" onClick={manualSave}><Icon id="save" /> Lưu game ngay</button>
+        <h3 className="phone-small-title">Đời mới</h3>
+        {resetStep === 'confirm' ? <div className="phone-info-card"><small>XOÁ NHÂN VẬT</small><h3>{profile.name} · Ngày {state.day + 1}</h3><p>Nhân vật, căn phòng và {money(state.money)} sẽ bị xoá khỏi máy. Bản sao lưu được giữ {BACKUP_DAYS} ngày để bạn khôi phục.</p><label htmlFor="resetName">Gõ đúng tên nhân vật để xác nhận<input id="resetName" value={resetText} onChange={e => setResetText(e.target.value)} autoComplete="off" /></label><button className="primary wide" disabled={resetText.trim() !== profile.name} onClick={() => run(() => resetLife(localStorage, Date.now()), 'Chưa sao lưu được nên chưa xoá gì cả.')}>Xoá và bắt đầu đời mới</button><button className="wide" onClick={() => { setResetStep('idle'); setResetText(''); }}>Huỷ</button></div> : <button className="wide" onClick={() => setResetStep('confirm')}>Bắt đầu đời mới</button>}
+        {backup && <div className="phone-info-card"><small>BẢN SAO LƯU · CÒN {backup.daysLeft} NGÀY</small><h3>{backup.name || 'Nhân vật cũ'} · Ngày {backup.day + 1}</h3><p>Số dư {money(backup.money)}. Khôi phục sẽ đổi chỗ với đời hiện tại, nên không bên nào bị mất.</p>{resetStep === 'restore' ? <><button className="primary wide" onClick={() => run(() => restoreBackup(localStorage, Date.now()), 'Chưa khôi phục được.')}>Đúng, khôi phục đời này</button><button className="wide" onClick={() => setResetStep('idle')}>Huỷ</button></> : <button className="wide" onClick={() => setResetStep('restore')}>Khôi phục</button>}</div>}</>; break; }
     case 'baucua': body = <BauCua shaking={bauCuaShaking} state={state} onPlay={onPlayBauCua}/>; break;
     case 'leisure': body = <>{intro('Thời gian cho bản thân', 'Sau những giờ làm việc, hãy thở một chút.')}<button className="phone-leisure-card bc-launch" onClick={()=>navigate('baucua')}><span className="leisure-art">🦀</span><span><small>TRÒ CHƠI DÂN GIAN</small><h3>Bầu cua tôm cá</h3><p>Ba xúc xắc</p><b>Vào bàn chơi ↗</b></span></button><button className="phone-leisure-card" onClick={() => onAction('day', 'rest')}><span className="leisure-art">☕</span><span><small>CÓ THỂ CHỌN</small><h3>Nghỉ ngơi trong ngày</h3><p>Nghỉ 1 giờ · Năng lượng +15 · Stress −10</p><b>Nghỉ 1 giờ ↗</b></span></button></>; break;
     case 'contacts': body = <>{intro('Danh bạ', 'Những người cùng bạn đi qua cuộc sống.')}{officeOf(state).met.length?<><div className="office-people">{STAFF.filter(p=>officeOf(state).met.includes(p.id)).map(p=><div className="phone-contact" key={p.id}><span className="office-avatar" style={{background:p.color}}>{p.initial}</span><span><strong>{p.name}</strong><small>{p.role}</small></span></div>)}</div></>:<Empty icon="people" title="Chưa có liên hệ">Ghé sảnh khu văn phòng và chào hỏi để thêm người quen vào danh bạ.</Empty>}<div className="phone-feature-row"><span>Đồng nghiệp</span><span>Bạn bè</span><span>Gia đình</span></div><div className="phone-action-list">{actionRow('message', 'Tin nhắn', 'Đọc lời nhắn từ trợ lý', () => navigate('messages'))}{actionRow('call', 'Bàn phím gọi', 'Giao diện gọi trong game', () => navigate('calls'))}</div></>; break;
