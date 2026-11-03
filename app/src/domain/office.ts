@@ -25,7 +25,8 @@ export function validApplication(v:unknown):v is Application{if(!v||typeof v!=='
 export const INTERVIEW_COMM_RESCUE=2;
 export const PROBATION_DAYS=60,PROBATION_PASS_DAYS=30,PROBATION_SALARY=.85,RETRY_AFTER_FAIL=30;
 export interface Probation{start:number;end:number;workDays:number}
-export interface OfficeState{probation?:Probation;retryDay?:number;application?:Application|null;role:'visitor'|'employee'|'owner';employerId:string|null;industry:Industry;size:OfficeSize;name:string;leaseUntil:number;workComputer:number;computers:number;printer:number;employeeDecor:Partial<Record<DecorId,number|null>>;ownerDecor:Partial<Record<DecorId,number|null>>;met:string[]}
+import {isTier,type Tier} from './career';
+export interface OfficeState{tier?:Tier;tierSince?:number;probation?:Probation;retryDay?:number;application?:Application|null;role:'visitor'|'employee'|'owner';employerId:string|null;industry:Industry;size:OfficeSize;name:string;leaseUntil:number;workComputer:number;computers:number;printer:number;employeeDecor:Partial<Record<DecorId,number|null>>;ownerDecor:Partial<Record<DecorId,number|null>>;met:string[]}
 export function initialOffice():OfficeState{return{role:'visitor',employerId:null,industry:'tech',size:'small',name:'Công ty của tôi',leaseUntil:0,workComputer:1,computers:1,printer:0,employeeDecor:{},ownerDecor:{},met:[]}}
 export const officeOf=(s:GameState)=>s.office??initialOffice();
 export const activeLease=(s:GameState)=>officeOf(s).role==='owner'&&officeOf(s).leaseUntil>s.day;
@@ -33,7 +34,7 @@ export function validOffice(value:unknown):value is OfficeState{
  if(!value||typeof value!=='object')return false;const o=value as OfficeState;
  const level=(v:number,min:number,max:number)=>Number.isInteger(v)&&v>=min&&v<=max;
  const decor=(v:OfficeState['ownerDecor'])=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.entries(v).every(([id,slot])=>Object.hasOwn(DECOR,id)&&(slot===null||level(slot!,0,2)))&&new Set(Object.values(v).filter(v=>v!==null)).size===Object.values(v).filter(v=>v!==null).length;
- const pr=o.probation;if(pr!==undefined&&!(o.role==='employee'&&pr&&Number.isInteger(pr.start)&&pr.start>=0&&pr.end===pr.start+PROBATION_DAYS&&Number.isInteger(pr.workDays)&&pr.workDays>=0&&pr.workDays<=PROBATION_DAYS))return false;if(o.retryDay!==undefined&&!level(o.retryDay,0,100100))return false;
+ if(o.tier!==undefined&&!(o.role==='employee'&&isTier(o.tier)&&Number.isInteger(o.tierSince)&&o.tierSince!>=0))return false;if(o.tierSince!==undefined&&o.tier===undefined)return false;const pr=o.probation;if(pr!==undefined&&!(o.role==='employee'&&pr&&Number.isInteger(pr.start)&&pr.start>=0&&pr.end===pr.start+PROBATION_DAYS&&Number.isInteger(pr.workDays)&&pr.workDays>=0&&pr.workDays<=PROBATION_DAYS))return false;if(o.retryDay!==undefined&&!level(o.retryDay,0,100100))return false;
  return (o.application==null||validApplication(o.application))&&['visitor','employee','owner'].includes(o.role)&&(o.employerId===null||COMPANIES.some(c=>c.id===o.employerId))&&(o.role!=='employee'||o.employerId!==null)&&Object.hasOwn(INDUSTRIES,o.industry)&&Object.hasOwn(SIZES,o.size)&&typeof o.name==='string'&&o.name.trim().length>0&&o.name.length<=32&&level(o.leaseUntil,0,100007)&&level(o.workComputer,1,3)&&level(o.computers,1,3)&&level(o.printer,0,2)&&decor(o.employeeDecor)&&!Object.hasOwn(o.employeeDecor,'coffee')&&decor(o.ownerDecor)&&Array.isArray(o.met)&&o.met.length<=STAFF.length&&new Set(o.met).size===o.met.length&&o.met.every(id=>STAFF.some(n=>n.id===id));
 }
 export type OfficeAction={kind:'apply';id:string;cv:string}|{kind:'startInterview'}|{kind:'answer';choice:number}|{kind:'acceptOffer'}|{kind:'cancelApplication'}|{kind:'shift'}|{kind:'endLease'}|{kind:'leave'}|{kind:'rent';size:OfficeSize;industry:Industry;name:string}|{kind:'renew'}|{kind:'upgrade';item:'computer'|'printer'}|{kind:'buyDecor';id:DecorId}|{kind:'place';id:DecorId;slot:number|null}|{kind:'meet';id:string};
@@ -63,10 +64,10 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
   const app=o.application;if(!app||app.status!=='interview'||!Number.isInteger(a.choice)||a.choice<0||a.choice>2)return fail('Câu trả lời không hợp lệ.');
   app.answers.push(a.choice);if(app.answers.length===3){const right=app.answers.filter((n,i)=>n===questionFor(app.questions[i]!).answer).length;app.status=right===3||(right===2&&skillsOf(s).communication.level>=INTERVIEW_COMM_RESCUE)?'passed':'failed'}
  }else if(a.kind==='acceptOffer'){
-  const app=o.application;if(!app||app.status!=='passed'||o.role!=='visitor')return fail('Bạn chưa có thư nhận việc.');if(s.day<app.startDay)return fail('Bạn bắt đầu đi làm từ ngày mai.');o.role='employee';o.employerId=app.companyId;app.status='hired';o.probation={start:s.day,end:s.day+PROBATION_DAYS,workDays:0};
+  const app=o.application;if(!app||app.status!=='passed'||o.role!=='visitor')return fail('Bạn chưa có thư nhận việc.');if(s.day<app.startDay)return fail('Bạn bắt đầu đi làm từ ngày mai.');o.role='employee';o.employerId=app.companyId;app.status='hired';o.probation={start:s.day,end:s.day+PROBATION_DAYS,workDays:0};o.tier='junior';o.tierSince=s.day;
  }else if(a.kind==='shift'){return fail('Hãy chọn công việc để bắt đầu ca.');
  } else if(a.kind==='endLease'){if(o.role!=='owner')return fail('Bạn không có hợp đồng thuê.');o.role='visitor';o.leaseUntil=s.day;o.employerId=null}
- else if(a.kind==='leave'){if(o.role!=='employee')return fail('Bạn không ở vai nhân viên.');o.role='visitor';o.employerId=null;o.application=null;delete o.probation}
+ else if(a.kind==='leave'){if(o.role!=='employee')return fail('Bạn không ở vai nhân viên.');o.role='visitor';o.employerId=null;o.application=null;delete o.probation;delete o.tier;delete o.tierSince}
  else if(a.kind==='rent'){
   if(o.role!=='visitor')return fail('Bạn đang có văn phòng.');if(o.application&&['pending','interview','passed'].includes(o.application.status))return fail('Hãy hủy hồ sơ tuyển dụng trước khi thuê.');
   if(!Object.hasOwn(SIZES,a.size)||!Object.hasOwn(INDUSTRIES,a.industry)||typeof a.name!=='string'||!a.name.trim()||a.name.trim().length>32)return fail('Hãy chọn ngành, diện tích và tên công ty tối đa 32 ký tự.');
