@@ -1,4 +1,5 @@
 import {canEnterOffice} from './work';
+import {post} from './money';
 import type {GameState,GameResult} from './types';
 import {spendTime,clockOf,HALF_DAY} from './time';
 export const SIZES={small:{name:'Nhỏ',area:40,seats:6,rent:1200000},medium:{name:'Vừa',area:85,seats:12,rent:2400000},large:{name:'Lớn',area:160,seats:24,rent:4200000}} as const;
@@ -35,7 +36,7 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
  let n=structuredClone(s);const o=n.office=structuredClone(officeOf(s));
  const fail=(error:string):GameResult=>({ok:false,error});
  if(o.application?.status==='interview'&&a.kind!=='answer')return fail('Hãy trả lời hết câu hỏi trong buổi phỏng vấn.');
- const pay=(amount:number,label:string)=>{if(n.money<amount)return false;n.money-=amount;n.ledger=[{name:label,amount:-amount,day:n.day},...n.ledger].slice(0,100);return true};
+ const pay=(amount:number,label:string)=>amount<=0||post(n,{name:label,amount:-amount})==='ok';
  if(o.role==='employee'&&!canEnterOffice(s))return fail('Công ty đã hết giờ làm.');if(o.role==='employee'&&['upgrade','buyDecor','place','rent','renew'].includes(a.kind))return fail('Thiết bị công ty do công ty quản lý.');
  if(a.kind==='meet'){if(!STAFF.some(p=>p.id===a.id))return fail('Không tìm thấy nhân vật.');if(o.met.includes(a.id))return fail('Bạn đã làm quen với người này.');o.met.push(a.id)}
  else if(a.kind==='apply'){
