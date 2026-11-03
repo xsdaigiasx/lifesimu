@@ -51,3 +51,7 @@ Giữ12 nhịp/93giây mở đầu,15 ảnh nam/nữ, các file âm thanh hiện
 
 
 Luồng tải mới và cử chỉ xem phần cuối README. Bộ đếm sẵn sàng dựa trên ô đã vẽ thành công, không chỉ ảnh đã giải mã.
+
+## Thay đổi do chủ dự án quyết định (Issue #2, 2026-11-03)
+
+Bỏ phí sinh hoạt 90.000đ/ngày. Thay bằng tiền trọ 1.500.000đ/tháng (`src/domain/rent.ts`): trả tháng đầu ngay sau phần mở đầu, các tháng sau tự trả vào ngày 1; thiếu tiền được gia hạn 3 ngày rồi bị giảm tâm trạng, tăng căng thẳng mỗi ngày. Save cũ không có `rent` không bị tính tiền ngay.

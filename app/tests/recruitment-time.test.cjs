@@ -28,7 +28,7 @@ console.log('PASS: IT eligibility, CV/day+1 interview/day+2 work, 4h charge once
   // Ở nhà: ngủ tại chỗ, không mất tiền ngoài sinh hoạt.
   const home = faintIfLate(at({money: 1000000}, 1500, 'home'));
   assert.equal(home.day, 1); assert.equal(home.clock.minute, START); assert.equal(home.clock.location, 'home');
-  assert.equal(home.money, 1000000 - 90000); assert.equal(home.lastReport.faint.place, 'home'); assert.ok(engine.valid(home));
+  assert.equal(home.money, 1000000); assert.equal(home.lastReport.faint.place, 'home'); assert.ok(engine.valid(home));
   // Ở ngoài: về nhà, mất tối đa 20% tiền mặt, không bao giờ âm.
   let lostSome = 0, total = 200;
   for (let d = 0; d < total; d++) {
@@ -39,7 +39,7 @@ console.log('PASS: IT eligibility, CV/day+1 interview/day+2 work, 4h charge once
   assert.ok(lostSome > total * 0.15 && lostSome < total * 0.45, 'tỉ lệ mất tiền ~30%: ' + lostSome);
   // Sức khoẻ < 30: vào viện, trả viện phí, không mất tiền do ngất.
   const hosp = faintIfLate(at({money: 1000000, health: 20}, 1500, 'park'));
-  assert.equal(hosp.lastReport.faint.place, 'hospital'); assert.equal(hosp.lastReport.faint.lost, 0); assert.equal(hosp.money, 1000000 - 150000 - 90000);
+  assert.equal(hosp.lastReport.faint.place, 'hospital'); assert.equal(hosp.lastReport.faint.lost, 0); assert.equal(hosp.money, 1000000 - 150000);
   // Tiền ít: không âm.
   const poor = faintIfLate(at({money: 30000, health: 20}, 1500, 'park')); assert.ok(poor.money >= 0); assert.ok(engine.valid(poor));
   // Mất mô phỏng 30 đêm liên tiếp: luôn hợp lệ, tất định.
