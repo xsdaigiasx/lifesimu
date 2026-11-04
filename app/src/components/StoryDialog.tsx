@@ -9,7 +9,7 @@ export default function StoryDialog({state,onAnswer}:{state:GameState;onAnswer:(
  const [done,setDone]=useState<{name:string;text:string}|null>(null),[error,setError]=useState('');const ev=openEvent(state);
  if(!ev&&!done)return null;
  return <div className="story-backdrop"><section className="story-dialog" role="dialog" aria-modal="true" aria-label={ev?.npc.name??done?.name}>
-  {ev?<><header><span className="story-avatar" style={{background:ev.npc.tone}} aria-hidden="true">{ev.npc.label}</span><span><strong>{ev.npc.name}</strong><small>{ev.npc.role}</small></span><span className="story-tier">{relationTier(socialOf(state).relations[ev.npc.id]?.score??0)}</span></header>
+  {ev?<><header><span className="story-avatar" style={{background:ev.npc.tone}} aria-hidden="true">{ev.npc.label}</span><span><strong>{ev.npc.name}</strong><small>{ev.npc.role}</small></span><span className="story-tier">{relationTier(socialOf(state).relations[ev.npc.id]?.score??0,ev.npc.id)}</span></header>
    <p className="story-line">{ev.line}</p>
    <div className="story-options">{ev.options.map((o,i)=><button key={i} disabled={o.locked} onClick={()=>{const r=onAnswer(i);if(r.ok){setDone({name:ev.npc.name,text:r.text??''});setError('')}else setError(r.error??'')}}><span>{o.label}</span>{o.locked&&<small>{o.need}</small>}</button>)}</div>
    {error&&<p className="story-error" role="alert">{error}</p>}</>

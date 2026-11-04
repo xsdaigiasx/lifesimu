@@ -7,7 +7,7 @@ import {dayLabel,clockLabel} from '../domain/journal-view';
 import Icon from './Icon';
 
 export interface SocialHandlers{reply:(id:string,msgId:string,choice:number)=>GameResult;send:(id:string,kind:'hello'|'invite')=>GameResult;call:(id:string)=>GameResult;read:(id:string)=>void}
-const tierName=(score:number,id:string)=>id==='me'?'Gia đình':relationTier(score);
+const tierName=(score:number,id:string)=>relationTier(score,id);
 const Avatar=({id}:{id:string})=>{const n=castById(id);return n?<span className="ps-avatar" style={{background:n.tone}} aria-hidden="true">{n.label}</span>:null};
 
 /** T20: Tin nhắn dạng khung chat. Trả lời nhanh không ghi trước hệ quả; nhắn tin không tốn giờ. */
