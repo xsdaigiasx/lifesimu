@@ -30,4 +30,4 @@ img.npc-face{width:100%;height:100%;object-fit:cover;border-radius:50%;display:b
 .meal-needs span{display:inline-flex;align-items:center;gap:1px;font-size:11px;font-weight:800;color:#294d3d}
 .meal-needs span.short{color:#b0442b;opacity:.7}
 .meal-needs img{width:22px;height:22px;object-fit:contain}
-.product-glyph img{width:96px;height:96px;object-fit:contain}
+.product-glyph img{width:60px;height:60px;object-fit:contain}
