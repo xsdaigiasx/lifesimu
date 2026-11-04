@@ -6,7 +6,7 @@ Phạm vi: 28 mẫu × 4 hướng (112 PNG), dùng ảnh chuẩn duy nhất `ass
 
 - 27 mẫu: bed, wardrobe, desk, table, plant, lamp, rug, painting, fridge; mỗi loại basic, comfort, premium.
 - Một mẫu cửa: door-main-basic.
-- Tệp dùng trong game: `app/public/assets/furniture/<id>_<a|b|c|d>.png`.
+- Tệp dùng trong game: `app/public/assets/furniture/<id>_<a|b|c|d>.webp` (WebP lossless, cùng điểm ảnh với PNG nộp). PNG gốc chỉ còn trong lịch sử git (merge `25f7bce`); `export.cjs` và `verify.cjs` đọc PNG nên cần khôi phục PNG từ commit đó trước khi chạy lại.
 - `manifest.json`: khung, neo, chân đế, dung lượng, SHA-256 và thông số xuất thực tế của từng ảnh.
 - `prompts.json`: nguyên văn prompt từng ảnh, công cụ tạo và ảnh chuẩn.
 - `contact-sheet.webp`: đủ mọi mẫu và bốn hướng, hai mẫu trên mỗi hàng.

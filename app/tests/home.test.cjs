@@ -25,8 +25,8 @@ for(const [id,views] of Object.entries(HOME_SOURCE_AXES))for(let turn=0;turn<2;t
  assert(Math.abs(p.shearY-p.scaleY*left+HOME_FLOOR.stepY/HOME_FLOOR.stepX)<1e-10,id);
  assert(p.scaleY>0.8&&p.scaleY<1.3);
 }
-assert(HOME_ART.desk[0].src.endsWith('desk-90.png'));
-assert(HOME_ART.desk[1].src.includes('desk-0.png?v=31'));
+assert(HOME_ART.desk[0].src.endsWith('desk-basic_a.webp'));
+assert(HOME_ART.desk[1].src.endsWith('desk-basic_b.webp'));
 console.log('PASS: furniture camera correction0/90, both floor axes, upright verticals and desk orientation mapping');
 
 const back=floorPoint(0,0),right=floorPoint(8,0),front=floorPoint(8,8),left=floorPoint(0,8);

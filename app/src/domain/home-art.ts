@@ -2,16 +2,16 @@ import {alignHomeAxes} from './home-geometry';
 import type {HomeId} from './home';
 interface HomeArtVariant {src:string;scale:number;anchorX:number;anchorY:number}
 export const HOME_ART:Record<HomeId,[HomeArtVariant,HomeArtVariant]> = {
-  "fridge": [{"src":"/assets/furniture/fridge-basic_a.svg","scale":1,"anchorX":50,"anchorY":100},{"src":"/assets/furniture/fridge-basic_b.svg","scale":1,"anchorX":50,"anchorY":100}],
+  "fridge": [{"src":"/assets/furniture/fridge-basic_a.webp","scale":1,"anchorX":50,"anchorY":100},{"src":"/assets/furniture/fridge-basic_b.webp","scale":1,"anchorX":50,"anchorY":100}],
   "bed": [
     {
-      "src": "/assets/static-scenes/furniture-v2/bed-0.png",
+      "src":"/assets/furniture/bed-basic_a.webp",
       "scale": 1.07277,
       "anchorX": 38.2353,
       "anchorY": 94.7456
     },
     {
-      "src": "/assets/static-scenes/furniture-v2/bed-90.png",
+      "src":"/assets/furniture/bed-basic_b.webp",
       "scale": 1.19056,
       "anchorX": 60.0587,
       "anchorY": 94.6622
@@ -19,13 +19,13 @@ export const HOME_ART:Record<HomeId,[HomeArtVariant,HomeArtVariant]> = {
   ],
   "wardrobe": [
     {
-      "src": "/assets/static-scenes/furniture-v2/wardrobe-0.png",
+      "src":"/assets/furniture/wardrobe-basic_a.webp",
       "scale": 2.1473,
       "anchorX": 58.6729,
       "anchorY": 95.7465
     },
     {
-      "src": "/assets/static-scenes/furniture-v2/wardrobe-90.png",
+      "src":"/assets/furniture/wardrobe-basic_b.webp",
       "scale": 1.76532,
       "anchorX": 39.7087,
       "anchorY": 96.544
@@ -33,13 +33,13 @@ export const HOME_ART:Record<HomeId,[HomeArtVariant,HomeArtVariant]> = {
   ],
   "desk": [
     {
-      "src": "/assets/static-scenes/furniture-v2/desk-90.png",
+      "src":"/assets/furniture/desk-basic_a.webp",
       "scale": 1.59223,
       "anchorX": 57.356,
       "anchorY": 86.0717
     },
     {
-      "src": "/assets/static-scenes/furniture-v2/desk-0.png?v=31",
+      "src":"/assets/furniture/desk-basic_b.webp",
       "scale": 1.6264,
       "anchorX": 46.2735,
       "anchorY": 85.0622
@@ -47,13 +47,13 @@ export const HOME_ART:Record<HomeId,[HomeArtVariant,HomeArtVariant]> = {
   ],
   "table": [
     {
-      "src": "/assets/static-scenes/furniture-v2/table-0.png",
+      "src":"/assets/furniture/table-basic_a.webp",
       "scale": 1.40471,
       "anchorX": 50.7519,
       "anchorY": 92.1601
     },
     {
-      "src": "/assets/static-scenes/furniture-v2/table-90.png",
+      "src":"/assets/furniture/table-basic_b.webp",
       "scale": 1.46429,
       "anchorX": 46.8959,
       "anchorY": 88.824
@@ -61,29 +61,29 @@ export const HOME_ART:Record<HomeId,[HomeArtVariant,HomeArtVariant]> = {
   ],
   "plant": [
     {
-      "src": "/assets/static-scenes/furniture-v2/plant-0.png",
+      "src":"/assets/furniture/plant-basic_a.webp",
       "scale": 1.32143,
       "anchorX": 49.9176,
       "anchorY": 96.2963
     },
     {
-      "src": "/assets/static-scenes/furniture-v2/plant-90.png",
+      "src":"/assets/furniture/plant-basic_b.webp",
       "scale": 1.29242,
       "anchorX": 49.7755,
       "anchorY": 96.1317
     }
   ],
-  "lamp": [{"anchorY":89.8108,"scale":1.51055,"anchorX":50,"src":"/assets/static-scenes/bedside-lamp.png"},{"anchorY":89.8108,"scale":1.51055,"anchorX":50,"src":"/assets/static-scenes/bedside-lamp.png"}],
-  "painting": [{src:"/assets/painting.svg",scale:1,anchorX:50,anchorY:100},{src:"/assets/painting.svg",scale:1,anchorX:50,anchorY:100}],
+  "lamp": [{"anchorY":89.8108,"scale":1.51055,"anchorX":50,"src":"/assets/furniture/lamp-basic_a.webp"},{"anchorY":89.8108,"scale":1.51055,"anchorX":50,"src":"/assets/furniture/lamp-basic_b.webp"}],
+  "painting": [{src:"/assets/furniture/painting-basic_a.webp",scale:1,anchorX:50,anchorY:100},{src:"/assets/furniture/painting-basic_b.webp",scale:1,anchorX:50,anchorY:100}],
   "rug": [
     {
-      "src": "/assets/static-scenes/furniture-v2/rug-0.png",
+      "src":"/assets/furniture/rug-basic_a.webp",
       "scale": 1.05931,
       "anchorX": 66.4597,
       "anchorY": 92.4805
     },
     {
-      "src": "/assets/static-scenes/furniture-v2/rug-90.png",
+      "src":"/assets/furniture/rug-basic_b.webp",
       "scale": 1.10029,
       "anchorX": 65.1174,
       "anchorY": 98.3398
