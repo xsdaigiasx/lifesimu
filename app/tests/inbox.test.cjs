@@ -68,3 +68,12 @@ test('dữ liệu hộp thư hỏng bị từ chối',()=>{
  const s=at(2,600,'home');assert.ok(engine.valid({...s,inbox:I.inboxOf(s)}));
  for(const bad of [{version:2},{...I.inboxOf(s),threads:{ai:[]}},{...I.inboxOf(s),appts:[{id:'a',npc:'me',day:99,minute:0,place:'home',status:'set'}]},{...I.inboxOf(s),queue:Array(21).fill({id:'q',npc:'me',day:0,minute:0,from:'npc',text:'',kind:'note'})}])assert.equal(engine.valid({...s,inbox:bad}),false);
 });
+
+test('lời nhắn theo vai vế: người lớn nói kiểu người lớn, người chơi đáp có dạ ạ',()=>{
+ const s=withRel(at(4,700,'home'),'ba-tu',35);
+ const hi=I.inboxOf(I.sendMessage(s,'ba-tu','hello').state).threads['ba-tu'];assert.match(hi[0].text,/bà.*ạ\?$/);
+ const inv=I.inboxOf(I.sendMessage(s,'ba-tu','invite').state).threads['ba-tu'];assert.match(inv[0].text,/con mời bà/);assert.doesNotMatch(inv[1].text,/Ok|nha!/);
+ let t=s;const seen=[];for(let d=1;d<40;d++){t=I.settleInbox({...t,day:d});for(const q of I.inboxOf(t).queue)if(q.npc==='ba-tu'&&(q.kind==='invite'||q.kind==='checkin'))seen.push(q)}
+ assert.ok(seen.length,'Bà Tư có nhắn');for(const q of seen){assert.match(q.text,/bà|con/);assert.ok(q.replies.every(r=>r.startsWith('Dạ')),q.replies.join('/'))}
+ assert.equal(I.voiceFor('dev-an').rank,'peer');assert.equal(I.voiceFor('tuan').rank,'junior');assert.equal(I.voiceFor('dev-trang').rank,'senior');
+});
