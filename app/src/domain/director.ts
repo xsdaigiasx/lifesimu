@@ -135,3 +135,8 @@ export function validStory(v:unknown,day:number):v is StoryState{if(!v||typeof v
  if(s.pending!==undefined){const p=s.pending;if(!p||typeof p.key!=='string'||!id(p.npc)||!MOTIF_IDS.includes(p.motif)||!Number.isInteger(p.variant)||p.variant<0||p.variant>=motifOf(p.motif).variants||!['npc','player'].includes(p.by)||!d(p.day,day))return false}
  return true}
 export const placeHasStory=(s:GameState,place:PlaceId)=>NPCS.some(n=>n.story&&presentAt(n,s.day,clockOf(s).minute,place));
+
+/** Có thể rủ người này đi ăn lúc này không (đủ quen, đúng giờ ăn). */
+export function canMeal(s:GameState,id:string){const npc=castById(id);return !!npc&&motifOf('meal').eligible(ctxFor(s,npc))}
+/** Thông tin hồ sơ được hiện theo độ quen (chốt 04/11): Xa lạ chỉ thấy tên và vai; Quen biết thêm quê và điểm nhấn; Thân thêm mục tiêu; nỗi lo chỉ khi đã nghe chuyện riêng. */
+export function knownFacts(s:GameState,id:string){const npc=castById(id);if(!npc)return[];const score=socialOf(s).relations[id]?.score??0,out:[string,string][]=[];if(score>=10){out.push(['Quê',npc.origin]);out.push(['Điểm nhấn',npc.quirk])}if(score>=30)out.push(['Mục tiêu',npc.goal]);if(storyOf(s).memories.some(m=>m.npc===id&&m.motif==='private'))out.push(['Nỗi lo',npc.fear]);return out}

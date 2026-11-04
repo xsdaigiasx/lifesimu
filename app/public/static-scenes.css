@@ -192,3 +192,23 @@
 .story-options button:disabled{opacity:1;background:transparent;color:#9a9a88;border-style:dashed}
 .story-options small{font-size:10px}
 .story-error{margin:0;font-size:11px;color:#a1452f}
+.person-backdrop{position:fixed;inset:0;z-index:140;display:flex;align-items:flex-end;justify-content:center;padding:12px 12px calc(78px + env(safe-area-inset-bottom));background:#102b2540}
+.person-sheet{width:min(560px,100%);display:flex;flex-direction:column;gap:12px;padding:14px;background:#fffaf0;border:1px solid #d6c7a3;border-radius:16px;box-shadow:0 12px 40px #102b2540}
+.person-sheet>header{display:flex;align-items:center;gap:10px}
+.person-avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:700;color:#344b3f;flex:none}
+.person-title{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.person-title strong{font-size:15px}
+.person-title small{font-size:12px;color:#78876c}
+.person-tier{font-size:11px;padding:3px 8px;border-radius:7px;background:#e9efdc;color:#5f7b52;white-space:nowrap}
+.person-close{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:#f3efe2;flex:none}
+.person-close svg{width:16px;height:16px}
+.person-facts{margin:0;display:flex;flex-direction:column;gap:6px}
+.person-facts>div{display:grid;grid-template-columns:90px minmax(0,1fr);gap:8px;align-items:baseline}
+.person-facts dt{font-size:11px;color:#78876c}
+.person-facts dd{margin:0;font-size:13px;color:#2f3f35}
+.person-unknown{margin:0;font-size:12px;color:#78876c}
+.person-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.person-actions.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.person-actions button{display:flex;align-items:center;justify-content:center;min-height:46px;padding:0 12px;border-radius:10px;background:#38644e;color:#fff;font-size:13px;line-height:1.2;text-align:center}
+.person-actions button+button{background:#eaf0dd;color:#2f4d38;border:1px solid #d6e0c7}
+.person-note{margin:0;font-size:11px;color:#806d43}
