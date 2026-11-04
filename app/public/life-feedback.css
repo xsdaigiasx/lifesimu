@@ -66,3 +66,5 @@ img.npc-face{width:100%;height:100%;object-fit:cover;border-radius:50%;display:b
 .late-badge{display:grid;place-items:center;width:28px;height:28px;padding:0!important;border-radius:50%!important}
 .late-badge svg{width:17px!important;height:17px!important;fill:none;stroke:#7a5a12;stroke-width:2}
 .market-item-art>span[hidden]{display:none}.market-item-art>span:not([hidden]) svg{width:40px;height:40px;fill:none;stroke:#7a5a3e}
+
+.market-item{align-items:center;text-align:center}.market-item button{align-self:stretch}.market-item strong,.market-item small{max-width:100%;overflow-wrap:anywhere}.market-item-facts{flex-wrap:wrap;justify-content:center;gap:4px 10px;max-width:100%}.market-item-facts>span{white-space:nowrap}
