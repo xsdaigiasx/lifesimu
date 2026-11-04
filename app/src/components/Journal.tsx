@@ -1,31 +1,24 @@
-import {COWORKERS,socialOf} from '../domain/social';
 import {useState} from 'react';
 import type {GameState} from '../domain/types';
-import {journalOf,type JournalEntry} from '../domain/journal';
-import {STAFF} from '../domain/office';
-import {shortDate} from '../domain/format';
-import {ActionRow,DataRow,GameScreen} from './GameUI';
+import {journalOf} from '../domain/journal';
+import {JOURNAL_TABS,journalTab,groupByDay,clockLabel,type JournalTab} from '../domain/journal-view';
+import {castById} from '../domain/npc';
+import {GameScreen} from './GameUI';
 import Icon from './Icon';
 
-const timeText=(minute:number)=>`${String(Math.floor(minute/60)).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;
-const stamp=(entry:JournalEntry)=>`${shortDate(entry.day)} ${timeText(entry.minute)}`;
-
+/** T19: Nhật ký chia tab Câu chuyện, Công việc, Đời sống; nhóm theo ngày áng chừng. Đọc Nhật ký không tốn giờ. Sổ thu chi là mục riêng. */
 export default function Journal({state,onNpc}:{state:GameState;onNpc:(id:string)=>void}){
- const [selected,setSelected]=useState<string|null>(null),[people,setPeople]=useState(false);
- const entries=journalOf(state),entry=entries.find(e=>e.id===selected);
- const met=state.office?.met??[],known=[...STAFF.filter(p=>met.includes(p.id)),...COWORKERS.filter(p=>socialOf(state).relations[p.id])];
- const person=entry?.npcId?known.find(p=>p.id===entry.npcId):undefined;
- if(entry)return <GameScreen title={entry.title} onBack={()=>setSelected(null)}>
-  <DataRow label="Ngày" value={shortDate(entry.day)}/><DataRow label="Giờ" value={timeText(entry.minute)}/>
-  <p className="game-status">{entry.detail}</p>
-  {person&&<ActionRow icon="people" label={person.name} value={person.role} onClick={()=>onNpc(person.id)}/>}
- </GameScreen>;
- if(people)return <GameScreen title="Người quen" onBack={()=>setPeople(false)}>
-  {known.length?<div className="game-actions">{known.map(p=><ActionRow key={p.id} icon="people" label={p.name} value={p.role} onClick={()=>onNpc(p.id)}/>)}</div>:<div className="game-empty"><Icon name="people"/><h3>Chưa có người quen</h3></div>}
- </GameScreen>;
- return <div className="game-journal">
-  <div className="game-actions"><ActionRow icon="people" label="Người quen" value={`${known.length} người`} onClick={()=>setPeople(true)}/></div>
-  <DataRow label="Nhật ký" value={`${entries.length} sự kiện`}/>
-  {entries.length?<div className="game-actions">{entries.map(e=><ActionRow key={e.id} icon="note" label={e.title} value={stamp(e)} onClick={()=>setSelected(e.id)}/>)}</div>:<div className="game-empty"><Icon name="note"/><h3>Chưa có sự kiện</h3></div>}
- </div>;
-}
+ const [tab,setTab]=useState<JournalTab>('story'),[selected,setSelected]=useState<string|null>(null);
+ const all=journalOf(state),entry=all.find(e=>e.id===selected),groups=groupByDay(all.filter(e=>journalTab(e)===tab),state.day);
+ if(entry){const npc=entry.npcId?castById(entry.npcId):undefined;return <GameScreen title={entry.title} onBack={()=>setSelected(null)}>
+  <p className="journal-when">{groupByDay([entry],state.day)[0]!.label} {clockLabel(entry.minute)}</p>
+  <p className="journal-detail">{entry.detail}</p>
+  {npc&&<button className="journal-person" onClick={()=>onNpc(npc.id)}><span className="journal-avatar" style={{background:npc.tone}} aria-hidden="true">{npc.label}</span><span><strong>{npc.name}</strong><small>{npc.role}</small></span><Icon name="chevron-right"/></button>}
+ </GameScreen>}
+ return <div className="game-journal journal">
+  <nav className="journal-tabs" role="tablist">{JOURNAL_TABS.map(([id,label])=><button key={id} role="tab" aria-selected={id===tab} onClick={()=>setTab(id)}>{label}</button>)}</nav>
+  {groups.length?groups.map(g=><section key={g.label} className="journal-group"><h4>{g.label}</h4>{g.items.map(e=>{const npc=e.npcId?castById(e.npcId):undefined;return <button key={e.id} className="journal-row" onClick={()=>setSelected(e.id)}>
+   {npc?<span className="journal-avatar" style={{background:npc.tone}} aria-hidden="true">{npc.label}</span>:<span className="journal-icon" aria-hidden="true"><Icon name={tab==='work'?'briefcase':tab==='life'?'home':'note'}/></span>}
+   <span className="journal-copy"><strong>{e.title}</strong><small>{e.detail}</small></span><span className="journal-time">{clockLabel(e.minute)}</span></button>})}</section>)
+  :<div className="game-empty"><Icon name="note"/><h3>Chưa có gì</h3></div>}
+ </div>}
