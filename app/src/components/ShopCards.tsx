@@ -25,7 +25,7 @@ export function HomeCards({state,ids,tone,onFull}:{state:GameState;ids:HomeId[];
   const blocked=current||better||full;
   return <article key={id+tier} className="market-item" data-product={id}>
    <span className="market-item-art" style={tone?{background:tone}:undefined}><LineArt line={line}/><InfoButton spec={specOf(line)}/></span><strong>{name}</strong>
-   <span className="market-item-facts">{id!=='painting'&&id!=='lamp'&&<span title="Kích thước"><Icon name="grid"/>{(item.w/2).toLocaleString('vi-VN')}×{(item.h/2).toLocaleString('vi-VN')} m</span>}{HOME_TIERS[tier].comfort>0&&<span title="Bớt căng thẳng mỗi đêm"><Icon name="moon"/>−{HOME_TIERS[tier].comfort}/đêm</span>}</span>
+   <span className="market-item-facts">{HOME_TIERS[tier].comfort>0&&<span title="Bớt căng thẳng mỗi đêm"><Icon name="moon"/>−{HOME_TIERS[tier].comfort}/đêm</span>}</span>
    <button type="button" aria-pressed={inCart} disabled={blocked} onClick={()=>{if(!cart.toggle(line,stack))onFull()}}>{current?'Đang dùng':full?'Đã đủ':better?'Có tốt hơn':inCart?'Trong giỏ':money(price)}</button>
   </article>}))}</>;
 }
