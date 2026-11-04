@@ -4,6 +4,7 @@ import type {GameState,GameResult,PlaceId} from './types';
 import {post} from './money';
 import {bankAction,settleBank,SAVE_RATE,type BankAction} from './bank';
 import {weekendJob} from './weekend';
+import {sideWork,settleSide} from './side';
 import {fridgeOf,placedAt,BED_ENERGY,TABLE_MOOD,decorRelief} from './home';
 import {recordJournal} from './journal';
 import {residenceOf,hasRoom,COOK_FACTOR} from './housing';
@@ -116,7 +117,7 @@ export function validLife(v:unknown,day:number):v is LifeState{if(!v||typeof v!=
 }
 export function stock(s:GameState,id:IngredientId){return lifeOf(s).pantry.filter(a=>a.ingredient===id&&a.expiresDay>s.day).reduce((n,a)=>n+a.qty,0)}
 export function canCook(s:GameState,id:RecipeId){return Object.entries(RECIPES[id].needs).every(([key,qty])=>stock(s,key as IngredientId)>=qty)}
-export type LifeAction={kind:'ingredient';id:IngredientId;qty:number}|{kind:'discardFood'}|{kind:'cook';id:RecipeId}|{kind:'improvise';items:IngredientId[]}|{kind:'cookStep';id:string;stage:number;position:number}|{kind:'cancelCook';id:string}|{kind:'eat';id:string}|{kind:'eatOut';id:EatOutId;takeaway?:boolean}|{kind:'eatBag';id:string}|{kind:'deposit';amount:number;term:7|30|90|180|360}|{kind:'withdraw';id:string}|{kind:'borrow';amount:number}|BankAction|{kind:'repay';amount:number}|{kind:'repayApp';amount:number}|{kind:'exam'}|{kind:'treat';id:ConditionId}|{kind:'checkup'}|{kind:'park';activity:'walk'|'exercise'|'parkRest'|'music'}|{kind:'product';id:ProductId}|{kind:'equip';id:ProductId|null;category:'clothing'|'transport'}|{kind:'tv'}|{kind:'coffee'}|{kind:'weekendJob'};
+export type LifeAction={kind:'ingredient';id:IngredientId;qty:number}|{kind:'discardFood'}|{kind:'cook';id:RecipeId}|{kind:'improvise';items:IngredientId[]}|{kind:'cookStep';id:string;stage:number;position:number}|{kind:'cancelCook';id:string}|{kind:'eat';id:string}|{kind:'eatOut';id:EatOutId;takeaway?:boolean}|{kind:'eatBag';id:string}|{kind:'deposit';amount:number;term:7|30|90|180|360}|{kind:'withdraw';id:string}|{kind:'borrow';amount:number}|BankAction|{kind:'repay';amount:number}|{kind:'repayApp';amount:number}|{kind:'exam'}|{kind:'treat';id:ConditionId}|{kind:'checkup'}|{kind:'park';activity:'walk'|'exercise'|'parkRest'|'music'}|{kind:'product';id:ProductId}|{kind:'equip';id:ProductId|null;category:'clothing'|'transport'}|{kind:'tv'}|{kind:'coffee'}|{kind:'weekendJob'}|{kind:'sideWork';id:string};
 const clamp=(n:number)=>Math.min(100,Math.max(0,Math.round(n)));
 function transact(s:GameState,minutes:number,fee:number,place:PlaceId|null,label:string,change:(n:GameState,l:LifeState)=>void):GameResult{if(place&&clockOf(s).location!==(place==='home'?residenceOf(s):place))return{ok:false,error:place==='home'?'Hãy về nhà.':'Hãy đến đúng địa điểm.'};if(!int(fee,0)||s.money<fee)return{ok:false,error:'Chưa đủ tiền.'};const t=spendTime(s,minutes);if(!t.ok)return t;const n=structuredClone(t.state);n.life=structuredClone(lifeOf(s));if(fee&&post(n,{name:label,amount:-fee})!=='ok')return{ok:false,error:'Chưa đủ tiền.'};change(n,n.life);return{ok:true,state:n}}
 export function lifeAction(s:GameState,a:LifeAction):GameResult{const l=lifeOf(s),bad=(error:string):GameResult=>({ok:false,error});
@@ -134,6 +135,7 @@ export function lifeAction(s:GameState,a:LifeAction):GameResult{const l=lifeOf(s
  case'withdraw':{const d=l.savings.find(d=>d.id===a.id);if(!d)return bad('Sổ không còn tồn tại.');const interest=s.day>=d.openedDay+d.term?Math.floor(d.principal*savingBp(d)/10000):0,payout=d.principal+interest;if(s.money+payout>1e12)return bad('Số dư đã đạt giới hạn.');return transact(s,5,0,'bank','',(n,v)=>{v.savings=v.savings.filter(d=>d.id!==a.id);post(n,{id:`withdraw:${a.id}`,name:interest?'Tất toán tiết kiệm có lãi':'Rút tiết kiệm trước hạn',amount:payout})})}
  case'loan':case'payLoan':case'payoff':return bankAction(s,a);
  case'weekendJob':return weekendJob(s);
+ case'sideWork':return sideWork(s,a.id);
  case'borrow':{if(l.loan||!int(a.amount,500000,5000000)||s.money+a.amount>1e12)return bad('Vay 500.000–5.000.000đ; tối đa một khoản.');return transact(s,15,0,'bank','',(n,v)=>{v.loan={principal:a.amount,balance:a.amount+Math.ceil(a.amount*.015),dueDay:s.day+30};post(n,{name:'Nhận tiền vay ngân hàng',amount:a.amount})})}
  case'repay':{if(!l.loan||!int(a.amount,1,l.loan.balance))return bad('Số tiền trả chưa hợp lệ.');return transact(s,10,a.amount,'bank','Trả nợ ngân hàng',(_,v)=>{v.loan!.balance-=a.amount;if(!v.loan!.balance)v.loan=null})}
  case'repayApp':{if(!l.loan||!int(a.amount,1,l.loan.balance))return bad('Số tiền trả chưa hợp lệ.');return transact(s,0,a.amount,null,'Trả nợ qua app',(_,v)=>{v.loan!.balance-=a.amount;if(!v.loan!.balance)v.loan=null})}
@@ -163,4 +165,4 @@ function settleLife(previous:GameState,next:GameState):GameState{const before=li
 export function giftIngredient(s:GameState,id:IngredientId,qty:number):GameState{const l=structuredClone(lifeOf(s));if(l.pantry.length>=99)return s;stockLot(s,l,id,qty);return{...s,life:l}}
 
 /** Qua ngày: sinh hoạt rồi ngân hàng (phí trễ hạn, điểm tín dụng). */
-export function settleLifeDay(previous:GameState,next:GameState):GameState{return settleBank(settleLife(previous,next))}
+export function settleLifeDay(previous:GameState,next:GameState):GameState{return settleSide(settleBank(settleLife(previous,next)))}
