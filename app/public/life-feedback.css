@@ -11,3 +11,6 @@
 .vital-chips svg{width:14px!important;height:14px!important;fill:none;stroke:currentColor}
 .street-menu{margin-bottom:10px}
 .life-hint{margin:0 0 10px;font-size:12px;color:#7a5a12;text-align:center}
+.life-list article.is-locked{opacity:.55}
+.life-list article.is-locked small{display:inline-flex;align-items:center;gap:4px}
+.life-list article.is-locked svg{width:13px!important;height:13px!important;fill:none;stroke:currentColor}
