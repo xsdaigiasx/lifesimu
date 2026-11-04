@@ -49,7 +49,7 @@ async function main() {
     const png = await sharp({ create: { width, height, channels: 4, background: '#00000000' } }).composite([{ input: sprite, left: l, top: t }]).png({ compressionLevel: 9 }).toBuffer();
     const output = path.join(HERE, 'furniture', path.basename(template.file));
     fs.writeFileSync(output, png);
-    items.push({ ...template, file: project(output), bytes: png.length, sha256: sha(png), source: project(source), registration: { method: 'alpha-bbox-to-original-template; no rotation or mirroring', source_bbox_px: bb, destination_bbox_px: template.alpha_bbox_px, template_file: `app/public${template.file}` } });
+    items.push({ ...template, ...(template.id === 'desk' ? { baked_surface_items: [], shelf_books_baked: true, surface_items_policy: 'Desktop is empty; lamp and other placeable surface items are separate sprites.' } : {}), file: project(output), bytes: png.length, sha256: sha(png), source: project(source), registration: { method: 'alpha-bbox-to-original-template; no rotation or mirroring', source_bbox_px: bb, destination_bbox_px: template.alpha_bbox_px, template_file: `app/public${template.file}` } });
   }
   const roomSource = path.join(HERE, 'sources/room.webp');
   const roomClean = await readClean(roomSource);
@@ -64,6 +64,7 @@ async function main() {
   fs.unlinkSync(cleaned); fs.unlinkSync(registered);
   const roomBuffer = fs.readFileSync(roomFile);
   const room = { id: 'room-master-storybook', file: project(roomFile), frame_px: [1448,1086], origin_px: [724,350], tile_px: [128,64], floor_tiles: [8,8], floor_corners_px: [[724,350],[1236,606],[724,862],[212,606]], anchor_px: [724,862], kitchen: { x:0,y:0,w:5,h:1 }, bath: { x:5,y:0,w:3,h:3 }, bath_opening: { axis:'y',at:3,from:6,to:7 }, registration: { source_surface_corners_px: [[196,633],[1251,632],[724,916]], target_surface_corners_px: [[212,606],[1236,606],[724,862]], method:'affine registration, no perspective warp' }, bytes:roomBuffer.length,sha256:sha(roomBuffer) };
+  room.entry_door = { baked: false, wall: null, span_tiles: null, painting_exclusion: null, reason: 'Entry door removed at owner request; no door exclusion on left wall y=5..7.' };
   json(path.join(HERE, 'manifest.json'), { schema_version: 1, issue: 124, status: 'trial-for-review', projection: 'orthographic-2:1', tile_px: [128,64], z_px: 32, geometry: 'x=724+64*(x-y); y=350+32*(x+y)-z', anchor: 'actual bottom footprint vertex from lot5; rectangles are not centered', runtime_changed: false, room, items });
   console.log(`Exported room + ${items.length} independent sprites`);
 }

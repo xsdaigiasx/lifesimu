@@ -101,8 +101,15 @@
       ],
       "method": "affine registration, no perspective warp"
     },
-    "bytes": 116218,
-    "sha256": "cd564fdfd93771b8b52af5e386fac06b96beb4c9e8761347f9a5e35413b10217"
+    "bytes": 93358,
+    "sha256": "f84a3a60a57b1a5155b00f2280e0096982e197f5be780d0b62272a79e37fc1e9",
+    "entry_door": {
+      "baked": false,
+      "wall": null,
+      "span_tiles": null,
+      "painting_exclusion": null,
+      "reason": "Entry door removed at owner request; no door exclusion on left wall y=5..7."
+    }
   },
   "items": [
     {
@@ -844,20 +851,23 @@
       ],
       "mount": "floor",
       "rgba": true,
-      "bytes": 69539,
+      "bytes": 66663,
       "alpha_bbox_px": [
         44,
         17,
         232,
         228
       ],
-      "sha256": "d830a478864155f06408f9dd91d88907c95c5d4fd77c3c6e3709ad72dc2905cf",
+      "sha256": "94065dd88252a4b47dd7f43f550179127976052a2d90401ee495c24f0f89f4a0",
+      "baked_surface_items": [],
+      "shelf_books_baked": true,
+      "surface_items_policy": "Desktop is empty; lamp and other placeable surface items are separate sprites.",
       "source": "assets/style-sample/sources/desk-a.webp",
       "registration": {
         "method": "alpha-bbox-to-original-template; no rotation or mirroring",
         "source_bbox_px": [
-          179,
-          61,
+          180,
+          63,
           1128,
           1134
         ],
@@ -929,21 +939,24 @@
       ],
       "mount": "floor",
       "rgba": true,
-      "bytes": 69343,
+      "bytes": 66720,
       "alpha_bbox_px": [
         24,
         17,
         212,
         228
       ],
-      "sha256": "ae591b5559f7008974c38f01da6e159fa9c3ffb76666ff8587cc66bc2139e2e3",
+      "sha256": "b4cdc92766457647f68cb43bc9a9826b567abba3fe27ce871246121e748c4707",
+      "baked_surface_items": [],
+      "shelf_books_baked": true,
+      "surface_items_policy": "Desktop is empty; lamp and other placeable surface items are separate sprites.",
       "source": "assets/style-sample/sources/desk-b.webp",
       "registration": {
         "method": "alpha-bbox-to-original-template; no rotation or mirroring",
         "source_bbox_px": [
           104,
           52,
-          1113,
+          1114,
           1172
         ],
         "destination_bbox_px": [
@@ -1014,22 +1027,25 @@
       ],
       "mount": "floor",
       "rgba": true,
-      "bytes": 53764,
+      "bytes": 52448,
       "alpha_bbox_px": [
         24,
         57,
         212,
         237
       ],
-      "sha256": "e9fc8a8fb3c57c98382980b1b7da889a3da8bb96a524d19d0f3fa6ea97e55deb",
+      "sha256": "5e8be8070af30f47647a79c961ffe1e399991db725bc626c1a634c5dfc11716f",
+      "baked_surface_items": [],
+      "shelf_books_baked": true,
+      "surface_items_policy": "Desktop is empty; lamp and other placeable surface items are separate sprites.",
       "source": "assets/style-sample/sources/desk-c.webp",
       "registration": {
         "method": "alpha-bbox-to-original-template; no rotation or mirroring",
         "source_bbox_px": [
-          112,
-          199,
+          110,
+          198,
           1076,
-          1110
+          1113
         ],
         "destination_bbox_px": [
           24,
@@ -1099,22 +1115,25 @@
       ],
       "mount": "floor",
       "rgba": true,
-      "bytes": 52217,
+      "bytes": 50953,
       "alpha_bbox_px": [
         44,
         57,
         232,
         237
       ],
-      "sha256": "0d54313b1979d39d6eae5bdaa9e7e3405989ce5352ff5cfaa36dae04fff4de38",
+      "sha256": "6d3e8dfbbe574a67317b5b459a9f088a7d1af4197e9cf17e670b3c216f094af3",
+      "baked_surface_items": [],
+      "shelf_books_baked": true,
+      "surface_items_policy": "Desktop is empty; lamp and other placeable surface items are separate sprites.",
       "source": "assets/style-sample/sources/desk-d.webp",
       "registration": {
         "method": "alpha-bbox-to-original-template; no rotation or mirroring",
         "source_bbox_px": [
           158,
-          159,
+          160,
           1145,
-          1116
+          1117
         ],
         "destination_bbox_px": [
           44,

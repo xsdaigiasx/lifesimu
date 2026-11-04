@@ -30,6 +30,7 @@ async function main(){
       const template=old.items.find(t=>t.id===i.id&&t.model===i.model&&t.direction===i.direction);
       for(const k of ['frame_px','anchor_px','footprint_tiles','mount_origin_px','footprint_corners_px','front_vector_xy'])assert.deepEqual(i[k],template[k],`${i.file} ${k}`);
       const [w,d]=i.footprint_tiles;
+      if(i.id==='desk') { assert.deepEqual(i.baked_surface_items,[]); assert.equal(i.shelf_books_baked,true); }
       assert.equal(i.anchor_px[0],64*w);assert.equal(i.frame_px[0],64*(w+d));
       assert.equal(i.anchor_px[1],i.frame_px[1]);
       report.push(await checkImage(i));
@@ -43,6 +44,7 @@ async function main(){
     }
   }
   const room=m.room;assert.deepEqual(room.frame_px,[1448,1086]);assert.deepEqual(room.origin_px,[724,350]);
+  assert.equal(room.entry_door.baked,false);assert.equal(room.entry_door.span_tiles,null);assert.equal(room.entry_door.painting_exclusion,null);
   const project=(x,y)=>[724+64*(x-y),350+32*(x+y)];
   assert.deepEqual(room.floor_corners_px,[[0,0],[8,0],[8,8],[0,8]].map(p=>project(...p)));
   report.push(await checkImage(room));
