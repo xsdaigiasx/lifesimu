@@ -35,3 +35,5 @@ button.ps-row{cursor:pointer}button.ps-row:hover{background:#eef3e6}
 .ps-card:hover{background:#eef3e6}
 .ps-bubble.them p{color:#294d3d!important}.ps-bubble.me p{color:#fff!important}
 .ps-avatar{color:#294d3d}
+/* 04/11: thanh dưới điện thoại chỉ hiện ở màn chính */
+.phone-shell:not(.is-home) .phone-dock{display:none}

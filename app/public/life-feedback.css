@@ -1,0 +1,13 @@
+/* 04/11: báo chỉ số tăng giảm và cảnh báo trên thanh trên cùng */
+.stat-flash{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 78px);transform:translateX(-50%);width:max-content;z-index:2000;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 32px);pointer-events:none;animation:statFlash 2.6s ease forwards}
+.stat-flash span{display:inline-flex;align-items:center;gap:4px;height:30px;padding:0 10px;border-radius:15px;background:#fcfcf6;border:1px solid #d7dfcf;box-shadow:0 4px 14px #0002;font-size:13px;font-weight:800}
+.stat-flash span.good{color:#2f6b4f}.stat-flash span.bad{color:#b0442b}
+.stat-flash svg{width:15px!important;height:15px!important;fill:none;stroke:currentColor}
+.stat-flash small{font-size:11px;font-weight:700;color:#5d6f62;margin-right:2px}
+@keyframes statFlash{0%{opacity:0;transform:translate(-50%,-6px)}10%{opacity:1;transform:translate(-50%,0)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-4px)}}
+.vital-chips{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.vital-chips span{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 9px;border-radius:13px;font-size:11.5px;font-weight:800;white-space:nowrap}
+.vital-chips span.soon{background:#f9eeda;color:#7a5a12}.vital-chips span.low{background:#fbebeb;color:#a1381f}
+.vital-chips svg{width:14px!important;height:14px!important;fill:none;stroke:currentColor}
+.street-menu{margin-bottom:10px}
+.life-hint{margin:0 0 10px;font-size:12px;color:#7a5a12;text-align:center}
