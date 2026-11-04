@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thử xếp nội thất — #124</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#faf3e5;color:#4a3b33;font:15px system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:14px}h1{font-size:20px;margin:0 0 10px}.tools{display:flex;gap:8px;flex-wrap:wrap}button,select{font:inherit;border:1px solid #9c8268;background:#fffaf1;border-radius:8px;padding:9px 12px;color:inherit}button{cursor:pointer}canvas{display:block;width:100%;height:auto;touch-action:manipulation}#status{min-height:2.8em;font-size:14px}p{line-height:1.5}.note{font-size:13px;color:#756456}
+</style>
+<main><h1>Thử xếp nội thất #124</h1><div class="tools"><select id="item" aria-label="Chọn món"><option value="bed">Giường</option><option value="wardrobe">Tủ</option><option value="desk">Bàn</option></select><button id="rotate">Xoay 90°</button><button id="grid">Ẩn/hiện lưới</button><button id="reset">Đặt lại</button></div><p id="status" role="status">Đang tải ảnh…</p><canvas width="1448" height="1086" aria-label="Phòng thử đặt đồ"></canvas><p class="note">Chọn món, chạm ô sàn để chuyển vị trí góc chân đế. Cam: bếp cố định; tím: phòng tắm. Đây là trình xem asset riêng, chưa nối vào game hoặc save.</p></main>
+<script>
+(async()=>{
+const manifest=await(await fetch('manifest.json')).json();
+const initial=await(await fetch('placements.json')).json();
+let placements=structuredClone(initial),grid=true;
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),status=document.querySelector('#status'),select=document.querySelector('#item');
+const rel=p=>p.replace(/^assets\/style-sample\//,'');
+const images=new Map();
+await Promise.all([manifest.room,...manifest.items].map(async i=>{const img=new Image();img.src=rel(i.file);await img.decode();images.set(i.file,img)}));
+const project=(x,y)=>[724+64*(x-y),350+32*(x+y)];
+const item=p=>manifest.items.find(i=>i.id===p.id&&i.direction===p.direction);
+const rect=p=>({x:p.x,y:p.y,w:item(p).footprint_tiles[0],h:item(p).footprint_tiles[1]});
+const intersects=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
+function valid(p){const a=rect(p);return a.x>=0&&a.y>=0&&a.x+a.w<=8&&a.y+a.h<=8&&![manifest.room.kitchen,manifest.room.bath,...placements.filter(q=>q.id!==p.id).map(rect)].some(b=>intersects(a,b))}
+function polygon(r,color){const pts=[[r.x,r.y],[r.x+r.w,r.y],[r.x+r.w,r.y+r.h],[r.x,r.y+r.h]].map(p=>project(...p));ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.closePath();ctx.globalAlpha=.18;ctx.fillStyle=color;ctx.fill();ctx.globalAlpha=1;ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke()}
+function draw(){ctx.clearRect(0,0,1448,1086);ctx.drawImage(images.get(manifest.room.file),0,0);const sorted=[...placements].sort((a,b)=>{const aa=rect(a),bb=rect(b);return aa.x+aa.y+aa.w+aa.h-bb.x-bb.y-bb.w-bb.h});for(const p of sorted){const i=item(p),r=rect(p),anchor=project(r.x+r.w,r.y+r.h);ctx.drawImage(images.get(i.file),anchor[0]-i.anchor_px[0],anchor[1]-i.anchor_px[1])}if(grid){ctx.strokeStyle='#17829090';ctx.lineWidth=1.5;for(let n=0;n<=8;n++)for(const pair of [[[n,0],[n,8]],[[0,n],[8,n]]]){ctx.beginPath();ctx.moveTo(...project(...pair[0]));ctx.lineTo(...project(...pair[1]));ctx.stroke()}polygon(manifest.room.kitchen,'#ce871b');polygon(manifest.room.bath,'#6662b4');polygon(rect(placements.find(p=>p.id===select.value)),'#a53569')}}
+function info(text){const p=placements.find(p=>p.id===select.value),r=rect(p);status.textContent=text||`${select.selectedOptions[0].text}: hướng ${p.direction}, ${r.w}×${r.h} ô, vị trí (${p.x}, ${p.y}).`}
+canvas.onclick=e=>{const bounds=canvas.getBoundingClientRect(),px=(e.clientX-bounds.left)*1448/bounds.width,py=(e.clientY-bounds.top)*1086/bounds.height;const dx=(px-724)/64,dy=(py-350)/32,p=placements.find(p=>p.id===select.value),candidate={...p,x:Math.floor((dx+dy)/2),y:Math.floor((dy-dx)/2)};if(valid(candidate)){Object.assign(p,candidate);info();draw()}else info('Vị trí bị chiếm hoặc vượt sàn. Chọn ô khác.')};
+document.querySelector('#rotate').onclick=()=>{const p=placements.find(p=>p.id===select.value),old=rect(p),candidate={...p,direction:'abcd'[('abcd'.indexOf(p.direction)+1)%4]},next=rect(candidate);candidate.x=p.x+(old.w-next.w)/2;candidate.y=p.y+(old.h-next.h)/2;if(valid(candidate)){Object.assign(p,candidate);info();draw()}else info('Không đủ chỗ xoay tại vị trí này.')};
+document.querySelector('#grid').onclick=()=>{grid=!grid;draw()};document.querySelector('#reset').onclick=()=>{placements=structuredClone(initial);info();draw()};select.onchange=()=>{info();draw()};info();draw();
+})().catch(e=>{document.querySelector('#status').textContent='Không tải được ảnh. Mở trang qua máy chủ HTTP cục bộ.';console.error(e)});
+</script></html>
