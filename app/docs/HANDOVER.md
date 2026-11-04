@@ -43,7 +43,7 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - Nhà phố, biệt thự: mỗi tầng một mặt bằng liền, kéo, phóng to; giá nhà phố thuê 6 triệu hoặc mua 2,5 tỷ, biệt thự 12 tỷ.
 - Ăn uống: rủi ro ngộ độc theo độ tươi, độ chín, không theo giá; món quán, nhà hàng không rủi ro.
 - Bản đồ thành phố: ghép từ mảnh nhỏ (ô 256×128) thay ảnh lớn bị mờ.
-- Phong cách đồ hoạ (chốt 04/11, issue #133): **bán hiện thực** như ảnh chuẩn `assets/style-reference/room-reference.webp`; thay phong cách sách truyện (#124) và màu phẳng cũ. Viền mảnh cùng tông, ánh sáng cố định trên-trái, không bóng đổ ngoài chân đế. Món ăn, nguyên liệu, chân dung NPC, địa điểm, nhà phố, biệt thự, vỏ phòng giữ nguyên.
+- Phong cách đồ hoạ (chốt 04/11, issue #133): **bán hiện thực** như ảnh chuẩn `assets/style-reference/room-reference.webp`; thay phong cách sách truyện (#124) và màu phẳng cũ. Viền mảnh cùng tông, ánh sáng cố định trên-trái, không bóng đổ ngoài chân đế. Vỏ phòng, nhà phố, biệt thự, văn phòng cũng vẽ lại hết (chủ dự án chốt 04/11); chỉ món ăn, nguyên liệu, nhân vật và ảnh địa điểm giữ nguyên.
 - **Bản đồ thành phố giữ nguyên, huỷ sửa** (#97, #98 đóng 04/11): không ghép mảnh, không vẽ lại ô nền hay công trình.
 
 ## 5. Đã làm trong phiên 04/11 (đều đã vào main)
@@ -69,7 +69,7 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 
 ### Codex (asset)
 
-- **#133** issue Codex duy nhất: vẽ lại mọi ảnh đồ theo phong cách bán hiện thực. Lô 1 nội thất phòng trọ (28 mẫu × 4 hướng, gồm tủ lạnh và cửa), lô 2 đồ TTTM (8), lô 3 đồ văn phòng (38), lô 4 món ăn mới (giữ phong cách món hiện có; gồm 3 món, 5 món tự chế, cà phê từ #120). Claude duyệt lô 1 bằng ảnh ghép tổng trước, đạt mới làm lô sau; khi gộp, bỏ `fridge-*.svg`, ảnh tạm cơm trứng và `static-scenes/furniture-v2`.
+- **#133** issue Codex duy nhất: vẽ lại mọi ảnh đồ theo phong cách bán hiện thực. Lô 1 nội thất phòng trọ (28 mẫu × 4 hướng, gồm tủ lạnh và cửa), lô 2 đồ TTTM (8), lô 3 đồ văn phòng (38), lô 5 vỏ phòng (phòng trọ, nhà phố, biệt thự, văn phòng, cảnh tĩnh đang dùng; giữ kích thước, gốc, tên tệp), lô 4 món ăn mới (giữ phong cách món hiện có; gồm 3 món, 5 món tự chế, cà phê từ #120). Claude duyệt lô 1 bằng ảnh ghép tổng trước, đạt mới làm lô sau; khi gộp, bỏ `fridge-*.svg`, ảnh tạm cơm trứng và `static-scenes/furniture-v2`.
 - **#55** đồ văn phòng mới, hoãn tới giai đoạn mở công ty, sẽ theo phong cách bán hiện thực.
 - Đã đóng: #124, #97, #98, #120 (xem #133).
 
@@ -84,7 +84,7 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - `domain/director.ts` câu chuyện NPC; `lines.ts` câu thoại; `npc.ts` hồ sơ, xưng hô `ADDRESS`, `relationTier(score,id)`.
 - `domain/life.ts` ăn uống, kho (lô có `cold`, `late`), tủ lạnh (`stockLot`, `chillPantry`), công thức (`knowsRecipe`, `learnRecipe`, `NPC_TEACHES`, `recipeSources`), nấu bừa (`improvise`, `improvName`, `improvCap`), rủi ro (`RISK`, `isStale`, `consume`), ăn ngoài `EAT_OUT`, ngân hàng `repayApp`, bệnh viện.
 - `domain/vitals.ts` chỉ số, `applyIllness` (ngộ độc phát tác trễ, gọi trong `spendTime` và ca làm).
-- `domain/home.ts` nội thất phòng trọ (`HOME_MODELS`, `FRIDGE`, `homeName`); `home-geometry.ts` lưới theo ảnh `room-master-storybook.webp` (vỏ phòng giữ nguyên) (1448×1086, gốc 724,350, ô 128×64).
+- `domain/home.ts` nội thất phòng trọ (`HOME_MODELS`, `FRIDGE`, `homeName`); `home-geometry.ts` lưới theo ảnh `room-master-storybook.webp` (Codex vẽ lại vỏ phòng ở #133, giữ kích thước và gốc) (1448×1086, gốc 724,350, ô 128×64).
 - `domain/housing.ts` nhà phố, biệt thự (`HOUSES` theo tầng, `arrangeFloor`, `moveHouse`, `residenceOf`).
 - `domain/stat-delta.ts` chip chỉ số sau mỗi hành động.
 - `domain/furniture-sprites.json`, `house-floors.json` số đo ảnh Codex.
