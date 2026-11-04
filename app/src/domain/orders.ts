@@ -4,9 +4,10 @@ import {HOME_ITEMS,HOME_TIERS,homeOf,homePrice,homeName,planHome,uidOf,type Home
 import {post} from './money';
 import {clockOf,spendTime} from './time';
 import {residenceOf} from './housing';
+import {deliveryFee} from './specs';
 
-/** T29: giỏ, đơn giao hôm sau, bán lại. Giá và số liệu đã duyệt 04/11. */
-export const ORDER={fee:15000,resale:.55,maxLines:8,maxOrders:3,mallMinutes:10} as const;
+/** T29: giỏ, đơn giao hôm sau, bán lại. Phí giao tính theo cân nặng và kích thước (`deliveryFee`, duyệt 05/11). */
+export const ORDER={resale:.55,maxLines:8,maxOrders:3,mallMinutes:10} as const;
 
 export type Line={kind:'product';id:ProductId}|{kind:'home';id:HomeId;tier:HomeTier};
 export interface Order{id:string;day:number;due:number;lines:Line[]}
@@ -79,7 +80,7 @@ export function receiveOrder(s:GameState,id:string):GameResult{
  if(s.day<order.due)return bad('Đơn chưa giao tới.');
  if(clockOf(s).location!==residenceOf(s))return bad('Hãy về nhà để nhận hàng.');
  const v=applyLines(s,order.lines);if(!v.ok)return bad(v.error+'. Hãy huỷ đơn này.');
- const total=v.total+ORDER.fee;if(s.money<total)return bad('Chưa đủ tiền.');
+ const total=v.total+deliveryFee(order.lines);if(s.money<total)return bad('Chưa đủ tiền.');
  const n=structuredClone(v.state);n.orders={...o,list:o.list.filter(x=>x.id!==id)};
  if(post(n,{id:`order:${order.id}:${order.day}`,name:'Nhận đơn hàng',amount:-total})!=='ok')return bad('Chưa đủ tiền.');
  return{ok:true,state:n};

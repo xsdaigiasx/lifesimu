@@ -1,0 +1,7 @@
+/* Thang cỡ chữ 5 bậc (chốt 05/11). Màn mới dùng biến hoặc lớp t-*, không đặt px rời. */
+:root{--fs-stat:22px;--fs-title:16px;--fs-body:13px;--fs-note:11px;--fs-min:10px}
+.t-stat{font-size:var(--fs-stat)!important;font-weight:800;line-height:1.1}
+.t-title{font-size:var(--fs-title)!important;font-weight:700;line-height:1.2}
+.t-body{font-size:var(--fs-body)!important}
+.t-note{font-size:var(--fs-note)!important}
+.t-min{font-size:var(--fs-min)!important}

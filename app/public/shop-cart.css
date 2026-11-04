@@ -26,3 +26,17 @@
 .market-item button[aria-pressed=true]{background:#e9efde;color:#355a42;border:1px solid #c9d4bc}
 .furniture-shop .shop-categories{overflow:visible}
 .furniture-shop .shop-categories button{flex:1 1 auto;padding:7px 6px;font-size:12px;white-space:nowrap;min-width:0}
+.mall-bar{gap:8px}
+.market-item-art{position:relative}
+.market-item .info-dot{position:absolute;top:5px;right:5px;align-self:auto;width:22px;min-width:22px;height:22px;min-height:22px;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;background:#fffdf4;border:1.5px solid #8aa17c;color:#355a42;font:italic 700 13px/1 Georgia,serif;box-shadow:none}
+.info-sheet{width:min(100%,420px);display:flex;flex-direction:column;gap:10px;padding:16px;background:#fffdf4;border-radius:16px 16px 0 0;max-height:80vh;overflow:auto}
+.info-sheet header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.info-sheet .info-close{width:32px;min-width:32px;height:32px;min-height:32px;padding:0;margin:0;border-radius:8px;background:#eaf0df;border:1px solid #d8e2cb;color:#355a42;display:grid;place-items:center;flex:none}
+.info-sheet .info-close svg{width:16px;height:16px}
+.info-sheet dl{display:flex;flex-direction:column;gap:6px;margin:0}
+.info-sheet dl>div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px;background:#f4f1e2;border-radius:10px}
+.info-sheet dt{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-note);color:#5f7b52;flex:none}
+.info-sheet dt svg{width:15px;height:15px}
+.info-sheet dd{margin:0;font-size:var(--fs-body);font-weight:700;color:#2f4a3a;text-align:right;min-width:0;overflow-wrap:anywhere}
+.market-seller-copy .t-title,.mall-zones .market-stall strong{font-size:var(--fs-title)}
+.furniture-shop-balance .t-stat{display:block}

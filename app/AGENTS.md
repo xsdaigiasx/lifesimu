@@ -11,4 +11,7 @@
 7. Luồng tuyển dụng: bằng CNTT, chỉ ứng tuyển IT; CV hôm nay, phỏng vấn ngày kế tiếp, nhận việc từ ngày sau khi đậu. Đồng hồ, khoảng cách, tiền và dữ liệu lưu phải dùng domain hiện có.
 8. Không tải ZIP hoặc tài liệu lên Drive nếu chưa được yêu cầu. Khi được yêu cầu, dùng thư mục game và bàn giao hiện có; cập nhật bàn giao hiện hành, giữ lịch sử có phiên bản, không gửi trùng nhiều gói.
 
+9. Cỡ chữ theo thang 5 bậc (`public/type-scale.css`, chốt 05/11): số liệu lớn 22px đậm (`t-stat`, ví dụ "10 phút", số dư), tiêu đề 16px đậm (`t-title`), nội dung 13px (`t-body`), phụ 11px (`t-note`), tối thiểu 10px (`t-min`, chỉ chip và huy hiệu). Màn mới dùng biến `--fs-*` hoặc lớp `t-*`, không đặt px rời; không dùng chữ dưới 10px. Màn cũ đổi dần khi chạm tới.
+10. Mua sắm (TTTM và điện thoại): màn đầu là các ô mục sản phẩm, không thanh tab; thanh trên chỉ có Giỏ hàng và Kho (điện thoại: Đơn hàng). Thẻ đồ có nút "i" mở bảng thông tin riêng theo loại (`domain/specs.ts`).
+
 Nguồn: chỉ đạo trực tiếp của chủ dự án ngày 30/10/2026. Đọc docs/HANDOVER.md trước khi tiếp tục.
