@@ -1,105 +1,187 @@
 {
-  "issue": 60,
-  "type": "market-ingredient-card",
-  "anchor": "center",
-  "perspective": "slightly elevated three-quarter",
-  "source": "OpenAI built-in image generation; one original and one style edit per ingredient",
+  "issue": 89,
+  "lot": 1,
+  "style": "warm-pastel-hand-drawn-storybook",
+  "source": "OpenAI built-in image generation; text prompts only, no input reference images",
+  "approval": "awaiting owner style review before later lots",
+  "perspective": "slightly elevated orthographic, requested isometric 2:1",
+  "alpha_centering": "visible alpha >=128 bounds, 2 source-pixel padding; preserve generated alpha",
+  "tile_footprint": null,
   "items": [
     {
       "id": "rice",
+      "name": "Gạo",
+      "group": "ingredients",
       "file": "/assets/ingredients/rice.webp",
       "frame_px": [
         256,
         256
       ],
+      "anchor_px": [
+        128,
+        128
+      ],
       "content_bbox_px": [
-        30,
+        26,
         18,
-        225,
+        230,
         238
       ],
-      "bytes": 18958,
-      "alpha": true
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 23124,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "0dcf8d9f0d0a63f941206d5eecf94a68ffce245db9128504728530fa9c89531f"
     },
     {
       "id": "egg",
+      "name": "Trứng",
+      "group": "ingredients",
       "file": "/assets/ingredients/egg.webp",
       "frame_px": [
         256,
         256
       ],
+      "anchor_px": [
+        128,
+        128
+      ],
       "content_bbox_px": [
         18,
-        59,
+        61,
         238,
-        196
+        195
       ],
-      "bytes": 29118,
-      "alpha": true
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 37654,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "fe5f8a694d18cf476c540d0d0de8898b38cdf292d52d86d29ceeae0bce4d261b"
     },
     {
       "id": "vegetable",
+      "name": "Rau củ",
+      "group": "ingredients",
       "file": "/assets/ingredients/vegetable.webp",
       "frame_px": [
         256,
         256
       ],
+      "anchor_px": [
+        128,
+        128
+      ],
       "content_bbox_px": [
-        39,
+        38,
         18,
         217,
         238
       ],
-      "bytes": 34916,
-      "alpha": true
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "bytes": 19170,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "3d873774fbb035f76f12f68d805f89f009591e3d80e1c71cd75185099ca27c36"
     },
     {
       "id": "pork",
+      "name": "Thịt heo",
+      "group": "ingredients",
       "file": "/assets/ingredients/pork.webp",
       "frame_px": [
         256,
         256
       ],
+      "anchor_px": [
+        128,
+        128
+      ],
       "content_bbox_px": [
         18,
-        54,
+        61,
         238,
-        202
+        194
       ],
-      "bytes": 29502,
-      "alpha": true
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "bytes": 34744,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "6c1bb4601705e026adb5ba1fb78babfdb9ba355c132168243252982a2ce80870"
     },
     {
       "id": "tofu",
+      "name": "Đậu phụ",
+      "group": "ingredients",
       "file": "/assets/ingredients/tofu.webp",
       "frame_px": [
         256,
         256
       ],
+      "anchor_px": [
+        128,
+        128
+      ],
       "content_bbox_px": [
         18,
-        56,
+        51,
         238,
-        199
+        205
       ],
-      "bytes": 24118,
-      "alpha": true
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "bytes": 31360,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "30fe3ad547c2ac535aad351f12330ff0fb69cb60fea8176857c38bac942e11b5"
     },
     {
       "id": "fish",
+      "name": "Cá tươi",
+      "group": "ingredients",
       "file": "/assets/ingredients/fish.webp",
       "frame_px": [
         256,
         256
       ],
+      "anchor_px": [
+        128,
+        128
+      ],
       "content_bbox_px": [
         18,
-        62,
+        68,
         238,
-        193
+        187
       ],
-      "bytes": 27530,
-      "alpha": true
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        127.5,
+        127.5
+      ],
+      "bytes": 35738,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "11fea761965ac821b5b1652b96f0af89428dc6fd2df0e82b5838a938427a2b96"
     }
-  ]
+  ],
+  "canonical_manifest": "../storybook-lot1/manifest.json"
 }
