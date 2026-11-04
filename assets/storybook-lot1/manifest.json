@@ -1,0 +1,505 @@
+{
+  "issue": 89,
+  "lot": 1,
+  "style": "warm-pastel-hand-drawn-storybook",
+  "source": "OpenAI built-in image generation; text prompts only, no input reference images",
+  "approval": "awaiting owner style review before later lots",
+  "perspective": "slightly elevated orthographic, requested isometric 2:1",
+  "alpha_centering": "visible alpha >=128 bounds, 2 source-pixel padding; preserve generated alpha",
+  "tile_footprint": null,
+  "items": [
+    {
+      "id": "eggRice",
+      "name": "Cơm trứng",
+      "group": "meals",
+      "file": "/assets/meals/eggRice.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        46,
+        238,
+        209
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128.5,
+        127.5
+      ],
+      "bytes": 20304,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "284239745f630b51b63e98dc8f1198d9eb31b1688eb02b19f0324fae9426a354"
+    },
+    {
+      "id": "porkRice",
+      "name": "Cơm thịt rau",
+      "group": "meals",
+      "file": "/assets/meals/porkRice.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        51,
+        238,
+        204
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "bytes": 21130,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "cc5c97c48c3e65a9ee1c6203dd286de8564ddb21171dc19fc2a0e2c4ca09464a"
+    },
+    {
+      "id": "tofuRice",
+      "name": "Cơm đậu rau",
+      "group": "meals",
+      "file": "/assets/meals/tofuRice.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        45,
+        238,
+        211
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128.5
+      ],
+      "bytes": 21230,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "ff1bf0d8347ba664085bf1e23ce18459abde90915970fe83d93826971bdc3262"
+    },
+    {
+      "id": "fishRice",
+      "name": "Cơm cá kho",
+      "group": "meals",
+      "file": "/assets/meals/fishRice.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        49,
+        238,
+        207
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 19588,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "21f1f08538bedf37078b3bd1eb9f195ec48049081363ae60fedbe6df603fd2c1"
+    },
+    {
+      "id": "canhChua",
+      "name": "Canh chua cá",
+      "group": "meals",
+      "file": "/assets/meals/canhChua.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        33,
+        238,
+        222
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128.5,
+        128
+      ],
+      "bytes": 23604,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "0e560da6244284b0725873e5f4abba0502557fa0bade34b6f5c91f43d0700e1e"
+    },
+    {
+      "id": "banhMi",
+      "name": "Bánh mì",
+      "group": "meals",
+      "file": "/assets/meals/banhMi.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        56,
+        238,
+        200
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "bytes": 19528,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "5738028517c907a221dd18324bdd8d06b57b34c8adf4cb04bdbf1f61ed088a22"
+    },
+    {
+      "id": "comTam",
+      "name": "Cơm tấm",
+      "group": "meals",
+      "file": "/assets/meals/comTam.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        48,
+        238,
+        207
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 21800,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "beddedd4b42c464086f46337abf602059e08c1d3b7cf66232f57f004ea079896"
+    },
+    {
+      "id": "pho",
+      "name": "Phở bò",
+      "group": "meals",
+      "file": "/assets/meals/pho.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        30,
+        238,
+        225
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "bytes": 23738,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "05d79e1fa67c3cd22a07aa9c0fb9d8367a73c1b84c0cbe76c36ae09587fdee34"
+    },
+    {
+      "id": "setLunch",
+      "name": "Cơm phần",
+      "group": "meals",
+      "file": "/assets/meals/setLunch.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        62,
+        238,
+        193
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128.5,
+        127.5
+      ],
+      "bytes": 19346,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "caf256b10280314767dac85b84ffa8dfc5d2e1648c63a3e52e8c51a1316e32c2"
+    },
+    {
+      "id": "hotpot",
+      "name": "Lẩu hải sản",
+      "group": "meals",
+      "file": "/assets/meals/hotpot.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        51,
+        238,
+        205
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128.5,
+        128.5
+      ],
+      "bytes": 19966,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "c8e9fe19bb1029ef998e650863d3767c2446013e141150609d94785b3509173c"
+    },
+    {
+      "id": "steak",
+      "name": "Bò bít tết",
+      "group": "meals",
+      "file": "/assets/meals/steak.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        65,
+        238,
+        191
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 39170,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "8844b5b53acf44a3319f50254358faef2bc986b18e723af82e006963bca88114"
+    },
+    {
+      "id": "rice",
+      "name": "Gạo",
+      "group": "ingredients",
+      "file": "/assets/ingredients/rice.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        26,
+        18,
+        230,
+        238
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 23124,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "0dcf8d9f0d0a63f941206d5eecf94a68ffce245db9128504728530fa9c89531f"
+    },
+    {
+      "id": "egg",
+      "name": "Trứng",
+      "group": "ingredients",
+      "file": "/assets/ingredients/egg.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        61,
+        238,
+        195
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 37654,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "fe5f8a694d18cf476c540d0d0de8898b38cdf292d52d86d29ceeae0bce4d261b"
+    },
+    {
+      "id": "vegetable",
+      "name": "Rau củ",
+      "group": "ingredients",
+      "file": "/assets/ingredients/vegetable.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        38,
+        18,
+        217,
+        238
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "bytes": 19170,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "3d873774fbb035f76f12f68d805f89f009591e3d80e1c71cd75185099ca27c36"
+    },
+    {
+      "id": "pork",
+      "name": "Thịt heo",
+      "group": "ingredients",
+      "file": "/assets/ingredients/pork.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        61,
+        238,
+        194
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "bytes": 34744,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "6c1bb4601705e026adb5ba1fb78babfdb9ba355c132168243252982a2ce80870"
+    },
+    {
+      "id": "tofu",
+      "name": "Đậu phụ",
+      "group": "ingredients",
+      "file": "/assets/ingredients/tofu.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        51,
+        238,
+        205
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "bytes": 31360,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "30fe3ad547c2ac535aad351f12330ff0fb69cb60fea8176857c38bac942e11b5"
+    },
+    {
+      "id": "fish",
+      "name": "Cá tươi",
+      "group": "ingredients",
+      "file": "/assets/ingredients/fish.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        68,
+        238,
+        187
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        127.5,
+        127.5
+      ],
+      "bytes": 35738,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "11fea761965ac821b5b1652b96f0af89428dc6fd2df0e82b5838a938427a2b96"
+    }
+  ]
+}
