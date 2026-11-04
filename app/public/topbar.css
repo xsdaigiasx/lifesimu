@@ -1,14 +1,15 @@
-/* 04/11: thanh trên gọn, giờ và ngày cân với ví; chỉ số trạng thái nằm hàng dưới, bỏ tên nghề và biểu tượng game */
-.topbar.tb{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"time wallet" "chips chips";align-items:stretch;gap:8px;height:auto;min-height:0;padding:10px 0}
-.topbar.tb .tb-time{grid-area:time;display:flex;align-items:center;gap:8px;height:52px;padding:0 10px;border-radius:14px;background:#eef2e8;color:#173e38;min-width:0}
-.tb-clock{display:inline-flex;align-items:center;gap:4px;font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
-.tb-clock svg{width:17px!important;height:17px!important;fill:none;stroke:currentColor}
-.tb-date{display:grid;line-height:1.15;white-space:nowrap}.tb-date b{font-size:13px;color:#173e38}.tb-date small{font-size:10.5px;color:#6b7d70}
-.topbar.tb .wallet{grid-area:wallet;display:flex;align-items:center;justify-content:flex-start;height:52px;width:auto;margin:0;padding:0 12px;border-radius:14px;gap:8px;min-width:0}
-.topbar.tb .wallet small{font-size:10.5px;letter-spacing:0;text-transform:none}
-.topbar.tb .wallet strong{font-size:17px;font-variant-numeric:tabular-nums}
+/* 04/11: thanh trên gọn, cỡ chữ vừa; giờ và ngày cân với ví, chỉ số trạng thái hàng dưới */
+.topbar.tb{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"time wallet" "chips chips";align-items:stretch;gap:6px;height:auto;min-height:0;padding:8px 0}
+.topbar.tb .tb-time,.topbar.tb .wallet{height:42px;border-radius:12px;padding:0 10px;min-width:0}
+.topbar.tb .tb-time{grid-area:time;display:flex;align-items:center;gap:8px;background:#eef2e8;color:#173e38}
+.tb-clock{display:inline-flex;align-items:center;gap:4px;font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;padding-right:8px;border-right:1px solid #d3dccb}
+.tb-clock svg{width:14px!important;height:14px!important;fill:none;stroke:currentColor}
+.tb-date{display:grid;line-height:1.15;white-space:nowrap}.tb-date b{font-size:12px;font-weight:700;color:#173e38}.tb-date small{font-size:10px;color:#6b7d70}
+.topbar.tb .wallet{grid-area:wallet;display:flex;align-items:center;justify-content:center;gap:7px;width:auto;margin:0}
+.topbar.tb .wallet .coin{display:grid;place-items:center;width:22px;height:22px;flex:0 0 22px;font-size:12px}
+.topbar.tb .wallet strong{font-size:15px;font-variant-numeric:tabular-nums}
 .topbar.tb .vital-chips{grid-area:chips;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px}
-.topbar.tb .vital-chips span{justify-content:center;height:30px;padding:0 8px;border-radius:10px;font-size:12px}
+.topbar.tb .vital-chips span{justify-content:center;height:26px;padding:0 8px;border-radius:9px;font-size:11.5px}
+.topbar.tb .vital-chips svg{width:13px!important;height:13px!important}
 .topbar.tb .weather,.topbar.tb .desktop-save{display:none}
 @media(min-width:761px){.topbar.tb{grid-template-columns:auto 1fr auto auto;grid-template-areas:"time chips weather wallet"}.topbar.tb .weather{display:flex;grid-area:weather}.topbar.tb .vital-chips{grid-auto-columns:max-content;justify-content:start;align-self:center}}
-@media(max-width:360px){.topbar.tb .wallet .coin{display:none}.tb-clock{font-size:18px}}
