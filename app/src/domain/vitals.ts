@@ -15,7 +15,7 @@ export type WarnLevel='soon'|'low';
 export interface VitalWarning{key:'energy'|'fullness'|'mood'|'stress'|'health';level:WarnLevel;text:string}
 /** Cảnh báo sớm: hiện trước khi chạm ngưỡng phạt (m bắt đầu giảm dưới 60). */
 export function vitalWarnings(s:GameState):VitalWarning[]{const w:VitalWarning[]=[],{low,soon}=VITALS.warn;const lack=(key:'energy'|'fullness'|'mood',v:number,name:string,hint:string)=>{if(v<low)w.push({key,level:'low',text:`${name} rất thấp: ${hint}`});else if(v<soon)w.push({key,level:'soon',text:`${name} sắp thấp: ${hint}`})};
-lack('fullness',fullnessOf(s),'Bạn đang đói','hãy ăn sớm');lack('energy',s.energy,'Năng lượng','hãy nghỉ hoặc ngủ');lack('mood',s.mood,'Tinh thần','hãy thư giãn hoặc gặp bạn');
+lack('fullness',fullnessOf(s),'Độ no','hãy ăn sớm');lack('energy',s.energy,'Năng lượng','hãy nghỉ hoặc ngủ');lack('mood',s.mood,'Tinh thần','hãy thư giãn hoặc gặp bạn');
 if(s.stress>=VITALS.stressHigh)w.push({key:'stress',level:'low',text:'Căng thẳng cao: làm việc kém hiệu quả, hãy nghỉ ngơi'});else if(s.stress>=VITALS.warn.stress)w.push({key:'stress',level:'soon',text:'Căng thẳng đang dâng: nên nghỉ sớm'});
 if(s.health<VITALS.sickHealth)w.push({key:'health',level:'low',text:'Sức khỏe yếu: hiệu suất giảm, nên đi khám'});else if(s.health<VITALS.warn.health)w.push({key:'health',level:'soon',text:'Sức khỏe đang xuống: giữ ăn ngủ đều'});
 return w}
