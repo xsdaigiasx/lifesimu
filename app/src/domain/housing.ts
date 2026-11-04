@@ -29,7 +29,9 @@ export const HOUSE_IDS=Object.keys(HOUSES) as HouseId[];
 export const COOK_FACTOR=.8,STUDY_FACTOR=1.25,MOVE_MINUTES=120;
 export const RELAX={fun:{name:'Chơi game',minutes:45,mood:10,stress:-12,energy:-2},garden:{name:'Ra vườn',minutes:30,mood:8,stress:-10,energy:4}} as const;
 
-export interface Placed{id:HomeId;x:number;y:number;rotation:0|90}
+export type Rotation=0|90|180|270;
+export const ROTATIONS:Rotation[]=[0,90,180,270];
+export interface Placed{id:HomeId;x:number;y:number;rotation:Rotation}
 export interface HousingState{version:1;house:HouseId;tenure:'rent'|'own';owned:HouseId[];layouts:Partial<Record<HouseId,Partial<Record<'1'|'2',Placed[]>>>>;relax?:Partial<Record<'fun'|'garden',number>>}
 export const housingOf=(s:GameState):HousingState=>s.housing??{version:1,house:'tro',tenure:'rent',owned:[],layouts:{}};
 export const houseOf=(s:GameState)=>HOUSES[housingOf(s).house];
@@ -42,7 +44,7 @@ export function monthlyRent(s:GameState,base:number){const h=housingOf(s);if(h.h
 export const rentLabel=(s:GameState)=>housingOf(s).house==='tro'?'Tiền trọ':'Tiền thuê nhà';
 
 /** Kích thước đồ trên lưới (theo hướng xoay). */
-export const itemSize=(p:Placed)=>{const t=HOME_ITEMS[p.id];return p.rotation?{w:t.h,h:t.w}:{w:t.w,h:t.h}};
+export const itemSize=(p:Placed)=>{const t=HOME_ITEMS[p.id];return p.rotation%180?{w:t.h,h:t.w}:{w:t.w,h:t.h}};
 export function layoutOf(s:GameState,house:HouseId,floor:1|2):Placed[]{return housingOf(s).layouts[house]?.[String(floor) as '1'|'2']??[]}
 /** Đồ đã mua nhưng chưa đặt ở tầng nào của nhà này. */
 export function storageOf(s:GameState,house:HouseId):HomeId[]{const used=new Set(Object.values(housingOf(s).layouts[house]??{}).flat().map(p=>p.id));return homeOf(s).items.map(i=>i.id).filter(id=>!used.has(id))}
@@ -55,7 +57,7 @@ export function placeError(floor:FloorDef,items:Placed[]):string|null{const cell
 /** Lưu cách bày một tầng của nhà đang ở. */
 export function arrangeFloor(s:GameState,floor:1|2,items:Placed[]):GameResult{const h=housingOf(s);if(h.house==='tro')return{ok:false,error:'Phòng trọ sắp xếp trong Nhà của tôi.'};if(!atResidence(s)||s.work?.active)return{ok:false,error:'Hãy về nhà để sắp xếp.'};
  const def=HOUSES[h.house].floors.find(f=>f.id===floor);if(!def)return{ok:false,error:'Nhà không có tầng này.'};const owned=new Set(homeOf(s).items.map(i=>i.id));
- if(items.length>30||!items.every(p=>owned.has(p.id)&&Number.isInteger(p.x)&&Number.isInteger(p.y)&&(p.rotation===0||p.rotation===90)))return{ok:false,error:'Đồ chưa hợp lệ.'};if(new Set(items.map(p=>p.id)).size!==items.length)return{ok:false,error:'Mỗi món chỉ đặt một chỗ.'};
+ if(items.length>30||!items.every(p=>owned.has(p.id)&&Number.isInteger(p.x)&&Number.isInteger(p.y)&&ROTATIONS.includes(p.rotation)))return{ok:false,error:'Đồ chưa hợp lệ.'};if(new Set(items.map(p=>p.id)).size!==items.length)return{ok:false,error:'Mỗi món chỉ đặt một chỗ.'};
  const key=String(floor) as '1'|'2',others=Object.entries(h.layouts[h.house]??{}).filter(([k])=>k!==key).flatMap(([,v])=>v??[]);if(items.some(p=>others.some(o=>o.id===p.id)))return{ok:false,error:'Món này đang ở tầng khác.'};
  const err=placeError(def,items);if(err)return{ok:false,error:err};
  if(items.some(p=>p.id==='bed'&&!['bedroom','guest'].includes(roomAt(def,p)!.id)))return{ok:false,error:'Giường đặt ở phòng ngủ.'};
@@ -83,5 +85,5 @@ export function relaxAtHome(s:GameState,kind:'fun'|'garden'):GameResult{if(!hasR
 
 export function validHousing(v:unknown,day:number):v is HousingState{if(!v||typeof v!=='object')return false;const h=v as HousingState;if(h.version!==1||!HOUSE_IDS.includes(h.house)||!['rent','own'].includes(h.tenure)||!Array.isArray(h.owned)||!h.owned.every(x=>HOUSE_IDS.includes(x)&&x!=='tro'))return false;
  if(h.tenure==='own'&&h.house!=='tro'&&!h.owned.includes(h.house))return false;if(!h.layouts||typeof h.layouts!=='object')return false;
- for(const [house,floors] of Object.entries(h.layouts)){const def=HOUSES[house as HouseId];if(!def||house==='tro'||!floors||typeof floors!=='object')return false;const seen=new Set<string>();for(const [fk,items] of Object.entries(floors)){const f=def.floors.find(x=>String(x.id)===fk);if(!f||!Array.isArray(items)||!items.every(p=>p&&Object.hasOwn(HOME_ITEMS,p.id)&&!seen.has(p.id)&&(seen.add(p.id),true)&&(p.rotation===0||p.rotation===90)))return false;if(placeError(f,items))return false}}
+ for(const [house,floors] of Object.entries(h.layouts)){const def=HOUSES[house as HouseId];if(!def||house==='tro'||!floors||typeof floors!=='object')return false;const seen=new Set<string>();for(const [fk,items] of Object.entries(floors)){const f=def.floors.find(x=>String(x.id)===fk);if(!f||!Array.isArray(items)||!items.every(p=>p&&Object.hasOwn(HOME_ITEMS,p.id)&&!seen.has(p.id)&&(seen.add(p.id),true)&&ROTATIONS.includes(p.rotation)))return false;if(placeError(f,items))return false}}
  return h.relax===undefined||Object.values(h.relax).every(d=>Number.isInteger(d)&&(d as number)>=0&&(d as number)<=day)}

@@ -31,3 +31,9 @@ test('bếp nấu nhanh hơn, tiền thuê tính theo nhà',()=>{
  const c=ok(L.lifeAction(n,{kind:'cook',id:'eggRice'}));assert.equal(T.clockOf(c).minute-T.clockOf(n).minute,Math.round(L.RECIPES.eggRice.minutes*H.COOK_FACTOR));
  let d=n.day;while(dateAt(d).getUTCDate()!==1)d++;const r=settleRent({...n,day:d,rent:{billedMonth:'x',owed:0,billOwed:0,dueDay:null,notice:null}});assert.ok(r.ledger.some(e=>e.name.startsWith('Tiền thuê nhà')&&e.amount===-6e6));
 });
+test('xoay 4 hướng: 180° giữ kích thước, 270° đổi rộng sâu, góc lạ bị từ chối',()=>{
+ const n=ok(H.moveHouse(at('apartments'),'townhouse','rent'));const f2=H.layoutOf(n,'townhouse',2);
+ assert.deepEqual(H.itemSize({id:'bed',x:0,y:0,rotation:180}),H.itemSize({id:'bed',x:0,y:0,rotation:0}));assert.deepEqual(H.itemSize({id:'bed',x:0,y:0,rotation:270}),H.itemSize({id:'bed',x:0,y:0,rotation:90}));
+ ok(H.arrangeFloor(n,2,f2.map(p=>p.id==='bed'?{...p,rotation:180}:p)));ok(H.arrangeFloor(n,2,f2.map(p=>p.id==='bed'?{...p,rotation:270}:p)));
+ assert.equal(H.arrangeFloor(n,2,f2.map(p=>p.id==='bed'?{...p,rotation:45}:p)).ok,false);
+});

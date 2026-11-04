@@ -35,3 +35,5 @@
 .iso-label{font-size:7px;font-weight:800;fill:#5d5446;text-anchor:middle;dominant-baseline:middle;opacity:.75;pointer-events:none}
 .house-view{grid-template-columns:minmax(0,1fr);min-width:0;overflow:hidden}
 .iso-room .iso-label{stroke:none;paint-order:normal;font-family:inherit}
+.house-store button img{width:44px;height:36px;object-fit:contain}
+.product-glyph.model-art{height:104px!important;display:grid;place-items:center;overflow:hidden}.product-glyph.model-art img{max-width:92%;max-height:96px;width:auto;height:auto;object-fit:contain}
