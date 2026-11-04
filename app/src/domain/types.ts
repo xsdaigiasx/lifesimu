@@ -1,4 +1,5 @@
 import type {OrdersState} from './orders';
+import type {BankState} from './bank';
 import type {HousingState} from './housing';
 import type {LifeState} from './life';
 import type {HomeState} from './home';
@@ -23,7 +24,7 @@ export type PlaceId = 'home' | 'office' | 'market' | 'mall' | 'bank' | 'hospital
 export interface Item {name:string;price:number;bonus:number;desc:string;effect:string}
 export interface LedgerEntry {name:string;amount:number;day:number}
 export interface DayReport {action:DailyAction;earn:number;cost:number;xp:number;net:number;efficiency:number;day:number;faint?:{place:'home'|'out'|'hospital';lost:number;why?:'late'|'tired'|'hungry'}}
-export interface GameState {txIds?:string[];txSeq?:number;rent?:RentState;housing?:HousingState;life?:LifeState;orders?:OrdersState;home?:HomeState;officeItems?:OfficeItems;social?:SocialState;skills?:Skills;study?:StudyState;story?:StoryState;inbox?:InboxState;work?:WorkState;journal?:JournalEntry[];officeLayout?:OfficeLayout;clock?:GameClock;office?:OfficeState;fishing?:FishingState;bauCuaLast?:BauCuaRound;version:1;day:number;money:number;energy:number;fullness?:number;coffee?:{day:number;count:number;crashAt:number|null};mood:number;health:number;stress:number;xp:number;owned:ItemId[];equipped:ItemId[];ledger:LedgerEntry[];lastReport:DayReport|null}
+export interface GameState {txIds?:string[];txSeq?:number;rent?:RentState;housing?:HousingState;life?:LifeState;orders?:OrdersState;bank?:BankState;home?:HomeState;officeItems?:OfficeItems;social?:SocialState;skills?:Skills;study?:StudyState;story?:StoryState;inbox?:InboxState;work?:WorkState;journal?:JournalEntry[];officeLayout?:OfficeLayout;clock?:GameClock;office?:OfficeState;fishing?:FishingState;bauCuaLast?:BauCuaRound;version:1;day:number;money:number;energy:number;fullness?:number;coffee?:{day:number;count:number;crashAt:number|null};mood:number;health:number;stress:number;xp:number;owned:ItemId[];equipped:ItemId[];ledger:LedgerEntry[];lastReport:DayReport|null}
 export type GameResult = {ok:true;state:GameState} | {ok:false;error:string};
 export interface EngineApi {KEY:string;COST:number;ITEMS:Record<ItemId,Item>;initial():GameState;valid(value:unknown):value is GameState;buy(state:GameState,id:string):GameResult;toggle(state:GameState,id:string):GameResult;advance(state:GameState,action:string):GameResult;parse(raw:string|null):GameState|null}
 export interface Appointment {id:string;title:string;date:string}
