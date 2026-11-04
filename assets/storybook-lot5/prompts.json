@@ -1,0 +1,112 @@
+{
+  "issue": 89,
+  "lot": 5,
+  "style": "Warm hand-drawn storybook illustration: thin brown #4a3b33 ink, warm pastel fills, mild watercolor/pencil material wash, upper-left light, orthographic 2:1. No external cast shadow, text, logo or third-party input.",
+  "method": "Editable isometric illustration geometry rendered to RGBA PNG with original AI-generated material/art swatches. Rotations are geometry rotations, never horizontal sprite mirrors.",
+  "tool": "Built-in image_gen for seven original swatches; Sharp/librsvg for exact geometry rasterization.",
+  "materials": [
+    {
+      "id": "linen",
+      "file": "materials/linen.png",
+      "prompt": "Use case: illustration-story. Asset type: original material/artwork for precise isometric furniture sprites. Warm cream linen and soft quilted cotton fabric texture, seamless square, pale cream #fbf3e2 with a little blush, fine woven fibers and very faint hand colored pencil wash. Top down flat material swatch, no quilting grid, no perspective, no object, no shadows, no border. Palette pastel warm, never pure black, no glossy gradient, no 3D render. No logo, watermark or brand.",
+      "input_images": []
+    },
+    {
+      "id": "coir",
+      "file": "materials/coir.png",
+      "prompt": "Use case: illustration-story. Asset type: original material/artwork for precise isometric furniture sprites. Natural woven sedge mat texture, seamless square, warm honey straw and pale butter threads, tiny irregular handwoven reeds crossing, hand painted storybook watercolor and pencil. Flat top down material swatch, no object silhouette, no perspective, no shadow, no text. Palette pastel warm, never pure black, no glossy gradient, no 3D render. No logo, watermark or brand.",
+      "input_images": []
+    },
+    {
+      "id": "wool",
+      "file": "materials/wool.png",
+      "prompt": "Use case: illustration-story. Asset type: original material/artwork for precise isometric furniture sprites. Soft woven wool rug surface, horizontal broad pastel stripes alternating muted sage, cream, soft brick, pale turquoise, subtle short fibers, flat orthographic top down texture swatch. Warm hand painted storybook watercolor, no border, no object, no perspective, no shadows, no text. Palette pastel warm, never pure black, no glossy gradient, no 3D render. No logo, watermark or brand.",
+      "input_images": []
+    },
+    {
+      "id": "rug-floral",
+      "file": "materials/rug-floral.png",
+      "prompt": "Use case: illustration-story. Asset type: original material/artwork for precise isometric furniture sprites. Decorative handwoven rug surface, muted coral and butter central diamond medallion on warm cream, sage and turquoise botanical angular corner motifs, thin ornamental border on all edges, tiny woven fibers. Flat rectangular top down textile design filling canvas, warm watercolor pencil storybook, no perspective, no fringe outside, no text. Palette pastel warm, never pure black, no glossy gradient, no 3D render. No logo, watermark or brand.",
+      "input_images": []
+    },
+    {
+      "id": "print",
+      "file": "materials/print.png",
+      "prompt": "Use case: illustration-story. Asset type: original material/artwork for precise isometric furniture sprites. A simple charming small art print of a terracotta vase with butter yellow daisies and sage leaves, flat pastel blue background, warm children's storybook illustration thin brown ink and colored pencil wash. Full rectangular artwork only, no frame, no typography, no signature, no shadow. Palette pastel warm, never pure black, no glossy gradient, no 3D render. No logo, watermark or brand.",
+      "input_images": []
+    },
+    {
+      "id": "oil",
+      "file": "materials/oil.png",
+      "prompt": "Use case: illustration-story. Asset type: original material/artwork for precise isometric furniture sprites. A small intimate oil painting of a quiet Vietnamese river bend, green banana trees, distant small cream houses with brick roofs, muted turquoise water, pale warm sky, visible gentle brush strokes, warm hand painted storybook. Landscape artwork fills rectangular canvas, no frame, no text, no signature, no people. Palette pastel warm, never pure black, no glossy gradient, no 3D render. No logo, watermark or brand.",
+      "input_images": []
+    },
+    {
+      "id": "landscape",
+      "file": "materials/landscape.png",
+      "prompt": "Use case: illustration-story. Asset type: original material/artwork for precise isometric furniture sprites. A warm tranquil panoramic Vietnamese landscape painting with overlapping pale blue mountains, terraced sage green fields, a winding turquoise river and tiny honey colored thatched farmhouse, large butter sky and soft peach clouds. Hand painted storybook watercolor with pencil outlines, softly textured paper, full rectangular artwork, no frame, no text, no signature, no people. Palette pastel warm, never pure black, no glossy gradient, no 3D render. No logo, watermark or brand.",
+      "input_images": []
+    }
+  ],
+  "reused_originals": [
+    {
+      "id": "wood",
+      "file": "materials/wood.png",
+      "source": "assets/storybook-lot4/materials/wood.png",
+      "prompt_record": "../storybook-lot4/prompts.json"
+    },
+    {
+      "id": "stone",
+      "file": "materials/stone.png",
+      "source": "assets/storybook-lot4/materials/stone.png",
+      "prompt_record": "../storybook-lot4/prompts.json"
+    }
+  ],
+  "designs": [
+    {
+      "id": "bed",
+      "description": "Thin painted iron frame, thin mattress, plaid blanket; honey wood frame with two under-bed drawers and double pillows; tall upholstered headboard with two attached lamps and thick quilt.",
+      "render_source": "render.cjs"
+    },
+    {
+      "id": "wardrobe",
+      "description": "Zipped fabric wardrobe on steel frame; two-door honey wood wardrobe with round handles; wood wardrobe with mirror door and top light. Rear views show solid backs without doors or mirrors.",
+      "render_source": "render.cjs"
+    },
+    {
+      "id": "desk",
+      "description": "Folding panel desk with crossed legs and old laptop; wood desk with two-tier bookshelf and desk lamp; metal height-adjustable desk with laptop, extra monitor and small cactus.",
+      "render_source": "render.cjs"
+    },
+    {
+      "id": "table",
+      "description": "Plastic folding table with two plastic stools; round wood table with two wooden chairs; stone-top wood-legged table with four padded chairs and flower vase.",
+      "render_source": "render.cjs"
+    },
+    {
+      "id": "plant",
+      "description": "Small cactus in terracotta pot; trailing pothos in glazed pot; tall fiddle-leaf fig in flower-painted ceramic pot.",
+      "render_source": "render.cjs"
+    },
+    {
+      "id": "lamp",
+      "description": "Plastic clip-on lamp; ceramic base with paper shade; brass base with cream fabric shade.",
+      "render_source": "render.cjs"
+    },
+    {
+      "id": "rug",
+      "description": "Woven sedge; colored-stripe wool; ornamental woven textile with fringes on two ends.",
+      "render_source": "render.cjs"
+    },
+    {
+      "id": "painting",
+      "description": "Print in plastic frame; small oil painting in wood frame; large landscape in wood frame with picture light. Two wall orientations only.",
+      "render_source": "render.cjs"
+    },
+    {
+      "id": "door-main",
+      "description": "One closed wooden entrance door model with inset panels, brass handle and peephole. Preserve legacy zero-depth 0x2 wall footprint; four wall orientations.",
+      "render_source": "render.cjs"
+    }
+  ]
+}
