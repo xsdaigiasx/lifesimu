@@ -1,7 +1,7 @@
 {
   "version": "0.36.1",
-  "date": "2026-11-01",
-  "deployment": "Not deployed by assistant",
+  "date": "2026-11-04",
+  "deployment": "Cloudflare Workers Builds tự build từ nhánh main (thư mục app)",
   "handover": "docs/HANDOVER.md",
   "sourceIncludes": [
     "src",
@@ -16,10 +16,6 @@
     "player saves",
     "QA fixtures",
     "credentials"
-  ],
-  "packages": [
-    "Mot_Doi_De_Song_v0.35_Source.zip",
-    "Mot_Doi_De_Song_v0.35_Upload.zip"
   ],
   "art": "public/assets/static-scenes/furniture-v2",
   "room": "public/assets/static-scenes/rental-diamond.png",

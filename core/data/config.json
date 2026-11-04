@@ -16,10 +16,10 @@
     "initial": { "energy": 85, "fullness": 70, "mood": 75, "stress": 20, "health": 90 }
   },
   "skills": {
-    "maxLevel": 50,
-    "xpBase": 100,
-    "xpStep": 25,
+    "maxLevel": 10,
+    "xpBase": 80,
+    "xpExponent": 1.6,
     "ids": ["programming", "logic", "graphics", "management", "communication", "cooking"],
-    "initialLevels": { "programming": 3, "logic": 3, "graphics": 1, "management": 1, "communication": 1, "cooking": 1 }
+    "initialLevels": { "programming": 1, "logic": 1, "graphics": 1, "management": 1, "communication": 1, "cooking": 1 }
   }
 }
