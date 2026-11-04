@@ -42,3 +42,19 @@ img.npc-face{width:100%;height:100%;object-fit:cover;border-radius:50%;display:b
 .recipe-hint span{display:inline-flex;align-items:center;gap:4px}
 .recipe-from svg,.recipe-hint svg{width:13px!important;height:13px!important;fill:none;stroke:currentColor}
 .recipe-face{width:20px;height:20px;border-radius:50%;overflow:hidden;display:inline-block;background:#eee}
+/* T23: nấu bừa */
+.improv-open,.improv-cook{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;min-height:44px;margin:0 0 10px;border:1px solid #c3d0b6;border-radius:12px;background:#fcfcf6;color:#294d3d;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.improv-cook{margin-top:12px;background:#2f6b4f;border-color:#2f6b4f;color:#fff}.improv-cook:disabled{opacity:.45}
+.improv-open svg,.improv-cook svg{width:16px!important;height:16px!important;fill:none;stroke:currentColor}
+.improv-cook small{display:inline-flex;align-items:center;gap:2px;font-size:11px;font-weight:600;opacity:.85}.improv-cook small svg{width:12px!important;height:12px!important}
+.improv-pot{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:8px 0 6px;padding:10px;border-radius:16px;background:#efe6d6}
+.improv-pot button{aspect-ratio:1;border:2px dashed #cdbd9f;border-radius:12px;background:#fbf6ec;display:grid;place-items:center;padding:2px;cursor:pointer}
+.improv-pot button:not(.empty){border-style:solid;border-color:#b79f78}.improv-pot img{width:90%;height:90%;object-fit:contain}
+.improv-name{display:grid;justify-items:center;gap:3px;margin:0 0 10px;font-size:15px!important;font-weight:800;color:#294d3d!important;text-align:center;min-height:38px}
+.improv-name span{font-weight:600;color:#8b978d;font-size:12px}
+.improv-result{font-size:11px;font-weight:700;color:#6b7d70}.improv-result.burnt{color:#b0442b}.improv-result.tasty{color:#2f6b4f}
+.improv-pick{cursor:pointer}.improv-pick:disabled{opacity:.45}
+.improv-tag{display:block;font-size:10px;color:#9a7a2e;font-weight:700}
+.improv-tried{margin-top:14px}.improv-tried h4{margin:0 0 8px;font-size:13px;color:#294d3d}
+.improv-combo{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;margin-bottom:6px;border:1px solid #e1e6dc;border-radius:11px;background:#fcfcf6}
+.improv-combo .improv-result{display:grid;justify-items:end;font-size:12px;color:#294d3d}.improv-combo .improv-result small{font-size:10.5px;color:#6b7d70}
