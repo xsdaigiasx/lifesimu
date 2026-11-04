@@ -20,7 +20,7 @@ export function PersonSheet({state,id,onTalk,onClose}:{state:GameState;id:string
  const act=(k:'talk'|'meal')=>{const r=onTalk(id,k);if(r.ok)onClose();else setNote(r.error)};
  const rows:[string,string][]=known?[['Quê',p.origin],['Tính cách',p.traits.join(', ')],['Điểm nhấn',p.quirk],...(close?[['Mong muốn',p.goal] as [string,string]]:[]),...(fearKnown?[['Đang lo',p.fear] as [string,string]]:[])]:[];
  return <div className="story-backdrop" onClick={e=>{if(e.target===e.currentTarget)onClose()}}><section className="story-dialog person-sheet" role="dialog" aria-modal="true" aria-label={p.name}>
-  <header><span className="story-avatar" style={{background:p.tone}} aria-hidden="true">{p.label}</span><span><strong>{p.name}</strong><small>{p.role}</small></span><span className="story-tier">{relationTier(score)}</span><button className="person-close" aria-label="Đóng" onClick={onClose}>×</button></header>
+  <header><span className="story-avatar" style={{background:p.tone}} aria-hidden="true">{p.label}</span><span><strong>{p.name}</strong><small>{p.role}</small></span><span className="story-tier">{relationTier(score,p.id)}</span><button className="person-close" aria-label="Đóng" onClick={onClose}>×</button></header>
   {known&&<dl className="person-facts">{rows.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}
   <div className="person-actions">{known?<><button onClick={()=>act('talk')}>Nói chuyện</button><button disabled={!mealOpen(state,id)} onClick={()=>act('meal')}>Rủ đi ăn{!mealOpen(state,id)&&<small>Giờ ăn trưa, tối</small>}</button></>:<button className="wide" onClick={()=>act('talk')}>Chào hỏi</button>}</div>
   {note&&<p className="story-error" role="status">{note}</p>}
