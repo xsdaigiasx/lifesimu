@@ -1,7 +1,7 @@
 import NpcFace from './NpcFace';
 import {useState} from 'react';
 import type {GameState,GameResult} from '../domain/types';
-import {INGREDIENTS,STALLS,type IngredientId,type LifeAction,type StallId} from '../domain/life';
+import {INGREDIENTS,STALLS,isLate,marketPrice,shelfDays,type IngredientId,type LifeAction,type StallId} from '../domain/life';
 import {castById,peopleHere,presentAt,relationTier} from '../domain/npc';
 import {socialOf} from '../domain/social';
 import {clockOf} from '../domain/time';
@@ -33,10 +33,10 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
   </header>
   {chat&&onTalk&&<PersonSheet state={state} id={seller.id} onTalk={onTalk} onClose={()=>setChat(false)}/>}
   <div className="market-qty" role="radiogroup" aria-label="Số phần mỗi lần mua">{QTY.map(q=><button key={q} role="radio" aria-checked={q===qty} onClick={()=>setQty(q)}>{q} phần</button>)}</div>
-  <div className="market-grid">{stall.items.map(id=>{const it=INGREDIENTS[id],price=it.price*qty;return <article key={id} className="market-item">
+  <div className="market-grid">{stall.items.map(id=>{const it=INGREDIENTS[id],late=isLate(state,id),price=marketPrice(state,id)*qty;return <article key={id} className="market-item">
    <span className="market-item-art" style={{background:ITEM_TONE[id]}}><img src={ingredientArt(id)} alt="" loading="lazy" decoding="async"/></span>
    <strong>{it.name}</strong>
-   <span className="market-item-facts"><span title="Hạn dùng"><Icon name="clock"/>{it.days} ngày</span><span title="Trong kho"><Icon name="box"/>{stock(id)}</span></span>
+   <span className="market-item-facts"><span title="Hạn dùng" className={late?'late-tag':''}><Icon name="clock"/>{shelfDays(state,id)} ngày</span>{late&&<span className="late-tag">Chiều</span>}<span title="Trong kho"><Icon name="box"/>{stock(id)}</span></span>
    <button disabled={state.money<price} onClick={()=>buy(id)}>{money(price)}</button>
   </article>})}</div>
   {note&&<p className="market-note" role="status">{note}</p>}

@@ -10,7 +10,7 @@ export function drainFullness(s:GameState,minutes:number):GameState{if(minutes<=
 export function drainSleep(n:GameState){n.fullness=round1(clampVital(fullnessOf(n)-VITALS.sleepHours*VITALS.sleepDrainPerHour))}
 export function eatFullness(n:GameState,amount:number){n.fullness=round1(clampVital(fullnessOf(n)+amount))}
 /** Hệ số thể trạng m: 1,0 khi chăm đủ; chỉ phạt khi lơ là. */
-export function vitalFactor(s:GameState){const x=Math.min(s.energy,fullnessOf(s),s.mood);let m=x>=VITALS.mFull?1:x>=VITALS.mFloor?.7+.3*(x-VITALS.mFloor)/(VITALS.mFull-VITALS.mFloor):VITALS.mMin;if(s.health<VITALS.sickHealth||s.life?.conditions?.length)m*=.8;if(s.stress>=VITALS.stressBurnout)m*=.8;else if(s.stress>=VITALS.stressHigh)m*=.9;return Math.round(m*1000)/1000}
+export function vitalFactor(s:GameState){const x=Math.min(s.energy,fullnessOf(s),s.mood);let m=x>=VITALS.mFull?1:x>=VITALS.mFloor?.7+.3*(x-VITALS.mFloor)/(VITALS.mFull-VITALS.mFloor):VITALS.mMin;if(s.health<VITALS.sickHealth||s.life?.conditions?.length)m*=.8;if(s.life?.conditions?.some(c=>c.id==='foodPoisoning'&&c.severe&&c.treatedDay===undefined))m*=.8;if(s.stress>=VITALS.stressBurnout)m*=.8;else if(s.stress>=VITALS.stressHigh)m*=.9;return Math.round(m*1000)/1000}
 export type WarnLevel='soon'|'low';
 export interface VitalWarning{key:'energy'|'fullness'|'mood'|'stress'|'health';level:WarnLevel;text:string}
 /** Cảnh báo sớm: hiện trước khi chạm ngưỡng phạt (m bắt đầu giảm dưới 60). */
@@ -34,3 +34,6 @@ export const coffeeToday=(s:GameState)=>s.coffee&&s.coffee.day===s.day?s.coffee.
 export function drinkCoffee(n:GameState,minuteNow:number){n.energy=clampVital(n.energy+COFFEE.boost);const c=n.coffee&&n.coffee.day===n.day?n.coffee:{day:n.day,count:0,crashAt:null as number|null};n.coffee={day:n.day,count:c.count+1,crashAt:minuteNow+COFFEE.crashAfter}}
 /** Khi đồng hồ qua mốc tụt thì trừ 10 năng lượng một lần. */
 export function applyCoffeeCrash(s:GameState,toMinute:number):GameState{const c=s.coffee;if(!c||c.crashAt===null||c.day!==s.day||toMinute<c.crashAt)return s;return{...s,energy:Math.max(0,s.energy-COFFEE.boost),coffee:{...c,crashAt:null}}}
+
+/** T24: ngộ độc phát tác 2–4 giờ sau bữa ăn có rủi ro. */
+export function applyIllness(s:GameState,toMinute:number):GameState{const p=s.life?.pending;if(!p||(s.day===p.day&&toMinute<p.minute))return s;const life=structuredClone(s.life!);delete life.pending;if(!life.conditions.some(c=>c.id==='foodPoisoning'))life.conditions.push({id:'foodPoisoning',sinceDay:s.day,diagnosed:false,...(p.severe?{severe:true}:{})});return{...s,life,energy:clampVital(s.energy-8),mood:clampVital(s.mood-6)}}
