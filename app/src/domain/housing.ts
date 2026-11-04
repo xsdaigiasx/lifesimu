@@ -47,7 +47,7 @@ export const rentLabel=(s:GameState)=>housingOf(s).house==='tro'?'Tiền trọ':
 export const itemSize=(p:Placed)=>{const t=HOME_ITEMS[p.id];return p.rotation%180?{w:t.h,h:t.w}:{w:t.w,h:t.h}};
 export function layoutOf(s:GameState,house:HouseId,floor:1|2):Placed[]{return housingOf(s).layouts[house]?.[String(floor) as '1'|'2']??[]}
 /** Đồ đã mua nhưng chưa đặt ở tầng nào của nhà này. */
-export function storageOf(s:GameState,house:HouseId):HomeId[]{const used=new Set(Object.values(housingOf(s).layouts[house]??{}).flat().map(p=>p.id));return homeOf(s).items.map(i=>i.id).filter(id=>!used.has(id))}
+export function storageOf(s:GameState,house:HouseId):HomeId[]{const used=new Set(Object.values(housingOf(s).layouts[house]??{}).flat().map(p=>p.id));return [...new Set(homeOf(s).items.map(i=>i.id))].filter(id=>!used.has(id))}
 const inside=(r:{x:number;y:number;w:number;h:number},x:number,y:number,w=1,h=1)=>x>=r.x&&y>=r.y&&x+w<=r.x+r.w&&y+h<=r.y+r.h;
 /** Phòng chứa trọn món đồ (đồ phải nằm gọn trong một phòng, không đặt ở hành lang, cầu thang). */
 export function roomAt(floor:FloorDef,p:Placed){const {w,h}=itemSize(p);return floor.rooms.find(r=>inside(r,p.x,p.y,w,h))}
