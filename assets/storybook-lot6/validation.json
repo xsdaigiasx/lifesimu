@@ -1,0 +1,69 @@
+{
+  "issue": 89,
+  "lot": 6,
+  "checks": [
+    {
+      "id": "rental-storybook",
+      "frame": [
+        1536,
+        1536
+      ],
+      "bytes": 91576,
+      "rgba": true,
+      "alpha_bbox": [
+        106,
+        208,
+        1430,
+        1363
+      ],
+      "margin_px": 106,
+      "hash_matches": true
+    },
+    {
+      "id": "bath-mask",
+      "frame": [
+        1536,
+        1536
+      ],
+      "bytes": 5342,
+      "rgba": true,
+      "alpha_bbox": [
+        927,
+        684,
+        1181,
+        1075
+      ],
+      "margin_px": 355,
+      "hash_matches": true
+    },
+    {
+      "id": "room-master-storybook",
+      "frame": [
+        1448,
+        1086
+      ],
+      "bytes": 54108,
+      "rgba": true,
+      "alpha_bbox": [
+        204,
+        146,
+        1244,
+        877
+      ],
+      "margin_px": 146,
+      "hash_matches": true
+    }
+  ],
+  "normalized_runtime_floor_matches_source": true,
+  "canonical_projection_2_to_1": true,
+  "bath_tiles": 9,
+  "kitchen_tiles": 5,
+  "free_cells": 50,
+  "all_free_cells_connected": true,
+  "safe_grid_points_checked": 289,
+  "limitations": [
+    "Original rental-diamond PNG cannot be decoded via available connector; normalized registration checked against home-geometry.ts, not image pixels.",
+    "room-master original has a furnished irregular floor; the new sibling preserves 1448x1086 frame and uses an explicit canonical 8x8 floor.",
+    "No UI integration or browser playtest in this asset-only PR; CSS bath occlusion must use supplied mask."
+  ]
+}

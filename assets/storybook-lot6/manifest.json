@@ -1,0 +1,221 @@
+{
+  "issue": 89,
+  "lot": 6,
+  "source_commit": "c7d825263e489949f4210d7de55c9eba814b73f7",
+  "method": "Extended existing repo-native SVG room geometry; inherited lot4 AI material swatches, no new imagegen or external images",
+  "registration": "Runtime variant preserves normalized HOME_OUTER_FLOOR corners. Original rental-diamond PNG pixel dimensions could not be decoded through connector; new square frame is 1536x1536. room-master source is 1448x1086 and furnished with a different polygon; supplied canonical sibling preserves its frame, not that polygon.",
+  "items": [
+    {
+      "id": "rental-storybook",
+      "file": "app/public/assets/static-scenes/rental-storybook.webp",
+      "frame": [
+        1536,
+        1536
+      ],
+      "origin": [
+        768,
+        464.64
+      ],
+      "axes": [
+        81.6,
+        55.2
+      ],
+      "wall": 250,
+      "projection": "legacy normalized floor registration",
+      "bytes": 91576,
+      "sha256": "91b761b09a885d430d67158d70bc336e7eaeddac8a606f40f937eaaf6bb89b5b",
+      "compression": "WebP q86 alpha100 RGBA",
+      "floor_tiles": [
+        8,
+        8
+      ],
+      "floor_corners": [
+        {
+          "world": [
+            0,
+            0
+          ],
+          "pixel": [
+            768,
+            464.64
+          ]
+        },
+        {
+          "world": [
+            8,
+            0
+          ],
+          "pixel": [
+            1420.8,
+            906.24
+          ]
+        },
+        {
+          "world": [
+            8,
+            8
+          ],
+          "pixel": [
+            768,
+            1347.8400000000001
+          ]
+        },
+        {
+          "world": [
+            0,
+            8
+          ],
+          "pixel": [
+            115.20000000000005,
+            906.24
+          ]
+        }
+      ],
+      "anchor_px": [
+        768,
+        1347.8400000000001
+      ],
+      "bath": {
+        "x": 5,
+        "y": 0,
+        "w": 3,
+        "h": 3
+      },
+      "kitchen": {
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 1
+      },
+      "bath_opening": {
+        "axis": "y",
+        "at": 3,
+        "from": 6,
+        "to": 7
+      },
+      "safe_grid": {
+        "origin": [
+          768,
+          508.8
+        ],
+        "axes": [
+          73.44,
+          49.68000000000001
+        ],
+        "margin_tiles": 0.4
+      }
+    },
+    {
+      "id": "bath-mask",
+      "file": "app/public/assets/static-scenes/rental-storybook-bath-mask.webp",
+      "frame": [
+        1536,
+        1536
+      ],
+      "bytes": 5342,
+      "sha256": "91795cd86f3ad45612115525e421143c5571c82c8733e9363f5cb5c9662e0424",
+      "compression": "WebP lossless RGBA",
+      "usage": "Partition-only occlusion overlay; replace old fixed CSS clip, not the full scene."
+    },
+    {
+      "id": "room-master-storybook",
+      "file": "app/public/assets/room-master-storybook.webp",
+      "frame": [
+        1448,
+        1086
+      ],
+      "origin": [
+        724,
+        350
+      ],
+      "axes": [
+        64,
+        32
+      ],
+      "wall": 200,
+      "projection": "orthographic-2:1",
+      "bytes": 54108,
+      "sha256": "6fe09f0ee124e6acb30034eb47e8239deb1bc0db5708d62223422f7c95fa6f09",
+      "compression": "WebP q86 alpha100 RGBA",
+      "floor_tiles": [
+        8,
+        8
+      ],
+      "floor_corners": [
+        {
+          "world": [
+            0,
+            0
+          ],
+          "pixel": [
+            724,
+            350
+          ]
+        },
+        {
+          "world": [
+            8,
+            0
+          ],
+          "pixel": [
+            1236,
+            606
+          ]
+        },
+        {
+          "world": [
+            8,
+            8
+          ],
+          "pixel": [
+            724,
+            862
+          ]
+        },
+        {
+          "world": [
+            0,
+            8
+          ],
+          "pixel": [
+            212,
+            606
+          ]
+        }
+      ],
+      "anchor_px": [
+        724,
+        862
+      ],
+      "bath": {
+        "x": 5,
+        "y": 0,
+        "w": 3,
+        "h": 3
+      },
+      "kitchen": {
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 1
+      },
+      "bath_opening": {
+        "axis": "y",
+        "at": 3,
+        "from": 6,
+        "to": 7
+      },
+      "safe_grid": {
+        "origin": [
+          724,
+          375.6
+        ],
+        "axes": [
+          57.6,
+          28.8
+        ],
+        "margin_tiles": 0.4
+      }
+    }
+  ]
+}
