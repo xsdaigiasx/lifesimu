@@ -192,3 +192,14 @@
 .story-options button:disabled{opacity:1;background:transparent;color:#9a9a88;border-style:dashed}
 .story-options small{font-size:10px}
 .story-error{margin:0;font-size:11px;color:#a1452f}
+.person-sheet>header{position:relative}
+.person-close{width:32px;height:32px;border-radius:9px;background:#f3efe2;border:1px solid #e1d8c0;font-size:18px;line-height:1;color:#5b6650;flex:none}
+.person-facts{margin:0;display:flex;flex-direction:column;gap:6px}
+.person-facts>div{display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px solid #ece4cf}
+.person-facts dt{font-size:11px;color:#78876c}
+.person-facts dd{margin:0;font-size:13px;color:#2f3f35}
+.person-stranger{margin:0;font-size:13px;color:#5b6650}
+.person-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.person-actions .wide{grid-column:1/-1}
+.person-actions button{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:10px;background:#38644e;color:#fff;font-size:13px}
+.person-actions button{flex-direction:column;gap:2px}.person-actions button small{font-size:10px;font-weight:400}.person-actions button:disabled{opacity:1;background:transparent;color:#9a9a88;border:1px dashed #cfc6ae}

@@ -135,3 +135,5 @@ export function validStory(v:unknown,day:number):v is StoryState{if(!v||typeof v
  if(s.pending!==undefined){const p=s.pending;if(!p||typeof p.key!=='string'||!id(p.npc)||!MOTIF_IDS.includes(p.motif)||!Number.isInteger(p.variant)||p.variant<0||p.variant>=motifOf(p.motif).variants||!['npc','player'].includes(p.by)||!d(p.day,day))return false}
  return true}
 export const placeHasStory=(s:GameState,place:PlaceId)=>NPCS.some(n=>n.story&&presentAt(n,s.day,clockOf(s).minute,place));
+/** Rủ đi ăn được không lúc này (cho giao diện làm mờ nút). */
+export function mealOpen(s:GameState,id:string){const npc=castById(id);return!!npc&&motifOf('meal').eligible(ctxFor(s,npc))}

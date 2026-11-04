@@ -6,7 +6,7 @@ import {socialOf} from '../domain/social';
 import {clockOf} from '../domain/time';
 import {money} from '../domain/format';
 import Icon from './Icon';
-import PeopleHere from './PeopleHere';
+import PeopleHere,{PersonSheet} from './PeopleHere';
 
 const ITEM_ICON:Record<IngredientId,string>={rice:'bag',egg:'food',vegetable:'leaf',pork:'food',tofu:'box',fish:'fish'};
 const ITEM_TONE:Record<IngredientId,string>={rice:'#f2e6c4',egg:'#f6e3b4',vegetable:'#d9ecc8',pork:'#f1d2cc',tofu:'#efe9dc',fish:'#d3e7e6'};
@@ -22,14 +22,14 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
  </div>}
  const seller=castById(stall.seller)!,here=presentAt(seller,state.day,c.minute,'market');
  const buy=(id:IngredientId)=>{const r=onAction({kind:'ingredient',id,qty});setNote(r.ok?`Đã mua ${qty} phần ${INGREDIENTS[id].name.toLowerCase()}.`:r.error)};
- const talk=(k:'talk'|'meal')=>{if(!onTalk)return;const r=onTalk(seller.id,k);setNote(r.ok?'':r.error);setChat(false)};
+ 
  return <div className="market">
   <header className="market-seller"><button className="market-back" aria-label="Về các quầy" onClick={()=>{setStall(null);setNote('')}}><Icon name="chevron-left"/></button>
    <span className="market-avatar" style={{background:seller.tone}} aria-hidden="true">{seller.label}</span>
    <span className="market-seller-copy"><strong>{here?seller.name:stall.name}</strong><small>{here?stall.name:`${seller.name} về rồi, người nhà trông quầy`}</small>{here&&<span className="market-tier">{relationTier(rel[seller.id]?.score??0)}</span>}</span>
    {here&&onTalk&&<button className="market-chat" aria-expanded={chat} onClick={()=>setChat(v=>!v)}>Hỏi chuyện</button>}
   </header>
-  {chat&&<div className="market-chat-options"><button onClick={()=>talk('talk')}>Nói chuyện</button><button onClick={()=>talk('meal')}>Rủ đi ăn</button></div>}
+  {chat&&onTalk&&<PersonSheet state={state} id={seller.id} onTalk={onTalk} onClose={()=>setChat(false)}/>}
   <div className="market-qty" role="radiogroup" aria-label="Số phần mỗi lần mua">{QTY.map(q=><button key={q} role="radio" aria-checked={q===qty} onClick={()=>setQty(q)}>{q} phần</button>)}</div>
   <div className="market-grid">{stall.items.map(id=>{const it=INGREDIENTS[id],price=it.price*qty;return <article key={id} className="market-item">
    <span className="market-item-art" style={{background:ITEM_TONE[id]}}><Icon name={ITEM_ICON[id]}/></span>
