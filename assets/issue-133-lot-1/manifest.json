@@ -1,0 +1,6111 @@
+{
+  "issue": 133,
+  "lot": 1,
+  "reference": "assets/style-reference/room-reference.webp",
+  "reference_sha256": "de62bcc0acc896633081b0a37d4828be4c03594875ea213c5f72bcf69ff8c053",
+  "projection": "orthographic 2:1; tile 128x64; z unit 32px",
+  "expected": 112,
+  "exported": 112,
+  "items": [
+    {
+      "id": "bed-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/bed-basic_a.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 78183,
+      "sha256": "c21d4360f66dbabdf73c7814ce46d36070dcbc2bb9b250ed9a68c1dcdf781a5c",
+      "source_sha256": "b49ea80ff93117e1b0aad000d59aa97f966e85cb4b29abc6ac0f0748aa4b33a5",
+      "source_crop_px": [
+        186,
+        209,
+        1119,
+        1076
+      ],
+      "source_bottom_anchor_px": [
+        490,
+        1073
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        30,
+        306,
+        278
+      ],
+      "calibration_bbox_px": [
+        14,
+        30,
+        306,
+        278
+      ],
+      "prior_ground_contact_px": [
+        130,
+        276
+      ],
+      "export_scale": 0.3129689174705252,
+      "export_offset_px": [
+        14,
+        5
+      ]
+    },
+    {
+      "id": "bed-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/bed-basic_b.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        192,
+        288
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 77351,
+      "sha256": "516c9b35de885ebfca9772d76443df3db0839dcc18d6fe02c4046e677aae3446",
+      "source_sha256": "d853c1b58c0b33948acdd228de719a05e36d2da8c96503a56689eb1248a5ffeb",
+      "source_crop_px": [
+        195,
+        197,
+        1129,
+        1055
+      ],
+      "source_bottom_anchor_px": [
+        814,
+        1052
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        28,
+        306,
+        278
+      ],
+      "calibration_bbox_px": [
+        14,
+        28,
+        306,
+        278
+      ],
+      "prior_ground_contact_px": [
+        190,
+        276
+      ],
+      "export_scale": 0.31263383297644537,
+      "export_offset_px": [
+        14,
+        8
+      ]
+    },
+    {
+      "id": "bed-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/bed-basic_c.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 66985,
+      "sha256": "3a43d4a41799ba77a168e4b207ac1c037e91be929df432ba7d8d6ecca5e00916",
+      "source_sha256": "bfa89be5efdc1fdea0f9974d12fa1ccdc2dd774cd408d169d7178eb4f607305f",
+      "source_crop_px": [
+        184,
+        340,
+        1119,
+        1006
+      ],
+      "source_bottom_anchor_px": [
+        499,
+        1003
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        83,
+        306,
+        278
+      ],
+      "calibration_bbox_px": [
+        14,
+        83,
+        306,
+        278
+      ],
+      "prior_ground_contact_px": [
+        129,
+        277
+      ],
+      "export_scale": 0.3122994652406417,
+      "export_offset_px": [
+        14,
+        70
+      ]
+    },
+    {
+      "id": "bed-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/bed-basic_d.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        192,
+        288
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 66896,
+      "sha256": "6a6718369798061e5dcccacbc8ef923357f379b149b2eb3db2a3827548c79546",
+      "source_sha256": "c7bbbd8f203727cfccc64702b55968e7b260b4337ec5b252b6b5436a9a9fd5bf",
+      "source_crop_px": [
+        152,
+        364,
+        1131,
+        1065
+      ],
+      "source_bottom_anchor_px": [
+        788,
+        1062
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        84,
+        306,
+        278
+      ],
+      "calibration_bbox_px": [
+        14,
+        84,
+        306,
+        278
+      ],
+      "prior_ground_contact_px": [
+        191,
+        277
+      ],
+      "export_scale": 0.2982635342185904,
+      "export_offset_px": [
+        14,
+        68
+      ]
+    },
+    {
+      "id": "bed-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/bed-comfort_a.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 93218,
+      "sha256": "87d12842bb437e65f32ab7951c8704d5aa03c23789db521fc9b1500599f2aa71",
+      "source_sha256": "334d462134c10a148e799923fca207cbe3dcd3dd201883fc2d961e217f68bedd",
+      "source_crop_px": [
+        206,
+        259,
+        1108,
+        1076
+      ],
+      "source_bottom_anchor_px": [
+        523,
+        1073
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "calibration_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "prior_ground_contact_px": [
+        129,
+        276
+      ],
+      "export_scale": 0.3237250554323725,
+      "export_offset_px": [
+        14,
+        12
+      ]
+    },
+    {
+      "id": "bed-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/bed-comfort_b.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        192,
+        288
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 90373,
+      "sha256": "5ad8fc07521d11e6645c404e3d783756851909356da6888d9b288b7f964e06c1",
+      "source_sha256": "74c48abc5bcd190ef86f94b6abd065dde4be405ce49319aecedd76146ce610f1",
+      "source_crop_px": [
+        118,
+        149,
+        1205,
+        1116
+      ],
+      "source_bottom_anchor_px": [
+        811,
+        1113
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "calibration_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "prior_ground_contact_px": [
+        190,
+        276
+      ],
+      "export_scale": 0.2686292548298068,
+      "export_offset_px": [
+        14,
+        17
+      ]
+    },
+    {
+      "id": "bed-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/bed-comfort_c.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 82530,
+      "sha256": "d19085843c33fb5e359e0a0c78c7e4f5984a871b8ef5dc9e4954ee41913bbef6",
+      "source_sha256": "401c51ee3b258e49d626aaf6187357dc7bb7c0f8bb12906cfa4550f8b793c02c",
+      "source_crop_px": [
+        189,
+        315,
+        1159,
+        1075
+      ],
+      "source_bottom_anchor_px": [
+        522,
+        1072
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "calibration_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "prior_ground_contact_px": [
+        128,
+        277
+      ],
+      "export_scale": 0.30103092783505153,
+      "export_offset_px": [
+        14,
+        49
+      ]
+    },
+    {
+      "id": "bed-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/bed-comfort_d.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        192,
+        288
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 73971,
+      "sha256": "eb208adc6dc9c3d4b7c0eeb8ecbd4370c81d17205f5b9377920ac9cb4cc06897",
+      "source_sha256": "85e79d48d3cc3990d8823fddf9ab9d853fab9c28b706b164a43b8af66bdfe236",
+      "source_crop_px": [
+        141,
+        305,
+        1175,
+        1054
+      ],
+      "source_bottom_anchor_px": [
+        805,
+        1051
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "calibration_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "prior_ground_contact_px": [
+        192,
+        277
+      ],
+      "export_scale": 0.28239845261121854,
+      "export_offset_px": [
+        14,
+        66
+      ]
+    },
+    {
+      "id": "bed-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/bed-premium_a.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 88807,
+      "sha256": "087e1230725dd438bd059155162df31c1376eb39d782097d8de148112dfb8d6a",
+      "source_sha256": "da2350d0fd4528ba4e53b9a58200b7537092c8e78c97944657f6207b415769a2",
+      "source_crop_px": [
+        146,
+        136,
+        1162,
+        1096
+      ],
+      "source_bottom_anchor_px": [
+        491,
+        1093
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        13,
+        309,
+        277
+      ],
+      "calibration_bbox_px": [
+        14,
+        13,
+        309,
+        277
+      ],
+      "prior_ground_contact_px": [
+        129,
+        276
+      ],
+      "export_scale": 0.28541666666666665,
+      "export_offset_px": [
+        17,
+        2
+      ]
+    },
+    {
+      "id": "bed-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/bed-premium_b.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        192,
+        288
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 84843,
+      "sha256": "765bbf64e57347406c74eca7fe734ccaa150d578ebc832fff2814e1dd7b80668",
+      "source_sha256": "9222deace2c220c31999bfb5b316b529feab621c3189bc306978a7744c68698b",
+      "source_crop_px": [
+        157,
+        130,
+        1173,
+        1102
+      ],
+      "source_bottom_anchor_px": [
+        807,
+        1099
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        11,
+        13,
+        306,
+        277
+      ],
+      "calibration_bbox_px": [
+        11,
+        13,
+        306,
+        277
+      ],
+      "prior_ground_contact_px": [
+        190,
+        276
+      ],
+      "export_scale": 0.28189300411522633,
+      "export_offset_px": [
+        16,
+        2
+      ]
+    },
+    {
+      "id": "bed-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/bed-premium_c.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 73298,
+      "sha256": "29cbdd5e96d5f32e4eee1178f4b4afdf4c89b643a46f623057a5269c63c34764",
+      "source_sha256": "d2f31ca6f5af85161f45907cccfd08563b52149346cc3557b1b155a70e0d4a3c",
+      "source_crop_px": [
+        167,
+        351,
+        1194,
+        1067
+      ],
+      "source_bottom_anchor_px": [
+        559,
+        1064
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        11,
+        85,
+        306,
+        278
+      ],
+      "calibration_bbox_px": [
+        11,
+        85,
+        306,
+        278
+      ],
+      "prior_ground_contact_px": [
+        128,
+        277
+      ],
+      "export_scale": 0.2872444011684518,
+      "export_offset_px": [
+        11,
+        72
+      ]
+    },
+    {
+      "id": "bed-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/bed-premium_d.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "anchor_px": [
+        192,
+        288
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 73022,
+      "sha256": "4bcd9dd53e0c6b6c9342d03e6874059329b3afd5289544278e70986d9c2585e4",
+      "source_sha256": "e357bf3168b9b9157bd1a91b48394949f49c437824db78adc04fb16d514cf2cc",
+      "source_crop_px": [
+        99,
+        336,
+        1174,
+        1091
+      ],
+      "source_bottom_anchor_px": [
+        735,
+        1088
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        85,
+        309,
+        278
+      ],
+      "calibration_bbox_px": [
+        14,
+        85,
+        309,
+        278
+      ],
+      "prior_ground_contact_px": [
+        192,
+        277
+      ],
+      "export_scale": 0.2744186046511628,
+      "export_offset_px": [
+        14,
+        70
+      ]
+    },
+    {
+      "id": "wardrobe-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/wardrobe-basic_a.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 60567,
+      "sha256": "4379463326739293e4f7a7ac97656e54db32307de1d89071b03373b004bdb4cc",
+      "source_sha256": "17dfca2fdef8100344ce8f0657533a041b9c849f88a899ee31c2fec40efa7c07",
+      "source_crop_px": [
+        175,
+        143,
+        850,
+        1393
+      ],
+      "source_bottom_anchor_px": [
+        467,
+        1390
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "calibration_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "prior_ground_contact_px": [
+        128,
+        277
+      ],
+      "export_scale": 0.22,
+      "export_offset_px": [
+        22,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/wardrobe-basic_b.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        64,
+        288
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 60396,
+      "sha256": "74ebcda6556021d2ad4cb78ff319e3a0ced4ca75e7ed62e8c2c062cdc305633d",
+      "source_sha256": "b3fabc8c04f7cadfcc6ae1a8978e330f25debf7092fb0837b690784d81974d4f",
+      "source_crop_px": [
+        168,
+        130,
+        858,
+        1401
+      ],
+      "source_bottom_anchor_px": [
+        571,
+        1398
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "calibration_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "prior_ground_contact_px": [
+        64,
+        277
+      ],
+      "export_scale": 0.21636506687647522,
+      "export_offset_px": [
+        22,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/wardrobe-basic_c.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 57676,
+      "sha256": "91754827f9307cf4f231934225e78e0d29d0e7b45a1c8f34918c372b9f939e80",
+      "source_sha256": "2f75a95d991853387f8c37c8f33aa382473db87310ea60a2a6273348acc9871c",
+      "source_crop_px": [
+        165,
+        136,
+        855,
+        1425
+      ],
+      "source_bottom_anchor_px": [
+        632,
+        1422
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "calibration_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "prior_ground_contact_px": [
+        128,
+        277
+      ],
+      "export_scale": 0.21334367726920092,
+      "export_offset_px": [
+        23,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/wardrobe-basic_d.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        64,
+        288
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 57635,
+      "sha256": "5920b1c4bc049a002c4d5f87038b765738638da12e564702ca04415c794b6d74",
+      "source_sha256": "8a3cf6de54d189c7739762555dbff6345f16a951aadc380b9a74f1a0aca7b3ce",
+      "source_crop_px": [
+        171,
+        141,
+        855,
+        1406
+      ],
+      "source_bottom_anchor_px": [
+        407,
+        1403
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        24,
+        180,
+        278
+      ],
+      "calibration_bbox_px": [
+        12,
+        24,
+        180,
+        278
+      ],
+      "prior_ground_contact_px": [
+        64,
+        277
+      ],
+      "export_scale": 0.21739130434782608,
+      "export_offset_px": [
+        22,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/wardrobe-comfort_a.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 64703,
+      "sha256": "a74557d23f7acb43240f47d51a4b62088d057a6509acb1b8b31f68c3ddd173d1",
+      "source_sha256": "b047d14b8a69e829ba53ad1a25bcad62e00835857db781140d9d790449768f38",
+      "source_crop_px": [
+        102,
+        121,
+        917,
+        1452
+      ],
+      "source_bottom_anchor_px": [
+        632,
+        1449
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "calibration_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "prior_ground_contact_px": [
+        128,
+        277
+      ],
+      "export_scale": 0.20613496932515338,
+      "export_offset_px": [
+        12,
+        3
+      ]
+    },
+    {
+      "id": "wardrobe-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/wardrobe-comfort_b.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        64,
+        288
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 62886,
+      "sha256": "8150f0593525ad560c1bdff92bae88a18a410d2ddb9a294beb51d9846d611e27",
+      "source_sha256": "c8e4a11787ab8b042170c23c60383b216b62702fb1626071bd5c25125bd28b43",
+      "source_crop_px": [
+        22,
+        570,
+        728,
+        1779
+      ],
+      "source_bottom_anchor_px": [
+        240,
+        1776
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "calibration_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "prior_ground_contact_px": [
+        64,
+        277
+      ],
+      "export_scale": 0.22746071133167908,
+      "export_offset_px": [
+        16,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/wardrobe-comfort_c.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 59594,
+      "sha256": "981f502d5bd1b2944df9492318c76b0ca2e31d7f938efa559644eedb202ffc94",
+      "source_sha256": "71658096e3f8b326153b7382d1f744c31d5bcebc57e31da4ed0bcf729460ca67",
+      "source_crop_px": [
+        103,
+        108,
+        916,
+        1463
+      ],
+      "source_bottom_anchor_px": [
+        636,
+        1460
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "calibration_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "prior_ground_contact_px": [
+        128,
+        277
+      ],
+      "export_scale": 0.2029520295202952,
+      "export_offset_px": [
+        14,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/wardrobe-comfort_d.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        64,
+        288
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 53416,
+      "sha256": "78214316857f17859f6e5d2684db9653d1d1cb641e21175012191a0fe8ab06a7",
+      "source_sha256": "9a14bb9e920026320cf1d0d1f9d3c2109c68c59b803a4762dc8db01107eb7130",
+      "source_crop_px": [
+        10,
+        532,
+        738,
+        1858
+      ],
+      "source_bottom_anchor_px": [
+        215,
+        1855
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "calibration_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "prior_ground_contact_px": [
+        64,
+        277
+      ],
+      "export_scale": 0.20739064856711917,
+      "export_offset_px": [
+        21,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/wardrobe-premium_a.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 60298,
+      "sha256": "d938ec3b61d4b6972eeaed495860d510375f0afbec72b72f7725558abb716db8",
+      "source_sha256": "80df9e36ccf132367fa74305c9a6fe97f9b9b218f7519071dbab8cf2d7871e64",
+      "source_crop_px": [
+        163,
+        174,
+        860,
+        1447
+      ],
+      "source_bottom_anchor_px": [
+        648,
+        1444
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "calibration_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "prior_ground_contact_px": [
+        128,
+        277
+      ],
+      "export_scale": 0.21602513747054203,
+      "export_offset_px": [
+        21,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/wardrobe-premium_b.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        64,
+        288
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 59088,
+      "sha256": "7f8bb68811ea372ce8a7035713c2ace2d515e17bd516b94fcc7a40be65fc75cd",
+      "source_sha256": "3c62aa2425891a8c0a3b3c71dcdd82f02c92c0efc160007962b0b5cd0e7e612a",
+      "source_crop_px": [
+        173,
+        154,
+        853,
+        1435
+      ],
+      "source_bottom_anchor_px": [
+        370,
+        1432
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "calibration_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "prior_ground_contact_px": [
+        64,
+        277
+      ],
+      "export_scale": 0.21467603434816548,
+      "export_offset_px": [
+        24,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/wardrobe-premium_c.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        128,
+        288
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 52362,
+      "sha256": "8f6221a72c1584f489be38080a600e9e54b1ccbc83e8391f1cdea6f8b6fb9adf",
+      "source_sha256": "62cb810a5613647d136f34ec8185f7f3c3f71f6248bd532fdad079f870dfad50",
+      "source_crop_px": [
+        172,
+        137,
+        851,
+        1455
+      ],
+      "source_bottom_anchor_px": [
+        635,
+        1452
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "calibration_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "prior_ground_contact_px": [
+        128,
+        277
+      ],
+      "export_scale": 0.208649468892261,
+      "export_offset_px": [
+        26,
+        2
+      ]
+    },
+    {
+      "id": "wardrobe-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/wardrobe-premium_d.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "anchor_px": [
+        64,
+        288
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 192,
+      "height_z": 6,
+      "bytes": 51890,
+      "sha256": "d8d92a81c851261b03d2aef5d9cf558aceb7109278082c72d664da1c021f62a9",
+      "source_sha256": "9b629161fde1d7e43b5fa57eba9a555a43388b214bf6c771befb8bafb2b9c0c4",
+      "source_crop_px": [
+        145,
+        106,
+        879,
+        1452
+      ],
+      "source_bottom_anchor_px": [
+        387,
+        1449
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "calibration_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "prior_ground_contact_px": [
+        64,
+        277
+      ],
+      "export_scale": 0.20430906389301634,
+      "export_offset_px": [
+        22,
+        2
+      ]
+    },
+    {
+      "id": "desk-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/desk-basic_a.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 38179,
+      "sha256": "ba70e39eddb3352e6dbcce0b55937dc93e8ae6290e44f7e9532fb3d94539446e",
+      "source_sha256": "99cfc4792102e7d2a894825f2ff613ef95ea25d507f2a47ede04ec3436893750",
+      "source_crop_px": [
+        191,
+        320,
+        1060,
+        1166
+      ],
+      "source_bottom_anchor_px": [
+        510,
+        1163
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        44,
+        70,
+        229,
+        223
+      ],
+      "calibration_bbox_px": [
+        44,
+        70,
+        229,
+        223
+      ],
+      "prior_ground_contact_px": [
+        156,
+        222
+      ],
+      "export_scale": 0.21288837744533948,
+      "export_offset_px": [
+        44,
+        42
+      ]
+    },
+    {
+      "id": "desk-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/desk-basic_b.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 39586,
+      "sha256": "efea17f63ec7915db194f0e0ebb35b5d783f2d8d9ea73d54dbd6a99caf1832b0",
+      "source_sha256": "382683bb328172dbf1029f413c4484a45d432483bee8b71401056b8888c46bde",
+      "source_crop_px": [
+        207,
+        320,
+        1037,
+        1156
+      ],
+      "source_bottom_anchor_px": [
+        735,
+        1153
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        27,
+        67,
+        212,
+        223
+      ],
+      "calibration_bbox_px": [
+        27,
+        67,
+        212,
+        223
+      ],
+      "prior_ground_contact_px": [
+        99,
+        222
+      ],
+      "export_scale": 0.22289156626506024,
+      "export_offset_px": [
+        27,
+        36
+      ]
+    },
+    {
+      "id": "desk-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/desk-basic_c.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 37751,
+      "sha256": "8e1ca86d94a525f7d5ab98bc6c17d0d51fbec04a853a82dd31d85f65c41040c5",
+      "source_sha256": "f8b5466f757239e373d3b8c4f5e618c5b821582047ec6e9f041e867c4dfa4490",
+      "source_crop_px": [
+        186,
+        282,
+        1068,
+        1139
+      ],
+      "source_bottom_anchor_px": [
+        501,
+        1136
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        27,
+        81,
+        212,
+        233
+      ],
+      "calibration_bbox_px": [
+        27,
+        81,
+        212,
+        233
+      ],
+      "prior_ground_contact_px": [
+        137,
+        231
+      ],
+      "export_scale": 0.20975056689342403,
+      "export_offset_px": [
+        27,
+        52
+      ]
+    },
+    {
+      "id": "desk-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/desk-basic_d.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 38396,
+      "sha256": "a7ddedb3f474545fe6fc9be80b0d25b8d553429ab7651174680abd2a089c0960",
+      "source_sha256": "7281b11b9213bb348d6d0d1407b78de9a45d719a1f6e7770f40eb024b59a97b4",
+      "source_crop_px": [
+        205,
+        319,
+        1040,
+        1158
+      ],
+      "source_bottom_anchor_px": [
+        741,
+        1155
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        44,
+        81,
+        229,
+        233
+      ],
+      "calibration_bbox_px": [
+        44,
+        81,
+        229,
+        233
+      ],
+      "prior_ground_contact_px": [
+        118,
+        231
+      ],
+      "export_scale": 0.2215568862275449,
+      "export_offset_px": [
+        44,
+        46
+      ]
+    },
+    {
+      "id": "desk-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/desk-comfort_a.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 41854,
+      "sha256": "e7c60f3e7d9dc972601ef93b2fc5753263497afb9a5d6c3684ecaa563d35879a",
+      "source_sha256": "84cdf8d2da99182a16be84c5ef4789c0aac28b725f4dd2c75cbb0e17f35ca344",
+      "source_crop_px": [
+        156,
+        429,
+        1092,
+        1236
+      ],
+      "source_bottom_anchor_px": [
+        746,
+        1233
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        44,
+        17,
+        232,
+        228
+      ],
+      "calibration_bbox_px": [
+        44,
+        17,
+        232,
+        228
+      ],
+      "prior_ground_contact_px": [
+        156,
+        226
+      ],
+      "export_scale": 0.20085470085470086,
+      "export_offset_px": [
+        44,
+        64
+      ]
+    },
+    {
+      "id": "desk-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/desk-comfort_b.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 41432,
+      "sha256": "61e47e7e83f725502cfa347a825eecdc5a149d80a121e7aef87aa2a836fc711b",
+      "source_sha256": "2aad6a041db202d475c4020b62d58f48dcd7f71d4af2860bf77dfe42ae0a4e5d",
+      "source_crop_px": [
+        194,
+        436,
+        1061,
+        1231
+      ],
+      "source_bottom_anchor_px": [
+        527,
+        1228
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        24,
+        17,
+        212,
+        228
+      ],
+      "calibration_bbox_px": [
+        24,
+        17,
+        212,
+        228
+      ],
+      "prior_ground_contact_px": [
+        99,
+        226
+      ],
+      "export_scale": 0.21683967704728951,
+      "export_offset_px": [
+        24,
+        54
+      ]
+    },
+    {
+      "id": "desk-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/desk-comfort_c.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 39503,
+      "sha256": "a6f00f05493342f04ea0d9b3a0a90a20408243847a1d4cb17f78f63dfeb9b66b",
+      "source_sha256": "988a686b51812337cf32600285d07f33019fc7778f13194d34331f468a414809",
+      "source_crop_px": [
+        154,
+        432,
+        1099,
+        1241
+      ],
+      "source_bottom_anchor_px": [
+        494,
+        1238
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        24,
+        57,
+        212,
+        237
+      ],
+      "calibration_bbox_px": [
+        24,
+        57,
+        212,
+        237
+      ],
+      "prior_ground_contact_px": [
+        138,
+        235
+      ],
+      "export_scale": 0.19894179894179895,
+      "export_offset_px": [
+        24,
+        75
+      ]
+    },
+    {
+      "id": "desk-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/desk-comfort_d.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 43228,
+      "sha256": "6511942458cffe02060602e7990d9721aaa0c1162eebf5ae3c7fe320aa61d16d",
+      "source_sha256": "f982e4eca29feafbb3a8d0d965636b6961237f640e4477fbebb4d962f061b900",
+      "source_crop_px": [
+        181,
+        433,
+        1078,
+        1230
+      ],
+      "source_bottom_anchor_px": [
+        532,
+        1227
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        44,
+        57,
+        232,
+        237
+      ],
+      "calibration_bbox_px": [
+        44,
+        57,
+        232,
+        237
+      ],
+      "prior_ground_contact_px": [
+        117,
+        235
+      ],
+      "export_scale": 0.20958751393534003,
+      "export_offset_px": [
+        44,
+        68
+      ]
+    },
+    {
+      "id": "desk-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/desk-premium_a.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 40871,
+      "sha256": "d2e9fa9db3a58fa3b1153b9fc911b14d4e9c71a0ca8449de5d7668c528c5ab04",
+      "source_sha256": "ad07acb73c66fd82698c04e7619f76c325f1e707f78d41d4e0642dc36a3eb2ba",
+      "source_crop_px": [
+        154,
+        248,
+        1091,
+        1192
+      ],
+      "source_bottom_anchor_px": [
+        762,
+        1189
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        43,
+        55,
+        228,
+        228
+      ],
+      "calibration_bbox_px": [
+        43,
+        55,
+        228,
+        228
+      ],
+      "prior_ground_contact_px": [
+        154,
+        226
+      ],
+      "export_scale": 0.19743863393810032,
+      "export_offset_px": [
+        43,
+        40
+      ]
+    },
+    {
+      "id": "desk-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/desk-premium_b.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 41336,
+      "sha256": "7c8532cc838e6fef63d941f521b1f2af6beaba4d76267b5e06888ca60fcb3bbd",
+      "source_sha256": "004a3140224f85506f41fdd1dbed5d41d12aceb736257c0560ae0ee832986e28",
+      "source_crop_px": [
+        128,
+        127,
+        1113,
+        1173
+      ],
+      "source_bottom_anchor_px": [
+        779,
+        1170
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        28,
+        31,
+        213,
+        228
+      ],
+      "calibration_bbox_px": [
+        28,
+        31,
+        213,
+        228
+      ],
+      "prior_ground_contact_px": [
+        102,
+        226
+      ],
+      "export_scale": 0.18781725888324874,
+      "export_offset_px": [
+        28,
+        30
+      ]
+    },
+    {
+      "id": "desk-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/desk-premium_c.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 36118,
+      "sha256": "7ca29808b8b013567d66ad0283e5bd7575a42a4f3776ccc6623c0a1b9b941e2a",
+      "source_sha256": "a4fae0a74e4b2d9dc7371c05635f11fe3879b2f71fc63241a9e704e342be3759",
+      "source_crop_px": [
+        82,
+        236,
+        1117,
+        1185
+      ],
+      "source_bottom_anchor_px": [
+        741,
+        1182
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        28,
+        60,
+        213,
+        237
+      ],
+      "calibration_bbox_px": [
+        28,
+        60,
+        213,
+        237
+      ],
+      "prior_ground_contact_px": [
+        135,
+        236
+      ],
+      "export_scale": 0.178743961352657,
+      "export_offset_px": [
+        28,
+        67
+      ]
+    },
+    {
+      "id": "desk-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/desk-premium_d.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        256
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 37717,
+      "sha256": "6d343869ce08f9911d438387758793ce942376f0826b999fd38bece05b071d9a",
+      "source_sha256": "4a27848b087642dd1561a43a2fb62eccab447d56d41e812f3bbfe0701999511e",
+      "source_crop_px": [
+        147,
+        281,
+        1076,
+        1198
+      ],
+      "source_bottom_anchor_px": [
+        762,
+        1195
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        43,
+        76,
+        228,
+        237
+      ],
+      "calibration_bbox_px": [
+        43,
+        76,
+        228,
+        237
+      ],
+      "prior_ground_contact_px": [
+        120,
+        236
+      ],
+      "export_scale": 0.1991388589881593,
+      "export_offset_px": [
+        43,
+        54
+      ]
+    },
+    {
+      "id": "table-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/table-basic_a.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 32879,
+      "sha256": "cb5e0c32b91c894f26ef3bfe4f7763df94913c421917dcd0b3c7b0b07f8894be",
+      "source_sha256": "e7a30b09d111dd29c8d2df61e87290eaa14cc7fd61a395dd64bb4502398535c8",
+      "source_crop_px": [
+        215,
+        281,
+        1121,
+        1067
+      ],
+      "source_bottom_anchor_px": [
+        690,
+        1064
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        21,
+        68,
+        235,
+        179
+      ],
+      "calibration_bbox_px": [
+        21,
+        68,
+        235,
+        179
+      ],
+      "prior_ground_contact_px": [
+        135,
+        178
+      ],
+      "export_scale": 0.22391857506361323,
+      "export_offset_px": [
+        27,
+        2
+      ]
+    },
+    {
+      "id": "table-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/table-basic_b.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 32909,
+      "sha256": "87114c23e3883a2298c8490eaa9f1afd2ee59d7c7cfdd88181fb03a4c22e2655",
+      "source_sha256": "de3121f010227a6a4f5ec90e5218dee1b6e7bd763c688a3c32aef4c3f3317054",
+      "source_crop_px": [
+        234,
+        284,
+        1107,
+        1044
+      ],
+      "source_bottom_anchor_px": [
+        667,
+        1041
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        62,
+        68,
+        194,
+        210
+      ],
+      "calibration_bbox_px": [
+        21,
+        68,
+        235,
+        179
+      ],
+      "prior_ground_contact_px": [
+        135,
+        178
+      ],
+      "export_scale": 0.23157894736842105,
+      "export_offset_px": [
+        27,
+        2
+      ]
+    },
+    {
+      "id": "table-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/table-basic_c.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 33634,
+      "sha256": "72a62248adf9e2e80760f11c46c5e1192148cff02a1db07d935bfb9d0dfc73e5",
+      "source_sha256": "d2ae999b6ef20dcc634bfbf0b4c0ef0cc7a3d9b27ac35839119a6e356fa18649",
+      "source_crop_px": [
+        218,
+        274,
+        1117,
+        1050
+      ],
+      "source_bottom_anchor_px": [
+        661,
+        1047
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        21,
+        68,
+        235,
+        179
+      ],
+      "calibration_bbox_px": [
+        21,
+        68,
+        235,
+        179
+      ],
+      "prior_ground_contact_px": [
+        135,
+        178
+      ],
+      "export_scale": 0.2268041237113402,
+      "export_offset_px": [
+        27,
+        2
+      ]
+    },
+    {
+      "id": "table-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/table-basic_d.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 32671,
+      "sha256": "fef8fee668aaa19496a4b6f60ac32a8b21a6f46814591de7892a0de97191d798",
+      "source_sha256": "dc8883539414c1e872dbc9bae503cba316ba33e5efbfbaf8f457beabbb91be1a",
+      "source_crop_px": [
+        215,
+        280,
+        1116,
+        1065
+      ],
+      "source_bottom_anchor_px": [
+        675,
+        1062
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        62,
+        68,
+        194,
+        210
+      ],
+      "calibration_bbox_px": [
+        21,
+        68,
+        235,
+        179
+      ],
+      "prior_ground_contact_px": [
+        135,
+        178
+      ],
+      "export_scale": 0.22420382165605096,
+      "export_offset_px": [
+        27,
+        2
+      ]
+    },
+    {
+      "id": "table-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/table-comfort_a.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 34989,
+      "sha256": "6c0ff861f31e82fb5024ed38f2894073a155d061d94f2038be6d0f5be190f508",
+      "source_sha256": "47b372a11501eb80d43fe944dd5980629e4ac1ac8ccc46624ae3a3a247bebe5f",
+      "source_crop_px": [
+        268,
+        226,
+        1055,
+        1040
+      ],
+      "source_bottom_anchor_px": [
+        769,
+        1037
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        21,
+        71,
+        235,
+        173
+      ],
+      "calibration_bbox_px": [
+        21,
+        71,
+        235,
+        173
+      ],
+      "prior_ground_contact_px": [
+        202,
+        172
+      ],
+      "export_scale": 0.20884520884520885,
+      "export_offset_px": [
+        46,
+        2
+      ]
+    },
+    {
+      "id": "table-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/table-comfort_b.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 35062,
+      "sha256": "e96c24fbceafb92a85ed3ed7ea74ac9a88d974e3693a5aaba7088cbc12f30db3",
+      "source_sha256": "468fa7d1f8626c5469250df5aa822597fbe27a7acf85c28095afa74bc39e6df9",
+      "source_crop_px": [
+        268,
+        225,
+        1052,
+        1017
+      ],
+      "source_bottom_anchor_px": [
+        568,
+        1014
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        72,
+        43,
+        184,
+        210
+      ],
+      "calibration_bbox_px": [
+        21,
+        71,
+        235,
+        173
+      ],
+      "prior_ground_contact_px": [
+        202,
+        172
+      ],
+      "export_scale": 0.21464646464646464,
+      "export_offset_px": [
+        44,
+        2
+      ]
+    },
+    {
+      "id": "table-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/table-comfort_c.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 33857,
+      "sha256": "567781d7e6344ffb3acb33fb31c51e9209f185a3def45e6709a03921cfe53689",
+      "source_sha256": "fcef322eedd523ebffb5cc517f03d09c89d95075854dffcc9999bf1569af5ece",
+      "source_crop_px": [
+        278,
+        223,
+        1050,
+        1030
+      ],
+      "source_bottom_anchor_px": [
+        758,
+        1027
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        21,
+        71,
+        235,
+        178
+      ],
+      "calibration_bbox_px": [
+        21,
+        71,
+        235,
+        173
+      ],
+      "prior_ground_contact_px": [
+        202,
+        172
+      ],
+      "export_scale": 0.21065675340768278,
+      "export_offset_px": [
+        47,
+        2
+      ]
+    },
+    {
+      "id": "table-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/table-comfort_d.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 34363,
+      "sha256": "4202552c0f1778b34d616a2ae711aa6366f0f19aa57db41b72918956c91c4399",
+      "source_sha256": "4e7fb04b3ccec7b6bb8a7dc50aa06eccd76c2737167b962a8ce02b8c85841741",
+      "source_crop_px": [
+        278,
+        222,
+        1051,
+        1029
+      ],
+      "source_bottom_anchor_px": [
+        608,
+        1026
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        72,
+        42,
+        184,
+        210
+      ],
+      "calibration_bbox_px": [
+        21,
+        71,
+        235,
+        173
+      ],
+      "prior_ground_contact_px": [
+        202,
+        172
+      ],
+      "export_scale": 0.21065675340768278,
+      "export_offset_px": [
+        47,
+        2
+      ]
+    },
+    {
+      "id": "table-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/table-premium_a.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 43415,
+      "sha256": "7253279ac2251ccdf0932ce4f289a14fb91c1716bdc069eb8146fe55b133f13f",
+      "source_sha256": "b0d943ea3d55209d350e7cbbe7468090be6e737d108ffd8aed904ca72a624c15",
+      "source_crop_px": [
+        204,
+        317,
+        1136,
+        1093
+      ],
+      "source_bottom_anchor_px": [
+        647,
+        1090
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        18,
+        41,
+        238,
+        212
+      ],
+      "calibration_bbox_px": [
+        18,
+        41,
+        238,
+        212
+      ],
+      "prior_ground_contact_px": [
+        128,
+        211
+      ],
+      "export_scale": 0.23605150214592274,
+      "export_offset_px": [
+        18,
+        28
+      ]
+    },
+    {
+      "id": "table-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/table-premium_b.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 44473,
+      "sha256": "62c378919e48df5f5db7064b408e280364578d58b99a1d3c32b1048f9a9aab65",
+      "source_sha256": "ee533b1439736a92db51f0536743209e15923d877db092ed2c6233a01941c4d0",
+      "source_crop_px": [
+        199,
+        270,
+        1121,
+        1082
+      ],
+      "source_bottom_anchor_px": [
+        748,
+        1079
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        18,
+        41,
+        238,
+        212
+      ],
+      "calibration_bbox_px": [
+        18,
+        41,
+        238,
+        212
+      ],
+      "prior_ground_contact_px": [
+        128,
+        211
+      ],
+      "export_scale": 0.2386117136659436,
+      "export_offset_px": [
+        18,
+        18
+      ]
+    },
+    {
+      "id": "table-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/table-premium_c.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 43387,
+      "sha256": "0830deb4a928b30a15faa24f2ab607a344284dd0ffb6c5afeca4f61f3ffcb57e",
+      "source_sha256": "4f3294f13603e925b19dfca160b618ea9bf8c2f03aead954fced12d7b3ef6fc1",
+      "source_crop_px": [
+        206,
+        316,
+        1127,
+        1085
+      ],
+      "source_bottom_anchor_px": [
+        629,
+        1082
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        18,
+        40,
+        238,
+        212
+      ],
+      "calibration_bbox_px": [
+        18,
+        40,
+        238,
+        212
+      ],
+      "prior_ground_contact_px": [
+        128,
+        211
+      ],
+      "export_scale": 0.23887079261672095,
+      "export_offset_px": [
+        18,
+        28
+      ]
+    },
+    {
+      "id": "table-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/table-premium_d.png",
+      "frame_px": [
+        256,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "bytes": 41471,
+      "sha256": "ec7fb7806764c8194212c4128be2cdf70a6bafb0d3c5b2679dd4473a6edebae2",
+      "source_sha256": "9fd140d6803dc0179fb5223097911a18dbc062398b18be1a70d43a9ea528d15b",
+      "source_crop_px": [
+        201,
+        328,
+        1131,
+        1074
+      ],
+      "source_bottom_anchor_px": [
+        762,
+        1071
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        18,
+        40,
+        238,
+        212
+      ],
+      "calibration_bbox_px": [
+        18,
+        40,
+        238,
+        212
+      ],
+      "prior_ground_contact_px": [
+        128,
+        211
+      ],
+      "export_scale": 0.23655913978494625,
+      "export_offset_px": [
+        18,
+        35
+      ]
+    },
+    {
+      "id": "plant-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/plant-basic_a.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 5377,
+      "sha256": "06e25f32563a1238b92fe3aa0f0b58ddde96277df3de73ecd6e2b70699c37f47",
+      "source_sha256": "deb15e7c4b3cce7fe644ba4206194495b61d3f28611cf2a06602d96ed135e1e9",
+      "source_crop_px": [
+        273,
+        494,
+        746,
+        1371
+      ],
+      "source_bottom_anchor_px": [
+        497,
+        1368
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "calibration_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.07069555302166476,
+      "export_offset_px": [
+        48,
+        103
+      ]
+    },
+    {
+      "id": "plant-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/plant-basic_b.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 5146,
+      "sha256": "aa6ccbc8848aeda93fdd582822111e40b84000439c0db11461552900c843b5ec",
+      "source_sha256": "3570d9b33cdae4ae9728db584bb53758c3a7e1078e2c3fc770f3e56ba206c997",
+      "source_crop_px": [
+        292,
+        367,
+        727,
+        1244
+      ],
+      "source_bottom_anchor_px": [
+        503,
+        1241
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "calibration_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.07069555302166476,
+      "export_offset_px": [
+        49,
+        103
+      ]
+    },
+    {
+      "id": "plant-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/plant-basic_c.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 5551,
+      "sha256": "b581d1739ef2c16352a5256de7cd0c4a9f6fe1f0081d86423e7b40bae6095c09",
+      "source_sha256": "7fdc5bb9f56a630d6f19b9d862853d16eed759c4f9189dd2aceefc67f88b84e7",
+      "source_crop_px": [
+        232,
+        304,
+        786,
+        1288
+      ],
+      "source_bottom_anchor_px": [
+        493,
+        1285
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "calibration_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.06300813008130081,
+      "export_offset_px": [
+        47,
+        103
+      ]
+    },
+    {
+      "id": "plant-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/plant-basic_d.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 5487,
+      "sha256": "7896b2fd2066e14a439348d0de40b5ff941f0fc5ae0c83eca3e084a5f7ebdc34",
+      "source_sha256": "7c0d8edc04e12d9f1bdc9b391acc7d7c58f2027c584a27152837e2eabd5bc477",
+      "source_crop_px": [
+        233,
+        295,
+        782,
+        1340
+      ],
+      "source_bottom_anchor_px": [
+        504,
+        1337
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "calibration_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.05933014354066986,
+      "export_offset_px": [
+        48,
+        102
+      ]
+    },
+    {
+      "id": "plant-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/plant-comfort_a.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 21023,
+      "sha256": "124b403c905fd4f2f3624cf7be8ee9ebb627fc5d4082e4f100d1676d43476e25",
+      "source_sha256": "8ce120a358c5fcdc6db8647cbf470817f55d531a00203e18446abb6937d512df",
+      "source_crop_px": [
+        118,
+        463,
+        841,
+        1301
+      ],
+      "source_bottom_anchor_px": [
+        367,
+        1298
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        37,
+        109,
+        90,
+        165
+      ],
+      "calibration_bbox_px": [
+        16,
+        56,
+        112,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.13007159904534607,
+      "export_offset_px": [
+        17,
+        55
+      ]
+    },
+    {
+      "id": "plant-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/plant-comfort_b.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 21562,
+      "sha256": "860246c709d618cc584c6d7fdce9e34766f249c12bf11a220844db937ffa65cf",
+      "source_sha256": "8853b797ce83c37c03e1d52aabeb4774b5013c1ea7289cdab3a5bcf2a3749f46",
+      "source_crop_px": [
+        136,
+        437,
+        847,
+        1269
+      ],
+      "source_bottom_anchor_px": [
+        783,
+        1266
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        38,
+        109,
+        90,
+        165
+      ],
+      "calibration_bbox_px": [
+        16,
+        56,
+        112,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.1310096153846154,
+      "export_offset_px": [
+        18,
+        55
+      ]
+    },
+    {
+      "id": "plant-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/plant-comfort_c.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 22342,
+      "sha256": "d00e6d03e658f0db051dc58782e335f46996defaecb631bfb3968d76c7296578",
+      "source_sha256": "a317485c93fc6d09d51b51bab978068931fc4695d4617d9c80afe3e486b24f7f",
+      "source_crop_px": [
+        110,
+        356,
+        920,
+        1263
+      ],
+      "source_bottom_anchor_px": [
+        661,
+        1260
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        38,
+        109,
+        91,
+        165
+      ],
+      "calibration_bbox_px": [
+        16,
+        56,
+        112,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.12017640573318633,
+      "export_offset_px": [
+        16,
+        55
+      ]
+    },
+    {
+      "id": "plant-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/plant-comfort_d.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 20199,
+      "sha256": "77d1120896ffd5e3283abb85169169de5bc56631876a436a37ff3cb8724b5358",
+      "source_sha256": "232129a6475dd18dee85561510363cc0399c5d8124257194dbbf548948a14b36",
+      "source_crop_px": [
+        89,
+        339,
+        936,
+        1328
+      ],
+      "source_bottom_anchor_px": [
+        619,
+        1325
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        38,
+        108,
+        90,
+        165
+      ],
+      "calibration_bbox_px": [
+        16,
+        56,
+        112,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.1102123356926188,
+      "export_offset_px": [
+        18,
+        55
+      ]
+    },
+    {
+      "id": "plant-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/plant-premium_a.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 21641,
+      "sha256": "bb3e9b7935b752c31149d555fdaf5413d702c9f13c71601e67955e1266aaf34f",
+      "source_sha256": "95fe49acd1d269fd4718621d5f7bde167ecb3d05ad64a99a793022d0144a8317",
+      "source_crop_px": [
+        185,
+        197,
+        838,
+        1321
+      ],
+      "source_bottom_anchor_px": [
+        495,
+        1318
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        38,
+        39,
+        90,
+        165
+      ],
+      "calibration_bbox_px": [
+        24,
+        12,
+        104,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.13612099644128114,
+      "export_offset_px": [
+        20,
+        11
+      ]
+    },
+    {
+      "id": "plant-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/plant-premium_b.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 19455,
+      "sha256": "11f1ed90a9b1a46cb5814b386f0cd5c64b484bb4fbbcfca0501cc2e37be5cd78",
+      "source_sha256": "e2a4d2e312f81ea442c39d6c4251055d4d804c302278e3a0871e12b98d94df12",
+      "source_crop_px": [
+        195,
+        153,
+        788,
+        1322
+      ],
+      "source_bottom_anchor_px": [
+        498,
+        1319
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        39,
+        49,
+        90,
+        165
+      ],
+      "calibration_bbox_px": [
+        24,
+        12,
+        104,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.13088109495295125,
+      "export_offset_px": [
+        26,
+        11
+      ]
+    },
+    {
+      "id": "plant-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/plant-premium_c.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 19183,
+      "sha256": "7630fcb83a431338fac77d2780e60e400d3f0fcce4814e50e11d0bf807957b76",
+      "source_sha256": "7533f23b24f8cfd923948dc9b8ce6b49a34b2ea31b2dbc3260e3f11ac279776c",
+      "source_crop_px": [
+        201,
+        147,
+        828,
+        1370
+      ],
+      "source_bottom_anchor_px": [
+        509,
+        1367
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        38,
+        50,
+        90,
+        165
+      ],
+      "calibration_bbox_px": [
+        24,
+        12,
+        104,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.12510220768601799,
+      "export_offset_px": [
+        25,
+        11
+      ]
+    },
+    {
+      "id": "plant-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/plant-premium_d.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 19434,
+      "sha256": "d4e6d6fcbe7a745c3c5d5d5cb7034946e91b27f38bcafdb9f919daf074f655be",
+      "source_sha256": "3ed1ddd88e25546a9d7382d1752b8173dd41c781dbed56a570ce8b49f3fb88a8",
+      "source_crop_px": [
+        171,
+        144,
+        811,
+        1347
+      ],
+      "source_bottom_anchor_px": [
+        507,
+        1344
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        38,
+        47,
+        89,
+        165
+      ],
+      "calibration_bbox_px": [
+        24,
+        12,
+        104,
+        165
+      ],
+      "prior_ground_contact_px": [
+        64,
+        164
+      ],
+      "export_scale": 0.12718204488778054,
+      "export_offset_px": [
+        24,
+        11
+      ]
+    },
+    {
+      "id": "lamp-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/lamp-basic_a.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 6168,
+      "sha256": "b5a6dbdf18a105be160a49512762ef7ec328c52303e33327e0440ab5a1e7b8a4",
+      "source_sha256": "3d8dc3b7219bb0dc8b3bf633f56a6d94c94628de9f518c8fbf51976ddb60a117",
+      "source_crop_px": [
+        137,
+        178,
+        827,
+        1391
+      ],
+      "source_bottom_anchor_px": [
+        547,
+        1388
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        43,
+        84,
+        90,
+        169
+      ],
+      "calibration_bbox_px": [
+        43,
+        84,
+        90,
+        169
+      ],
+      "prior_ground_contact_px": [
+        71,
+        167
+      ],
+      "export_scale": 0.07007419620774938,
+      "export_offset_px": [
+        43,
+        82
+      ]
+    },
+    {
+      "id": "lamp-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/lamp-basic_b.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 6125,
+      "sha256": "8d7f7f1f9927de31216a0e4404bc3c1c20a003fdfb0e9ac26d6af7de4632932b",
+      "source_sha256": "6a8d409d3bdf467e5207043634960a6ea68241252615aa49e237e5b54de73f41",
+      "source_crop_px": [
+        156,
+        175,
+        871,
+        1391
+      ],
+      "source_bottom_anchor_px": [
+        460,
+        1388
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        38,
+        76,
+        89,
+        169
+      ],
+      "calibration_bbox_px": [
+        38,
+        76,
+        89,
+        169
+      ],
+      "prior_ground_contact_px": [
+        57,
+        167
+      ],
+      "export_scale": 0.06990131578947369,
+      "export_offset_px": [
+        39,
+        82
+      ]
+    },
+    {
+      "id": "lamp-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/lamp-basic_c.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 5845,
+      "sha256": "ec3650e7f94f179c0c2edc151842cd707c04f8093eb899cc244eca250855e31c",
+      "source_sha256": "e155e488a467168a24db44565435e553f43f67f0b795aeb2fbf356e1b936b155",
+      "source_crop_px": [
+        180,
+        166,
+        849,
+        1368
+      ],
+      "source_bottom_anchor_px": [
+        481,
+        1365
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        38,
+        75,
+        85,
+        171
+      ],
+      "calibration_bbox_px": [
+        38,
+        75,
+        85,
+        171
+      ],
+      "prior_ground_contact_px": [
+        66,
+        170
+      ],
+      "export_scale": 0.07071547420965059,
+      "export_offset_px": [
+        38,
+        85
+      ]
+    },
+    {
+      "id": "lamp-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/lamp-basic_d.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 5358,
+      "sha256": "daf7f2be73a0522d23aabb31f4292cd7045e78761af15de021706b934b8887d5",
+      "source_sha256": "00aa0a4e829037952a5cf3cb286e0e7478c69231a8bdddd15cb62c3781040eec",
+      "source_crop_px": [
+        209,
+        178,
+        784,
+        1388
+      ],
+      "source_bottom_anchor_px": [
+        488,
+        1385
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        39,
+        83,
+        90,
+        171
+      ],
+      "calibration_bbox_px": [
+        39,
+        83,
+        90,
+        171
+      ],
+      "prior_ground_contact_px": [
+        61,
+        170
+      ],
+      "export_scale": 0.07024793388429752,
+      "export_offset_px": [
+        45,
+        85
+      ]
+    },
+    {
+      "id": "lamp-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/lamp-comfort_a.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 12611,
+      "sha256": "596d66adae4eb91e1690a39694a58103803da9e820b754a9a1ee8f18301668a8",
+      "source_sha256": "c7d16e61f76439acf4f672adc3e65a1f141f1c6f1c3d1db4bf67c40025dab9bf",
+      "source_crop_px": [
+        175,
+        386,
+        846,
+        1416
+      ],
+      "source_bottom_anchor_px": [
+        505,
+        1413
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "calibration_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "prior_ground_contact_px": [
+        64,
+        168
+      ],
+      "export_scale": 0.10388349514563107,
+      "export_offset_px": [
+        30,
+        61
+      ]
+    },
+    {
+      "id": "lamp-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/lamp-comfort_b.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 12490,
+      "sha256": "981d1717a30e0650eaf704219a399653422ddebcec2f42f1fc0b0480d7db83a5",
+      "source_sha256": "c1749df67a67d054d82f0d223f6d089e4549aced371313cfdfe5ecd8bf19933a",
+      "source_crop_px": [
+        180,
+        380,
+        852,
+        1416
+      ],
+      "source_bottom_anchor_px": [
+        507,
+        1413
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "calibration_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "prior_ground_contact_px": [
+        64,
+        168
+      ],
+      "export_scale": 0.10328185328185328,
+      "export_offset_px": [
+        30,
+        61
+      ]
+    },
+    {
+      "id": "lamp-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/lamp-comfort_c.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 12400,
+      "sha256": "6aec737514e8f8a1ce6d018bba22ddce57d81354bd96e229c4b1221c9e7b301f",
+      "source_sha256": "15aff8cd9313f32cabc5c5ff05b62c5722d46c1dc1047c64ca8b5a21be0c2966",
+      "source_crop_px": [
+        159,
+        310,
+        862,
+        1400
+      ],
+      "source_bottom_anchor_px": [
+        506,
+        1397
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "calibration_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "prior_ground_contact_px": [
+        64,
+        168
+      ],
+      "export_scale": 0.0981651376146789,
+      "export_offset_px": [
+        30,
+        61
+      ]
+    },
+    {
+      "id": "lamp-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/lamp-comfort_d.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 12947,
+      "sha256": "ef9ffb553c7448b67fd5ad509eec073311b5d3faec69c499726e0d338beff94e",
+      "source_sha256": "468eb5002cf31187e383b5056b30e5a8ea3e9902daec926f9a04e1b249b45b8e",
+      "source_crop_px": [
+        161,
+        380,
+        851,
+        1417
+      ],
+      "source_bottom_anchor_px": [
+        507,
+        1414
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "calibration_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "prior_ground_contact_px": [
+        64,
+        168
+      ],
+      "export_scale": 0.10318225650916105,
+      "export_offset_px": [
+        29,
+        61
+      ]
+    },
+    {
+      "id": "lamp-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/lamp-premium_a.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 13421,
+      "sha256": "479b705ce90839d0aa52b64ce901e28059f4f9d5058f9ab97627952bd908aa3e",
+      "source_sha256": "6c51c78cc92802400cfec904730080b005021eaaba8241c854a6177420c9fa84",
+      "source_crop_px": [
+        193,
+        247,
+        828,
+        1316
+      ],
+      "source_bottom_anchor_px": [
+        512,
+        1313
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "calibration_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "prior_ground_contact_px": [
+        64,
+        170
+      ],
+      "export_scale": 0.11693171188026193,
+      "export_offset_px": [
+        27,
+        45
+      ]
+    },
+    {
+      "id": "lamp-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/lamp-premium_b.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 13740,
+      "sha256": "877327ddc01e5d1402ea6a70a7bbaa5e5ee7edf68a7619fc3e0ab636e4af938c",
+      "source_sha256": "7c7612a7a10b7bbf7ec8471481f0a4ef2da1be24571fe478e81f46d529c1879e",
+      "source_crop_px": [
+        202,
+        249,
+        820,
+        1317
+      ],
+      "source_bottom_anchor_px": [
+        499,
+        1314
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "calibration_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "prior_ground_contact_px": [
+        64,
+        170
+      ],
+      "export_scale": 0.11704119850187265,
+      "export_offset_px": [
+        28,
+        45
+      ]
+    },
+    {
+      "id": "lamp-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/lamp-premium_c.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 13362,
+      "sha256": "440ed6aff1fb78fc9c5cddac7e746916c67218e2af13f013c24e19145f81950f",
+      "source_sha256": "1a318926beac93b28a7c06642b0f393fed675055355c474244b69b4b1e9f22f8",
+      "source_crop_px": [
+        170,
+        246,
+        807,
+        1317
+      ],
+      "source_bottom_anchor_px": [
+        488,
+        1314
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "calibration_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "prior_ground_contact_px": [
+        64,
+        170
+      ],
+      "export_scale": 0.11671335200746966,
+      "export_offset_px": [
+        27,
+        45
+      ]
+    },
+    {
+      "id": "lamp-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/lamp-premium_d.png",
+      "frame_px": [
+        128,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 13460,
+      "sha256": "225c3ff87d9d072c166585b1d2ef02a639eaa055f6bff3e79c6a4fcfe1d5ecc5",
+      "source_sha256": "60daac8157bdc69b2f5f98eee8831d8c5955f7bc548600cb9185bcde1229a677",
+      "source_crop_px": [
+        189,
+        245,
+        833,
+        1316
+      ],
+      "source_bottom_anchor_px": [
+        512,
+        1313
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "calibration_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "prior_ground_contact_px": [
+        64,
+        170
+      ],
+      "export_scale": 0.11671335200746966,
+      "export_offset_px": [
+        27,
+        45
+      ]
+    },
+    {
+      "id": "rug-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/rug-basic_a.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        192,
+        168
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 65312,
+      "sha256": "b8fd2ddb331747ce538436c897a68ca52b30663f6a35fb5e36fafaa65246c2d4",
+      "source_sha256": "6c8ec2802e11b81a15b0ee5b13b08e5862238f21d00c42ed889a54937e55fc52",
+      "source_crop_px": [
+        53,
+        18,
+        1577,
+        878
+      ],
+      "source_bottom_anchor_px": [
+        976,
+        875
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "calibration_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "prior_ground_contact_px": [
+        193,
+        159
+      ],
+      "export_scale": 0.18255813953488373,
+      "export_offset_px": [
+        21,
+        2
+      ]
+    },
+    {
+      "id": "rug-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/rug-basic_b.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        128,
+        168
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 60967,
+      "sha256": "b66650a51f85f5070cdb045036ce201c3bbff005afcd3728c2461a2951a7c836",
+      "source_sha256": "4b2a7079bf61a8fda560bd59dc19c775b807ef1eb848c1fef85ee79f8e0aab72",
+      "source_crop_px": [
+        59,
+        12,
+        1687,
+        893
+      ],
+      "source_bottom_anchor_px": [
+        596,
+        890
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "calibration_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "prior_ground_contact_px": [
+        127,
+        159
+      ],
+      "export_scale": 0.17813267813267813,
+      "export_offset_px": [
+        15,
+        3
+      ]
+    },
+    {
+      "id": "rug-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/rug-basic_c.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        192,
+        168
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 62111,
+      "sha256": "86ccb7fbf43761d4eb4ea4cc6359aa8edb9cb4651c7101dd9134450b7dc0c434",
+      "source_sha256": "1afe56e570724798f57a3236bcb831b09cf1ca0490bd02ac33a8dff89227b0e2",
+      "source_crop_px": [
+        52,
+        14,
+        1579,
+        880
+      ],
+      "source_bottom_anchor_px": [
+        974,
+        877
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "calibration_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "prior_ground_contact_px": [
+        193,
+        159
+      ],
+      "export_scale": 0.1812933025404157,
+      "export_offset_px": [
+        22,
+        2
+      ]
+    },
+    {
+      "id": "rug-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/rug-basic_d.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        128,
+        168
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 59398,
+      "sha256": "29dc8dde2cdbbc5b38d5535347fe323190e06b33545a3cfacae0bacbe95d641d",
+      "source_sha256": "84a74d9c0360d0dceb485c54abee2deb39b0fd4535c93fd2d02765b0409b5084",
+      "source_crop_px": [
+        125,
+        17,
+        1640,
+        894
+      ],
+      "source_bottom_anchor_px": [
+        694,
+        891
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "calibration_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "prior_ground_contact_px": [
+        127,
+        159
+      ],
+      "export_scale": 0.1790193842645382,
+      "export_offset_px": [
+        25,
+        2
+      ]
+    },
+    {
+      "id": "rug-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/rug-comfort_a.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        192,
+        168
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 48573,
+      "sha256": "0db1a52f53d03b46a53082beec1eaa2a46c5b76e2f67a1ad30b0b7921598ac40",
+      "source_sha256": "9870f9eb414254084552d3b23b64c843e0905784c76b8fcfb0129ac2f77dfdb2",
+      "source_crop_px": [
+        58,
+        66,
+        1654,
+        854
+      ],
+      "source_bottom_anchor_px": [
+        1048,
+        851
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "calibration_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "prior_ground_contact_px": [
+        193,
+        159
+      ],
+      "export_scale": 0.18170426065162906,
+      "export_offset_px": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": "rug-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/rug-comfort_b.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        128,
+        168
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 49486,
+      "sha256": "8c87cdf64d2bba324a24d598870ef0c25f938f4e27ea634184d7283ad9d0370d",
+      "source_sha256": "3214d90d7edad666c0e01d0608741dbe78e8552c4c3fbfc1e597c6e5e36a2ede",
+      "source_crop_px": [
+        70,
+        28,
+        1661,
+        897
+      ],
+      "source_bottom_anchor_px": [
+        618,
+        894
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "calibration_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "prior_ground_contact_px": [
+        127,
+        159
+      ],
+      "export_scale": 0.1806674338319908,
+      "export_offset_px": [
+        17,
+        2
+      ]
+    },
+    {
+      "id": "rug-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/rug-comfort_c.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        192,
+        168
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 47789,
+      "sha256": "08b9ce626fa052743140876905f2d0ccf1141f01a091570a1cb7ac48887142ce",
+      "source_sha256": "9148b11c6d2542b93e7a807d8319ab94f63979282ad9cd870a21f3f6da28e5e9",
+      "source_crop_px": [
+        36,
+        40,
+        1686,
+        875
+      ],
+      "source_bottom_anchor_px": [
+        1063,
+        872
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "calibration_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "prior_ground_contact_px": [
+        193,
+        159
+      ],
+      "export_scale": 0.17575757575757575,
+      "export_offset_px": [
+        15,
+        13
+      ]
+    },
+    {
+      "id": "rug-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/rug-comfort_d.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        128,
+        168
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 50346,
+      "sha256": "3c2fa4bc12b0247854d4318bb895c9cef9e26923b45b459ffcfbd01e423a070b",
+      "source_sha256": "94b937ca5db5e248f20d6862729eb3fc68b97a5b9ddf87b84981fa0050cc25df",
+      "source_crop_px": [
+        71,
+        45,
+        1660,
+        876
+      ],
+      "source_bottom_anchor_px": [
+        662,
+        873
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "calibration_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "prior_ground_contact_px": [
+        127,
+        159
+      ],
+      "export_scale": 0.18250471994965387,
+      "export_offset_px": [
+        15,
+        8
+      ]
+    },
+    {
+      "id": "rug-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/rug-premium_a.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        192,
+        168
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 61290,
+      "sha256": "cd7eefe9deb8f300b49ff43d690e3fd2fcd4b9728290c292a5757ca27d68230d",
+      "source_sha256": "bed860e7664898ee4909d58a794d2745f8274d5e9a731804343e1c941975d7dc",
+      "source_crop_px": [
+        69,
+        12,
+        1605,
+        872
+      ],
+      "source_bottom_anchor_px": [
+        952,
+        869
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        14,
+        306,
+        162
+      ],
+      "calibration_bbox_px": [
+        12,
+        14,
+        306,
+        162
+      ],
+      "prior_ground_contact_px": [
+        195,
+        160
+      ],
+      "export_scale": 0.18372093023255814,
+      "export_offset_px": [
+        18,
+        2
+      ]
+    },
+    {
+      "id": "rug-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/rug-premium_b.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        128,
+        168
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 56568,
+      "sha256": "7201a62ad9753214acedc8db380d6d56a80f40ad23e1b24e4d134c1671852040",
+      "source_sha256": "ebdb06a6b0e2275f1db7810e953d92d109593620468a352165e9b37aeaaf7d45",
+      "source_crop_px": [
+        178,
+        15,
+        1701,
+        866
+      ],
+      "source_bottom_anchor_px": [
+        676,
+        863
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        14,
+        308,
+        161
+      ],
+      "calibration_bbox_px": [
+        14,
+        14,
+        308,
+        161
+      ],
+      "prior_ground_contact_px": [
+        125,
+        160
+      ],
+      "export_scale": 0.18566392479435959,
+      "export_offset_px": [
+        20,
+        2
+      ]
+    },
+    {
+      "id": "rug-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/rug-premium_c.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        192,
+        168
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 57353,
+      "sha256": "e8c79b9cb08ebbc3d91265562c9746e070cd7ef071c9b15eff5cf0ccc21cf686",
+      "source_sha256": "0ff1a7ef91121b97f6bf164342c424f96773a7a8353a320f49c0666082b1ee6a",
+      "source_crop_px": [
+        61,
+        9,
+        1602,
+        886
+      ],
+      "source_bottom_anchor_px": [
+        957,
+        883
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        14,
+        12,
+        308,
+        160
+      ],
+      "calibration_bbox_px": [
+        14,
+        12,
+        308,
+        160
+      ],
+      "prior_ground_contact_px": [
+        193,
+        159
+      ],
+      "export_scale": 0.1790193842645382,
+      "export_offset_px": [
+        24,
+        2
+      ]
+    },
+    {
+      "id": "rug-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/rug-premium_d.png",
+      "frame_px": [
+        320,
+        168
+      ],
+      "anchor_px": [
+        128,
+        168
+      ],
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "height_px": 8,
+      "height_z": 0.25,
+      "bytes": 57647,
+      "sha256": "44d13cde304f3042fba9cf0435da4af4b5831379f68fa9afafa79b9c79258c55",
+      "source_sha256": "b4aab8c829e222e9f3f0bf7222d5c3b3e273d9139a2c4675a519049ea849619e",
+      "source_crop_px": [
+        70,
+        16,
+        1667,
+        909
+      ],
+      "source_bottom_anchor_px": [
+        702,
+        908
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        12,
+        13,
+        306,
+        160
+      ],
+      "calibration_bbox_px": [
+        12,
+        13,
+        306,
+        160
+      ],
+      "prior_ground_contact_px": [
+        126,
+        159
+      ],
+      "export_scale": 0.17581187010078386,
+      "export_offset_px": [
+        19,
+        2
+      ]
+    },
+    {
+      "id": "painting-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/painting-basic_a.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 15492,
+      "sha256": "0c31b074d3e313dfbcd565c3b2e9f1840bec0c54ddd02b1d9827443cf954d67b",
+      "source_sha256": "f98cdbeac3e1c50bd6a85551b68acaaa928c84c22fc6af978360b6ce4177d85d",
+      "source_crop_px": [
+        264,
+        402,
+        836,
+        1184
+      ],
+      "source_bottom_anchor_px": [
+        777,
+        1181
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        35,
+        84,
+        109,
+        187
+      ],
+      "calibration_bbox_px": [
+        35,
+        84,
+        109,
+        187
+      ],
+      "prior_ground_contact_px": [
+        72,
+        186
+      ],
+      "export_scale": 0.12937062937062938,
+      "export_offset_px": [
+        35,
+        85
+      ]
+    },
+    {
+      "id": "painting-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/painting-basic_b.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 13958,
+      "sha256": "c87fa3ae5b9221dbab4bfc767298ac112dd84e8580a7f4974d3473b82dc41dc8",
+      "source_sha256": "0bf741792d405af43489123712c9ff205280e9a1d4e742883afa59800e7b4024",
+      "source_crop_px": [
+        300,
+        397,
+        887,
+        1179
+      ],
+      "source_bottom_anchor_px": [
+        358,
+        1176
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        83,
+        84,
+        157,
+        187
+      ],
+      "calibration_bbox_px": [
+        83,
+        84,
+        157,
+        187
+      ],
+      "prior_ground_contact_px": [
+        120,
+        186
+      ],
+      "export_scale": 0.1260647359454855,
+      "export_offset_px": [
+        84,
+        88
+      ]
+    },
+    {
+      "id": "painting-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/painting-basic_c.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 13681,
+      "sha256": "092a04e00903998b9d8c2df15398556bacc77e5cdf8ddead67e557cbf243d6ba",
+      "source_sha256": "cdeae180491f447c1e0cf57dd9e4e34e8fbc74f6d3a5b405b9e320399bbe5a98",
+      "source_crop_px": [
+        163,
+        128,
+        957,
+        1233
+      ],
+      "source_bottom_anchor_px": [
+        876,
+        1230
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        35,
+        84,
+        109,
+        187
+      ],
+      "calibration_bbox_px": [
+        35,
+        84,
+        109,
+        187
+      ],
+      "prior_ground_contact_px": [
+        72,
+        186
+      ],
+      "export_scale": 0.09319899244332494,
+      "export_offset_px": [
+        35,
+        84
+      ]
+    },
+    {
+      "id": "painting-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/painting-basic_d.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 12278,
+      "sha256": "87dba3f34b8700bf5d1af3f02e42d3f51fa653bcb483da2d6cfb49a39824cfd9",
+      "source_sha256": "0fb70de603f731e9165dc94f88c8710f4b3db18c5a2a261d219d27de20a9971a",
+      "source_crop_px": [
+        254,
+        192,
+        1003,
+        1191
+      ],
+      "source_bottom_anchor_px": [
+        301,
+        1188
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        83,
+        84,
+        157,
+        187
+      ],
+      "calibration_bbox_px": [
+        83,
+        84,
+        157,
+        187
+      ],
+      "prior_ground_contact_px": [
+        120,
+        186
+      ],
+      "export_scale": 0.09879839786381843,
+      "export_offset_px": [
+        83,
+        88
+      ]
+    },
+    {
+      "id": "painting-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/painting-comfort_a.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 19063,
+      "sha256": "78f3d88779347f03b19adc90dd26039eb0cf1e5414d474f7af63be32f4e582a4",
+      "source_sha256": "d1231f36d133b1dd17cc08bbaec6e24527b7d7ba16b15d2365333f732d7d2e6d",
+      "source_crop_px": [
+        185,
+        508,
+        953,
+        1257
+      ],
+      "source_bottom_anchor_px": [
+        899,
+        1254
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        24,
+        66,
+        121,
+        192
+      ],
+      "calibration_bbox_px": [
+        24,
+        66,
+        121,
+        192
+      ],
+      "prior_ground_contact_px": [
+        72.5,
+        191
+      ],
+      "export_scale": 0.12630208333333334,
+      "export_offset_px": [
+        24,
+        97
+      ]
+    },
+    {
+      "id": "painting-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/painting-comfort_b.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 18787,
+      "sha256": "87527f6449e6f0faf06e72a6948d0cbe41b26650271fd1a91cb6f36b672c01a6",
+      "source_sha256": "622e3b8f8d2899c4ef4d176cf2048d161172befc30784dab03ce74506c188a1a",
+      "source_crop_px": [
+        203,
+        462,
+        984,
+        1252
+      ],
+      "source_bottom_anchor_px": [
+        245,
+        1249
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        71,
+        66,
+        168,
+        192
+      ],
+      "calibration_bbox_px": [
+        71,
+        66,
+        168,
+        192
+      ],
+      "prior_ground_contact_px": [
+        119.5,
+        191
+      ],
+      "export_scale": 0.12419974391805377,
+      "export_offset_px": [
+        71,
+        93
+      ]
+    },
+    {
+      "id": "painting-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/painting-comfort_c.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 15698,
+      "sha256": "47e034055f01f892b59f9c90a5f61ebecfe1bc006f75b4fbb2db4612a29a44f2",
+      "source_sha256": "6675a158bb8b13dccdc0e26a7bfa38ed636335af110b3d86bd2d4efdd506ff96",
+      "source_crop_px": [
+        194,
+        504,
+        980,
+        1226
+      ],
+      "source_bottom_anchor_px": [
+        917,
+        1223
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        24,
+        66,
+        121,
+        192
+      ],
+      "calibration_bbox_px": [
+        24,
+        66,
+        121,
+        192
+      ],
+      "prior_ground_contact_px": [
+        72.5,
+        191
+      ],
+      "export_scale": 0.12340966921119594,
+      "export_offset_px": [
+        24,
+        102
+      ]
+    },
+    {
+      "id": "painting-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/painting-comfort_d.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 14810,
+      "sha256": "efe812a63c8947c79bbd81c42f22a12b7037dbfd25e9e30134609d7e410f57a3",
+      "source_sha256": "20d0eb84cb8387b9b9690c1910b366ec5ebc8e2e5e3fc434e5cb79c981f030c8",
+      "source_crop_px": [
+        196,
+        488,
+        996,
+        1243
+      ],
+      "source_bottom_anchor_px": [
+        251,
+        1240
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        71,
+        66,
+        168,
+        192
+      ],
+      "calibration_bbox_px": [
+        71,
+        66,
+        168,
+        192
+      ],
+      "prior_ground_contact_px": [
+        119.5,
+        191
+      ],
+      "export_scale": 0.12125,
+      "export_offset_px": [
+        71,
+        100
+      ]
+    },
+    {
+      "id": "painting-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/painting-premium_a.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 33088,
+      "sha256": "11825e3f9771e6b446e48e9f5771965caf3af3cd19f1054f5305569d21c8e4f9",
+      "source_sha256": "740c827fd9f5017eae5500770c0a0d1c0d7326490dc4a596265917d124e96e12",
+      "source_crop_px": [
+        113,
+        190,
+        1041,
+        1254
+      ],
+      "source_bottom_anchor_px": [
+        967,
+        1251
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        11,
+        40,
+        133,
+        199
+      ],
+      "calibration_bbox_px": [
+        11,
+        40,
+        133,
+        199
+      ],
+      "prior_ground_contact_px": [
+        72,
+        198
+      ],
+      "export_scale": 0.1314655172413793,
+      "export_offset_px": [
+        11,
+        59
+      ]
+    },
+    {
+      "id": "painting-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/painting-premium_b.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 31910,
+      "sha256": "43794af229589013739501ea260204ed590b10e174bed034b84addda366bd171",
+      "source_sha256": "4c051da207e426df09096119e2f848a5e68d16f19a241bddc8b4a89f52b62d6e",
+      "source_crop_px": [
+        129,
+        205,
+        1032,
+        1275
+      ],
+      "source_bottom_anchor_px": [
+        198,
+        1272
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        59,
+        40,
+        181,
+        199
+      ],
+      "calibration_bbox_px": [
+        59,
+        40,
+        181,
+        199
+      ],
+      "prior_ground_contact_px": [
+        120,
+        198
+      ],
+      "export_scale": 0.13510520487264674,
+      "export_offset_px": [
+        59,
+        54
+      ]
+    },
+    {
+      "id": "painting-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/painting-premium_c.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        128,
+        224
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 27024,
+      "sha256": "d42e974d8e52ed9ceb7ce1ceff677cc0058528db2129fed94fd44cb6012c1104",
+      "source_sha256": "46a8e35efe5b899581e401b8182aba01b4e0a4c17228237193e43591e9996cfe",
+      "source_crop_px": [
+        112,
+        190,
+        1044,
+        1248
+      ],
+      "source_bottom_anchor_px": [
+        963,
+        1245
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        11,
+        40,
+        133,
+        199
+      ],
+      "calibration_bbox_px": [
+        11,
+        40,
+        133,
+        199
+      ],
+      "prior_ground_contact_px": [
+        72,
+        198
+      ],
+      "export_scale": 0.13090128755364808,
+      "export_offset_px": [
+        11,
+        60
+      ]
+    },
+    {
+      "id": "painting-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/painting-premium_d.png",
+      "frame_px": [
+        192,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 128,
+      "height_z": 4,
+      "bytes": 25508,
+      "sha256": "ab0878f2e0111aa61698d770ed4d0a0e23d444cff0f4294928641a98ed67e7e0",
+      "source_sha256": "a5ff076ac4ddd815fa722471d20c146223dff92a17c726a3e11fb2cf70f0858a",
+      "source_crop_px": [
+        130,
+        189,
+        1057,
+        1272
+      ],
+      "source_bottom_anchor_px": [
+        188,
+        1269
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        59,
+        40,
+        181,
+        199
+      ],
+      "calibration_bbox_px": [
+        59,
+        40,
+        181,
+        199
+      ],
+      "prior_ground_contact_px": [
+        120,
+        198
+      ],
+      "export_scale": 0.13160733549083065,
+      "export_offset_px": [
+        59,
+        56
+      ]
+    },
+    {
+      "id": "fridge-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/fridge-basic_a.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 22030,
+      "sha256": "27cc7cd503f419483f0a57587617f7c5edcda5bd6dd9bbf8d30a29b91923f2d1",
+      "source_sha256": "4bb3e2b56506a1ae0c52969f8b8b0375eaae2846fbcec9f925df558d29fdde8d",
+      "source_crop_px": [
+        159,
+        1041,
+        689,
+        1762
+      ],
+      "source_bottom_anchor_px": [
+        447,
+        1759
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        108,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.19622641509433963,
+      "export_offset_px": [
+        12,
+        66
+      ]
+    },
+    {
+      "id": "fridge-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/fridge-basic_b.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 22232,
+      "sha256": "f0bb23ae5a36aefba751ea5a5110d14295e14ab742e67fac9ccfae9a29913f5f",
+      "source_sha256": "60cca223be11312f7bc6110df30c23955ad2c81298b50241529aca1c2527495f",
+      "source_crop_px": [
+        160,
+        1038,
+        689,
+        1757
+      ],
+      "source_bottom_anchor_px": [
+        408,
+        1754
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        108,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.19659735349716445,
+      "export_offset_px": [
+        12,
+        66
+      ]
+    },
+    {
+      "id": "fridge-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/fridge-basic_c.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 21798,
+      "sha256": "36ee2ec93df4a0d1ac784e6a4c688ec191a2a271d29df15d8a794059642409a0",
+      "source_sha256": "21c59099083ac38d64906cae306e136a6210e677437f685ef7830c9989b0f80f",
+      "source_crop_px": [
+        156,
+        842,
+        693,
+        1584
+      ],
+      "source_bottom_anchor_px": [
+        395,
+        1581
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        108,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.19366852886405958,
+      "export_offset_px": [
+        12,
+        64
+      ]
+    },
+    {
+      "id": "fridge-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/fridge-basic_d.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 21297,
+      "sha256": "a63d1b19c9851a1f27360fb791af31f1fd46b645355c5b0aa0a99d430c5843e2",
+      "source_sha256": "2db92e963856c8f6298047f833a53f89c0586df3f81cb46ee387c9aecd1cd2fd",
+      "source_crop_px": [
+        151,
+        841,
+        698,
+        1582
+      ],
+      "source_bottom_anchor_px": [
+        448,
+        1579
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        108,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.19012797074954296,
+      "export_offset_px": [
+        12,
+        67
+      ]
+    },
+    {
+      "id": "fridge-comfort",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/fridge-comfort_a.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 26907,
+      "sha256": "236c43d4eeabae2bb82ec0730895f28c67d5bfd2f1751146169c914e7dd3e769",
+      "source_sha256": "836c0dffae7fd2b7ab99ba5e0942a3fc70eab4a971257346ac78b5de5b5a7d64",
+      "source_crop_px": [
+        144,
+        172,
+        798,
+        1573
+      ],
+      "source_bottom_anchor_px": [
+        478,
+        1570
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        20,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.14632405424696646,
+      "export_offset_px": [
+        17,
+        2
+      ]
+    },
+    {
+      "id": "fridge-comfort",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/fridge-comfort_b.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 26027,
+      "sha256": "3dd40315b356ff842561cd53e20d59e788e3de7a8042ccaa631f53195ad6ed28",
+      "source_sha256": "14d3102c4d70868b91804a51865a8ea2335b8047bcdfdb1f5705578df0902e59",
+      "source_crop_px": [
+        158,
+        176,
+        790,
+        1564
+      ],
+      "source_bottom_anchor_px": [
+        450,
+        1561
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        20,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.14769452449567724,
+      "export_offset_px": [
+        18,
+        2
+      ]
+    },
+    {
+      "id": "fridge-comfort",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/fridge-comfort_c.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 24759,
+      "sha256": "d5d9419377fd184d014190a1abccacb3d981ab7a6515d0072daa33e9e40fb8e7",
+      "source_sha256": "186ccead7132ae71fc998f44a9e5d3c4d90dd976de672cb91c1a448f708e33d0",
+      "source_crop_px": [
+        58,
+        198,
+        784,
+        1737
+      ],
+      "source_bottom_anchor_px": [
+        443,
+        1734
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        20,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.1332033788174139,
+      "export_offset_px": [
+        16,
+        2
+      ]
+    },
+    {
+      "id": "fridge-comfort",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/fridge-comfort_d.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 24993,
+      "sha256": "0cd4b71dc66ddfb02590ec7884bf984a3897013d6381eab58a25d5214f083077",
+      "source_sha256": "18728917d26ef5118fabc4e82d773833276b7ef248a3b1de5d742b20fa39b1c9",
+      "source_crop_px": [
+        143,
+        168,
+        799,
+        1580
+      ],
+      "source_bottom_anchor_px": [
+        464,
+        1577
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        20,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.14518413597733712,
+      "export_offset_px": [
+        17,
+        2
+      ]
+    },
+    {
+      "id": "fridge-premium",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/fridge-premium_a.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 28675,
+      "sha256": "ec2e23b15752383448e3af21d73feb6ab3306056f11aded857dc6670a4dab1c9",
+      "source_sha256": "d7bbd327a414a33786bb875caac3dedb4e633dc75805c02caa11af7fdc24048b",
+      "source_crop_px": [
+        100,
+        115,
+        848,
+        1603
+      ],
+      "source_bottom_anchor_px": [
+        563,
+        1600
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        20,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.13776881720430106,
+      "export_offset_px": [
+        13,
+        3
+      ]
+    },
+    {
+      "id": "fridge-premium",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/fridge-premium_b.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 27823,
+      "sha256": "c5df6c27e221113019cdcfd8b00df6805bcaaad0d90cf8cdbf90d432d2cac0c7",
+      "source_sha256": "0a1533c1b68257a38d5a445a46b967df62e387836b1c46533cd2bbbd69cf34e8",
+      "source_crop_px": [
+        109,
+        120,
+        840,
+        1587
+      ],
+      "source_bottom_anchor_px": [
+        408,
+        1584
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        20,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.13974096796182686,
+      "export_offset_px": [
+        13,
+        2
+      ]
+    },
+    {
+      "id": "fridge-premium",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/fridge-premium_c.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 25597,
+      "sha256": "a4e695a1a819fdcc854084a718ee764bfbbee41cf4872a5c19bd5e644509dfb6",
+      "source_sha256": "5efaf8e3c9fc631107a6cbecc28ace7dd336c58a6e9ebfd43843c540f86f56c8",
+      "source_crop_px": [
+        101,
+        111,
+        842,
+        1606
+      ],
+      "source_bottom_anchor_px": [
+        552,
+        1603
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        20,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.13712374581939799,
+      "export_offset_px": [
+        14,
+        2
+      ]
+    },
+    {
+      "id": "fridge-premium",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/fridge-premium_d.png",
+      "frame_px": [
+        128,
+        224
+      ],
+      "anchor_px": [
+        64,
+        224
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_px": 160,
+      "height_z": 5,
+      "bytes": 25767,
+      "sha256": "b2bb939216fffa2ea5f0cce665b509ba849d01d89f8aef19a14d87ad3be75f47",
+      "source_sha256": "286c10e952a4afbb93ad3cefc8d1ada2150aa0ec340078d15db3b1228472d531",
+      "source_crop_px": [
+        42,
+        281,
+        807,
+        1782
+      ],
+      "source_bottom_anchor_px": [
+        357,
+        1779
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": null,
+      "calibration_bbox_px": [
+        12,
+        20,
+        116,
+        208
+      ],
+      "prior_ground_contact_px": [
+        64,
+        207
+      ],
+      "export_scale": 0.13594771241830064,
+      "export_offset_px": [
+        13,
+        3
+      ]
+    },
+    {
+      "id": "door-main-basic",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/door-main-basic_a.png",
+      "frame_px": [
+        128,
+        320
+      ],
+      "anchor_px": [
+        0,
+        320
+      ],
+      "footprint_tiles": [
+        0,
+        2
+      ],
+      "height_px": 256,
+      "height_z": 8,
+      "bytes": 48553,
+      "sha256": "c965ea34a841cfe4f6ab3fd793c32f38c09f6040e7b36cd2e6d8b3aaa3249148",
+      "source_sha256": "2ec87dae065f890d33f606c2314b7810cc008c1008c1f0868b84c9435ddc7cb4",
+      "source_crop_px": [
+        93,
+        276,
+        704,
+        1882
+      ],
+      "source_bottom_anchor_px": [
+        147,
+        1879
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "calibration_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "prior_ground_contact_px": [
+        64,
+        316
+      ],
+      "export_scale": 0.19551681195516812,
+      "export_offset_px": [
+        5,
+        2
+      ]
+    },
+    {
+      "id": "door-main-basic",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/door-main-basic_b.png",
+      "frame_px": [
+        128,
+        320
+      ],
+      "anchor_px": [
+        128,
+        320
+      ],
+      "footprint_tiles": [
+        2,
+        0
+      ],
+      "height_px": 256,
+      "height_z": 8,
+      "bytes": 48523,
+      "sha256": "2c6daa3da6f0cf10c8d63eb88b774893883fb2580c602eb837aa23a62c5403f9",
+      "source_sha256": "5709ed64bd81c9281dafba31bb146f6a6a5c4c7b27b8c8a9a26502c3dc5cd3ed",
+      "source_crop_px": [
+        77,
+        179,
+        695,
+        1846
+      ],
+      "source_bottom_anchor_px": [
+        632,
+        1843
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "calibration_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "prior_ground_contact_px": [
+        64,
+        316
+      ],
+      "export_scale": 0.1883623275344931,
+      "export_offset_px": [
+        6,
+        2
+      ]
+    },
+    {
+      "id": "door-main-basic",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/door-main-basic_c.png",
+      "frame_px": [
+        128,
+        320
+      ],
+      "anchor_px": [
+        0,
+        320
+      ],
+      "footprint_tiles": [
+        0,
+        2
+      ],
+      "height_px": 256,
+      "height_z": 8,
+      "bytes": 49447,
+      "sha256": "5ef5423cd009c558fda9fce612299bea405029a81707106b2749c58ac445a3a5",
+      "source_sha256": "8142954606d3fa97334c6b6bd54b3d2d9f1cfdde80d2d959b59620326b95b066",
+      "source_crop_px": [
+        83,
+        271,
+        718,
+        1855
+      ],
+      "source_bottom_anchor_px": [
+        140,
+        1852
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "calibration_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "prior_ground_contact_px": [
+        64,
+        316
+      ],
+      "export_scale": 0.1952755905511811,
+      "export_offset_px": [
+        2,
+        7
+      ]
+    },
+    {
+      "id": "door-main-basic",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/door-main-basic_d.png",
+      "frame_px": [
+        128,
+        320
+      ],
+      "anchor_px": [
+        128,
+        320
+      ],
+      "footprint_tiles": [
+        2,
+        0
+      ],
+      "height_px": 256,
+      "height_z": 8,
+      "bytes": 50388,
+      "sha256": "5c376aa87d8cc2d0c62ef3807e29a6998dc12f0e5564a4f3da66b4c7da30e13c",
+      "source_sha256": "89d4d6e80fd73ea2dc95a5aa2b8fbfb71d10217794ab53c0dff95278bb122e09",
+      "source_crop_px": [
+        93,
+        262,
+        703,
+        1822
+      ],
+      "source_bottom_anchor_px": [
+        642,
+        1819
+      ],
+      "calibration_ref": "5649d3d",
+      "prior_alpha_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "calibration_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "prior_ground_contact_px": [
+        64,
+        316
+      ],
+      "export_scale": 0.2012820512820513,
+      "export_offset_px": [
+        3,
+        2
+      ]
+    }
+  ]
+}
