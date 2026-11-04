@@ -1,0 +1,62 @@
+{
+  "issue": 89,
+  "lot": 4,
+  "checks": [
+    {
+      "id": "townhouse-t1",
+      "no_overlaps": true,
+      "in_bounds": true,
+      "all_cells_reachable": true,
+      "reachable_cells": 216,
+      "total_cells": 216,
+      "hall_cells": 36,
+      "doors_width_2": true,
+      "door_count": 3,
+      "exact_projection_2_to_1": true,
+      "alpha_margin_px": 21,
+      "bytes": 97404
+    },
+    {
+      "id": "townhouse-t2",
+      "no_overlaps": true,
+      "in_bounds": true,
+      "all_cells_reachable": true,
+      "reachable_cells": 216,
+      "total_cells": 216,
+      "hall_cells": 20,
+      "doors_width_2": true,
+      "door_count": 6,
+      "exact_projection_2_to_1": true,
+      "alpha_margin_px": 21,
+      "bytes": 128948
+    },
+    {
+      "id": "villa-t1",
+      "no_overlaps": true,
+      "in_bounds": true,
+      "all_cells_reachable": true,
+      "reachable_cells": 900,
+      "total_cells": 900,
+      "hall_cells": 284,
+      "doors_width_2": true,
+      "door_count": 10,
+      "exact_projection_2_to_1": true,
+      "alpha_margin_px": 21,
+      "bytes": 280490
+    },
+    {
+      "id": "villa-t2",
+      "no_overlaps": true,
+      "in_bounds": true,
+      "all_cells_reachable": true,
+      "reachable_cells": 392,
+      "total_cells": 392,
+      "hall_cells": 112,
+      "doors_width_2": true,
+      "door_count": 6,
+      "exact_projection_2_to_1": true,
+      "alpha_margin_px": 21,
+      "bytes": 152436
+    }
+  ]
+}
