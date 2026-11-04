@@ -1,171 +1,100 @@
-# Bàn giao — Một đời để sống v0.35
+# Bàn giao — Một đời để sống, Basic 1.0 (04/11/2026)
 
-Ngày: 01/11/2026. Đây là trạng thái mã nguồn bàn giao, không phải xác nhận website Cloudflare đang chạy đã được cập nhật.
+Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude mới: đọc hết trước khi làm, rồi đọc `CLAUDE.md`, `AGENTS.md`, `README.md`.
 
-## 1. Chạy và build
+## 1. Tóm tắt
 
-- React 19 + TypeScript, Vite 8; Node.js 24, npm.
-- Giải nén source, mở terminal trong thư mục có package.json.
-- `npm ci`
-- `npm run dev`: chạy phát triển.
-- `npm test`: kiểm thử domain và các điều kiện luồng game.
-- `npm run build`: kiểm tra TypeScript và tạo dist.
-- `npm run preview`: xem bản build.
+- Repo `xsdaigiasx/lifesimu`, game ở `app/` (React 19, TypeScript, Vite 8), engine kiểm tra ở `core/`.
+- Thiết kế chi tiết: hai tài liệu Claude Docs *Workflow phát triển hoàn chỉnh* và *Kế hoạch và thiết kế Basic 1.0* (project `BvJJ1urceVRjfoNmQYohLr`, node `eb588493-56a5`; ticket T01–T89, mục "Để dành phát triển sau" ở cuối).
+- Tiến độ Basic 1.0: khoảng 30% theo số ticket (T01–T24, T40, T41 xong; T25 bỏ, gộp vào issue #124). Tính cả phần làm trước của T26–T29 thì khoảng 33–35%.
+- main hiện ở `859aa60` (gộp #128). Không có PR đang mở.
 
-Source ZIP chứa src, public (ảnh/âm thanh/font), tests, scripts, cấu hình và tài liệu. Không chứa node_modules, save người chơi, fixture trình duyệt, thông tin đăng nhập hay bản build dist. Bộ ảnh gốc của mọi lần thử không nằm đầy đủ trong source; các tài nguyên cần để chạy game có trong public.
+## 2. Quy trình bắt buộc
 
-## 2. Triển khai đúng cách người dùng đang dùng
+- Không bắt đầu ticket khi chủ dự án chưa duyệt đề xuất. Mỗi ticket: đề xuất ngắn (AskUserQuestion), duyệt, mở issue, nhánh `claude/<số-issue>-<tên>`, PR, **không tự gộp**.
+- Trước khi đẩy: `cd app && npm test && npm run build`, `cd core && npm run check` đều xanh.
+- Chụp màn hình kiểm tra (390×844) trước khi báo xong.
+- Việc cố ý làm nhỏ hoặc hoãn: thêm một dòng vào "Để dành phát triển sau" ở tài liệu Kế hoạch.
+- Trả lời chủ dự án bằng tiếng Việt, ngắn, hợp đọc trên điện thoại.
 
-Người dùng tải ZIP web tĩnh trực tiếp lên Cloudflare, không cần chuyển sang CLI. Sau khi build, nén NỘI DUNG dist: index.html và assets phải nằm ngay gốc ZIP, không thêm lớp thư mục dist hoặc source. Không thêm tệp `_redirects` vào gói này. Gói hiện hành Mot_Doi_De_Song_v0.35_Upload.zip có index.html và assets ở gốc; gói v0.27_Upload.zip cũ chưa có bản sửa kéo thả.
+### Bài học (đã gây lỗi trong phiên trước)
 
-Nguyên nhân lỗi deploy trước chưa được xác nhận vì chưa có nguyên văn lỗi; việc bỏ `_redirects` là thay đổi đóng gói để trở về dạng bản24. Không khẳng định đây là nguyên nhân gốc. Cấu hình wrangler.jsonc chỉ dùng nếu người phát triển chọn triển khai bằng Wrangler; assets.directory trỏ ./dist, tên Worker motdoi. Không có tài khoản/token trong source.
+- **Không thêm commit vào PR đã báo chủ dự án.** Chủ dự án gộp rất nhanh; commit đẩy sau khi gộp bị mất (đã xảy ra ở #75, #85, #95). Sửa thêm thì mở PR mới.
+- **PR nối tiếp**: khi PR mới sửa cùng file với PR đang chờ, tách nhánh từ nhánh PR đó và ghi rõ "gộp sau #xx" trong tiêu đề, mô tả. Sau khi PR trước được gộp, gộp main vào nhánh sau để khỏi xung đột.
+- Trước khi báo "gộp được", kiểm tra `mergeable_state` qua API.
+- Trả lời bằng dữ liệu đã kiểm tra, không đoán (từng báo sai kết quả kiểm tra ảnh).
 
-## 3. Trạng thái chức năng
+## 3. Môi trường phiên cloud
 
-### Thành phố và địa điểm
+- npm: `NO_PROXY= no_proxy= npm ci --proxy="$HTTPS_PROXY" --https-proxy="$HTTPS_PROXY" --noproxy=""`.
+- GitHub: chỉ dùng REST (`gh api repos/xsdaigiasx/lifesimu/...`), GraphQL không chạy. Mô tả PR dài thì ghi ra file rồi `-F body=@file`. API thỉnh thoảng trả 500/502: thử lại, rồi kiểm tra PR đã tạo chưa trước khi tạo lại.
+- Sau khi đẩy nhánh mới: `git config --add remote.origin.fetch "+refs/heads/<b>:refs/remotes/origin/<b>"; git fetch origin; git branch -u origin/<b>`.
+- Footer PR: `🤖 Generated with [Claude Code](https://claude.com/claude-code)` + link phiên. Commit kết thúc bằng `Co-Authored-By` và `Claude-Session`.
+- Chụp màn hình: `npx vite preview --port 4174 --strictPort` (chạy nền, timeout dài), Playwright `require('playwright')`, nạp save vào localStorage `life-simulator-vi-v1`, hồ sơ `life-simulator-profile-v1` = `{"name":"Lâm","gender":"male","complete":true}`. Tạo save bằng `.test-build` (sau `npx tsc -p tsconfig.tests.json`).
+- Test: `app/tests/*.test.cjs`, đăng ký vào mảng trong `app/scripts/test.mjs` (một dòng dài; chèn `,['tests/x.test.cjs']` sau mục cuối).
 
-- Giữ bản đồ 16 tile, tải/giải mã vùng ban đầu trước khi vào game; tải tiếp nền, kéo và pinch zoom.
-- Địa điểm dùng mô tả ngắn và nút gọn; có thông báo khi đến.
-- Camera theo vị trí thực nhân vật, tên địa điểm hiển thị; icon đầu–vai SVG không kèm tên nhân vật. Tam giác chỉ hướng đích đang chọn, khi bám mép chỉ về vị trí thật. Bấm icon để quay về nhân vật.
-- Thanh dưới: Thành phố, Nhật ký, Quan hệ, Điện thoại.
+## 4. Quyết định đã chốt (ngoài CLAUDE.md)
 
-### Công việc và kỹ năng
+- Giao diện: mỗi màn một việc; danh sách đồ là lưới thẻ có ảnh; thông tin phụ bằng biểu tượng kèm số có đơn vị rõ ("+2/ngày", "Nhanh 40%", "Căng thẳng −1/đêm"); nút cùng nhóm cùng cỡ; không tiêu đề lặp, không dòng mô tả thừa; nhãn trạng thái dạng biểu tượng đè góc ảnh.
+- Thanh trên: ô giờ (T5 05/11, Ngày n) và ví cùng cao 42px; chip cảnh báo Đói, Mệt… hàng dưới khi có. Thanh dưới: Thành phố, Kỹ năng, Nhật ký, Quan hệ, Điện thoại.
+- NPC: lựa chọn không lộ hệ quả, lựa chọn khoá hiện mờ; nhắc thời gian áng chừng (hôm qua, tuần trước…), không ghi ngày; NPC tự bắt chuyện ≤3/ngày; tin nhắn ≤2/ngày; xưng hô theo vai vế (người lớn nói kiểu người lớn, người chơi đáp "dạ… ạ").
+- Tin nhắn trong điện thoại không tốn giờ; gọi điện 15 phút, chỉ Mẹ và người từ bậc Thân; hẹn đi ăn phải đến đúng nơi đúng giờ.
+- Nội thất không chia hạng; mỗi loại 3 mẫu tên riêng (HOME_MODELS), mẫu đắt đẹp và nhiều tính năng hơn; xoay 4 hướng.
+- Nhà phố, biệt thự: mỗi tầng một mặt bằng liền, kéo, phóng to; giá nhà phố thuê 6 triệu hoặc mua 2,5 tỷ, biệt thự 12 tỷ.
+- Ăn uống: rủi ro ngộ độc theo độ tươi, độ chín, không theo giá; món quán, nhà hàng không rủi ro.
+- Bản đồ thành phố: ghép từ mảnh nhỏ (ô 256×128) thay ảnh lớn bị mờ.
+- Phong cách vẽ (chốt lại 04/11, issue #124): vẽ tay kiểu sách truyện, viền nâu đậm dày run tay, bo tròn, mũm mĩm, tô bút chì màu, nhiều đồ lặt vặt. Món ăn, đồ TTTM, chân dung NPC đã đạt, giữ nguyên.
 
-- Luồng CV → phỏng vấn ngày tiếp theo → nhận việc theo lịch domain; công việc IT, Lv/XP kỹ năng, học tối và lương kỳ tháng giữ nguyên.
-- Hai ca 08–12h / 13–17h, tiến độ chạy nhanh; tự giao việc theo ngày/công ty/kỹ năng, lưu assignment để không đổi khi reload.
-- Trong ca hiển thị góc máy tính + %, có pause/resume/rời ca; không trò chuyện, kể cả pause. Ngoài ca có hai đồng nghiệp An/Linh, điểm quan hệ/cooldown.
-- Nhân viên không mua hay nâng cấp đồ công ty. Chủ công ty còn luồng riêng; không xem đó là hệ thống công ty tự động hóa đã hoàn thiện.
-- 12h: popup ăn cơm và nghỉ đến13h, phí30.000đ, +20 năng lượng/-10 stress; hoặc ra ngoài một lát. Không ăn lại được khi đã13h. Chưa có chọn món/nấu ăn cho bữa trưa.
-- 17h: popup hết ca, nút **Ra ngoài phố**, không tự đi về nhà. Trở về bản đồ trước công ty, giữ thời gian và vị trí office. Người chơi tự chọn nơi tiếp theo.
-- Lời mời tăng ca khoảng30%, theo seed/ngày, ổn định khi tải lại; chỉ nhận lúc17h sau ca chiều, đủ18 năng lượng; chạy17–19h. Sau19h có popup ra phố. Thời gian được ghi vào kỳ lương mức thường; CHƯA có hệ số tăng ca riêng.
-- Không vào công ty sau giờ khi không có ca tăng ca đang chạy; ngày nghỉ cũng khóa nhân viên. Dữ liệu lễ âm lịch ngoài2026 chưa đầy đủ.
+## 5. Đã làm trong phiên 04/11 (đều đã vào main)
 
-### Nhà ở và nội thất
-
-- Nền nhà trọ vuông giữ bố cục bếp/vệ sinh. v0.30 dùng rental-diamond.png, sàn hình thoi cân với hai trục bằng nhau và phủ đủ lưới; bỏ tường thấp/cửa phía trước. Ảnh AI edit từ nền đã chốt; ảnh cũ lưu nguyên. Diện tích27m² vẫn là minh họa.
-- Giường mặc định, không cho cất vào kho; bấm giường mở xác nhận ngủ đến sáng mai, phí sinh hoạt90.000đ do domain xử lý. Bỏ màn lịch sinh hoạt trong ngày; lịch hẹn trên điện thoại vẫn giữ.
-- Điện thoại → Mua sắm chia bốn danh mục. Nội thất nhà gồm giường, tủ, bàn laptop, bàn ăn nhỏ, cây, đèn, thảm, tranh; ba hạng giá và nâng cấp trả chênh lệch. Phòng sắp xếp đồ đã sở hữu; giường/bàn laptop mặc định. Đồ mua vào kho, trừ tiền và ghi sổ. Chi tiết v0.34 tại docs/LIFE-v0.34.md.
-- Sắp xếp bằng lưới10×10 ô, mỗi ô cạnh0,5m (diện tích lưới25m² minh họa), v0.31 đặt trong khoảng lùi nửa ô quanh sàn. Có chọn món/đặt/xoay90°/cất/lưu/hủy; chặn chồng đồ, dải bếp/vệ sinh y<3. Hai vùng góc/lối cửa cũ đã mở lại. Hình nền dự kiến27m² và lưới25m² chưa được chuẩn hóa cùng tỷ lệ mét.
-- v0.28: 14 PNG riêng cho 7 món × 2 hướng tại public/assets/static-scenes/furniture-v2. Căn theo vùng alpha và điểm chân riêng trong src/domain/home-art.ts. Thảm là ảnh raster được chiếu affine lên đúng bốn góc footprint; xoay là đổi trục trên sàn, không lật ảnh.
-- Icon xoay/cất/lưu đặt cạnh món đang chọn; icon Lưu trong kho không đẩy khung phòng khi đổi lựa chọn. v0.30 phòng dùng kích thước tự động theo viewport, không còn giới hạn520px; desktop kho bên trái, mobile hàng ngang.
-- v0.29 không còn lớp che tường trước/phải/cửa. Chỉ lớp vệ sinh giữ z-index500; icon600. Cửa trước đã bỏ khỏi ảnh nền; v0.30 mở lại vùng lối cửa cũ mà không làm mất tính hợp lệ của save cũ.
-- Các ảnh giường/tủ/bàn laptop/bàn ăn được hiệu chỉnh độ dốc theo hai trục sàn bằng ma trận giữ cạnh đứng thẳng, giữ nguyên anchor chân. Cặp ảnh bàn laptop0/90 được đổi lại để cùng hướng với các món khác. Thay ảnh cây90 chứa hai chậu bằng một chậu và đo lại anchor.
-- Bỏ nhãn mọi món khi không sắp xếp, chỉ giữ nút Đi ngủ trên giường.
-- Bản sửa local 31/10: kéo thả chuột/cảm ứng ngay trên nền phòng; kho có ảnh để kéo vào phòng. Lưới, con trỏ và vị trí đồ dùng chung phép chiếu. Vùng đặt xanh/đỏ; vị trí sai trả lại chỗ cũ. Có xoay/cất/lưu/hủy và di chuyển bằng phím mũi tên khi chọn đồ. Chừa 80px cho thanh địa điểm để không che nút Lưu. Không thay nền hoặc định dạng save. Bản sửa được đóng gói trong Mot_Doi_De_Song_v0.27_DragDrop_Source.zip và Mot_Doi_De_Song_v0.27_DragDrop_Upload.zip; hai ZIP gốc giữ lại làm lịch sử.
-- v0.27 sửa CSS cũ làm phòng lệch sang phải, tiêu đề đè nút; sửa vùng cắt atlas và điểm đặt theo mặt sàn. Đã xem khung390×780 trên trình duyệt.
-
-## 4. Điểm vào mã
-
-| Phần | Tệp |
+| Phần | PR |
 |---|---|
-| Điều hướng, popup ca/ngủ, commit save | src/App.tsx |
-| Bản đồ/camera/icon | src/components/CityMap.tsx, public/map-player.css, public/assets/standing-player.svg |
-| Nhà/editor | src/components/Room.tsx, public/static-scenes.css |
-| Cửa hàng điện thoại/ảnh nội thất | src/components/FurnitureShop.tsx, HomeArt.tsx, Phone.tsx |
-| Kho nhà, giá, footprint, collision, validation | src/domain/home.ts |
-| Phép chiếu sàn và tọa độ con trỏ | src/domain/home-geometry.ts |
-| Ảnh riêng và anchor | src/domain/home-art.ts, docs/FURNITURE-RENDER.md |
-| Công việc, tăng ca, bữa trưa, kỹ năng/lương | src/domain/work.ts |
-| Đồng hồ, đi lại, kết thúc ngày | src/domain/time.ts |
-| Save và kiểu dữ liệu | src/domain/engine.ts, src/domain/types.ts |
-| Văn phòng và giao tiếp | src/components/Office.tsx, OfficeWorkScene.tsx; src/domain/social.ts |
-| Cảnh công ty/máy tính | src/components/PackedOffice.tsx, WorkActivity.tsx |
-| Tài nguyên mới | public/assets/static-scenes/ |
+| T20 tin nhắn, gọi điện, hẹn; xưng hô theo vai vế | #75, #76 |
+| Báo chỉ số tăng giảm, cảnh báo thanh trên, quán ăn ven đường | #78 |
+| Công thức mở dần, app Ngân hàng | #80 |
+| Nhà hàng, Trung tâm thương mại | #82 |
+| Nhà phố, biệt thự (mặt bằng liền vào ở #107) | #85, #107 |
+| Ảnh nguyên liệu, ảnh lô 1–3 (món, đồ TTTM, chân dung) | #87, #105 |
+| Nội thất bỏ hạng, 3 mẫu | #91 |
+| Thanh trên, màn Sức khỏe | #93, #95, #96 |
+| Ảnh lô 4–6, phòng trọ 2:1, nội thất 4 hướng | #107, #112 |
+| Mua sắm điện thoại ảnh nhỏ; phòng trọ biểu tượng, tab Kỹ năng | #110, #114 |
+| T21 tủ lạnh | #116 |
+| T22 sổ công thức, ba nguồn học món | #119 |
+| T23 nấu bừa | #122 |
+| T24 chợ chiều, bệnh do ăn uống; biểu tượng Chiều, thẻ cà phê | #126, #127, #128 |
 
-Save giữ key `life-simulator-vi-v1`, profile `life-simulator-profile-v1`; home/work là dữ liệu mở rộng optional để đọc save cũ. Không reset save để nâng phiên bản.
+## 6. Đang chờ
 
-## 5. Kiểm chứng và giới hạn
+### Codex (asset)
 
-- Đã qua TypeScript, production build và các suite hiện hành. Có test riêng shift-choices cho phí ăn trưa, chặn lặp, lời mời tăng ca ổn định, chạy/lưu/lương/khóa cửa. Browser QA mới nhất xác nhận nút Ra ngoài phố giữ nhân vật trước công ty và phòng không lệch khung.
-- Chưa kiểm tra toàn bộ đồ ở mọi ô/hướng, mọi màn hình và mọi save cũ. Không xem build thành công là bằng chứng mọi ảnh đã chuẩn.
-- Bộ ảnh v0.28 là ảnh AI độc lập theo hai hướng, không phải ảnh render từ một mô hình3D chung; chi tiết bất đối xứng giữa hướng có thể khác nhẹ. Thảm trong cảnh dùng một texture với phép chiếu sàn để bảo đảm góc xoay hình học; ảnh thảm90 gốc chỉ dùng thumbnail. Không cam kết mọi chi tiết là bản xoay3D tuyệt đối.
-- Có anchor chân riêng theo alpha, phép chiếu thống nhất và lớp tường tiền cảnh. Tỷ lệ chiều cao và mét vẫn là minh họa; chưa kiểm tra đường đi liên tục. Chỉ vùng vệ sinh còn dùng mask cố định theo nền mới, không phải mô hình3D.
-- Cần kiểm tra save nhà từ các bản thử đã cất giường trước khi khóa cất; migration bảo đảm mọi save có giường đặt trong phòng chưa hoàn chỉnh.
-- v0.33 cửa hàng điện thoại dùng chung HOME_ITEMS/homeOf/buyHome với kho nhà7món. homeOf gộp các ID trong owned cũ còn thiếu vào kho, không trừ tiền hoặc sửa owned/equipped. Luồng UI shop3món cũ đã bỏ, domain legacy giữ để đọc save/kiểm thử.
-- Ca tăng ca hiện tính lương thường; nên chốt hệ số/phụ cấp trước khi mở rộng kinh tế. Một số nhãn ca chiều còn dùng chung khi đang tăng ca.
-- Tính năng tương lai chưa hoàn thiện: nhà phố/biệt thự, công ty tự động hóa dòng tiền, điện nước/dịch vụ, thời tiết/mùa, NPC thế giới/sự kiện sâu, mua hàng giao hôm sau, về quê. Nấu ăn, bệnh viện và ngân hàng có bản cơ bản ở v0.34 (docs/LIFE-v0.34.md).
+- **#124** chốt lại phong cách: Codex gửi PR thử gồm vỏ phòng trọ + 3 món (giường gỗ có ngăn kéo, tủ gỗ hai cánh, bàn gỗ có kệ sách) đủ 4 hướng. Claude ghép thử vào game (khớp ô, nét, tỉ lệ), báo chủ dự án. Điều kiện ghép ghi ở bình luận của #124 (tách lớp, đúng lưới lô 6, bố cục bếp 5×1 và phòng tắm 3×3, 4 hướng cùng thiết kế, không nền tối). Duyệt xong mới vẽ lại lô 4, 5, 6, ô nền và công trình bản đồ.
+- **#120** ảnh 3 món mới (rauMuong, thitKho, comChien), 5 ảnh món tự chế (improv-com/xao/rim/luoc/la), cà phê, tủ lạnh 3 mẫu 4 hướng. Hiện đang dùng ảnh tạm (Cơm trứng, biểu tượng cốc, khối SVG `fridge-*.svg`).
+- **#97** mảnh bản đồ: lô A (#118) và lô B (#123) đã đóng vì sai phong cách, chờ #124.
+- **#55** đồ văn phòng, hoãn tới giai đoạn mở công ty.
 
-- QA bản sửa local: `npm test` qua 18 suite; `npm run build` qua. Edge headless kiểm tra chuột kéo từ kho và trực tiếp trong phòng, cảm ứng kéo từ kho, chặn va chạm, xoay, hủy, lưu/tải lại; nút Lưu dùng được ở 320×640, 390×780, 430×932 và 1280×900. Script: scripts/qa-home.cjs (cần Playwright/Edge, QA_BASE_URL tùy chọn; PLAYWRIGHT_MODULE nếu module cài ngoài dự án). Ảnh QA lưu ở .qa-artifacts/home; không đưa dữ liệu QA vào gói source.
+### Claude
 
-## 6. Tài nguyên và quyền
+- **#98** dựng bản đồ ghép từ mảnh (khối tạm trước, nạp ảnh theo manifest) — chờ chủ dự án duyệt bắt đầu.
+- Ticket tiếp theo: chủ dự án chọn **T26** (kho đồ, instanceId, lưới phòng) hay **T27** (chế độ bố trí: kéo, thả, xoay, huỷ, BFS lối đi). Phần đã có sẵn: lưới phòng trọ, xoay 4 hướng, kéo thả ở phòng trọ, chạm đặt ở nhà phố.
+- Sau đó T28 (điểm dùng của đồ), T29 (TTTM giỏ, đơn, giao hàng, bán lại), rồi theo bảng ticket.
 
-Ảnh nhà, cảnh công ty/máy tính và atlas nội thất mới được tạo bằng công cụ tạo ảnh AI trong phiên làm việc theo chỉ đạo người dùng; SVG icon người đứng viết bằng mã. Tệp runtime nằm trong public, ảnh AI không phải sản phẩm cắt chính xác từ một bản vẽ3D. Không cam kết độc quyền hoặc quyền của bên thứ ba ngoài những gì có thể xác minh. Nguồn tài nguyên trước đó kế thừa docs/SOURCES.md; các ghi chú cũ mô tả ảnh/luồng đã thay không còn là trạng thái hiện hành. Bộ ZIP văn phòng người dùng đã bác bỏ không được coi là bộ tài nguyên được duyệt.
+## 7. Bản đồ mã nguồn (domain mới hoặc đổi nhiều)
 
-## 7. Ưu tiên tiếp theo
+- `domain/inbox.ts` tin nhắn, cuộc gọi, hẹn; `voiceFor()` vai vế.
+- `domain/director.ts` câu chuyện NPC; `lines.ts` câu thoại; `npc.ts` hồ sơ, xưng hô `ADDRESS`, `relationTier(score,id)`.
+- `domain/life.ts` ăn uống, kho (lô có `cold`, `late`), tủ lạnh (`stockLot`, `chillPantry`), công thức (`knowsRecipe`, `learnRecipe`, `NPC_TEACHES`, `recipeSources`), nấu bừa (`improvise`, `improvName`, `improvCap`), rủi ro (`RISK`, `isStale`, `consume`), ăn ngoài `EAT_OUT`, ngân hàng `repayApp`, bệnh viện.
+- `domain/vitals.ts` chỉ số, `applyIllness` (ngộ độc phát tác trễ, gọi trong `spendTime` và ca làm).
+- `domain/home.ts` nội thất phòng trọ (`HOME_MODELS`, `FRIDGE`, `homeName`); `home-geometry.ts` lưới theo ảnh `room-master-storybook.webp` (1448×1086, gốc 724,350, ô 128×64).
+- `domain/housing.ts` nhà phố, biệt thự (`HOUSES` theo tầng, `arrangeFloor`, `moveHouse`, `residenceOf`).
+- `domain/stat-delta.ts` chip chỉ số sau mỗi hành động.
+- `domain/furniture-sprites.json`, `house-floors.json` số đo ảnh Codex.
+- Giao diện mới: `PhoneSocial.tsx`, `PhoneBank.tsx`, `MallShop.tsx`, `HouseView.tsx`, `HouseVisit.tsx`, `Improvise.tsx`, `NpcFace.tsx`, `furniture-art.ts`. CSS mới: `public/phone-social.css`, `life-feedback.css`, `housing.css`, `topbar.css` (nhớ tăng `?v=` trong `index.html` khi sửa).
 
-1. Tinh chỉnh tỷ lệ mét/chiều cao và đối chiếu chi tiết bất đối xứng giữa hai hướng khi cần.
-2. Hoàn thiện migration giường cho save cũ từ các bản thử đã cất giường.
-3. Bổ sung kiểm thử UI ngủ, hai lựa chọn nghỉ trưa, từ chối/nhận tăng ca và ra phố sau19h.
-4. Sau khi nhà trọ ổn định mới mở rộng các loại nhà và sự kiện đã chốt.
+## 8. Lưu ý kỹ thuật
 
-
-
-## Kiểm chứng v0.28
-
-- npm test:18suite; npm run build:TypeScript và production.
-- scripts/qa-home.cjs: kéo chuột/kéo cảm ứng, vị trí sai, xoay, lưu/hủy, tải lại và các khung320–1280px.
-- scripts/qa-home-art.cjs: đủ7món ở0/90°, icon cạnh vật phẩm, giới hạn520px desktop, kiểm tra pixel lớp tường trước/phải/vệ sinh che marker trong khi phần sàn không che. Ảnh QA trong .qa-artifacts/home, không đóng gói.
-- ZIP v0.28 là lịch sử trước khi bỏ tường trước.
-
-## Kiểm chứng v0.29
-
-- npm test:18suite, bổ sung kiểm tra cả hai trục chiếu, giữ cạnh đứng, ánh xạ0/90 của bàn laptop. npm run build qua.
-- qa-home: kéo chuột/cảm ứng, xoay, vị trí sai, lưu/hủy/reload và khung320–1280px.
-- qa-home-art: đủ14PNG decode và7món ở cả hai hướng, không còn lớp tường trước/phải, chỉ vệ sinh che marker. Có ảnh chụp desktop/mobile để đối chiếu thực tế.
-- Hiệu chỉnh camera dựa trên độ dốc cạnh thẳng tham chiếu, không biến ảnh AI thành mô hình3D; các cạnh riêng trong cùng ảnh có thể vẫn lệch nhẹ do ảnh nguồn không hoàn toàn trực giao.
-- Gói v0.29 là lịch sử trước khi cân lại sàn/đổi layout. Không deploy trong phiên này.
-
-## v0.30 — bố cục trong nhà và nhân vật bản đồ
-
-- Bỏ footerKhu nhà trọ khi ở trong phòng; thay Góc nhỏ bằng nhãn Nhà trọ nhỏ trong hàng công cụ, icon Kỹ năng vẫn mở được. Không che thanh điều hướng mobile.
-- Hệ chiếu đối xứng: gốc(50,30.25), bướcX±4.25 và bướcY2.875. Góc trước(50,87.75), hai góc bên(7.5,59)/(92.5,59). Căn theo ảnh thực; xem docs/ROOM-ISOMETRIC-v0.30.md.
-- Desktop1598×900: canvas khoảng894px, đủ mép sàn; kiểm tra cả1280×720,390×780,320×640. Không còn khung cuộn trong nhà.
-- Portrait map là player-bust.svg viết bằng mã; bỏ span tên hiển thị, giữ aria-label. Kiểm tra tam giác90° khi nhân vật phía phải ngoài khung, bấm đưa camera về.
-- npm test18suite; build; qa-home; qa-home-art; qa-room-map-layout. Ảnh QA không đóng gói vào source.
-- Gói v0.30 là lịch sử trước khi thêm mép an toàn và sửa riêng laptop.
-
-## v0.31 — mép an toàn và hướng laptop
-
-- Khoảng lùi .5ô quanh sàn; vùng đặt/lưới/đồ/thảm/input đồng bộ co vào90%. Chặn thả vào dải viền và hiện đường viền khi sắp xếp. Các ô logic save0–10 giữ nguyên nên bố cục cũ tự lùi vào, không xóa đồ/reset.
-- Sửa ảnh laptop ở desk-0.png: màn hình và bàn phím nhìn về ghế dưới-phải, thay vì xoay vuông góc với ghế. Cache-bustv31, cập nhật alpha/anchor. Ảnh hướng còn lại giữ nguyên.
-- Chi tiết, prompt built-in và giới hạn mét minh họa: docs/ROOM-SAFETY-v0.31.md.
-- Kiểm tra npm test18suite; build; qa-home; qa-home-art; qa-home-safety. Bố cục test theo ảnh người dùng có cây9,9, giường/bàn hướng90; thả vào mép bị chặn, lưu giữ nguyên tọa độ.
-- ZIPv0.31 là lịch sử trước khi hiệu chỉnh tâm và vuốt kho.
-
-## v0.32 — tâm tiếp xúc, tâm xoay và vuốt kho
-
-- HOME_GROUND tách tâm mặt đỡ của mỗi ảnh khỏi alpha/điểm chân thấp nhất; sprite và phép hiệu chỉnh camera cùng neo tâm này vào tâm footprint. Căn lại độ dốc tham chiếu của giường/tủ/bàn theo các cạnh thẳng. Không sinh ảnh mới.
-- Xoay giữ nguyên tâm footprint, kể cả cạnh lẻ; tọa độ nửa ô được hỗ trợ trong validate/save/va chạm. Va chạm kiểm tra hình chữ nhật liên tục, không dùng Set ô số nguyên. Nếu thiếu chỗ thì giữ nguyên đồ và báo Không đủ chỗ để xoay. Save số nguyên cũ đọc bình thường.
-- Mobile kho dùng pan-x tự nhiên. Chạm chưa bắt kéo; vượt10px theo ngang để trình duyệt cuộn, theo dọc mới kéo vào phòng. Desktop kho dọc dùng pan-y, kéo ngang ra phòng. Sửa mất capture khi cảm ứng chuyển từ img sang button.
-- Ảnh vẫn là2D do AI vẽ, có sai khác chi tiết phối cảnh bên trong ảnh; căn mặt đỡ và tâm xoay không biến ảnh thành mô hình3D. Không ghi là đã chuẩn kiến trúc tuyệt đối.
-- npm test18suite; build; qa-home; qa-home-art; qa-home-shelf. QA-shelf dùng CDP touch thật: vuốt ngang không đổi lựa chọn/không kéo nhầm, kéo dọc đặt/saved plant6,6, xoay bed giữ đúng vị trí tâm, lưu/reload. Có unit test tâm không đổi cho cả7món0/90, quay lại trả đúng tọa độ và va chạm nửa ô.
-- Chi tiết tại docs/ROOM-ANCHORS-v0.32.md. Gói v0.32 là lịch sử trước khi chuyển cửa hàng vào điện thoại.
-
-## v0.33 — mua nội thất trong điện thoại
-
-- Mua sắm mở trực tiếp catalog7món trong điện thoại, không chuyển sang modal cửa hàng khác. Bỏ nút Mua nội thất và state shop trong phòng. Giữ sắp xếp/kho đồ.
-- buyHome dùng liveState mới nhất, chống mua trùng và thiếu tiền; mỗi giao dịch ghi một lần vào ledger và journal. Món mua vào kho placed:false, không tự đặt. Giá như cửa hàng nhà v0.32, không thêm thời gian hay phí vận chuyển.
-- Giữ đồ mua bằng shop legacy: homeOf gộp owned còn thiếu vào home.items mà không mutation; lần mua/lưu sau sẽ persist kho đầy đủ. Không xóa owned/equipped, không reset save. Số lượng trên điện thoại/thu chi đọc kho thống nhất.
-- Component ảnh dùng chung HomeArt.tsx, shop FurnitureShop.tsx. Không tạo ảnh hoặc dựng3D trong phiên này.
-- npm test19suite gồmhome-shop; build; qa-phone-shop kiểm tra7món, legacy duplicate, tiền/ledger, thiếu tiền320px, ở nguyên điện thoại, về kho phòng và reload. qa-home-shelf xác nhận vuốt/kéo/xoay/lưu vẫn qua.
-- Gói v0.33 là lịch sử trước khi bổ sung sinh hoạt và dịch vụ thành phố. Không deploy.
-
-## v0.34 — sinh hoạt, mua sắm và dịch vụ thành phố
-
-- Bốn danh mục mua sắm; nội thất ba hạng giá và nâng cấp trả chênh lệch; đồ điện tử, quần áo và phương tiện có tác dụng trong game.
-- Đèn ngủ ngắn mới, cây/đèn gắn bàn, tranh treo hai đoạn tường và nút ngủ neo vào giường. Giữ khung tùy chọn mobile ổn định khi kéo đồ.
-- Chợ nguyên liệu có hạn dùng, bếp bốn công thức và ăn món nấu; xem TV tại nhà.
-- Ngân hàng gửi/rút tiết kiệm, vay/trả một phần/toàn bộ và phí quá hạn; bệnh phát sinh qua ngày, khám rồi chữa; bốn hoạt động công viên.
-- Save cũ tương thích qua trường life và metadata đồ tùy chọn. Không triển khai lên Cloudflare trong phiên này.
-- Thông số, phạm vi thực hiện, giới hạn hình ảnh và prompt đèn: docs/LIFE-v0.34.md. Lãi/phí/bệnh là tham số game.
-- Kiểm chứng: 20 suite domain, TypeScript/production build, qa-life cho toàn luồng giao diện và reload; qa-home-shelf cho cảm ứng vuốt/kéo/tâm xoay. Chi tiết thực thi nằm trong các script tương ứng.
-- Gói v0.34 là lịch sử trước minigame nấu ăn.
-
-## v0.35 — icon ngủ và minigame nấu ăn
-
-- Nút ngủ trong phòng là icon mặt trăng, có nhãn hỗ trợ đọc màn hình và title Đi ngủ.
-- Nấu chuyển thành ba bước canh nhịp: sơ chế, đảo chảo, canh lửa. Điểm quyết định chất lượng và năng lượng món ăn.
-- Nguyên liệu/năng lượng/thời gian trừ một lần khi bắt đầu; tiến độ từng bước lưu trong save và tiếp tục khi mở lại. Dừng nấu không hoàn nguyên liệu. Khóa ngủ khi đang nấu. Save và món ăn cũ vẫn đọc được.
-- npm test: 20 suite; thêm kiểm chứng cooking pending/ba hạng/chống lặp/hủy/reload; production build; qa-life chơi bằng nút theo kim, reload giữa lượt và khung 320/390/1280px.
-- Quy tắc, điểm chất lượng và giới hạn: docs/COOKING-v0.35.md. Không tạo ảnh mới hoặc triển khai Cloudflare.
-- Gói hiện hành Mot_Doi_De_Song_v0.35_Source.zip / Mot_Doi_De_Song_v0.35_Upload.zip.
+- Mọi slice mới của save phải có validator và được nối vào `engine.ts`; test phải kiểm `engine.valid` và `engine.parse(JSON.stringify(s))`.
+- Ngẫu nhiên luôn theo seed (hash ngày, id) để tải lại không đổi kết quả.
+- Phòng trọ vẽ bằng sprite lô 5 neo đáy chân đế; ảnh nội thất cũ `static-scenes/furniture-v2` chỉ còn làm dự phòng.
+- Ảnh tạm thiếu thì có `onError` quay về ảnh Cơm trứng hoặc biểu tượng.
+- Thông tin tài khoản (hạn mức tuần) Claude không xem được; chủ dự án xem ở Settings > Usage.
