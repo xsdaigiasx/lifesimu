@@ -31,3 +31,8 @@ img.npc-face{width:100%;height:100%;object-fit:cover;border-radius:50%;display:b
 .meal-needs span.short{color:#b0442b;opacity:.7}
 .meal-needs img{width:22px;height:22px;object-fit:contain}
 .product-glyph img{width:60px;height:60px;object-fit:contain}
+/* T21: tủ lạnh, lô sắp hỏng */
+.pantry-grid .market-item.is-soon{border-color:#e8c35a;box-shadow:inset 0 0 0 1px #e8c35a}
+.pantry-grid .cold{color:#3f7fa6}
+.fridge-cap{display:flex;align-items:center;justify-content:flex-end;gap:4px;margin:0 0 8px;font-size:12px;font-weight:800;color:#3f7fa6}
+.fridge-cap svg{width:15px!important;height:15px!important;fill:none;stroke:currentColor}

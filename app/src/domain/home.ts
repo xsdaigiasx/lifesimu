@@ -1,14 +1,19 @@
 import type {GameState,GameResult} from './types';
 import {post} from './money';
 import {clockOf} from './time';
-export const HOME_ITEMS={bed:{name:'Giường đơn',price:1400000,w:2,h:3,icon:'home'},wardrobe:{name:'Tủ quần áo',price:950000,w:2,h:1,icon:'bag'},desk:{name:'Bàn laptop',price:850000,w:2,h:2,icon:'briefcase'},table:{name:'Bàn ăn nhỏ',price:420000,w:2,h:2,icon:'cup'},plant:{name:'Chậu cây',price:180000,w:1,h:1,icon:'health'},lamp:{name:'Đèn ngủ',price:350000,w:1,h:1,icon:'bell'},rug:{name:'Thảm nhỏ',price:650000,w:3,h:2,icon:'grid'},painting:{name:'Tranh treo tường',price:280000,w:2,h:1,icon:'map'}} as const;
+export const HOME_ITEMS={bed:{name:'Giường đơn',price:1400000,w:2,h:3,icon:'home'},wardrobe:{name:'Tủ quần áo',price:950000,w:2,h:1,icon:'bag'},desk:{name:'Bàn laptop',price:850000,w:2,h:2,icon:'briefcase'},table:{name:'Bàn ăn nhỏ',price:420000,w:2,h:2,icon:'cup'},plant:{name:'Chậu cây',price:180000,w:1,h:1,icon:'health'},lamp:{name:'Đèn ngủ',price:350000,w:1,h:1,icon:'bell'},rug:{name:'Thảm nhỏ',price:650000,w:3,h:2,icon:'grid'},painting:{name:'Tranh treo tường',price:280000,w:2,h:1,icon:'map'},fridge:{name:'Tủ lạnh',price:2500000,w:1,h:1,icon:'snow'}} as const;
 export type HomeId=keyof typeof HOME_ITEMS;
 export const HOME_TIERS={basic:{name:'Cơ bản',factor:1,comfort:0},comfort:{name:'Tiện nghi',factor:1.6,comfort:1},premium:{name:'Cao cấp',factor:2.5,comfort:2}} as const;
 export type HomeTier=keyof typeof HOME_TIERS;
 /** Mỗi mẫu một món riêng (chốt 04/11): không ghi hạng, mẫu đắt hơn đẹp hơn, êm hơn. Khoá là hạng nội bộ. */
-export const HOME_MODELS:Record<HomeId,Record<HomeTier,string>>={bed:{basic:'Giường đơn khung sắt',comfort:'Giường gỗ có ngăn kéo',premium:'Giường bọc nệm có đèn đầu giường'},wardrobe:{basic:'Tủ vải khung thép',comfort:'Tủ gỗ hai cánh',premium:'Tủ gỗ có gương và đèn'},desk:{basic:'Bàn gấp gọn',comfort:'Bàn gỗ có kệ sách',premium:'Bàn nâng hạ có màn phụ'},table:{basic:'Bàn nhựa xếp',comfort:'Bàn gỗ tròn',premium:'Bàn mặt đá chân gỗ'},plant:{basic:'Chậu xương rồng',comfort:'Chậu trầu bà',premium:'Bàng Singapore chậu gốm'},lamp:{basic:'Đèn kẹp',comfort:'Đèn gốm',premium:'Đèn đồng chao vải'},rug:{basic:'Thảm cói',comfort:'Thảm len',premium:'Thảm dệt hoa văn'},painting:{basic:'Tranh in',comfort:'Tranh sơn dầu nhỏ',premium:'Tranh khung gỗ lớn'}};
+export const HOME_MODELS:Record<HomeId,Record<HomeTier,string>>={bed:{basic:'Giường đơn khung sắt',comfort:'Giường gỗ có ngăn kéo',premium:'Giường bọc nệm có đèn đầu giường'},wardrobe:{basic:'Tủ vải khung thép',comfort:'Tủ gỗ hai cánh',premium:'Tủ gỗ có gương và đèn'},desk:{basic:'Bàn gấp gọn',comfort:'Bàn gỗ có kệ sách',premium:'Bàn nâng hạ có màn phụ'},table:{basic:'Bàn nhựa xếp',comfort:'Bàn gỗ tròn',premium:'Bàn mặt đá chân gỗ'},plant:{basic:'Chậu xương rồng',comfort:'Chậu trầu bà',premium:'Bàng Singapore chậu gốm'},lamp:{basic:'Đèn kẹp',comfort:'Đèn gốm',premium:'Đèn đồng chao vải'},rug:{basic:'Thảm cói',comfort:'Thảm len',premium:'Thảm dệt hoa văn'},painting:{basic:'Tranh in',comfort:'Tranh sơn dầu nhỏ',premium:'Tranh khung gỗ lớn'},fridge:{basic:'Tủ lạnh mini',comfort:'Tủ lạnh hai cửa',premium:'Tủ lạnh ngăn đông mềm'}};
 export const homeName=(id:HomeId,tier:HomeTier='basic')=>HOME_MODELS[id]?.[tier]??HOME_ITEMS[id].name;
-export const homePrice=(id:HomeId,tier:HomeTier='basic')=>Math.round(HOME_ITEMS[id].price*HOME_TIERS[tier].factor);
+/** Giá riêng khi không theo hệ số hạng (T21: tủ lạnh 2,5 / 4,5 / 8 triệu). */
+const PRICE:Partial<Record<HomeId,Record<HomeTier,number>>>={fridge:{basic:2500000,comfort:4500000,premium:8000000}};
+export const homePrice=(id:HomeId,tier:HomeTier='basic')=>PRICE[id]?.[tier]??Math.round(HOME_ITEMS[id].price*HOME_TIERS[tier].factor);
+/** T21: tủ lạnh (chủ dự án duyệt 04/11): sức chứa theo phần, hạn dùng kéo dài theo hệ số; gạo không đổi. */
+export const FRIDGE:Record<HomeTier,{cap:number;factor:number}>={basic:{cap:20,factor:2},comfort:{cap:35,factor:2.5},premium:{cap:60,factor:3}};
+export function fridgeOf(s:GameState){const f=homeOf(s).items.find(i=>i.id==='fridge');return f?FRIDGE[f.tier??'basic']:null}
 export interface HomeObject{tier?:HomeTier;mount?:'floor'|'surface'|'wall';parentId?:HomeId;wall?:'left'|'right';id:HomeId;x:number;y:number;rotation:0|90|180|270;placed:boolean}
 export interface HomeState{items:HomeObject[];grid?:8}
 export const HOME_GRID=8;
