@@ -83,6 +83,7 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 
 - **Để dành, chủ dự án nêu 04/11 chưa làm**: (1) hướng dẫn việc tiếp theo những ngày đầu và sau giờ làm, tạm hoãn tới khi xong toàn bộ game, ý chủ dự án là thêm hoạt động khác cho người chơi; (2) tên nhiệm vụ công việc còn đơn giản, cần đa dạng và thật hơn; (3) quán ăn: hỏi Ăn tại chỗ hay Mang về (#139).
 - Ticket tiếp theo (chủ dự án 04/11 giao làm tiếp lần lượt cho xong Basic 1.0, không cần hỏi lại thứ tự): **T26** (kho đồ, instanceId, lưới phòng) rồi **T27** (chế độ bố trí: kéo, thả, xoay, huỷ, BFS lối đi). Mở phiên mới từ file này; trước khi làm, đọc đề xuất ticket trong tài liệu Kế hoạch và gửi AskUserQuestion ngắn nếu có chỗ chưa rõ. Phần đã có sẵn: lưới phòng trọ, xoay 4 hướng, kéo thả ở phòng trọ, chạm đặt ở nhà phố.
+- **T26 xong** (issue #146): `uid` cho mỗi đồ (bản đầu giữ mã loại để save cũ khớp), trần số lượng `HOME_MAX` (cây, đèn 3; tranh 2; còn lại 1), mua thêm khi chưa đủ, tranh cùng tường không chồng. Nhà phố, biệt thự vẫn đặt một món mỗi loại (bản thể thứ 2 nằm trong kho); mở rộng khi làm T27 nếu cần.
 - Sau đó T28 (điểm dùng của đồ), T29 (TTTM giỏ, đơn, giao hàng, bán lại), rồi theo bảng ticket.
 
 ## 7. Bản đồ mã nguồn (domain mới hoặc đổi nhiều)

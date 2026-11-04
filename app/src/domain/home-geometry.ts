@@ -23,7 +23,7 @@ export function alignHomeAxes(rightSlope:number,leftSlope:number){
 }
 
 export function homeAnchor(item:HomeObject,items:HomeObject[]){const {w,h}=homeSize(item);if(item.mount==='wall'){const p=item.wall==='right'?outerFloorPoint(item.x+1,0):outerFloorPoint(0,item.y+1);return {...p,y:p.y-12}}
- if(item.mount==='surface'){const parent=items.find(i=>i.id===item.parentId);if(parent){const size=homeSize(parent),p=floorPoint(parent.x+size.w*(item.id==='lamp'?.27:.73),parent.y+size.h*.5);return {...p,y:p.y-7}}}return floorPoint(item.x+w/2,item.y+h/2)}
+ if(item.mount==='surface'){const parent=items.find(i=>(i.uid??i.id)===item.parentId);if(parent){const size=homeSize(parent),p=floorPoint(parent.x+size.w*(item.id==='lamp'?.27:.73),parent.y+size.h*.5);return {...p,y:p.y-7}}}return floorPoint(item.x+w/2,item.y+h/2)}
 
 // Ảnh đồ vật vẽ cho ô lưới 10×10 cũ: giữ nguyên kích thước hiển thị khi ô to ra thành 1/8 sàn.
 export function homeArtFit(id:keyof typeof HOME_ITEMS,w:number,h:number){const base=LEGACY_SIZE[id]??HOME_ITEMS[id];return (base.w+base.h)/((w+h)*GRID_RATIO)}
