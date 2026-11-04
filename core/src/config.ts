@@ -35,7 +35,7 @@ const configSchema = s.obj({
   skills: s.obj({
     maxLevel: s.int({ min: 2, max: 200 }),
     xpBase: s.int({ min: 1 }),
-    xpStep: s.int({ min: 0 }),
+    xpExponent: s.num({ min: 0, max: 5 }),
     ids: s.arr(s.str({ min: 1, max: 40 }), { min: 1, max: 32 }),
     initialLevels: s.rec(s.int({ min: 1 })),
   }),

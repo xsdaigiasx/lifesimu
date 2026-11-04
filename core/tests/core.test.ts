@@ -161,12 +161,14 @@ test('T03: nén sổ cái vẫn nhất quán và vẫn chống trùng', () => {
 
 // ---------- Kỹ năng
 
-test('Kỹ năng: lên cấp đúng, trần 50, Lv hiệu dụng', () => {
-  assert.equal(xpToNext(1), 100);
-  assert.deepEqual(addSkillXp({ level: 1, xp: 0 }, 230), { level: 3, xp: 5 });
-  assert.deepEqual(addSkillXp({ level: 49, xp: 0 }, 1e9), { level: 50, xp: 0 });
-  assert.equal(effectiveLevel(25), 5);
-  assert.equal(effectiveLevel(50), 10);
+test('Kỹ năng: Lv 1–10, XP 80 × n^1,6, trần 10', () => {
+  assert.equal(xpToNext(1), 80);
+  assert.equal(xpToNext(2), 243);
+  assert.equal(xpToNext(9), 2691);
+  assert.deepEqual(addSkillXp({ level: 1, xp: 0 }, 400), { level: 3, xp: 77 });
+  assert.deepEqual(addSkillXp({ level: 9, xp: 0 }, 1e9), { level: 10, xp: 0 });
+  assert.equal(effectiveLevel(5), 5);
+  assert.equal(effectiveLevel(10), 10);
 });
 
 // ---------- T04: save và migration
@@ -219,7 +221,7 @@ test('T04: migration save v1 (v0.35) giữ tiền, chỉ số, kỹ năng, dữ 
   assert.equal(sv.vitals.energy, 60);
   assert.equal(sv.vitals.stress, 30);
   assert.equal(sv.vitals.fullness, DEFAULT_CONFIG.vitals.initial.fullness);
-  assert.deepEqual(sv.skills['programming'], { level: 4, xp: 30 });
+  assert.deepEqual(sv.skills['programming'], { level: 1, xp: 0 }); // cấp 4 hệ cũ quy về Lv 1
   assert.deepEqual(sv.skills['cooking'], { level: 1, xp: 0 });
   assert.deepEqual(sv.legacy['social'], { anything: [1, 2, 3] });
   assert.deepEqual(sv.legacy['ledgerDisplay'], [{ name: 'Lương', amount: 100000, day: 3 }]);
@@ -259,7 +261,7 @@ test('T04: thao tác trên save', () => {
   g = applySaveTx(g, buy).save;
   assert.equal(walletBalance(g), DEFAULT_CONFIG.economy.startMoney - 200000);
   g = gainSkillXp(g, 'cooking', 150);
-  assert.deepEqual(g.skills['cooking'], { level: 2, xp: 50 });
+  assert.deepEqual(g.skills['cooking'], { level: 2, xp: 70 });
   assert.throws(() => gainSkillXp(g, 'flying', 1));
 });
 

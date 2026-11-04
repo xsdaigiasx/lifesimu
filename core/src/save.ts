@@ -204,7 +204,7 @@ const legacyV1Schema = s.obj({
   office: s.opt(s.unknown()),
   fishing: s.opt(s.unknown()),
   bauCuaLast: s.opt(s.unknown()),
-  skills: s.opt(s.rec(s.obj({ level: s.int({ min: 1, max: 50 }), xp: s.int({ min: 0 }) }))),
+  skills: s.opt(s.rec(s.obj({ level: s.int({ min: 1, max: 50 }), xp: s.int({ min: 0 }) }))), // hệ cũ 1–50
   clock: s.opt(
     s.obj({
       minute: s.int({ min: 420, max: 1320 }),
@@ -276,8 +276,9 @@ export function migrateV1ToV2(old: unknown, ctx: MigrationContext = {}): SaveV2 
   const skills: SaveV2['skills'] = {};
   for (const id of cfg.skills.ids) {
     const fromV1 = v1.skills?.[id];
-    const base = fromV1 ?? { level: cfg.skills.initialLevels[id] ?? 1, xp: 0 };
-    skills[id] = addSkillXp({ level: Math.min(base.level, cfg.skills.maxLevel), xp: 0 }, base.xp, cfg);
+    // Save v1 dùng cấp 1–50; quy về Lv 1–10 (cấp / 5, làm tròn, tối thiểu 1) và bỏ XP lẻ của hệ cũ.
+    const level = fromV1 ? Math.max(1, Math.round(fromV1.level / 5)) : (cfg.skills.initialLevels[id] ?? 1);
+    skills[id] = { level: Math.min(level, cfg.skills.maxLevel), xp: 0 };
   }
 
   // Giữ nguyên mọi phần lõi chưa hiểu, kể cả kỹ năng lạ không có trong cấu hình mới.
