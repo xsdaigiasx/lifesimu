@@ -69,3 +69,5 @@ export function settleLifeDay(previous:GameState,next:GameState):GameState{const
  n.health=clamp(n.health-dailyHealthPenalty(previous));const tier=n.home?.items.find(i=>i.id==='bed')?.tier??'basic';n.energy=clamp(n.energy+({basic:0,comfort:4,premium:8}[tier]));const comfort=(n.home?.items??[]).filter(i=>i.placed).reduce((total,i)=>total+({basic:0,comfort:1,premium:2}[i.tier??'basic']),0);n.stress=clamp(n.stress-comfort);return n;
 }
 
+/** Quà nguyên liệu từ NPC (T17): thêm vào kho, hạn tính từ hôm nay. Kho đầy thì bỏ qua. */
+export function giftIngredient(s:GameState,id:IngredientId,qty:number):GameState{const l=structuredClone(lifeOf(s));if(l.pantry.length>=100)return s;const old=l.pantry.find(p=>p.ingredient===id&&p.boughtDay===s.day);if(old)old.qty=Math.min(99,old.qty+qty);else l.pantry.push({ingredient:id,qty,boughtDay:s.day,expiresDay:s.day+INGREDIENTS[id].days});return{...s,life:l}}

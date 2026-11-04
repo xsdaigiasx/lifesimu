@@ -8,7 +8,7 @@ import {money,shortDate} from '../domain/format';
 import {COFFEE,coffeeToday} from '../domain/vitals';
 import {clockText} from '../domain/time';
 import {ActionRow,DataRow} from './GameUI';
-export default function LifeServices({state,place,onAction,onTalk}:{state:GameState;place:'home'|'market'|'bank'|'hospital'|'park'|'streetfood';onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,minutes:5|15)=>GameResult}){
+export default function LifeServices({state,place,onAction,onTalk}:{state:GameState;place:'home'|'market'|'bank'|'hospital'|'park'|'streetfood';onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,kind:'talk'|'meal')=>GameResult}){
  const [page,setPage]=useState(place==='bank'?'savings':'recipes'),[notice,setNotice]=useState(''),[qty,setQty]=useState(1),[amount,setAmount]=useState(500000),[term,setTerm]=useState<7|30|90>(30),[repayment,setRepayment]=useState(100000);const l=lifeOf(state);
  function run(a:LifeAction,message='Đã thực hiện.'){const r=onAction(a);setNotice(r.ok?message:r.error)}
  const tabs=(values:[string,string][])=><nav className="life-tabs">{values.map(([id,label])=><button key={id} aria-pressed={page===id} onClick={()=>{setPage(id);setNotice('')}}>{label}</button>)}</nav>;

@@ -4,6 +4,7 @@ import type {OfficeItems} from './office-items';
 import type {SocialState} from './social';
 import type {Skills,WorkState} from './work';
 import type {StudyState} from './study';
+import type {StoryState} from './director';
 import type {JournalEntry} from './journal';
 import type {OfficeLayout} from './layout';
 import type {GameClock} from './time';
@@ -19,7 +20,7 @@ export type PlaceId = 'home' | 'office' | 'market' | 'mall' | 'bank' | 'hospital
 export interface Item {name:string;price:number;bonus:number;desc:string;effect:string}
 export interface LedgerEntry {name:string;amount:number;day:number}
 export interface DayReport {action:DailyAction;earn:number;cost:number;xp:number;net:number;efficiency:number;day:number;faint?:{place:'home'|'out'|'hospital';lost:number}}
-export interface GameState {txIds?:string[];txSeq?:number;rent?:RentState;life?:LifeState;home?:HomeState;officeItems?:OfficeItems;social?:SocialState;skills?:Skills;study?:StudyState;work?:WorkState;journal?:JournalEntry[];officeLayout?:OfficeLayout;clock?:GameClock;office?:OfficeState;fishing?:FishingState;bauCuaLast?:BauCuaRound;version:1;day:number;money:number;energy:number;fullness?:number;coffee?:{day:number;count:number;crashAt:number|null};mood:number;health:number;stress:number;xp:number;owned:ItemId[];equipped:ItemId[];ledger:LedgerEntry[];lastReport:DayReport|null}
+export interface GameState {txIds?:string[];txSeq?:number;rent?:RentState;life?:LifeState;home?:HomeState;officeItems?:OfficeItems;social?:SocialState;skills?:Skills;study?:StudyState;story?:StoryState;work?:WorkState;journal?:JournalEntry[];officeLayout?:OfficeLayout;clock?:GameClock;office?:OfficeState;fishing?:FishingState;bauCuaLast?:BauCuaRound;version:1;day:number;money:number;energy:number;fullness?:number;coffee?:{day:number;count:number;crashAt:number|null};mood:number;health:number;stress:number;xp:number;owned:ItemId[];equipped:ItemId[];ledger:LedgerEntry[];lastReport:DayReport|null}
 export type GameResult = {ok:true;state:GameState} | {ok:false;error:string};
 export interface EngineApi {KEY:string;COST:number;ITEMS:Record<ItemId,Item>;initial():GameState;valid(value:unknown):value is GameState;buy(state:GameState,id:string):GameResult;toggle(state:GameState,id:string):GameResult;advance(state:GameState,action:string):GameResult;parse(raw:string|null):GameState|null}
 export interface Appointment {id:string;title:string;date:string}
