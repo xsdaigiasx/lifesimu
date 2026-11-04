@@ -14,3 +14,4 @@
 .life-list article.is-locked{opacity:.55}
 .life-list article.is-locked small{display:inline-flex;align-items:center;gap:4px}
 .life-list article.is-locked svg{width:13px!important;height:13px!important;fill:none;stroke:currentColor}
+.mall-zones small{display:inline-flex;align-items:center;gap:4px;font-size:12px}.mall-zones small svg{width:14px!important;height:14px!important}
