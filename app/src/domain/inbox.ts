@@ -62,7 +62,7 @@ export function unreadCount(s:GameState,id?:string){const t=inboxOf(s).threads;r
 /** Lên lịch tin nhắn cho ngày mới (tối đa 2), chọn theo seed. */
 function schedule(s:GameState,ib:InboxState):Queued[]{const out:Queued[]=[],day=s.day,mk=(npc:string,minute:number,kind:MsgKind,text:string,replies?:string[],appt?:Msg['appt'])=>out.push({id:`q${day}:${npc}:${kind}`,npc,day,minute,from:'npc',text,kind,...(replies?{replies}:{}),...(appt?{appt}:{})});
  const h=(k:string)=>hash(`inbox:${day}:${k}`);
- if(dateAt(day+2).getUTCDate()===1)mk('ba-tu',480,'rent','Còn hai ngày nữa tới hạn tiền trọ nghen con.',['Dạ con nhớ rồi','Bà cho con khất vài bữa']);
+ if(dateAt(day+2).getUTCDate()===1&&(s.housing?.house??'tro')==='tro')mk('ba-tu',480,'rent','Còn hai ngày nữa tới hạn tiền trọ nghen con.',['Dạ con nhớ rồi','Bà cho con khất vài bữa']);
  const lastMom=Math.max(-9,...(ib.threads.me??[]).filter(m=>m.from==='npc').map(m=>m.day));if(day-lastMom>=2&&h('mom')%3!==0){const v=h('momv')%3,teach=nextMomRecipe(s);const kind:MsgKind=v===0?'mom-care':v===1?'mom-gift':teach?'mom-recipe':'mom-care';mk('me',1140+h('momt')%90,kind,kind==='mom-care'?'Con ăn uống đầy đủ không? Đừng thức khuya quá nghe.':kind==='mom-gift'?'Mẹ gửi con ít gạo, nhờ người quen mang tới phòng rồi đó.':MOM_RECIPE_TEXT[teach!],kind==='mom-recipe'?['Con ghi lại rồi','Để con thử nấu']:['Con khoẻ, mẹ yên tâm','Dạ con biết rồi']);if(kind==='mom-recipe')out[out.length-1]!.recipe=teach}
  const close=NPCS.filter(n=>n.story&&!n.remote&&scoreOf(s,n.id)>=30);const dow=dateAt(day).getUTCDay();
  for(const n of close.sort((a,b)=>h(a.id)-h(b.id))){if(out.length>=DAILY_MESSAGES)break;const rel=socialOf(s).relations[n.id]!;
