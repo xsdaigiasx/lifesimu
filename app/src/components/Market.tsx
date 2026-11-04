@@ -34,7 +34,7 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
   {chat&&onTalk&&<PersonSheet state={state} id={seller.id} onTalk={onTalk} onClose={()=>setChat(false)}/>}
   <div className="market-qty" role="radiogroup" aria-label="Số phần mỗi lần mua">{QTY.map(q=><button key={q} role="radio" aria-checked={q===qty} onClick={()=>setQty(q)}>{q} phần</button>)}</div>
   <div className="market-grid">{stall.items.map(id=>{const it=INGREDIENTS[id],late=isLate(state,id),price=marketPrice(state,id)*qty;return <article key={id} className="market-item">
-   <span className="market-item-art" style={{background:ITEM_TONE[id]}}>{late&&<b className="late-badge">Chiều</b>}<img src={ingredientArt(id)} alt="" loading="lazy" decoding="async"/></span>
+   <span className="market-item-art" style={{background:ITEM_TONE[id]}}>{late&&<b className="late-badge" title="Hàng chiều: rẻ hơn, hạn ngắn hơn" aria-label="Hàng chiều"><Icon name="sunset"/></b>}<img src={ingredientArt(id)} alt="" loading="lazy" decoding="async"/></span>
    <strong>{it.name}</strong>
    <span className="market-item-facts"><span title="Hạn dùng" className={late?'late-tag':''}><Icon name="clock"/>{shelfDays(state,id)} ngày</span><span title="Trong kho"><Icon name="box"/>{stock(id)}</span></span>
    <button disabled={state.money<price} onClick={()=>buy(id)}>{money(price)}</button>
