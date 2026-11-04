@@ -62,7 +62,7 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 | Mua sắm điện thoại ảnh nhỏ; phòng trọ biểu tượng, tab Kỹ năng | #110, #114 |
 | T21 tủ lạnh | #116 |
 | T22 sổ công thức, ba nguồn học món | #119 |
-| T23 nấu bừa | #122 |
+| T23 thử nấu | #122 |
 | T24 chợ chiều, bệnh do ăn uống; biểu tượng Chiều, thẻ cà phê | #126, #127, #128 |
 
 ## 6. Đang chờ
