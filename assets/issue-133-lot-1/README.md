@@ -43,6 +43,14 @@ Lô 1 thuộc #133; không đóng toàn bộ issue khi gộp riêng lô này. Cl
 
 ## Xem ảnh duyệt
 
+### Sửa theo review PR #152 — đèn đầu giường
+
+Đổi đèn nhỏ của `bed-premium_a/b/c/d` sang chao kem, viền và tay cong bằng đồng tối để dễ nhận ra hơn ở kích thước sprite. Cùng hai đèn gắn đầu giường ở cả bốn hướng; mặt lưng giữ che khuất tự nhiên. Giữ nguyên khung 320×288, neo và chân đế. Kiểm tra so với commit `8738d5a`: chỉ bốn PNG này đổi, 108 sprite khác giữ nguyên.
+
+![So sánh trước/sau và bản 96 px](bed-premium-lights-review.webp)
+
+Prompt chỉnh sửa trong [review-bed-premium-lights.json](review-bed-premium-lights.json); `prepare.cjs` nạp các prompt này khi tái xuất. `node assets/issue-133-lot-1/review-premium.cjs` kiểm tra phạm vi bốn ảnh và tạo ảnh so sánh.
+
 ![Tổng quan 28 mẫu](models-a.webp)
 
 ![Đặt thử trên phòng trọ và lưới 8×8](room-grid-preview.webp)

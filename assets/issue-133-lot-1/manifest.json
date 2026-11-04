@@ -466,18 +466,18 @@
       ],
       "height_px": 128,
       "height_z": 4,
-      "bytes": 88807,
-      "sha256": "087e1230725dd438bd059155162df31c1376eb39d782097d8de148112dfb8d6a",
-      "source_sha256": "da2350d0fd4528ba4e53b9a58200b7537092c8e78c97944657f6207b415769a2",
+      "bytes": 88369,
+      "sha256": "cc06e06e47375d0cd93eda0a476ccd3a5c705869baa7f255712cd7dff7af07c4",
+      "source_sha256": "2741ef7807b0b53b3099b6e345e92fc525c1ebea958f0d10a6a3548b545c2a01",
       "source_crop_px": [
-        146,
-        136,
-        1162,
-        1096
+        139,
+        135,
+        1157,
+        1101
       ],
       "source_bottom_anchor_px": [
-        491,
-        1093
+        486,
+        1098
       ],
       "calibration_ref": "5649d3d",
       "prior_alpha_bbox_px": [
@@ -496,9 +496,9 @@
         129,
         276
       ],
-      "export_scale": 0.28541666666666665,
+      "export_scale": 0.2836438923395445,
       "export_offset_px": [
-        17,
+        18,
         2
       ]
     },
@@ -521,18 +521,18 @@
       ],
       "height_px": 128,
       "height_z": 4,
-      "bytes": 84843,
-      "sha256": "765bbf64e57347406c74eca7fe734ccaa150d578ebc832fff2814e1dd7b80668",
-      "source_sha256": "9222deace2c220c31999bfb5b316b529feab621c3189bc306978a7744c68698b",
+      "bytes": 83827,
+      "sha256": "32f864dc1dad60c20fa2529284ca13f0f42d16e772262b520ad0c439da35fa60",
+      "source_sha256": "e594ce29b9c0b1485f6b493ee1e4ca990669274358e8a598658790548d2ea8a0",
       "source_crop_px": [
-        157,
-        130,
+        153,
+        132,
         1173,
-        1102
+        1106
       ],
       "source_bottom_anchor_px": [
-        807,
-        1099
+        810,
+        1103
       ],
       "calibration_ref": "5649d3d",
       "prior_alpha_bbox_px": [
@@ -551,7 +551,7 @@
         190,
         276
       ],
-      "export_scale": 0.28189300411522633,
+      "export_scale": 0.2813141683778234,
       "export_offset_px": [
         16,
         2
@@ -576,18 +576,18 @@
       ],
       "height_px": 128,
       "height_z": 4,
-      "bytes": 73298,
-      "sha256": "29cbdd5e96d5f32e4eee1178f4b4afdf4c89b643a46f623057a5269c63c34764",
-      "source_sha256": "d2f31ca6f5af85161f45907cccfd08563b52149346cc3557b1b155a70e0d4a3c",
+      "bytes": 73479,
+      "sha256": "44f072ac32aa8b1f40912ed1fb978667c1e72ddfd3d9648c0d57714d8d2d2a9a",
+      "source_sha256": "2ea7b3e530159deac19173d8275ca0e31cc510bcbcf69bcc2926601b1b965ff2",
       "source_crop_px": [
-        167,
-        351,
-        1194,
-        1067
+        166,
+        350,
+        1195,
+        1068
       ],
       "source_bottom_anchor_px": [
         559,
-        1064
+        1065
       ],
       "calibration_ref": "5649d3d",
       "prior_alpha_bbox_px": [
@@ -606,7 +606,7 @@
         128,
         277
       ],
-      "export_scale": 0.2872444011684518,
+      "export_scale": 0.28668610301263364,
       "export_offset_px": [
         11,
         72
@@ -631,18 +631,18 @@
       ],
       "height_px": 128,
       "height_z": 4,
-      "bytes": 73022,
-      "sha256": "4bcd9dd53e0c6b6c9342d03e6874059329b3afd5289544278e70986d9c2585e4",
-      "source_sha256": "e357bf3168b9b9157bd1a91b48394949f49c437824db78adc04fb16d514cf2cc",
+      "bytes": 72805,
+      "sha256": "f603d11c0778452ee87b111dadcdbdb31a7586bd66b93b700f496f364d5d83b6",
+      "source_sha256": "1d2e456877057ba47b099b4429c1ac060c2c0a7e49e60cd1384c2e568d9675dc",
       "source_crop_px": [
-        99,
-        336,
+        97,
+        333,
         1174,
-        1091
+        1095
       ],
       "source_bottom_anchor_px": [
-        735,
-        1088
+        737,
+        1092
       ],
       "calibration_ref": "5649d3d",
       "prior_alpha_bbox_px": [
@@ -661,10 +661,10 @@
         192,
         277
       ],
-      "export_scale": 0.2744186046511628,
+      "export_scale": 0.27390900649953576,
       "export_offset_px": [
         14,
-        70
+        69
       ]
     },
     {
