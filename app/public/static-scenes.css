@@ -130,3 +130,4 @@
 .static-afternoon-tint{position:absolute;inset:0;background:#f2a24c1a}
 @keyframes static-ring{50%{stroke-opacity:.25}}
 @media(prefers-reduced-motion:reduce){.static-office .static-person-ring{animation:none}}
+.life-list button{min-width:92px;text-align:center;justify-content:center}.life-list .life-facts{display:flex;flex-wrap:wrap;gap:0 14px}
