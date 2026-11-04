@@ -5,7 +5,8 @@ import {money} from '../domain/format';
 import Icon from './Icon';
 import {productArt} from './NpcFace';
 
-export const FACT:Record<ProductId,[string,string]>={casual:['smile','+2'],officeWear:['smile','+2'],coat:['smile','+2'],headphones:['bell','Nghe nhạc'],tv:['play','Xem TV'],bicycle:['clock','×0,6'],motorbike:['clock','×0,35'],scooter:['clock','×0,3']};
+/** Hiệu quả ghi rõ đơn vị: tinh thần mỗi ngày, đi nhanh hơn bao nhiêu. */
+export const FACT:Record<ProductId,[string,string]>={casual:['smile','+2/ngày'],officeWear:['smile','+2/ngày'],coat:['smile','+2/ngày'],headphones:['bell','Nghe nhạc'],tv:['play','Xem TV'],bicycle:['bus','Nhanh 40%'],motorbike:['bus','Nhanh 65%'],scooter:['bus','Nhanh 70%']};
 type Zone='clothing'|'electronics'|'transport';
 const ZONES:{id:Zone;name:string;icon:string;tone:string}[]=[{id:'clothing',name:'Thời trang',icon:'people',tone:'#f3e2d6'},{id:'electronics',name:'Điện tử',icon:'play',tone:'#dfe8ef'},{id:'transport',name:'Xe',icon:'bus',tone:'#e4ecd6'}];
 
