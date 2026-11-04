@@ -1,3 +1,4 @@
+import NpcFace from './NpcFace';
 import {useState} from 'react';
 import type {GameState,GameResult} from '../domain/types';
 import {INGREDIENTS,STALLS,type IngredientId,type LifeAction,type StallId} from '../domain/life';
@@ -26,7 +27,7 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
  
  return <div className="market">
   <header className="market-seller"><button className="market-back" aria-label="Về các quầy" onClick={()=>{setStall(null);setNote('')}}><Icon name="chevron-left"/></button>
-   <span className="market-avatar" style={{background:seller.tone}} aria-hidden="true">{seller.label}</span>
+   <span className="market-avatar" style={{background:seller.tone}} aria-hidden="true"><NpcFace id={seller.id} label={seller.label}/></span>
    <span className="market-seller-copy"><strong>{here?seller.name:stall.name}</strong><small>{here?stall.name:`${seller.name} về rồi, người nhà trông quầy`}</small>{here&&<span className="market-tier">{relationTier(rel[seller.id]?.score??0)}</span>}</span>
    {here&&onTalk&&<button className="market-chat" aria-expanded={chat} onClick={()=>setChat(v=>!v)}>Hỏi chuyện</button>}
   </header>

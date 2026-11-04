@@ -1,3 +1,4 @@
+import NpcFace from './NpcFace';
 import WorkActivity from './WorkActivity';
 import PackedOffice from './PackedOffice';
 import {useState} from 'react';
@@ -57,7 +58,7 @@ export default function OfficeWorkScene({state,onWork,onChat,onSkills,onContract
   </footer>}
   {message&&!npc&&!turn&&<p className="ows-message" role="status">{message}</p>}
   {turn&&<div className="ows-dialogue ows-turn" role="dialog" aria-label={turn.npc.name}>
-   <header><span className="ows-turn-avatar" aria-hidden="true">{turn.npc.name.split(' ').map(w=>w[0]).join('').slice(-2)}</span><span><strong>{turn.npc.name}</strong><small>{turn.npc.role}</small></span></header>
+   <header><span className="ows-turn-avatar" aria-hidden="true"><NpcFace id={turn.npc.id} label={turn.npc.name.split(' ').map(w=>w[0]).join('').slice(-2)}/></span><span><strong>{turn.npc.name}</strong><small>{turn.npc.role}</small></span></header>
    <p>{turn.event.line}</p>
    <div className="ows-turn-options">{turn.options.map((o,i)=><button key={i} disabled={o.locked} onClick={()=>answer(i)}>{o.label}{o.locked&&<small>{o.need}</small>}</button>)}</div>
   </div>}
