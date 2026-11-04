@@ -5,7 +5,7 @@ const ok=r=>{assert.ok(r.ok,r.error);assert.ok(engine.valid(r.state),'state hợ
 test('thuê nhà phố: phải đến xem, trả tháng đầu, chuyển nơi ở, mang giường theo',()=>{
  assert.equal(H.moveHouse(at('home'),'townhouse','rent').ok,false,'phải đến nơi');
  const s=at('apartments'),n=ok(H.moveHouse(s,'townhouse','rent'));assert.equal(n.money,s.money-6e6);assert.equal(H.residenceOf(n),'apartments');assert.equal(T.clockOf(n).minute,600+H.MOVE_MINUTES);
- assert.ok(H.layoutOf(n,'townhouse','bedroom').some(p=>p.id==='bed'),'giường vào phòng ngủ');assert.equal(H.monthlyRent(n,1500000),6e6);
+ {const f2=H.HOUSES.townhouse.floors[1],bed=H.layoutOf(n,'townhouse',2).find(p=>p.id==='bed');assert.ok(bed,'giường lên tầng 2');assert.equal(H.roomAt(f2,bed).id,'bedroom')}assert.equal(H.monthlyRent(n,1500000),6e6);
  const sl=ok(T.finishDay(n));assert.equal(T.clockOf(sl).location,'apartments','ngủ ở nhà mới');assert.ok(sl.energy>=n.energy);
  assert.equal(L.lifeAction({...n,clock:{...n.clock,location:'home'}},{kind:'tv'}).ok,false,'phòng trọ không còn là nhà');
  const back=ok(H.moveHouse({...n,clock:{...n.clock,location:'home'}},'tro','rent'));assert.equal(H.residenceOf(back),'home');assert.equal(back.money,n.money,'về trọ miễn phí');
@@ -15,16 +15,25 @@ test('mua biệt thự: không còn tiền nhà, có sân vườn và phòng gi�
  const n=ok(H.moveHouse(at('villa',{money:2e10}),'villa','own'));assert.ok(H.housingOf(n).owned.includes('villa'));assert.equal(H.monthlyRent(n,1500000),0);
  const g=ok(H.relaxAtHome(n,'garden'));assert.ok(g.mood>n.mood||n.mood===100);assert.equal(H.relaxAtHome(g,'garden').ok,false,'mỗi ngày một lần');ok(H.relaxAtHome(g,'fun'));
 });
-test('sắp xếp phòng: trong phòng, không chồng, không đặt hai nơi',()=>{
- const n=ok(H.moveHouse(at('apartments'),'townhouse','rent'));
- assert.equal(H.arrangeRoom(n,'living',[{id:'desk',x:9,y:9,rotation:0}]).ok,false,'ngoài phòng');
- assert.equal(H.arrangeRoom(n,'living',[{id:'bed',x:0,y:0,rotation:0}]).ok,false,'giường đang ở phòng ngủ');
- const before=H.layoutOf(n,'townhouse','study');const m=ok(H.arrangeRoom(n,'study',[]));assert.ok(H.storageOf(m,'townhouse').length>=H.storageOf(n,'townhouse').length+before.length);
- const p=ok(H.arrangeRoom(m,'living',[{id:'desk',x:2,y:2,rotation:90}]));assert.deepEqual(H.layoutOf(p,'townhouse','living')[0],{id:'desk',x:2,y:2,rotation:90});
+test('mặt bằng liền: đồ nằm gọn trong một phòng, không ở hành lang, không đặt hai tầng',()=>{
+ const n=ok(H.moveHouse(at('apartments'),'townhouse','rent'));const f1=H.HOUSES.townhouse.floors[0];
+ assert.equal(H.arrangeFloor(n,1,[{id:'desk',x:9,y:0,rotation:0}]).ok,false,'vắt qua hai phòng');
+ assert.equal(H.arrangeFloor(n,1,[{id:'desk',x:2,y:10,rotation:0}]).ok,false,'hành lang');
+ assert.equal(H.arrangeFloor(n,1,[{id:'desk',x:2,y:2,rotation:0}]).ok,false,'bàn đang ở tầng 2');
+ const m=ok(H.arrangeFloor(n,2,H.layoutOf(n,'townhouse',2).filter(p=>p.id!=='desk')));assert.ok(H.storageOf(m,'townhouse').includes('desk'));
+ const p=ok(H.arrangeFloor(m,1,[{id:'desk',x:11,y:1,rotation:90}]));assert.equal(H.roomAt(f1,H.layoutOf(p,'townhouse',1)[0]).id,'kitchen');
+ assert.equal(H.arrangeFloor(p,2,[{id:'bed',x:11,y:1,rotation:0}]).ok,false,'giường ở phòng làm việc');
+ for(const house of ['townhouse','villa'])for(const f of H.HOUSES[house].floors){for(const r of f.rooms){assert.ok(r.x+r.w<=f.w&&r.y+r.h<=f.h,r.id);for(const o of f.rooms)if(o!==r)assert.ok(r.x>=o.x+o.w||o.x>=r.x+r.w||r.y>=o.y+o.h||o.y>=r.y+r.h,`${r.id} chồng ${o.id}`)}}
  assert.equal(engine.valid({...p,housing:{...H.housingOf(p),house:'villa',tenure:'own'}}),false,'chưa mua mà ở');
 });
 test('bếp nấu nhanh hơn, tiền thuê tính theo nhà',()=>{
  let n=ok(H.moveHouse(at('apartments'),'townhouse','rent'));n={...n,life:{...L.lifeOf(n),pantry:[{ingredient:'rice',qty:3,boughtDay:n.day,expiresDay:n.day+5},{ingredient:'egg',qty:4,boughtDay:n.day,expiresDay:n.day+5}]}};
  const c=ok(L.lifeAction(n,{kind:'cook',id:'eggRice'}));assert.equal(T.clockOf(c).minute-T.clockOf(n).minute,Math.round(L.RECIPES.eggRice.minutes*H.COOK_FACTOR));
  let d=n.day;while(dateAt(d).getUTCDate()!==1)d++;const r=settleRent({...n,day:d,rent:{billedMonth:'x',owed:0,billOwed:0,dueDay:null,notice:null}});assert.ok(r.ledger.some(e=>e.name.startsWith('Tiền thuê nhà')&&e.amount===-6e6));
+});
+test('xoay 4 hướng: 180° giữ kích thước, 270° đổi rộng sâu, góc lạ bị từ chối',()=>{
+ const n=ok(H.moveHouse(at('apartments'),'townhouse','rent'));const f2=H.layoutOf(n,'townhouse',2);
+ assert.deepEqual(H.itemSize({id:'bed',x:0,y:0,rotation:180}),H.itemSize({id:'bed',x:0,y:0,rotation:0}));assert.deepEqual(H.itemSize({id:'bed',x:0,y:0,rotation:270}),H.itemSize({id:'bed',x:0,y:0,rotation:90}));
+ ok(H.arrangeFloor(n,2,f2.map(p=>p.id==='bed'?{...p,rotation:180}:p)));ok(H.arrangeFloor(n,2,f2.map(p=>p.id==='bed'?{...p,rotation:270}:p)));
+ assert.equal(H.arrangeFloor(n,2,f2.map(p=>p.id==='bed'?{...p,rotation:45}:p)).ok,false);
 });

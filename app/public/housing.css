@@ -26,3 +26,14 @@
 .house-buy button small{font-size:10.5px;font-weight:600;color:#6b7d70}
 .house-buy button.primary{background:#2f6b4f;border-color:#2f6b4f;color:#fff}
 .house-buy button:disabled{opacity:.45;cursor:default}
+.house-nav{display:flex;gap:8px;align-items:center}
+.house-floors{display:flex;gap:4px;flex:0 0 auto}
+.house-floors button{width:40px;height:34px;border:1px solid #d7dfcf;border-radius:10px;background:#fcfcf6;color:#294d3d;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.house-floors button[aria-pressed=true]{background:#173e38;border-color:#173e38;color:#fff}
+.house-nav .house-rooms{flex:1;min-width:0}
+.iso-room{aspect-ratio:360/420;max-height:56vh;border-radius:14px;background:#f6f3ec;touch-action:none;user-select:none;cursor:grab}
+.iso-label{font-size:7px;font-weight:800;fill:#5d5446;text-anchor:middle;dominant-baseline:middle;opacity:.75;pointer-events:none}
+.house-view{grid-template-columns:minmax(0,1fr);min-width:0;overflow:hidden}
+.iso-room .iso-label{stroke:none;paint-order:normal;font-family:inherit}
+.house-store button img{width:44px;height:36px;object-fit:contain}
+.product-glyph.model-art{height:104px!important;display:grid;place-items:center;overflow:hidden}.product-glyph.model-art img{max-width:92%;max-height:96px;width:auto;height:auto;object-fit:contain}
