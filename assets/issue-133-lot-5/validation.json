@@ -1,0 +1,20 @@
+{
+  "tested_base": "d34ac1610e220cbabf397c832cc9701a475dd364",
+  "app_version": "0.43.1",
+  "asset_verify": "PASS",
+  "runtime_files": 14,
+  "distinct_designs": 9,
+  "total_bytes": 1856056,
+  "max_bytes": 142248,
+  "frames": "All unchanged",
+  "rental_and_house_alpha": "Decoded original alpha channels match exactly by SHA-256",
+  "geometry_files": "Unchanged from baseline after normalizing CRLF/LF",
+  "characters": "Original office character regions restored before encoding; decoded mean RGB error below 12",
+  "app_test": "PASS",
+  "app_build": "PASS; existing CSS runtime-resolution and chunk-size warnings",
+  "core_check": "PASS; 18 tests",
+  "mobile_review": "PASS; all images decoded; two 390x844 views; no horizontal overflow",
+  "visual_review": "All runtime files inspected on full contact sheet; original/new rental and four house plans inspected with fixed grid and partition cap overlays; batch 1 furniture on rental reviewed",
+  "png_compatibility": "1536x1536 frame retained, 768px sampling, 72-color palette, 142248 bytes; WebP retains 1536px sampling",
+  "runtime_code_changes": false
+}

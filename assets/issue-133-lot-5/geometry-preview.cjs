@@ -1,0 +1,10 @@
+// Diagnostic overlays only. Never writes game assets.
+const fs=require('fs'),path=require('path'),sharp=require('sharp'),{execFileSync}=require('child_process'),root=path.resolve(__dirname,'../..'),m=JSON.parse(fs.readFileSync(path.join(__dirname,'manifest.json')));
+(async()=>{const selected=m.items.filter(x=>x.id==='rental'||x.geometry),layers=[];let labels='';for(let i=0;i<selected.length;i++){const j=selected[i],[w,h]=j.frame_px,g=j.geometry,ox=g?g.origin_px[0]:724,oy=g?g.origin_px[1]:350,[fx,fy]=j.footprint_tiles,P=(x,y,z=0)=>[ox+64*(x-y),oy+32*(x+y)-z];let lines='';const line=(a,b,c)=>{lines+='<path d="M'+a+'L'+b+'" stroke="'+c+'" stroke-width="2" fill="none" opacity=".7"/>'};
+for(let k=0;k<=fx;k++)line(P(k,0),P(k,fy),'#359a99');for(let k=0;k<=fy;k++)line(P(0,k),P(fx,k),'#359a99');
+if(g)for(const r of g.partition_runs){const a=r.axis==='x'?P(r.at,r.from,32):P(r.from,r.at,32),b=r.axis==='x'?P(r.at,r.to,32):P(r.to,r.at,32);line(a,b,'#e33f75')}
+const overlay=Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'+lines+'</svg>');
+const old=execFileSync('git',['show',m.baseline_commit+':app/public/'+j.file],{cwd:root,maxBuffer:20000000});
+for(let side=0;side<2;side++){const over=await sharp(side?path.join(root,'app/public',j.file):old).composite([{input:overlay}]).toBuffer(),b=await sharp(over).resize(730,450,{fit:'inside'}).toBuffer(),z=await sharp(b).metadata();layers.push({input:b,left:side*750+Math.floor((750-z.width)/2),top:i*500+45});labels+='<text x="'+(side*750+12)+'" y="'+(i*500+25)+'" font-family="Arial" font-size="16">'+j.id+' / '+(side?'NEW':'BASELINE')+'</text>'}
+}
+layers.push({input:Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="2500">'+labels+'</svg>'),left:0,top:0});await sharp({create:{width:1500,height:2500,channels:4,background:'#f4f0e5'}}).composite(layers).webp({quality:92}).toFile(path.join(__dirname,'geometry-preview.webp'));console.log('Wrote baseline/new with fixed grid and partition cap overlays');})().catch(e=>{console.error(e);process.exitCode=1});
