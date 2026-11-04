@@ -98,3 +98,11 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - Phòng trọ vẽ bằng sprite lô 5 neo đáy chân đế; ảnh nội thất cũ `static-scenes/furniture-v2` chỉ còn làm dự phòng.
 - Ảnh tạm thiếu thì có `onError` quay về ảnh Cơm trứng hoặc biểu tượng.
 - Thông tin tài khoản (hạn mức tuần) Claude không xem được; chủ dự án xem ở Settings > Usage.
+
+## 9. Tiết kiệm quota (chủ dự án chốt 04/11)
+
+- Trả lời ngắn; gộp sửa nhỏ vào một lượt; việc đã duyệt thì làm luôn, không hỏi lại.
+- Chỉ chụp màn hình chính khi cần; review asset Codex bằng ảnh ghép tổng, không mở từng ảnh.
+- Không đọc lại tài liệu Claude Docs dài trừ khi cần.
+- Việc đơn giản (chữ, màu, icon) dùng Sonnet; thiết kế cơ chế, ticket lớn dùng Opus.
+- Phiên dài thì mở phiên mới từ file này.
