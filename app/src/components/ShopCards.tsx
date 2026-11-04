@@ -1,12 +1,15 @@
 import type {GameState} from '../domain/types';
+import {PRODUCTS,lifeOf,type ProductId} from '../domain/life';
 import {HOME_ITEMS,HOME_MAX,HOME_TIERS,homePrice,homeName,homeOf,type HomeId,type HomeTier} from '../domain/home';
-import {cartTotal,cartPrices,linePrice,lineName,type Line} from '../domain/orders';
+import {cartTotal,cartPrices,linePrice,lineName,sameLine,type Line} from '../domain/orders';
 import {money} from '../domain/format';
 import Icon from './Icon';
 import HomeArt from './HomeArt';
 import {productArt} from './NpcFace';
 import {spriteFor} from './furniture-art';
 import {cart,useCart} from './cart';
+import {specOf} from '../domain/specs';
+import {InfoButton} from './ShopInfo';
 
 /** Ảnh nhỏ của một dòng trong giỏ. */
 export function LineArt({line}:{line:Line}){
@@ -21,7 +24,7 @@ export function HomeCards({state,ids,tone,onFull}:{state:GameState;ids:HomeId[];
   const item=HOME_ITEMS[id],stack=HOME_MAX[id]>1,full=stack&&owned.filter(i=>i.id===id).length>=HOME_MAX[id],old=stack?undefined:owned.find(i=>i.id===id),oldTier=old?.tier??'basic',current=!!old&&oldTier===tier,better=!!old&&HOME_TIERS[oldTier].comfort>HOME_TIERS[tier].comfort,price=homePrice(id,tier)-(old?homePrice(id,oldTier):0),line:Line={kind:'home',id,tier},inCart=items.some(x=>x.kind==='home'&&x.id===id&&x.tier===tier),name=homeName(id,tier);
   const blocked=current||better||full;
   return <article key={id+tier} className="market-item" data-product={id}>
-   <span className="market-item-art" style={tone?{background:tone}:undefined}><LineArt line={line}/></span><strong>{name}</strong>
+   <span className="market-item-art" style={tone?{background:tone}:undefined}><LineArt line={line}/><InfoButton spec={specOf(line)}/></span><strong>{name}</strong>
    <span className="market-item-facts">{id!=='painting'&&id!=='lamp'&&<span title="Kích thước"><Icon name="grid"/>{(item.w/2).toLocaleString('vi-VN')}×{(item.h/2).toLocaleString('vi-VN')} m</span>}{HOME_TIERS[tier].comfort>0&&<span title="Bớt căng thẳng mỗi đêm"><Icon name="moon"/>−{HOME_TIERS[tier].comfort}/đêm</span>}</span>
    <button type="button" aria-pressed={inCart} disabled={blocked} onClick={()=>{if(!cart.toggle(line,stack))onFull()}}>{current?'Đang dùng':full?'Đã đủ':better?'Có tốt hơn':inCart?'Trong giỏ':money(price)}</button>
   </article>}))}</>;
@@ -42,4 +45,33 @@ export function CartPanel({state,fee=0,go,onGo,note}:{state:GameState;fee?:numbe
 export function CartButton({onOpen}:{onOpen:()=>void}){
  const lines=useCart();
  return <button className="cart-chip" aria-label={`Giỏ hàng ${lines.length} món`} onClick={onOpen}><Icon name="bag"/>{lines.length}</button>;
+}
+
+/** Hiệu quả ghi rõ đơn vị: tinh thần mỗi ngày, đi nhanh hơn bao nhiêu. */
+export const FACT:Record<ProductId,[string,string]>={casual:['smile','+2/ngày'],officeWear:['smile','+2/ngày'],coat:['smile','+2/ngày'],headphones:['bell','Nghe nhạc'],tv:['play','Xem TV'],bicycle:['bus','Nhanh 40%'],motorbike:['bus','Nhanh 65%'],scooter:['bus','Nhanh 70%'],backpack:['bag','Túi 8 món']};
+export const FULL='Giỏ chỉ chứa tối đa 8 món.';
+/** Mọi loại nội thất, đèn và tủ lạnh xếp cuối. */
+export const HOME_IDS=[...(Object.keys(HOME_ITEMS) as HomeId[]).filter(id=>id!=='lamp'&&id!=='fridge'),'lamp','fridge'] as HomeId[];
+
+/** Lưới thẻ đồ TTTM theo nhóm (thời trang, điện tử, xe, ba lô). Món đã có thì Mặc, Dùng hoặc Đã có. */
+export function ProductCards({state,category,tone,onFull,onEquip}:{state:GameState;category:string;tone?:string;onFull:()=>void;onEquip:(id:ProductId,category:'clothing'|'transport')=>void}){
+ const items=useCart(),l=lifeOf(state);
+ return <>{(Object.keys(PRODUCTS) as ProductId[]).filter(id=>PRODUCTS[id].category===category).map(id=>{
+  const p=PRODUCTS[id],has=l.owned.includes(id),active=l.outfit===id||l.transport===id,line:Line={kind:'product',id},inCart=items.some(x=>sameLine(x,line));
+  return <article key={id} className="market-item" data-product={id}>
+   <span className="market-item-art" style={tone?{background:tone}:undefined}><img src={productArt(id)} alt="" loading="lazy" decoding="async"/><InfoButton spec={specOf(line)}/></span><strong>{p.name}</strong>
+   <span className="market-item-facts" title={p.effect}><span><Icon name={FACT[id][0]}/>{FACT[id][1]}</span></span>
+   {has?(p.category==='electronics'||p.category==='bag'?<button disabled>Đã có</button>:<button disabled={active} onClick={()=>onEquip(id,p.category as 'clothing'|'transport')}>{active?'Đang dùng':p.category==='clothing'?'Mặc':'Dùng'}</button>):<button type="button" aria-pressed={inCart} onClick={()=>{if(!cart.toggle(line))onFull()}}>{inCart?'Trong giỏ':money(p.price)}</button>}
+  </article>})}</>;
+}
+
+export interface Zone{id:string;name:string;icon:string;tone:string;count?:number}
+/** Màn chọn mục: mỗi mục một ô lớn kèm số món. Dùng chung cho TTTM và điện thoại. */
+export function ZoneGrid({zones,onOpen}:{zones:Zone[];onOpen:(id:string)=>void}){
+ return <div className="market-stalls mall-zones">{zones.map(z=><button key={z.id} type="button" className="market-stall" onClick={()=>onOpen(z.id)}><span className="market-stall-art" style={{background:z.tone}}><Icon name={z.icon}/></span><strong>{z.name}</strong>{z.count!==undefined&&<small><Icon name="box"/>{z.count}</small>}</button>)}</div>;
+}
+
+/** Nút tròn góc trên: biểu tượng kèm số (Kho, Đơn hàng). */
+export function BarChip({icon,count,label,onOpen}:{icon:string;count:number;label:string;onOpen:()=>void}){
+ return <button type="button" className="cart-chip" aria-label={`${label} ${count}`} onClick={onOpen}><Icon name={icon}/>{count}</button>;
 }

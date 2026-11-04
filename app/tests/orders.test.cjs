@@ -2,6 +2,7 @@ const assert=require('node:assert/strict');
 const {engine}=require('../.test-build/domain/engine');
 const {homeOf,saveHome,uidOf,homePrice}=require('../.test-build/domain/home');
 const {lifeOf,PRODUCTS}=require('../.test-build/domain/life');
+const {deliveryFee}=require('../.test-build/domain/specs');
 const {ORDER,checkout,placeOrder,cancelOrder,receiveOrder,sellBack,saleOf,cartTotal,ordersOf,resaleOf}=require('../.test-build/domain/orders');
 const {residenceOf}=require('../.test-build/domain/housing');
 const {clockOf}=require('../.test-build/domain/time');
@@ -33,15 +34,15 @@ assert(!receiveOrder(o.state,id).ok);// chưa tới ngày
 const next={...o.state,day:o.state.day+1};
 assert(!receiveOrder(at(next,'mall'),id).ok);// phải ở nhà
 const home=at(next,residenceOf(next));
-const sum=cartTotal(home,[pLine('tv'),hLine('rug','basic')]);
+const sum=cartTotal(home,[pLine('tv'),hLine('rug','basic')]),fee=deliveryFee([pLine('tv'),hLine('rug','basic')]);
 const r=receiveOrder(home,id);assert(r.ok,r.error);
-assert.equal(r.state.money,home.money-sum-ORDER.fee);
+assert.equal(r.state.money,home.money-sum-fee);
 assert.equal(ordersOf(r.state).list.length,0);
 assert(lifeOf(r.state).owned.includes('tv'));
 assert(!receiveOrder(r.state,id).ok);// không nhận trùng
 assert(engine.valid(r.state)&&engine.parse(JSON.stringify(r.state)));
 // không đủ tiền thì đơn còn nguyên, tiền không âm
-const broke=receiveOrder({...home,money:sum+ORDER.fee-1},id);assert(!broke.ok);
+const broke=receiveOrder({...home,money:sum+fee-1},id);assert(!broke.ok);
 // huỷ đơn, trần số đơn
 assert.equal(ordersOf(cancelOrder(o.state,id).state).list.length,0);
 let many=base();for(let k=0;k<ORDER.maxOrders;k++)many=placeOrder(many,[pLine(k?'headphones':'tv')]).state;
