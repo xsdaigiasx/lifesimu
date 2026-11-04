@@ -111,7 +111,7 @@
 @media(prefers-reduced-motion:reduce){.cooking-steam{animation:none}}
 
 /* Mini game sửa bug */
-.bug-game{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;gap:10px;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));background:#141a26fa;color:#f2f5fb;overflow:auto}
+.bug-game{position:fixed;inset:0;z-index:1300;display:flex;flex-direction:column;gap:10px;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));background:#141a26fa;color:#f2f5fb;overflow:auto}
 .bug-game header{display:flex;justify-content:space-between;gap:8px;font-size:13px;opacity:.85}
 .bug-game h3{margin:4px 0 0;font-size:20px}.bug-game p{margin:0;font-size:15px}.bug-game small{font-size:12px;opacity:.8}
 .bug-timer{height:8px;border-radius:4px;background:#ffffff26;overflow:hidden}.bug-timer i{display:block;height:100%;background:#4cc38a;transition:width .1s linear}.bug-timer i.slow{background:#e8a33d}
@@ -203,3 +203,5 @@
 .person-actions .wide{grid-column:1/-1}
 .person-actions button{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:10px;background:#38644e;color:#fff;font-size:13px}
 .person-actions button{flex-direction:column;gap:2px}.person-actions button small{font-size:10px;font-weight:400}.person-actions button:disabled{opacity:1;background:transparent;color:#9a9a88;border:1px dashed #cfc6ae}
+
+.bug-wires{width:100%;max-width:360px;margin:8px auto;touch-action:manipulation}.bug-wires g{cursor:pointer}
