@@ -24,14 +24,20 @@ export const CAST:NpcProfile[]=[
  {id:'bao-ngoc',name:'Bảo Ngọc',label:'BN',age:27,origin:'Đà Lạt',role:'Giao dịch viên ngân hàng',traits:['tham vọng','chu đáo','thích số liệu'],quirk:'Cắm hoa tươi ở quầy',goal:'Lên chuyên viên tín dụng',fear:'Khách nợ xấu',voice:'Đà Lạt, lịch sự',tone:'#efd9e6',schedule:[at(WORK,'08:00','16:30','bank'),at([6],'08:00','11:30','bank')]},
  {id:'me',name:'Mẹ',label:'Mẹ',age:50,origin:'quê nhà',role:'Mẹ ở quê',traits:['lo xa','thương con','giấu chuyện khó'],quirk:'Gửi đồ quê qua xe khách',goal:'Con ổn định',fear:'Ruộng mất mùa',voice:'Giọng quê',tone:'#f0e4cf',remote:true,story:true,schedule:[]},
 ];
-export const castById=(id:string)=>CAST.find(n=>n.id===id);
+/** Vai phụ cố định (NPC phụ theo mục 23): người bán ở quầy chợ. Không có chuỗi riêng trong bản chơi thử. */
+export const EXTRAS:NpcProfile[]=[
+ {id:'chu-luc',name:'Chú Lực',label:'CL',age:52,origin:'Nghệ An',role:'Bán thịt cá ở chợ',traits:['cau có','thật thà','cẩn thận'],quirk:'Mài dao trước khi chào khách',goal:'Trả hết nợ',fear:'Mất mối hàng',voice:'Nghệ An, nói to',tone:'#f1d2cc',schedule:[at(WEEK,'07:00','12:00','market')]},
+ {id:'ba-nam',name:'Bà Năm',label:'BN',age:70,origin:'Bến Tre',role:'Bán tạp hoá ở chợ',traits:['hiền','hay hỏi han','tiết kiệm'],quirk:'Gói hàng bằng lá chuối',goal:'Được con cháu về thăm',fear:'Cô đơn',voice:'Miền Tây, chậm rãi',tone:'#f2e6c4',schedule:[at(WEEK,'07:00','18:00','market')]},
+];
+export const NPCS=[...CAST,...EXTRAS];
+export const castById=(id:string)=>NPCS.find(n=>n.id===id);
 
 /** Lệch giờ nhỏ theo ngày và người (0–15 phút) để lịch không máy móc. */
 const jitter=(id:string,day:number,salt:string)=>hash(`${id}:${day}:${salt}`)%16;
 /** Có mặt ở nơi này vào lúc này không. */
 export function presentAt(n:NpcProfile,day:number,minute:number,place:PlaceId){if(n.remote)return false;const dow=dateAt(day).getUTCDay();return n.schedule.some((s,i)=>s.place===place&&s.days.includes(dow)&&minute>=s.from+jitter(n.id,day,'a'+i)&&minute<s.to-jitter(n.id,day,'b'+i))}
 /** Những người đang ở cùng nơi, cùng giờ với người chơi. */
-export function peopleHere(s:GameState,place?:PlaceId){const loc=place??s.clock?.location??'home',minute=s.clock?.minute??420;return CAST.filter(n=>presentAt(n,s.day,minute,loc))}
+export function peopleHere(s:GameState,place?:PlaceId){const loc=place??s.clock?.location??'home',minute=s.clock?.minute??420;return NPCS.filter(n=>presentAt(n,s.day,minute,loc))}
 
 // ---------- Pool thuộc tính và bộ sinh NPC phụ (bản chơi thử: khoảng 40 tên, 10 điểm nhấn)
 export const POOL={

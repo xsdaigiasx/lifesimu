@@ -39,3 +39,10 @@ test('chào hỏi chỉ khi người đó đang ở đây; cộng quan hệ, cá
  assert.equal(talkTo(at(mon,600,'market'),'bao-ngoc',5).ok,false,'không có mặt thì không gặp');assert.equal(talkTo(at(mon,600,'market'),'me',5).ok,false);
  assert.equal(N.relationTier(9),'Xa lạ');assert.equal(N.relationTier(10),'Quen biết');assert.equal(N.relationTier(30),'Thân');assert.equal(N.relationTier(60),'Tri kỷ');
 });
+
+test('chợ chia quầy: mỗi món ở đúng một quầy, người bán có lịch ở chợ',()=>{
+ const {STALLS,INGREDIENTS}=require('../.test-build/domain/life');
+ const items=STALLS.flatMap(s=>s.items);assert.deepEqual([...items].sort(),Object.keys(INGREDIENTS).sort());
+ for(const s of STALLS){const n=N.castById(s.seller);assert.ok(n&&n.schedule.some(x=>x.place==='market'),s.id);assert.deepEqual(N.profileProblems(n),[])}
+ assert.ok(N.peopleHere(at(dayOf(1),600,'market')).some(n=>n.id==='chu-luc'));
+});

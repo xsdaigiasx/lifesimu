@@ -4,8 +4,8 @@ import {peopleHere,relationTier} from '../domain/npc';
 import {socialOf} from '../domain/social';
 
 /** T16: hàng "Ở đây lúc này" trên thẻ địa điểm; chạm vào người để chào hỏi hoặc trò chuyện. */
-export default function PeopleHere({state,place,onTalk}:{state:GameState;place:PlaceId;onTalk:(id:string,minutes:5|15)=>GameResult}){
- const [open,setOpen]=useState<string|null>(null),[note,setNote]=useState('');const people=peopleHere(state,place),rel=socialOf(state).relations;
+export default function PeopleHere({state,place,onTalk,only}:{state:GameState;place:PlaceId;onTalk:(id:string,minutes:5|15)=>GameResult;only?:string[]}){
+ const [open,setOpen]=useState<string|null>(null),[note,setNote]=useState('');const people=peopleHere(state,place).filter(p=>!only||only.includes(p.id)),rel=socialOf(state).relations;
  if(!people.length)return null;const person=people.find(p=>p.id===open);
  const talk=(m:5|15)=>{if(!person)return;const r=onTalk(person.id,m);setNote(r.ok?(m===5?`Đã chào ${person.name}.`:`Đã trò chuyện với ${person.name}.`):r.error)};
  return <section className="people-here" aria-label="Ở đây lúc này">

@@ -37,3 +37,10 @@ Dự án: **Một đời để sống**, game mô phỏng đời sống kết h�
 - Không hard-code số cân bằng; không reset save của người chơi.
 - Chạy `cd core && npm run check` trước khi mở PR nếu có đụng TypeScript.
 - Phải chạy tốt ở chiều rộng điện thoại (khoảng 380 px).
+
+## Nguyên tắc giao diện (chốt 04/11)
+
+- Mỗi màn một việc; không nhồi nhiều việc vào một chỗ (ví dụ chợ: chọn quầy rồi mới vào quầy).
+- Danh sách đồ dạng lưới thẻ có ảnh như siêu thị, không dạng dòng chữ.
+- Thông tin phụ dùng biểu tượng kèm số (đồng hồ 3 ngày, hộp 2) thay cho câu chữ; không dùng dấu "•" hay "·".
+- Nút cùng nhóm cùng kích thước, chữ thẳng hàng; không lặp tiêu đề, không dòng mô tả thừa.

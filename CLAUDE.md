@@ -23,3 +23,10 @@ Dự án **Một đời để sống**. Đọc `AGENTS.md` để biết vai trò
 - Mỗi năm game có tổng kết; không có kết thúc cứng.
 - Phòng trọ 8×8 ô, phòng tắm 3×3. Kỹ năng Lv 1–10, XP lên Lv n = 80 × n^1,6 (chủ dự án chốt đổi từ hệ 1–50, 04/11).
 - Thiệt hại giao việc sai theo 5 mức và điểm lệch (workflow 12.2).
+
+## Nguyên tắc giao diện (chốt 04/11)
+
+- Mỗi màn một việc; không nhồi nhiều việc vào một chỗ (ví dụ chợ: chọn quầy rồi mới vào quầy).
+- Danh sách đồ dạng lưới thẻ có ảnh như siêu thị, không dạng dòng chữ.
+- Thông tin phụ dùng biểu tượng kèm số (đồng hồ 3 ngày, hộp 2) thay cho câu chữ; không dùng dấu "•" hay "·".
+- Nút cùng nhóm cùng kích thước, chữ thẳng hàng; không lặp tiêu đề, không dòng mô tả thừa.

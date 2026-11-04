@@ -3,11 +3,11 @@ import {clockOf,spendTime,END} from './time';
 import {canEnterOffice} from './work';
 import {officeOf} from './office';
 import {recordJournal} from './journal';
-import {CAST,castById,presentAt} from './npc';
+import {NPCS,castById,presentAt} from './npc';
 export const COWORKERS=[{id:'dev-an',name:'Minh An',role:'Lập trình viên',line:'Lỗi khó thì chia nhỏ ra, cùng tìm nhé.'},{id:'dev-linh',name:'Thảo Linh',role:'Thiết kế giao diện',line:'Trưa nay ăn gì nhỉ?'},{id:'dev-huy',name:'Gia Huy',role:'Kiểm thử phần mềm',line:'Mình vừa tìm được một lỗi khá thú vị.'},{id:'dev-trang',name:'Thu Trang',role:'Điều phối dự án',line:'Nhớ để dành thời gian nghỉ trưa nhé.'}] as const;
 export interface SocialState{relations:Record<string,{score:number;lastDay:number;minutes:number}>;chatMinutesDay:number;chatDay:number}
 export const socialOf=(s:GameState):SocialState=>s.social??{relations:{},chatMinutesDay:0,chatDay:s.day};
-export function validSocial(v:unknown,day:number):v is SocialState{if(!v||typeof v!=='object')return false;const q=v as SocialState;return Number.isInteger(q.chatDay)&&q.chatDay>=0&&q.chatDay<=day&&Number.isInteger(q.chatMinutesDay)&&q.chatMinutesDay>=0&&q.chatMinutesDay<=480&&!!q.relations&&typeof q.relations==='object'&&Object.entries(q.relations).every(([id,r])=>CAST.some(p=>p.id===id)&&r&&Number.isInteger(r.score)&&r.score>=0&&r.score<=100&&Number.isInteger(r.lastDay)&&r.lastDay>=0&&r.lastDay<=day&&Number.isInteger(r.minutes)&&r.minutes>=0&&r.minutes<=1320)}
+export function validSocial(v:unknown,day:number):v is SocialState{if(!v||typeof v!=='object')return false;const q=v as SocialState;return Number.isInteger(q.chatDay)&&q.chatDay>=0&&q.chatDay<=day&&Number.isInteger(q.chatMinutesDay)&&q.chatMinutesDay>=0&&q.chatMinutesDay<=480&&!!q.relations&&typeof q.relations==='object'&&Object.entries(q.relations).every(([id,r])=>NPCS.some(p=>p.id===id)&&r&&Number.isInteger(r.score)&&r.score>=0&&r.score<=100&&Number.isInteger(r.lastDay)&&r.lastDay>=0&&r.lastDay<=day&&Number.isInteger(r.minutes)&&r.minutes>=0&&r.minutes<=1320)}
 export function chatCoworker(s:GameState,id:string,minutes:5|15):GameResult{
  if(s.work?.active)return{ok:false,error:'Không trò chuyện trong ca làm.'};
  if(!canEnterOffice(s)||clockOf(s).minute+minutes>1020)return{ok:false,error:'Đã hết giờ ở công ty.'};
@@ -17,7 +17,7 @@ export function chatCoworker(s:GameState,id:string,minutes:5|15):GameResult{
  n=recordJournal(n,`chat:${s.day}:${c.minute}:${id}`,'Trò chuyện với '+npc.name,`Đã trò chuyện ${minutes} phút.`,id);return{ok:true,state:n};
 }
 /** Cộng hoặc trừ quan hệ với một đồng nghiệp (0–100), dùng cho điểm rẽ và thẻ Giúp đồng nghiệp. */
-export function adjustRelation(s:GameState,id:string,delta:number):GameState{if(!CAST.some(p=>p.id===id)||!delta)return s;const old=socialOf(s),rel=old.relations[id];return{...s,social:{...old,relations:{...old.relations,[id]:{score:Math.max(0,Math.min(100,(rel?.score??0)+delta)),lastDay:s.day,minutes:rel?.lastDay===s.day?rel.minutes:0}}}}}
+export function adjustRelation(s:GameState,id:string,delta:number):GameState{if(!NPCS.some(p=>p.id===id)||!delta)return s;const old=socialOf(s),rel=old.relations[id];return{...s,social:{...old,relations:{...old.relations,[id]:{score:Math.max(0,Math.min(100,(rel?.score??0)+delta)),lastDay:s.day,minutes:rel?.lastDay===s.day?rel.minutes:0}}}}}
 /** T16: chào hỏi hoặc trò chuyện với người đang ở cùng nơi, cùng giờ. Cộng quan hệ nhẹ, cách nhau ít nhất 60 phút với cùng người. */
 export function talkTo(s:GameState,id:string,minutes:5|15):GameResult{const npc=castById(id),c=clockOf(s);if(!npc||![5,15].includes(minutes))return{ok:false,error:'Không tìm thấy người này.'};
  if(s.work?.active)return{ok:false,error:'Không trò chuyện trong ca làm.'};if(!presentAt(npc,s.day,c.minute,c.location))return{ok:false,error:`${npc.name} không còn ở đây.`};
