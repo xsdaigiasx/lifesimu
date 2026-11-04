@@ -1,0 +1,252 @@
+{
+  "issue": 89,
+  "lot": 2,
+  "style": "warm-pastel-hand-drawn-storybook",
+  "source": "OpenAI built-in image generation; text prompts; scooter edited from own generated sprite; no third-party reference images",
+  "approval": "awaiting PR review",
+  "perspective": "slightly elevated orthographic, requested isometric 2:1",
+  "alpha_centering": "visible alpha >=128 bounds, 2 source-pixel padding; preserve generated alpha",
+  "tile_footprint": null,
+  "items": [
+    {
+      "id": "casual",
+      "name": "Bộ đồ thường ngày",
+      "group": "products",
+      "category": "clothing",
+      "file": "/assets/products/casual.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        51,
+        18,
+        205,
+        238
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 36846,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "519585473a27d39573d0ac32fe65a22dfe48fcdffc8bd57172e032b3982e89f5"
+    },
+    {
+      "id": "officeWear",
+      "name": "Bộ đồ công sở",
+      "group": "products",
+      "category": "clothing",
+      "file": "/assets/products/officeWear.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        40,
+        18,
+        216,
+        238
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 36678,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "f786142cb4ef87b17978e19426e9135adf46dfa2c2fe01c8746590a50e19d2da"
+    },
+    {
+      "id": "coat",
+      "name": "Áo khoác cao cấp",
+      "group": "products",
+      "category": "clothing",
+      "file": "/assets/products/coat.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        59,
+        18,
+        196,
+        238
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 35616,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "5f09ee38db51be465c5d887748bc3cfee6d8ba982cc692bc846e41be45b6a6e5"
+    },
+    {
+      "id": "headphones",
+      "name": "Tai nghe",
+      "group": "products",
+      "category": "electronics",
+      "file": "/assets/products/headphones.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        32,
+        18,
+        223,
+        238
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        127.5,
+        127.5
+      ],
+      "bytes": 18932,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "47d25096ff9523231db80d1650eb86be7af5acf7d543187e4caee7e143a158f1"
+    },
+    {
+      "id": "tv",
+      "name": "TV phòng trọ",
+      "group": "products",
+      "category": "electronics",
+      "file": "/assets/products/tv.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        36,
+        238,
+        220
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "bytes": 35022,
+      "rgba": true,
+      "compression": "lossless",
+      "sha256": "0c8a6fd90d491ca3b01bbc43c4ad8495bca0d0b2c15fba4f02f041b016162bc2"
+    },
+    {
+      "id": "bicycle",
+      "name": "Xe đạp",
+      "group": "products",
+      "category": "transport",
+      "file": "/assets/products/bicycle.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        33,
+        238,
+        222
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "bytes": 30034,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "5556a981ba5f852a30b54c1e87099917cd61ec25fa2916b04b3a292118c6771e"
+    },
+    {
+      "id": "motorbike",
+      "name": "Xe máy",
+      "group": "products",
+      "category": "transport",
+      "file": "/assets/products/motorbike.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        18,
+        26,
+        238,
+        229
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "bytes": 27932,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "c058e6a7e6827f4d60b47f80c54593c3b208db4e8cbb577cef054a4b5d427f71"
+    },
+    {
+      "id": "scooter",
+      "name": "Xe tay ga",
+      "group": "products",
+      "category": "transport",
+      "file": "/assets/products/scooter.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        24,
+        18,
+        231,
+        238
+      ],
+      "minimum_margin_px": 18,
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "bytes": 23528,
+      "rgba": true,
+      "compression": "quality-95",
+      "sha256": "a3e5051cb2a3ef510b72a1c6401030f777dfb4c8565d3afdb98d0810dbb65c5c"
+    }
+  ]
+}
