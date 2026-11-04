@@ -15,3 +15,5 @@ export function chatCoworker(s:GameState,id:string,minutes:5|15):GameResult{
  n.social={chatDay:s.day,chatMinutesDay:dayMinutes,relations:{...old.relations,[id]:{score:Math.min(100,(rel?.score??0)+(minutes===5?2:4)),lastDay:s.day,minutes:clockOf(n).minute}}};
  n=recordJournal(n,`chat:${s.day}:${c.minute}:${id}`,'Trò chuyện với '+npc.name,`Đã trò chuyện ${minutes} phút.`,id);return{ok:true,state:n};
 }
+/** Cộng hoặc trừ quan hệ với một đồng nghiệp (0–100), dùng cho điểm rẽ và thẻ Giúp đồng nghiệp. */
+export function adjustRelation(s:GameState,id:string,delta:number):GameState{if(!COWORKERS.some(p=>p.id===id)||!delta)return s;const old=socialOf(s),rel=old.relations[id];return{...s,social:{...old,relations:{...old.relations,[id]:{score:Math.max(0,Math.min(100,(rel?.score??0)+delta)),lastDay:s.day,minutes:rel?.lastDay===s.day?rel.minutes:0}}}}}
