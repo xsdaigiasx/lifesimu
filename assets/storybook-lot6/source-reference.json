@@ -1,0 +1,25 @@
+{
+  "issue": 89,
+  "lot": 6,
+  "base_commit": "c7d825263e489949f4210d7de55c9eba814b73f7",
+  "files": {
+    "app/src/domain/home-geometry.ts": {
+      "blob_sha": "a6c20977032bd5b4b341918274ec0b0caea58975"
+    },
+    "app/src/domain/home.ts": {
+      "blob_sha": "98edd6f9b818aff7b61263578e3eb87897ea1c53"
+    },
+    "assets/source/build-room.cjs": {
+      "blob_sha": "41b851d0d71d9cecd446db224f7aab187c0ecfb7"
+    },
+    "assets/storybook-lot4/render.cjs": {
+      "blob_sha": "01bc2948ecb88d1e8408bee920750bb2cf88bb51"
+    },
+    "app/public/assets/room-master.webp": {
+      "blob_sha": "e9a8463407befeb351cd74496677eb29f455db90"
+    },
+    "app/public/assets/static-scenes/rental-diamond.png": {
+      "blob_sha": "9d8d12660c3d8db1d2513c1073acdd3c58e0ef63"
+    }
+  }
+}
