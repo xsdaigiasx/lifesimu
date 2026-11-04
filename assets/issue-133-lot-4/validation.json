@@ -1,0 +1,11 @@
+{
+  "tested_base": "d25988610bf0fa6ee3ffdcf514aee242c81c6622",
+  "asset_verify": "PASS: 9 WebP, 256x256, alpha, margins, centered, hashes, under 40000 bytes",
+  "max_bytes": 30164,
+  "app_test": "PASS",
+  "app_build": "PASS; existing CSS runtime-resolution and chunk-size warnings",
+  "core_check": "PASS; 18 tests",
+  "mobile_review": "PASS: 390x844; 9 decoded images; no page overflow",
+  "visual_review": "Inspected all 9 at full contact-sheet size and 64px dark-background thumbnails",
+  "runtime_code_changes": false
+}
