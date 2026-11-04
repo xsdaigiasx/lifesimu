@@ -32,9 +32,10 @@ console.log('PASS: furniture camera correction0/90, both floor axes, upright ver
 const back=floorPoint(0,0),right=floorPoint(8,0),front=floorPoint(8,8),left=floorPoint(0,8);
 assert.equal(back.x,front.x);assert.equal(right.y,left.y);
 assert.equal(Math.hypot(right.x-back.x,right.y-back.y),Math.hypot(left.x-back.x,left.y-back.y));
-assert.deepEqual(outerFloorPoint(0,8),{x:7.5,y:59});assert.deepEqual(outerFloorPoint(8,8),{x:50,y:87.75});
-assert(left.x>7.5&&right.x<92.5&&front.y<87.75);assert.equal(HOME_SAFE_MARGIN,.4);
-for(let x=0;x<=8;x++)for(let y=0;y<=8;y++){const p=floorPoint(x,y);const outerX=((p.x-HOME_OUTER_FLOOR.originX)/HOME_OUTER_FLOOR.stepX+(p.y-HOME_OUTER_FLOOR.originY)/HOME_OUTER_FLOOR.stepY)/2;const outerY=((p.y-HOME_OUTER_FLOOR.originY)/HOME_OUTER_FLOOR.stepY-(p.x-HOME_OUTER_FLOOR.originX)/HOME_OUTER_FLOOR.stepX)/2;assert(outerX>=.4-1e-10&&outerX<=7.6+1e-10);assert(outerY>=.4-1e-10&&outerY<=7.6+1e-10)}
+// Góc sàn khớp ảnh phòng lô 6: (0,8) tại px 212,606 và (8,8) tại px 724,862 trên khung 1448×1086.
+const near=(p,q)=>assert(Math.abs(p.x-q.x)<1e-9&&Math.abs(p.y-q.y)<1e-9,JSON.stringify(p));near(outerFloorPoint(0,8),{x:212/1448*100,y:606/1086*100});near(outerFloorPoint(8,8),{x:50,y:862/1086*100});
+assert.equal(HOME_SAFE_MARGIN,0);
+for(let x=0;x<=8;x++)for(let y=0;y<=8;y++){const p=floorPoint(x,y);const outerX=((p.x-HOME_OUTER_FLOOR.originX)/HOME_OUTER_FLOOR.stepX+(p.y-HOME_OUTER_FLOOR.originY)/HOME_OUTER_FLOOR.stepY)/2;const outerY=((p.y-HOME_OUTER_FLOOR.originY)/HOME_OUTER_FLOOR.stepY-(p.x-HOME_OUTER_FLOOR.originX)/HOME_OUTER_FLOOR.stepX)/2;assert(outerX>=-1e-10&&outerX<=8+1e-10);assert(outerY>=-1e-10&&outerY<=8+1e-10)}
 assert.equal((homeSafeEdgePath().match(/Z/g)||[]).length,2);
 assert.equal(blockedHomeCell(7,7),false);assert.equal(blockedHomeCell(6,2),true);assert.equal(blockedHomeCell(2,0),true);assert.equal(blockedHomeCell(2,1),false);assert.equal(homeError(moved.map(i=>i.id==='bed'?{...i,x:5,y:5}:i)),null);
 console.log('PASS: equal diamond axes, full floor corner coverage and old front-door floor cells usable');
@@ -44,7 +45,7 @@ const {HOME_GROUND}=require('../.test-build/domain/home-art');
 for(const id of Object.keys(HOME_GROUND))for(const rotation of [0,90]){
  const item={id,x:3.5,y:4,rotation,placed:true},before=homeSize(item),turned=rotateHomeObject(item),after=homeSize(turned);
  assert.deepEqual(floorPoint(item.x+before.w/2,item.y+before.h/2),floorPoint(turned.x+after.w/2,turned.y+after.h/2));
- assert.deepEqual(rotateHomeObject(turned),item);
+ assert.deepEqual(rotateHomeObject(rotateHomeObject(rotateHomeObject(turned))),item,'xoay 4 lần về chỗ cũ');assert.equal(turned.rotation,rotation+90);
  const ground=HOME_GROUND[id][rotation?1:0];assert(ground.x>0&&ground.x<100&&ground.y>0&&ground.y<=100);
 }
 let half=homeOf(engine.initial()).items.map(i=>i.id==='desk'?{...i,x:4.5,y:5.5}:i);assert(validHome({items:half,grid:8}));assert(engine.parse(JSON.stringify({...engine.initial(),home:{items:half,grid:8}})));
