@@ -7,18 +7,21 @@ import {VOICE} from './lines';
 import {socialOf,adjustRelation} from './social';
 import {clockOf,spendTime,END} from './time';
 import {recordJournal} from './journal';
-import {giftIngredient,nextMomRecipe,learnRecipe,RECIPES,type RecipeId} from './life';
+import {giftIngredient,nextMomRecipe,learnRecipe,lifeOf,RECIPES,type RecipeId} from './life';
+import {post} from './money';
 import {addWorkXp} from './study';
 import {places} from './places';
 import {dateAt} from './format';
 import {hash} from './shift';
 import {storyOf} from './director';
 
-export type MsgKind='mom-care'|'mom-gift'|'mom-recipe'|'invite'|'checkin'|'rent'|'missed'|'note';
+export type MsgKind='mom-care'|'mom-aid'|'mom-gift'|'mom-recipe'|'invite'|'checkin'|'rent'|'missed'|'note';
 export interface Msg{id:string;day:number;minute:number;from:'npc'|'me';text:string;kind:MsgKind;replies?:string[];answered?:number;read?:boolean;recipe?:RecipeId;appt?:{day:number;minute:number;place:PlaceId}}
 export interface Queued extends Msg{npc:string}
 export interface Appointment{id:string;npc:string;day:number;minute:number;place:PlaceId;status:'set'|'done'|'missed'}
 export interface InboxState{version:1;seq:number;threads:Record<string,Msg[]>;queue:Queued[];appts:Appointment[];called:Record<string,number>;hello:Record<string,number>}
+/** T31: khi tiền mặt cộng tiết kiệm dưới ngưỡng, Mẹ nhắn gửi tiền; gọi lại Mẹ trong 3 ngày để nhận; 14 ngày một lần. */
+export const MOM_AID={below:100000,gift:1000000,cooldown:14,claimDays:3};
 export const DAILY_MESSAGES=2,CALL_MINUTES=15,MISSED_PENALTY=-5,APPT_EARLY=30,APPT_LATE=60;
 export const inboxOf=(s:GameState):InboxState=>s.inbox??{version:1,seq:0,threads:{},queue:[],appts:[],called:{},hello:{}};
 const scoreOf=(s:GameState,id:string)=>socialOf(s).relations[id]?.score??0;
@@ -59,9 +62,15 @@ export const canCall=(s:GameState,id:string)=>id==='me'||scoreOf(s,id)>=30;
 export const contactsOf=(s:GameState)=>NPCS.filter(n=>n.id==='me'||scoreOf(s,n.id)>=10).sort((a,b)=>(a.id==='me'?-1:0)-(b.id==='me'?-1:0));
 export function unreadCount(s:GameState,id?:string){const t=inboxOf(s).threads;return Object.entries(t).filter(([k])=>!id||k===id).reduce((n,[,msgs])=>n+msgs.filter(m=>m.from==='npc'&&!m.read).length,0)}
 
+/** Tiền mặt cộng tiền tiết kiệm dưới ngưỡng thì cần Mẹ giúp (không tự vay, không âm số dư). */
+const needsAid=(s:GameState)=>s.money+lifeOf(s).savings.reduce((t,x)=>t+x.principal,0)<MOM_AID.below;
+const lastAidDay=(ib:InboxState)=>[...(ib.threads.me??[]),...ib.queue.filter(q=>q.npc==='me')].filter(m=>m.kind==='mom-aid').map(m=>m.day);
+/** Tin Mẹ gửi tiền còn hạn nhận, chưa nhận. */
+const openAid=(s:GameState)=>(inboxOf(s).threads.me??[]).find(m=>m.kind==='mom-aid'&&m.answered===undefined&&s.day-m.day<=MOM_AID.claimDays);
 /** Lên lịch tin nhắn cho ngày mới (tối đa 2), chọn theo seed. */
 function schedule(s:GameState,ib:InboxState):Queued[]{const out:Queued[]=[],day=s.day,mk=(npc:string,minute:number,kind:MsgKind,text:string,replies?:string[],appt?:Msg['appt'])=>out.push({id:`q${day}:${npc}:${kind}`,npc,day,minute,from:'npc',text,kind,...(replies?{replies}:{}),...(appt?{appt}:{})});
  const h=(k:string)=>hash(`inbox:${day}:${k}`);
+ if(needsAid(s)&&!lastAidDay(ib).some(d=>day-d<MOM_AID.cooldown))mk('me',480,'mom-aid','Mẹ nghe nói dạo này con túng. Mẹ gửi con ít tiền, con gọi cho mẹ một cuộc để mẹ chuyển nhé.');
  if(dateAt(day+2).getUTCDate()===1&&(s.housing?.house??'tro')==='tro')mk('ba-tu',480,'rent','Còn hai ngày nữa tới hạn tiền trọ nghen con.',['Dạ con nhớ rồi','Bà cho con khất vài bữa']);
  const lastMom=Math.max(-9,...(ib.threads.me??[]).filter(m=>m.from==='npc').map(m=>m.day));if(day-lastMom>=2&&h('mom')%3!==0){const v=h('momv')%3,teach=nextMomRecipe(s);const kind:MsgKind=v===0?'mom-care':v===1?'mom-gift':teach?'mom-recipe':'mom-care';mk('me',1140+h('momt')%90,kind,kind==='mom-care'?'Con ăn uống đầy đủ không? Đừng thức khuya quá nghe.':kind==='mom-gift'?'Mẹ gửi con ít gạo, nhờ người quen mang tới phòng rồi đó.':(MOM_RECIPE_TEXT[teach!]??""),kind==='mom-recipe'?['Con ghi lại rồi','Để con thử nấu']:['Con khoẻ, mẹ yên tâm','Dạ con biết rồi']);if(kind==='mom-recipe')out[out.length-1]!.recipe=teach}
  const close=NPCS.filter(n=>n.story&&!n.remote&&scoreOf(s,n.id)>=30);const dow=dateAt(day).getUTCDay();
@@ -100,7 +109,9 @@ export function sendMessage(s:GameState,id:string,kind:'hello'|'invite'):GameRes
 /** Gọi điện: Mẹ hoặc người từ bậc Thân; 15 phút; mỗi người mỗi ngày một cuộc. */
 export function callNpc(s:GameState,id:string):GameResult{const npc=castById(id);if(!npc||!canCall(s,id))return{ok:false,error:'Cần thân hơn mới gọi điện được.'};const ib=inboxOf(s);if(ib.called[id]===s.day)return{ok:false,error:'Hôm nay đã gọi rồi.'};if(clockOf(s).minute+CALL_MINUTES>END)return{ok:false,error:'Khuya quá rồi.'};
  const r=spendTime(s,CALL_MINUTES);if(!r.ok)return r;let n=adjustRelation(r.state,id,4);n={...n,mood:Math.min(100,n.mood+3),stress:Math.max(0,n.stress-(id==='me'?4:2)),inbox:{...inboxOf(n),called:{...ib.called,[id]:s.day}}};
- return{ok:true,state:recordJournal(n,`call:${s.day}:${id}`,`Gọi điện cho ${npc.name}`,id==='me'?'Nghe giọng mẹ, thấy nhẹ lòng.':'Nói chuyện một lúc, vui hẳn.',id)}}
+ const aid=id==='me'?openAid(s):undefined;let story=id==='me'?'Nghe giọng mẹ, thấy nhẹ lòng.':'Nói chuyện một lúc, vui hẳn.';
+ if(aid){if(post(n,{id:`momaid:${aid.day}`,name:'Mẹ gửi tiền',amount:MOM_AID.gift})==='ok'){const cur=inboxOf(n);n={...n,inbox:{...cur,threads:{...cur.threads,me:(cur.threads.me??[]).map(m=>m.id===aid.id?{...m,answered:1}:m)}}};story='Nghe giọng mẹ, mẹ chuyển cho con 1.000.000đ và dặn ăn uống đầy đủ.'}}
+ return{ok:true,state:recordJournal(n,`call:${s.day}:${id}`,`Gọi điện cho ${npc.name}`,story,id)}}
 
 /** Hẹn đang tới giờ ở nơi người chơi đang đứng (sớm 30 phút đến trễ 60 phút). */
 export function dueAppointment(s:GameState){const c=clockOf(s);return inboxOf(s).appts.find(a=>a.status==='set'&&a.day===s.day&&a.place===c.location&&c.minute>=a.minute-APPT_EARLY&&c.minute<=a.minute+APPT_LATE)}

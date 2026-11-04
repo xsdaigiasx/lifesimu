@@ -12,6 +12,7 @@ import PhoneBank from './PhoneBank';
 import {Messages,Calls,Contacts,type SocialHandlers} from './PhoneSocial';
 import type {Bets, RoundResult} from '../domain/bau-cua';
 import { useEffect, useRef, useState } from 'react';
+import { isWeekend, WEEKEND } from '../domain/weekend';
 import type { FormEvent, ReactNode } from 'react';
 import type { DailyAction, GameResult, GameState, PhoneState, PlayerProfile } from '../domain/types';
 import { phoneData as data } from '../domain/phone-data';
@@ -64,6 +65,7 @@ function Clock({minute=480}:{minute?:number}) {
 
 export default function Phone({ state, profile, onAction, onResetStart, onPlayBauCua, bauCuaShaking, onShop,onLifeAction,social }: PhoneProps) {
   const [chatWith, setChatWith] = useState<string|undefined>(undefined);
+  const [workNote, setWorkNote] = useState('');
   const [phone, setPhone] = useState<PhoneState>(() => { try { return data.parse(localStorage.getItem(data.KEY)) ?? data.initial(); } catch { return data.initial(); } });
   const [page, setPage] = useState<Page>('home');
   const [dial, setDial] = useState('');
@@ -132,7 +134,7 @@ export default function Phone({ state, profile, onAction, onResetStart, onPlayBa
     case 'messages': body = social?<Messages state={state} h={social} openId={chatWith} top={<article className="system-message"><span className="message-avatar"><Icon id={state.lastReport ? 'message' : 'home'} /></span><div><small>TRỢ LÝ {state.lastReport ? shortDate(state.lastReport.day) : 'CHÀO MỪNG'}</small><h3>{state.lastReport ? 'Tổng kết ngày của bạn' : 'Một khởi đầu ở An Nhiên'}</h3><p>{state.lastReport ? `Thu ${money(state.lastReport.earn)}, sinh hoạt ${money(state.lastReport.cost)}. Bạn tích lũy thêm ${state.lastReport.xp} XP.` : 'Phòng 03 đang chờ bạn. Hãy ghé về nhà, chọn vài món đồ và bắt đầu một ngày mới.'}</p></div></article>}/>:<article className="system-message"><span className="message-avatar"><Icon id={state.lastReport ? 'message' : 'home'} /></span><div><small>TRỢ LÝ {state.lastReport ? shortDate(state.lastReport.day) : 'CHÀO MỪNG'}</small><h3>{state.lastReport ? 'Tổng kết ngày của bạn' : 'Một khởi đầu ở An Nhiên'}</h3><p>{state.lastReport ? `Thu ${money(state.lastReport.earn)}, sinh hoạt ${money(state.lastReport.cost)}. Bạn tích lũy thêm ${state.lastReport.xp} XP.` : 'Phòng 03 đang chờ bạn. Hãy ghé về nhà, chọn vài món đồ và bắt đầu một ngày mới.'}</p></div></article>; break;
     case 'calls': body = social?<Calls state={state} h={social}/>:null; break;
     case 'news': body = <><div className="news-masthead"><small>BẢN TIN</small><h2>An Nhiên hôm nay</h2><p>{shortDate(state.day)} Đời sống & nhịp phố</p></div><article className="news-feature"><span className="news-skyline"><Icon id="city" /></span><small>CHUYỆN KHU PHỐ</small><h3>Hẻm Nắng có một người hàng xóm mới</h3><p>{profile.name} bắt đầu cuộc sống ở phòng 03. Một chiếc bàn làm việc, một ô cửa sổ và những dự định đang đợi phía trước.</p></article><article className="phone-news-item"><small>GÓC SỐNG</small><h3>{homeOf(state).items.length} món đồ, những thay đổi nhỏ</h3><p>{homeOf(state).items.length ? `Góc phòng của ${profile.name} đã có thêm dấu ấn riêng. Đồ đã mua có thể cất và đặt lại.` : 'Một góc xanh hay ngọn đèn ấm có thể là món đầu tiên cho căn phòng mới.'}</p></article><article className="phone-news-item"><small>NHỊP SỐNG</small><h3>Chừa một khoảng cho nghỉ ngơi</h3><p>Năng lượng và stress ảnh hưởng hiệu suất công việc. Một ngày nghỉ có thể giúp bạn lấy lại cân bằng.</p></article></>; break;
-    case 'work': body = <>{intro(`Công việc của ${profile.name}`, 'Từng nhiệm vụ, thêm một chút kinh nghiệm.')}<div className="phone-info-card"><small>NGHỀ HIỆN TẠI</small><h3>Lập trình viên mới</h3><p>{state.xp} XP tích lũy Cấp {1 + Math.floor(state.xp / 100)}</p></div><div className="phone-action-list">{actionRow('briefcase', 'Đến thành phố', '', () => onAction('city'))}</div></>; break;
+    case 'work': body = <>{intro(`Công việc của ${profile.name}`, 'Từng nhiệm vụ, thêm một chút kinh nghiệm.')}<div className="phone-info-card"><small>NGHỀ HIỆN TẠI</small><h3>Lập trình viên mới</h3><p>{state.xp} XP tích lũy Cấp {1 + Math.floor(state.xp / 100)}</p></div><div className="phone-action-list">{actionRow('briefcase', 'Đến thành phố', '', () => onAction('city'))}{isWeekend(state.day)&&actionRow('briefcase', 'Làm thêm cuối tuần', money(WEEKEND.pay), () => { const r = onLifeAction({ kind: 'weekendJob' }); setWorkNote(r.ok ? `Xong ca, nhận ${money(WEEKEND.pay)}.` : r.error ?? ''); })}</div>{workNote&&<p className="market-note" role="status">{workNote}</p>}</>; break;
     case 'save': {
       let backup: ReturnType<typeof backupInfo> = null;
       try { backup = backupInfo(localStorage, Date.now()); } catch { backup = null; }
