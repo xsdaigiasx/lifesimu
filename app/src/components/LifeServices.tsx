@@ -3,23 +3,25 @@ import PeopleHere from './PeopleHere';
 import Market from './Market';
 import CookingGame from './CookingGame';
 import type {GameState,GameResult} from '../domain/types';
-import {STREET_MEALS,mealBlock,knowsRecipe,RECIPE_LEVEL,type StreetMealId,INGREDIENTS,RECIPES,CONDITIONS,DEPOSIT_TERMS,lifeOf,stock,canCook,MEAL_QUALITY,type LifeAction,type IngredientId,type RecipeId} from '../domain/life';
+import {EAT_OUT,eatOutAt,mealBlock,knowsRecipe,RECIPE_LEVEL,type EatOutId,INGREDIENTS,RECIPES,CONDITIONS,DEPOSIT_TERMS,lifeOf,stock,canCook,MEAL_QUALITY,type LifeAction,type IngredientId,type RecipeId} from '../domain/life';
 import {money,shortDate} from '../domain/format';
 import {COFFEE,coffeeToday} from '../domain/vitals';
 import {clockText} from '../domain/time';
 import {ActionRow,DataRow,type Fact} from './GameUI';
 import Icon from './Icon';
-const MEAL_ART:Record<StreetMealId,{icon:string;tone:string}>={banhMi:{icon:'food',tone:'#f3e2c4'},comTam:{icon:'restaurant',tone:'#f6dccd'},pho:{icon:'cup',tone:'#e4ecd6'}};
-export default function LifeServices({state,place,onAction,onTalk}:{state:GameState;place:'home'|'market'|'bank'|'hospital'|'park'|'streetfood';onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,kind:'talk'|'meal')=>GameResult}){
+import MallShop from './MallShop';
+const MEAL_ART:Record<EatOutId,{icon:string;tone:string}>={banhMi:{icon:'food',tone:'#f3e2c4'},comTam:{icon:'restaurant',tone:'#f6dccd'},pho:{icon:'cup',tone:'#e4ecd6'},setLunch:{icon:'restaurant',tone:'#efe3cf'},hotpot:{icon:'flame',tone:'#f6d9cf'},steak:{icon:'pan',tone:'#e9dccf'}};
+export default function LifeServices({state,place,onAction,onTalk}:{state:GameState;place:'home'|'market'|'bank'|'hospital'|'park'|'streetfood'|'restaurant'|'mall';onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,kind:'talk'|'meal')=>GameResult}){
  const [page,setPage]=useState(place==='bank'?'savings':'recipes'),[notice,setNotice]=useState(''),[qty,setQty]=useState(1),[amount,setAmount]=useState(500000),[term,setTerm]=useState<7|30|90>(30),[repayment,setRepayment]=useState(100000);const l=lifeOf(state);
  function run(a:LifeAction,message='Đã thực hiện.'){const r=onAction(a);setNotice(r.ok?message:r.error)}
  const tabs=(values:[string,string][])=><nav className="life-tabs">{values.map(([id,label])=><button key={id} aria-pressed={page===id} onClick={()=>{setPage(id);setNotice('')}}>{label}</button>)}</nav>;
  return <div className="life-services"><div className="life-summary"><strong>{money(state.money)}</strong><span>{clockText(state)}</span></div><p className="life-status" role="status" hidden={!notice}>{notice}</p>{onTalk&&place!=='market'&&<PeopleHere state={state} place={place} onTalk={onTalk}/>}
- {place==='streetfood'&&<div className="market-grid street-menu">{(Object.keys(STREET_MEALS) as StreetMealId[]).map(id=>{const m=STREET_MEALS[id];return <article key={id} className="market-item">
+ {(place==='streetfood'||place==='restaurant')&&<div className="market-grid street-menu">{eatOutAt(place).map(id=>{const m=EAT_OUT[id];return <article key={id} className="market-item">
   <span className="market-item-art" style={{background:MEAL_ART[id].tone}}><Icon name={MEAL_ART[id].icon}/></span><strong>{m.name}</strong>
-  <span className="market-item-facts"><span title="Thời gian"><Icon name="clock"/>{m.minutes}'</span><span title="Độ no"><Icon name="restaurant"/>+{m.fullness}</span><span title="Năng lượng"><Icon name="bolt"/>+{m.energy}</span></span>
-  <button disabled={state.money<m.price||!!mealBlock(state)} onClick={()=>run({kind:'streetMeal',id},'Đã ăn xong.')}>{money(m.price)}</button></article>})}</div>}
- {place==='streetfood'&&mealBlock(state)&&<p className="life-hint">{mealBlock(state)}</p>}
+  <span className="market-item-facts"><span title="Thời gian"><Icon name="clock"/>{m.minutes}'</span><span title="Độ no"><Icon name="restaurant"/>+{m.fullness}</span>{place==='restaurant'?<span title="Tinh thần"><Icon name="smile"/>+{m.mood}</span>:<span title="Năng lượng"><Icon name="bolt"/>+{m.energy}</span>}</span>
+  <button disabled={state.money<m.price||!!mealBlock(state)} onClick={()=>run({kind:'eatOut',id},'Đã ăn xong.')}>{money(m.price)}</button></article>})}</div>}
+ {(place==='streetfood'||place==='restaurant')&&mealBlock(state)&&<p className="life-hint">{mealBlock(state)}</p>}
+ {place==='mall'&&<MallShop state={state} onAction={onAction}/>}
  {place==='streetfood'&&<div className="game-actions"><ActionRow icon="cup" label="Cà phê" facts={[['coin',money(COFFEE.price)],['clock','10 phút'],['bolt',`+${COFFEE.boost}`],['cups',`${coffeeToday(state)}/${COFFEE.perDay}`]]} disabled={coffeeToday(state)>=COFFEE.perDay||state.money<COFFEE.price} onClick={()=>run({kind:'coffee'},'Đã uống cà phê.')}/></div>}
  {place==='market'&&<Market state={state} stock={id=>stock(state,id)} onAction={onAction} onTalk={onTalk}/>}
  {place==='home'&&<>{l.cooking?<CookingGame cooking={l.cooking} onAction={onAction} onDone={message=>{setNotice(message);setPage('meals')}}/>:<>{tabs([['recipes','Nấu ăn'],['pantry','Nguyên liệu'],['meals','Món đã nấu'],['rest','Thư giãn']])}
