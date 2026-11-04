@@ -2,6 +2,7 @@ import {alignHomeAxes} from './home-geometry';
 import type {HomeId} from './home';
 interface HomeArtVariant {src:string;scale:number;anchorX:number;anchorY:number}
 export const HOME_ART:Record<HomeId,[HomeArtVariant,HomeArtVariant]> = {
+  "fridge": [{"src":"/assets/furniture/fridge-basic_a.svg","scale":1,"anchorX":50,"anchorY":100},{"src":"/assets/furniture/fridge-basic_b.svg","scale":1,"anchorX":50,"anchorY":100}],
   "bed": [
     {
       "src": "/assets/static-scenes/furniture-v2/bed-0.png",
@@ -110,5 +111,6 @@ export const HOME_GROUND:Record<HomeId,[{x:number;y:number;scale:number},{x:numb
  plant:[{x:50,y:92,scale:HOME_ART.plant[0].scale},{x:50,y:92,scale:HOME_ART.plant[1].scale}],
  lamp:[{x:50,y:85.8108,scale:HOME_ART.lamp[0].scale*.5},{x:50,y:85.8108,scale:HOME_ART.lamp[1].scale*.5}],
  painting:[{x:50,y:100,scale:1},{x:50,y:100,scale:1}],
- rug:[{x:50,y:50,scale:1},{x:50,y:50,scale:1}]
+ rug:[{x:50,y:50,scale:1},{x:50,y:50,scale:1}],
+ fridge:[{x:50,y:85,scale:1},{x:50,y:85,scale:1}]
 };
