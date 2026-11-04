@@ -1,0 +1,45 @@
+{
+  "issue": 133,
+  "lot": 1,
+  "reviewed_on": "2026-11-04",
+  "tested_main": "5161099f9ba67ddcb291c88ab26c74b1f69ba536",
+  "sprites": 112,
+  "models": 28,
+  "directions": 4,
+  "total_png_bytes": 4294859,
+  "max_png_bytes": 93218,
+  "asset_verify": "PASS",
+  "app_npm_test": "PASS",
+  "app_npm_run_build": "PASS",
+  "core_npm_run_check": "PASS (18 tests)",
+  "mobile_review": "PASS: Edge headless 390x844, all images decoded",
+  "visual_review": [
+    "directions-1.webp",
+    "directions-2.webp",
+    "directions-3.webp",
+    "directions-4.webp",
+    "room-grid-preview.webp",
+    "mobile-390x844.png"
+  ],
+  "scope": "PNG assets and authoring/review files only; no runtime TypeScript/core/save/map changes",
+  "runtime_followup": "Claude switches fridge SVG references to supplied PNG and wires painting c/d after approval",
+  "build_notes": "Vite reports existing public CSS resolution and chunk size warnings; build exits 0",
+  "review_fix": {
+    "review_url": "https://github.com/xsdaigiasx/lifesimu/pull/152#issuecomment-6636184846",
+    "baseline_commit": "8738d5a35873a6913bbeea8b9ace340ce1273b09",
+    "tool": "built-in image_gen",
+    "changed_sprites": [
+      "bed-premium_a",
+      "bed-premium_b",
+      "bed-premium_c",
+      "bed-premium_d"
+    ],
+    "unchanged_sprite_count": 108,
+    "geometry": "PASS: unchanged frames, anchors and footprints",
+    "asset_verify": "PASS: 112 PNG",
+    "app_npm_test": "PASS",
+    "app_npm_run_build": "PASS",
+    "core_npm_run_check": "PASS (18 tests)",
+    "visual_review": "bed-premium-lights-review.webp (before/after four directions and 96px thumbnails)"
+  }
+}

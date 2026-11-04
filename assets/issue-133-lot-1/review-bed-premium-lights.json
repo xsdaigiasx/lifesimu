@@ -1,0 +1,46 @@
+{
+  "issue": 133,
+  "pr": 152,
+  "review_url": "https://github.com/xsdaigiasx/lifesimu/pull/152#issuecomment-6636184846",
+  "baseline_commit": "8738d5a35873a6913bbeea8b9ace340ce1273b09",
+  "tool": "built-in image_gen",
+  "intent": "precise-object-edit",
+  "description": "Single upholstered cream bed with vertically stitched headboard, two clearly visible cream conical reading lamps on dark-brass gooseneck arms, cream mattress, sage pillow and sage duvet",
+  "items": [
+    {
+      "key": "bed-premium_a",
+      "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET, the already approved bed-premium_a furniture sprite. Image 2 is STYLE REFERENCE only. Change ONLY the pair of headboard reading lights so they are clearly recognizable at small game-sprite size. Replace the tiny brass cones with two matching compact CREAM conical lampshades with thin dark-brass rims and clearly visible curved dark-brass gooseneck arms, firmly attached to the upper corners of the headboard. Each shade is about 1.5 times the old cone's size, still a small realistic reading lamp, not a bedside table lamp. The lamps project slightly above/in front of the headboard rail so their silhouettes remain visible from front AND rear views. Use bright cream shade against muted brass; do not add glow, light beams or external shadow. Preserve EXACTLY the bed design, honey oak frame, cream vertically stitched upholstery, sage blanket, pillow, mattress, leg positions, camera, contour and perspective. Headboard stays UPPER RIGHT, foot stays LOWER LEFT; do not rotate or mirror. Keep all four feet at their existing positions, don't resize the bed or move its ground contact. True transparent background, no floor, no text or logo. Target frame remains 320x288, footprint 2x3 tiles, anchor (128,288). Semi-realistic digital painting matching existing approved style. Show just this one bed.",
+      "inputs": [
+        "existing bed-premium_a (edit target)",
+        "assets/style-reference/room-reference.webp (style only)"
+      ]
+    },
+    {
+      "key": "bed-premium_b",
+      "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET: the approved bed-premium_b sprite. Image 2 is the newly approved lamp-design reference bed-premium_a. Image 3 is room STYLE reference only. Change ONLY the two headboard lamps in image 1 to match image 2 EXACTLY: compact CREAM conical lampshades, thin dark-brass rims, dark-brass curved gooseneck arms, circular brass mounts. Each cream shade is about 1.5 times the old brass cone size, still a small realistic reading light. Make these small lamps clearly recognizable at game sprite size. Keep the exact same pair, placement at two upper headboard corners and materials in all directions. Headboard remains UPPER LEFT and foot remains LOWER RIGHT. Front view b. Frame 320x288, footprint 3x2, anchor (192,288). Preserve all other bed pixels/design: honey oak frame, cream vertically stitched upholstery, sage blanket and pillow, mattress, feet, silhouette, scale, ground contacts, camera and perspective. Do not rotate or mirror the bed or change furniture design. Keep lights within the existing canvas. True transparent background, no floor, no cast shadow, NO halo or external glow, no light beams, no text/logo. Match the semi-realistic painting style, fixed upper-left ambient lighting.",
+      "inputs": [
+        "existing bed-premium_b (edit target)",
+        "revised bed-premium_a (lamp design)",
+        "assets/style-reference/room-reference.webp (style only)"
+      ]
+    },
+    {
+      "key": "bed-premium_c",
+      "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET: the approved bed-premium_c sprite. Image 2 is the newly approved lamp-design reference bed-premium_a. Image 3 is room STYLE reference only. Change ONLY the two headboard lamps in image 1 to match image 2 EXACTLY: compact CREAM conical lampshades, thin dark-brass rims, dark-brass curved gooseneck arms, circular brass mounts. Each cream shade is about 1.5 times the old brass cone size, still a small realistic reading light. Make these small lamps clearly recognizable at game sprite size. Keep the exact same pair, placement at two upper headboard corners and materials in all directions. Headboard remains LOWER LEFT foreground and foot remains UPPER RIGHT background. This is rear view c: lights are attached to the FRONT bed-facing side of headboard, never mount new lights on its back panel. Preserve natural occlusion, with the curved brass arms and cream shade profiles visible above/around the upper corners. Frame 320x288, footprint 2x3, anchor (128,288). Preserve all other bed pixels/design: honey oak frame, cream vertically stitched upholstery, sage blanket and pillow, mattress, feet, silhouette, scale, ground contacts, camera and perspective. Do not rotate or mirror the bed or change furniture design. Keep lights within the existing canvas. True transparent background, no floor, no cast shadow, NO halo or external glow, no light beams, no text/logo. Match the semi-realistic painting style, fixed upper-left ambient lighting.",
+      "inputs": [
+        "existing bed-premium_c (edit target)",
+        "revised bed-premium_a (lamp design)",
+        "assets/style-reference/room-reference.webp (style only)"
+      ]
+    },
+    {
+      "key": "bed-premium_d",
+      "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET: the approved bed-premium_d sprite. Image 2 is the newly approved lamp-design reference bed-premium_a. Image 3 is room STYLE reference only. Change ONLY the two headboard lamps in image 1 to match image 2 EXACTLY: compact CREAM conical lampshades, thin dark-brass rims, dark-brass curved gooseneck arms, circular brass mounts. Each cream shade is about 1.5 times the old brass cone size, still a small realistic reading light. Make these small lamps clearly recognizable at game sprite size. Keep the exact same pair, placement at two upper headboard corners and materials in all directions. Headboard remains LOWER RIGHT foreground and foot remains UPPER LEFT background. This is rear view d: lights are attached to the FRONT bed-facing side of headboard, never mount new lights on its back panel. Preserve natural occlusion, with the curved brass arms and cream shade profiles visible above/around the upper corners. Frame 320x288, footprint 3x2, anchor (192,288). Preserve all other bed pixels/design: honey oak frame, cream vertically stitched upholstery, sage blanket and pillow, mattress, feet, silhouette, scale, ground contacts, camera and perspective. Do not rotate or mirror the bed or change furniture design. Keep lights within the existing canvas. True transparent background, no floor, no cast shadow, NO halo or external glow, no light beams, no text/logo. Match the semi-realistic painting style, fixed upper-left ambient lighting.",
+      "inputs": [
+        "existing bed-premium_d (edit target)",
+        "revised bed-premium_a (lamp design)",
+        "assets/style-reference/room-reference.webp (style only)"
+      ]
+    }
+  ]
+}
