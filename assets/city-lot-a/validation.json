@@ -1,0 +1,292 @@
+{
+  "issue": 97,
+  "lot": "A",
+  "tile_count": 34,
+  "road_tiles": 13,
+  "water_tiles": 13,
+  "other_tiles": 8,
+  "total_bytes": 49318,
+  "matching_directed_edge_pairs": 372,
+  "decoded_rgb_edge_samples": 7440,
+  "max_edge_rgb_difference": 0,
+  "normal_source_over_native_mosaic_opaque_pixels": 262144,
+  "native_mosaic_has_no_alpha_cracks": true,
+  "complete_lake_joins_checked": 24,
+  "checks": [
+    {
+      "id": "grass-1",
+      "bytes": 1718,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "grass-2",
+      "bytes": 1710,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "grass-3",
+      "bytes": 1724,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "grass-flowers",
+      "bytes": 1906,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "earth",
+      "bytes": 484,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "sand",
+      "bytes": 484,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "sidewalk",
+      "bytes": 1150,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "plaza",
+      "bytes": 810,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-x",
+      "bytes": 950,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-y",
+      "bytes": 964,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-corner-xm-ym",
+      "bytes": 970,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-corner-xm-yp",
+      "bytes": 938,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-corner-xp-ym",
+      "bytes": 908,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-corner-xp-yp",
+      "bytes": 950,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-t-no-xm",
+      "bytes": 884,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-t-no-xp",
+      "bytes": 908,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-t-no-ym",
+      "bytes": 884,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-t-no-yp",
+      "bytes": 888,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-cross",
+      "bytes": 826,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-zebra-x",
+      "bytes": 1042,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "road-zebra-y",
+      "bytes": 1056,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-center",
+      "bytes": 1706,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-edge-xm",
+      "bytes": 2144,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-edge-xp",
+      "bytes": 2164,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-edge-ym",
+      "bytes": 2102,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-edge-yp",
+      "bytes": 2126,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-convex-xm-ym",
+      "bytes": 2232,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-concave-xm-ym",
+      "bytes": 1990,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-convex-xm-yp",
+      "bytes": 2234,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-concave-xm-yp",
+      "bytes": 1994,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-convex-xp-ym",
+      "bytes": 2256,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-concave-xp-ym",
+      "bytes": 1982,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-convex-xp-yp",
+      "bytes": 2228,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    },
+    {
+      "id": "water-concave-xp-yp",
+      "bytes": 2006,
+      "opaque_pixels": 16384,
+      "rgba": true,
+      "exact_alpha": true,
+      "hash_matches": true
+    }
+  ],
+  "limits": [
+    "Native integer pixel placements verified; runtime zoom and GPU filtering require integration QA. Use texture extrusion/gutters when building an atlas; do not infer UVs from alpha bounds."
+  ]
+}

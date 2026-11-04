@@ -1,0 +1,21 @@
+{
+  "issue": 97,
+  "lot": "A",
+  "method": "Exact native-resolution procedural tile geometry with inherited AI material swatches; no new AI scene or tile generation.",
+  "external_reference_images": [],
+  "style": "Warm pastel hand-illustrated storybook; thin brown ink details, very subtle wash, no external shadows, no lettering, 256x128 exact 2:1 diamond, matched edge profiles.",
+  "source_materials": [
+    {
+      "id": "stone",
+      "name": "Gạch kem",
+      "subject": "A seamless pale warm cream matte stone or ceramic surface wash with very sparse tiny paper-like mineral speckles, very low contrast. No grout, no tile lines, no geometric divisions. Colors cream #fbf3e2 and very pale beige, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless pale warm cream matte stone or ceramic surface wash with very sparse tiny paper-like mineral speckles, very low contrast. No grout, no tile lines, no geometric divisions. Colors cream #fbf3e2 and very pale beige, watercolor pencil storybook texture."
+    },
+    {
+      "id": "grass",
+      "name": "Cỏ xanh dịu",
+      "subject": "A seamless softly mottled sage-green grass surface texture seen directly from above. Very sparse tiny short grass flecks, low contrast, no bushes, no trees, no paths or flowers. Colors soft sage #9cc28a, pale yellow-green, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless softly mottled sage-green grass surface texture seen directly from above. Very sparse tiny short grass flecks, low contrast, no bushes, no trees, no paths or flowers. Colors soft sage #9cc28a, pale yellow-green, watercolor pencil storybook texture."
+    }
+  ]
+}

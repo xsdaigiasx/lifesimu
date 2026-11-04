@@ -1,0 +1,18 @@
+{
+  "issue": 97,
+  "lot": "A",
+  "base_commit": "c1b8cd92f52ab3c7c0fe723629d47e6ca3caa9ca",
+  "style_issue": 89,
+  "materials": [
+    {
+      "local": "materials/grass.png",
+      "source": "assets/storybook-lot4/materials/grass.png",
+      "blob_sha": "a940f6f51f6d43bad22d032d86103781990a6a6b"
+    },
+    {
+      "local": "materials/stone.png",
+      "source": "assets/storybook-lot4/materials/stone.png",
+      "blob_sha": "0bcb06372889b9784e5437cf9b146f3987eb6b51"
+    }
+  ]
+}

@@ -1,0 +1,1261 @@
+{
+  "issue": 97,
+  "lot": "A",
+  "projection": "orthographic-2:1",
+  "tile_px": [
+    256,
+    128
+  ],
+  "edge_profile_legend": {
+    "grass": "G",
+    "earth": "E",
+    "sand": "S",
+    "paving": "P",
+    "plaza": "L",
+    "road": "A",
+    "curb": "C",
+    "water": "W",
+    "foam": "F"
+  },
+  "edge_sampling": "100 equal samples, t increases along the other world axis; match xp to xm and yp to ym without reversing t",
+  "alpha": "Hard pixel-center coverage of diamond; no antialias alpha overlap or transparent cracks at native integer placement",
+  "items": [
+    {
+      "id": "grass-1",
+      "kind": "grass",
+      "file": "app/public/assets/city/terrain/grass-1.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1718,
+      "sha256": "ace17c0481013f3973b123d55b058c5bbee78f1850eb330563563a668acad818",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "xp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "ym": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "yp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "grass-2",
+      "kind": "grass",
+      "file": "app/public/assets/city/terrain/grass-2.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1710,
+      "sha256": "334d2162e426bd726ff76565076e6bcde2b1891b014db79617cf3e60375420ab",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "xp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "ym": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "yp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "grass-3",
+      "kind": "grass",
+      "file": "app/public/assets/city/terrain/grass-3.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1724,
+      "sha256": "b5b62630894d615b4835745d780c23625810256ed92e11ae6ef8730f9d0470d9",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "xp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "ym": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "yp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "grass-flowers",
+      "kind": "grass",
+      "file": "app/public/assets/city/terrain/grass-flowers.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1906,
+      "sha256": "78ed38e8af6ee9d33a931869de0b0f5b9baf0cbb26e8dbd98266b28e777d88c2",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "xp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "ym": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "yp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "earth",
+      "kind": "earth",
+      "file": "app/public/assets/city/terrain/earth.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 484,
+      "sha256": "9ae37e954acc3d9d68ef3708c84a5af36b1fa9a3d78b3251f77d0d431f7cadb4",
+      "edge_profiles": {
+        "xm": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+        "xp": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+        "ym": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+        "yp": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+      }
+    },
+    {
+      "id": "sand",
+      "kind": "sand",
+      "file": "app/public/assets/city/terrain/sand.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 484,
+      "sha256": "acf3457e2c0ef5de6b3423c715019468642de3cf288b084a416cd64913eb91b5",
+      "edge_profiles": {
+        "xm": "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+        "xp": "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+        "ym": "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+        "yp": "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+      }
+    },
+    {
+      "id": "sidewalk",
+      "kind": "paving",
+      "file": "app/public/assets/city/terrain/sidewalk.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1150,
+      "sha256": "f78745b020962655afc1fd006586667c89597f92eb094017f01a554a0f240d43",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "plaza",
+      "kind": "plaza",
+      "file": "app/public/assets/city/terrain/plaza.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 810,
+      "sha256": "c2ee545e6682ea5890d43a0c266956c87b03a0f07641a39d934c2f66c6d8b5d2",
+      "edge_profiles": {
+        "xm": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",
+        "xp": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",
+        "ym": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",
+        "yp": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+      }
+    },
+    {
+      "id": "road-x",
+      "kind": "road",
+      "connections": [
+        "xm",
+        "xp"
+      ],
+      "file": "app/public/assets/city/terrain/road-x.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 950,
+      "sha256": "0ae8acf2faf99189a5939b91fa7e5c4bee245b3d38b1b1afe2fc45411260eecb",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-y",
+      "kind": "road",
+      "connections": [
+        "ym",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/road-y.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 964,
+      "sha256": "63388efb714d4340c663f19b2198cc2494be353a84c3540207fc7e7c6d3dee77",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-corner-xm-ym",
+      "kind": "road",
+      "connections": [
+        "xm",
+        "ym"
+      ],
+      "file": "app/public/assets/city/terrain/road-corner-xm-ym.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 970,
+      "sha256": "547151820bce4feac5bb04071c65bb7235da032b1a5dd11b36d88087719621a5",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-corner-xm-yp",
+      "kind": "road",
+      "connections": [
+        "xm",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/road-corner-xm-yp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 938,
+      "sha256": "b71649466c9a65083f06698a7041431a4a0b74e3f947252a0e8868ab6062935c",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-corner-xp-ym",
+      "kind": "road",
+      "connections": [
+        "xp",
+        "ym"
+      ],
+      "file": "app/public/assets/city/terrain/road-corner-xp-ym.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 908,
+      "sha256": "980d01706785ddb70557410443723d3604a79a8383dd1634a19dba692ad5994f",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-corner-xp-yp",
+      "kind": "road",
+      "connections": [
+        "xp",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/road-corner-xp-yp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 950,
+      "sha256": "8cadbd6b0aadc157e2771b4367c213cab2be13f8351110e9d82c3bf482f29026",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-t-no-xm",
+      "kind": "road",
+      "connections": [
+        "xp",
+        "ym",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/road-t-no-xm.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 884,
+      "sha256": "feba975a31d041e9c05ced5ecd739ba8c69dfd9079e2941abb4034af418c68fb",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-t-no-xp",
+      "kind": "road",
+      "connections": [
+        "xm",
+        "ym",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/road-t-no-xp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 908,
+      "sha256": "8b5720285e2b6b64dbaee952451cad99315e1590a476603bc24ef559bb207806",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-t-no-ym",
+      "kind": "road",
+      "connections": [
+        "xm",
+        "xp",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/road-t-no-ym.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 884,
+      "sha256": "9698e7df691bbac0191d527cb5ddc646392034b22303620f992bff96c7fab778",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-t-no-yp",
+      "kind": "road",
+      "connections": [
+        "xm",
+        "xp",
+        "ym"
+      ],
+      "file": "app/public/assets/city/terrain/road-t-no-yp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 888,
+      "sha256": "3b352c2a2a09907c7890a4bdf832bc282ba7cb73caab748318172fe6e7f16db2",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-cross",
+      "kind": "road",
+      "connections": [
+        "xm",
+        "xp",
+        "ym",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/road-cross.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 826,
+      "sha256": "cfd13e498009b1296b3d519aadfe0125e8beb540e7e1a1d12d7783a347976b3e",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-zebra-x",
+      "kind": "road",
+      "connections": [
+        "xm",
+        "xp"
+      ],
+      "file": "app/public/assets/city/terrain/road-zebra-x.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1042,
+      "sha256": "76f4e1408af21013401205b34226b25d9bcba8ab3b65d846c7546f14a2a90e84",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "road-zebra-y",
+      "kind": "road",
+      "connections": [
+        "ym",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/road-zebra-y.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1056,
+      "sha256": "e6c8cde96f967e6505db34fd2cd9b8106530c2f6343c64ad79ff01b83b2339c4",
+      "edge_profiles": {
+        "xm": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "xp": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "ym": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP",
+        "yp": "PPPPPPPPPPPPPPPPPPPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPPPPPPPPPPPPPPPPPPP"
+      }
+    },
+    {
+      "id": "water-center",
+      "kind": "water",
+      "shore": "center",
+      "file": "app/public/assets/city/terrain/water-center.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1706,
+      "sha256": "c51115cbb21f8d7b26021f745cc4274ca07d2781b65d163eee75e5a3fb50681c",
+      "edge_profiles": {
+        "xm": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "xp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "ym": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "yp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+      }
+    },
+    {
+      "id": "water-edge-xm",
+      "kind": "water",
+      "shore": "edge",
+      "land_sides": [
+        "xm"
+      ],
+      "file": "app/public/assets/city/terrain/water-edge-xm.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2144,
+      "sha256": "3094e9fd8a4f65cfdddfc87d899ab5c37a78ac08d17a526eb13569c9303f47f1",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "xp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "ym": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "yp": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+      }
+    },
+    {
+      "id": "water-edge-xp",
+      "kind": "water",
+      "shore": "edge",
+      "land_sides": [
+        "xp"
+      ],
+      "file": "app/public/assets/city/terrain/water-edge-xp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2164,
+      "sha256": "e1ef220f897845da7a1c19c6605a93fd72952f7c6b0f03409df420e692f01d1d",
+      "edge_profiles": {
+        "xm": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "xp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "ym": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "yp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "water-edge-ym",
+      "kind": "water",
+      "shore": "edge",
+      "land_sides": [
+        "ym"
+      ],
+      "file": "app/public/assets/city/terrain/water-edge-ym.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2102,
+      "sha256": "dc4564ba062d21dd0db6575d82610393aa575effc8d3fecd3a48bf4eb8db979e",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "xp": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "ym": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "yp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+      }
+    },
+    {
+      "id": "water-edge-yp",
+      "kind": "water",
+      "shore": "edge",
+      "land_sides": [
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/water-edge-yp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2126,
+      "sha256": "442e165aa788c9676d37edaeeb61541509c957accc8b2c103518349c8cf89205",
+      "edge_profiles": {
+        "xm": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "xp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "ym": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "yp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "water-convex-xm-ym",
+      "kind": "water",
+      "shore": "convex",
+      "land_sides": [
+        "xm",
+        "ym"
+      ],
+      "file": "app/public/assets/city/terrain/water-convex-xm-ym.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2232,
+      "sha256": "0bf99577fc12c0ba5096fc19f0ee776f1c642d5ddba84b5a2160829ba4ac1909",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "xp": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "ym": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "yp": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+      }
+    },
+    {
+      "id": "water-concave-xm-ym",
+      "kind": "water",
+      "shore": "concave",
+      "land_sides": [
+        "xm",
+        "ym"
+      ],
+      "file": "app/public/assets/city/terrain/water-concave-xm-ym.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1990,
+      "sha256": "2ecff4b7feec35293e012d3aa089d7d1ec8d1428d7f239e87d292efd61cb3059",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "xp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "ym": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "yp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+      }
+    },
+    {
+      "id": "water-convex-xm-yp",
+      "kind": "water",
+      "shore": "convex",
+      "land_sides": [
+        "xm",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/water-convex-xm-yp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2234,
+      "sha256": "2576be76ebe6f2409210da2e8a14f2a1141fed84f77fc1c87833a11664800338",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "xp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "ym": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "yp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "water-concave-xm-yp",
+      "kind": "water",
+      "shore": "concave",
+      "land_sides": [
+        "xm",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/water-concave-xm-yp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1994,
+      "sha256": "e279d6700041f5f587ce2d08c2f542aa4127f47718770cc77ca25eb2d7cd373a",
+      "edge_profiles": {
+        "xm": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "xp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "ym": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "yp": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+      }
+    },
+    {
+      "id": "water-convex-xp-ym",
+      "kind": "water",
+      "shore": "convex",
+      "land_sides": [
+        "xp",
+        "ym"
+      ],
+      "file": "app/public/assets/city/terrain/water-convex-xp-ym.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2256,
+      "sha256": "04976af64514ea974160bda5661095947b6a5ad1f9fb9d60e141d9d7e5fc2731",
+      "edge_profiles": {
+        "xm": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "xp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "ym": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "yp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "water-concave-xp-ym",
+      "kind": "water",
+      "shore": "concave",
+      "land_sides": [
+        "xp",
+        "ym"
+      ],
+      "file": "app/public/assets/city/terrain/water-concave-xp-ym.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 1982,
+      "sha256": "e330fab0e7ca1a46fb66b34c9ab724891cf4da4dcb8e4c7a14f990fb7c17613e",
+      "edge_profiles": {
+        "xm": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "xp": "GGGGGGGGGGGGGGGGSSSSSSFFWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "ym": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "yp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+      }
+    },
+    {
+      "id": "water-convex-xp-yp",
+      "kind": "water",
+      "shore": "convex",
+      "land_sides": [
+        "xp",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/water-convex-xp-yp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2228,
+      "sha256": "7db2e1887fe278286d233f666b29ead29d070df6462f75220553ab90035a4f7a",
+      "edge_profiles": {
+        "xm": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "xp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "ym": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "yp": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+      }
+    },
+    {
+      "id": "water-concave-xp-yp",
+      "kind": "water",
+      "shore": "concave",
+      "land_sides": [
+        "xp",
+        "yp"
+      ],
+      "file": "app/public/assets/city/terrain/water-concave-xp-yp.webp",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        256,
+        128
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "floor_origin_px": [
+        128,
+        0
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "bytes": 2006,
+      "sha256": "04f1af17d47bd807ccdf1d15163cd8a54202873d69df3747f29afc7a62bb0458",
+      "edge_profiles": {
+        "xm": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "xp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG",
+        "ym": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "yp": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWFFSSSSSSGGGGGGGGGGGGGGGG"
+      }
+    }
+  ]
+}
