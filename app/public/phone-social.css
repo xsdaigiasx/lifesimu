@@ -37,3 +37,19 @@ button.ps-row{cursor:pointer}button.ps-row:hover{background:#eef3e6}
 .ps-avatar{color:#294d3d}
 /* 04/11: thanh dưới điện thoại chỉ hiện ở màn chính */
 .phone-shell:not(.is-home) .phone-dock{display:none}
+/* 04/11: app Ngân hàng */
+.bank-app{background:linear-gradient(145deg,#4f8a73,#2f6b4f)!important;color:#fff!important}
+.pb{display:grid;gap:10px;margin-top:8px}
+.pb-cash{display:grid;gap:3px;padding:14px;border-radius:14px;background:#2f6b4f;color:#fff}.pb-cash small{font-size:11px;opacity:.8}.pb-cash strong{font-size:22px}
+.pb-head{display:flex;align-items:center;gap:6px;margin:8px 0 0;font-size:13px;color:#294d3d}
+.pb-head svg,.pb-facts svg{width:15px!important;height:15px!important;fill:none;stroke:currentColor}
+.pb-list{display:grid;gap:8px}
+.pb-card{display:grid;gap:7px;padding:12px;border:1px solid #d7dfcf;border-radius:13px;background:#fcfcf6;color:#294d3d}
+.pb-card strong{font-size:16px}
+.pb-facts{display:flex;flex-wrap:wrap;gap:12px;font-size:11.5px;color:#5d6f62}.pb-facts span{display:inline-flex;align-items:center;gap:4px}
+.pb-facts .ok{color:#2f6b4f;font-weight:800}.pb-facts .late{color:#b0442b;font-weight:800}
+.pb-pay{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px}
+.pb-pay button{height:40px;border:1px solid #c3d0b6;border-radius:12px;background:#fcfcf6;color:#294d3d;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.pb-pay button:last-child{background:#2f6b4f;color:#fff;border-color:#2f6b4f}
+.pb-pay button:disabled{opacity:.45;cursor:default}
+.pb-empty{margin:0;padding:12px;border-radius:13px;background:#f1f4ec;font-size:12px;color:#7d8b80;text-align:center}

@@ -7,6 +7,7 @@ import {InstallCard,VersionCard} from './UpdateAndInstall';
 import {resetLife,restoreBackup,backupInfo,BACKUP_DAYS} from '../domain/reset';
 import {officeOf,STAFF} from '../domain/office';
 import BauCua from './BauCua';
+import PhoneBank from './PhoneBank';
 import {Messages,Calls,Contacts,type SocialHandlers} from './PhoneSocial';
 import type {Bets, RoundResult} from '../domain/bau-cua';
 import { useEffect, useRef, useState } from 'react';
@@ -16,7 +17,7 @@ import { phoneData as data } from '../domain/phone-data';
 import { fullnessOf, vitalWarnings } from '../domain/vitals';
 
 type Action = 'report' | 'day' | 'city' | 'room' | 'save';
-type Page = 'baucua' | 'home' | 'health' | 'contacts' | 'shop' | 'calendar' | 'alarms' | 'clock' | 'news' | 'finance' | 'work' | 'notes' | 'save' | 'leisure' | 'calls' | 'messages' | 'settings' | 'weather' | 'map' | 'room';
+type Page = 'bank' | 'baucua' | 'home' | 'health' | 'contacts' | 'shop' | 'calendar' | 'alarms' | 'clock' | 'news' | 'finance' | 'work' | 'notes' | 'save' | 'leisure' | 'calls' | 'messages' | 'settings' | 'weather' | 'map' | 'room';
 export interface PhoneProps {
   social?: SocialHandlers;
   bauCuaShaking: boolean;
@@ -37,6 +38,7 @@ const APPS: ReadonlyArray<{ page: Page; icon: string; label: string; tone: strin
   { page: 'news', icon: 'news', label: 'Đọc báo', tone: 'news-app' },
   { page: 'work', icon: 'briefcase', label: 'Công việc', tone: 'work-app' },
   { page: 'notes', icon: 'note', label: 'Ghi chú', tone: 'notes-app' },
+  { page: 'bank', icon: 'bank', label: 'Ngân hàng', tone: 'bank-app' },
   { page: 'save', icon: 'save', label: 'Lưu game', tone: 'save-app' },
   { page: 'leisure', icon: 'play', label: 'Giải trí', tone: 'leisure-app' },
 ];
@@ -44,7 +46,7 @@ const DOCK: ReadonlyArray<{ page: Page; icon: string; label: string }> = [
   { page: 'calls', icon: 'call', label: 'Gọi điện' }, { page: 'messages', icon: 'message', label: 'Tin nhắn' },
   { page: 'finance', icon: 'chart', label: 'Tài chính' }, { page: 'settings', icon: 'settings', label: 'Cài đặt' },
 ];
-const TITLES: Partial<Record<Page, string>> = { baucua: 'Bầu cua tôm cá', home: 'Điện thoại', weather: 'Thời tiết', settings: 'Cài đặt', clock: 'Đồng hồ', alarms: 'Báo thức', finance: 'Tài chính', messages: 'Tin nhắn', calls: 'Gọi điện', map: 'Bản đồ', room: 'Nhà của tôi' };
+const TITLES: Partial<Record<Page, string>> = { baucua: 'Bầu cua tôm cá', home: 'Điện thoại', weather: 'Thời tiết', settings: 'Cài đặt', clock: 'Đồng hồ', alarms: 'Báo thức', finance: 'Tài chính', bank: 'Ngân hàng', messages: 'Tin nhắn', calls: 'Gọi điện', map: 'Bản đồ', room: 'Nhà của tôi' };
 const dateAt = (day: number): Date => new Date(Date.UTC(2026, 10, 2 + day));
 const dateText = (day: number): string => new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: '2-digit', month: 'long', timeZone: 'UTC' }).format(dateAt(day));
 const shortDate = (day: number): string => new Intl.DateTimeFormat('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }).format(dateAt(day));
@@ -112,6 +114,7 @@ export default function Phone({ state, profile, onAction, onResetStart, onPlayBa
     case 'health': body = <>{intro('Sức khỏe của bạn', 'Lắng nghe bản thân, từng ngày.')}<div className="phone-person"><span>{profile.gender === 'female' ? '👩🏻‍💻' : '🧑🏻‍💻'}</span><div><strong>{profile.name}</strong><small>Lập trình viên mới</small></div><b>LV {1 + Math.floor(state.xp / 100)}</b></div><div className="phone-stat-list">{([
       ['energy', 'Năng lượng', '', 'gold'], ['fullness', 'No', '', 'orange'], ['mood', 'Tâm trạng', '', 'green'], ['health', 'Sức khỏe', '', 'teal'], ['stress', 'Stress', '', 'purple'],
     ] as const).map(([key, label, description, tone]) => <div key={key}><header><strong>{label}</strong><b>{Math.round(vital(key))}<small>/100</small></b></header><div className={`phone-meter ${tone}`}><i style={{ width: `${vital(key)}%` }} /></div></div>)}</div>{warnings.length>0&&<div className="phone-warnings" role="status">{warnings.map(w=>(<p key={w.key} className={w.level}>{w.text}</p>))}</div>}<div className="phone-info-card"><small>KINH NGHIỆM</small><h3>{state.xp} XP tích lũy</h3><p>Còn {100 - state.xp % 100} XP để lên cấp tiếp theo.</p></div></>; break;
+    case 'bank': body = <PhoneBank state={state} onLifeAction={onLifeAction}/>; break;
     case 'finance': {
       const date = dateAt(state.day), transactions = state.ledger.filter(entry => { const d = dateAt(entry.day); return d.getUTCMonth() === date.getUTCMonth() && d.getUTCFullYear() === date.getUTCFullYear(); });
       const income = transactions.filter(entry => entry.amount > 0).reduce((sum, entry) => sum + entry.amount, 0), expense = -transactions.filter(entry => entry.amount < 0).reduce((sum, entry) => sum + entry.amount, 0);
