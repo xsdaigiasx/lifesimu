@@ -27,5 +27,5 @@ test('xung khắc thì Hơi cháy; rủi ro ngộ độc theo seed khi ăn',()=>
  let hits=0;for(let seed=0;seed<1000;seed++)if(L.improvCustom(['pork','vegetable'],1,seed*7919).risky)hits++;assert.ok(hits>80&&hits<200,`~13,5% (${hits})`);
  let none=0;for(let seed=0;seed<200;seed++)if(L.improvCustom(['pork','vegetable'],10,seed*7919).risky)none++;assert.equal(none,0,'Lv10 không còn rủi ro');
  let r=stocked(at(),[['pork',1],['vegetable',1]]);r=finish(ok(L.lifeAction(r,{kind:'improvise',items:['pork','vegetable']})));const m=L.lifeOf(r).meals[0];r={...r,life:{...L.lifeOf(r),meals:[{...m,custom:{...m.custom,risky:true}}]},clock:{...r.clock,minute:900}};
- r=ok(L.lifeAction(r,{kind:'eat',id:m.id}));assert.ok(L.lifeOf(r).conditions.some(c=>c.id==='foodPoisoning'));
+ r=ok(L.lifeAction(r,{kind:'eat',id:m.id}));assert.ok(L.lifeOf(r).pending,'ngộ độc chờ phát tác');assert.equal(L.lifeOf(r).conditions.some(c=>c.id==='foodPoisoning'),false);
 });
