@@ -1,0 +1,152 @@
+{
+  "issue": 133,
+  "lot": 2,
+  "tool": "built-in image_gen",
+  "reference": "assets/style-reference/room-reference.webp",
+  "items": [
+    {
+      "id": "bicycle",
+      "name": "Xe đạp",
+      "file": "/assets/products/bicycle.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. A practical adult city bicycle: slender muted sage steel diamond frame, two large thin-spoked wheels, black rubber tires, small honey-brown saddle and grips, simple mudguards and rear luggage rack. Show the complete bicycle from a slight front-left three-quarter side view so both wheels, pedals, frame and handlebars are clearly readable. Mechanically plausible frame and spokes. No basket, rider or accessories."
+    },
+    {
+      "id": "motorbike",
+      "name": "Xe máy",
+      "file": "/assets/products/motorbike.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. An unbranded practical Vietnamese underbone motorbike, with slender cream and muted sage body panels, narrow seat, two medium large spoked wheels, visible small engine and exhaust, slim front fairing and front headlamp, rear-view mirrors. Distinct exposed mechanical engine and narrow underbone proportions, not a large automatic scooter. Whole vehicle in gentle front-left three-quarter catalog view; no rider, license lettering or manufacturer badge."
+    },
+    {
+      "id": "scooter",
+      "name": "Xe tay ga",
+      "file": "/assets/products/scooter.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. An unbranded modern step-through automatic scooter: broad muted sage front apron, wide flat footboard, enclosed engine, rounded cream-and-sage fairings, dark seat, compact cast wheels, simple headlamp and two mirrors. Clearly a fuller-bodied scooter rather than an exposed-engine underbone motorcycle. Whole vehicle in gentle front-left three-quarter catalog view, no rider, license text or badges."
+    },
+    {
+      "id": "headphones",
+      "name": "Tai nghe",
+      "file": "/assets/products/headphones.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. One pair of over-ear headphones, muted sage padded headband, cream ear cushions, matte dark sage outer ear cups and restrained brushed metal joints. Both ear cups visible, gentle front three-quarter catalog view. Realistic comfortable proportions, no cable, stand, case, logos or text."
+    },
+    {
+      "id": "tv",
+      "name": "TV phòng trọ",
+      "file": "/assets/products/tv.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. A compact flat-screen television suitable for a rental room, about 32-inch proportions, wide rectangular dark glass screen, thin charcoal-sage bezel and exactly two small splayed feet. Very subtle neutral reflection on powered-off screen, no content, UI, text or brand. Slight front-left three-quarter view, complete screen and feet visible, no furniture or remote."
+    },
+    {
+      "id": "casual",
+      "name": "Bộ đồ thường ngày",
+      "file": "/assets/products/casual.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. A complete simple casual outfit displayed as garments on an invisible form: one plain cream short-sleeved crew-neck T-shirt above one pair of muted sage straight-leg trousers, aligned naturally as a set. Clear cotton weave and soft fabric folds. Almost frontal with a slight three-quarter turn. No person, skin, head, neck, hands, feet, mannequin, hanger, shoes, text or decorative graphic."
+    },
+    {
+      "id": "officeWear",
+      "name": "Bộ đồ công sở",
+      "file": "/assets/products/officeWear.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. A complete modest office outfit displayed as garments on an invisible form: a muted sage-gray tailored blazer over a cream collared shirt and matching dark sage straight trousers. Restrained natural fabric folds, slim realistic tailoring and plain small buttons. Almost frontal with a slight three-quarter turn. No person, skin, head, neck, hands, feet, mannequin, hanger, shoes, bag, tie lettering or logos."
+    },
+    {
+      "id": "coat",
+      "name": "Áo khoác cao cấp",
+      "file": "/assets/products/coat.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. One premium honey-camel wool overcoat, knee-length, structured not oversized, simple notched lapels, two discreet welt pockets and a neat row of dark brown buttons. Warm wool texture and softly modeled folds matching the reference palette. Display only the coat on an invisible form, almost frontal with slight three-quarter turn. No person, head, hands, mannequin, hanger, scarf, other garments or brand."
+    },
+    {
+      "id": "backpack",
+      "name": "Ba lô",
+      "file": "/assets/products/backpack.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "prompt": "Use case: stylized-concept. Asset type: isolated product-card illustration for a Vietnamese life simulation game. The supplied room screenshot is STYLE REFERENCE ONLY. Match its semi-realistic digital painting, softly modeled volumes, restrained natural material texture, thin dark same-tone contours, realistic slender proportions, and honey oak / muted sage / cream / pale teal palette. One product, centered, fully visible, fills about 82-86 percent of a square frame with comfortable transparent margins. Nearly frontal catalog view with a gentle three-quarter angle, only slightly above the product, not a steep isometric floor sprite. Fixed soft lighting from UPPER LEFT. True transparent alpha background. No floor, room, display plinth, cast shadow, glow, text, logo, branding, watermark, person or body parts. Avoid toy-like proportions, thick black outlines, flat cartoon coloring or glossy 3D advertising style. Final output will be a 256x256 WebP with a clean readable silhouette at 64px. One practical medium-size muted sage canvas backpack, rounded rectangular shape, cream shoulder straps visible along the side, a small top carry handle, one front zip pocket, main zipper and tiny honey-brown leather zipper pulls. Realistic canvas seams and restrained fabric folds. Slight front-left three-quarter view showing front and some depth. No person, hanging display hook, items spilling out, text, badge or logo."
+    }
+  ]
+}

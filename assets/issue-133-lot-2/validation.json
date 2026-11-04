@@ -1,0 +1,28 @@
+{
+  "issue": 133,
+  "lot": 2,
+  "reviewed_on": "2026-11-05",
+  "tested_main": "164f344ae4edec233113619d63d38bbe6ec058a1",
+  "sprites": 9,
+  "frame_px": [
+    256,
+    256
+  ],
+  "max_bytes": 35822,
+  "total_bytes": 235614,
+  "lossless_count": 5,
+  "lossy_quality_95_count": 4,
+  "alpha_quality": 100,
+  "asset_verify": "PASS",
+  "app_npm_test": "PASS",
+  "app_npm_run_build": "PASS",
+  "core_npm_run_check": "PASS (18 tests; core unchanged by rebase)",
+  "mobile_review": "PASS: Edge headless 390x844; all 9 images decoded; no overflow",
+  "visual_review": [
+    "contact-sheet.webp (256px and 64px on light/dark backgrounds)",
+    "mobile-390x844.png"
+  ],
+  "backpack_runtime_followup": "Claude replaces /icons/icon-192.png with /assets/products/backpack.webp in productArt at app/src/components/NpcFace.tsx",
+  "scope": "9 product WebPs and authoring/review files only; no TypeScript/core/save/map edits",
+  "build_notes": "Existing public CSS resolution and chunk-size warnings remain; build exits 0"
+}

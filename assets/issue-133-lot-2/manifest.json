@@ -1,0 +1,309 @@
+{
+  "issue": 133,
+  "lot": 2,
+  "reference": "assets/style-reference/room-reference.webp",
+  "reference_sha256": "de62bcc0acc896633081b0a37d4828be4c03594875ea213c5f72bcf69ff8c053",
+  "asset_type": "product-card",
+  "units": "pixels; no floor footprint or z coordinate",
+  "expected": 9,
+  "exported": 9,
+  "items": [
+    {
+      "id": "bicycle",
+      "name": "Xe đạp",
+      "file": "/assets/products/bicycle.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        18,
+        37,
+        238,
+        219
+      ],
+      "bytes": 35822,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "631ceae43e8365bcdb5c27cc78b57a24078bc8e37276c05ef10559fcd14afce3",
+      "source_sha256": "b9c216b38856ed754890b249ab05ff711f42617b38036792d3073431ee9672e7",
+      "source_crop_px": [
+        58,
+        212,
+        1221,
+        1175
+      ]
+    },
+    {
+      "id": "motorbike",
+      "name": "Xe máy",
+      "file": "/assets/products/motorbike.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        18,
+        20,
+        237,
+        235
+      ],
+      "bytes": 29756,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "7beb450a5b8024222198ec90db0fd003ecc87d1cb33eae12fc25b8956357dbbf",
+      "source_sha256": "980f0b2809246a2236177fb1f36d75f01289e77d7f405cfc4f3da1d6abfbce8a",
+      "source_crop_px": [
+        94,
+        117,
+        1159,
+        1160
+      ]
+    },
+    {
+      "id": "scooter",
+      "name": "Xe tay ga",
+      "file": "/assets/products/scooter.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        20,
+        18,
+        236,
+        238
+      ],
+      "bytes": 23554,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "493c95c0eecb3582bdc2e546b3fd376ced78b64c32243aac1939d63ffebf2690",
+      "source_sha256": "2d74e9d9813544d5b61fded9662a0e6437fc662e01ce7f0c7058dd89888d5167",
+      "source_crop_px": [
+        90,
+        99,
+        1157,
+        1186
+      ]
+    },
+    {
+      "id": "headphones",
+      "name": "Tai nghe",
+      "file": "/assets/products/headphones.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        39,
+        18,
+        216,
+        238
+      ],
+      "bytes": 35056,
+      "encoding": "lossless",
+      "quality": null,
+      "alpha_quality": 100,
+      "sha256": "c1f4670b668bca66491f0e39d0fc8e2e89fe28ad23c5f9d60301f695d9597e00",
+      "source_sha256": "f85026ffc1efa54c70a367d3a91a3a60e71374cb97ac11244598e733d6d6e8b8",
+      "source_crop_px": [
+        192,
+        97,
+        1062,
+        1177
+      ]
+    },
+    {
+      "id": "tv",
+      "name": "TV phòng trọ",
+      "file": "/assets/products/tv.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        18,
+        41,
+        238,
+        214
+      ],
+      "bytes": 25986,
+      "encoding": "lossless",
+      "quality": null,
+      "alpha_quality": 100,
+      "sha256": "0c09ade03d2eebdf0f5ce52af0c4fd2fff59c89e40f1834f8c4b62c5c95276ea",
+      "source_sha256": "f4c7326320a24dcee6ccb3bebbc251c495bf38ddd61a7fbf8c78a81b26766e94",
+      "source_crop_px": [
+        155,
+        293,
+        1110,
+        1046
+      ]
+    },
+    {
+      "id": "casual",
+      "name": "Bộ đồ thường ngày",
+      "file": "/assets/products/casual.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        87,
+        18,
+        168,
+        238
+      ],
+      "bytes": 18528,
+      "encoding": "lossless",
+      "quality": null,
+      "alpha_quality": 100,
+      "sha256": "02ed723bd486d15359ec5dbf049bb606b6ed0135c2b11a9793afb2fd052bcb4f",
+      "source_sha256": "2c272621139f81026e37804a6519415b1fc227138875a56b82dbeb0f8af65c29",
+      "source_crop_px": [
+        406,
+        63,
+        838,
+        1213
+      ]
+    },
+    {
+      "id": "officeWear",
+      "name": "Bộ đồ công sở",
+      "file": "/assets/products/officeWear.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        87,
+        18,
+        169,
+        238
+      ],
+      "bytes": 17420,
+      "encoding": "lossless",
+      "quality": null,
+      "alpha_quality": 100,
+      "sha256": "3e25eff6d5facb74046ca7240b03019de8689e996240f2ab27a3ad42ce6c6030",
+      "source_sha256": "316c01b1adfa7ebe30eaa6302b2b968765cdab5a8b890d47564a46138535ca94",
+      "source_crop_px": [
+        402,
+        53,
+        837,
+        1214
+      ]
+    },
+    {
+      "id": "coat",
+      "name": "Áo khoác cao cấp",
+      "file": "/assets/products/coat.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        70,
+        18,
+        187,
+        238
+      ],
+      "bytes": 29070,
+      "encoding": "lossless",
+      "quality": null,
+      "alpha_quality": 100,
+      "sha256": "2e7b38f823b2f92a79ec455705eb54bbfba392cc004a6d12c60be68fd2fb41a9",
+      "source_sha256": "c7ce6047ffc0f2a00d80e0ac2a641cc066924e6a10e5f8e398731f1243570bed",
+      "source_crop_px": [
+        305,
+        68,
+        911,
+        1201
+      ]
+    },
+    {
+      "id": "backpack",
+      "name": "Ba lô",
+      "file": "/assets/products/backpack.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "front-three-quarter",
+      "alpha_bbox_px": [
+        38,
+        18,
+        217,
+        238
+      ],
+      "bytes": 20422,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "ddf5f3d77fbcd48f57a45c3da1eb207de8808ae587e387840c9bfef0c5997eaa",
+      "source_sha256": "9eb2365264c85d7ec5b1ba70e5eee3f0cc0b4fb1e3bbdadc7ed49d2808a02f25",
+      "source_crop_px": [
+        190,
+        84,
+        1089,
+        1179
+      ]
+    }
+  ]
+}
