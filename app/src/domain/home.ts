@@ -22,6 +22,15 @@ export const HOME_MAX:Record<HomeId,number>={bed:1,wardrobe:1,desk:1,table:1,pla
 /** Mã bản thể (instanceId): bản đầu của mỗi loại giữ mã loại để save cũ khớp. */
 export const uidOf=(i:{id:HomeId;uid?:string})=>i.uid??i.id;
 function withUids(items:HomeObject[]):HomeObject[]{const seen=new Map<HomeId,number>();return items.map(i=>{const n=(seen.get(i.id)??0)+1;seen.set(i.id,n);return i.uid?i:{...i,uid:n===1?i.id:`${i.id}-${n}`}})}
+/** T28: điểm dùng của đồ. Chỉ đồ đang đặt trong phòng trọ (đang ở trọ) mới có hiệu ứng. */
+export const BED_ENERGY:Record<HomeTier,number>={basic:0,comfort:4,premium:8};
+export const DESK_XP:Record<HomeTier,number>={basic:0,comfort:.1,premium:.2};
+export const TABLE_MOOD:Record<HomeTier,number>={basic:2,comfort:3,premium:4};
+export const DECOR:HomeId[]=['plant','lamp','rug','painting'],DECOR_CAP=6;
+export const livesInTro=(s:GameState)=>(s.housing?.house??'tro')==='tro';
+export function placedAt(s:GameState,id:HomeId):HomeObject|null{if(!livesInTro(s))return null;return homeOf(s).items.find(i=>i.id===id&&i.placed)??null}
+/** Giảm căng thẳng mỗi đêm: đồ trang trí 1 + bậc mẫu, đồ khác theo bậc mẫu; cộng dồn tối đa 6. */
+export function decorRelief(s:GameState){if(!livesInTro(s))return 0;const t=homeOf(s).items.filter(i=>i.placed).reduce((n,i)=>n+(DECOR.includes(i.id)?1:0)+HOME_TIERS[i.tier??'basic'].comfort,0);return Math.min(DECOR_CAP,t)}
 export const HOME_BATH={x:5,y:0,w:3,h:3};
 export const HOME_KITCHEN={x:0,y:0,w:5,h:1};
 export const LEGACY_SIZE:Partial<Record<HomeId,{w:number;h:number}>>={bed:{w:2,h:4}};
