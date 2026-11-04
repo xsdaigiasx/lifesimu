@@ -1,3 +1,4 @@
+import NpcFace from './NpcFace';
 import {useState} from 'react';
 import type {GameState} from '../domain/types';
 import {NPCS,relationTier} from '../domain/npc';
@@ -13,7 +14,7 @@ export default function RelationsView({state,initialId,extra}:{state:GameState;i
  const met=state.office?.met??[],known=NPCS.filter(n=>rel[n.id]||met.includes(n.id)).sort((a,b)=>(Number(b.id==='me')-Number(a.id==='me'))||((rel[b.id]?.score??0)-(rel[a.id]?.score??0))||a.name.localeCompare(b.name,'vi'));
  const p=selected?profileOf(state,selected):null;
  if(p)return <GameScreen title={p.npc.name} onBack={()=>setSelected(undefined)}>
-  <header className="profile-head"><span className="profile-avatar" style={{background:p.npc.tone}} aria-hidden="true">{p.npc.label}</span><span className="profile-title"><strong>{p.npc.role}</strong><span className="profile-tier">{relationTier(p.score,p.npc.id)}</span></span></header>
+  <header className="profile-head"><span className="profile-avatar" style={{background:p.npc.tone}} aria-hidden="true"><NpcFace id={p.npc.id} label={p.npc.label}/></span><span className="profile-title"><strong>{p.npc.role}</strong><span className="profile-tier">{relationTier(p.score,p.npc.id)}</span></span></header>
   <div className="profile-progress" role="progressbar" aria-label="Độ thân thiết" aria-valuemin={0} aria-valuemax={100} aria-valuenow={p.progress.pct}><span style={{width:`${p.progress.pct}%`}}/></div>
   {p.progress.next&&<small className="profile-next">Tới {p.progress.next}</small>}
   {p.facts.length>0&&<dl className="person-facts">{p.facts.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}
@@ -22,7 +23,7 @@ export default function RelationsView({state,initialId,extra}:{state:GameState;i
   <section className="profile-block"><h4>Chuyện đã cùng trải qua</h4>{p.shared.length?<ul className="profile-shared">{p.shared.map(m=><li key={m.id}><span>{m.text}</span><small>{m.when}</small></li>)}</ul>:<p className="profile-empty">Chưa có</p>}</section>
  </GameScreen>;
  return <div className="game-relations relations">
-  {known.length?<div className="relations-grid">{known.map(n=><button key={n.id} className="relations-card" onClick={()=>setSelected(n.id)}><span className="relations-avatar" style={{background:n.tone}} aria-hidden="true">{n.label}</span><strong>{n.name}</strong><small>{relationTier(rel[n.id]?.score??0,n.id)}</small></button>)}</div>
+  {known.length?<div className="relations-grid">{known.map(n=><button key={n.id} className="relations-card" onClick={()=>setSelected(n.id)}><span className="relations-avatar" style={{background:n.tone}} aria-hidden="true"><NpcFace id={n.id} label={n.label}/></span><strong>{n.name}</strong><small>{relationTier(rel[n.id]?.score??0,n.id)}</small></button>)}</div>
   :<div className="game-empty"><Icon name="people"/><h3>Chưa có người quen</h3></div>}
   {extra}
  </div>}
