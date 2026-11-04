@@ -24,7 +24,7 @@ export function HomeCards({state,ids,tone,onFull}:{state:GameState;ids:HomeId[];
   const item=HOME_ITEMS[id],stack=HOME_MAX[id]>1,full=stack&&owned.filter(i=>i.id===id).length>=HOME_MAX[id],old=stack?undefined:owned.find(i=>i.id===id),oldTier=old?.tier??'basic',current=!!old&&oldTier===tier,better=!!old&&HOME_TIERS[oldTier].comfort>HOME_TIERS[tier].comfort,price=homePrice(id,tier)-(old?homePrice(id,oldTier):0),line:Line={kind:'home',id,tier},inCart=items.some(x=>x.kind==='home'&&x.id===id&&x.tier===tier),name=homeName(id,tier);
   const blocked=current||better||full;
   return <article key={id+tier} className="market-item" data-product={id}>
-   <span className="market-item-art" style={tone?{background:tone}:undefined}><LineArt line={line}/><InfoButton spec={specOf(line)}/></span><strong>{name}</strong>
+   <span className="market-item-art" style={tone?{background:tone}:undefined}><LineArt line={line}/></span><InfoButton spec={specOf(line)}/><strong>{name}</strong>
    <span className="market-item-facts">{HOME_TIERS[tier].comfort>0&&<span title="Bớt căng thẳng mỗi đêm"><Icon name="moon"/>−{HOME_TIERS[tier].comfort}/đêm</span>}</span>
    <button type="button" aria-pressed={inCart} disabled={blocked} onClick={()=>{if(!cart.toggle(line,stack))onFull()}}>{current?'Đang dùng':full?'Đã đủ':better?'Có tốt hơn':inCart?'Trong giỏ':money(price)}</button>
   </article>}))}</>;
@@ -59,7 +59,7 @@ export function ProductCards({state,category,tone,onFull,onEquip}:{state:GameSta
  return <>{(Object.keys(PRODUCTS) as ProductId[]).filter(id=>PRODUCTS[id].category===category).map(id=>{
   const p=PRODUCTS[id],has=l.owned.includes(id),active=l.outfit===id||l.transport===id,line:Line={kind:'product',id},inCart=items.some(x=>sameLine(x,line));
   return <article key={id} className="market-item" data-product={id}>
-   <span className="market-item-art" style={tone?{background:tone}:undefined}><img src={productArt(id)} alt="" loading="lazy" decoding="async"/><InfoButton spec={specOf(line)}/></span><strong>{p.name}</strong>
+   <span className="market-item-art" style={tone?{background:tone}:undefined}><img src={productArt(id)} alt="" loading="lazy" decoding="async"/></span><InfoButton spec={specOf(line)}/><strong>{p.name}</strong>
    <span className="market-item-facts" title={p.effect}><span><Icon name={FACT[id][0]}/>{FACT[id][1]}</span></span>
    {has?(p.category==='electronics'||p.category==='bag'?<button disabled>Đã có</button>:<button disabled={active} onClick={()=>onEquip(id,p.category as 'clothing'|'transport')}>{active?'Đang dùng':p.category==='clothing'?'Mặc':'Dùng'}</button>):<button type="button" aria-pressed={inCart} onClick={()=>{if(!cart.toggle(line))onFull()}}>{inCart?'Trong giỏ':money(p.price)}</button>}
   </article>})}</>;
