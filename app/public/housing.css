@@ -36,4 +36,4 @@
 .house-view{grid-template-columns:minmax(0,1fr);min-width:0;overflow:hidden}
 .iso-room .iso-label{stroke:none;paint-order:normal;font-family:inherit}
 .house-store button img{width:44px;height:36px;object-fit:contain}
-.product-glyph.model-art{height:104px!important;display:grid;place-items:center;overflow:hidden}.product-glyph.model-art img{max-width:92%;max-height:96px;width:auto;height:auto;object-fit:contain}
+.product-glyph.model-art{height:78px!important;display:grid;place-items:center;overflow:hidden}.product-glyph.model-art img{max-width:70%;max-height:64px;width:auto;height:auto;object-fit:contain}
