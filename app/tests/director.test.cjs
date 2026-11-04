@@ -33,7 +33,7 @@ test('nhờ giúp ghi ký ức và móc; tới hạn thì gặp lại nhắc đ�
 
 test('từ chối thì người đó nhớ, lần gặp lại thái độ khác',()=>{
  let s=withPending(at(0,1140,'home'),'ba-tu','favor',0);s=ok(D.answerEvent(s,2));const h=D.storyOf(s).hooks[0];s={...s,day:h.from,clock:{...clockOf(s),minute:1140,location:'home'}};
- s=ok(D.startTalk(s,'ba-tu'));const ev=D.openEvent(s);assert.match(ev.line,/bận/);assert.ok(!ev.options.some(o=>/quà/.test(o.label)));
+ s=ok(D.startTalk(s,'ba-tu'));const ev=D.openEvent(s);assert.match(D.storyOf(s).pending.line,/^return-bad#/);assert.doesNotMatch(ev.line,/quà/);assert.ok(!ev.options.some(o=>/quà/.test(o.label)));
 });
 
 test('lựa chọn thiếu kỹ năng hoặc thiếu tiền bị khoá',()=>{
