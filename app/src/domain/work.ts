@@ -8,6 +8,7 @@ import {recordJournal} from './journal';
 import {tierSalary,nextTier,promotionGaps,TIER_NAME,type Tier,type TierFacts} from './career';
 import {bugPuzzle,repairFraction} from './bug-game';
 import {SKILLS,xpNeeded,defaultSkills,gainXp,MAX_LEVEL,type SkillId,type Skills} from './skill-xp';
+import {addWorkXp,certLevel} from './study';
 import holidays from './calendar-2026.json';
 export {SKILLS,xpNeeded} from './skill-xp';
 export type {SkillId,Skill,Skills} from './skill-xp';
@@ -69,7 +70,7 @@ export function workTick(s:GameState,minutes=4):GameState{const active=s.work?.a
  const old=a.minutes;a.minutes+=step;n.clock={...clockOf(n),minute:clockOf(n).minute+step,lastWorkDay:s.day};{const q=applyCoffeeCrash(n,clockOf(n).minute);n.energy=q.energy;if(q.coffee)n.coffee=q.coffee}n.fullness=drainFullness(n,step).fullness;n.energy=Math.max(0,n.energy-(Math.floor(a.minutes*18/240)-Math.floor(old*18/240)));n.stress=Math.min(100,n.stress+Math.floor(a.minutes*10/240)-Math.floor(old*10/240));credit(n,a.companyId,step);
  let remaining=step;while(remaining>0&&w.task){const task=w.task,t=TASKS.find(t=>t.id===task.id)!,used=Math.min(remaining,task.required-task.elapsed);task.elapsed+=used;remaining-=used;if(task.elapsed<task.required)break;
  const success=task.roll>=task.errorPct;
- if(success){if(task.attempt===0){{const gain=taskXp(t,skillsOf(n)[t.skill].level);n=addSkillXp(n,t.skill,gain);n=addSkillXp(n,t.secondary,Math.floor(gain/2))}}w.lastResult=`${t.name}: đã hoàn thành${task.attempt?' sửa lỗi':''}.`;w.task=null;}
+ if(success){if(task.attempt===0){{const gain=taskXp(t,skillsOf(n)[t.skill].level);n=addWorkXp(n,t.skill,gain);n=addWorkXp(n,t.secondary,Math.floor(gain/2))}}w.lastResult=`${t.name}: đã hoàn thành${task.attempt?' sửa lỗi':''}.`;w.task=null;}
  else if(task.attempt<2){w.bug={serial:task.serial,attempt:task.attempt+1,seed:(Math.imul(task.serial,2654435761)^Math.imul(w.seed+task.attempt,40503))>>>0};w.lastResult=`${t.name}: phát hiện bug, hãy tìm và sửa.`;remaining=0;}
  else{w.lastResult=`${t.name}: chuyển kiểm tra thêm.`;w.task=null;}
  n=recordJournal(n,`task:${task.serial}:${task.attempt}:${success?'ok':'error'}`,success?'Hoàn thành đầu việc':'Kiểm tra công việc',w.lastResult);if(!w.task&&remaining>0)w.task=makeTask({...n,work:w},t.id);
@@ -85,7 +86,7 @@ export function settleNewDay(previous:GameState,next:GameState):GameState{let n=
  if(dateAt(next.day).getUTCDate()===1){const po=n.office;if(po?.role==='employee'&&po.employerId&&!po.probation){const cur=po.tier??'junior',to=nextTier(cur);if(to){const f=tierFacts(n);if(f&&promotionGaps(to,f).length===0){po.tier=to;po.tierSince=next.day;n=recordJournal(n,`tier:${next.day}`,'Thăng bậc',`Bạn lên bậc ${TIER_NAME[to]}, lương tháng từ nay ${money(salaryFor(po.employerId,false,to))}.`)}}}}
  return n;
 }
-export function studySkill(s:GameState,skill:SkillId,hours:1|2):GameResult{const c=clockOf(s);if(!Object.hasOwn(SKILLS,skill)||![1,2].includes(hours))return{ok:false,error:'Buổi học không hợp lệ.'};if(s.work?.active||s.office?.application?.status==='interview'||s.fishing?.atLake)return{ok:false,error:'Hãy hoàn thành hoạt động hiện tại.'};if(c.minute<1080)return{ok:false,error:'Lớp tối bắt đầu từ 18:00.'};if(c.minute+hours*60>END||c.lastStudyDay===s.day)return{ok:false,error:'Chưa thể học thêm hôm nay.'};if(skillsOf(s)[skill].level>=MAX_LEVEL)return{ok:false,error:'Kỹ năng đã đạt Lv tối đa.'};const price=40000*hours;if(s.money<price||s.energy<5*hours)return{ok:false,error:'Chưa đủ tiền hoặc năng lượng.'};let n=structuredClone(s);n.clock={...c,minute:c.minute+hours*60,lastStudyDay:s.day};if(post(n,{name:`Học ${SKILLS[skill]}`,amount:-price})!=='ok')return{ok:false,error:'Chưa đủ tiền hoặc năng lượng.'};n.energy-=5*hours;n.stress=Math.min(100,n.stress+2*hours);const xp=30*hours*(s.energy<25?.5:1);n=addSkillXp(n,skill,xp);n=recordJournal(n,`study:${s.day}`,'Học '+SKILLS[skill],`${hours} giờ, +${xp} XP.`);return{ok:true,state:n};}
+export {studySkill} from './study';
 
 /** Mini game sửa bug: trả lời đúng và nhanh thì sửa nhanh (25% giờ chuẩn), chậm 33%, sai 40% (mục 12.2). */
 export function bugOf(s:GameState){const w=s.work;if(!w?.bug||!w.task)return null;const t=TASKS.find(t=>t.id===w.task!.id)!;return{task:t,seed:w.bug.seed,attempt:w.bug.attempt,puzzle:bugPuzzle(w.bug.seed,t.skill)}}
@@ -98,4 +99,4 @@ export function fixBug(s:GameState,choice:number,ms:number):GameResult{const b=b
 
 /** Chấm công tháng trước (phút làm / phút chuẩn) và các số liệu xét lên bậc. */
 export function attendanceOf(s:GameState,month:string){const p=workOf(s).periods.find(p=>officeOf(s).employerId&&p.key===officeOf(s).employerId+':'+month);return p?Math.min(1,p.minutes/standardMinutes(month)):0}
-export function tierFacts(s:GameState):TierFacts|null{const o=officeOf(s);if(o.role!=='employee'||!o.employerId)return null;const k=skillsOf(s),prev=monthOf(s.day-1);return{main:k.programming.level,communication:k.communication.level,management:k.management.level,daysInTier:s.day-(o.tierSince??0),attendance:attendanceOf(s,prev)}}
+export function tierFacts(s:GameState):TierFacts|null{const o=officeOf(s);if(o.role!=='employee'||!o.employerId)return null;const k=skillsOf(s),prev=monthOf(s.day-1);return{main:k.programming.level,cert:certLevel(s,'programming'),communication:k.communication.level,management:k.management.level,daysInTier:s.day-(o.tierSince??0),attendance:attendanceOf(s,prev)}}

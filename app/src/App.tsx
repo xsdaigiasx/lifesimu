@@ -7,6 +7,7 @@ import {chatCoworker} from './domain/social';
 import Journal from './components/Journal';
 import {recordJournal} from './domain/journal';
 import {overtimeOffered,lunchBreak,workAction,workTick,fixBug,canEnterOffice,settleNewDay,studySkill,type WorkAction,type SkillId} from './domain/work';
+import type {StudyMode} from './domain/study';
 import {saveOfficeLayout,type OfficeLayout} from './domain/layout';
 import {SkillsPanel} from './components/WorkPanel';
 import BugGame from './components/BugGame';
@@ -41,7 +42,7 @@ export default function App(){
  const doFixBug=(choice:number,ms:number)=>{const r=fixBug(liveState.current,choice,ms);if(r.ok){commitGame(r.state);toast(r.state.work?.lastResult??'Đã sửa bug')}else toast(r.error)};
  const doWorkAction=(action:WorkAction)=>{const r=workAction(liveState.current,action);if(r.ok)commitGame(r.state);return r};
  const doChat=(id:string,minutes:5|15)=>{const r=chatCoworker(liveState.current,id,minutes);if(r.ok)commitGame(r.state);return r};
- const doStudy=(id:SkillId,hours:1|2)=>{const r=studySkill(liveState.current,id,hours);if(r.ok)commitGame(r.state);return r};
+ const doStudy=(id:SkillId,mode:StudyMode)=>{const r=studySkill(liveState.current,id,mode);if(r.ok)commitGame(r.state);return r};
  const doBuyOfficeItem=(id:string)=>{const r=buyOfficeItem(liveState.current,id);if(r.ok)commitGame(r.state);return r};
  const doLayout=(layout:OfficeLayout)=>{const r=saveOfficeLayout(liveState.current,layout);if(r.ok&&r.state!==liveState.current){const n=recordJournal(r.state,`layout:${r.state.day}:${clockOf(r.state).minute}`,'Sắp xếp văn phòng','Đã lưu bố cục.');commitGame(n);return{ok:true,state:n} as const}return r};
  useEffect(()=>{if(opening||entering||trip!==null||!state.work?.active||state.work.active.paused)return;const id=setInterval(()=>{if(document.visibilityState!=='visible')return;const next=workTick(liveState.current,30);if(next!==liveState.current)commitGame(next)},1000);return()=>clearInterval(id)},[opening,entering,trip,state.work?.active?.day,state.work?.active?.slot,state.work?.active?.paused]);
