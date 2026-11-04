@@ -33,3 +33,26 @@ assert.equal(homeError(wall('right',0,0)),null);
 const legacy=JSON.parse(JSON.stringify(engine.initial()));legacy.home={grid:8,items:[{id:'bed',x:0,y:3,rotation:0,placed:true},{id:'desk',x:0,y:6,rotation:0,placed:true}]};
 assert(engine.parse(JSON.stringify(legacy)));assert.deepEqual(homeOf(legacy).items.map(uidOf),['bed','desk']);
 console.log('PASS home instances: uid, caps, save/load by uid, duplicates, wall overlap, legacy saves');
+// T27: lối đi nối bếp, vệ sinh, giường
+{const {homeWalkError}=require('../.test-build/domain/home');
+ const base=homeOf(engine.initial()).items;assert.equal(homeWalkError(base),null);
+ const wall=(extra)=>[...base,...extra];
+ // hàng tủ chắn ngang phòng, tách bếp khỏi giường
+ const fence=[0,2,4,6].map((x,k)=>({id:'wardrobe',uid:k?'wardrobe-'+(k+1):'wardrobe',x,y:2,rotation:0,placed:true}));
+ assert(homeWalkError(wall(fence)),'tủ chắn');
+ // chắn kín ô trước bếp
+ const kitchen=[0,1,2,3,4].map(x=>({id:'plant',uid:'k'+x,x,y:1,rotation:0,placed:true}));
+ assert(homeWalkError(wall(kitchen)),'chắn bếp');
+ // thảm không chắn lối
+ assert.equal(homeWalkError(wall([{id:'rug',x:2,y:2,rotation:0,placed:true}])),null);
+ // đồ trong kho không chiếm ô
+ assert.equal(homeWalkError(wall(fence.map(i=>({...i,placed:false})))),null);
+ // lưu: thoáng thì được, chắn kín ba ô trước bếp thì bị từ chối
+ let s2={...engine.initial(),money:50000000};for(let n=0;n<3;n++)s2=buyHome(s2,'plant').state;
+ const put=(xs)=>homeOf(s2).items.map(i=>i.id==='plant'?{...i,x:xs[Number(i.uid==='plant'?1:i.uid.slice(-1))-1],y:1,placed:true}:i);
+ const ok=saveHome(s2,put([1,2,5]));assert.equal(ok.ok,false,'(5,1) nằm trong khu vệ sinh nên không hợp lệ');
+ const part=saveHome(s2,homeOf(s2).items.map(i=>i.uid==='plant'?{...i,x:2,y:1,placed:true}:i));assert.equal(part.ok,true,part.error);
+ const shut=saveHome(s2,homeOf(s2).items.map(i=>i.id==='plant'?{...i,x:{plant:1,'plant-2':2,'plant-3':3}[i.uid],y:1,placed:true}:i));
+ assert.equal(shut.ok,false);assert.equal(shut.error,'Chừa lối đi tới bếp, vệ sinh và giường.');
+ console.log('PASS home walkability BFS');
+}
