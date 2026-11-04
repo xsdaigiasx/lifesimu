@@ -24,7 +24,7 @@ export const inboxOf=(s:GameState):InboxState=>s.inbox??{version:1,seq:0,threads
 const scoreOf=(s:GameState,id:string)=>socialOf(s).relations[id]?.score??0;
 const placeName=(p:PlaceId)=>places.find(x=>x.id===p)?.name??p;
 const hhmm=(m:number)=>`${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}`;
-const MOM_RECIPE_TEXT:Record<RecipeId,string>={eggRice:'',canhChua:'Mẹ chỉ con nấu canh chua cá: nêm chua ngọt vừa miệng, bỏ rau sau cùng cho xanh.',porkRice:'Mẹ chỉ con cơm thịt rau: xào thịt trước, rau cho sau, đừng để nhừ.',fishRice:'Mẹ chỉ con kho cá: ướp nửa tiếng, kho lửa nhỏ cho thấm.',tofuRice:'Mẹ chỉ con món đậu rau: chiên đậu vàng rồi xào với rau.'};
+const MOM_RECIPE_TEXT:Partial<Record<RecipeId,string>>={eggRice:'',canhChua:'Mẹ chỉ con nấu canh chua cá: nêm chua ngọt vừa miệng, bỏ rau sau cùng cho xanh.',porkRice:'Mẹ chỉ con cơm thịt rau: xào thịt trước, rau cho sau, đừng để nhừ.',fishRice:'Mẹ chỉ con kho cá: ướp nửa tiếng, kho lửa nhỏ cho thấm.',tofuRice:'Mẹ chỉ con món đậu rau: chiên đậu vàng rồi xào với rau.'};
 const WEEKDAY=['Chủ nhật','thứ Hai','thứ Ba','thứ Tư','thứ Năm','thứ Sáu','thứ Bảy'];
 const whenText=(today:number,day:number,minute:number)=>`${day===today?'hôm nay':day===today+1?'mai':WEEKDAY[dateAt(day).getUTCDay()]} lúc ${hhmm(minute)}`;
 
@@ -63,7 +63,7 @@ export function unreadCount(s:GameState,id?:string){const t=inboxOf(s).threads;r
 function schedule(s:GameState,ib:InboxState):Queued[]{const out:Queued[]=[],day=s.day,mk=(npc:string,minute:number,kind:MsgKind,text:string,replies?:string[],appt?:Msg['appt'])=>out.push({id:`q${day}:${npc}:${kind}`,npc,day,minute,from:'npc',text,kind,...(replies?{replies}:{}),...(appt?{appt}:{})});
  const h=(k:string)=>hash(`inbox:${day}:${k}`);
  if(dateAt(day+2).getUTCDate()===1&&(s.housing?.house??'tro')==='tro')mk('ba-tu',480,'rent','Còn hai ngày nữa tới hạn tiền trọ nghen con.',['Dạ con nhớ rồi','Bà cho con khất vài bữa']);
- const lastMom=Math.max(-9,...(ib.threads.me??[]).filter(m=>m.from==='npc').map(m=>m.day));if(day-lastMom>=2&&h('mom')%3!==0){const v=h('momv')%3,teach=nextMomRecipe(s);const kind:MsgKind=v===0?'mom-care':v===1?'mom-gift':teach?'mom-recipe':'mom-care';mk('me',1140+h('momt')%90,kind,kind==='mom-care'?'Con ăn uống đầy đủ không? Đừng thức khuya quá nghe.':kind==='mom-gift'?'Mẹ gửi con ít gạo, nhờ người quen mang tới phòng rồi đó.':MOM_RECIPE_TEXT[teach!],kind==='mom-recipe'?['Con ghi lại rồi','Để con thử nấu']:['Con khoẻ, mẹ yên tâm','Dạ con biết rồi']);if(kind==='mom-recipe')out[out.length-1]!.recipe=teach}
+ const lastMom=Math.max(-9,...(ib.threads.me??[]).filter(m=>m.from==='npc').map(m=>m.day));if(day-lastMom>=2&&h('mom')%3!==0){const v=h('momv')%3,teach=nextMomRecipe(s);const kind:MsgKind=v===0?'mom-care':v===1?'mom-gift':teach?'mom-recipe':'mom-care';mk('me',1140+h('momt')%90,kind,kind==='mom-care'?'Con ăn uống đầy đủ không? Đừng thức khuya quá nghe.':kind==='mom-gift'?'Mẹ gửi con ít gạo, nhờ người quen mang tới phòng rồi đó.':(MOM_RECIPE_TEXT[teach!]??""),kind==='mom-recipe'?['Con ghi lại rồi','Để con thử nấu']:['Con khoẻ, mẹ yên tâm','Dạ con biết rồi']);if(kind==='mom-recipe')out[out.length-1]!.recipe=teach}
  const close=NPCS.filter(n=>n.story&&!n.remote&&scoreOf(s,n.id)>=30);const dow=dateAt(day).getUTCDay();
  for(const n of close.sort((a,b)=>h(a.id)-h(b.id))){if(out.length>=DAILY_MESSAGES)break;const rel=socialOf(s).relations[n.id]!;
   if((dow===5||dow===6)&&h('inv'+n.id)%3===0){const apDay=day+1,apMin=1110;mk(n.id,600+h('t'+n.id)%300,'invite',say(n.id,T.invite(placeName('streetfood'),hhmm(apMin))),sayAll(n.id,T.inviteReplies),{day:apDay,minute:apMin,place:'streetfood'});continue}
@@ -83,7 +83,7 @@ export function replyMessage(s:GameState,id:string,msgId:string,choice:number):G
  if(m.kind==='invite'){if(choice===0&&m.appt){appts.push({id:`a${seq}`,npc:id,day:m.appt.day,minute:m.appt.minute,place:m.appt.place,status:'set'});answer=say(id,T.yes);n=adjustRelation(n,id,1)}else{answer=say(id,T.no)}}
  else if(m.kind==='rent'){answer=choice===0?'Ừ, giỏi lắm.':'Thôi được, nhưng đừng trễ quá nghen.';n=adjustRelation(n,id,choice===0?1:-1)}
  else if(m.kind==='mom-gift'){n=giftIngredient(n,'rice',3);answer='Nhớ ra bến lấy sớm kẻo người ta đợi.';n=adjustRelation(n,id,2);n={...n,mood:Math.min(100,n.mood+3)}}
- else if(m.kind==='mom-recipe'){if(m.recipe&&RECIPES[m.recipe])n=learnRecipe(n,m.recipe);n=addWorkXp(n,'cooking',choice===0?20:10);answer='Nấu được thì chụp hình cho mẹ coi.';n=adjustRelation(n,id,2)}
+ else if(m.kind==='mom-recipe'){if(m.recipe&&RECIPES[m.recipe])n=learnRecipe(n,m.recipe,'me','Mẹ');n=addWorkXp(n,'cooking',choice===0?20:10);answer='Nấu được thì chụp hình cho mẹ coi.';n=adjustRelation(n,id,2)}
  else{answer=id==='me'?'Ừ, mẹ thương.':say(id,T.fine);n=adjustRelation(n,id,2);n={...n,mood:Math.min(100,n.mood+2)}}
  const nm=inboxOf(n),now=clockOf(s).minute;const thread=[...(nm.threads[id]??[])].map(x=>x.id===msgId?{...x,answered:choice,read:true}:x);thread.push({id:`m${seq}:me`,day:s.day,minute:now,from:'me',text:label,kind:'note',read:true},{id:`m${seq}:re`,day:s.day,minute:now,from:'npc',text:answer,kind:'note',read:true});
  n={...n,inbox:{...nm,seq,appts,threads:{...nm.threads,[id]:thread.slice(-40)}}};
