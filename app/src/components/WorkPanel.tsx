@@ -1,16 +1,26 @@
 import {useState} from 'react';
 import type {GameState,GameResult} from '../domain/types';
 import {nextTier,promotionGaps,TIER_NAME} from '../domain/career';
-import {tierFacts,standardMinutes,SKILLS,TASKS,skillsOf,xpNeeded,workOf,shiftInfo,workAction,errorChance,pendingWages,holidayName,isWorkday,salaryFor,studySkill,type SkillId,type TaskId,type WorkAction} from '../domain/work';
-import {clockOf,clockText,END} from '../domain/time';
+import {tierFacts,standardMinutes,SKILLS,TASKS,skillsOf,xpNeeded,workOf,shiftInfo,workAction,errorChance,pendingWages,holidayName,isWorkday,salaryFor,type SkillId,type TaskId,type WorkAction} from '../domain/work';
+import {clockOf,clockText} from '../domain/time';
+import {COURSES,COURSE_IDS,SELF_STUDY,CERT_SESSIONS,SESSION_ENERGY,studyQuote,workCap,certLevel,hasCert,sessionsOf,type StudyMode} from '../domain/study';
+import {MAX_LEVEL} from '../domain/skill-xp';
 import {officeOf} from '../domain/office';
 import {money,dateAt} from '../domain/format';
 import {GameScreen,ActionRow,DataRow} from './GameUI';
 import Icon from './Icon';
-export function SkillsPanel({state,onStudy,onBack}:{state:GameState;onStudy:(id:SkillId,hours:1|2)=>GameResult;onBack:()=>void}){
- const [selected,setSelected]=useState<SkillId|null>(null),[hours,setHours]=useState<1|2>(1),[error,setError]=useState('');const skills=skillsOf(state),clock=clockOf(state);
- return <GameScreen title={selected?'Học '+SKILLS[selected]:'Kỹ năng'} onBack={()=>selected?(setSelected(null),setError('')):onBack()} footer={selected?<button className="primary wide" disabled={!!state.work?.active||clock.minute<1080||clock.minute+hours*60>END||clock.lastStudyDay===state.day||state.money<40000*hours||state.energy<5*hours||skills[selected].level>=50} onClick={()=>{const r=onStudy(selected,hours);setError(r.ok?'Đã hoàn thành buổi học.':r.error)}}>Học {hours} giờ <span>{money(40000*hours)}</span></button>:undefined}>
- {selected?<><DataRow label="Lv hiện tại" value={`Lv ${skills[selected].level}`}/><div className="work-hour-picks">{([1,2] as const).map(h=><button key={h} aria-pressed={h===hours} onClick={()=>setHours(h)}>{h} giờ</button>)}</div><DataRow label="Kinh nghiệm" value={`+${30*hours*(state.energy<25?.5:1)} XP`}/><DataRow label="Năng lượng" value={`−${5*hours}`}/><DataRow label="Giờ học" value="18:00–01:00"/>{clock.lastStudyDay===state.day?<p className="game-status">Đã học hôm nay</p>:clock.minute<1080?<p className="game-status">Lớp tối bắt đầu lúc 18:00</p>:null}</>:<div className="skill-list">{(Object.keys(SKILLS) as SkillId[]).map(id=><button className="skill-row" key={id} onClick={()=>{setSelected(id);setError('')}}><span><strong>{SKILLS[id]}</strong><small>Lv {skills[id].level}</small></span><progress value={skills[id].xp} max={xpNeeded(skills[id].level)} aria-label={`Kinh nghiệm ${SKILLS[id]}`}/><small>{skills[id].level===50?'Tối đa':`${skills[id].xp}/${xpNeeded(skills[id].level)} XP`}</small></button>)}</div>}{error&&<p className="game-status" role="status">{error}</p>}</GameScreen>
+export function SkillsPanel({state,onStudy,onBack}:{state:GameState;onStudy:(id:SkillId,mode:StudyMode)=>GameResult;onBack:()=>void}){
+ const [selected,setSelected]=useState<SkillId|null>(null),[mode,setMode]=useState<StudyMode>('basic'),[error,setError]=useState('');const skills=skillsOf(state);
+ const pick=(id:SkillId)=>{const lv=skills[id].level;setMode(COURSE_IDS.slice().reverse().find(c=>lv>=COURSES[c].from&&lv<COURSES[c].to)??'self');setSelected(id);setError('')};
+ const certText=(id:SkillId)=>{const c=certLevel(state,id);return c?'Chứng chỉ '+COURSES[COURSE_IDS[c-1]!].name:''};
+ const q=selected?studyQuote(state,selected,mode):null;
+ return <GameScreen title={selected?'Học '+SKILLS[selected]:'Kỹ năng'} onBack={()=>selected?(setSelected(null),setError('')):onBack()} footer={selected&&q?<button className="primary wide" disabled={!q.ok} onClick={()=>{const r=onStudy(selected,mode);setError(r.ok?'Đã hoàn thành buổi học.':r.error)}}>Học 2 giờ <span>{q.ok&&q.fee?money(q.fee):'Miễn phí'}</span></button>:undefined}>
+ {selected&&q?<><div className="work-hour-picks">{(['self',...COURSE_IDS] as StudyMode[]).map(m=><button key={m} aria-pressed={m===mode} onClick={()=>{setMode(m);setError('')}}>{m==='self'?SELF_STUDY.name:COURSES[m].name}</button>)}</div>
+ <DataRow label="Lv hiện tại" value={`Lv ${skills[selected].level}`}/><DataRow label="Trần khi đi làm" value={`Lv ${workCap(state,selected)}`}/>
+ {mode==='self'?<DataRow label="Học tới" value={`Lv ${SELF_STUDY.to}, không có chứng chỉ`}/>:<><DataRow label="Học tới" value={`Lv ${COURSES[mode].to}`}/><DataRow label="Chứng chỉ" value={hasCert(state,selected,mode)?'Đã có':`${sessionsOf(state,selected,mode)} / ${CERT_SESSIONS} buổi`}/></>}
+ {q.ok&&<DataRow label="Kinh nghiệm" value={`+${q.xp} XP`}/>}<DataRow label="Năng lượng" value={`−${SESSION_ENERGY}`}/>
+ {!q.ok&&<p className="game-status">{q.error}</p>}</>
+ :<div className="skill-list">{(Object.keys(SKILLS) as SkillId[]).map(id=><button className="skill-row" key={id} onClick={()=>pick(id)}><span><strong>{SKILLS[id]}</strong><small>Lv {skills[id].level} {certText(id)}</small></span><progress value={skills[id].level>=MAX_LEVEL?1:skills[id].xp} max={skills[id].level>=MAX_LEVEL?1:xpNeeded(skills[id].level)} aria-label={`Kinh nghiệm ${SKILLS[id]}`}/><small>{skills[id].level>=MAX_LEVEL?'Tối đa':`${skills[id].xp}/${xpNeeded(skills[id].level)} XP`}</small></button>)}</div>}{error&&<p className="game-status" role="status">{error}</p>}</GameScreen>
 }
 export default function WorkPanel({state,onAction,onBack,onSkills}:{state:GameState;onAction:(a:WorkAction)=>GameResult;onBack:()=>void;onSkills:()=>void}){
  const [selected,setSelected]=useState<TaskId>(TASKS[0].id),[error,setError]=useState(''),[confirmLeave,setConfirmLeave]=useState(false),w=workOf(state),a=w.active,t=w.task,slot=shiftInfo(state),definition=TASKS.find(x=>x.id===(t?.id??selected))!,o=officeOf(state),curMonth=dateAt(state.day).toISOString().slice(0,7),monthPeriod=w.periods.find(p=>p.key===(o.employerId??'')+':'+curMonth),upNext=nextTier(o.tier??'junior'),facts=tierFacts(state),gaps=upNext&&facts?promotionGaps(upNext,facts):[],eligible=isWorkday(state.day),done=w.finished.includes(slot.key)||clockOf(state).minute>=slot.end;
