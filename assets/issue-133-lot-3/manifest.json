@@ -1,0 +1,1690 @@
+{
+  "issue": 133,
+  "lot": 3,
+  "reference": "assets/style-reference/room-reference.webp",
+  "reference_sha256": "de62bcc0acc896633081b0a37d4828be4c03594875ea213c5f72bcf69ff8c053",
+  "baseline_commit": "8aa6253",
+  "runtime_manifest": "app/public/assets/offices/small/manifest.json",
+  "canonical_set": "small",
+  "copy_targets": [
+    "medium",
+    "large"
+  ],
+  "expected": 38,
+  "exported": 38,
+  "geometry": "legacy office pixel coordinates; floor footprint and z not provided by source manifest",
+  "items": [
+    {
+      "id": "executive_desk",
+      "name": "Bàn giám đốc",
+      "file": "/assets/offices/small/sprites/executive_desk.png",
+      "frame_px": [
+        306,
+        271
+      ],
+      "anchor_px": [
+        153,
+        257
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        13,
+        5,
+        292,
+        260
+      ],
+      "baseline_bbox_px": [
+        7,
+        5,
+        299,
+        260
+      ],
+      "source_crop_px": [
+        29,
+        21,
+        1286,
+        1163
+      ],
+      "export_offset_px": [
+        13,
+        5
+      ],
+      "export_scale": 0.22329246935201402,
+      "bytes": 93643,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "8c8c5dc0dc5e2a736604cbec78d920a32edfb92ff34029bdaf36fd36de22d43f",
+      "source_sha256": "963018d5298830f359af44dc9b8f81ddde5d9dae13a6c08fae8870e5166f80ab"
+    },
+    {
+      "id": "executive_chair",
+      "name": "Ghế giám đốc",
+      "file": "/assets/offices/small/sprites/executive_chair.png",
+      "frame_px": [
+        143,
+        222
+      ],
+      "anchor_px": [
+        72,
+        210
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        6,
+        131,
+        212
+      ],
+      "baseline_bbox_px": [
+        5,
+        6,
+        136,
+        212
+      ],
+      "source_crop_px": [
+        65,
+        28,
+        918,
+        1472
+      ],
+      "export_offset_px": [
+        10,
+        6
+      ],
+      "export_scale": 0.14265927977839335,
+      "bytes": 35399,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "d23d51442fd72683a741b6af1c7f3dbf8ec01bdd98d1fea2aa5ef13e2465bbde",
+      "source_sha256": "6d472dfc6a43ae0b874dc26fb4cc96c6929246cfd39a912092b62bdef1e24003"
+    },
+    {
+      "id": "glass_conference_table",
+      "name": "Bàn họp kính",
+      "file": "/assets/offices/small/sprites/glass_conference_table.png",
+      "frame_px": [
+        336,
+        250
+      ],
+      "anchor_px": [
+        168,
+        229
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        15,
+        7,
+        323,
+        232
+      ],
+      "baseline_bbox_px": [
+        7,
+        6,
+        331,
+        232
+      ],
+      "source_crop_px": [
+        31,
+        16,
+        1432,
+        1043
+      ],
+      "export_offset_px": [
+        15,
+        6
+      ],
+      "export_scale": 0.22005842259006816,
+      "bytes": 59709,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "343824637e3c268feb26c070730656804376643992a5472f22dbf2683efba459",
+      "source_sha256": "6af1994b908a7a5c17195df617d03d059e88edc55d0b3c8fe0e2e9dff142d6a0"
+    },
+    {
+      "id": "mesh_office_chair",
+      "name": "Ghế công thái học",
+      "file": "/assets/offices/small/sprites/mesh_office_chair.png",
+      "frame_px": [
+        123,
+        192
+      ],
+      "anchor_px": [
+        62,
+        181
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        11,
+        6,
+        115,
+        184
+      ],
+      "baseline_bbox_px": [
+        7,
+        6,
+        118,
+        184
+      ],
+      "source_crop_px": [
+        91,
+        37,
+        919,
+        1454
+      ],
+      "export_offset_px": [
+        11,
+        6
+      ],
+      "export_scale": 0.12561750176429076,
+      "bytes": 28247,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "da028ffe1fe2d10fbe117bf98e54dc9706ce5f2263c20128313b178b192d4bb9",
+      "source_sha256": "8591882a79d2f11a5ceae082c199bd0cd2f313936e5da7650e3c27e8db03cea0"
+    },
+    {
+      "id": "presentation_display",
+      "name": "Màn hình thuyết trình đứng",
+      "file": "/assets/offices/small/sprites/presentation_display.png",
+      "frame_px": [
+        152,
+        248
+      ],
+      "anchor_px": [
+        76,
+        238
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        5,
+        144,
+        241
+      ],
+      "baseline_bbox_px": [
+        11,
+        5,
+        145,
+        241
+      ],
+      "source_crop_px": [
+        48,
+        24,
+        928,
+        1587
+      ],
+      "export_offset_px": [
+        12,
+        5
+      ],
+      "export_scale": 0.1509916826615483,
+      "bytes": 41301,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "f5144df52161053ef24495f4605ecb6a51c0b946fe5018f5711ef90ce73cea4a",
+      "source_sha256": "59a12e2f9c243539ed2daed3d71548b8e2202c7a0d0fb338a4e1d7a5e734267e"
+    },
+    {
+      "id": "wide_presentation_display",
+      "name": "Màn hình họp có bánh xe",
+      "file": "/assets/offices/small/sprites/wide_presentation_display.png",
+      "frame_px": [
+        174,
+        262
+      ],
+      "anchor_px": [
+        87,
+        252
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        14,
+        8,
+        166,
+        254
+      ],
+      "baseline_bbox_px": [
+        12,
+        7,
+        167,
+        254
+      ],
+      "source_crop_px": [
+        45,
+        23,
+        967,
+        1513
+      ],
+      "export_offset_px": [
+        14,
+        8
+      ],
+      "export_scale": 0.1657718120805369,
+      "bytes": 43876,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "ef0774eb0a96a15533d41a3205bc65823bf9d9c148498d093e2f17a0f1d2fc2e",
+      "source_sha256": "582111f987bb3150b7695374324dbaf2079818d50e22898e59d3f94c4b38afed"
+    },
+    {
+      "id": "low_storage_cabinet",
+      "name": "Tủ tài liệu thấp",
+      "file": "/assets/offices/small/sprites/low_storage_cabinet.png",
+      "frame_px": [
+        216,
+        208
+      ],
+      "anchor_px": [
+        108,
+        198
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        6,
+        202,
+        201
+      ],
+      "baseline_bbox_px": [
+        6,
+        6,
+        209,
+        201
+      ],
+      "source_crop_px": [
+        94,
+        61,
+        1186,
+        1171
+      ],
+      "export_offset_px": [
+        12,
+        6
+      ],
+      "export_scale": 0.17567567567567569,
+      "bytes": 40620,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "10f75194e33f11e92ddac32e4e8207f45b2e1a969d5c402d2599960e9817ac59",
+      "source_sha256": "b21dcabbc45d2eda8930a4967c6b96941ac92dc1fbd2dc92f3be3e1098ea3803"
+    },
+    {
+      "id": "espresso_machine",
+      "name": "Máy pha cà phê",
+      "file": "/assets/offices/small/sprites/espresso_machine.png",
+      "frame_px": [
+        156,
+        159
+      ],
+      "anchor_px": [
+        78,
+        149
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        13,
+        6,
+        144,
+        152
+      ],
+      "baseline_bbox_px": [
+        8,
+        6,
+        149,
+        152
+      ],
+      "source_crop_px": [
+        133,
+        45,
+        1129,
+        1153
+      ],
+      "export_offset_px": [
+        13,
+        6
+      ],
+      "export_scale": 0.13176895306859207,
+      "bytes": 32005,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "0db6155c23f0b4b71464a6407dde3b5436a004308a2748fca92a65091f49a533",
+      "source_sha256": "1b66f3ec220ab844717647432d88c232bb599615e32baead578d0d4f9d25e0be"
+    },
+    {
+      "id": "tea_set",
+      "name": "Bộ ấm trà",
+      "file": "/assets/offices/small/sprites/tea_set.png",
+      "frame_px": [
+        172,
+        118
+      ],
+      "anchor_px": [
+        86,
+        109
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        6,
+        161,
+        112
+      ],
+      "baseline_bbox_px": [
+        6,
+        6,
+        165,
+        112
+      ],
+      "source_crop_px": [
+        68,
+        35,
+        1449,
+        1002
+      ],
+      "export_offset_px": [
+        10,
+        6
+      ],
+      "export_scale": 0.10961737331954498,
+      "bytes": 25722,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "d892cc723ea03167af1a560f6027084aa35d01a8a253c5d8d51d6b137da514c1",
+      "source_sha256": "fac96620186cd6d1de92cd03b2d9d97e1117c5a82ef90600c3d53e200e1145a3"
+    },
+    {
+      "id": "bar_stool_left",
+      "name": "Ghế quầy trái",
+      "file": "/assets/offices/small/sprites/bar_stool_left.png",
+      "frame_px": [
+        89,
+        156
+      ],
+      "anchor_px": [
+        44,
+        143
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        7,
+        79,
+        145
+      ],
+      "baseline_bbox_px": [
+        6,
+        7,
+        82,
+        145
+      ],
+      "source_crop_px": [
+        71,
+        67,
+        834,
+        1592
+      ],
+      "export_offset_px": [
+        10,
+        7
+      ],
+      "export_scale": 0.09049180327868853,
+      "bytes": 13688,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "ed510a91041e0ca25d1026dd47e4b9633e09e28f62638c1ef1ac9707f08bda35",
+      "source_sha256": "20f5dddfb0c4bfe0a35ac2974446ad5b4c7702f9b4dec81d96dd80159a098d87"
+    },
+    {
+      "id": "bar_stool_right",
+      "name": "Ghế quầy phải",
+      "file": "/assets/offices/small/sprites/bar_stool_right.png",
+      "frame_px": [
+        90,
+        149
+      ],
+      "anchor_px": [
+        45,
+        135
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        7,
+        81,
+        138
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        84,
+        138
+      ],
+      "source_crop_px": [
+        149,
+        103,
+        862,
+        1412
+      ],
+      "export_offset_px": [
+        10,
+        7
+      ],
+      "export_scale": 0.10007639419404125,
+      "bytes": 13226,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "dba49c2fae53c0a45da533810968ecda3440c97ebc77e31e65fb99f2de341aa6",
+      "source_sha256": "2440d6440b3de99305a5707b1563580ec8d4fe67fd2c649f4a0053560c1e52fe"
+    },
+    {
+      "id": "workstation_four",
+      "name": "Cụm bàn bốn chỗ",
+      "file": "/assets/offices/small/sprites/workstation_four.png",
+      "frame_px": [
+        274,
+        234
+      ],
+      "anchor_px": [
+        137,
+        223
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        6,
+        265,
+        226
+      ],
+      "baseline_bbox_px": [
+        7,
+        6,
+        269,
+        226
+      ],
+      "source_crop_px": [
+        37,
+        33,
+        1307,
+        1122
+      ],
+      "export_offset_px": [
+        10,
+        6
+      ],
+      "export_scale": 0.20202020202020202,
+      "bytes": 65958,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "b67b3e4be31870c8082009e7ad5c43497d92ed6953bd0e8797ced624bcfd47f5",
+      "source_sha256": "833551993229fc9797d8a38d55f5ae570e421b92f32988c219405ee018562902"
+    },
+    {
+      "id": "workstation_pair",
+      "name": "Cụm bàn hai chỗ",
+      "file": "/assets/offices/small/sprites/workstation_pair.png",
+      "frame_px": [
+        249,
+        221
+      ],
+      "anchor_px": [
+        124,
+        211
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        7,
+        239,
+        213
+      ],
+      "baseline_bbox_px": [
+        5,
+        7,
+        244,
+        213
+      ],
+      "source_crop_px": [
+        49,
+        32,
+        1258,
+        1116
+      ],
+      "export_offset_px": [
+        10,
+        7
+      ],
+      "export_scale": 0.1900369003690037,
+      "bytes": 56675,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "49989dce371bd583c6b17862b317a7c02b2cb18e8764a9dffa4eee4f45019a7f",
+      "source_sha256": "da9bf5fa28daec7d3c985c7192ed5ea78ca483a30355c8e7b89071b66b68e7fc"
+    },
+    {
+      "id": "curved_monitor_desk",
+      "name": "Bàn máy tính màn hình cong",
+      "file": "/assets/offices/small/sprites/curved_monitor_desk.png",
+      "frame_px": [
+        248,
+        236
+      ],
+      "anchor_px": [
+        124,
+        227
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        7,
+        238,
+        229
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        241,
+        229
+      ],
+      "source_crop_px": [
+        60,
+        31,
+        1226,
+        1157
+      ],
+      "export_offset_px": [
+        10,
+        7
+      ],
+      "export_scale": 0.19715808170515098,
+      "bytes": 57981,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "37095c76e41923d48bc0fbcfafdc3015ec5be790644b36eaf953130a390e79d1",
+      "source_sha256": "1ad37766d0fa785ab390c478a11e290ea62607fecb20914d679337280bbcc745"
+    },
+    {
+      "id": "water_cooler_black",
+      "name": "Cây nước màu đen",
+      "file": "/assets/offices/small/sprites/water_cooler_black.png",
+      "frame_px": [
+        89,
+        207
+      ],
+      "anchor_px": [
+        44,
+        195
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        11,
+        7,
+        80,
+        198
+      ],
+      "baseline_bbox_px": [
+        8,
+        7,
+        82,
+        198
+      ],
+      "source_crop_px": [
+        86,
+        51,
+        736,
+        1848
+      ],
+      "export_offset_px": [
+        11,
+        7
+      ],
+      "export_scale": 0.10628825820812465,
+      "bytes": 21968,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "484969f160ef6cd9c0abd411246f29421781859b76e141a7a24b0244edff137e",
+      "source_sha256": "9b4509b94da4867684314f2e9a783f096b0cca10e52cc5780e83c92c1396bc6d"
+    },
+    {
+      "id": "water_cooler_white",
+      "name": "Cây nước màu trắng",
+      "file": "/assets/offices/small/sprites/water_cooler_white.png",
+      "frame_px": [
+        89,
+        200
+      ],
+      "anchor_px": [
+        44,
+        188
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        9,
+        6,
+        77,
+        191
+      ],
+      "baseline_bbox_px": [
+        8,
+        6,
+        78,
+        191
+      ],
+      "source_crop_px": [
+        165,
+        121,
+        731,
+        1660
+      ],
+      "export_offset_px": [
+        9,
+        6
+      ],
+      "export_scale": 0.12020792722547108,
+      "bytes": 23327,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "414e2c3a53c7e96f02076062f81a77108a10defb8a951cacca91429c8fdbff67",
+      "source_sha256": "851096745055a58d1e6ee57d8ededc22b434718070162d225b140bdd1c447429"
+    },
+    {
+      "id": "monstera_plant",
+      "name": "Cây trầu bà",
+      "file": "/assets/offices/small/sprites/monstera_plant.png",
+      "frame_px": [
+        156,
+        205
+      ],
+      "anchor_px": [
+        78,
+        188
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        23,
+        137,
+        191
+      ],
+      "baseline_bbox_px": [
+        7,
+        23,
+        141,
+        191
+      ],
+      "source_crop_px": [
+        84,
+        146,
+        967,
+        1324
+      ],
+      "export_offset_px": [
+        12,
+        23
+      ],
+      "export_scale": 0.14261460101867574,
+      "bytes": 39775,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "911bb6920ad1f84bb6d90352cd33f91bf7a54054c19df3fa2640a13f41327f73",
+      "source_sha256": "9c3878a4adb591c3fb3cf1a2d61683f57c24a48e221ee6350af7aad43ea11ebc"
+    },
+    {
+      "id": "snake_plant",
+      "name": "Cây lưỡi hổ",
+      "file": "/assets/offices/small/sprites/snake_plant.png",
+      "frame_px": [
+        86,
+        158
+      ],
+      "anchor_px": [
+        43,
+        146
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        15,
+        7,
+        76,
+        149
+      ],
+      "baseline_bbox_px": [
+        10,
+        7,
+        81,
+        149
+      ],
+      "source_crop_px": [
+        115,
+        45,
+        787,
+        1585
+      ],
+      "export_offset_px": [
+        15,
+        7
+      ],
+      "export_scale": 0.09220779220779221,
+      "bytes": 17452,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "1c453e2e6de869be7a40b8ca09fe599842c0eb5731b48f7b333687a590d1c5f5",
+      "source_sha256": "954bf6af12848741af7c237c23d4e3381d2f0a55cbaaa6fcdc467b812ef91986"
+    },
+    {
+      "id": "bonsai",
+      "name": "Cây bonsai",
+      "file": "/assets/offices/small/sprites/bonsai.png",
+      "frame_px": [
+        119,
+        148
+      ],
+      "anchor_px": [
+        60,
+        137
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        9,
+        7,
+        113,
+        140
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        115,
+        140
+      ],
+      "source_crop_px": [
+        79,
+        45,
+        1048,
+        1274
+      ],
+      "export_offset_px": [
+        9,
+        7
+      ],
+      "export_scale": 0.10821806346623271,
+      "bytes": 24286,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "945f8bebff7492ad5cc152313d9e59cef02b0d7efd7892530a8d24de2b0cbe4c",
+      "source_sha256": "dff6a7dd772f04643787de4d1b95e36849c34b2d568925f7ec343bef67cbdf78"
+    },
+    {
+      "id": "wall_art",
+      "name": "Tranh treo tường",
+      "file": "/assets/offices/small/sprites/wall_art.png",
+      "frame_px": [
+        115,
+        219
+      ],
+      "anchor_px": [
+        58,
+        110
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        44,
+        104,
+        212
+      ],
+      "baseline_bbox_px": [
+        6,
+        44,
+        107,
+        212
+      ],
+      "source_crop_px": [
+        86,
+        318,
+        822,
+        1628
+      ],
+      "export_offset_px": [
+        10,
+        44
+      ],
+      "export_scale": 0.1282442748091603,
+      "bytes": 25812,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "62d6ebb1716645de7813651e15567355fcdab2b8a175b10615c9b2aa61d85389",
+      "source_sha256": "a0019646706dba5ef772e73aba333a3895a13f6290bc5a641e4b6f7296419219"
+    },
+    {
+      "id": "certificate_top",
+      "name": "Bằng khen phía trên",
+      "file": "/assets/offices/small/sprites/certificate_top.png",
+      "frame_px": [
+        97,
+        76
+      ],
+      "anchor_px": [
+        48,
+        38
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        7,
+        88,
+        69
+      ],
+      "baseline_bbox_px": [
+        9,
+        7,
+        91,
+        69
+      ],
+      "source_crop_px": [
+        173,
+        113,
+        1244,
+        984
+      ],
+      "export_offset_px": [
+        12,
+        7
+      ],
+      "export_scale": 0.0711825487944891,
+      "bytes": 7387,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "81a38e95ca73f5ad85e8c4e584890b7cf737b9612beb07f29861b032bd608507",
+      "source_sha256": "8d23062bc420e35b1ee854dcb7eab9eaf1edbe5eedc0bbdf93c42357f55cf571"
+    },
+    {
+      "id": "certificate_bottom",
+      "name": "Bằng khen phía dưới",
+      "file": "/assets/offices/small/sprites/certificate_bottom.png",
+      "frame_px": [
+        95,
+        75
+      ],
+      "anchor_px": [
+        48,
+        38
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        7,
+        8,
+        89,
+        68
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        89,
+        68
+      ],
+      "source_crop_px": [
+        145,
+        141,
+        1266,
+        967
+      ],
+      "export_offset_px": [
+        7,
+        8
+      ],
+      "export_scale": 0.07314897413024085,
+      "bytes": 7525,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "d7575cefa6131ecaae38a7d601814ec6156ef34037bf011ef5f709268da1bca2",
+      "source_sha256": "a5421d22127cfe4daa8c857da7c7ee661df340e962b9d855267227af8fa5677b"
+    },
+    {
+      "id": "bookcase",
+      "name": "Tủ sách",
+      "file": "/assets/offices/small/sprites/bookcase.png",
+      "frame_px": [
+        172,
+        262
+      ],
+      "anchor_px": [
+        86,
+        253
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        7,
+        162,
+        255
+      ],
+      "baseline_bbox_px": [
+        8,
+        7,
+        163,
+        255
+      ],
+      "source_crop_px": [
+        42,
+        23,
+        961,
+        1522
+      ],
+      "export_offset_px": [
+        10,
+        7
+      ],
+      "export_scale": 0.16544362908605736,
+      "bytes": 65296,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "2ce2057f9690e01d03087bfc9f70d7ef4abd77d0e0ed028a32e29c70462ce109",
+      "source_sha256": "f1ac8ee1a84a7dff8026222eea8de91819dbbeac29ce35f11c3e5acc51ddfabf"
+    },
+    {
+      "id": "putting_mat",
+      "name": "Thảm tập golf",
+      "file": "/assets/offices/small/sprites/putting_mat.png",
+      "frame_px": [
+        310,
+        173
+      ],
+      "anchor_px": [
+        155,
+        163
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        15,
+        7,
+        297,
+        166
+      ],
+      "baseline_bbox_px": [
+        8,
+        7,
+        303,
+        166
+      ],
+      "source_crop_px": [
+        51,
+        18,
+        1649,
+        916
+      ],
+      "export_offset_px": [
+        15,
+        7
+      ],
+      "export_scale": 0.17706013363028952,
+      "bytes": 36425,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "b6073d47cd1f67ce4d9b33be2091f9514ece1b80908477d184396892fcf9c02a",
+      "source_sha256": "45163dbd7e9bd70577d650bcf7a4cef0ef74ac97ac0154f0a00aa6eab48e42bd"
+    },
+    {
+      "id": "wine_cooler",
+      "name": "Tủ rượu",
+      "file": "/assets/offices/small/sprites/wine_cooler.png",
+      "frame_px": [
+        139,
+        214
+      ],
+      "anchor_px": [
+        70,
+        201
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        6,
+        127,
+        204
+      ],
+      "baseline_bbox_px": [
+        10,
+        6,
+        129,
+        204
+      ],
+      "source_crop_px": [
+        79,
+        51,
+        929,
+        1513
+      ],
+      "export_offset_px": [
+        12,
+        6
+      ],
+      "export_scale": 0.1354309165526676,
+      "bytes": 36284,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "4e35422d5ce5aac0b4f1a1bafb2662e660814504e89f2df035dd048ed1d13698",
+      "source_sha256": "bfa0bfa7436745157e277243de56de02a3dd02b4919d221dcf651992493c466d"
+    },
+    {
+      "id": "leather_armchair",
+      "name": "Ghế bành da",
+      "file": "/assets/offices/small/sprites/leather_armchair.png",
+      "frame_px": [
+        166,
+        172
+      ],
+      "anchor_px": [
+        83,
+        162
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        13,
+        7,
+        154,
+        164
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        160,
+        164
+      ],
+      "source_crop_px": [
+        83,
+        46,
+        1138,
+        1217
+      ],
+      "export_offset_px": [
+        13,
+        7
+      ],
+      "export_scale": 0.1340734415029889,
+      "bytes": 30610,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "20afdda8141250eb51397867285ca6d1fca79853748d4bea057f89a26e0352bf",
+      "source_sha256": "f06298203de7090d0e7d60734253fbd050a70b4225b0301fc947fa3818329374"
+    },
+    {
+      "id": "guest_chair",
+      "name": "Ghế tiếp khách",
+      "file": "/assets/offices/small/sprites/guest_chair.png",
+      "frame_px": [
+        126,
+        148
+      ],
+      "anchor_px": [
+        63,
+        139
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        7,
+        7,
+        118,
+        142
+      ],
+      "baseline_bbox_px": [
+        6,
+        7,
+        119,
+        142
+      ],
+      "source_crop_px": [
+        61,
+        57,
+        1072,
+        1286
+      ],
+      "export_offset_px": [
+        7,
+        7
+      ],
+      "export_scale": 0.10984540276647681,
+      "bytes": 22765,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "6f605c4d0a9dfe28a2d6eb00d9b7decbd43704cdc33dd45b8bb06bd3d015552f",
+      "source_sha256": "d069abb7249724920a8fa2eb150f8cc6ae2bdf5fc9a3aed1e05af61394951952"
+    },
+    {
+      "id": "mesh_bin",
+      "name": "Thùng rác lưới",
+      "file": "/assets/offices/small/sprites/mesh_bin.png",
+      "frame_px": [
+        81,
+        108
+      ],
+      "anchor_px": [
+        40,
+        97
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        8,
+        7,
+        75,
+        100
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        75,
+        100
+      ],
+      "source_crop_px": [
+        132,
+        114,
+        944,
+        1232
+      ],
+      "export_offset_px": [
+        8,
+        7
+      ],
+      "export_scale": 0.08318425760286226,
+      "bytes": 16966,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "3af79277973a236bdb5251851bb2946a99cb608e2054e896e5129fccd8a099a6",
+      "source_sha256": "effeb99f5d2ce7eba1f772a6294fe43ebd8c11335f594194676b768be41259ee"
+    },
+    {
+      "id": "recycle_bin",
+      "name": "Thùng rác tái chế",
+      "file": "/assets/offices/small/sprites/recycle_bin.png",
+      "frame_px": [
+        98,
+        133
+      ],
+      "anchor_px": [
+        49,
+        120
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        7,
+        88,
+        123
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        92,
+        123
+      ],
+      "source_crop_px": [
+        143,
+        91,
+        951,
+        1324
+      ],
+      "export_offset_px": [
+        12,
+        7
+      ],
+      "export_scale": 0.09407948094079481,
+      "bytes": 14892,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "34a1ca2d8194a350dbfe0b8f782bb97ac9bd64b8b9abd0c754a5f873fec5b8b3",
+      "source_sha256": "37e1c923301932331c26f877e8f004c75868a09f11d0f13681a5cffdff876270"
+    },
+    {
+      "id": "mini_fridge",
+      "name": "Tủ lạnh mini",
+      "file": "/assets/offices/small/sprites/mini_fridge.png",
+      "frame_px": [
+        135,
+        161
+      ],
+      "anchor_px": [
+        68,
+        149
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        6,
+        123,
+        152
+      ],
+      "baseline_bbox_px": [
+        9,
+        6,
+        126,
+        152
+      ],
+      "source_crop_px": [
+        145,
+        96,
+        1004,
+        1224
+      ],
+      "export_offset_px": [
+        12,
+        6
+      ],
+      "export_scale": 0.12943262411347517,
+      "bytes": 25025,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "8a47b3253825af9787b0fceb0083ef965fee80347be6b2e48067ec16171e4a0e",
+      "source_sha256": "273b5da2ac41cdec9294d4c243b39efc171eac947736045202edf7e0a0fbe242"
+    },
+    {
+      "id": "silver_laptop",
+      "name": "Laptop bạc",
+      "file": "/assets/offices/small/sprites/silver_laptop.png",
+      "frame_px": [
+        109,
+        111
+      ],
+      "anchor_px": [
+        54,
+        101
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        7,
+        100,
+        104
+      ],
+      "baseline_bbox_px": [
+        8,
+        7,
+        103,
+        104
+      ],
+      "source_crop_px": [
+        113,
+        65,
+        1158,
+        1213
+      ],
+      "export_offset_px": [
+        12,
+        7
+      ],
+      "export_scale": 0.08449477351916376,
+      "bytes": 13492,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "4a5deb189cee7b12c4cad18b604500159198a9b5df9b40dac40dca86f5318515",
+      "source_sha256": "d0ce01f120459e1a7627a1a2ef0269fc5abfbfda3a03516e11cf2b24440fe098"
+    },
+    {
+      "id": "black_laptop",
+      "name": "Laptop đen",
+      "file": "/assets/offices/small/sprites/black_laptop.png",
+      "frame_px": [
+        108,
+        110
+      ],
+      "anchor_px": [
+        54,
+        101
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        13,
+        7,
+        97,
+        104
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        102,
+        104
+      ],
+      "source_crop_px": [
+        101,
+        77,
+        1079,
+        1199
+      ],
+      "export_offset_px": [
+        13,
+        7
+      ],
+      "export_scale": 0.08645276292335116,
+      "bytes": 11819,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "c61a2ef9c3c182ff87960809f7d1f7c3f75bf96f03ba51c4f3189baff17a8306",
+      "source_sha256": "62dc368d4b710d4968d522ed40e7d3b4066868c5229df58aec08df599868dffb"
+    },
+    {
+      "id": "globe",
+      "name": "Quả địa cầu",
+      "file": "/assets/offices/small/sprites/globe.png",
+      "frame_px": [
+        99,
+        130
+      ],
+      "anchor_px": [
+        50,
+        113
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        12,
+        7,
+        90,
+        116
+      ],
+      "baseline_bbox_px": [
+        9,
+        7,
+        92,
+        116
+      ],
+      "source_crop_px": [
+        82,
+        95,
+        951,
+        1300
+      ],
+      "export_offset_px": [
+        12,
+        7
+      ],
+      "export_scale": 0.09045643153526971,
+      "bytes": 17329,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "db8da3c2c348d3c5ef7424fcd7d32ec282386bd9f1299ba92a013face5b4c2a7",
+      "source_sha256": "5084c5ed5dec11a8506c811de5d5c7df5c677f51b5531e0ed69bb3b1d80d1033"
+    },
+    {
+      "id": "safe",
+      "name": "Két sắt",
+      "file": "/assets/offices/small/sprites/safe.png",
+      "frame_px": [
+        129,
+        135
+      ],
+      "anchor_px": [
+        64,
+        123
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        13,
+        7,
+        118,
+        126
+      ],
+      "baseline_bbox_px": [
+        10,
+        7,
+        121,
+        126
+      ],
+      "source_crop_px": [
+        168,
+        135,
+        1039,
+        1121
+      ],
+      "export_offset_px": [
+        13,
+        7
+      ],
+      "export_scale": 0.1206896551724138,
+      "bytes": 19728,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "04f2612f04b8ab36232be75c5830f3e9a77deb1327900632a31b5cc01a797815",
+      "source_sha256": "d284466855f1022b26ae14e24fa5211211e4ea90ed4228990f6509ea2082a03e"
+    },
+    {
+      "id": "paper_shredder",
+      "name": "Máy hủy giấy",
+      "file": "/assets/offices/small/sprites/paper_shredder.png",
+      "frame_px": [
+        96,
+        127
+      ],
+      "anchor_px": [
+        48,
+        116
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        11,
+        7,
+        86,
+        119
+      ],
+      "baseline_bbox_px": [
+        7,
+        7,
+        89,
+        119
+      ],
+      "source_crop_px": [
+        103,
+        64,
+        989,
+        1383
+      ],
+      "export_offset_px": [
+        11,
+        7
+      ],
+      "export_scale": 0.08491281273692192,
+      "bytes": 13609,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "82900ad58829ea99d316fce62992f10e4ee255f1cb8a4967338890ccdf176617",
+      "source_sha256": "64b018f0f7c9ebd63d845231dda73ace77fbfe7d2b95905f0bcf44e68732be88"
+    },
+    {
+      "id": "desk_organizer",
+      "name": "Khay tài liệu trên bàn",
+      "file": "/assets/offices/small/sprites/desk_organizer.png",
+      "frame_px": [
+        125,
+        121
+      ],
+      "anchor_px": [
+        62,
+        112
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        8,
+        6,
+        116,
+        115
+      ],
+      "baseline_bbox_px": [
+        5,
+        6,
+        118,
+        115
+      ],
+      "source_crop_px": [
+        94,
+        60,
+        1183,
+        1159
+      ],
+      "export_offset_px": [
+        8,
+        6
+      ],
+      "export_scale": 0.09918107370336669,
+      "bytes": 21273,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "60fe3d1fb6b7883b8585b22a2ba0d1a02fb2332e336c542c3f192927ecd07f97",
+      "source_sha256": "1e1de2f94c3e198d2fb208444e6c78173f423c925dcfd70942fcaffaa491946d"
+    },
+    {
+      "id": "paper_tray",
+      "name": "Khay giấy nhiều tầng",
+      "file": "/assets/offices/small/sprites/paper_tray.png",
+      "frame_px": [
+        115,
+        122
+      ],
+      "anchor_px": [
+        58,
+        112
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        13,
+        7,
+        105,
+        115
+      ],
+      "baseline_bbox_px": [
+        9,
+        7,
+        108,
+        115
+      ],
+      "source_crop_px": [
+        137,
+        101,
+        1060,
+        1183
+      ],
+      "export_offset_px": [
+        13,
+        7
+      ],
+      "export_scale": 0.09981515711645102,
+      "bytes": 19830,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "288be00556de5a386139016ad5e07bc81beca09602e02eb9d33431dd9c44a7dd",
+      "source_sha256": "6840791917332383a45a1ea10dc51d12dd4702d2f73faffbb0f8d3e279a7cae1"
+    },
+    {
+      "id": "digital_clock",
+      "name": "Đồng hồ điện tử",
+      "file": "/assets/offices/small/sprites/digital_clock.png",
+      "frame_px": [
+        104,
+        96
+      ],
+      "anchor_px": [
+        52,
+        86
+      ],
+      "footprint_tiles": null,
+      "height_z": null,
+      "direction": "preserve-existing-view",
+      "alpha_bbox_px": [
+        10,
+        7,
+        95,
+        89
+      ],
+      "baseline_bbox_px": [
+        8,
+        7,
+        96,
+        89
+      ],
+      "source_crop_px": [
+        133,
+        137,
+        1126,
+        1089
+      ],
+      "export_offset_px": [
+        10,
+        7
+      ],
+      "export_scale": 0.0861344537815126,
+      "bytes": 10408,
+      "encoding": "rgba",
+      "palette_colours": null,
+      "sha256": "c72c32fec32a77b1803de4056c4db8788cc79972ca866b3a3b57cc72874e9323",
+      "source_sha256": "be8c23e9e4d448b0154e01cf20f68698841807245dfdd2c869884d9072576272"
+    }
+  ]
+}
