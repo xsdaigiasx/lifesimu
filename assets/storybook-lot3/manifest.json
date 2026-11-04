@@ -1,0 +1,845 @@
+{
+  "issue": 89,
+  "lot": 3,
+  "style": "warm-pastel-hand-drawn-storybook",
+  "source": "OpenAI built-in image generation, text prompts with no third-party reference images",
+  "portrait": "shoulders-up; frontal or slight three-quarter; no baked circle or backdrop",
+  "safe_circle": {
+    "center_px": [
+      128,
+      128
+    ],
+    "diameter_px": 220,
+    "method": "Entire visible portrait fits inside the circle by uniform scaling, not by cutting pixels"
+  },
+  "items": [
+    {
+      "id": "ba-tu",
+      "name": "Bà Tư",
+      "age": 62,
+      "role": "Chủ trọ",
+      "origin": "Bến Tre",
+      "traits": [
+        "kỹ tính",
+        "tốt bụng",
+        "hay càm ràm"
+      ],
+      "clothing_tone": "#f2dcc2",
+      "file": "/assets/npc/ba-tu.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        56,
+        43,
+        200,
+        213
+      ],
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "minimum_margin_px": 43,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 100.432,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 27862,
+      "compression": "lossless",
+      "sha256": "52edfe0be8c68eaa69d20e877016dab63ced7a0f0a10a574a10f3e5188208f4c"
+    },
+    {
+      "id": "dev-an",
+      "name": "Minh An",
+      "age": 26,
+      "role": "Lập trình viên",
+      "origin": "Nam Định",
+      "traits": [
+        "hay nói",
+        "nhiệt tình",
+        "hơi vội"
+      ],
+      "clothing_tone": "#cfe3d8",
+      "file": "/assets/npc/dev-an.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        56,
+        46,
+        200,
+        210
+      ],
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "minimum_margin_px": 46,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 94.966,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 26326,
+      "compression": "lossless",
+      "sha256": "85324aff74afc924343a6152679acd9158bef0c13bae7ef0cb64a481a203bcb1"
+    },
+    {
+      "id": "dev-linh",
+      "name": "Thảo Linh",
+      "age": 24,
+      "role": "Thiết kế giao diện",
+      "origin": "Huế",
+      "traits": [
+        "nhẹ nhàng",
+        "cầu toàn",
+        "ngại xung đột"
+      ],
+      "clothing_tone": "#f3d6cf",
+      "file": "/assets/npc/dev-linh.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        54,
+        33,
+        202,
+        222
+      ],
+      "visible_center_px": [
+        128,
+        127
+      ],
+      "minimum_margin_px": 33,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 104.511,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 33348,
+      "compression": "lossless",
+      "sha256": "2df287145d2caefedbe9509411f92e29c5e19094dff07216c618698703886f40"
+    },
+    {
+      "id": "dev-huy",
+      "name": "Gia Huy",
+      "age": 29,
+      "role": "Kiểm thử phần mềm",
+      "origin": "Sài Gòn",
+      "traits": [
+        "thẳng thắn",
+        "hay đùa",
+        "dễ cáu"
+      ],
+      "clothing_tone": "#dcd6f0",
+      "file": "/assets/npc/dev-huy.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        56,
+        42,
+        199,
+        214
+      ],
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "minimum_margin_px": 42,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 94.311,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 24206,
+      "compression": "lossless",
+      "sha256": "2d17183afe7068bce27433144379a336a6f0dbdcceb8206f3e638698b9c8cf5a"
+    },
+    {
+      "id": "dev-trang",
+      "name": "Thu Trang",
+      "age": 33,
+      "role": "Điều phối dự án",
+      "origin": "Hà Nội",
+      "traits": [
+        "nghiêm",
+        "công bằng",
+        "ít khen"
+      ],
+      "clothing_tone": "#f2e2bd",
+      "file": "/assets/npc/dev-trang.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        53,
+        32,
+        202,
+        223
+      ],
+      "visible_center_px": [
+        127,
+        127.5
+      ],
+      "minimum_margin_px": 32,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 107.007,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 29762,
+      "compression": "lossless",
+      "sha256": "96c2021aa7cd68c1b057db35d26a5e3c161f586b43cd67288c2fbac80d8ec35d"
+    },
+    {
+      "id": "co-hanh",
+      "name": "Cô Hạnh",
+      "age": 48,
+      "role": "Bán rau ở chợ",
+      "origin": "Quảng Ngãi",
+      "traits": [
+        "nhanh nhảu",
+        "rộng rãi",
+        "hay mặc cả"
+      ],
+      "clothing_tone": "#d9ecc8",
+      "file": "/assets/npc/co-hanh.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        61,
+        42,
+        194,
+        214
+      ],
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "minimum_margin_px": 42,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 94.818,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 27602,
+      "compression": "lossless",
+      "sha256": "a7d65e353e2cbf44c96a52bc037a8da809259ce87da87efa7325182e55bef56f"
+    },
+    {
+      "id": "chu-sau",
+      "name": "Chú Sáu",
+      "age": 67,
+      "role": "Hàng xóm về hưu",
+      "origin": "Cần Thơ",
+      "traits": [
+        "chậm rãi",
+        "hoài cổ",
+        "tự trọng cao"
+      ],
+      "clothing_tone": "#e6dccb",
+      "file": "/assets/npc/chu-sau.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        56,
+        47,
+        200,
+        209
+      ],
+      "visible_center_px": [
+        128,
+        128.5
+      ],
+      "minimum_margin_px": 47,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 94.311,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 25248,
+      "compression": "lossless",
+      "sha256": "bae64cfbdb81245f06395ea40e4208dda84dd33878b4b50d08ed05e8cb58bf38"
+    },
+    {
+      "id": "tuan",
+      "name": "Tuấn",
+      "age": 22,
+      "role": "Sinh viên chạy giao hàng",
+      "origin": "Thanh Hoá",
+      "traits": [
+        "lạc quan",
+        "liều",
+        "hay quên"
+      ],
+      "clothing_tone": "#d6e6f2",
+      "file": "/assets/npc/tuan.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        54,
+        42,
+        201,
+        214
+      ],
+      "visible_center_px": [
+        127.5,
+        128.5
+      ],
+      "minimum_margin_px": 42,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 97.788,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 26014,
+      "compression": "lossless",
+      "sha256": "a436633aca419829e61f46c98130c91daf2e390f36efec185d98e46a41cab57c"
+    },
+    {
+      "id": "chi-mai",
+      "name": "Chị Mai",
+      "age": 35,
+      "role": "Bán bánh mì vỉa hè",
+      "origin": "Quảng Nam",
+      "traits": [
+        "chịu khó",
+        "kiệm lời",
+        "giữ chữ tín"
+      ],
+      "clothing_tone": "#f4e0c9",
+      "file": "/assets/npc/chi-mai.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        58,
+        42,
+        197,
+        214
+      ],
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "minimum_margin_px": 42,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 96.884,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 26260,
+      "compression": "lossless",
+      "sha256": "e54d9494d38a00253ef65b5cc3b8c419ef0187e03ff976307c9c1836e8374cf4"
+    },
+    {
+      "id": "bs-quan",
+      "name": "Bác sĩ Quân",
+      "age": 41,
+      "role": "Bác sĩ",
+      "origin": "Hải Phòng",
+      "traits": [
+        "điềm đạm",
+        "thực tế",
+        "hơi khô"
+      ],
+      "clothing_tone": "#d3e7e6",
+      "file": "/assets/npc/bs-quan.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        47,
+        37,
+        208,
+        219
+      ],
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "minimum_margin_px": 37,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 103.007,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 29026,
+      "compression": "lossless",
+      "sha256": "aef91a0abc75e0742d4a13293bfd5c348cce3690c9fb6cd4e9dfeb5dc1c4ba08"
+    },
+    {
+      "id": "bao-ngoc",
+      "name": "Bảo Ngọc",
+      "age": 27,
+      "role": "Giao dịch viên ngân hàng",
+      "origin": "Đà Lạt",
+      "traits": [
+        "tham vọng",
+        "chu đáo",
+        "thích số liệu"
+      ],
+      "clothing_tone": "#efd9e6",
+      "file": "/assets/npc/bao-ngoc.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        60,
+        42,
+        195,
+        214
+      ],
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "minimum_margin_px": 42,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 94.088,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 28320,
+      "compression": "lossless",
+      "sha256": "f6783171c605a36802931c1b47c7a73d1ae7e06b2fa8ca6cca9b23534a672023"
+    },
+    {
+      "id": "me",
+      "name": "Mẹ",
+      "age": 50,
+      "role": "Mẹ ở quê",
+      "origin": "quê nhà",
+      "traits": [
+        "lo xa",
+        "thương con",
+        "giấu chuyện khó"
+      ],
+      "clothing_tone": "#f0e4cf",
+      "file": "/assets/npc/me.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        52,
+        31,
+        203,
+        224
+      ],
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "minimum_margin_px": 31,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 104.099,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 32088,
+      "compression": "lossless",
+      "sha256": "e49e1a67704b8be67b1a467230ed596c373fa59a0b1e0b8034843cfd511469ca"
+    },
+    {
+      "id": "chu-luc",
+      "name": "Chú Lực",
+      "age": 52,
+      "role": "Bán thịt cá ở chợ",
+      "origin": "Nghệ An",
+      "traits": [
+        "cau có",
+        "thật thà",
+        "cẩn thận"
+      ],
+      "clothing_tone": "#f1d2cc",
+      "file": "/assets/npc/chu-luc.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        52,
+        46,
+        203,
+        210
+      ],
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "minimum_margin_px": 46,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 96.128,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 27938,
+      "compression": "lossless",
+      "sha256": "33bbbcc509b9670ea46ae4a70d5739ea7d6540d15ac28dd372188926ac4e1987"
+    },
+    {
+      "id": "ba-nam",
+      "name": "Bà Năm",
+      "age": 70,
+      "role": "Bán tạp hoá ở chợ",
+      "origin": "Bến Tre",
+      "traits": [
+        "hiền",
+        "hay hỏi han",
+        "tiết kiệm"
+      ],
+      "clothing_tone": "#f2e6c4",
+      "file": "/assets/npc/ba-nam.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        62,
+        41,
+        194,
+        215
+      ],
+      "visible_center_px": [
+        128,
+        128
+      ],
+      "minimum_margin_px": 41,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 96.605,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 27258,
+      "compression": "lossless",
+      "sha256": "54e2390561dea5576dcac6bf5d2beac3d8d2501a4a9172ed6cb86c68040fc741"
+    },
+    {
+      "id": "lan",
+      "name": "Mai Lan",
+      "age": 28,
+      "role": "Lễ tân tòa nhà",
+      "origin": "Đà Nẵng",
+      "traits": [
+        "vui vẻ",
+        "chu đáo",
+        "nhanh nhảu"
+      ],
+      "clothing_tone": "#e9cfc4",
+      "file": "/assets/npc/lan.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        58,
+        39,
+        198,
+        216
+      ],
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "minimum_margin_px": 39,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 97.604,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 28638,
+      "compression": "lossless",
+      "sha256": "d5fa013ac427e414a6f688ea98a6a4fd0f30dd72c1fb362a51346a46cba93af3"
+    },
+    {
+      "id": "minh",
+      "name": "Đức Minh",
+      "age": 45,
+      "role": "Quản lý mặt bằng",
+      "origin": "Hà Nội",
+      "traits": [
+        "cẩn thận",
+        "kiệm lời",
+        "giữ chữ tín"
+      ],
+      "clothing_tone": "#cfdde1",
+      "file": "/assets/npc/minh.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        48,
+        38,
+        208,
+        218
+      ],
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "minimum_margin_px": 38,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 102.374,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 29232,
+      "compression": "lossless",
+      "sha256": "5b1be7cdc3484381b310d00a81f8f745c14854bcd600cfa58ae25d0734dd43f3"
+    },
+    {
+      "id": "ha",
+      "name": "Ngọc Hà",
+      "age": 31,
+      "role": "Điều phối tuyển dụng",
+      "origin": "Huế",
+      "traits": [
+        "tò mò",
+        "tốt bụng",
+        "cẩn thận"
+      ],
+      "clothing_tone": "#dcd8e6",
+      "file": "/assets/npc/ha.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        54,
+        38,
+        201,
+        218
+      ],
+      "visible_center_px": [
+        127.5,
+        128
+      ],
+      "minimum_margin_px": 38,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 102.54,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 28628,
+      "compression": "lossless",
+      "sha256": "042398da9fa293e72f6b6908aa92c4b5e9055ba60fdf08084318ae703e985e81"
+    },
+    {
+      "id": "bao",
+      "name": "Quốc Bảo",
+      "age": 34,
+      "role": "Kỹ thuật viên tòa nhà",
+      "origin": "Sài Gòn",
+      "traits": [
+        "thật thà",
+        "vội vàng",
+        "hay đùa"
+      ],
+      "clothing_tone": "#d6dfcc",
+      "file": "/assets/npc/bao.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "content_bbox_px": [
+        53,
+        45,
+        203,
+        210
+      ],
+      "visible_center_px": [
+        128,
+        127.5
+      ],
+      "minimum_margin_px": 45,
+      "rgba": true,
+      "safe_circle": {
+        "center_px": [
+          128,
+          128
+        ],
+        "diameter_px": 220,
+        "max_alpha_radius_px": 95.344,
+        "alpha_pixels_outside": 0
+      },
+      "bytes": 26400,
+      "compression": "lossless",
+      "sha256": "ed4b6fa50a06084d7abbaae7ec56928397788fbfe1cd31a9db1db4f5f8cc6ff6"
+    }
+  ]
+}
