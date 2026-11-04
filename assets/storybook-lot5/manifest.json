@@ -1,0 +1,6410 @@
+{
+  "schema_version": 2,
+  "issue": 89,
+  "lot": 5,
+  "tile_px": [
+    128,
+    64
+  ],
+  "z_px": 32,
+  "projection": "orthographic-2:1",
+  "geometry": "x=originX+64*(x-y); y=originY+32*(x+y)-z",
+  "anchor": "actual bottom footprint vertex; rectangular anchors are off-center",
+  "rotation": "local a: +Y; b: +X; c: -Y; d: -X, around footprint center; b/d swap width and depth",
+  "runtime_directory": "app/public/assets/furniture",
+  "authoring_source": "render.cjs",
+  "items": [
+    {
+      "id": "bed",
+      "model": "basic",
+      "name": "Giường đơn khung sắt",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/bed-basic_a.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          128
+        ],
+        [
+          320,
+          192
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 18180,
+      "alpha_bbox_px": [
+        14,
+        30,
+        306,
+        278
+      ],
+      "sha256": "c1da3cd32418d80eefdafafb77420c14dda904bc7af44de5c0a687c5edc8ea7e"
+    },
+    {
+      "id": "bed",
+      "model": "basic",
+      "name": "Giường đơn khung sắt",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/bed-basic_b.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          320,
+          224
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 18088,
+      "alpha_bbox_px": [
+        14,
+        28,
+        306,
+        278
+      ],
+      "sha256": "48a2acff5dfd05de6ec8ec52db47849252b9bbf82934ef3382198021d659ea00"
+    },
+    {
+      "id": "bed",
+      "model": "basic",
+      "name": "Giường đơn khung sắt",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/bed-basic_c.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          128
+        ],
+        [
+          320,
+          192
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 19690,
+      "alpha_bbox_px": [
+        14,
+        83,
+        306,
+        278
+      ],
+      "sha256": "c68fd56de582cb43dad87991bc2f87389ef7726da478b92568f76b06699dbd5d"
+    },
+    {
+      "id": "bed",
+      "model": "basic",
+      "name": "Giường đơn khung sắt",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/bed-basic_d.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          320,
+          224
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 20281,
+      "alpha_bbox_px": [
+        14,
+        84,
+        306,
+        278
+      ],
+      "sha256": "c519eda672d4777f8edf8634042f1d2a6857399e65c607d8209f9d2a111d22e7"
+    },
+    {
+      "id": "bed",
+      "model": "comfort",
+      "name": "Giường gỗ có ngăn kéo",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/bed-comfort_a.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          128
+        ],
+        [
+          320,
+          192
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 43647,
+      "alpha_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "sha256": "d91b36a18b809fb2a99076ff10f733fcb4e500e7ce39fc83043ddcc7396507a1"
+    },
+    {
+      "id": "bed",
+      "model": "comfort",
+      "name": "Giường gỗ có ngăn kéo",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/bed-comfort_b.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          320,
+          224
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 44286,
+      "alpha_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "sha256": "d441ad457012a9a287d1a65a1e03f6928ee2e12bc467775dd3e6bdde9dcbc83e"
+    },
+    {
+      "id": "bed",
+      "model": "comfort",
+      "name": "Giường gỗ có ngăn kéo",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/bed-comfort_c.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          128
+        ],
+        [
+          320,
+          192
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 34151,
+      "alpha_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "sha256": "77eb2174472647158c2938df39672092cc62b66fd88b8f7a492aa4036ba12e7b"
+    },
+    {
+      "id": "bed",
+      "model": "comfort",
+      "name": "Giường gỗ có ngăn kéo",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/bed-comfort_d.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          320,
+          224
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 34361,
+      "alpha_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "sha256": "27a904de308966a7187970a79cb3fbadc8147ea3fc6e4c62307482dc1e2f7803"
+    },
+    {
+      "id": "bed",
+      "model": "premium",
+      "name": "Giường bọc nệm có đèn đầu giường",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/bed-premium_a.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          128
+        ],
+        [
+          320,
+          192
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 54381,
+      "alpha_bbox_px": [
+        14,
+        13,
+        309,
+        277
+      ],
+      "sha256": "e880f1b6057aece8f25b1d7873800cc2fd62da94609a6b144aaa2e95c2e846aa"
+    },
+    {
+      "id": "bed",
+      "model": "premium",
+      "name": "Giường bọc nệm có đèn đầu giường",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/bed-premium_b.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          320,
+          224
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 54793,
+      "alpha_bbox_px": [
+        11,
+        13,
+        306,
+        277
+      ],
+      "sha256": "75c921783e1f796b607f2eda53998ee8e82d035582d3d6a6810e9ae48ba55893"
+    },
+    {
+      "id": "bed",
+      "model": "premium",
+      "name": "Giường bọc nệm có đèn đầu giường",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/bed-premium_c.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          128
+        ],
+        [
+          320,
+          192
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 38632,
+      "alpha_bbox_px": [
+        11,
+        85,
+        306,
+        278
+      ],
+      "sha256": "8714109b1beef25643ee54d2c09d93f1d68a9639a20c06876fd4d3dd05265afb"
+    },
+    {
+      "id": "bed",
+      "model": "premium",
+      "name": "Giường bọc nệm có đèn đầu giường",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/bed-premium_d.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          320,
+          224
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 39621,
+      "alpha_bbox_px": [
+        14,
+        85,
+        309,
+        278
+      ],
+      "sha256": "e729dd1fc58edb477d5865337784d2eddd310ae2c0d1558e492110521ce88b5e"
+    },
+    {
+      "id": "wardrobe",
+      "model": "basic",
+      "name": "Tủ vải khung thép",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/wardrobe-basic_a.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        64,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          192
+        ],
+        [
+          192,
+          256
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 23754,
+      "alpha_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "sha256": "0c109ca4af0dd95064721f7e5f79cdc6cac647794cb9cff04e1b4447fdc82537"
+    },
+    {
+      "id": "wardrobe",
+      "model": "basic",
+      "name": "Tủ vải khung thép",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/wardrobe-basic_b.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          64,
+          288
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 23081,
+      "alpha_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "sha256": "4c10a1d00db697fa1a3490b4fca6981c8d5b65f8b83f3b2df5ab8945e6774885"
+    },
+    {
+      "id": "wardrobe",
+      "model": "basic",
+      "name": "Tủ vải khung thép",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/wardrobe-basic_c.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        64,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          192
+        ],
+        [
+          192,
+          256
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 23297,
+      "alpha_bbox_px": [
+        12,
+        23,
+        180,
+        278
+      ],
+      "sha256": "6a061af042489776ac486fa1fd9866c8e363b8ef498541a4535a7fced7050b3a"
+    },
+    {
+      "id": "wardrobe",
+      "model": "basic",
+      "name": "Tủ vải khung thép",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/wardrobe-basic_d.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          64,
+          288
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 21968,
+      "alpha_bbox_px": [
+        12,
+        24,
+        180,
+        278
+      ],
+      "sha256": "9d3c4b59de955766fe45e59cbdaf7b4e24e6a08530ebdf355559150d3b2b267b"
+    },
+    {
+      "id": "wardrobe",
+      "model": "comfort",
+      "name": "Tủ gỗ hai cánh",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/wardrobe-comfort_a.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        64,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          192
+        ],
+        [
+          192,
+          256
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 33073,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "sha256": "6c1f9386637bcab675434ba49d3c0624ca8afc0603251620e9057da97af6df4b"
+    },
+    {
+      "id": "wardrobe",
+      "model": "comfort",
+      "name": "Tủ gỗ hai cánh",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/wardrobe-comfort_b.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          64,
+          288
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 30840,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "sha256": "d4f47c83de63ae4b0226c0ff4b7abba0556ffc906a293f3dca5403fb0f86b641"
+    },
+    {
+      "id": "wardrobe",
+      "model": "comfort",
+      "name": "Tủ gỗ hai cánh",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/wardrobe-comfort_c.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        64,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          192
+        ],
+        [
+          192,
+          256
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 25079,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "sha256": "86b2ab5a0512e4d97af3c7e399bd7d7b874bc838fe2f5914e286756d13dde345"
+    },
+    {
+      "id": "wardrobe",
+      "model": "comfort",
+      "name": "Tủ gỗ hai cánh",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/wardrobe-comfort_d.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          64,
+          288
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 23823,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "sha256": "75347684c3fdcbea30c203aa329b41711b1aeed8700c43dc53e628b3e442c19e"
+    },
+    {
+      "id": "wardrobe",
+      "model": "premium",
+      "name": "Tủ gỗ có gương và đèn",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/wardrobe-premium_a.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        64,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          192
+        ],
+        [
+          192,
+          256
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 28557,
+      "alpha_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "sha256": "eb361fbf5728bc7d55a6d6b15373592d2f8d2b809654ab9f4473318aeca27de3"
+    },
+    {
+      "id": "wardrobe",
+      "model": "premium",
+      "name": "Tủ gỗ có gương và đèn",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/wardrobe-premium_b.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          64,
+          288
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 25948,
+      "alpha_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "sha256": "d2b468da065ef3e119d04f623167a709417de165a0d9fce299f0bb18bbb73aaf"
+    },
+    {
+      "id": "wardrobe",
+      "model": "premium",
+      "name": "Tủ gỗ có gương và đèn",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/wardrobe-premium_c.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        64,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          192
+        ],
+        [
+          192,
+          256
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 20914,
+      "alpha_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "sha256": "e277da1c83213fc390d3c68f2ed9cc6c285fef16d0baeb6852272d5196766fe5"
+    },
+    {
+      "id": "wardrobe",
+      "model": "premium",
+      "name": "Tủ gỗ có gương và đèn",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/wardrobe-premium_d.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          64,
+          288
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 20116,
+      "alpha_bbox_px": [
+        9,
+        7,
+        183,
+        278
+      ],
+      "sha256": "738f81b5c5340fbcc24d7fc661e18c39ff60509af438203a06261e2087702b8e"
+    },
+    {
+      "id": "desk",
+      "model": "basic",
+      "name": "Bàn gấp gọn",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/desk-basic_a.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 12987,
+      "alpha_bbox_px": [
+        44,
+        70,
+        229,
+        223
+      ],
+      "sha256": "ea0d8a5bd2ec511a06b61fec649138d7cd84ed0dce8a820823ba63f414ff2e72"
+    },
+    {
+      "id": "desk",
+      "model": "basic",
+      "name": "Bàn gấp gọn",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/desk-basic_b.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 12733,
+      "alpha_bbox_px": [
+        27,
+        67,
+        212,
+        223
+      ],
+      "sha256": "d8fff3c7d8b48bfa7651b4eeef5b79f518fb6b822acf364a69a2fec31f890e37"
+    },
+    {
+      "id": "desk",
+      "model": "basic",
+      "name": "Bàn gấp gọn",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/desk-basic_c.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 11916,
+      "alpha_bbox_px": [
+        27,
+        81,
+        212,
+        233
+      ],
+      "sha256": "25f79ec5d7052011d6232b4c2f1503320ae7f894cad7b0b6e9edaea380c2a3f9"
+    },
+    {
+      "id": "desk",
+      "model": "basic",
+      "name": "Bàn gấp gọn",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/desk-basic_d.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 12187,
+      "alpha_bbox_px": [
+        44,
+        81,
+        229,
+        233
+      ],
+      "sha256": "f27ec3732aef8a89332bd26b164a9b19d1cec23cad37f94128319db843fc1ef7"
+    },
+    {
+      "id": "desk",
+      "model": "comfort",
+      "name": "Bàn gỗ có kệ sách",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/desk-comfort_a.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 27468,
+      "alpha_bbox_px": [
+        44,
+        17,
+        232,
+        228
+      ],
+      "sha256": "6e265cfa3e95b1594b17653a1bbb364109db4a2b9b95f24cbb8c2d8d1d131596"
+    },
+    {
+      "id": "desk",
+      "model": "comfort",
+      "name": "Bàn gỗ có kệ sách",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/desk-comfort_b.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 25293,
+      "alpha_bbox_px": [
+        24,
+        17,
+        212,
+        228
+      ],
+      "sha256": "27326e399e538c1e1dafadcca774071360053bcc2a872a59c74aaaffa0e34b27"
+    },
+    {
+      "id": "desk",
+      "model": "comfort",
+      "name": "Bàn gỗ có kệ sách",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/desk-comfort_c.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 19880,
+      "alpha_bbox_px": [
+        24,
+        57,
+        212,
+        237
+      ],
+      "sha256": "6dd89aa1069b8a98a991d52b1f7acbe59d400ba4501944467f8dd997aadb4873"
+    },
+    {
+      "id": "desk",
+      "model": "comfort",
+      "name": "Bàn gỗ có kệ sách",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/desk-comfort_d.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 20243,
+      "alpha_bbox_px": [
+        44,
+        57,
+        232,
+        237
+      ],
+      "sha256": "58f4cc1f4b8e397c3b6d5743a3b96c0b272aea238fca8e96e1cbfd928505de41"
+    },
+    {
+      "id": "desk",
+      "model": "premium",
+      "name": "Bàn nâng hạ có màn phụ",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/desk-premium_a.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 15100,
+      "alpha_bbox_px": [
+        43,
+        55,
+        228,
+        228
+      ],
+      "sha256": "4a6bac0d92ca0b4916c88e813d2c11506be3b474df9e4b9be6220fc735ffaab3"
+    },
+    {
+      "id": "desk",
+      "model": "premium",
+      "name": "Bàn nâng hạ có màn phụ",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/desk-premium_b.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 15123,
+      "alpha_bbox_px": [
+        28,
+        31,
+        213,
+        228
+      ],
+      "sha256": "149ed8cbe9c25d3ee6b312fa25468f9a3eb03d8201f31f256a3cfb020a42e0cb"
+    },
+    {
+      "id": "desk",
+      "model": "premium",
+      "name": "Bàn nâng hạ có màn phụ",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/desk-premium_c.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 14385,
+      "alpha_bbox_px": [
+        28,
+        60,
+        213,
+        237
+      ],
+      "sha256": "1f1305346f72b281cf000105e3cfabbabebae5847cd4f38943a68f1777071407"
+    },
+    {
+      "id": "desk",
+      "model": "premium",
+      "name": "Bàn nâng hạ có màn phụ",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/desk-premium_d.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 13169,
+      "alpha_bbox_px": [
+        43,
+        76,
+        228,
+        237
+      ],
+      "sha256": "2b922614246e3cbab3857f933059fa1004fab03dde464c23d631fbea55f6509a"
+    },
+    {
+      "id": "table",
+      "model": "basic",
+      "name": "Bàn nhựa xếp",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/table-basic_a.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 8346,
+      "alpha_bbox_px": [
+        21,
+        68,
+        235,
+        179
+      ],
+      "sha256": "39b94d6752fb922422c8dafb1b3c8787dfdf2d83239ef9854b09d4700e893160"
+    },
+    {
+      "id": "table",
+      "model": "basic",
+      "name": "Bàn nhựa xếp",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/table-basic_b.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 6334,
+      "alpha_bbox_px": [
+        62,
+        68,
+        194,
+        210
+      ],
+      "sha256": "eabbad20fd293abfeb3c901c1ece146a6102f97cea5b11b463a966b5f24597d4"
+    },
+    {
+      "id": "table",
+      "model": "basic",
+      "name": "Bàn nhựa xếp",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/table-basic_c.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 8694,
+      "alpha_bbox_px": [
+        21,
+        68,
+        235,
+        179
+      ],
+      "sha256": "550c3402b4677c8b17c669ee83083ea96418efbc4fe20ecd76d1be12b5159d0f"
+    },
+    {
+      "id": "table",
+      "model": "basic",
+      "name": "Bàn nhựa xếp",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/table-basic_d.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 6374,
+      "alpha_bbox_px": [
+        62,
+        68,
+        194,
+        210
+      ],
+      "sha256": "fa2492ef84895d9c8634a60f5e0bb2356e48f57f3ccb86163799f0e063628ca4"
+    },
+    {
+      "id": "table",
+      "model": "comfort",
+      "name": "Bàn gỗ tròn",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/table-comfort_a.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 19826,
+      "alpha_bbox_px": [
+        21,
+        71,
+        235,
+        173
+      ],
+      "sha256": "5cb5f672cb0668b03de7a57b9f881f571472ec01310d909d979855373ebe67fd"
+    },
+    {
+      "id": "table",
+      "model": "comfort",
+      "name": "Bàn gỗ tròn",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/table-comfort_b.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 15114,
+      "alpha_bbox_px": [
+        72,
+        43,
+        184,
+        210
+      ],
+      "sha256": "b43d4f56611bfdb3da27997262be046440242ab03f44cce34721ccde017f4233"
+    },
+    {
+      "id": "table",
+      "model": "comfort",
+      "name": "Bàn gỗ tròn",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/table-comfort_c.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 19769,
+      "alpha_bbox_px": [
+        21,
+        71,
+        235,
+        178
+      ],
+      "sha256": "0c1e23e2fcd803722254f670b204e88de0ad6c6c550631f1cf4d114920d9f320"
+    },
+    {
+      "id": "table",
+      "model": "comfort",
+      "name": "Bàn gỗ tròn",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/table-comfort_d.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 15314,
+      "alpha_bbox_px": [
+        72,
+        42,
+        184,
+        210
+      ],
+      "sha256": "9d405fff387d1dff2960230a3095f617b2e6b97cef8d470230cf72f44fdce880"
+    },
+    {
+      "id": "table",
+      "model": "premium",
+      "name": "Bàn mặt đá chân gỗ",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/table-premium_a.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 21316,
+      "alpha_bbox_px": [
+        18,
+        41,
+        238,
+        212
+      ],
+      "sha256": "aaeed51602f7d6821def73cb4302c9a5a8112a607832289817e500514c65f858"
+    },
+    {
+      "id": "table",
+      "model": "premium",
+      "name": "Bàn mặt đá chân gỗ",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/table-premium_b.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 20106,
+      "alpha_bbox_px": [
+        18,
+        41,
+        238,
+        212
+      ],
+      "sha256": "0063a5399df49b678c8ca646e2ce0cff0c7a4fc269e4cec65a36c428ac47aa48"
+    },
+    {
+      "id": "table",
+      "model": "premium",
+      "name": "Bàn mặt đá chân gỗ",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/table-premium_c.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 21703,
+      "alpha_bbox_px": [
+        18,
+        40,
+        238,
+        212
+      ],
+      "sha256": "b06041dc5b880e6b4dbde99f9bea3d5364a5f7c5a7341cb2e65b6fcea2c92936"
+    },
+    {
+      "id": "table",
+      "model": "premium",
+      "name": "Bàn mặt đá chân gỗ",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/table-premium_d.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        224
+      ],
+      "height_px": 96,
+      "render_extent_height_px": 96,
+      "height_z": 3,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        96
+      ],
+      "footprint_center_px": [
+        128,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          96
+        ],
+        [
+          256,
+          160
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 20501,
+      "alpha_bbox_px": [
+        18,
+        40,
+        238,
+        212
+      ],
+      "sha256": "5f70421d16ef4d6f7c70c3cc4d34c934d608a5fb97163cf79dcfbea32594281a"
+    },
+    {
+      "id": "plant",
+      "model": "basic",
+      "name": "Chậu xương rồng",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/plant-basic_a.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 3976,
+      "alpha_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "sha256": "d55c0463e989027079553f80f278eeb30a482c6aa3d875f65c420d303725cbc0"
+    },
+    {
+      "id": "plant",
+      "model": "basic",
+      "name": "Chậu xương rồng",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/plant-basic_b.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 4021,
+      "alpha_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "sha256": "0044deda34925128a869319e865bf86edfbf3ffdc9603b0a037dca7fc2438a4d"
+    },
+    {
+      "id": "plant",
+      "model": "basic",
+      "name": "Chậu xương rồng",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/plant-basic_c.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 3811,
+      "alpha_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "sha256": "9a12d16cc85c1ee1f14b9ae04f9973526b6f6817ff788abd1abed8a2e310f220"
+    },
+    {
+      "id": "plant",
+      "model": "basic",
+      "name": "Chậu xương rồng",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/plant-basic_d.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 3998,
+      "alpha_bbox_px": [
+        44,
+        103,
+        84,
+        165
+      ],
+      "sha256": "2f997fbb913c94accb2c1456f3fd67e283bcf6cbedb83ea3981184026e121857"
+    },
+    {
+      "id": "plant",
+      "model": "comfort",
+      "name": "Chậu trầu bà",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/plant-comfort_a.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 5350,
+      "alpha_bbox_px": [
+        37,
+        109,
+        90,
+        165
+      ],
+      "sha256": "4d87d8df567669a4fa423788cbc509bcb8a304796701f1705c2e11d4ffac80b9"
+    },
+    {
+      "id": "plant",
+      "model": "comfort",
+      "name": "Chậu trầu bà",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/plant-comfort_b.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 5408,
+      "alpha_bbox_px": [
+        38,
+        109,
+        90,
+        165
+      ],
+      "sha256": "7ac4a9ebe7a663cfc603da67eb9b0bf0ad64eb2fc90ce6519cbcb91f05fee3e5"
+    },
+    {
+      "id": "plant",
+      "model": "comfort",
+      "name": "Chậu trầu bà",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/plant-comfort_c.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 5451,
+      "alpha_bbox_px": [
+        38,
+        109,
+        91,
+        165
+      ],
+      "sha256": "576c5cf4bbec29940ef84b531aa6e00bf745aef2872deb0d5407a87790016d45"
+    },
+    {
+      "id": "plant",
+      "model": "comfort",
+      "name": "Chậu trầu bà",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/plant-comfort_d.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 5411,
+      "alpha_bbox_px": [
+        38,
+        108,
+        90,
+        165
+      ],
+      "sha256": "81c94dbd90d131f1b7f34ab1507d62b8ab50095cf561ecde9a11a24114cd61d0"
+    },
+    {
+      "id": "plant",
+      "model": "premium",
+      "name": "Bàng Singapore chậu gốm",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/plant-premium_a.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 9316,
+      "alpha_bbox_px": [
+        38,
+        39,
+        90,
+        165
+      ],
+      "sha256": "21879bfac66078d682e6ca977ffd2b55dfe170dc075735f0c03f0d1a8cd4faf0"
+    },
+    {
+      "id": "plant",
+      "model": "premium",
+      "name": "Bàng Singapore chậu gốm",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/plant-premium_b.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 9016,
+      "alpha_bbox_px": [
+        39,
+        49,
+        90,
+        165
+      ],
+      "sha256": "c7b2e1ede7b1211f1d57f4980be157279f4777567debdd3b71ca2645771c0159"
+    },
+    {
+      "id": "plant",
+      "model": "premium",
+      "name": "Bàng Singapore chậu gốm",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/plant-premium_c.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 8758,
+      "alpha_bbox_px": [
+        38,
+        50,
+        90,
+        165
+      ],
+      "sha256": "806962e792f89dcc6a4c76d910d9e1780708ae8aeb174b86c946e32327b77b1a"
+    },
+    {
+      "id": "plant",
+      "model": "premium",
+      "name": "Bàng Singapore chậu gốm",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/plant-premium_d.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 8989,
+      "alpha_bbox_px": [
+        38,
+        47,
+        89,
+        165
+      ],
+      "sha256": "cb41a4debc8cf8db2f075154895f2dbfbf790df6458305cdb9f26b576bc2ac61"
+    },
+    {
+      "id": "lamp",
+      "model": "basic",
+      "name": "Đèn kẹp",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/lamp-basic_a.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 3992,
+      "alpha_bbox_px": [
+        43,
+        84,
+        90,
+        169
+      ],
+      "sha256": "7e051b2eba231be71be7637fb2dad74b00fe5e5c62a0d16da5432cfca5a3f8ce"
+    },
+    {
+      "id": "lamp",
+      "model": "basic",
+      "name": "Đèn kẹp",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/lamp-basic_b.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 4211,
+      "alpha_bbox_px": [
+        38,
+        76,
+        89,
+        169
+      ],
+      "sha256": "c5a2573a5b8254ceba4545fa5a379c12173fa74f7a8aa2fa9b3dde3c31989aaf"
+    },
+    {
+      "id": "lamp",
+      "model": "basic",
+      "name": "Đèn kẹp",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/lamp-basic_c.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 4140,
+      "alpha_bbox_px": [
+        38,
+        75,
+        85,
+        171
+      ],
+      "sha256": "caecccfb4c33a62df86c44f930f294fb4b656d6ce1f6cd89b0d9a3f41d26e681"
+    },
+    {
+      "id": "lamp",
+      "model": "basic",
+      "name": "Đèn kẹp",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/lamp-basic_d.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 4078,
+      "alpha_bbox_px": [
+        39,
+        83,
+        90,
+        171
+      ],
+      "sha256": "ef5c075945df76cd9761242d99de8733994b4a2a779345f5c91a89d1430d8bb2"
+    },
+    {
+      "id": "lamp",
+      "model": "comfort",
+      "name": "Đèn gốm",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/lamp-comfort_a.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 9033,
+      "alpha_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "sha256": "d3caf8a2b8e2172c007ad52b3f6a4175f713db24c25629e69f0b7d41dec79a4b"
+    },
+    {
+      "id": "lamp",
+      "model": "comfort",
+      "name": "Đèn gốm",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/lamp-comfort_b.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 9046,
+      "alpha_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "sha256": "1f22eb247893a19323241252e2145bd4c46b6deaf786121d38ea2ae95196f5d3"
+    },
+    {
+      "id": "lamp",
+      "model": "comfort",
+      "name": "Đèn gốm",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/lamp-comfort_c.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 9046,
+      "alpha_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "sha256": "1f22eb247893a19323241252e2145bd4c46b6deaf786121d38ea2ae95196f5d3"
+    },
+    {
+      "id": "lamp",
+      "model": "comfort",
+      "name": "Đèn gốm",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/lamp-comfort_d.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 9049,
+      "alpha_bbox_px": [
+        33,
+        62,
+        95,
+        169
+      ],
+      "sha256": "9d69617025cc333dcc8571c1a05d9d014bb3230751db283e862670b37e77d3e3"
+    },
+    {
+      "id": "lamp",
+      "model": "premium",
+      "name": "Đèn đồng chao vải",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/lamp-premium_a.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 8169,
+      "alpha_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "sha256": "866f7e0c18c71a1ed47c2ce70a7bc1a5c6b83bc6a40c7abf592546359bbda15a"
+    },
+    {
+      "id": "lamp",
+      "model": "premium",
+      "name": "Đèn đồng chao vải",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/lamp-premium_b.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 8185,
+      "alpha_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "sha256": "13d3829fef2ceb7d442544d3a6c8ec71797880512c3f6ccabeda2de05ef1fa0d"
+    },
+    {
+      "id": "lamp",
+      "model": "premium",
+      "name": "Đèn đồng chao vải",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/lamp-premium_c.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 8185,
+      "alpha_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "sha256": "13d3829fef2ceb7d442544d3a6c8ec71797880512c3f6ccabeda2de05ef1fa0d"
+    },
+    {
+      "id": "lamp",
+      "model": "premium",
+      "name": "Đèn đồng chao vải",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/lamp-premium_d.png",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        1,
+        1
+      ],
+      "frame_px": [
+        128,
+        192
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        64,
+        160
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor_or_surface",
+      "rgba": true,
+      "bytes": 8175,
+      "alpha_bbox_px": [
+        33,
+        46,
+        95,
+        171
+      ],
+      "sha256": "81ab77c7b54bba28f69caccb935a2f8595cd25cbf1ec2123893e36e11f14f703"
+    },
+    {
+      "id": "rug",
+      "model": "basic",
+      "name": "Thảm cói",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/rug-basic_a.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        192,
+        168
+      ],
+      "mount_origin_px": [
+        128,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          8
+        ],
+        [
+          320,
+          104
+        ],
+        [
+          192,
+          168
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 48787,
+      "alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "sha256": "5465c9f8b30a05a0e1248f83760904816fd031ac44ae6238569e3b539c257677"
+    },
+    {
+      "id": "rug",
+      "model": "basic",
+      "name": "Thảm cói",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/rug-basic_b.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        128,
+        168
+      ],
+      "mount_origin_px": [
+        192,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          8
+        ],
+        [
+          320,
+          72
+        ],
+        [
+          128,
+          168
+        ],
+        [
+          0,
+          104
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 49002,
+      "alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "sha256": "aa0ff6c8f7816862148ab12d1fe521ca578243342c28637e92f590f907947a47"
+    },
+    {
+      "id": "rug",
+      "model": "basic",
+      "name": "Thảm cói",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/rug-basic_c.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        192,
+        168
+      ],
+      "mount_origin_px": [
+        128,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          8
+        ],
+        [
+          320,
+          104
+        ],
+        [
+          192,
+          168
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 48926,
+      "alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "sha256": "e6fe182058b07049786c1a9b046342e9b91c1d920117202c524db9bd22e8795e"
+    },
+    {
+      "id": "rug",
+      "model": "basic",
+      "name": "Thảm cói",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/rug-basic_d.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        128,
+        168
+      ],
+      "mount_origin_px": [
+        192,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          8
+        ],
+        [
+          320,
+          72
+        ],
+        [
+          128,
+          168
+        ],
+        [
+          0,
+          104
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 48984,
+      "alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "sha256": "2829c0edaae55f8d90ea025a223f062f02f4579d41914d78791d0ee360a2fb23"
+    },
+    {
+      "id": "rug",
+      "model": "comfort",
+      "name": "Thảm len",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/rug-comfort_a.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        192,
+        168
+      ],
+      "mount_origin_px": [
+        128,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          8
+        ],
+        [
+          320,
+          104
+        ],
+        [
+          192,
+          168
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 45428,
+      "alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "sha256": "34dd502bcea22d5921b6fcc7e6047df024f4b37ecae20848dce33c2c18640fcb"
+    },
+    {
+      "id": "rug",
+      "model": "comfort",
+      "name": "Thảm len",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/rug-comfort_b.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        128,
+        168
+      ],
+      "mount_origin_px": [
+        192,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          8
+        ],
+        [
+          320,
+          72
+        ],
+        [
+          128,
+          168
+        ],
+        [
+          0,
+          104
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 45321,
+      "alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "sha256": "e0a99f09eb7f9a7dfd1ec8dd3145747f5d9e464aced691162cd629ae2b0edf4e"
+    },
+    {
+      "id": "rug",
+      "model": "comfort",
+      "name": "Thảm len",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/rug-comfort_c.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        192,
+        168
+      ],
+      "mount_origin_px": [
+        128,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          8
+        ],
+        [
+          320,
+          104
+        ],
+        [
+          192,
+          168
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 45334,
+      "alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "sha256": "61cf9e657bfc2b2890acffaf1e5ef1113f12cc538bf2ba58a04d0caf75549c9f"
+    },
+    {
+      "id": "rug",
+      "model": "comfort",
+      "name": "Thảm len",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/rug-comfort_d.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        128,
+        168
+      ],
+      "mount_origin_px": [
+        192,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          8
+        ],
+        [
+          320,
+          72
+        ],
+        [
+          128,
+          168
+        ],
+        [
+          0,
+          104
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 45219,
+      "alpha_bbox_px": [
+        15,
+        14,
+        305,
+        160
+      ],
+      "sha256": "f8b634fbb7e6d4c2f53e572789fdc4d52917be0146a263a694bc4e256fecaa0d"
+    },
+    {
+      "id": "rug",
+      "model": "premium",
+      "name": "Thảm dệt hoa văn",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/rug-premium_a.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        192,
+        168
+      ],
+      "mount_origin_px": [
+        128,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          8
+        ],
+        [
+          320,
+          104
+        ],
+        [
+          192,
+          168
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 54328,
+      "alpha_bbox_px": [
+        12,
+        14,
+        306,
+        162
+      ],
+      "sha256": "265b0d42f3fc4c1f72b349d29a9c30cbb4ccdbd792ea3e093b851dfef33a096b"
+    },
+    {
+      "id": "rug",
+      "model": "premium",
+      "name": "Thảm dệt hoa văn",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/rug-premium_b.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        128,
+        168
+      ],
+      "mount_origin_px": [
+        192,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          8
+        ],
+        [
+          320,
+          72
+        ],
+        [
+          128,
+          168
+        ],
+        [
+          0,
+          104
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 54441,
+      "alpha_bbox_px": [
+        14,
+        14,
+        308,
+        161
+      ],
+      "sha256": "8c9b62ddfd07d6a7897c780d56872457c786fd32e347062d8820a6c22f3e83fd"
+    },
+    {
+      "id": "rug",
+      "model": "premium",
+      "name": "Thảm dệt hoa văn",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/rug-premium_c.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        192,
+        168
+      ],
+      "mount_origin_px": [
+        128,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          8
+        ],
+        [
+          320,
+          104
+        ],
+        [
+          192,
+          168
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 54342,
+      "alpha_bbox_px": [
+        14,
+        12,
+        308,
+        160
+      ],
+      "sha256": "ec1898e7e169fdf4eb145e583b8b26cd56a80c8d199246ae34fbc6bb3fa83dc6"
+    },
+    {
+      "id": "rug",
+      "model": "premium",
+      "name": "Thảm dệt hoa văn",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/rug-premium_d.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        3,
+        2
+      ],
+      "frame_px": [
+        320,
+        168
+      ],
+      "height_px": 0,
+      "render_extent_height_px": 8,
+      "height_z": 0,
+      "top_padding_px": 8,
+      "anchor_px": [
+        128,
+        168
+      ],
+      "mount_origin_px": [
+        192,
+        8
+      ],
+      "footprint_center_px": [
+        160,
+        88
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          8
+        ],
+        [
+          320,
+          72
+        ],
+        [
+          128,
+          168
+        ],
+        [
+          0,
+          104
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 54376,
+      "alpha_bbox_px": [
+        12,
+        13,
+        306,
+        160
+      ],
+      "sha256": "e08cec149202cd34cbc80f1a684829fcb0d13ee72237c1999c01577892e582bd"
+    },
+    {
+      "id": "painting",
+      "model": "basic",
+      "name": "Tranh in",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/painting-basic_a.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        224
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        96,
+        176
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          192,
+          192
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 8309,
+      "alpha_bbox_px": [
+        35,
+        84,
+        109,
+        187
+      ],
+      "sha256": "06145a4e3a5762219ff3e4704123f2c83d24d3903da26c502606d49a8a9741a9"
+    },
+    {
+      "id": "painting",
+      "model": "basic",
+      "name": "Tranh in",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/painting-basic_b.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        224
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        96,
+        176
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          192,
+          160
+        ],
+        [
+          64,
+          224
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 7897,
+      "alpha_bbox_px": [
+        83,
+        84,
+        157,
+        187
+      ],
+      "sha256": "c516a33abf5c5863950665d60cb3257234140639c5e6f25b7fb50d367d6e8f8d"
+    },
+    {
+      "id": "painting",
+      "model": "comfort",
+      "name": "Tranh sơn dầu nhỏ",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/painting-comfort_a.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        224
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        96,
+        176
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          192,
+          192
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 19825,
+      "alpha_bbox_px": [
+        24,
+        66,
+        121,
+        192
+      ],
+      "sha256": "2bd6124bbac30cb9452ccc336fd2eaa957d823518152a9cb9d363c3000f4a78b"
+    },
+    {
+      "id": "painting",
+      "model": "comfort",
+      "name": "Tranh sơn dầu nhỏ",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/painting-comfort_b.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        224
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        96,
+        176
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          192,
+          160
+        ],
+        [
+          64,
+          224
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 18922,
+      "alpha_bbox_px": [
+        71,
+        66,
+        168,
+        192
+      ],
+      "sha256": "0e4b85c7e89afe2be7b0347591a378937ed526a4bb78c5246c4feefaadeeeaf4"
+    },
+    {
+      "id": "painting",
+      "model": "premium",
+      "name": "Tranh khung gỗ lớn",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/painting-premium_a.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        224
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        224
+      ],
+      "mount_origin_px": [
+        64,
+        128
+      ],
+      "footprint_center_px": [
+        96,
+        176
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          128
+        ],
+        [
+          192,
+          192
+        ],
+        [
+          128,
+          224
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 29626,
+      "alpha_bbox_px": [
+        11,
+        40,
+        133,
+        199
+      ],
+      "sha256": "fb91dab6fae33f23b988fd45fbe5e59e3091da8de398b52a4540c1b14da003f2"
+    },
+    {
+      "id": "painting",
+      "model": "premium",
+      "name": "Tranh khung gỗ lớn",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/painting-premium_b.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        224
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        224
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        96,
+        176
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          192,
+          160
+        ],
+        [
+          64,
+          224
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 28655,
+      "alpha_bbox_px": [
+        59,
+        40,
+        181,
+        199
+      ],
+      "sha256": "d99dba69e9a0c12f3b70132c9fdb99d85cef4f3dea105fd21112d04c9ad20438"
+    },
+    {
+      "id": "door-main",
+      "model": "basic",
+      "name": "Cửa ra vào",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "/assets/furniture/door-main-basic_a.png",
+      "footprint_tiles": [
+        0,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        0,
+        2
+      ],
+      "frame_px": [
+        128,
+        320
+      ],
+      "height_px": 256,
+      "render_extent_height_px": 256,
+      "height_z": 8,
+      "top_padding_px": 0,
+      "anchor_px": [
+        0,
+        320
+      ],
+      "mount_origin_px": [
+        128,
+        256
+      ],
+      "footprint_center_px": [
+        64,
+        288
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          256
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          320
+        ],
+        [
+          0,
+          320
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 23961,
+      "alpha_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "sha256": "ba193a83baff767ecd017b4560aff739322d7440fbd0cf701125b333953904d3"
+    },
+    {
+      "id": "door-main",
+      "model": "basic",
+      "name": "Cửa ra vào",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "/assets/furniture/door-main-basic_b.png",
+      "footprint_tiles": [
+        2,
+        0
+      ],
+      "unrotated_footprint_tiles": [
+        0,
+        2
+      ],
+      "frame_px": [
+        128,
+        320
+      ],
+      "height_px": 256,
+      "render_extent_height_px": 256,
+      "height_z": 8,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        320
+      ],
+      "mount_origin_px": [
+        0,
+        256
+      ],
+      "footprint_center_px": [
+        64,
+        288
+      ],
+      "footprint_corners_px": [
+        [
+          0,
+          256
+        ],
+        [
+          128,
+          320
+        ],
+        [
+          128,
+          320
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 26208,
+      "alpha_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "sha256": "09bff20906f2c3986095617bda0cb8771aa4542e1f525ab29842f4031bf2b00a"
+    },
+    {
+      "id": "door-main",
+      "model": "basic",
+      "name": "Cửa ra vào",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "/assets/furniture/door-main-basic_c.png",
+      "footprint_tiles": [
+        0,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        0,
+        2
+      ],
+      "frame_px": [
+        128,
+        320
+      ],
+      "height_px": 256,
+      "render_extent_height_px": 256,
+      "height_z": 8,
+      "top_padding_px": 0,
+      "anchor_px": [
+        0,
+        320
+      ],
+      "mount_origin_px": [
+        128,
+        256
+      ],
+      "footprint_center_px": [
+        64,
+        288
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          256
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          320
+        ],
+        [
+          0,
+          320
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 23962,
+      "alpha_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "sha256": "eb841cea93f0a03637f729dfa4394b9fa9cca0c4d4022685a404852e00cd4a15"
+    },
+    {
+      "id": "door-main",
+      "model": "basic",
+      "name": "Cửa ra vào",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "/assets/furniture/door-main-basic_d.png",
+      "footprint_tiles": [
+        2,
+        0
+      ],
+      "unrotated_footprint_tiles": [
+        0,
+        2
+      ],
+      "frame_px": [
+        128,
+        320
+      ],
+      "height_px": 256,
+      "render_extent_height_px": 256,
+      "height_z": 8,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        320
+      ],
+      "mount_origin_px": [
+        0,
+        256
+      ],
+      "footprint_center_px": [
+        64,
+        288
+      ],
+      "footprint_corners_px": [
+        [
+          0,
+          256
+        ],
+        [
+          128,
+          320
+        ],
+        [
+          128,
+          320
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "wall",
+      "rgba": true,
+      "bytes": 26218,
+      "alpha_bbox_px": [
+        2,
+        12,
+        126,
+        317
+      ],
+      "sha256": "eaf5dc0e18bf651796c9238db2f5ee88e9320287c8672424aae7cfca78232ecf"
+    }
+  ]
+}
