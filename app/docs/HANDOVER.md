@@ -6,8 +6,8 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 
 - Repo `xsdaigiasx/lifesimu`, game ở `app/` (React 19, TypeScript, Vite 8), engine kiểm tra ở `core/`.
 - Thiết kế chi tiết: hai tài liệu Claude Docs *Workflow phát triển hoàn chỉnh* và *Kế hoạch và thiết kế Basic 1.0* (project `BvJJ1urceVRjfoNmQYohLr`, node `eb588493-56a5`; ticket T01–T89, mục "Để dành phát triển sau" ở cuối).
-- Tiến độ Basic 1.0: khoảng 30% theo số ticket (T01–T24, T40, T41 xong; T25 bỏ, gộp vào issue #124). Tính cả phần làm trước của T26–T29 thì khoảng 33–35%.
-- main hiện ở `859aa60` (gộp #128). Không có PR đang mở.
+- Tiến độ Basic 1.0: khoảng 33% theo số ticket (T01–T24, T26, T27, T40, T41 xong; T25 bỏ, gộp vào issue #124). Phần làm trước của T28–T29 chưa tính.
+- main hiện ở `96873a7` (gộp #150), bản app 0.37.0. Không có PR đang mở; chuỗi PR #134–#145 đã gộp hết. Issue mở: #133 (Codex asset), #55 (hoãn).
 
 ## 2. Quy trình bắt buộc
 
@@ -75,17 +75,21 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - **#55** đồ văn phòng mới, hoãn tới giai đoạn mở công ty, sẽ theo phong cách bán hiện thực.
 - Đã đóng: #124, #97, #98, #120 (xem #133).
 
-### Chuỗi PR chờ gộp (04/11 tối, gộp đúng thứ tự, mỗi PR tách từ PR trước)
+### Cần kiểm tra bằng chơi thử (chưa chụp màn hình)
 
-#134 (phong cách bán hiện thực) → #135 (bàn giao vỏ phòng, base #134) và chuỗi riêng #136 (sửa màn Bếp, ngất) → #138 (kiệt sức, #137) → #140 (số lượng chợ, Thử nấu, thử việc 30 ngày) → #141 (Nối dây) → #142 (mini game theo kỹ năng) → #143 (mang về, ba lô, #139). Gộp từng PR rồi mới gộp PR sau; PR sau đã đổi base khi PR trước vào main, nếu không đổi thì gộp main vào nhánh. Chưa PR nào được chụp màn hình kiểm tra: cần chơi thử Bấm nhịp, Nhớ thứ tự, thẻ món Bếp, cửa sổ chọn số lượng, Ăn tại chỗ hoặc Mang về.
+Bấm nhịp, Nhớ thứ tự, thẻ món Bếp, cửa sổ chọn số lượng, Ăn tại chỗ hoặc Mang về (từ chuỗi #136–#143).
+
+### Nghi vấn mất save (04/11 tối, chưa rõ nguyên nhân)
+
+Chủ dự án báo một lần save quay về ngày 1 với 5.200.000đ. Cơ chế: `engine.parse` trả null thì `initialSession` tải `initial()` và autosave ghi đè save cũ. Đã thử tải save sinh từ 5 bản cũ (#76 đến #145) bằng build hiện tại, đều tải được. Cần: địa chỉ/máy lúc mất, nội dung `life-simulator-vi-v1` nếu còn. Đề xuất chưa làm (chờ duyệt): tải lỗi thì giữ bản gốc ở khoá riêng, không ghi đè.
 
 ### Claude
 
 - **Để dành, chủ dự án nêu 04/11 chưa làm**: (1) hướng dẫn việc tiếp theo những ngày đầu và sau giờ làm, tạm hoãn tới khi xong toàn bộ game, ý chủ dự án là thêm hoạt động khác cho người chơi; (2) tên nhiệm vụ công việc còn đơn giản, cần đa dạng và thật hơn; (3) quán ăn: hỏi Ăn tại chỗ hay Mang về (#139).
-- Ticket tiếp theo (chủ dự án 04/11 giao làm tiếp lần lượt cho xong Basic 1.0, không cần hỏi lại thứ tự): **T26** (kho đồ, instanceId, lưới phòng) rồi **T27** (chế độ bố trí: kéo, thả, xoay, huỷ, BFS lối đi). Mở phiên mới từ file này; trước khi làm, đọc đề xuất ticket trong tài liệu Kế hoạch và gửi AskUserQuestion ngắn nếu có chỗ chưa rõ. Phần đã có sẵn: lưới phòng trọ, xoay 4 hướng, kéo thả ở phòng trọ, chạm đặt ở nhà phố.
+- Ticket tiếp theo (chủ dự án 04/11 giao làm tiếp lần lượt cho xong Basic 1.0, không cần hỏi lại thứ tự): **T28**, rồi T29. Mở phiên mới từ file này; trước khi làm, đọc đề xuất ticket trong tài liệu Kế hoạch và gửi AskUserQuestion ngắn nếu có chỗ chưa rõ. Phần đã có sẵn: lưới phòng trọ, xoay 4 hướng, kéo thả ở phòng trọ, chạm đặt ở nhà phố.
 - **T26 xong** (issue #146): `uid` cho mỗi đồ (bản đầu giữ mã loại để save cũ khớp), trần số lượng `HOME_MAX` (cây, đèn 3; tranh 2; còn lại 1), mua thêm khi chưa đủ, tranh cùng tường không chồng. Nhà phố, biệt thự vẫn đặt một món mỗi loại (bản thể thứ 2 nằm trong kho); mở rộng khi làm T27 nếu cần.
 - **T27 xong** (issue #148): `homeWalkError` (BFS): ô sàn trống phải thông từ bếp tới lối vào vệ sinh và cạnh giường; chỉ kiểm khi lưu, không kiểm khi tải save. Phòng chưa có cửa nên chưa tính cửa (thêm khi có ảnh cửa ở #133). Kéo, thả, xoay, hủy, chặn kéo cảnh trên điện thoại đã có từ trước.
-- **Quy tắc phiên bản (chủ dự án 04/11)**: mỗi PR nâng `version` trong `app/package.json` và `package-lock.json` (T26+T27 là 0.37.0; PR sau 0.37.1, 0.38.0… tuỳ cỡ).
+- **Quy tắc phiên bản (chủ dự án 04/11)**: mỗi PR có thay đổi app nâng `version` (PR chỉ tài liệu thì không) trong `app/package.json` và `package-lock.json` (T26+T27 là 0.37.0; PR sau 0.37.1, 0.38.0… tuỳ cỡ).
 - Sau đó T28 (điểm dùng của đồ), T29 (TTTM giỏ, đơn, giao hàng, bán lại), rồi theo bảng ticket.
 
 ## 7. Bản đồ mã nguồn (domain mới hoặc đổi nhiều)
@@ -114,4 +118,5 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - Chỉ chụp màn hình chính khi cần; review asset Codex bằng ảnh ghép tổng, không mở từng ảnh.
 - Không đọc lại tài liệu Claude Docs dài trừ khi cần.
 - Việc đơn giản (chữ, màu, icon) dùng Sonnet; thiết kế cơ chế, ticket lớn dùng Opus.
-- Phiên dài thì mở phiên mới từ file này.
+- Phiên dài thì mở phiên mới từ file này. Phiên 04/11 tối làm T26, T27 và đóng issue trong một phiên là đã dài: sau 2 ticket thì dừng, cập nhật file này, mở phiên mới.
+- Mẹo môi trường: không dùng `pkill -f` (giết luôn shell), dùng `fuser -k <cổng>/tcp`; clone nông cần thêm refspec nhánh mới (mục 3) kẻo hook báo commit chưa đẩy; `core` không có lockfile, cài bằng `npm install --no-package-lock`.
