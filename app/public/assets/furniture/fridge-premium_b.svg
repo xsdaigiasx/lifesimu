@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="224" viewBox="0 0 128 224">
-<g stroke="#4a3b33" stroke-width="1.6" stroke-linejoin="round">
-<polygon points="0,192 64,224 64,59 0,27" fill="#c9d4de"/>
-<polygon points="64,224 128,192 128,27 64,59" fill="#aebccb"/>
-<polygon points="64,-5 128,27 64,59 0,27" fill="#e2e9f0"/>
-<line x1="64" y1="149.75" x2="128" y2="117.75"/>
-<line x1="96.0" y1="208.0" x2="96.0" y2="133.75"/>
-<line x1="116.47999999999999" y1="107.00999999999998" x2="116.47999999999999" y2="57.50999999999999" stroke-width="3"/>
-</g></svg>

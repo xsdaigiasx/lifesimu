@@ -17,7 +17,7 @@
     "QA fixtures",
     "credentials"
   ],
-  "art": "public/assets/static-scenes/furniture-v2",
+  "art": "public/assets/furniture",
   "room": "public/assets/static-scenes/rental-diamond.png",
   "life": "docs/LIFE-v0.34.md",
   "cooking": "docs/COOKING-v0.35.md"
