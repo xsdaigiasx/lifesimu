@@ -41,6 +41,8 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - Tin nhắn trong điện thoại không tốn giờ; gọi điện 15 phút, chỉ Mẹ và người từ bậc Thân; hẹn đi ăn phải đến đúng nơi đúng giờ.
 - Nội thất không chia hạng; mỗi loại 3 mẫu tên riêng (HOME_MODELS), mẫu đắt đẹp và nhiều tính năng hơn; xoay 4 hướng.
 - Nhà phố, biệt thự: mỗi tầng một mặt bằng liền, kéo, phóng to; giá nhà phố thuê 6 triệu hoặc mua 2,5 tỷ, biệt thự 12 tỷ.
+- Mang về và túi (#139): quán và nhà hàng hỏi Ăn tại chỗ hay Mang về (giá +10%, hạn 1 ngày); túi mặc định 3 món, ba lô (TTTM, 350.000đ) 8 món; món trong túi ăn ở đâu cũng được, tab Món đã nấu ở nhà hiện thẻ "Mang về". Ba lô dùng tạm biểu tượng ứng dụng, cần ảnh `products/backpack.webp` trong #133 lô 2.
+- Mini game sự cố theo nhóm kỹ năng (`domain/bug-game.ts`, `GAMES_BY_SKILL`): Lập trình và Logic (nối dây, xếp số, chuỗi quy luật), Đồ họa (tìm khác biệt, mảnh thiếu, phối màu), Quản lý (xếp ưu tiên, chia người), Giao tiếp (tình huống, ghép lời), Nấu ăn (nhớ thứ tự, bấm nhịp). Chọn trò theo seed; không có đọc code.
 - Ăn uống: rủi ro ngộ độc theo độ tươi, độ chín, không theo giá; món quán, nhà hàng không rủi ro.
 - Bản đồ thành phố: ghép từ mảnh nhỏ (ô 256×128) thay ảnh lớn bị mờ.
 - Phong cách đồ hoạ (chốt 04/11, issue #133): **bán hiện thực** như ảnh chuẩn `assets/style-reference/room-reference.webp`; thay phong cách sách truyện (#124) và màu phẳng cũ. Viền mảnh cùng tông, ánh sáng cố định trên-trái, không bóng đổ ngoài chân đế. Món ăn, nguyên liệu, chân dung NPC, địa điểm, nhà phố, biệt thự, vỏ phòng giữ nguyên.
@@ -62,7 +64,7 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 | Mua sắm điện thoại ảnh nhỏ; phòng trọ biểu tượng, tab Kỹ năng | #110, #114 |
 | T21 tủ lạnh | #116 |
 | T22 sổ công thức, ba nguồn học món | #119 |
-| T23 nấu bừa | #122 |
+| T23 thử nấu | #122 |
 | T24 chợ chiều, bệnh do ăn uống; biểu tượng Chiều, thẻ cà phê | #126, #127, #128 |
 
 ## 6. Đang chờ
@@ -73,9 +75,14 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - **#55** đồ văn phòng mới, hoãn tới giai đoạn mở công ty, sẽ theo phong cách bán hiện thực.
 - Đã đóng: #124, #97, #98, #120 (xem #133).
 
+### Chuỗi PR chờ gộp (04/11 tối, gộp đúng thứ tự, mỗi PR tách từ PR trước)
+
+#134 (phong cách bán hiện thực) → #135 (bàn giao vỏ phòng, base #134) và chuỗi riêng #136 (sửa màn Bếp, ngất) → #138 (kiệt sức, #137) → #140 (số lượng chợ, Thử nấu, thử việc 30 ngày) → #141 (Nối dây) → #142 (mini game theo kỹ năng) → #143 (mang về, ba lô, #139). Gộp từng PR rồi mới gộp PR sau; PR sau đã đổi base khi PR trước vào main, nếu không đổi thì gộp main vào nhánh. Chưa PR nào được chụp màn hình kiểm tra: cần chơi thử Bấm nhịp, Nhớ thứ tự, thẻ món Bếp, cửa sổ chọn số lượng, Ăn tại chỗ hoặc Mang về.
+
 ### Claude
 
-- Ticket tiếp theo: chủ dự án chọn **T26** (kho đồ, instanceId, lưới phòng) hay **T27** (chế độ bố trí: kéo, thả, xoay, huỷ, BFS lối đi). Phần đã có sẵn: lưới phòng trọ, xoay 4 hướng, kéo thả ở phòng trọ, chạm đặt ở nhà phố.
+- **Để dành, chủ dự án nêu 04/11 chưa làm**: (1) hướng dẫn việc tiếp theo những ngày đầu và sau giờ làm, tạm hoãn tới khi xong toàn bộ game, ý chủ dự án là thêm hoạt động khác cho người chơi; (2) tên nhiệm vụ công việc còn đơn giản, cần đa dạng và thật hơn; (3) quán ăn: hỏi Ăn tại chỗ hay Mang về (#139).
+- Ticket tiếp theo (chủ dự án 04/11 giao làm tiếp lần lượt cho xong Basic 1.0, không cần hỏi lại thứ tự): **T26** (kho đồ, instanceId, lưới phòng) rồi **T27** (chế độ bố trí: kéo, thả, xoay, huỷ, BFS lối đi). Mở phiên mới từ file này; trước khi làm, đọc đề xuất ticket trong tài liệu Kế hoạch và gửi AskUserQuestion ngắn nếu có chỗ chưa rõ. Phần đã có sẵn: lưới phòng trọ, xoay 4 hướng, kéo thả ở phòng trọ, chạm đặt ở nhà phố.
 - Sau đó T28 (điểm dùng của đồ), T29 (TTTM giỏ, đơn, giao hàng, bán lại), rồi theo bảng ticket.
 
 ## 7. Bản đồ mã nguồn (domain mới hoặc đổi nhiều)

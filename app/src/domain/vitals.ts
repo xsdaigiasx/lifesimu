@@ -19,6 +19,9 @@ lack('fullness',fullnessOf(s),'Độ no','hãy ăn sớm');lack('energy',s.energ
 if(s.stress>=VITALS.stressHigh)w.push({key:'stress',level:'low',text:'Căng thẳng cao: làm việc kém hiệu quả, hãy nghỉ ngơi'});else if(s.stress>=VITALS.warn.stress)w.push({key:'stress',level:'soon',text:'Căng thẳng đang dâng: nên nghỉ sớm'});
 if(s.health<VITALS.sickHealth)w.push({key:'health',level:'low',text:'Sức khỏe yếu: hiệu suất giảm, nên đi khám'});else if(s.health<VITALS.warn.health)w.push({key:'health',level:'soon',text:'Sức khỏe đang xuống: giữ ăn ngủ đều'});
 return w}
+/** #137: Năng lượng hoặc No dưới 20 thì Sức khỏe −2 mỗi giờ thức (số nguyên theo mốc đồng hồ). */
+export const LOW_HURT={below:20,perHour:2} as const;
+export const hurtWhenLow=(s:GameState,from:number,to:number):GameState=>{if(Math.min(s.energy,fullnessOf(s))>=LOW_HURT.below)return s;const lost=Math.floor(to*LOW_HURT.perHour/60)-Math.floor(from*LOW_HURT.perHour/60);return lost<=0?s:{...s,health:Math.max(0,s.health-lost)}};
 /** Cuối ngày: có chỉ số rơi dưới mức sàn thì Sức khỏe −3 (mục 11.1). */
 export const dailyHealthPenalty=(s:GameState)=>Math.min(s.energy,fullnessOf(s),s.mood)<VITALS.mFloor?3:0;
 /** T07: thời gian trôi hao Năng lượng 2,5/giờ (ca làm và học đã tự tính riêng); ngủ +10/giờ; nghỉ ngồi +3/giờ. */
