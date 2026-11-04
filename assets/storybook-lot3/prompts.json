@@ -1,0 +1,369 @@
+{
+  "issue": 89,
+  "lot": 3,
+  "mode": "OpenAI built-in image generation",
+  "external_reference_images": [],
+  "style": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.",
+  "items": [
+    {
+      "id": "ba-tu",
+      "name": "Bà Tư",
+      "age": 62,
+      "origin": "Bến Tre",
+      "role": "Chủ trọ",
+      "traits": [
+        "kỹ tính",
+        "tốt bụng",
+        "hay càm ràm"
+      ],
+      "quirk": "Tưới cây lúc sáu giờ, nhớ ngày thu tiền từng phòng",
+      "goal": "Giữ khu trọ yên ổn",
+      "fear": "Con trai ở xa ít về",
+      "voice": "Miền Tây, gọi người trẻ là con",
+      "tone": "#f2dcc2",
+      "group": "npc",
+      "design": "Vietnamese woman, 62, landlady. Silver-black hair in a neat low bun, softly squared face, fine age lines, one gently raised brow, observant slightly fussy expression softened by kind eyes and a small closed-mouth smile. Warm peach-beige simple collared blouse.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 62, landlady. Silver-black hair in a neat low bun, softly squared face, fine age lines, one gently raised brow, observant slightly fussy expression softened by kind eyes and a small closed-mouth smile. Warm peach-beige simple collared blouse.\nClothing color should remain close to existing avatar tone #f2dcc2; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "dev-an",
+      "name": "Minh An",
+      "age": 26,
+      "origin": "Nam Định",
+      "role": "Lập trình viên",
+      "traits": [
+        "hay nói",
+        "nhiệt tình",
+        "hơi vội"
+      ],
+      "quirk": "Luôn có kẹo trong ngăn bàn",
+      "goal": "Lên Senior trong hai năm",
+      "fear": "Bị tụt lại phía sau",
+      "voice": "Miền Bắc, xưng mình",
+      "tone": "#cfe3d8",
+      "group": "npc",
+      "design": "Vietnamese man, 26, software developer. Short tousled black hair, slim oval face, small thin rectangular glasses, bright expressive brows, lively enthusiastic open smile, slightly forward eager posture. Pale mint-green casual collared shirt.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese man, 26, software developer. Short tousled black hair, slim oval face, small thin rectangular glasses, bright expressive brows, lively enthusiastic open smile, slightly forward eager posture. Pale mint-green casual collared shirt.\nClothing color should remain close to existing avatar tone #cfe3d8; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "dev-linh",
+      "name": "Thảo Linh",
+      "age": 24,
+      "origin": "Huế",
+      "role": "Thiết kế giao diện",
+      "traits": [
+        "nhẹ nhàng",
+        "cầu toàn",
+        "ngại xung đột"
+      ],
+      "quirk": "Vẽ nguệch ngoạc khi nghe họp",
+      "goal": "Mở một studio nhỏ",
+      "fear": "Làm người khác thất vọng",
+      "voice": "Huế nhẹ",
+      "tone": "#f3d6cf",
+      "group": "npc",
+      "design": "Vietnamese woman, 24, interface designer. Smooth black chin-length bob with curved ends and a soft fringe, round gentle face, shy thoughtful small smile, relaxed eyes. Soft warm blush-peach blouse with simple rounded neckline.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 24, interface designer. Smooth black chin-length bob with curved ends and a soft fringe, round gentle face, shy thoughtful small smile, relaxed eyes. Soft warm blush-peach blouse with simple rounded neckline.\nClothing color should remain close to existing avatar tone #f3d6cf; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "dev-huy",
+      "name": "Gia Huy",
+      "age": 29,
+      "origin": "Sài Gòn",
+      "role": "Kiểm thử phần mềm",
+      "traits": [
+        "thẳng thắn",
+        "hay đùa",
+        "dễ cáu"
+      ],
+      "quirk": "Đếm lỗi như sưu tầm",
+      "goal": "Được ghi nhận",
+      "fear": "Mẹ đang bệnh",
+      "voice": "Sài Gòn",
+      "tone": "#dcd6f0",
+      "group": "npc",
+      "design": "Vietnamese man, 29, software tester. Short wavy black hair swept up to one side, angular face, lively raised eyebrow and playful slightly crooked smile, candid confident gaze. Pale lavender simple crew-neck shirt.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese man, 29, software tester. Short wavy black hair swept up to one side, angular face, lively raised eyebrow and playful slightly crooked smile, candid confident gaze. Pale lavender simple crew-neck shirt.\nClothing color should remain close to existing avatar tone #dcd6f0; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "dev-trang",
+      "name": "Thu Trang",
+      "age": 33,
+      "origin": "Hà Nội",
+      "role": "Điều phối dự án",
+      "traits": [
+        "nghiêm",
+        "công bằng",
+        "ít khen"
+      ],
+      "quirk": "Dùng sổ tay giấy, không dùng ứng dụng",
+      "goal": "Đưa nhóm qua dự án lớn",
+      "fear": "Con nhỏ hay ốm",
+      "voice": "Miền Bắc gọn, xưng chị",
+      "tone": "#f2e2bd",
+      "group": "npc",
+      "design": "Vietnamese woman, 33, project coordinator. Neatly center-parted black hair in a low ponytail, long oval face, composed straight brows, serious but fair attentive expression, very slight restrained smile. Pale buttery-cream button-front office blouse.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 33, project coordinator. Neatly center-parted black hair in a low ponytail, long oval face, composed straight brows, serious but fair attentive expression, very slight restrained smile. Pale buttery-cream button-front office blouse.\nClothing color should remain close to existing avatar tone #f2e2bd; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "co-hanh",
+      "name": "Cô Hạnh",
+      "age": 48,
+      "origin": "Quảng Ngãi",
+      "role": "Bán rau ở chợ",
+      "traits": [
+        "nhanh nhảu",
+        "rộng rãi",
+        "hay mặc cả"
+      ],
+      "quirk": "Cho thêm hành lá cho khách quen",
+      "goal": "Nuôi con học đại học",
+      "fear": "Nợ vốn đầu mùa",
+      "voice": "Quảng Ngãi, xưng tui",
+      "tone": "#d9ecc8",
+      "group": "npc",
+      "design": "Vietnamese woman, 48, market vegetable seller. Black hair with a few gray strands in a loose bun, broad warm round face and smiling cheek lines, quick friendly animated smile and alert eyes. Soft light-leaf-green simple everyday blouse.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 48, market vegetable seller. Black hair with a few gray strands in a loose bun, broad warm round face and smiling cheek lines, quick friendly animated smile and alert eyes. Soft light-leaf-green simple everyday blouse.\nClothing color should remain close to existing avatar tone #d9ecc8; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "chu-sau",
+      "name": "Chú Sáu",
+      "age": 67,
+      "origin": "Cần Thơ",
+      "role": "Hàng xóm về hưu",
+      "traits": [
+        "chậm rãi",
+        "hoài cổ",
+        "tự trọng cao"
+      ],
+      "quirk": "Mang theo chiếc radio nhỏ",
+      "goal": "Được người khác cần đến",
+      "fear": "Cô đơn",
+      "voice": "Miền Tây, kể chuyện dài",
+      "tone": "#e6dccb",
+      "group": "npc",
+      "design": "Vietnamese man, 67, retired neighbor. Short thinning salt-and-gray hair, small neat gray mustache, softly rectangular face with natural wrinkles, calm nostalgic eyes and dignified gentle closed-mouth smile. Muted warm taupe-beige collared shirt.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese man, 67, retired neighbor. Short thinning salt-and-gray hair, small neat gray mustache, softly rectangular face with natural wrinkles, calm nostalgic eyes and dignified gentle closed-mouth smile. Muted warm taupe-beige collared shirt.\nClothing color should remain close to existing avatar tone #e6dccb; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "tuan",
+      "name": "Tuấn",
+      "age": 22,
+      "origin": "Thanh Hoá",
+      "role": "Sinh viên chạy giao hàng",
+      "traits": [
+        "lạc quan",
+        "liều",
+        "hay quên"
+      ],
+      "quirk": "Xe máy cũ đặt tên Chiến Mã",
+      "goal": "Tốt nghiệp đúng hạn",
+      "fear": "Nợ học phí",
+      "voice": "Thanh Hoá, nói nhanh",
+      "tone": "#d6e6f2",
+      "group": "npc",
+      "design": "Vietnamese man, 22, student and delivery worker. Slightly messy cropped black hair, youthful oval face, bright curious eyes and broad optimistic carefree grin. Pale sky-blue plain T-shirt, no helmet or delivery branding.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese man, 22, student and delivery worker. Slightly messy cropped black hair, youthful oval face, bright curious eyes and broad optimistic carefree grin. Pale sky-blue plain T-shirt, no helmet or delivery branding.\nClothing color should remain close to existing avatar tone #d6e6f2; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "chi-mai",
+      "name": "Chị Mai",
+      "age": 35,
+      "origin": "Quảng Nam",
+      "role": "Bán bánh mì vỉa hè",
+      "traits": [
+        "chịu khó",
+        "kiệm lời",
+        "giữ chữ tín"
+      ],
+      "quirk": "Nhớ khách quen thích ăn gì",
+      "goal": "Mở quán có mái che",
+      "fear": "Một mình nuôi con",
+      "voice": "Quảng Nam, ngắn gọn",
+      "tone": "#f4e0c9",
+      "group": "npc",
+      "design": "Vietnamese woman, 35, street banh mi vendor. Black hair neatly tied in a low ponytail with side part, slender long face, tired but steady kind eyes, quiet trustworthy small closed-mouth smile. Warm pale apricot everyday blouse.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 35, street banh mi vendor. Black hair neatly tied in a low ponytail with side part, slender long face, tired but steady kind eyes, quiet trustworthy small closed-mouth smile. Warm pale apricot everyday blouse.\nClothing color should remain close to existing avatar tone #f4e0c9; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "bs-quan",
+      "name": "Bác sĩ Quân",
+      "age": 41,
+      "origin": "Hải Phòng",
+      "role": "Bác sĩ",
+      "traits": [
+        "điềm đạm",
+        "thực tế",
+        "hơi khô"
+      ],
+      "quirk": "Nhắc uống nước trong mọi câu chuyện",
+      "goal": "Giảm ca trực",
+      "fear": "Bận đến mức xa gia đình",
+      "voice": "Miền Bắc chừng mực",
+      "tone": "#d3e7e6",
+      "group": "npc",
+      "design": "Vietnamese man, 41, doctor. Neatly side-parted short black hair, thin oval glasses, balanced rectangular face, calm reserved attentive gaze, slight neutral smile. Pale aqua simple medical collared shirt, no badge, writing, symbols or props.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese man, 41, doctor. Neatly side-parted short black hair, thin oval glasses, balanced rectangular face, calm reserved attentive gaze, slight neutral smile. Pale aqua simple medical collared shirt, no badge, writing, symbols or props.\nClothing color should remain close to existing avatar tone #d3e7e6; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "bao-ngoc",
+      "name": "Bảo Ngọc",
+      "age": 27,
+      "origin": "Đà Lạt",
+      "role": "Giao dịch viên ngân hàng",
+      "traits": [
+        "tham vọng",
+        "chu đáo",
+        "thích số liệu"
+      ],
+      "quirk": "Cắm hoa tươi ở quầy",
+      "goal": "Lên chuyên viên tín dụng",
+      "fear": "Khách nợ xấu",
+      "voice": "Đà Lạt, lịch sự",
+      "tone": "#efd9e6",
+      "group": "npc",
+      "design": "Vietnamese woman, 27, bank teller. Neat shoulder-length black hair with soft side-swept waves, oval face, poised focused eyes and polite confident small smile. Soft pale mauve-pink collared office blouse, no jewelry or badge.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 27, bank teller. Neat shoulder-length black hair with soft side-swept waves, oval face, poised focused eyes and polite confident small smile. Soft pale mauve-pink collared office blouse, no jewelry or badge.\nClothing color should remain close to existing avatar tone #efd9e6; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "me",
+      "name": "Mẹ",
+      "age": 50,
+      "origin": "quê nhà",
+      "role": "Mẹ ở quê",
+      "traits": [
+        "lo xa",
+        "thương con",
+        "giấu chuyện khó"
+      ],
+      "quirk": "Gửi đồ quê qua xe khách",
+      "goal": "Con ổn định",
+      "fear": "Ruộng mất mùa",
+      "voice": "Giọng quê",
+      "tone": "#f0e4cf",
+      "group": "npc",
+      "design": "Vietnamese woman, 50, the player's mother living in the countryside. Dark hair with a few gray strands at the temples pulled into a soft loose low bun, gently elongated face with subtle age lines, tender caring smile and slightly worried loving eyes. Warm ivory-beige simple everyday blouse.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 50, the player's mother living in the countryside. Dark hair with a few gray strands at the temples pulled into a soft loose low bun, gently elongated face with subtle age lines, tender caring smile and slightly worried loving eyes. Warm ivory-beige simple everyday blouse.\nClothing color should remain close to existing avatar tone #f0e4cf; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "chu-luc",
+      "name": "Chú Lực",
+      "age": 52,
+      "origin": "Nghệ An",
+      "role": "Bán thịt cá ở chợ",
+      "traits": [
+        "cau có",
+        "thật thà",
+        "cẩn thận"
+      ],
+      "quirk": "Mài dao trước khi chào khách",
+      "goal": "Trả hết nợ",
+      "fear": "Mất mối hàng",
+      "voice": "Nghệ An, nói to",
+      "tone": "#f1d2cc",
+      "group": "npc",
+      "design": "Vietnamese man, 52, market meat and fish seller. Closely cropped salt-and-black hair, broad square face, strong brows slightly knitted, honest steady eyes and a gruff reserved mouth that is not hostile. Muted dusty-coral simple work shirt, no apron lettering or props.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese man, 52, market meat and fish seller. Closely cropped salt-and-black hair, broad square face, strong brows slightly knitted, honest steady eyes and a gruff reserved mouth that is not hostile. Muted dusty-coral simple work shirt, no apron lettering or props.\nClothing color should remain close to existing avatar tone #f1d2cc; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "ba-nam",
+      "name": "Bà Năm",
+      "age": 70,
+      "origin": "Bến Tre",
+      "role": "Bán tạp hoá ở chợ",
+      "traits": [
+        "hiền",
+        "hay hỏi han",
+        "tiết kiệm"
+      ],
+      "quirk": "Gói hàng bằng lá chuối",
+      "goal": "Được con cháu về thăm",
+      "fear": "Cô đơn",
+      "voice": "Miền Tây, chậm rãi",
+      "tone": "#f2e6c4",
+      "group": "npc",
+      "design": "Vietnamese woman, 70, grocery vendor. Silver hair in a small tidy bun, fine thin round glasses, petite softly round face with gentle age lines, kindly smiling crinkled eyes and warm welcoming small smile. Pale warm butter-yellow simple blouse.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 70, grocery vendor. Silver hair in a small tidy bun, fine thin round glasses, petite softly round face with gentle age lines, kindly smiling crinkled eyes and warm welcoming small smile. Pale warm butter-yellow simple blouse.\nClothing color should remain close to existing avatar tone #f2e6c4; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "lan",
+      "name": "Mai Lan",
+      "age": 28,
+      "origin": "Đà Nẵng",
+      "role": "Lễ tân tòa nhà",
+      "traits": [
+        "vui vẻ",
+        "chu đáo",
+        "nhanh nhảu"
+      ],
+      "quirk": "Nhớ tên khách từ lần đầu gặp",
+      "goal": "Học xong lớp tiếng Anh buổi tối",
+      "fear": "Bị thay bằng máy quét thẻ",
+      "voice": "Đà Nẵng, nói nhanh",
+      "tone": "#e9cfc4",
+      "group": "npc",
+      "design": "Vietnamese woman, 28, building receptionist. Long black hair pulled half-up with softly waved ends visible near shoulders, softly heart-shaped face, bright sociable friendly smile and alert caring eyes. Pale dusty-peach collared blouse, no badge.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 28, building receptionist. Long black hair pulled half-up with softly waved ends visible near shoulders, softly heart-shaped face, bright sociable friendly smile and alert caring eyes. Pale dusty-peach collared blouse, no badge.\nClothing color should remain close to existing avatar tone #e9cfc4; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "minh",
+      "name": "Đức Minh",
+      "age": 45,
+      "origin": "Hà Nội",
+      "role": "Quản lý mặt bằng",
+      "traits": [
+        "cẩn thận",
+        "kiệm lời",
+        "giữ chữ tín"
+      ],
+      "quirk": "Luôn mang thước dây trong túi áo",
+      "goal": "Lấp đầy tầng còn trống",
+      "fear": "Khách thuê bỏ ngang hợp đồng",
+      "voice": "Miền Bắc chừng mực",
+      "tone": "#cfdde1",
+      "group": "npc",
+      "design": "Vietnamese man, 45, building space manager. Short neat black hair graying at temples, broad slightly oblong face, understated rectangular glasses, calm careful gaze and reserved trustworthy closed-mouth smile. Pale blue-gray simple collared shirt.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese man, 45, building space manager. Short neat black hair graying at temples, broad slightly oblong face, understated rectangular glasses, calm careful gaze and reserved trustworthy closed-mouth smile. Pale blue-gray simple collared shirt.\nClothing color should remain close to existing avatar tone #cfdde1; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "ha",
+      "name": "Ngọc Hà",
+      "age": 31,
+      "origin": "Huế",
+      "role": "Điều phối tuyển dụng",
+      "traits": [
+        "tò mò",
+        "tốt bụng",
+        "cẩn thận"
+      ],
+      "quirk": "Đọc CV bằng bút đỏ",
+      "goal": "Ghép đúng người đúng việc",
+      "fear": "Giới thiệu nhầm người",
+      "voice": "Huế nhẹ",
+      "tone": "#dcd8e6",
+      "group": "npc",
+      "design": "Vietnamese woman, 31, recruiting coordinator. Long straight black hair gathered in a high ponytail, thin round glasses, narrow oval face, curious attentive kind eyes and subtle thoughtful smile, head tilted just slightly. Muted pale lilac collared office blouse.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese woman, 31, recruiting coordinator. Long straight black hair gathered in a high ponytail, thin round glasses, narrow oval face, curious attentive kind eyes and subtle thoughtful smile, head tilted just slightly. Muted pale lilac collared office blouse.\nClothing color should remain close to existing avatar tone #dcd8e6; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    },
+    {
+      "id": "bao",
+      "name": "Quốc Bảo",
+      "age": 34,
+      "origin": "Sài Gòn",
+      "role": "Kỹ thuật viên tòa nhà",
+      "traits": [
+        "thật thà",
+        "vội vàng",
+        "hay đùa"
+      ],
+      "quirk": "Đeo chùm chìa khoá kêu leng keng",
+      "goal": "Mở tiệm sửa máy riêng",
+      "fear": "Mất điện cả tòa nhà",
+      "voice": "Sài Gòn",
+      "tone": "#d6dfcc",
+      "group": "npc",
+      "design": "Vietnamese man, 34, building technician. Short thick wavy black hair, softly square face, very light neat stubble, open honest gaze and a quick playful half-smile, energetic expression. Pale muted sage-green simple work shirt, no badge, tools or props.",
+      "prompt": "Use case: illustration-story. Asset type: fictional NPC shoulder-up avatar portrait for Vietnamese life simulation game, issue #89 lot 3. Consistent warm charming hand-drawn storybook style matching pastel food and product sprites. Thin dark brown #4a3b33 fineliner outlines with slight hand wobble, inner lines thinner. Rounded mildly chubby cute proportions but age-appropriate adult facial features, expressive understated eyes, natural diverse ordinary Vietnamese faces. Flat pastel base colors with very subtle watercolor or colored-pencil wash inside the person only; top-left softly lighter, right side slightly darker. Warm palette cream #fbf3e2, honey #d9a066, sage #9cc28a, turquoise #7fb8b0, cherry #f2b8c6, butter #f4d58d, pale blue #a9c4e4, soft brick #d98276. Soft moderate saturation. FRONT-facing or very slight three-quarter view at eye level, never full-body or scene. Show complete hair, both ears if visible, full chin, neck and shoulders as a small rounded bust. Center the face near the middle of the square; keep all hair and chin well inside an imaginary central circle 86% of canvas diameter, with clear empty space above hair and around shoulders. Entire bust isolated with truly alpha-transparent clean background; do NOT draw the imaginary circle. No text, letters, badges, logo, watermark, colored background, scenery, props, external shadows, glow, haze, glossy gradients, photorealism, 3D render, pixel art or anime sparkle. One person only. Entirely fictional face, not any celebrity or real identifiable person. Preserve clear distinct hairstyle and face silhouette at 64 px.\nCharacter: Vietnamese man, 34, building technician. Short thick wavy black hair, softly square face, very light neat stubble, open honest gaze and a quick playful half-smile, energetic expression. Pale muted sage-green simple work shirt, no badge, tools or props.\nClothing color should remain close to existing avatar tone #d6dfcc; use it on the visible upper garment, not as background. Depict the stated age and expression clearly."
+    }
+  ]
+}
