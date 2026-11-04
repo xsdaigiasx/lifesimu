@@ -1,0 +1,37 @@
+/* T20: Tin nhắn, cuộc gọi, danh bạ trên điện thoại */
+.ps-avatar{flex:0 0 40px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800}
+.ps-list{display:grid;gap:8px;margin-top:10px}
+.ps-row{display:flex;align-items:center;gap:11px;width:100%;min-height:62px;padding:10px 12px;border:1px solid #d7dfcf;border-radius:13px;background:#fcfcf6;color:#294d3d;font:inherit;text-align:left}
+button.ps-row{cursor:pointer}button.ps-row:hover{background:#eef3e6}
+.ps-row-copy{flex:1;min-width:0;display:grid;gap:3px}
+.ps-row-copy strong{font-size:13px}
+.ps-row-copy small{font-size:11.5px;color:#6b7d70;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-row-side{display:grid;justify-items:end;gap:5px;font-size:10.5px;color:#7d8b80}
+.ps-badge{min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:#c0563a;color:#fff;font-size:10.5px;display:grid;place-items:center}
+.ps-call{flex:0 0 96px;display:flex;align-items:center;justify-content:center;gap:6px;height:36px;border:0;border-radius:10px;background:#2f6b4f;color:#fff;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer}
+.ps-call svg{width:15px!important;height:15px!important;fill:none;stroke:currentColor}
+.ps-call:disabled{background:#e4e8df;color:#8b978d;cursor:default}
+.ps-chat{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.ps-chat-head{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid #e1e7da}
+.ps-chat-head span{display:grid;gap:2px}.ps-chat-head strong{font-size:14px;color:#294d3d}.ps-chat-head small{font-size:11px;color:#6b7d70}
+.ps-back{width:36px;height:36px;display:grid;place-items:center;border:1px solid #d7dfcf;border-radius:10px;background:#fcfcf6;color:#294d3d;cursor:pointer}
+.ps-back svg{width:16px!important;height:16px!important;fill:none;stroke:currentColor}
+.ps-bubbles{display:flex;flex-direction:column;gap:6px;padding:2px 2px 4px}
+.ps-bubbles>div{display:flex;flex-direction:column}
+.ps-day{align-self:center;margin:8px 0 4px;font-size:10.5px;color:#8b978d}
+.ps-bubble{max-width:80%;padding:8px 11px 6px;border-radius:15px;font-size:12.5px;line-height:1.4}
+.ps-bubble p{margin:0}.ps-bubble small{display:block;margin-top:3px;font-size:9.5px;opacity:.65;text-align:right}
+.ps-bubble.them{align-self:flex-start;background:#eef2e8;color:#294d3d;border-bottom-left-radius:5px}
+.ps-bubble.me{align-self:flex-end;background:#2f6b4f;color:#fff;border-bottom-right-radius:5px}
+.ps-replies{display:grid;gap:6px;margin:6px 0 2px}
+.ps-replies button,.ps-compose button{min-height:40px;padding:8px 12px;border:1px solid #c3d0b6;border-radius:12px;background:#fcfcf6;color:#294d3d;font:inherit;font-size:12px;font-weight:700;text-align:center;cursor:pointer}
+.ps-replies button:hover,.ps-compose button:hover{background:#eef3e6}
+.ps-compose{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;padding-top:10px;border-top:1px solid #e1e7da}
+.ps-note{margin:0;font-size:11.5px;color:#8a3b25;text-align:center}
+.ps-empty{margin:18px 0;font-size:12px;color:#7d8b80;text-align:center}
+.ps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.ps-card{display:grid;justify-items:center;align-content:start;gap:5px;min-height:108px;padding:12px 6px;border:1px solid #d7dfcf;border-radius:13px;background:#fcfcf6;color:#294d3d;font:inherit;cursor:pointer}
+.ps-card strong{font-size:12px;text-align:center}.ps-card small{font-size:10.5px;color:#6b7d70;text-align:center}
+.ps-card:hover{background:#eef3e6}
+.ps-bubble.them p{color:#294d3d!important}.ps-bubble.me p{color:#fff!important}
+.ps-avatar{color:#294d3d}
