@@ -1,7 +1,7 @@
 import LifeServices from './components/LifeServices';
 import HouseView from './components/HouseView';
 import HouseVisit from './components/HouseVisit';
-import {housingOf,residenceOf,moveHouse,arrangeRoom,relaxAtHome,type HouseId} from './domain/housing';
+import {housingOf,residenceOf,moveHouse,arrangeFloor,relaxAtHome,type HouseId} from './domain/housing';
 import {MODES,type TravelMode} from './domain/travel';
 import {lifeAction,lifeOf,PRODUCTS,type LifeAction} from './domain/life';
 import {buyHome,saveHome,HOME_ITEMS,type HomeId,type HomeTier} from './domain/home';
@@ -87,7 +87,7 @@ export default function App(){
  const handleAction=(action:'report'|'day'|'city'|'room'|'save',next?:DailyAction)=>{switch(action){case'city':changeView('city');break;case'room':changeView('room');break;case'save':save(true);break;case'day':if(next==='rest')activity('rest');else changeView('room');break;default:setModal(action)}};
  const purchaseFurniture=(id:HomeId,tier:HomeTier='basic')=>{const r=buyHome(liveState.current,id,tier);if(r.ok)commitGame(recordJournal(r.state,`purchase-home:${id}`,'Mua nội thất',HOME_ITEMS[id].name));return r};
  const doMove=(house:HouseId,tenure:'rent'|'own')=>{const r=moveHouse(liveState.current,house,tenure);if(r.ok){commitGame(r.state);setModal(null);setView(house==='tro'?'city':'room');toast(house==='tro'?'Đã về lại phòng trọ.':'Đã chuyển nhà.')}return r};
- const houseH={arrange:(room:Parameters<typeof arrangeRoom>[1],items:Parameters<typeof arrangeRoom>[2])=>{const r=arrangeRoom(liveState.current,room,items);if(r.ok)commitGame(r.state);return r},relax:(k:'fun'|'garden')=>{const r=relaxAtHome(liveState.current,k);if(r.ok)commitGame(r.state);return r},sleep:()=>setModal('sleep'),cook:()=>setModal('homeServices'),study:()=>setModal('skills')};
+ const houseH={arrange:(floor:1|2,items:Parameters<typeof arrangeFloor>[2])=>{const r=arrangeFloor(liveState.current,floor,items);if(r.ok)commitGame(r.state);return r},relax:(k:'fun'|'garden')=>{const r=relaxAtHome(liveState.current,k);if(r.ok)commitGame(r.state);return r},sleep:()=>setModal('sleep'),cook:()=>setModal('homeServices'),study:()=>setModal('skills')};
  const doLifeAction=(action:LifeAction)=>{const r=lifeAction(liveState.current,action);if(r.ok){const next=recordJournal(r.state,`life:${action.kind}:${r.state.day}:${clockOf(r.state).minute}:${r.state.money}`,'Sinh hoạt',action.kind==='cook'?'Nấu ăn':action.kind==='eat'?'Ăn uống':action.kind==='product'?'Mua sắm':'Hoạt động trong ngày');commitGame(next);return {...r,state:next}}return r};
  const confirmDay=()=>{if(bauCuaShaking){toast('Hãy chờ xóc bầu cua xong trước khi ngủ.');return}if(dayLock.current)return;dayLock.current=true;const r=finishDay(liveState.current);if(!r.ok){dayLock.current=false;toast(r.error);return}commitGame(r.state);setModal('summary')};
  const activity=(kind:'study'|'rest')=>{if(kind==='study'){setModal('skills');return}const r=personalActivity(liveState.current,kind);if(r.ok){commitGame(r.state);toast('Đã nghỉ 1 giờ.')}else toast(r.error)};
