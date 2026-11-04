@@ -1,0 +1,105 @@
+{
+  "issue": 60,
+  "type": "market-ingredient-card",
+  "anchor": "center",
+  "perspective": "slightly elevated three-quarter",
+  "source": "OpenAI built-in image generation; one original and one style edit per ingredient",
+  "items": [
+    {
+      "id": "rice",
+      "file": "/assets/ingredients/rice.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "content_bbox_px": [
+        30,
+        18,
+        225,
+        238
+      ],
+      "bytes": 18958,
+      "alpha": true
+    },
+    {
+      "id": "egg",
+      "file": "/assets/ingredients/egg.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "content_bbox_px": [
+        18,
+        59,
+        238,
+        196
+      ],
+      "bytes": 29118,
+      "alpha": true
+    },
+    {
+      "id": "vegetable",
+      "file": "/assets/ingredients/vegetable.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "content_bbox_px": [
+        39,
+        18,
+        217,
+        238
+      ],
+      "bytes": 34916,
+      "alpha": true
+    },
+    {
+      "id": "pork",
+      "file": "/assets/ingredients/pork.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "content_bbox_px": [
+        18,
+        54,
+        238,
+        202
+      ],
+      "bytes": 29502,
+      "alpha": true
+    },
+    {
+      "id": "tofu",
+      "file": "/assets/ingredients/tofu.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "content_bbox_px": [
+        18,
+        56,
+        238,
+        199
+      ],
+      "bytes": 24118,
+      "alpha": true
+    },
+    {
+      "id": "fish",
+      "file": "/assets/ingredients/fish.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "content_bbox_px": [
+        18,
+        62,
+        238,
+        193
+      ],
+      "bytes": 27530,
+      "alpha": true
+    }
+  ]
+}

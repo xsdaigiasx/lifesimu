@@ -1,0 +1,12 @@
+{
+  "subjects": {
+    "rice": "One small open beige cloth rice sack, folded rim, filled with uncooked ivory rice grains. A few restrained grain marks, no spilled grains.",
+    "egg": "Six whole eggs, warm ivory and pale tan, arranged in a small plain recycled brown pulp egg tray, two rows of three.",
+    "vegetable": "A compact bundle of fresh leafy green Asian vegetables with a few pale stems, wrapped at its base in a single banana leaf and simple twine. Only vegetables.",
+    "pork": "One fresh raw pork belly cut, pale coral pink meat and ivory fat bands, resting on a small folded banana leaf. Clean appetizing grocery illustration, no blood.",
+    "tofu": "Three fresh ivory tofu blocks, two below and one slightly offset above, sitting on a small banana leaf. Simple rectangular blocks, very sparse tiny pore marks.",
+    "fish": "One whole fresh silver-blue fish lying diagonally on a small banana leaf, head to the left, tail to the right, clear fin and gill shapes. No ice, no water."
+  },
+  "generation": "Isolated grocery sprite for Vietnamese life simulation game. Flat color illustration, thin dark muted brown ink outlines, restrained warm sage/cream/tan palette. Slightly elevated three-quarter orthographic top-down view. Complete centered object in square frame, about 80% occupancy, transparent margins. Actual transparent background. No environment, cast shadow, ambient occlusion, gradients, lighting, glossy highlights, photoreal texture, text, numbers or logos. Solid fills, sparse readable details at 64 px.",
+  "style_edit": "Ingredient is edit target; repo bed-basic_a_sage.png is style reference only. Preserve ingredient subject, composition, colors, details and transparency. Match uniform flat regions and thin crisp ink outlines. Remove gradients, mottled texture and shaded transitions. One solid color per bounded face/region; limited palette of 8–12 colors. No dither, noise, sheen, highlights, shadows, new objects, text or logos. Keep full ingredient with clear margin."
+}
