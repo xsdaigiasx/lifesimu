@@ -1,0 +1,226 @@
+{
+  "status": "pass",
+  "checks": [
+    "13 decoded RGBA assets; frame, alpha, hash and <150000 bytes",
+    "12 names/directions; inherited footprint and anchor values",
+    "rear images are not exact mirror copies",
+    "canonical room grid; fixed kitchen/bath rectangles",
+    "preview placement has no collisions; remaining floor connected",
+    "mobile preview width 380px"
+  ],
+  "limitations": [
+    "Artwork contact points are registered by template bounding boxes, not a reconstructed 3D mesh. Visual in-game review remains required.",
+    "No changes to game UI, core, save or balance; runtime integration not tested."
+  ],
+  "walkable_cells": 38,
+  "images": [
+    {
+      "file": "assets/style-sample/furniture/bed-comfort_a.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "bytes": 117267,
+      "alpha_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "transparent_pixels": 52112,
+      "sha256": "25774e1d62e363a629f8e43c229152751010d88e5e3412a5b706036155217688"
+    },
+    {
+      "file": "assets/style-sample/furniture/bed-comfort_b.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "bytes": 117058,
+      "alpha_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "transparent_pixels": 52231,
+      "sha256": "5f6073947040110f763fcb1ffdf986ba43e7b5b5706333bea83cd8b353bddede"
+    },
+    {
+      "file": "assets/style-sample/furniture/bed-comfort_c.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "bytes": 97661,
+      "alpha_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "transparent_pixels": 57465,
+      "sha256": "fb46ec6223ef854a69f5678eda0b4dfdcbed2b85b1dbc0b4ff12c5789158609c"
+    },
+    {
+      "file": "assets/style-sample/furniture/bed-comfort_d.png",
+      "frame_px": [
+        320,
+        288
+      ],
+      "bytes": 98958,
+      "alpha_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "transparent_pixels": 57231,
+      "sha256": "554930d6436a904fa2338479445b27470cd15696b8537c1a0d6c52ef7da4a274"
+    },
+    {
+      "file": "assets/style-sample/furniture/wardrobe-comfort_a.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "bytes": 98087,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "transparent_pixels": 18434,
+      "sha256": "9cd2c7aa3dda018a3c4cd7382a5b9baa6989f127e593dd07ba4f24857b9a9317"
+    },
+    {
+      "file": "assets/style-sample/furniture/wardrobe-comfort_b.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "bytes": 99654,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "transparent_pixels": 18939,
+      "sha256": "0eac6841b7436c95ce6a6853f306b6b09ca88e1fd352f086f2bee102b5febc0b"
+    },
+    {
+      "file": "assets/style-sample/furniture/wardrobe-comfort_c.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "bytes": 92972,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "transparent_pixels": 18659,
+      "sha256": "72cef7383a97f1a1cce9688cc502014ae924d890e3c38e7aadac5f080f6d809a"
+    },
+    {
+      "file": "assets/style-sample/furniture/wardrobe-comfort_d.png",
+      "frame_px": [
+        192,
+        288
+      ],
+      "bytes": 92845,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "transparent_pixels": 19099,
+      "sha256": "e38295e364654611f0a8840cd80eae2bb5e11bdf8886b9b65fc2603e5039a611"
+    },
+    {
+      "file": "assets/style-sample/furniture/desk-comfort_a.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "bytes": 69539,
+      "alpha_bbox_px": [
+        44,
+        17,
+        232,
+        228
+      ],
+      "transparent_pixels": 43846,
+      "sha256": "d830a478864155f06408f9dd91d88907c95c5d4fd77c3c6e3709ad72dc2905cf"
+    },
+    {
+      "file": "assets/style-sample/furniture/desk-comfort_b.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "bytes": 69343,
+      "alpha_bbox_px": [
+        24,
+        17,
+        212,
+        228
+      ],
+      "transparent_pixels": 43934,
+      "sha256": "ae591b5559f7008974c38f01da6e159fa9c3ffb76666ff8587cc66bc2139e2e3"
+    },
+    {
+      "file": "assets/style-sample/furniture/desk-comfort_c.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "bytes": 53764,
+      "alpha_bbox_px": [
+        24,
+        57,
+        212,
+        237
+      ],
+      "transparent_pixels": 48785,
+      "sha256": "e9fc8a8fb3c57c98382980b1b7da889a3da8bb96a524d19d0f3fa6ea97e55deb"
+    },
+    {
+      "file": "assets/style-sample/furniture/desk-comfort_d.png",
+      "frame_px": [
+        256,
+        256
+      ],
+      "bytes": 52217,
+      "alpha_bbox_px": [
+        44,
+        57,
+        232,
+        237
+      ],
+      "transparent_pixels": 49411,
+      "sha256": "0d54313b1979d39d6eae5bdaa9e7e3405989ce5352ff5cfaa36dae04fff4de38"
+    },
+    {
+      "file": "assets/style-sample/room-master-storybook.webp",
+      "frame_px": [
+        1448,
+        1086
+      ],
+      "bytes": 116218,
+      "alpha_bbox_px": [
+        206,
+        147,
+        1243,
+        873
+      ],
+      "transparent_pixels": 1081069,
+      "sha256": "cd564fdfd93771b8b52af5e386fac06b96beb4c9e8761347f9a5e35413b10217"
+    }
+  ]
+}

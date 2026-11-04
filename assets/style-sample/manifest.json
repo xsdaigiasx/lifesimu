@@ -1,0 +1,1129 @@
+{
+  "schema_version": 1,
+  "issue": 124,
+  "status": "trial-for-review",
+  "projection": "orthographic-2:1",
+  "tile_px": [
+    128,
+    64
+  ],
+  "z_px": 32,
+  "geometry": "x=724+64*(x-y); y=350+32*(x+y)-z",
+  "anchor": "actual bottom footprint vertex from lot5; rectangles are not centered",
+  "runtime_changed": false,
+  "room": {
+    "id": "room-master-storybook",
+    "file": "assets/style-sample/room-master-storybook.webp",
+    "frame_px": [
+      1448,
+      1086
+    ],
+    "origin_px": [
+      724,
+      350
+    ],
+    "tile_px": [
+      128,
+      64
+    ],
+    "floor_tiles": [
+      8,
+      8
+    ],
+    "floor_corners_px": [
+      [
+        724,
+        350
+      ],
+      [
+        1236,
+        606
+      ],
+      [
+        724,
+        862
+      ],
+      [
+        212,
+        606
+      ]
+    ],
+    "anchor_px": [
+      724,
+      862
+    ],
+    "kitchen": {
+      "x": 0,
+      "y": 0,
+      "w": 5,
+      "h": 1
+    },
+    "bath": {
+      "x": 5,
+      "y": 0,
+      "w": 3,
+      "h": 3
+    },
+    "bath_opening": {
+      "axis": "y",
+      "at": 3,
+      "from": 6,
+      "to": 7
+    },
+    "registration": {
+      "source_surface_corners_px": [
+        [
+          196,
+          633
+        ],
+        [
+          1251,
+          632
+        ],
+        [
+          724,
+          916
+        ]
+      ],
+      "target_surface_corners_px": [
+        [
+          212,
+          606
+        ],
+        [
+          1236,
+          606
+        ],
+        [
+          724,
+          862
+        ]
+      ],
+      "method": "affine registration, no perspective warp"
+    },
+    "bytes": 116218,
+    "sha256": "cd564fdfd93771b8b52af5e386fac06b96beb4c9e8761347f9a5e35413b10217"
+  },
+  "items": [
+    {
+      "id": "bed",
+      "model": "comfort",
+      "name": "Giường gỗ có ngăn kéo",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "assets/style-sample/furniture/bed-comfort_a.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          128
+        ],
+        [
+          320,
+          192
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 117267,
+      "alpha_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "sha256": "25774e1d62e363a629f8e43c229152751010d88e5e3412a5b706036155217688",
+      "source": "assets/style-sample/sources/bed-a.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          49,
+          106,
+          1270,
+          1123
+        ],
+        "destination_bbox_px": [
+          14,
+          34,
+          306,
+          277
+        ],
+        "template_file": "app/public/assets/furniture/bed-comfort_a.png"
+      }
+    },
+    {
+      "id": "bed",
+      "model": "comfort",
+      "name": "Giường gỗ có ngăn kéo",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "assets/style-sample/furniture/bed-comfort_b.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          320,
+          224
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 117058,
+      "alpha_bbox_px": [
+        14,
+        34,
+        306,
+        277
+      ],
+      "sha256": "5f6073947040110f763fcb1ffdf986ba43e7b5b5706333bea83cd8b353bddede",
+      "source": "assets/style-sample/sources/bed-b.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          53,
+          81,
+          1273,
+          1123
+        ],
+        "destination_bbox_px": [
+          14,
+          34,
+          306,
+          277
+        ],
+        "template_file": "app/public/assets/furniture/bed-comfort_b.png"
+      }
+    },
+    {
+      "id": "bed",
+      "model": "comfort",
+      "name": "Giường gỗ có ngăn kéo",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "assets/style-sample/furniture/bed-comfort_c.png",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        192,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          192,
+          128
+        ],
+        [
+          320,
+          192
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 97661,
+      "alpha_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "sha256": "fb46ec6223ef854a69f5678eda0b4dfdcbed2b85b1dbc0b4ff12c5789158609c",
+      "source": "assets/style-sample/sources/bed-c.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          61,
+          306,
+          1262,
+          1088
+        ],
+        "destination_bbox_px": [
+          14,
+          89,
+          306,
+          278
+        ],
+        "template_file": "app/public/assets/furniture/bed-comfort_c.png"
+      }
+    },
+    {
+      "id": "bed",
+      "model": "comfort",
+      "name": "Giường gỗ có ngăn kéo",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "assets/style-sample/furniture/bed-comfort_d.png",
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        3
+      ],
+      "frame_px": [
+        320,
+        288
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        192,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        160,
+        208
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          320,
+          224
+        ],
+        [
+          192,
+          288
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 98958,
+      "alpha_bbox_px": [
+        14,
+        89,
+        306,
+        278
+      ],
+      "sha256": "554930d6436a904fa2338479445b27470cd15696b8537c1a0d6c52ef7da4a274",
+      "source": "assets/style-sample/sources/bed-d.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          64,
+          263,
+          1260,
+          1048
+        ],
+        "destination_bbox_px": [
+          14,
+          89,
+          306,
+          278
+        ],
+        "template_file": "app/public/assets/furniture/bed-comfort_d.png"
+      }
+    },
+    {
+      "id": "wardrobe",
+      "model": "comfort",
+      "name": "Tủ gỗ hai cánh",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "assets/style-sample/furniture/wardrobe-comfort_a.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        64,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          192
+        ],
+        [
+          192,
+          256
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 98087,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "sha256": "9cd2c7aa3dda018a3c4cd7382a5b9baa6989f127e593dd07ba4f24857b9a9317",
+      "source": "assets/style-sample/sources/wardrobe-a.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          63,
+          42,
+          956,
+          1467
+        ],
+        "destination_bbox_px": [
+          12,
+          12,
+          180,
+          278
+        ],
+        "template_file": "app/public/assets/furniture/wardrobe-comfort_a.png"
+      }
+    },
+    {
+      "id": "wardrobe",
+      "model": "comfort",
+      "name": "Tủ gỗ hai cánh",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "assets/style-sample/furniture/wardrobe-comfort_b.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          64,
+          288
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 99654,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "sha256": "0eac6841b7436c95ce6a6853f306b6b09ca88e1fd352f086f2bee102b5febc0b",
+      "source": "assets/style-sample/sources/wardrobe-b.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          73,
+          42,
+          950,
+          1474
+        ],
+        "destination_bbox_px": [
+          12,
+          12,
+          180,
+          278
+        ],
+        "template_file": "app/public/assets/furniture/wardrobe-comfort_b.png"
+      }
+    },
+    {
+      "id": "wardrobe",
+      "model": "comfort",
+      "name": "Tủ gỗ hai cánh",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "assets/style-sample/furniture/wardrobe-comfort_c.png",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        288
+      ],
+      "mount_origin_px": [
+        64,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          64,
+          192
+        ],
+        [
+          192,
+          256
+        ],
+        [
+          128,
+          288
+        ],
+        [
+          0,
+          224
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 92972,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "sha256": "72cef7383a97f1a1cce9688cc502014ae924d890e3c38e7aadac5f080f6d809a",
+      "source": "assets/style-sample/sources/wardrobe-c.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          46,
+          41,
+          973,
+          1484
+        ],
+        "destination_bbox_px": [
+          12,
+          12,
+          180,
+          278
+        ],
+        "template_file": "app/public/assets/furniture/wardrobe-comfort_c.png"
+      }
+    },
+    {
+      "id": "wardrobe",
+      "model": "comfort",
+      "name": "Tủ gỗ hai cánh",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "assets/style-sample/furniture/wardrobe-comfort_d.png",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        1
+      ],
+      "frame_px": [
+        192,
+        288
+      ],
+      "height_px": 192,
+      "render_extent_height_px": 192,
+      "height_z": 6,
+      "top_padding_px": 0,
+      "anchor_px": [
+        64,
+        288
+      ],
+      "mount_origin_px": [
+        128,
+        192
+      ],
+      "footprint_center_px": [
+        96,
+        240
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          64,
+          288
+        ],
+        [
+          0,
+          256
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 92845,
+      "alpha_bbox_px": [
+        12,
+        12,
+        180,
+        278
+      ],
+      "sha256": "e38295e364654611f0a8840cd80eae2bb5e11bdf8886b9b65fc2603e5039a611",
+      "source": "assets/style-sample/sources/wardrobe-d.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          56,
+          53,
+          967,
+          1485
+        ],
+        "destination_bbox_px": [
+          12,
+          12,
+          180,
+          278
+        ],
+        "template_file": "app/public/assets/furniture/wardrobe-comfort_d.png"
+      }
+    },
+    {
+      "id": "desk",
+      "model": "comfort",
+      "name": "Bàn gỗ có kệ sách",
+      "direction": "a",
+      "rotation_deg": 0,
+      "file": "assets/style-sample/furniture/desk-comfort_a.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 69539,
+      "alpha_bbox_px": [
+        44,
+        17,
+        232,
+        228
+      ],
+      "sha256": "d830a478864155f06408f9dd91d88907c95c5d4fd77c3c6e3709ad72dc2905cf",
+      "source": "assets/style-sample/sources/desk-a.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          179,
+          61,
+          1128,
+          1134
+        ],
+        "destination_bbox_px": [
+          44,
+          17,
+          232,
+          228
+        ],
+        "template_file": "app/public/assets/furniture/desk-comfort_a.png"
+      }
+    },
+    {
+      "id": "desk",
+      "model": "comfort",
+      "name": "Bàn gỗ có kệ sách",
+      "direction": "b",
+      "rotation_deg": 90,
+      "file": "assets/style-sample/furniture/desk-comfort_b.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 69343,
+      "alpha_bbox_px": [
+        24,
+        17,
+        212,
+        228
+      ],
+      "sha256": "ae591b5559f7008974c38f01da6e159fa9c3ffb76666ff8587cc66bc2139e2e3",
+      "source": "assets/style-sample/sources/desk-b.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          104,
+          52,
+          1113,
+          1172
+        ],
+        "destination_bbox_px": [
+          24,
+          17,
+          212,
+          228
+        ],
+        "template_file": "app/public/assets/furniture/desk-comfort_b.png"
+      }
+    },
+    {
+      "id": "desk",
+      "model": "comfort",
+      "name": "Bàn gỗ có kệ sách",
+      "direction": "c",
+      "rotation_deg": 180,
+      "file": "assets/style-sample/furniture/desk-comfort_c.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        0,
+        -1
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 53764,
+      "alpha_bbox_px": [
+        24,
+        57,
+        212,
+        237
+      ],
+      "sha256": "e9fc8a8fb3c57c98382980b1b7da889a3da8bb96a524d19d0f3fa6ea97e55deb",
+      "source": "assets/style-sample/sources/desk-c.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          112,
+          199,
+          1076,
+          1110
+        ],
+        "destination_bbox_px": [
+          24,
+          57,
+          212,
+          237
+        ],
+        "template_file": "app/public/assets/furniture/desk-comfort_c.png"
+      }
+    },
+    {
+      "id": "desk",
+      "model": "comfort",
+      "name": "Bàn gỗ có kệ sách",
+      "direction": "d",
+      "rotation_deg": 270,
+      "file": "assets/style-sample/furniture/desk-comfort_d.png",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "unrotated_footprint_tiles": [
+        2,
+        2
+      ],
+      "frame_px": [
+        256,
+        256
+      ],
+      "height_px": 128,
+      "render_extent_height_px": 128,
+      "height_z": 4,
+      "top_padding_px": 0,
+      "anchor_px": [
+        128,
+        256
+      ],
+      "mount_origin_px": [
+        128,
+        128
+      ],
+      "footprint_center_px": [
+        128,
+        192
+      ],
+      "footprint_corners_px": [
+        [
+          128,
+          128
+        ],
+        [
+          256,
+          192
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "front_vector_xy": [
+        -1,
+        0
+      ],
+      "mount": "floor",
+      "rgba": true,
+      "bytes": 52217,
+      "alpha_bbox_px": [
+        44,
+        57,
+        232,
+        237
+      ],
+      "sha256": "0d54313b1979d39d6eae5bdaa9e7e3405989ce5352ff5cfaa36dae04fff4de38",
+      "source": "assets/style-sample/sources/desk-d.webp",
+      "registration": {
+        "method": "alpha-bbox-to-original-template; no rotation or mirroring",
+        "source_bbox_px": [
+          158,
+          159,
+          1145,
+          1116
+        ],
+        "destination_bbox_px": [
+          44,
+          57,
+          232,
+          237
+        ],
+        "template_file": "app/public/assets/furniture/desk-comfort_d.png"
+      }
+    }
+  ]
+}
