@@ -15,3 +15,6 @@
 .life-list article.is-locked small{display:inline-flex;align-items:center;gap:4px}
 .life-list article.is-locked svg{width:13px!important;height:13px!important;fill:none;stroke:currentColor}
 .mall-zones small{display:inline-flex;align-items:center;gap:4px;font-size:12px}.mall-zones small svg{width:14px!important;height:14px!important}
+.market-item-art img{width:76px;height:76px;object-fit:contain;display:block}
+.pantry-grid .market-item.is-expired{opacity:.6}
+.pantry-grid .late{color:#b0442b;font-weight:800}
