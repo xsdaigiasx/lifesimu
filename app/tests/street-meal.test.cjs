@@ -2,11 +2,11 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const L=require('../.test-build/domain/life');const {engine}=require('../.test-build/domain/engine');const {clockOf}=require('../.test-build/domain/time');
 const {fullnessOf}=require('../.test-build/domain/vitals');const {statDeltas}=require('../.test-build/domain/stat-delta');
 const at=(minute,location,extra={})=>{const s=engine.initial();return{...s,day:2,money:1e6,fullness:30,clock:{...clockOf(s),minute,location},...extra}};
-test('ăn ở quán: đúng nơi, trừ tiền, tăng no, chung luật 3 giờ',()=>{
+test('ăn ở quán: đúng nơi, trừ tiền, tăng no, ăn tiếp được khi chưa no',()=>{
  assert.equal(L.lifeAction(at(720,'home'),{kind:'eatOut',id:'comTam'}).ok,false,'phải ở quán');
  const s=at(720,'streetfood'),r=L.lifeAction(s,{kind:'eatOut',id:'comTam'});assert.ok(r.ok,r.error);assert.ok(engine.valid(r.state));
  assert.equal(r.state.money,s.money-L.EAT_OUT.comTam.price);assert.ok(fullnessOf(r.state)>fullnessOf(s)+40);assert.equal(clockOf(r.state).minute,720+L.EAT_OUT.comTam.minutes);
- assert.match(L.lifeAction(r.state,{kind:'eatOut',id:'banhMi'}).error,/3 giờ/);
+ assert.doesNotMatch(String(L.lifeAction(r.state,{kind:'eatOut',id:'banhMi'}).error),/3 giờ/,'không còn luật chờ 3 giờ');
  assert.equal(L.lifeAction(at(720,'streetfood',{fullness:95}),{kind:'eatOut',id:'pho'}).ok,false,'đang no');
  assert.equal(L.lifeAction(at(720,'streetfood',{money:1000}),{kind:'eatOut',id:'pho'}).ok,false,'thiếu tiền');
  const d=statDeltas(s,r.state);assert.ok(d.some(x=>x.key==='fullness'&&x.value>0&&x.good));assert.ok(d.some(x=>x.key==='energy'));
