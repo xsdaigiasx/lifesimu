@@ -143,6 +143,10 @@ export const LINES:Line[]=[
  // Dạy nấu ăn
  L('recipe:co-hanh','Mua rau hoài mà biết nấu canh chua chưa? Để {self} chỉ cho.'),
  L('recipe:co-hanh','Rau muống ni xào tỏi phải lửa to nha, để {self} chỉ.'),
+ L('recipe:chu-luc','Thịt kho trứng phải kho lửa liu riu mới thấm, để {self} chỉ {you}.'),
+ L('recipe:chu-luc','Mua thịt hoài, biết kho trứng chưa? Nghe {self} nói nè.'),
+ L('recipe:chi-mai','Cơm nguội đừng bỏ, chiên với trứng ngon lắm. {Self} chỉ cho.'),
+ L('recipe:chi-mai','Bí món thì làm cơm chiên trứng, {self} chỉ {you} cách cho tơi.'),
  L('recipe:me','Mẹ chỉ con cách kho cá cho đậm nha, nhớ ghi lại kẻo quên.'),
  L('recipe:me','Nấu canh chua phải cho me trước con ơi, mẹ chỉ cho.'),
  // Mẹ
