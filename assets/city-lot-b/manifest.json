@@ -1,0 +1,571 @@
+{
+  "issue": 97,
+  "lot": "B",
+  "projection": "orthographic-2:1",
+  "tile_px": [
+    256,
+    128
+  ],
+  "geometry": "px=128*h+128*(x-y); py=z_budget+64*(x+y)-z; anchor=[128*w,frameHeight]",
+  "source": "Original native geometry extended from prior isometric assets; image_gen plaster wash and prior lot4 palette",
+  "items": [
+    {
+      "id": "home",
+      "name": "Khu nhà trọ",
+      "file": "app/public/assets/city/buildings/home.webp",
+      "footprint_tiles": [
+        4,
+        4
+      ],
+      "frame_px": [
+        1024,
+        842
+      ],
+      "anchor_px": [
+        512,
+        842
+      ],
+      "floor_origin_px": [
+        512,
+        330
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 330,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 62172,
+      "sha256": "22b2ba7157ec8322989091af72bb2abc3e09bf3e919a06612969a04fdd902f39",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/home.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 23770,
+        "sha256": "0caae96d44e70d69cc625632267415787af77e50a65a46aa921c95d734fd1d55"
+      }
+    },
+    {
+      "id": "office",
+      "name": "Văn phòng sáu công ty",
+      "file": "app/public/assets/city/buildings/office.webp",
+      "footprint_tiles": [
+        6,
+        6
+      ],
+      "frame_px": [
+        1536,
+        1418
+      ],
+      "anchor_px": [
+        768,
+        1418
+      ],
+      "floor_origin_px": [
+        768,
+        650
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 650,
+      "quality": 80,
+      "alphaQuality": 100,
+      "bytes": 140954,
+      "sha256": "5940976295616cfc297c2f9c932359c351256326b3088be4e58113fe6c5eaaf6",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/office.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 36768,
+        "sha256": "4507f1942486f0e415cc497989a694e60730c0f16822601990f9142bada493f3"
+      }
+    },
+    {
+      "id": "market",
+      "name": "Chợ dân sinh",
+      "file": "app/public/assets/city/buildings/market.webp",
+      "footprint_tiles": [
+        6,
+        6
+      ],
+      "frame_px": [
+        1536,
+        1048
+      ],
+      "anchor_px": [
+        768,
+        1048
+      ],
+      "floor_origin_px": [
+        768,
+        280
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 280,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 91670,
+      "sha256": "0371ff43ccd1f1079bf6fe773aa99ff6b3117c11cbe5398c4c25bfcbb0ae9205",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/market.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 20506,
+        "sha256": "90670e146c339664012a1b8f6f45a02934eb519c156b76b31b86677e283d5c27"
+      }
+    },
+    {
+      "id": "mall",
+      "name": "Trung tâm thương mại",
+      "file": "app/public/assets/city/buildings/mall.webp",
+      "footprint_tiles": [
+        6,
+        6
+      ],
+      "frame_px": [
+        1536,
+        1208
+      ],
+      "anchor_px": [
+        768,
+        1208
+      ],
+      "floor_origin_px": [
+        768,
+        440
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 440,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 144988,
+      "sha256": "55703234683363de21c197451b2d5758bc3bb3324c8b7e60db6b6ee0e86016a2",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/mall.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 28990,
+        "sha256": "c8a4402df2f21eab396109c1336cf3773e92bec98a8233333db10c52764efe74"
+      }
+    },
+    {
+      "id": "bank",
+      "name": "Ngân hàng",
+      "file": "app/public/assets/city/buildings/bank.webp",
+      "footprint_tiles": [
+        4,
+        4
+      ],
+      "frame_px": [
+        1024,
+        792
+      ],
+      "anchor_px": [
+        512,
+        792
+      ],
+      "floor_origin_px": [
+        512,
+        280
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 280,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 40364,
+      "sha256": "8a6acbc8f8349636b356168897802a3883c79504e1cae0c40e664c06b634946a",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/bank.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 17470,
+        "sha256": "a84a873041618584cea79b017e94096e65d1d1037b290e84e959c53f57158d01"
+      }
+    },
+    {
+      "id": "hospital",
+      "name": "Bệnh viện",
+      "file": "app/public/assets/city/buildings/hospital.webp",
+      "footprint_tiles": [
+        6,
+        6
+      ],
+      "frame_px": [
+        1536,
+        1248
+      ],
+      "anchor_px": [
+        768,
+        1248
+      ],
+      "floor_origin_px": [
+        768,
+        480
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 480,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 113404,
+      "sha256": "2337b81409db373a0163838469e285a650bf529280b2c6b6e10241c4f75ae6bf",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/hospital.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 25364,
+        "sha256": "3ff5d2cb69b46b7ba624d0329cb0dd2cfc0c6a30673fa893c669e20df9254a40"
+      }
+    },
+    {
+      "id": "bus",
+      "name": "Trạm xe buýt",
+      "file": "app/public/assets/city/buildings/bus.webp",
+      "footprint_tiles": [
+        2,
+        4
+      ],
+      "frame_px": [
+        768,
+        604
+      ],
+      "anchor_px": [
+        256,
+        604
+      ],
+      "floor_origin_px": [
+        512,
+        220
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 220,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 23768,
+      "sha256": "c121803ac387479ef5a746ff247e0b3e9fb16e9c6406f3298205194dfbe88331",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/bus.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 16448,
+        "sha256": "7eec2603b6aee0849b4e83401a7178ba7e3032a74a7e96cb7e346ef257838f40"
+      }
+    },
+    {
+      "id": "park",
+      "name": "Công viên",
+      "file": "app/public/assets/city/buildings/park.webp",
+      "footprint_tiles": [
+        8,
+        8
+      ],
+      "frame_px": [
+        2048,
+        1324
+      ],
+      "anchor_px": [
+        1024,
+        1324
+      ],
+      "floor_origin_px": [
+        1024,
+        300
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 300,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 48746,
+      "sha256": "d2d6cbf6d2a604ee16f217703ec501359f632ec21c6a60d1114854d675ab1098",
+      "component": false,
+      "components": [
+        {
+          "id": "park-gazebo",
+          "world_origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "park-fountain",
+          "world_origin": [
+            4,
+            4
+          ]
+        }
+      ],
+      "location_card": {
+        "file": "app/public/assets/locations/park.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 8176,
+        "sha256": "6ce9da35ada90c778ceef7af0c7a60825b303e1581fcc9a0ff0884b8b5086994"
+      }
+    },
+    {
+      "id": "streetfood",
+      "name": "Quán ăn ven đường",
+      "file": "app/public/assets/city/buildings/streetfood.webp",
+      "footprint_tiles": [
+        4,
+        4
+      ],
+      "frame_px": [
+        1024,
+        742
+      ],
+      "anchor_px": [
+        512,
+        742
+      ],
+      "floor_origin_px": [
+        512,
+        230
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 230,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 30968,
+      "sha256": "f7f9a4662a08a6145229d594b49339613330a9613868e8221ab8e4f223357ccf",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/streetfood.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 14430,
+        "sha256": "c6064d83b7d1fa95e56fd90ba7f11c4274452c05ac5f946490742380ea35517f"
+      }
+    },
+    {
+      "id": "restaurant",
+      "name": "Nhà hàng",
+      "file": "app/public/assets/city/buildings/restaurant.webp",
+      "footprint_tiles": [
+        4,
+        4
+      ],
+      "frame_px": [
+        1024,
+        872
+      ],
+      "anchor_px": [
+        512,
+        872
+      ],
+      "floor_origin_px": [
+        512,
+        360
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 360,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 49138,
+      "sha256": "8b94615f3f0c7e647d2235c6353877f7af8e64c1c98fc7d9e3058ae378842293",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/restaurant.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 19554,
+        "sha256": "88322b0585a8e8ba3136491bfe6891f9a56b1b58af64dcd061854cb99231a847"
+      }
+    },
+    {
+      "id": "apartments",
+      "name": "Dãy nhà phố",
+      "file": "app/public/assets/city/buildings/apartments.webp",
+      "footprint_tiles": [
+        6,
+        4
+      ],
+      "frame_px": [
+        1280,
+        1000
+      ],
+      "anchor_px": [
+        768,
+        1000
+      ],
+      "floor_origin_px": [
+        512,
+        360
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 360,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 75974,
+      "sha256": "475f709d97bd2c96bc626e35245c560ced15db524034e0ebd56c894148438d4a",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/apartments.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 21100,
+        "sha256": "a368bf5257a3af2143c0d8668f7368f44a900cf8455e8bcae456ffc6063ba356"
+      }
+    },
+    {
+      "id": "villa",
+      "name": "Biệt thự",
+      "file": "app/public/assets/city/buildings/villa.webp",
+      "footprint_tiles": [
+        6,
+        6
+      ],
+      "frame_px": [
+        1536,
+        1188
+      ],
+      "anchor_px": [
+        768,
+        1188
+      ],
+      "floor_origin_px": [
+        768,
+        420
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 420,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 93706,
+      "sha256": "08dba8e066f09be764b84b9094c50b315cf313cdfa8d522aab05961b33c6ea12",
+      "component": false,
+      "location_card": {
+        "file": "app/public/assets/locations/villa.webp",
+        "frame_px": [
+          512,
+          512
+        ],
+        "bytes": 20680,
+        "sha256": "5a8350a011ded4b23aca5b7777d895ef40e074f97299193d185e2501be9b397d"
+      }
+    },
+    {
+      "id": "park-gazebo",
+      "name": "Chòi nghỉ công viên",
+      "file": "app/public/assets/city/buildings/park-gazebo.webp",
+      "footprint_tiles": [
+        3,
+        3
+      ],
+      "frame_px": [
+        768,
+        674
+      ],
+      "anchor_px": [
+        384,
+        674
+      ],
+      "floor_origin_px": [
+        384,
+        290
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 290,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 27792,
+      "sha256": "d4e6422bd3dac2e4517cc66e5106be825ab80e8971dc54fe214611151a649dba",
+      "component": true
+    },
+    {
+      "id": "park-fountain",
+      "name": "Đài phun nước",
+      "file": "app/public/assets/city/buildings/park-fountain.webp",
+      "footprint_tiles": [
+        3,
+        3
+      ],
+      "frame_px": [
+        768,
+        534
+      ],
+      "anchor_px": [
+        384,
+        534
+      ],
+      "floor_origin_px": [
+        384,
+        150
+      ],
+      "tile_px": [
+        256,
+        128
+      ],
+      "z_budget_px": 150,
+      "quality": 90,
+      "alphaQuality": 100,
+      "bytes": 17072,
+      "sha256": "c75a0bf1b927bf10206031303658804d205afbfac83317eb3aa586906780202d",
+      "component": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "issue": 97,
+  "lot": "B",
+  "method": "Original native architectural illustration at exact target geometry; image_gen creates the plaster surface wash only. No external references or image edits.",
+  "external_reference_images": [],
+  "imagegen": {
+    "prompt": "Use case: illustration-story. Asset type: seamless flat material swatch for native hand-illustrated isometric city game facades. Create a full-frame uniform warm ivory cream painted plaster surface, with extremely subtle watercolor paper wash and very sparse tiny colored pencil flecks. Top-down flat texture only, edge to edge, no shapes, no perspective, no horizon, no objects, no signs, no lettering, no border, no cast shadows, no lighting gradient, no dark spots. Palette #fbf3e2 with soft pale ochre and muted honey undertones; gentle warm children's storybook material. Low contrast, bright matte, seamless quiet surface. This swatch will be projected onto mathematically exact building geometry; do not draw any building.",
+    "output_source": "Generated with built-in OpenAI image tool, 04/11/2026; reduced to 256x256 material swatch only."
+  },
+  "scene_spec": "12 recognizable Vietnamese city locations: two-storey rental alley, six-storey/six-company office, corrugated-roof market stalls, shopping mall, columned bank, hospital with teal medical plus, covered bus shelter, park gazebo and fountain, sidewalk food stall with parasol and plastic furniture, tiled-roof restaurant, two-storey townhouse row, villa garden. Thin brown #4a3b33 outlines; warm cream, honey, sage, teal, pink, butter, blue and muted brick; matte watercolor wash, light top-left, gentle darker right face; no external cast shadows, people, readable text, logos or brands. All geometry stays within exact issue #97 footprints; tile256x128; anchor actual lower footprint vertex. Park canopy/fountain also exported as independent 3x3 components.",
+  "location_cards": "512x512 RGBA versions of the same 12 buildings for app/public/assets/locations, consistent art rather than separate mismatched scenes."
+}

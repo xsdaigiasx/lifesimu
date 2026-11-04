@@ -1,0 +1,437 @@
+{
+  "issue": 97,
+  "lot": "B",
+  "main_buildings": 12,
+  "park_components": 2,
+  "location_cards": 12,
+  "all_geometry_inside_footprints": true,
+  "exact_projection_2_to_1": true,
+  "rectangular_anchors_checked": [
+    "bus",
+    "apartments"
+  ],
+  "total_runtime_bytes": 1213972,
+  "max_runtime_bytes": 144988,
+  "checks": [
+    {
+      "file": "app/public/assets/city/buildings/home.webp",
+      "frame_px": [
+        1024,
+        842
+      ],
+      "bytes": 62172,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        114,
+        1017,
+        840
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/home.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 23770,
+      "rgba": true,
+      "alpha_bbox": [
+        24,
+        115,
+        488,
+        449
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/office.webp",
+      "frame_px": [
+        1536,
+        1418
+      ],
+      "bytes": 140954,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        196,
+        1529,
+        1416
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/office.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 36768,
+      "rgba": true,
+      "alpha_bbox": [
+        23,
+        99,
+        489,
+        473
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/market.webp",
+      "frame_px": [
+        1536,
+        1048
+      ],
+      "bytes": 91670,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        140,
+        1529,
+        1046
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/market.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 20506,
+      "rgba": true,
+      "alpha_bbox": [
+        23,
+        137,
+        489,
+        416
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/mall.webp",
+      "frame_px": [
+        1536,
+        1208
+      ],
+      "bytes": 144988,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        168,
+        1529,
+        1206
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/mall.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 28990,
+      "rgba": true,
+      "alpha_bbox": [
+        23,
+        122,
+        489,
+        441
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/bank.webp",
+      "frame_px": [
+        1024,
+        792
+      ],
+      "bytes": 40364,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        138,
+        1017,
+        790
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/bank.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 17470,
+      "rgba": true,
+      "alpha_bbox": [
+        24,
+        137,
+        488,
+        438
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/hospital.webp",
+      "frame_px": [
+        1536,
+        1248
+      ],
+      "bytes": 113404,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        195,
+        1529,
+        1246
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/hospital.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 25364,
+      "rgba": true,
+      "alpha_bbox": [
+        23,
+        124,
+        489,
+        447
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/bus.webp",
+      "frame_px": [
+        768,
+        604
+      ],
+      "bytes": 23768,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        84,
+        761,
+        602
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/bus.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 16448,
+      "rgba": true,
+      "alpha_bbox": [
+        25,
+        122,
+        487,
+        440
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/park.webp",
+      "frame_px": [
+        2048,
+        1324
+      ],
+      "bytes": 48746,
+      "rgba": true,
+      "alpha_bbox": [
+        685,
+        157,
+        1363,
+        1099
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/park.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 8176,
+      "rgba": true,
+      "alpha_bbox": [
+        178,
+        140,
+        334,
+        357
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/streetfood.webp",
+      "frame_px": [
+        1024,
+        742
+      ],
+      "bytes": 30968,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        175,
+        1017,
+        740
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/streetfood.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 14430,
+      "rgba": true,
+      "alpha_bbox": [
+        24,
+        165,
+        488,
+        426
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/restaurant.webp",
+      "frame_px": [
+        1024,
+        872
+      ],
+      "bytes": 49138,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        190,
+        1017,
+        870
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/restaurant.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 19554,
+      "rgba": true,
+      "alpha_bbox": [
+        24,
+        143,
+        488,
+        456
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/apartments.webp",
+      "frame_px": [
+        1280,
+        1000
+      ],
+      "bytes": 75974,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        157,
+        1273,
+        998
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/apartments.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 21100,
+      "rgba": true,
+      "alpha_bbox": [
+        23,
+        129,
+        489,
+        439
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/villa.webp",
+      "frame_px": [
+        1536,
+        1188
+      ],
+      "bytes": 93706,
+      "rgba": true,
+      "alpha_bbox": [
+        7,
+        261,
+        1529,
+        1186
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/locations/villa.webp",
+      "frame_px": [
+        512,
+        512
+      ],
+      "bytes": 20680,
+      "rgba": true,
+      "alpha_bbox": [
+        23,
+        153,
+        489,
+        438
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/park-gazebo.webp",
+      "frame_px": [
+        768,
+        674
+      ],
+      "bytes": 27792,
+      "rgba": true,
+      "alpha_bbox": [
+        45,
+        147,
+        723,
+        650
+      ],
+      "sha256_matches": true
+    },
+    {
+      "file": "app/public/assets/city/buildings/park-fountain.webp",
+      "frame_px": [
+        768,
+        534
+      ],
+      "bytes": 17072,
+      "rgba": true,
+      "alpha_bbox": [
+        183,
+        222,
+        585,
+        437
+      ],
+      "sha256_matches": true
+    }
+  ],
+  "limitations": [
+    "Art-only verification; city renderer, hit regions, zoom performance and mobile gameplay are integrated by Claude.",
+    "Preview neighborhood is an asset assembly example, not a replacement of the game map or travel distances."
+  ]
+}

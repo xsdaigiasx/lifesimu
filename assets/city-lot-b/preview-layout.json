@@ -1,0 +1,49 @@
+{
+  "review_only": true,
+  "world_size": [
+    20,
+    20
+  ],
+  "tile_px": [
+    256,
+    128
+  ],
+  "origin_px": [
+    2560,
+    700
+  ],
+  "placements": [
+    {
+      "id": "home",
+      "x": 1,
+      "y": 2
+    },
+    {
+      "id": "bus",
+      "x": 6,
+      "y": 2
+    },
+    {
+      "id": "office",
+      "x": 12,
+      "y": 1
+    },
+    {
+      "id": "market",
+      "x": 1,
+      "y": 12
+    },
+    {
+      "id": "park",
+      "x": 11,
+      "y": 11
+    }
+  ],
+  "road_cross": [
+    9,
+    9
+  ],
+  "no_footprint_overlaps": true,
+  "no_footprints_on_road": true,
+  "not_a_game_layout": true
+}

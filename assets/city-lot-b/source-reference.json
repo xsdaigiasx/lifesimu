@@ -1,0 +1,28 @@
+{
+  "issue": 97,
+  "lot": "B",
+  "base_commit": "7513411dd4854a7642bedf87947fe05057cb1168",
+  "style_issue": 89,
+  "source_ids": "Issue #97 exact table of 12 locations; park separate components added to satisfy composable gazebo and fountain.",
+  "native_art_sources": [
+    "assets/source/build-room.cjs",
+    "assets/storybook-lot4/render.cjs"
+  ],
+  "new_material": "Built-in OpenAI image tool creates plaster wash only, 04/11/2026; complete prompt in prompts.json.",
+  "geometry_units": {
+    "tile_px": [
+      256,
+      128
+    ],
+    "world_axes": [
+      [
+        128,
+        64
+      ],
+      [
+        -128,
+        64
+      ]
+    ]
+  }
+}
