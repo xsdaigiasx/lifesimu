@@ -1,6 +1,16 @@
-# Bàn giao — Một đời để sống, Basic 1.0 (05/11/2026)
+# Bàn giao — Một đời để sống, Basic 1.0 (05/11/2026, cập nhật sau T31)
 
 Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude mới: đọc hết trước khi làm, rồi đọc `CLAUDE.md`, `AGENTS.md`, `README.md`.
+
+## 1b. Cập nhật cuối phiên 05/11 (đọc trước mục 1)
+
+- **T30 chưa tới main khi viết phần này**: #164 và #165 từng được gộp vào nhánh của #161 sau khi #161 đã vào main, nên main vẫn ở 0.40.0 không có `bank.ts`. Đã đưa lại bằng cherry-pick ở **#168** (0.41.0, có "Closes #162, #163").
+- **Chuỗi PR chờ gộp, theo thứ tự**: #168 (khôi phục T30, base main), #169 (nối ảnh ba lô lô 2, 0.41.1), #170 (nút i nhỏ mỏng, bỏ dòng kích thước thẻ nội thất, 0.41.2), #172 (T31, 0.42.0, issue #171). Mỗi PR có base là nhánh của PR trước; sau khi PR trước gộp thì đổi base về main rồi mới gộp.
+- **T31 xong** (issue #171, PR #172): `domain/weekend.ts` (ca làm thêm Thứ 7 và Chủ nhật: 4 giờ, 240.000đ, −20 năng lượng, +5 căng thẳng, mỗi ngày một ca, chống trùng bằng mã giao dịch `weekend:<ngày>`, nút trong app Công việc của điện thoại); `domain/inbox.ts` (`MOM_AID`: tiền mặt cộng tiết kiệm dưới 100.000đ thì Mẹ nhắn tin `mom-aid`; gọi Mẹ trong 3 ngày để nhận 1.000.000đ; 14 ngày một lần; mã giao dịch `momaid:<ngày>`). Chủ dự án duyệt 05/11: Mẹ gửi 1.000.000đ (không phải 500.000đ), ca cuối tuần mở mọi lúc (không giới hạn dưới 1.000.000đ). Không đổi schema save. Chưa chụp màn hình app Công việc và tin của Mẹ.
+- **Phản hồi giao diện 05/11**: nút i phải nhỏ và mỏng để không che sản phẩm trong ảnh; nếu thông tin phụ trên thẻ dài thì bỏ khỏi thẻ, để trong nút i (đã bỏ dòng kích thước ở thẻ nội thất).
+- **Thứ tự tiếp theo (chủ dự án chọn 05/11)**: T32 (dự án riêng buổi tối và khách tay trái) rồi T33 (điều kiện, vốn, văn phòng khi mở công ty). T33 phụ thuộc T30, T32. Cần đọc đề xuất trong tài liệu Kế hoạch (mục 18.2, mục 32) và gửi AskUserQuestion trước khi code. Chủ dự án chọn **điều kiện mở công ty thấp hơn đề xuất để dễ test** (đề xuất gốc: Quản lý ≥ Lv6, kỹ năng chính ≥ Lv7, ≥ 12 tháng làm việc, vốn ≥ 150 triệu), vốn khoảng 50 triệu; con số Lv và số tháng chưa chốt, hỏi lại khi làm T33. Văn phòng Nhỏ 40 m² thuê trước.
+- **Issue**: đã đóng #160, #166. #162, #163 tự đóng khi #168 gộp. #171 đóng thủ công khi #172 vào main. Còn mở: #133 (Codex: lô 2 xong, còn lô 3 đồ văn phòng 38 ảnh, lô 4 món ăn mới), #55 (hoãn). Cuối mỗi phiên: đóng issue của PR đã vào main, bình luận tiến độ vào #133.
+- **Bài học thêm**: PR gộp vào nhánh của PR khác chưa tới main thì thay đổi bị lạc. Trước khi báo "đã gộp", kiểm `base` của PR phải là `main` (`gh api repos/xsdaigiasx/lifesimu/pulls/<n> --jq .base.ref`). Clone nông (`--depth 1`) không gộp được nhánh khác (`unrelated histories`): dùng cherry-pick. Hook Stop báo "chưa đẩy" thì thêm refspec nhánh (mục 3).
 
 ## 1. Tóm tắt
 
