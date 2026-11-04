@@ -13,7 +13,7 @@ const ITEM_TONE:Record<IngredientId,string>={rice:'#f2e6c4',egg:'#f6e3b4',vegeta
 const QTY=[1,5,10] as const;
 
 /** Chợ chia theo quầy (chốt 04/11): màn đầu chọn quầy, vào quầy thấy người bán và lưới hàng có ảnh. Ảnh món ăn tạm là ô màu kèm biểu tượng tới khi có art. */
-export default function Market({state,stock,onAction,onTalk}:{state:GameState;stock:(id:IngredientId)=>number;onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,minutes:5|15)=>GameResult}){
+export default function Market({state,stock,onAction,onTalk}:{state:GameState;stock:(id:IngredientId)=>number;onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,kind:'talk'|'meal')=>GameResult}){
  const [stallId,setStall]=useState<StallId|null>(null),[qty,setQty]=useState<1|5|10>(1),[note,setNote]=useState(''),[chat,setChat]=useState(false);
  const c=clockOf(state),rel=socialOf(state).relations,stall=STALLS.find(s=>s.id===stallId);
  if(!stall){const sellers:string[]=STALLS.map(s=>s.seller);return <div className="market">
@@ -22,14 +22,14 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
  </div>}
  const seller=castById(stall.seller)!,here=presentAt(seller,state.day,c.minute,'market');
  const buy=(id:IngredientId)=>{const r=onAction({kind:'ingredient',id,qty});setNote(r.ok?`Đã mua ${qty} phần ${INGREDIENTS[id].name.toLowerCase()}.`:r.error)};
- const talk=(m:5|15)=>{if(!onTalk)return;const r=onTalk(seller.id,m);setNote(r.ok?(m===5?`Đã chào ${seller.name}.`:`Đã trò chuyện với ${seller.name}.`):r.error);setChat(false)};
+ const talk=(k:'talk'|'meal')=>{if(!onTalk)return;const r=onTalk(seller.id,k);setNote(r.ok?'':r.error);setChat(false)};
  return <div className="market">
   <header className="market-seller"><button className="market-back" aria-label="Về các quầy" onClick={()=>{setStall(null);setNote('')}}><Icon name="chevron-left"/></button>
    <span className="market-avatar" style={{background:seller.tone}} aria-hidden="true">{seller.label}</span>
    <span className="market-seller-copy"><strong>{here?seller.name:stall.name}</strong><small>{here?stall.name:`${seller.name} về rồi, người nhà trông quầy`}</small>{here&&<span className="market-tier">{relationTier(rel[seller.id]?.score??0)}</span>}</span>
    {here&&onTalk&&<button className="market-chat" aria-expanded={chat} onClick={()=>setChat(v=>!v)}>Hỏi chuyện</button>}
   </header>
-  {chat&&<div className="market-chat-options"><button onClick={()=>talk(5)}>Chào hỏi <small>5 phút</small></button><button onClick={()=>talk(15)}>Trò chuyện <small>15 phút</small></button></div>}
+  {chat&&<div className="market-chat-options"><button onClick={()=>talk('talk')}>Nói chuyện</button><button onClick={()=>talk('meal')}>Rủ đi ăn</button></div>}
   <div className="market-qty" role="radiogroup" aria-label="Số phần mỗi lần mua">{QTY.map(q=><button key={q} role="radio" aria-checked={q===qty} onClick={()=>setQty(q)}>{q} phần</button>)}</div>
   <div className="market-grid">{stall.items.map(id=>{const it=INGREDIENTS[id],price=it.price*qty;return <article key={id} className="market-item">
    <span className="market-item-art" style={{background:ITEM_TONE[id]}}><Icon name={ITEM_ICON[id]}/></span>
@@ -40,4 +40,4 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
   {note&&<p className="market-note" role="status">{note}</p>}
  </div>}
 
-function PeopleHereFiltered({state,exclude,onTalk}:{state:GameState;exclude:string[];onTalk:(id:string,minutes:5|15)=>GameResult}){const others=peopleHere(state,'market').filter(n=>!exclude.includes(n.id));return others.length?<PeopleHere state={state} place="market" onTalk={onTalk} only={others.map(n=>n.id)}/>:null}
+function PeopleHereFiltered({state,exclude,onTalk}:{state:GameState;exclude:string[];onTalk:(id:string,kind:'talk'|'meal')=>GameResult}){const others=peopleHere(state,'market').filter(n=>!exclude.includes(n.id));return others.length?<PeopleHere state={state} place="market" onTalk={onTalk} only={others.map(n=>n.id)}/>:null}

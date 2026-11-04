@@ -67,3 +67,9 @@ export function profileProblems(p:{age:number;job?:string;traits:string[]}){cons
 
 /** Bậc quan hệ (mục 24). Bất hoà làm ở T40. */
 export function relationTier(score:number){return score>=60?'Tri kỷ':score>=30?'Thân':score>=10?'Quen biết':'Xa lạ'}
+
+/** Cách xưng hô khi NPC nói với người chơi: self là NPC tự xưng, you là gọi người chơi. */
+export const ADDRESS:Record<string,{self:string;you:string}>={'ba-tu':{self:'bà',you:'con'},'chu-sau':{self:'chú',you:'con'},'co-hanh':{self:'cô',you:'con'},'chu-luc':{self:'chú',you:'cháu'},'ba-nam':{self:'bà',you:'con'},me:{self:'mẹ',you:'con'},'bs-quan':{self:'tôi',you:'em'},'dev-trang':{self:'chị',you:'em'},'dev-huy':{self:'anh',you:'em'},'dev-an':{self:'mình',you:'bạn'},'dev-linh':{self:'mình',you:'bạn'},'bao-ngoc':{self:'chị',you:'em'},tuan:{self:'em',you:'anh'},'chi-mai':{self:'chị',you:'em'}};
+export const addressOf=(id:string)=>ADDRESS[id]??{self:'tôi',you:'bạn'};
+/** Nhắc thời gian áng chừng, không ghi ngày cụ thể (chốt 04/11). */
+export function agoText(days:number){return days<=0?'lúc nãy':days===1?'hôm qua':days<=4?'mấy hôm trước':days<=10?'tuần trước':days<=24?'mấy tuần trước':days<=45?'tháng trước':'hồi trước'}
