@@ -53,3 +53,7 @@ button.ps-row{cursor:pointer}button.ps-row:hover{background:#eef3e6}
 .pb-pay button:last-child{background:#2f6b4f;color:#fff;border-color:#2f6b4f}
 .pb-pay button:disabled{opacity:.45;cursor:default}
 .pb-empty{margin:0;padding:12px;border-radius:13px;background:#f1f4ec;font-size:12px;color:#7d8b80;text-align:center}
+/* 04/11: biểu tượng cho từng chỉ số ở màn Sức khỏe */
+.phone-stat-name{display:inline-flex;align-items:center;gap:8px}
+.phone-stat-name svg{width:20px!important;height:20px!important;padding:5px;box-sizing:content-box;border-radius:9px;fill:none;stroke:currentColor}
+.phone-stat-name.gold svg{background:#f4ead3;color:#9a7a2e}.phone-stat-name.orange svg{background:#f6e3d6;color:#a6623c}.phone-stat-name.green svg{background:#e8eed9;color:#66773d}.phone-stat-name.teal svg{background:#dcebe6;color:#3f7466}.phone-stat-name.purple svg{background:#ebe4f0;color:#6f5a86}
