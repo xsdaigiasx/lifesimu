@@ -119,3 +119,14 @@
 .bug-options.code button{font-family:ui-monospace,Menlo,monospace;font-size:13px}.bug-options.code em{font-style:normal;opacity:.5;min-width:1.2em}.bug-options.code span{white-space:pre-wrap;word-break:break-word}
 .bug-options button.dim{opacity:.3}
 .bug-layout{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:12px 0}.bug-layout button{aspect-ratio:1;border-radius:8px;border:1px solid #ffffff44;background:#3b6ea5;color:#fff;font:inherit;font-size:13px}
+.static-office-svg{display:block;width:100%;height:100%;min-height:300px;fill:initial;stroke:none}
+.static-office .static-person{cursor:pointer}
+.static-office .static-person-hit{fill:transparent}
+.static-office .static-person-ring{fill:none;stroke:#fff6dc;stroke-width:6;stroke-opacity:.9;animation:static-ring 2.4s ease-in-out infinite}
+.static-office .static-person-tag{fill:#fff5dbf0;stroke:#baad8b;stroke-width:2}
+.static-office .static-person text{font-size:28px;font-weight:700;fill:#344b3f;font-family:inherit}
+.static-office .static-person:focus-visible .static-person-tag{stroke:#d7a746;stroke-width:5}
+.static-office .static-afternoon,.static-afternoon-tint{fill:#f2a24c;fill-opacity:.1;pointer-events:none}
+.static-afternoon-tint{position:absolute;inset:0;background:#f2a24c1a}
+@keyframes static-ring{50%{stroke-opacity:.25}}
+@media(prefers-reduced-motion:reduce){.static-office .static-person-ring{animation:none}}

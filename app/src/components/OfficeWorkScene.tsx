@@ -1,7 +1,5 @@
-import IsoOffice,{type OfficePerson} from './IsoOffice';
-import {buildPlan} from '../domain/office-plan';
-import {COMPANIES,SIZES,officeOf} from '../domain/office';
-import {useMemo} from 'react';
+import WorkActivity from './WorkActivity';
+import PackedOffice from './PackedOffice';
 import {useState} from 'react';
 import type {GameResult,GameState} from '../domain/types';
 import {TASKS,dailyTask,canEnterOffice,isWorkday,shiftInfo,workOf,taskBoard,cardInfo,needsChoice,openTurn,type WorkAction} from '../domain/work';
@@ -18,16 +16,12 @@ interface Props {
  onSkills:()=>void;
  onContract?:()=>void;
 }
-const colleagues=COWORKERS;
-const TONES=['#cfe3d8','#f3d6cf','#dcd6f0','#f2e2bd'];
-const initials=(name:string)=>name.split(' ').map(w=>w[0]).join('').slice(-2);
+const colleagues=COWORKERS.filter(p=>p.id==='dev-an'||p.id==='dev-linh');
 
 export default function OfficeWorkScene({state,onWork,onChat,onSkills,onContract}:Props){
  const [menu,setMenu]=useState(false);
  const [selected,setSelected]=useState<string|null>(null),[message,setMessage]=useState(''),[pick,setPick]=useState<CardKind|null>(null);
 
- const company=COMPANIES.find(c=>c.id===officeOf(state).employerId)??COMPANIES[0],plan=useMemo(()=>buildPlan(company.size,company.industry,SIZES[company.size].seats),[company.size,company.industry]);
- const people:OfficePerson[]=[{id:'player',name:'Bạn',label:'Bạn',seat:0,tone:'#b9d4ef',player:true},...colleagues.map((p,i)=>({id:p.id,name:p.name,label:initials(p.name),seat:i+1,tone:TONES[i%TONES.length]!}))];
  const work=workOf(state),active=work.active,task=work.task,assigned=dailyTask(state);
  const definition=TASKS.find(t=>t.id===task?.id)??assigned;
  const minute=clockOf(state).minute,noon=minute>=720&&minute<780;
@@ -49,7 +43,8 @@ export default function OfficeWorkScene({state,onWork,onChat,onSkills,onContract
  return <section className={`office-work-scene${active?' is-working':''}`} aria-label={active?'Ca làm hiện tại':'Văn phòng'}>
   <header className="ows-shiftbar"><div><strong>{shiftLabel}</strong><div className="ows-shift-track" role="progressbar" aria-label="Tiến độ ca" aria-valuemin={0} aria-valuemax={100} aria-valuenow={shiftPct}><span style={{width:`${shiftPct}%`}}/></div></div><button className="ows-more" aria-label="Mục khác" aria-expanded={menu} onClick={()=>setMenu(m=>!m)}>⋯</button>{menu&&<div className="ows-menu" role="menu"><button role="menuitem" onClick={()=>{setMenu(false);onSkills()}}>Kỹ năng và học tối</button>{onContract&&<button role="menuitem" onClick={()=>{setMenu(false);onContract()}}>Hợp đồng</button>}</div>}</header>
   <div className="ows-room">
-   <IsoOffice plan={plan} people={people} bug={!!work.bug} afternoon={minute>=780} onPerson={id=>{if(!active)meet(id)}}/>
+   {active?<WorkActivity state={state} drawing={drawing}/>:<PackedOffice state={state} onNpc={meet} afternoon={minute>=780}/>}
+   {active&&minute>=780&&<div className="static-afternoon-tint" aria-hidden="true"/>}
    {active&&<div className="ows-progress-card">
     <strong>{definition.name}</strong><div className="ows-progress-caption"><span>{active.paused?'Tạm dừng':task?.attempt?'Đang sửa lỗi':'Đang làm'}</span><b>{percent}%</b></div>
     <div className="ows-progress" role="progressbar" aria-label="Tiến độ công việc" aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent}><span style={{width:`${percent}%`}}/></div>
