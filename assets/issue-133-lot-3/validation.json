@@ -1,0 +1,36 @@
+{
+  "issue": 133,
+  "lot": 3,
+  "reviewed_on": "2026-11-05",
+  "tested_main": "bc9ef164e69b816179609313efce44d93539ea11",
+  "geometry_baseline": "8aa6253a2476c7b045a6480fe3442dc2e7cbe8af",
+  "sprites": 38,
+  "canonical_set": "small",
+  "copy_targets": [
+    "medium",
+    "large"
+  ],
+  "total_png_bytes": 1151333,
+  "max_png_bytes": 93643,
+  "rgba_png_count": 38,
+  "indexed_png_count": 0,
+  "asset_verify": "PASS: names, frames, anchors, alpha, hashes, size limits",
+  "runtime_manifests_unchanged": true,
+  "medium_large_pngs_unchanged": true,
+  "original_three_sets_identical": true,
+  "app_npm_test": "PASS",
+  "app_npm_run_build": "PASS",
+  "core_npm_run_check": "PASS (18 tests)",
+  "mobile_review": "PASS: Edge headless 390x844, all nine representative sprites decoded, no overflow",
+  "visual_review": [
+    "contact-sheet.webp (38 sprites)",
+    "page-1.webp",
+    "page-2.webp",
+    "page-3.webp",
+    "anchor-preview.webp",
+    "mobile-390x844.png"
+  ],
+  "scope": "38 small/sprites PNGs and authoring/review files only; no TypeScript/core/save/map/background edits",
+  "integration_followup": "Claude copies approved canonical small sprites to medium and large",
+  "build_notes": "Existing public CSS resolution and chunk size warnings remain; build exits 0"
+}

@@ -1,0 +1,617 @@
+{
+  "issue": 133,
+  "lot": 3,
+  "tool": "built-in image_gen",
+  "reference": "assets/style-reference/room-reference.webp",
+  "edit_targets": "app/public/assets/offices/small/sprites",
+  "items": [
+    {
+      "id": "executive_desk",
+      "name": "Bàn giám đốc",
+      "filename": "executive_desk.png",
+      "frame_px": [
+        306,
+        271
+      ],
+      "anchor_px": [
+        153,
+        257
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Preserve the L-shaped executive desk and its return cabinet, cream stone inset top and honey-oak frame. Keep the dark desk pad and the same drawer arrangement; no extra objects. Target frame 306x271 px, existing anchor (153,257). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "executive_chair",
+      "name": "Ghế giám đốc",
+      "filename": "executive_chair.png",
+      "frame_px": [
+        143,
+        222
+      ],
+      "anchor_px": [
+        72,
+        210
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same tall padded executive swivel chair and five-star caster base, upholstered in muted dark sage leather with soft seams. Target frame 143x222 px, existing anchor (72,210). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "glass_conference_table",
+      "name": "Bàn họp kính",
+      "filename": "glass_conference_table.png",
+      "frame_px": [
+        336,
+        250
+      ],
+      "anchor_px": [
+        168,
+        229
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same long transparent pale-teal glass conference table with thin matte metal frame, same four legs; preserve clean glass transparency and no added chairs. Target frame 336x250 px, existing anchor (168,229). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "mesh_office_chair",
+      "name": "Ghế công thái học",
+      "filename": "mesh_office_chair.png",
+      "frame_px": [
+        123,
+        192
+      ],
+      "anchor_px": [
+        62,
+        181
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same ergonomic mesh swivel office chair, dark sage/charcoal mesh back and seat, slender metal caster base. Target frame 123x192 px, existing anchor (62,181). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "presentation_display",
+      "name": "Màn hình thuyết trình đứng",
+      "filename": "presentation_display.png",
+      "frame_px": [
+        152,
+        248
+      ],
+      "anchor_px": [
+        76,
+        238
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same standing presentation screen and black wheeled A-frame stand; screen blank dark glass, no text or symbols. Target frame 152x248 px, existing anchor (76,238). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "wide_presentation_display",
+      "name": "Màn hình họp có bánh xe",
+      "filename": "wide_presentation_display.png",
+      "frame_px": [
+        174,
+        262
+      ],
+      "anchor_px": [
+        87,
+        252
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same wide presentation screen on a slim wheeled stand, matching dark metal and blank screen; no logos or text. Target frame 174x262 px, existing anchor (87,252). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "low_storage_cabinet",
+      "name": "Tủ tài liệu thấp",
+      "filename": "low_storage_cabinet.png",
+      "frame_px": [
+        216,
+        208
+      ],
+      "anchor_px": [
+        108,
+        198
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same low storage cabinet, honey-oak door panels and muted dark sage top/sides, slim metal handles; preserve four-door layout. Target frame 216x208 px, existing anchor (108,198). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "espresso_machine",
+      "name": "Máy pha cà phê",
+      "filename": "espresso_machine.png",
+      "frame_px": [
+        156,
+        159
+      ],
+      "anchor_px": [
+        78,
+        149
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same compact espresso machine and exact cup arrangement from target, matte charcoal metal and cream ceramic cups; unlettered controls. Target frame 156x159 px, existing anchor (78,149). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "tea_set",
+      "name": "Bộ ấm trà",
+      "filename": "tea_set.png",
+      "frame_px": [
+        172,
+        118
+      ],
+      "anchor_px": [
+        86,
+        109
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same tea tray, teapot and cups in exactly the same positions and count. Honey oak tray, warm cream/earth-tone ceramics, sage tea surfaces; no extra cups. Target frame 172x118 px, existing anchor (86,109). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "bar_stool_left",
+      "name": "Ghế quầy trái",
+      "filename": "bar_stool_left.png",
+      "frame_px": [
+        89,
+        156
+      ],
+      "anchor_px": [
+        44,
+        143
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same left-facing bar stool silhouette and footrest. Muted sage upholstered seat and slender matte steel pedestal/base. Match materials to bar_stool_right. Target frame 89x156 px, existing anchor (44,143). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "bar_stool_right",
+      "name": "Ghế quầy phải",
+      "filename": "bar_stool_right.png",
+      "frame_px": [
+        90,
+        149
+      ],
+      "anchor_px": [
+        45,
+        135
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same right-facing bar stool silhouette and footrest. Muted sage upholstered seat and slender matte steel pedestal/base. Match materials to bar_stool_left. Target frame 90x149 px, existing anchor (45,135). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "workstation_four",
+      "name": "Cụm bàn bốn chỗ",
+      "filename": "workstation_four.png",
+      "frame_px": [
+        274,
+        234
+      ],
+      "anchor_px": [
+        137,
+        223
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Keep the full four-place workstation assembly exactly as the target: all desk surfaces, dividers, metal legs and existing chair(s), same quantity and positions. Honey-oak tops, cream/sage fabric dividers; add no objects and no people. Target frame 274x234 px, existing anchor (137,223). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "workstation_pair",
+      "name": "Cụm bàn hai chỗ",
+      "filename": "workstation_pair.png",
+      "frame_px": [
+        249,
+        221
+      ],
+      "anchor_px": [
+        124,
+        211
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Keep the full two-place desk assembly, divider and existing laptop/monitor positions exactly as target. Honey-oak tops, cream/sage divider, matte metal legs; no extra desks or seats. Target frame 249x221 px, existing anchor (124,211). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "curved_monitor_desk",
+      "name": "Bàn máy tính màn hình cong",
+      "filename": "curved_monitor_desk.png",
+      "frame_px": [
+        248,
+        236
+      ],
+      "anchor_px": [
+        124,
+        227
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same desk with one curved monitor, keyboard, mouse and computer tower in their original positions. Honey-oak top, matte sage/charcoal equipment, blank dark screen. Target frame 248x236 px, existing anchor (124,227). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "water_cooler_black",
+      "name": "Cây nước màu đen",
+      "filename": "water_cooler_black.png",
+      "frame_px": [
+        89,
+        207
+      ],
+      "anchor_px": [
+        44,
+        195
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Keep the black/dark charcoal water cooler with large translucent pale-blue bottle, taps and cup dispenser exactly positioned. No labeling. Target frame 89x207 px, existing anchor (44,195). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "water_cooler_white",
+      "name": "Cây nước màu trắng",
+      "filename": "water_cooler_white.png",
+      "frame_px": [
+        89,
+        200
+      ],
+      "anchor_px": [
+        44,
+        188
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Keep the cream/white water cooler with translucent pale-blue bottle and taps exactly positioned, same unit geometry. No labeling. Target frame 89x200 px, existing anchor (44,188). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "monstera_plant",
+      "name": "Cây trầu bà",
+      "filename": "monstera_plant.png",
+      "frame_px": [
+        156,
+        205
+      ],
+      "anchor_px": [
+        78,
+        188
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same split-leaf monstera silhouette, natural muted green leaves and cream ceramic pot. Preserve the size and leaf arrangement, no floor shadow. Target frame 156x205 px, existing anchor (78,188). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "snake_plant",
+      "name": "Cây lưỡi hổ",
+      "filename": "snake_plant.png",
+      "frame_px": [
+        86,
+        158
+      ],
+      "anchor_px": [
+        43,
+        146
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same upright snake plant, subtle muted green variegation and cream pot; preserve leaf count, shape and footprint. Target frame 86x158 px, existing anchor (43,146). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "bonsai",
+      "name": "Cây bonsai",
+      "filename": "bonsai.png",
+      "frame_px": [
+        119,
+        148
+      ],
+      "anchor_px": [
+        60,
+        137
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same compact bonsai tree silhouette, natural soft green foliage, brown trunk and low muted sage/cream ceramic planter; keep its realistic restrained proportions. Target frame 119x148 px, existing anchor (60,137). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "wall_art",
+      "name": "Tranh treo tường",
+      "filename": "wall_art.png",
+      "frame_px": [
+        115,
+        219
+      ],
+      "anchor_px": [
+        58,
+        110
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same narrow upright oak-framed wall art, same mounting orientation and abstract composition; shift saturated red/blue to muted sage, cream and pale teal. No lettering. Target frame 115x219 px, existing anchor (58,110). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "certificate_top",
+      "name": "Bằng khen phía trên",
+      "filename": "certificate_top.png",
+      "frame_px": [
+        97,
+        76
+      ],
+      "anchor_px": [
+        48,
+        38
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same small landscape certificate frame, honey oak trim and cream paper, with a small abstract gold embossed seal. REMOVE all letters, words and numbers; use no pseudo-text. Keep its exact frontal geometry. Target frame 97x76 px, existing anchor (48,38). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "certificate_bottom",
+      "name": "Bằng khen phía dưới",
+      "filename": "certificate_bottom.png",
+      "frame_px": [
+        95,
+        75
+      ],
+      "anchor_px": [
+        48,
+        38
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same small landscape certificate frame, honey oak trim and cream paper, with a small abstract gold embossed seal. REMOVE all letters, words and numbers; use no pseudo-text. Match certificate_top materials while retaining target geometry. Target frame 95x75 px, existing anchor (48,38). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "bookcase",
+      "name": "Tủ sách",
+      "filename": "bookcase.png",
+      "frame_px": [
+        172,
+        262
+      ],
+      "anchor_px": [
+        86,
+        253
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same tall open honey-oak bookcase, exact shelves and book arrangement. Muted sage/cream/teal book spines, small decor unchanged, NO lettering on books. Target frame 172x262 px, existing anchor (86,253). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "putting_mat",
+      "name": "Thảm tập golf",
+      "filename": "putting_mat.png",
+      "frame_px": [
+        310,
+        173
+      ],
+      "anchor_px": [
+        155,
+        163
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same long diagonal putting mat and raised target end, same cups/balls and wooden edging as target. Muted sage turf with realistic short texture. Preserve exact long-axis orientation; no new flag or text. Target frame 310x173 px, existing anchor (155,163). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "wine_cooler",
+      "name": "Tủ rượu",
+      "filename": "wine_cooler.png",
+      "frame_px": [
+        139,
+        214
+      ],
+      "anchor_px": [
+        70,
+        201
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same glass-front wine cooler, exact rack and bottle layout. Matte dark sage casing, pale-teal glass, unlettered bottles; no added labels. Target frame 139x214 px, existing anchor (70,201). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "leather_armchair",
+      "name": "Ghế bành da",
+      "filename": "leather_armchair.png",
+      "frame_px": [
+        166,
+        172
+      ],
+      "anchor_px": [
+        83,
+        162
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same compact leather armchair silhouette, honey-brown leather with soft seams, unchanged short feet and arm geometry. Target frame 166x172 px, existing anchor (83,162). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "guest_chair",
+      "name": "Ghế tiếp khách",
+      "filename": "guest_chair.png",
+      "frame_px": [
+        126,
+        148
+      ],
+      "anchor_px": [
+        63,
+        139
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same guest chair with honey-oak arms and frame, cream/sage fabric back and seat, exact four-leg positions. Target frame 126x148 px, existing anchor (63,139). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "mesh_bin",
+      "name": "Thùng rác lưới",
+      "filename": "mesh_bin.png",
+      "frame_px": [
+        81,
+        108
+      ],
+      "anchor_px": [
+        40,
+        97
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same open cylindrical mesh wastebasket, matte dark sage metal mesh and rim, no trash or shadows added. Target frame 81x108 px, existing anchor (40,97). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "recycle_bin",
+      "name": "Thùng rác tái chế",
+      "filename": "recycle_bin.png",
+      "frame_px": [
+        98,
+        133
+      ],
+      "anchor_px": [
+        49,
+        120
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same rectangular dark sage recycling bin with simple universal recycling arrows only; no letters, words or brand. Target frame 98x133 px, existing anchor (49,120). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "mini_fridge",
+      "name": "Tủ lạnh mini",
+      "filename": "mini_fridge.png",
+      "frame_px": [
+        135,
+        161
+      ],
+      "anchor_px": [
+        68,
+        149
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same compact glass-door mini refrigerator, dark sage casing, pale teal glass and exact bottle/can arrangement. No text, logos or labels. Target frame 135x161 px, existing anchor (68,149). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "silver_laptop",
+      "name": "Laptop bạc",
+      "filename": "silver_laptop.png",
+      "frame_px": [
+        109,
+        111
+      ],
+      "anchor_px": [
+        54,
+        101
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same open silver laptop, identical screen angle and keyboard geometry. Brushed matte aluminum, blank dark screen, unlettered keys and no logo. Target frame 109x111 px, existing anchor (54,101). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "black_laptop",
+      "name": "Laptop đen",
+      "filename": "black_laptop.png",
+      "frame_px": [
+        108,
+        110
+      ],
+      "anchor_px": [
+        54,
+        101
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same open charcoal laptop, identical screen angle and keyboard geometry. Matte dark finish, blank screen, unlettered keys and no logo. Target frame 108x110 px, existing anchor (54,101). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "globe",
+      "name": "Quả địa cầu",
+      "filename": "globe.png",
+      "frame_px": [
+        99,
+        130
+      ],
+      "anchor_px": [
+        50,
+        113
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same globe and stand geometry, muted sage land, pale teal oceans and charcoal/sage stand. Recognizable continents, no map labels or lettering. Target frame 99x130 px, existing anchor (50,113). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "safe",
+      "name": "Két sắt",
+      "filename": "safe.png",
+      "frame_px": [
+        129,
+        135
+      ],
+      "anchor_px": [
+        64,
+        123
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same compact safe, muted dark sage/charcoal casing and brushed metal door, unchanged handle and keypad arrangement. Blank unlettered keys, no numeric code or branding. Target frame 129x135 px, existing anchor (64,123). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "paper_shredder",
+      "name": "Máy hủy giấy",
+      "filename": "paper_shredder.png",
+      "frame_px": [
+        96,
+        127
+      ],
+      "anchor_px": [
+        48,
+        116
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same compact paper shredder with one plain sheet in its top slot. Matte sage/charcoal casing; paper blank and unlettered. Target frame 96x127 px, existing anchor (48,116). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "desk_organizer",
+      "name": "Khay tài liệu trên bàn",
+      "filename": "desk_organizer.png",
+      "frame_px": [
+        125,
+        121
+      ],
+      "anchor_px": [
+        62,
+        112
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same desktop organizer and exact compartments, folders, pens and small paper stack. Honey-oak body, cream/sage folders, blank paper; no text. Target frame 125x121 px, existing anchor (62,112). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "paper_tray",
+      "name": "Khay giấy nhiều tầng",
+      "filename": "paper_tray.png",
+      "frame_px": [
+        115,
+        122
+      ],
+      "anchor_px": [
+        58,
+        112
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same stacked three-tier document trays and paper piles, matte dark sage metal, plain cream paper. Preserve tray count and perspective. Target frame 115x122 px, existing anchor (58,112). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    },
+    {
+      "id": "digital_clock",
+      "name": "Đồng hồ điện tử",
+      "filename": "digital_clock.png",
+      "frame_px": [
+        104,
+        96
+      ],
+      "anchor_px": [
+        52,
+        86
+      ],
+      "footprint_tiles": null,
+      "direction": "preserve-existing-view",
+      "prompt": "Use case: style-transfer. Image 1 is the EDIT TARGET: an existing project office sprite, supplied only to preserve its object design, component count, silhouette, camera angle, perspective and geometry. Image 2 is the ONLY STYLE REFERENCE: the approved room screenshot. Redraw the object in the room's semi-realistic digital painting style: softly modeled volumes, subtle natural materials, thin dark same-tone outlines instead of thick black cartoon borders. Use honey oak, muted sage, warm cream and pale teal, with restrained darker charcoal for named black equipment. Preserve EXACTLY the target object's pose, facing direction, leg/contact positions and arrangement; do not rotate, mirror or redesign. Fixed upper-left lighting with soft shading ON the object only. REMOVE all existing cast shadows and halos outside the object. True transparent alpha background, no floor, backdrop, platform, people, logo, watermark or text. No labels or legible writing anywhere; screens are blank unless otherwise specified. Entire object must remain visible in the same image bounds. Same compact rectangular digital clock body and exact viewing angle. Dark charcoal/sage casing and powered-off dark glass display, no digits, letters or permanent time; no glow. Target frame 104x96 px, existing anchor (52,86). Keep the object's proportions and relative contact points so it replaces the existing sprite without code changes."
+    }
+  ]
+}
