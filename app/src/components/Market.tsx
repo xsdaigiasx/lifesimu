@@ -34,7 +34,7 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
   </header>
   {chat&&onTalk&&<PersonSheet state={state} id={seller.id} onTalk={onTalk} onClose={()=>setChat(false)}/>}
   <div className="market-grid">{stall.items.map(id=>{const it=INGREDIENTS[id],late=isLate(state,id),price=marketPrice(state,id);return <article key={id} className="market-item">
-   <span className="market-item-art" style={{background:ITEM_TONE[id]}}>{late&&<b className="late-badge" title="Hàng chiều: rẻ hơn, hạn ngắn hơn" aria-label="Hàng chiều"><Icon name="sunset"/></b>}<img src={ingredientArt(id)} alt="" loading="lazy" decoding="async"/><InfoButton spec={foodSpec(id)}/></span>
+   <span className="market-item-art" style={{background:ITEM_TONE[id]}}>{late&&<b className="late-badge" title="Hàng chiều: rẻ hơn, hạn ngắn hơn" aria-label="Hàng chiều"><Icon name="sunset"/></b>}<img src={ingredientArt(id)} alt="" loading="lazy" decoding="async"/></span><InfoButton spec={foodSpec(id)}/>
    <strong>{it.name}</strong>
    <span className="market-item-facts"><span title="Hạn dùng" className={late?'late-tag':''}><Icon name="clock"/>{shelfDays(state,id)} ngày</span><span title="Trong kho"><Icon name="box"/>{stock(id)}</span></span>
    <button disabled={state.money<price} onClick={()=>{setQty(1);setPick(id)}}>{money(price)}</button>
