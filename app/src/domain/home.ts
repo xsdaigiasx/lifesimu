@@ -5,6 +5,9 @@ export const HOME_ITEMS={bed:{name:'Giường đơn',price:1400000,w:2,h:3,icon:
 export type HomeId=keyof typeof HOME_ITEMS;
 export const HOME_TIERS={basic:{name:'Cơ bản',factor:1,comfort:0},comfort:{name:'Tiện nghi',factor:1.6,comfort:1},premium:{name:'Cao cấp',factor:2.5,comfort:2}} as const;
 export type HomeTier=keyof typeof HOME_TIERS;
+/** Mỗi mẫu một món riêng (chốt 04/11): không ghi hạng, mẫu đắt hơn đẹp hơn, êm hơn. Khoá là hạng nội bộ. */
+export const HOME_MODELS:Record<HomeId,Record<HomeTier,string>>={bed:{basic:'Giường đơn khung sắt',comfort:'Giường gỗ có ngăn kéo',premium:'Giường bọc nệm có đèn đầu giường'},wardrobe:{basic:'Tủ vải khung thép',comfort:'Tủ gỗ hai cánh',premium:'Tủ gỗ có gương và đèn'},desk:{basic:'Bàn gấp gọn',comfort:'Bàn gỗ có kệ sách',premium:'Bàn nâng hạ có màn phụ'},table:{basic:'Bàn nhựa xếp',comfort:'Bàn gỗ tròn',premium:'Bàn mặt đá chân gỗ'},plant:{basic:'Chậu xương rồng',comfort:'Chậu trầu bà',premium:'Bàng Singapore chậu gốm'},lamp:{basic:'Đèn kẹp',comfort:'Đèn gốm',premium:'Đèn đồng chao vải'},rug:{basic:'Thảm cói',comfort:'Thảm len',premium:'Thảm dệt hoa văn'},painting:{basic:'Tranh in',comfort:'Tranh sơn dầu nhỏ',premium:'Tranh khung gỗ lớn'}};
+export const homeName=(id:HomeId,tier:HomeTier='basic')=>HOME_MODELS[id]?.[tier]??HOME_ITEMS[id].name;
 export const homePrice=(id:HomeId,tier:HomeTier='basic')=>Math.round(HOME_ITEMS[id].price*HOME_TIERS[tier].factor);
 export interface HomeObject{tier?:HomeTier;mount?:'floor'|'surface'|'wall';parentId?:HomeId;wall?:'left'|'right';id:HomeId;x:number;y:number;rotation:0|90;placed:boolean}
 export interface HomeState{items:HomeObject[];grid?:8}
