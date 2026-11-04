@@ -1,0 +1,33 @@
+{
+  "issue": 89,
+  "lot": 4,
+  "method": "Exact geometry rendered from layouts.json; OpenAI image generation supplies material swatches only",
+  "external_reference_images": [],
+  "style": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.",
+  "materials": [
+    {
+      "id": "wood",
+      "name": "Gỗ mật ong",
+      "subject": "A seamless subtle warm honey wood surface wash, faint flowing hand-painted grain, very low contrast, no plank boundaries, no nails, no furniture. Colors cream #fbf3e2 and honey #d9a066, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless subtle warm honey wood surface wash, faint flowing hand-painted grain, very low contrast, no plank boundaries, no nails, no furniture. Colors cream #fbf3e2 and honey #d9a066, watercolor pencil storybook texture."
+    },
+    {
+      "id": "stone",
+      "name": "Gạch kem",
+      "subject": "A seamless pale warm cream matte stone or ceramic surface wash with very sparse tiny paper-like mineral speckles, very low contrast. No grout, no tile lines, no geometric divisions. Colors cream #fbf3e2 and very pale beige, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless pale warm cream matte stone or ceramic surface wash with very sparse tiny paper-like mineral speckles, very low contrast. No grout, no tile lines, no geometric divisions. Colors cream #fbf3e2 and very pale beige, watercolor pencil storybook texture."
+    },
+    {
+      "id": "bath",
+      "name": "Gạch xanh nhạt",
+      "subject": "A seamless very pale turquoise blue matte ceramic surface wash, very soft watery paper texture, low contrast. No tile boundaries, no grid or grout, no fixtures. Colors pale aqua #dfe9ec and turquoise #7fb8b0 used extremely softly, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless very pale turquoise blue matte ceramic surface wash, very soft watery paper texture, low contrast. No tile boundaries, no grid or grout, no fixtures. Colors pale aqua #dfe9ec and turquoise #7fb8b0 used extremely softly, watercolor pencil storybook texture."
+    },
+    {
+      "id": "grass",
+      "name": "Cỏ xanh dịu",
+      "subject": "A seamless softly mottled sage-green grass surface texture seen directly from above. Very sparse tiny short grass flecks, low contrast, no bushes, no trees, no paths or flowers. Colors soft sage #9cc28a, pale yellow-green, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless softly mottled sage-green grass surface texture seen directly from above. Very sparse tiny short grass flecks, low contrast, no bushes, no trees, no paths or flowers. Colors soft sage #9cc28a, pale yellow-green, watercolor pencil storybook texture."
+    }
+  ]
+}

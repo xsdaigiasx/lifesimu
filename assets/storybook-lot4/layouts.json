@@ -1,0 +1,510 @@
+{
+  "issue": 89,
+  "lot": 4,
+  "source_reference": {"housing_sha":"67d4d1a45847151ad48027d58573b14e9e6c2441","room_sizes":{"townhouse":{"living":[10,10],"kitchen":[8,8],"bedroom":[10,10],"study":[8,8],"bath":[4,4]},"villa":{"living":[10,10],"kitchen":[8,8],"bedroom":[10,10],"guest":[10,10],"study":[8,8],"fun":[12,12],"garden":[16,16],"bath":[6,6]}}},
+  "coordinate_source": "Issue #89 lot 4; room dimensions cross-checked with HOUSES. housing.ts currently has no full-floor x/y layout.",
+  "tile_px": [
+    128,
+    64
+  ],
+  "z_px": 32,
+  "margin_px": 32,
+  "outer_wall_height_px": 128,
+  "partition_height_px": 32,
+  "floor_thickness_px": 16,
+  "door_width_tiles": 2,
+  "floors": [
+    {
+      "id": "townhouse-t1",
+      "house": "townhouse",
+      "floor": 1,
+      "name": "Nhà phố — tầng 1",
+      "w": 18,
+      "h": 12,
+      "rooms": [
+        {
+          "id": "living",
+          "name": "Phòng khách",
+          "x": 0,
+          "y": 0,
+          "w": 10,
+          "h": 10,
+          "material": "wood",
+          "color": "#e6c39b"
+        },
+        {
+          "id": "kitchen",
+          "name": "Bếp",
+          "x": 10,
+          "y": 0,
+          "w": 8,
+          "h": 8,
+          "material": "stone",
+          "color": "#e1e8d8"
+        }
+      ],
+      "stairs": {
+        "x": 14,
+        "y": 8,
+        "w": 4,
+        "h": 4,
+        "axis": "x"
+      },
+      "doors": [
+        {
+          "axis": "x",
+          "at": 10,
+          "from": 3,
+          "to": 5,
+          "connects": [
+            "living",
+            "kitchen"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 10,
+          "from": 4,
+          "to": 6,
+          "connects": [
+            "living",
+            "hall"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 8,
+          "from": 11,
+          "to": 13,
+          "connects": [
+            "kitchen",
+            "hall"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "townhouse-t2",
+      "house": "townhouse",
+      "floor": 2,
+      "name": "Nhà phố — tầng 2",
+      "w": 18,
+      "h": 12,
+      "rooms": [
+        {
+          "id": "bedroom",
+          "name": "Phòng ngủ",
+          "x": 0,
+          "y": 0,
+          "w": 10,
+          "h": 10,
+          "material": "wood",
+          "color": "#ead2c7"
+        },
+        {
+          "id": "study",
+          "name": "Phòng làm việc",
+          "x": 10,
+          "y": 0,
+          "w": 8,
+          "h": 8,
+          "material": "wood",
+          "color": "#d5ddca"
+        },
+        {
+          "id": "bath",
+          "name": "Phòng tắm",
+          "x": 14,
+          "y": 8,
+          "w": 4,
+          "h": 4,
+          "material": "bath",
+          "color": "#d2e5e7"
+        }
+      ],
+      "stairs": {
+        "x": 10,
+        "y": 8,
+        "w": 4,
+        "h": 4,
+        "axis": "x"
+      },
+      "doors": [
+        {
+          "axis": "x",
+          "at": 10,
+          "from": 3,
+          "to": 5,
+          "connects": [
+            "bedroom",
+            "study"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 8,
+          "from": 15,
+          "to": 17,
+          "connects": [
+            "study",
+            "bath"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 10,
+          "from": 4,
+          "to": 6,
+          "connects": [
+            "bedroom",
+            "hall"
+          ]
+        },
+        {
+          "axis": "x",
+          "at": 10,
+          "from": 8,
+          "to": 10,
+          "connects": [
+            "bedroom",
+            "stairs"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 8,
+          "from": 11,
+          "to": 13,
+          "connects": [
+            "study",
+            "stairs"
+          ]
+        },
+        {
+          "axis": "x",
+          "at": 14,
+          "from": 9,
+          "to": 11,
+          "connects": [
+            "bath",
+            "stairs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "villa-t1",
+      "house": "villa",
+      "floor": 1,
+      "name": "Biệt thự — tầng 1",
+      "w": 30,
+      "h": 30,
+      "rooms": [
+        {
+          "id": "living",
+          "name": "Phòng khách",
+          "x": 0,
+          "y": 0,
+          "w": 10,
+          "h": 10,
+          "material": "wood",
+          "color": "#e6c39b"
+        },
+        {
+          "id": "kitchen",
+          "name": "Bếp",
+          "x": 10,
+          "y": 0,
+          "w": 8,
+          "h": 8,
+          "material": "stone",
+          "color": "#e1e8d8"
+        },
+        {
+          "id": "bath",
+          "name": "Phòng tắm",
+          "x": 10,
+          "y": 8,
+          "w": 6,
+          "h": 6,
+          "material": "bath",
+          "color": "#d2e5e7"
+        },
+        {
+          "id": "fun",
+          "name": "Phòng giải trí",
+          "x": 18,
+          "y": 0,
+          "w": 12,
+          "h": 12,
+          "material": "wood",
+          "color": "#dcd3e5"
+        },
+        {
+          "id": "garden",
+          "name": "Sân vườn",
+          "x": 7,
+          "y": 14,
+          "w": 16,
+          "h": 16,
+          "material": "grass",
+          "color": "#b0ca96"
+        }
+      ],
+      "stairs": {
+        "x": 0,
+        "y": 10,
+        "w": 4,
+        "h": 4,
+        "axis": "y"
+      },
+      "doors": [
+        {
+          "axis": "x",
+          "at": 10,
+          "from": 3,
+          "to": 5,
+          "connects": [
+            "living",
+            "kitchen"
+          ]
+        },
+        {
+          "axis": "x",
+          "at": 10,
+          "from": 8,
+          "to": 10,
+          "connects": [
+            "living",
+            "bath"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 8,
+          "from": 12,
+          "to": 14,
+          "connects": [
+            "kitchen",
+            "bath"
+          ]
+        },
+        {
+          "axis": "x",
+          "at": 18,
+          "from": 3,
+          "to": 5,
+          "connects": [
+            "kitchen",
+            "fun"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 10,
+          "from": 5,
+          "to": 7,
+          "connects": [
+            "living",
+            "hall"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 8,
+          "from": 16,
+          "to": 18,
+          "connects": [
+            "kitchen",
+            "hall"
+          ]
+        },
+        {
+          "axis": "x",
+          "at": 16,
+          "from": 10,
+          "to": 12,
+          "connects": [
+            "bath",
+            "hall"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 12,
+          "from": 23,
+          "to": 25,
+          "connects": [
+            "fun",
+            "hall"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 14,
+          "from": 12,
+          "to": 14,
+          "connects": [
+            "bath",
+            "garden"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 10,
+          "from": 1,
+          "to": 3,
+          "connects": [
+            "living",
+            "stairs"
+          ]
+        }
+      ],
+      "garden_paths": [
+        {
+          "x": 16,
+          "y": 14,
+          "w": 2,
+          "h": 15
+        },
+        {
+          "x": 11,
+          "y": 24,
+          "w": 7,
+          "h": 2
+        }
+      ],
+      "shrubs": [
+        [
+          7.7,
+          16
+        ],
+        [
+          22.2,
+          17
+        ],
+        [
+          7.8,
+          23
+        ],
+        [
+          8.2,
+          29
+        ],
+        [
+          21.7,
+          29
+        ]
+      ]
+    },
+    {
+      "id": "villa-t2",
+      "house": "villa",
+      "floor": 2,
+      "name": "Biệt thự — tầng 2",
+      "w": 28,
+      "h": 14,
+      "rooms": [
+        {
+          "id": "bedroom",
+          "name": "Phòng ngủ",
+          "x": 0,
+          "y": 0,
+          "w": 10,
+          "h": 10,
+          "material": "wood",
+          "color": "#ead2c7"
+        },
+        {
+          "id": "guest",
+          "name": "Phòng ngủ phụ",
+          "x": 10,
+          "y": 0,
+          "w": 10,
+          "h": 10,
+          "material": "wood",
+          "color": "#eadfc5"
+        },
+        {
+          "id": "study",
+          "name": "Phòng làm việc",
+          "x": 20,
+          "y": 0,
+          "w": 8,
+          "h": 8,
+          "material": "wood",
+          "color": "#d5ddca"
+        }
+      ],
+      "stairs": {
+        "x": 0,
+        "y": 10,
+        "w": 4,
+        "h": 4,
+        "axis": "y"
+      },
+      "doors": [
+        {
+          "axis": "x",
+          "at": 10,
+          "from": 4,
+          "to": 6,
+          "connects": [
+            "bedroom",
+            "guest"
+          ]
+        },
+        {
+          "axis": "x",
+          "at": 20,
+          "from": 3,
+          "to": 5,
+          "connects": [
+            "guest",
+            "study"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 10,
+          "from": 5,
+          "to": 7,
+          "connects": [
+            "bedroom",
+            "hall"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 10,
+          "from": 14,
+          "to": 16,
+          "connects": [
+            "guest",
+            "hall"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 8,
+          "from": 23,
+          "to": 25,
+          "connects": [
+            "study",
+            "hall"
+          ]
+        },
+        {
+          "axis": "y",
+          "at": 10,
+          "from": 1,
+          "to": 3,
+          "connects": [
+            "bedroom",
+            "stairs"
+          ]
+        }
+      ]
+    }
+  ]
+}
