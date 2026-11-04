@@ -28,6 +28,10 @@ export const CAST:NpcProfile[]=[
 export const EXTRAS:NpcProfile[]=[
  {id:'chu-luc',name:'Chú Lực',label:'CL',age:52,origin:'Nghệ An',role:'Bán thịt cá ở chợ',traits:['cau có','thật thà','cẩn thận'],quirk:'Mài dao trước khi chào khách',goal:'Trả hết nợ',fear:'Mất mối hàng',voice:'Nghệ An, nói to',tone:'#f1d2cc',schedule:[at(WEEK,'07:00','12:00','market')]},
  {id:'ba-nam',name:'Bà Năm',label:'BN',age:70,origin:'Bến Tre',role:'Bán tạp hoá ở chợ',traits:['hiền','hay hỏi han','tiết kiệm'],quirk:'Gói hàng bằng lá chuối',goal:'Được con cháu về thăm',fear:'Cô đơn',voice:'Miền Tây, chậm rãi',tone:'#f2e6c4',schedule:[at(WEEK,'07:00','18:00','market')]},
+ {id:'lan',name:'Mai Lan',label:'ML',age:28,origin:'Đà Nẵng',role:'Lễ tân tòa nhà',traits:['vui vẻ','chu đáo','nhanh nhảu'],quirk:'Nhớ tên khách từ lần đầu gặp',goal:'Học xong lớp tiếng Anh buổi tối',fear:'Bị thay bằng máy quét thẻ',voice:'Đà Nẵng, nói nhanh',tone:'#e9cfc4',schedule:[at(WORK,'07:45','17:30','office')]},
+ {id:'minh',name:'Đức Minh',label:'ĐM',age:45,origin:'Hà Nội',role:'Quản lý mặt bằng',traits:['cẩn thận','kiệm lời','giữ chữ tín'],quirk:'Luôn mang thước dây trong túi áo',goal:'Lấp đầy tầng còn trống',fear:'Khách thuê bỏ ngang hợp đồng',voice:'Miền Bắc chừng mực',tone:'#cfdde1',schedule:[at(WORK,'09:00','16:00','office')]},
+ {id:'ha',name:'Ngọc Hà',label:'NH',age:31,origin:'Huế',role:'Điều phối tuyển dụng',traits:['tò mò','tốt bụng','cẩn thận'],quirk:'Đọc CV bằng bút đỏ',goal:'Ghép đúng người đúng việc',fear:'Giới thiệu nhầm người',voice:'Huế nhẹ',tone:'#dcd8e6',schedule:[at(WORK,'08:00','17:00','office')]},
+ {id:'bao',name:'Quốc Bảo',label:'QB',age:34,origin:'Sài Gòn',role:'Kỹ thuật viên tòa nhà',traits:['thật thà','vội vàng','hay đùa'],quirk:'Đeo chùm chìa khoá kêu leng keng',goal:'Mở tiệm sửa máy riêng',fear:'Mất điện cả tòa nhà',voice:'Sài Gòn',tone:'#d6dfcc',schedule:[at(WORK,'08:00','17:00','office')]},
 ];
 export const NPCS=[...CAST,...EXTRAS];
 export const castById=(id:string)=>NPCS.find(n=>n.id===id);
@@ -66,7 +70,9 @@ export function generateNpc(seed:string):PoolNpc{const r=(salt:string,n:number)=
 export function profileProblems(p:{age:number;job?:string;traits:string[]}){const out:string[]=[];const job=POOL.job.find(j=>j.name===p.job);if(job&&(p.age<job.min||p.age>job.max))out.push(`tuổi ${p.age} không hợp nghề ${p.job}`);for(const [a,b] of TRAIT_CONFLICTS)if(p.traits.includes(a)&&p.traits.includes(b))out.push(`tính cách xung khắc: ${a} và ${b}`);if(new Set(p.traits).size!==p.traits.length)out.push('tính cách bị lặp');return out}
 
 /** Bậc quan hệ (mục 24). Bất hoà làm ở T40. */
-export function relationTier(score:number){return score>=60?'Tri kỷ':score>=30?'Thân':score>=10?'Quen biết':'Xa lạ'}
+export function relationTier(score:number,id?:string){if(id==='me')return'Gia đình';return score>=60?'Tri kỷ':score>=30?'Thân':score>=10?'Quen biết':'Xa lạ'}
+/** Người làm ở sảnh tòa nhà văn phòng (trước đây là STAFF trong office.ts, giữ nguyên id để save cũ không mất người quen). */
+export const LOBBY=['lan','minh','ha','bao'];
 
 /** Cách xưng hô khi NPC nói với người chơi: self là NPC tự xưng, you là gọi người chơi. */
 export const ADDRESS:Record<string,{self:string;you:string}>={'ba-tu':{self:'bà',you:'con'},'chu-sau':{self:'chú',you:'con'},'co-hanh':{self:'cô',you:'con'},'chu-luc':{self:'chú',you:'cháu'},'ba-nam':{self:'bà',you:'con'},me:{self:'mẹ',you:'con'},'bs-quan':{self:'tôi',you:'em'},'dev-trang':{self:'chị',you:'em'},'dev-huy':{self:'anh',you:'em'},'dev-an':{self:'mình',you:'bạn'},'dev-linh':{self:'mình',you:'bạn'},'bao-ngoc':{self:'chị',you:'em'},tuan:{self:'em',you:'anh'},'chi-mai':{self:'chị',you:'em'}};
