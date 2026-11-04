@@ -13,7 +13,15 @@ Phạm vi theo bình luận [6629307790](https://github.com/xsdaigiasx/lifesimu/
 
 Ảnh đều độc lập, có alpha trong suốt, dưới 150.000 byte. Không ghi đè hoặc nối vào `app/public` trong PR thử. Basename, khung, chân đế, chiều cao và neo của từng hướng giữ đúng manifest lô 5. `manifest.json` ghi đầy đủ giá trị, hash và dung lượng thực. Nguồn ảnh AI mới và prompt đi kèm để tiếp tục chỉnh nét.
 
-Vỏ phòng chỉ có sàn, tường, cửa, cửa sổ và bếp/phòng tắm cố định; không có đồ đặt được, dép hay mèo trên sàn. Bếp `(0,0) 5×1`, phòng tắm `(5,0) 3×3`, lối mở tại `y=3, x=6..7`. Đồ trên mặt bàn thuộc sprite bàn; mặt sau tủ và kệ có hình riêng, không lật ảnh mặt trước.
+Vỏ phòng chỉ có sàn, tường, cửa sổ và bếp/phòng tắm cố định; không có cửa ra vào, đồ đặt được, dép hay mèo trên sàn. Bếp `(0,0) 5×1`, phòng tắm `(5,0) 3×3`, lối mở tại `y=3, x=6..7`. Cả bốn mặt bàn đều trống để đặt đèn và các món `mount: surface` riêng; sách trong kệ được giữ lại. Mặt sau tủ và kệ có hình riêng, không lật ảnh mặt trước.
+
+## Sửa hai lỗi chặn sau ghép thử
+
+Theo [review 6630177184](https://github.com/xsdaigiasx/lifesimu/issues/124#issuecomment-6630177184):
+
+- Đã sửa ảnh nguồn và xuất lại bàn a/b/c/d: bỏ cả đèn (kể cả phần chụp lộ phía sau kệ) và sách mở trên mặt bàn. Không vẽ kèm món đặt được; sách nằm trong kệ giữ nguyên.
+- Chủ dự án yêu cầu **bỏ cửa**, thay cho phương án dời/thu cửa. Vỏ phòng nay không vẽ cửa ra vào ở bất kỳ tường nào; chỗ cửa cũ được trả về tường kem và chân tường. `room.entry_door.baked=false`, vị trí và vùng cấm treo tranh do cửa đều `null`. Claude không cần khóa vùng tường trái y=5..7 vì cửa của bản này. Các ràng buộc treo tranh khác của game không thay đổi.
+- Bản sửa tiếp nối PR #130 sau khi PR đó đã được gộp. Chỉ sửa asset thử và metadata, không đổi logic vào/ra nhà hay vùng treo tranh trong game.
 
 ## Lưới và neo
 

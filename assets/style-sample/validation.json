@@ -148,15 +148,15 @@
         256,
         256
       ],
-      "bytes": 69539,
+      "bytes": 66663,
       "alpha_bbox_px": [
         44,
         17,
         232,
         228
       ],
-      "transparent_pixels": 43846,
-      "sha256": "d830a478864155f06408f9dd91d88907c95c5d4fd77c3c6e3709ad72dc2905cf"
+      "transparent_pixels": 43967,
+      "sha256": "94065dd88252a4b47dd7f43f550179127976052a2d90401ee495c24f0f89f4a0"
     },
     {
       "file": "assets/style-sample/furniture/desk-comfort_b.png",
@@ -164,15 +164,15 @@
         256,
         256
       ],
-      "bytes": 69343,
+      "bytes": 66720,
       "alpha_bbox_px": [
         24,
         17,
         212,
         228
       ],
-      "transparent_pixels": 43934,
-      "sha256": "ae591b5559f7008974c38f01da6e159fa9c3ffb76666ff8587cc66bc2139e2e3"
+      "transparent_pixels": 44145,
+      "sha256": "b4cdc92766457647f68cb43bc9a9826b567abba3fe27ce871246121e748c4707"
     },
     {
       "file": "assets/style-sample/furniture/desk-comfort_c.png",
@@ -180,15 +180,15 @@
         256,
         256
       ],
-      "bytes": 53764,
+      "bytes": 52448,
       "alpha_bbox_px": [
         24,
         57,
         212,
         237
       ],
-      "transparent_pixels": 48785,
-      "sha256": "e9fc8a8fb3c57c98382980b1b7da889a3da8bb96a524d19d0f3fa6ea97e55deb"
+      "transparent_pixels": 49031,
+      "sha256": "5e8be8070af30f47647a79c961ffe1e399991db725bc626c1a634c5dfc11716f"
     },
     {
       "file": "assets/style-sample/furniture/desk-comfort_d.png",
@@ -196,15 +196,15 @@
         256,
         256
       ],
-      "bytes": 52217,
+      "bytes": 50953,
       "alpha_bbox_px": [
         44,
         57,
         232,
         237
       ],
-      "transparent_pixels": 49411,
-      "sha256": "0d54313b1979d39d6eae5bdaa9e7e3405989ce5352ff5cfaa36dae04fff4de38"
+      "transparent_pixels": 49345,
+      "sha256": "6d3e8dfbbe574a67317b5b459a9f088a7d1af4197e9cf17e670b3c216f094af3"
     },
     {
       "file": "assets/style-sample/room-master-storybook.webp",
@@ -212,15 +212,15 @@
         1448,
         1086
       ],
-      "bytes": 116218,
+      "bytes": 93358,
       "alpha_bbox_px": [
         206,
         147,
         1243,
-        873
+        874
       ],
-      "transparent_pixels": 1081069,
-      "sha256": "cd564fdfd93771b8b52af5e386fac06b96beb4c9e8761347f9a5e35413b10217"
+      "transparent_pixels": 1080227,
+      "sha256": "f84a3a60a57b1a5155b00f2280e0096982e197f5be780d0b62272a79e37fc1e9"
     }
   ]
 }
