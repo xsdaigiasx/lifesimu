@@ -75,10 +75,14 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - **#55** đồ văn phòng mới, hoãn tới giai đoạn mở công ty, sẽ theo phong cách bán hiện thực.
 - Đã đóng: #124, #97, #98, #120 (xem #133).
 
+### Chuỗi PR chờ gộp (04/11 tối, gộp đúng thứ tự, mỗi PR tách từ PR trước)
+
+#134 (phong cách bán hiện thực) → #135 (bàn giao vỏ phòng, base #134) và chuỗi riêng #136 (sửa màn Bếp, ngất) → #138 (kiệt sức, #137) → #140 (số lượng chợ, Thử nấu, thử việc 30 ngày) → #141 (Nối dây) → #142 (mini game theo kỹ năng) → #143 (mang về, ba lô, #139). Gộp từng PR rồi mới gộp PR sau; PR sau đã đổi base khi PR trước vào main, nếu không đổi thì gộp main vào nhánh. Chưa PR nào được chụp màn hình kiểm tra: cần chơi thử Bấm nhịp, Nhớ thứ tự, thẻ món Bếp, cửa sổ chọn số lượng, Ăn tại chỗ hoặc Mang về.
+
 ### Claude
 
 - **Để dành, chủ dự án nêu 04/11 chưa làm**: (1) hướng dẫn việc tiếp theo những ngày đầu và sau giờ làm, tạm hoãn tới khi xong toàn bộ game, ý chủ dự án là thêm hoạt động khác cho người chơi; (2) tên nhiệm vụ công việc còn đơn giản, cần đa dạng và thật hơn; (3) quán ăn: hỏi Ăn tại chỗ hay Mang về (#139).
-- Ticket tiếp theo: chủ dự án chọn **T26** (kho đồ, instanceId, lưới phòng) hay **T27** (chế độ bố trí: kéo, thả, xoay, huỷ, BFS lối đi). Phần đã có sẵn: lưới phòng trọ, xoay 4 hướng, kéo thả ở phòng trọ, chạm đặt ở nhà phố.
+- Ticket tiếp theo (chủ dự án 04/11 giao làm tiếp lần lượt cho xong Basic 1.0, không cần hỏi lại thứ tự): **T26** (kho đồ, instanceId, lưới phòng) rồi **T27** (chế độ bố trí: kéo, thả, xoay, huỷ, BFS lối đi). Mở phiên mới từ file này; trước khi làm, đọc đề xuất ticket trong tài liệu Kế hoạch và gửi AskUserQuestion ngắn nếu có chỗ chưa rõ. Phần đã có sẵn: lưới phòng trọ, xoay 4 hướng, kéo thả ở phòng trọ, chạm đặt ở nhà phố.
 - Sau đó T28 (điểm dùng của đồ), T29 (TTTM giỏ, đơn, giao hàng, bán lại), rồi theo bảng ticket.
 
 ## 7. Bản đồ mã nguồn (domain mới hoặc đổi nhiều)
