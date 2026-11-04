@@ -23,7 +23,7 @@ Dự án: **Một đời để sống**, game mô phỏng đời sống kết h�
 - Ô sàn hình thoi **128×64 px**, camera trực giao 2:1. 1 đơn vị cao (z) = 32 px.
 - **Điểm neo:** đỉnh dưới hình thoi chân đế, nằm chính giữa mép dưới ảnh.
 - Khung ảnh: rộng = (x + y) × 64; cao = (x + y) × 32 + chiều cao px (x, y là số ô chân đế).
-- Phong cách: **màu phẳng, viền mực mảnh, không bóng đổ, không gradient ánh sáng**, nền trong suốt. Bóng và ánh sáng theo giờ do code vẽ.
+- Phong cách (chốt 04/11, #133): **bán hiện thực** như `assets/style-reference/room-reference.webp`: tô khối mềm, thấy chất liệu, viền mảnh cùng tông, ánh sáng cố định từ trên-trái, **không bóng đổ ra ngoài chân đế**, nền trong suốt. Bóng theo giờ do code vẽ. Món ăn giữ phong cách món hiện có.
 - Hướng: `a` là mặt trước nhìn xuống-trái, `b` nhìn xuống-phải. Đồ đối xứng chỉ cần 1 ảnh.
 - Tên file: `assets/<nhóm>/<id>_<hướng>_<biến-thể>.png`, ví dụ `assets/furniture/bed-basic_a_sage.png`.
 - Mỗi ảnh dưới **150 KB** (PNG đã nén hoặc WebP). Không chữ, logo, thương hiệu hay nhân vật có bản quyền.
