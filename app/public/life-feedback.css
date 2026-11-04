@@ -18,3 +18,5 @@
 .market-item-art img{width:76px;height:76px;object-fit:contain;display:block}
 .pantry-grid .market-item.is-expired{opacity:.6}
 .pantry-grid .late{color:#b0442b;font-weight:800}
+.shop-facts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:11.5px;color:#6b7d70;margin:2px 0 8px}
+.shop-facts span{display:inline-flex;align-items:center;gap:3px}.shop-facts svg{width:13px!important;height:13px!important;fill:none;stroke:currentColor}

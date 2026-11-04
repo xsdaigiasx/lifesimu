@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import type {GameState,GameResult} from '../domain/types';
-import {HOME_ITEMS,type HomeId} from '../domain/home';
+import {HOME_ITEMS,homeName,homeOf,type HomeId} from '../domain/home';
 import {HOUSES,RELAX,housingOf,layoutOf,storageOf,itemSize,placeError,type Placed,type RoomUse,type HouseId} from '../domain/housing';
 import {money} from '../domain/format';
 import Icon from './Icon';
@@ -48,6 +48,6 @@ export default function HouseView({state,h}:{state:GameState;h:HouseHandlers}){
    {(room==='fun'||room==='garden')&&<button disabled={used.has(room)} onClick={()=>act(()=>h.relax(room))}><Icon name={room==='fun'?'play':'leaf'}/>{RELAX[room].name}<small><Icon name="clock"/>{RELAX[room].minutes}'</small></button>}
    {sel&&<><button onClick={rotate}><Icon name="rotate"/>Xoay</button><button onClick={stow}><Icon name="box"/>Cất</button></>}
   </div>
-  {store.length>0&&<div className="house-store" aria-label="Đồ trong kho">{store.map(id=><button key={id} aria-pressed={pick===id} onClick={()=>{setSel(null);setPick(p=>p===id?null:id)}}><Icon name={HOME_ITEMS[id].icon}/><span>{HOME_ITEMS[id].name}</span></button>)}</div>}
+  {store.length>0&&<div className="house-store" aria-label="Đồ trong kho">{store.map(id=><button key={id} aria-pressed={pick===id} onClick={()=>{setSel(null);setPick(p=>p===id?null:id)}}><Icon name={HOME_ITEMS[id].icon}/><span>{homeName(id,homeOf(state).items.find(i=>i.id===id)?.tier)}</span></button>)}</div>}
   {note&&<p className="ps-note" role="status">{note}</p>}
  </section>}
