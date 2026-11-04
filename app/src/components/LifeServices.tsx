@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import PeopleHere from './PeopleHere';
 import CookingGame from './CookingGame';
 import type {GameState,GameResult} from '../domain/types';
 import {INGREDIENTS,RECIPES,CONDITIONS,DEPOSIT_TERMS,lifeOf,stock,canCook,MEAL_QUALITY,type LifeAction,type IngredientId,type RecipeId} from '../domain/life';
@@ -6,11 +7,11 @@ import {money,shortDate} from '../domain/format';
 import {COFFEE,coffeeToday} from '../domain/vitals';
 import {clockText} from '../domain/time';
 import {ActionRow,DataRow} from './GameUI';
-export default function LifeServices({state,place,onAction}:{state:GameState;place:'home'|'market'|'bank'|'hospital'|'park'|'streetfood';onAction:(a:LifeAction)=>GameResult}){
+export default function LifeServices({state,place,onAction,onTalk}:{state:GameState;place:'home'|'market'|'bank'|'hospital'|'park'|'streetfood';onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,minutes:5|15)=>GameResult}){
  const [page,setPage]=useState(place==='bank'?'savings':'recipes'),[notice,setNotice]=useState(''),[qty,setQty]=useState(1),[amount,setAmount]=useState(500000),[term,setTerm]=useState<7|30|90>(30),[repayment,setRepayment]=useState(100000);const l=lifeOf(state);
  function run(a:LifeAction,message='Đã thực hiện.'){const r=onAction(a);setNotice(r.ok?message:r.error)}
  const tabs=(values:[string,string][])=><nav className="life-tabs">{values.map(([id,label])=><button key={id} aria-pressed={page===id} onClick={()=>{setPage(id);setNotice('')}}>{label}</button>)}</nav>;
- return <div className="life-services"><div className="life-summary"><strong>{money(state.money)}</strong><span>{clockText(state)}</span></div><p className="life-status" role="status" hidden={!notice}>{notice}</p>
+ return <div className="life-services"><div className="life-summary"><strong>{money(state.money)}</strong><span>{clockText(state)}</span></div><p className="life-status" role="status" hidden={!notice}>{notice}</p>{onTalk&&<PeopleHere state={state} place={place} onTalk={onTalk}/>}
  {place==='streetfood'&&<div className="game-actions"><ActionRow icon="cup" label="Cà phê" value={`${money(COFFEE.price)}   10 phút   +${COFFEE.boost} năng lượng, tụt lại sau 3 giờ   ${coffeeToday(state)}/${COFFEE.perDay} ly`} disabled={coffeeToday(state)>=COFFEE.perDay||state.money<COFFEE.price} onClick={()=>run({kind:'coffee'},'Đã uống cà phê.')}/></div>}
  {place==='market'&&<><label className="life-field">Số lượng<select value={qty} onChange={e=>setQty(Number(e.target.value))}><option value={1}>1 phần</option><option value={5}>5 phần</option><option value={10}>10 phần</option></select></label><div className="life-list">{(Object.keys(INGREDIENTS) as IngredientId[]).map(id=><article key={id}><div><strong>{INGREDIENTS[id].name}</strong><span className="life-facts"><small>Còn tươi {INGREDIENTS[id].days} ngày</small><small>Trong kho {stock(state,id)}</small></span></div><button disabled={state.money<INGREDIENTS[id].price*qty} onClick={()=>run({kind:'ingredient',id,qty},'Đã thêm nguyên liệu vào kho.')}>{money(INGREDIENTS[id].price*qty)}</button></article>)}</div></>}
  {place==='home'&&<>{l.cooking?<CookingGame cooking={l.cooking} onAction={onAction} onDone={message=>{setNotice(message);setPage('meals')}}/>:<>{tabs([['recipes','Nấu ăn'],['pantry','Nguyên liệu'],['meals','Món đã nấu'],['rest','Thư giãn']])}

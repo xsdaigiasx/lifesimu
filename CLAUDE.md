@@ -8,6 +8,7 @@ Dự án **Một đời để sống**. Đọc `AGENTS.md` để biết vai trò
 - Không bắt đầu ticket khi kế hoạch hoặc quyết định liên quan chưa được chủ dự án duyệt.
 - Mỗi ticket một nhánh `claude/<số-issue>-<tên>`, mở PR, không tự gộp.
 - Trước khi đẩy: `cd core && npm run check` phải xanh.
+- Việc cố ý làm nhỏ trước hoặc hoãn (quy mô nội dung, đồ hoạ) ghi thêm một dòng vào mục "Để dành phát triển sau" cuối tài liệu Kế hoạch triển khai.
 
 ## Review PR của Codex
 
