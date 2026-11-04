@@ -1,0 +1,27 @@
+{
+  "issue": 89,
+  "lot": 6,
+  "method": "Extend existing repo-native SVG room source and reuse lot4 generated textures; no new image generation call.",
+  "external_reference_images": [],
+  "scene_spec": "Warm Vietnamese rental room shell, 8x8, fixed kitchen [0,0,5,1], bathroom [5,0,3,3], open foreground, cream back walls, honey wood, sage curtain, pale aqua bathroom. Thin brown #4a3b33 ink, soft low-contrast wash, no shadows outside objects, no text, no brands, no loose furniture. Runtime normalized floor corners [50,30.25],[92.5,59],[50,87.75],[7.5,59]. Separate canonical 2:1 sibling. Native source extended from assets/source/build-room.cjs and lot4/render.cjs.",
+  "inherited_material_prompts": [
+    {
+      "id": "wood",
+      "name": "Gỗ mật ong",
+      "subject": "A seamless subtle warm honey wood surface wash, faint flowing hand-painted grain, very low contrast, no plank boundaries, no nails, no furniture. Colors cream #fbf3e2 and honey #d9a066, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless subtle warm honey wood surface wash, faint flowing hand-painted grain, very low contrast, no plank boundaries, no nails, no furniture. Colors cream #fbf3e2 and honey #d9a066, watercolor pencil storybook texture."
+    },
+    {
+      "id": "stone",
+      "name": "Gạch kem",
+      "subject": "A seamless pale warm cream matte stone or ceramic surface wash with very sparse tiny paper-like mineral speckles, very low contrast. No grout, no tile lines, no geometric divisions. Colors cream #fbf3e2 and very pale beige, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless pale warm cream matte stone or ceramic surface wash with very sparse tiny paper-like mineral speckles, very low contrast. No grout, no tile lines, no geometric divisions. Colors cream #fbf3e2 and very pale beige, watercolor pencil storybook texture."
+    },
+    {
+      "id": "bath",
+      "name": "Gạch xanh nhạt",
+      "subject": "A seamless very pale turquoise blue matte ceramic surface wash, very soft watery paper texture, low contrast. No tile boundaries, no grid or grout, no fixtures. Colors pale aqua #dfe9ec and turquoise #7fb8b0 used extremely softly, watercolor pencil storybook texture.",
+      "prompt": "Use case: illustration-story. Asset type: seamless flat material texture swatch to be projected onto mathematically exact isometric game floor geometry. Fill the WHOLE square edge to edge with this flat material, straight top-down orthographic view, no perspective, no horizon, no objects, no borders, no text, logos, lighting gradients, specular highlights or cast shadows. Uniform warm storybook pastel color, very subtle watercolor/colored-pencil wash only; must tile quietly. This is ONLY a material surface, not a room plan or diagram.\nSurface: A seamless very pale turquoise blue matte ceramic surface wash, very soft watery paper texture, low contrast. No tile boundaries, no grid or grout, no fixtures. Colors pale aqua #dfe9ec and turquoise #7fb8b0 used extremely softly, watercolor pencil storybook texture."
+    }
+  ]
+}
