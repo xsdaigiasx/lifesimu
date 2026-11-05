@@ -3,6 +3,7 @@ import type {GameResult,GameState} from './types';
 import {activeLease,officeOf,SIZES} from './office';
 import {skillsOf} from './work';
 import {hash} from './shift';
+import {rosterOf} from './npc';
 import {generateNpc,mix} from './npc';
 import {spendTime} from './time';
 import {validWork,type WorkState} from './staff';
@@ -68,9 +69,9 @@ export const capacityOf=(s:GameState)=>SIZES[officeOf(s).size].seats-1;
 export const postActive=(s:GameState)=>{const h=hiringOf(s);return!!h&&s.day<h.postedDay+HIRING.postDays};
 /** Danh sách ứng viên đang có mặt (tính từ seed, không lưu trong save). */
 export function candidatesOf(s:GameState):Candidate[]{
- const h=hiringOf(s),c=s.company;if(!h||!c)return[];const out:Candidate[]=[],hired=new Set(staffOf(s).map(e=>e.id));
+ const h=hiringOf(s),c=s.company;if(!h||!c)return[];const out:Candidate[]=[],hired=new Set(staffOf(s).map(e=>e.id)),taken=new Set(rosterOf(s).map(n=>n.fullName));
  for(let b=0;b<=Math.floor(HIRING.postDays/HIRING.batchDays);b++){const start=h.postedDay+b*HIRING.batchDays;if(s.day<start||s.day>=start+HIRING.keepDays)continue;
-  for(let i=0;i<batchSize(h,b);i++){const cand=makeCandidate(`${c.founded}:${h.postedDay}:${b}:${i}`,h.rep);if(!h.gone.includes(cand.id)&&!hired.has(cand.id))out.push(cand)}}
+  for(let i=0;i<batchSize(h,b);i++){const cand=makeCandidate(`${c.founded}:${h.postedDay}:${b}:${i}`,h.rep);if(!h.gone.includes(cand.id)&&!hired.has(cand.id)&&!taken.has(cand.name))out.push(cand)}}
  return out;
 }
 export const candidateById=(s:GameState,id:string)=>candidatesOf(s).find(c=>c.id===id)??null;

@@ -5,6 +5,7 @@ import {useRef,useState,type PointerEvent} from 'react';
 import type {GameState,GameResult} from '../domain/types';
 import {officeOf,activeLease,SIZES} from '../domain/office';
 import {canMove,footprint,FURNITURE_NAMES,getOfficeLayout,layoutScope,placementError,ROOM_GRIDS,type OfficeFurniture,type OfficeLayout} from '../domain/layout';
+import {castById,coworkerId} from '../domain/npc';
 interface Props{state:GameState;onSave:(layout:OfficeLayout)=>GameResult;onBack:()=>void}
 function FurnitureArt({item,level}:{item:OfficeFurniture;level:number}){
  const {w,h}=footprint({...item,rotation:0});const transform=item.rotation===90?`translate(${h*30} 0) rotate(90)`:item.rotation===180?`translate(${w*30} ${h*30}) rotate(180)`:item.rotation===270?`translate(0 ${w*30}) rotate(270)`:undefined;return <g transform={transform}>
@@ -77,7 +78,9 @@ function IsoFurniture({item,level}:{item:OfficeFurniture;level:number}){
  </g>;
 }
 
-const COLLEAGUES=[{id:'dev-an',name:'An',shirt:'#6d8c9e',hair:'#343c37',female:false},{id:'dev-linh',name:'Linh',shirt:'#bb8c79',hair:'#4e3e32',female:true},{id:'dev-huy',name:'Huy',shirt:'#899568',hair:'#2c3433',female:false},{id:'dev-trang',name:'Trang',shirt:'#aa91ad',hair:'#453c35',female:true}] as const;
+/** Ghế 1–4 là đồng nghiệp theo chỗ ngồi; tên và giới lấy từ dàn NPC theo seed. */
+const SEAT_LOOK=[{desk:'dev',shirt:'#6d8c9e',hair:'#343c37'},{desk:'design',shirt:'#bb8c79',hair:'#4e3e32'},{desk:'qa',shirt:'#899568',hair:'#2c3433'},{desk:'pm',shirt:'#aa91ad',hair:'#453c35'}] as const;
+const colleaguesOf=(state:GameState)=>SEAT_LOOK.map(l=>{const n=castById(state,coworkerId(state.office?.employerId,l.desk));return{...l,id:n?.id??l.desk,name:n?.name??'',female:n?.gender==='female'}});
 function IsoPerson({chair,seated,shirt,hair,female,primary}:{chair:OfficeFurniture;seated:boolean;shirt:string;hair:string;female:boolean;primary:boolean}){
  const local=(x:number,y:number,z=0):IsoPoint=>{let a=x,b=y;if(chair.rotation===90){a=30-y;b=x}else if(chair.rotation===180){a=30-x;b=30-y}else if(chair.rotation===270){a=y;b=30-x}return[chair.x*30+a+(seated?0:32),chair.y*30+b,z]};
  const p=(x:number,y:number,z:number)=>{const[a,b,c]=local(x,y,z);return iso(a,b,c)},poly=(v:IsoPoint[])=>polygon(v.map(([x,y,z])=>local(x,y,z)));
@@ -105,6 +108,7 @@ function IsoPerson({chair,seated,shirt,hair,female,primary}:{chair:OfficeFurnitu
 export function OfficePreview({state,onDesk,onNpc}:{state:GameState;onDesk?:()=>void;onNpc?:(id:string)=>void}){
  const [highlight,setHighlight]=useState<string|null>(null),[profile]=useState(()=>{try{return parseProfile(localStorage.getItem(PROFILE_KEY))}catch{return null}}),scope=layoutScope(state),layout=getOfficeLayout(state),room=scope?layout[scope]:null;
  if(!room||!scope)return null;
+ const COLLEAGUES=colleaguesOf(state);
  const grid=ROOM_GRIDS[room.size],o=officeOf(state),level=scope==='employee'?o.workComputer:o.computers,W=grid.columns*30,D=grid.rows*30,H=76,originX=D*.84+22,originY=H+15,vw=(W+D)*.84+44,vh=(W+D)*.42+H+38;
  const items=room.items.filter(i=>i.placed).sort((a,b)=>(a.x+a.y)-(b.x+b.y)||a.y-b.y),work=workOf(state),task=work.task,taskInfo=TASKS.find(t=>t.id===task?.id),desk=items.find(i=>i.id==='desk-0'),talkChair=items.find(i=>i.id==='chair-2');
  const activate=(i:OfficeFurniture)=>{if(i.id==='desk-0'||i.id==='chair-0'){onDesk?.();return}const n=i.kind==='chair'?COLLEAGUES[Number(i.id.split('-')[1])-1]:undefined;if(n){onNpc?.(n.id);return}setHighlight(highlight===i.id?null:i.id)};

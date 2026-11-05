@@ -17,7 +17,7 @@ export default function PeopleHere({state,place,onTalk,only}:{state:GameState;pl
 
 /** Cửa sổ một người (chốt 04/11): đủ quen thì hiện thông tin; chưa quen thì chỉ chào hỏi. */
 export function PersonSheet({state,id,onTalk,onClose}:{state:GameState;id:string;onTalk:Talk;onClose:()=>void}){
- const [note,setNote]=useState('');const p=castById(id);if(!p)return null;const score=socialOf(state).relations[id]?.score??0,known=score>=10,close=score>=30,fearKnown=storyOf(state).memories.some(m=>m.npc===id&&m.topic==='chuyện riêng');
+ const [note,setNote]=useState('');const p=castById(state,id);if(!p)return null;const score=socialOf(state).relations[id]?.score??0,known=score>=10,close=score>=30,fearKnown=storyOf(state).memories.some(m=>m.npc===id&&m.topic==='chuyện riêng');
  const act=(k:'talk'|'meal')=>{const r=onTalk(id,k);if(r.ok)onClose();else setNote(r.error)};
  const rows:[string,string][]=known?[['Quê',p.origin],['Tính cách',p.traits.join(', ')],['Điểm nhấn',p.quirk],...(close?[['Mong muốn',p.goal] as [string,string]]:[]),...(fearKnown?[['Đang lo',p.fear] as [string,string]]:[])]:[];
  return <div className="story-backdrop" onClick={e=>{if(e.target===e.currentTarget)onClose()}}><section className="story-dialog person-sheet" role="dialog" aria-modal="true" aria-label={p.name}>

@@ -20,11 +20,11 @@ let q=st(365);for(let y=1;y<=7;y++){q=SU.markSeen(SU.settleSummary({...q,day:365
 assert.equal(q.summary.list.length,5);assert.equal(q.summary.list[0].id,'y3');assert.equal(q.summary.list[4].id,'y7');assert.equal(q.summary.unseen,undefined);assert(engine.valid(q));
 
 // 2. Chỉ dùng dữ kiện thật: người đồng hành, ký ức, mốc từ Nhật ký
-const base=st(400,{social:{relations:{'ba-tu':{score:45,lastDay:399,minutes:0},lan:{score:12,lastDay:390,minutes:0},minh:{score:3,lastDay:1,minutes:0},nobody:{score:99,lastDay:1,minutes:0}},chatMinutesDay:0,chatDay:400},
- story:{version:1,seq:0,log:[],hooks:[],loans:[],memories:[{id:'m1',day:380,npc:'ba-tu',motif:'loan',topic:'chưa trả tiền mượn',tag:'unpaid',weight:3},{id:'m2',day:390,npc:'ba-tu',motif:'meal',topic:'lỡ hẹn đi ăn',tag:'missed',weight:2}]},
+const base=st(400,{social:{relations:{'landlord':{score:45,lastDay:399,minutes:0},reception:{score:12,lastDay:390,minutes:0},leasing:{score:3,lastDay:1,minutes:0},nobody:{score:99,lastDay:1,minutes:0}},chatMinutesDay:0,chatDay:400},
+ story:{version:1,seq:0,log:[],hooks:[],loans:[],memories:[{id:'m1',day:380,npc:'landlord',motif:'loan',topic:'chưa trả tiền mượn',tag:'unpaid',weight:3},{id:'m2',day:390,npc:'landlord',motif:'meal',topic:'lỡ hẹn đi ăn',tag:'missed',weight:2}]},
  journal:[jr('tier:x',300,'Lên Middle'),jr('move:5:tro',10,'Chuyển tới phòng trọ'),jr('move:9:villa',200,'Chuyển tới biệt thự'),jr('chat:1:2:3',20,'Trò chuyện'),jr('project:p1',250,'Dự án đầu')]});
 const p=SU.peopleOf(base);
-assert.deepEqual(p.map(x=>x.id),['ba-tu','lan'],'bỏ người dưới 10 điểm và người không có trong dàn nhân vật');
+assert.deepEqual(p.map(x=>x.id),['landlord','reception'],'bỏ người dưới 10 điểm và người không có trong dàn nhân vật');
 assert.equal(p[0].memory,'chưa trả tiền mượn','lấy ký ức nặng nhất');assert.equal(p[1].memory,undefined,'không có ký ức thì để trống, không bịa');
 const marks=SU.marksOf(base.journal);
 assert.deepEqual(marks.map(x=>x.title),['Chuyển tới phòng trọ','Dự án đầu','Lên Middle'],'mỗi loại lấy lần đầu, theo thời gian, bỏ chat');

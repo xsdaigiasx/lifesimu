@@ -20,7 +20,7 @@ import {clockOf,spendTime,END} from './time';
 export const INGREDIENTS={rice:{name:'Gạo',price:10000,days:30},egg:{name:'Trứng',price:5000,days:5},vegetable:{name:'Rau củ',price:12000,days:2},pork:{name:'Thịt heo',price:35000,days:1},tofu:{name:'Đậu phụ',price:8000,days:2},fish:{name:'Cá tươi',price:30000,days:1}} as const;
 export type IngredientId=keyof typeof INGREDIENTS;
 /** Quầy chợ, mỗi quầy một người bán (chốt 04/11). Người bán vắng thì người nhà trông quầy, vẫn mua được. */
-export const STALLS=[{id:'veg',name:'Quầy rau',seller:'co-hanh',icon:'leaf',items:['vegetable','tofu']},{id:'meat',name:'Quầy thịt cá',seller:'chu-luc',icon:'fish',items:['pork','fish']},{id:'dry',name:'Tạp hoá',seller:'ba-nam',icon:'bag',items:['rice','egg']}] as const satisfies readonly {id:string;name:string;seller:string;icon:string;items:readonly IngredientId[]}[];
+export const STALLS=[{id:'veg',name:'Quầy rau',seller:'veg',icon:'leaf',items:['vegetable','tofu']},{id:'meat',name:'Quầy thịt cá',seller:'meat',icon:'fish',items:['pork','fish']},{id:'dry',name:'Tạp hoá',seller:'grocery',icon:'bag',items:['rice','egg']}] as const satisfies readonly {id:string;name:string;seller:string;icon:string;items:readonly IngredientId[]}[];
 export type StallId=typeof STALLS[number]['id'];
 export const RECIPES={eggRice:{name:'Cơm trứng',needs:{rice:1,egg:2},minutes:20,energy:24,health:0,mood:4},porkRice:{name:'Cơm thịt rau',needs:{rice:1,pork:1,vegetable:1},minutes:35,energy:36,health:2,mood:6},tofuRice:{name:'Cơm đậu rau',needs:{rice:1,tofu:2,vegetable:1},minutes:25,energy:30,health:3,mood:4},fishRice:{name:'Cơm cá kho',needs:{rice:1,fish:1,vegetable:1},minutes:40,energy:38,health:2,mood:7},canhChua:{name:'Canh chua cá',needs:{rice:1,fish:1,vegetable:2},minutes:35,energy:34,health:4,mood:8},rauMuong:{name:'Rau muống xào tỏi',needs:{vegetable:2},minutes:15,energy:16,health:4,mood:3},thitKho:{name:'Thịt kho trứng',needs:{rice:1,pork:1,egg:2},minutes:45,energy:42,health:1,mood:8},comChien:{name:'Cơm chiên trứng',needs:{rice:1,egg:1,vegetable:1},minutes:20,energy:30,health:1,mood:5}} as const;
 export type RecipeId=keyof typeof RECIPES;
@@ -31,7 +31,7 @@ export function knowsRecipe(s:GameState,id:RecipeId){if(id==='eggRice')return tr
 /** Món Mẹ sẽ chỉ tiếp theo (chưa biết), hoặc không còn món nào. */
 export const nextMomRecipe=(s:GameState):RecipeId|undefined=>MOM_TEACHES.find(id=>!knowsRecipe(s,id));
 /** T22: món riêng của từng NPC, chỉ học được từ đúng người đó. */
-export const NPC_TEACHES:Record<string,RecipeId>={'co-hanh':'rauMuong','chu-luc':'thitKho','chi-mai':'comChien'};
+export const NPC_TEACHES:Record<string,RecipeId>={veg:'rauMuong',meat:'thitKho',banhmi:'comChien'};
 /** T24 (chủ dự án duyệt 04/11): rủi ro theo độ tươi, độ chín, bảo quản; không theo giá. */
 export const LATE_FROM=900,LATE_ITEMS:IngredientId[]=['vegetable','pork','fish','tofu'],LATE_DISCOUNT=.3;
 export const PROTEIN_ITEMS:IngredientId[]=['pork','fish','tofu','egg'];

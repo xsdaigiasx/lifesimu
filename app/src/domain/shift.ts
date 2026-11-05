@@ -12,44 +12,47 @@ export const urgentBonus=(level:number)=>Math.min(300000,150000+50000*(level-1))
 /** Băm chuỗi thành số 32 bit, dùng cho mọi lựa chọn theo seed. */
 export function hash(text:string){let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 
-export type Effect={progress?:number;rating?:number;mood?:number;stress?:number;energy?:number;money?:number;bonus?:number;relation?:[string,number];xp?:[SkillId,number]};
+export type Effect={progress?:number;rating?:number;mood?:number;stress?:number;energy?:number;money?:number;bonus?:number;/** chỗ ngồi đồng nghiệp và điểm */relation?:[string,number];xp?:[SkillId,number]};
 export interface TurnOption{label:string;need?:[SkillId,number];effect:Effect;result:string}
 export interface TurnEvent{id:string;npc:string;line:string;options:TurnOption[]}
 
-/** Tám điểm rẽ ban đầu. Dạng dữ liệu để T17 chuyển thành mô-típ. Hệ quả không hiện cho người chơi trước khi chọn. */
+/** Tám điểm rẽ ban đầu. Dạng dữ liệu để T17 chuyển thành mô-típ. Hệ quả không hiện cho người chơi trước khi chọn.
+ * H0: `npc` và `relation` là chỗ ngồi trong nhóm (dev, design, qa, pm), đổi ra người của công ty đang làm lúc chạy.
+ * Chỗ trống: {name} tên người nói, {self}/{Self} người nói tự xưng, {you}/{You} người nói gọi người chơi,
+ * {me}/{Me} người chơi tự xưng, {call}/{Call} người chơi gọi người nói, {qa} tên người kiểm thử. */
 export const TURNS:TurnEvent[]=[
- {id:'hotfix',npc:'dev-trang',line:'Khách vừa báo trang thanh toán lỗi. Em bỏ việc đang làm qua xem giúp chị được không?',options:[
-  {label:'Để em xem ngay',effect:{progress:-30,rating:3,stress:5},result:'Bạn sửa kịp lỗi cho khách. Việc của mình chậm lại một chút.'},
-  {label:'Em làm xong phần này rồi qua',effect:{rating:-1},result:'Chị Trang gật đầu nhưng có vẻ hơi sốt ruột.'},
-  {label:'Gọi Gia Huy kiểm thử cùng',need:['communication',3],effect:{progress:-15,rating:3,relation:['dev-huy',3]},result:'Hai người chia nhau, lỗi được xử lý nhanh gọn.'}]},
- {id:'help-an',npc:'dev-an',line:'Đoạn này mình bí quá. Bạn xem giúp mình khoảng 20 phút được không?',options:[
-  {label:'Ngồi xem cùng',effect:{progress:-20,relation:['dev-an',5],xp:['logic',10]},result:'Hai người tìm ra chỗ sai. Minh An cảm ơn rối rít.'},
-  {label:'Chỉ tài liệu cho An tự đọc',need:['logic',3],effect:{progress:-5,relation:['dev-an',3]},result:'Tài liệu đúng chỗ cần, An tự xử lý được.'},
-  {label:'Để chiều nhé',effect:{relation:['dev-an',-2]},result:'An quay về bàn, trông hơi hụt hẫng.'}]},
- {id:'coffee',npc:'dev-linh',line:'Xuống uống cà phê không, hôm nay mình mời!',options:[
-  {label:'Đi luôn',effect:{progress:-15,mood:6,stress:-6,relation:['dev-linh',3]},result:'Mười lăm phút nói chuyện làm đầu óc nhẹ hẳn.'},
-  {label:'Mua giúp mình một ly',effect:{money:-25000,energy:8},result:'Ly cà phê đến tận bàn, tỉnh cả người.'},
-  {label:'Đang dở tay, để lần sau',effect:{relation:['dev-linh',-1]},result:'Linh đi một mình.'}]},
- {id:'standup',npc:'dev-trang',line:'Mười phút nữa họp nhanh, em trình bày phần việc của mình nhé.',options:[
+ {id:'hotfix',npc:'pm',line:'Khách vừa báo trang thanh toán lỗi. {You} bỏ việc đang làm qua xem giúp {self} được không?',options:[
+  {label:'Để {me} xem ngay',effect:{progress:-30,rating:3,stress:5},result:'Bạn sửa kịp lỗi cho khách. Việc của mình chậm lại một chút.'},
+  {label:'{Me} làm xong phần này rồi qua',effect:{rating:-1},result:'{name} gật đầu nhưng có vẻ hơi sốt ruột.'},
+  {label:'Gọi {qa} kiểm thử cùng',need:['communication',3],effect:{progress:-15,rating:3,relation:['qa',3]},result:'Hai người chia nhau, lỗi được xử lý nhanh gọn.'}]},
+ {id:'help-an',npc:'dev',line:'Đoạn này {self} bí quá. {You} xem giúp {self} khoảng 20 phút được không?',options:[
+  {label:'Ngồi xem cùng',effect:{progress:-20,relation:['dev',5],xp:['logic',10]},result:'Hai người tìm ra chỗ sai. {name} cảm ơn rối rít.'},
+  {label:'Chỉ tài liệu cho {name} tự đọc',need:['logic',3],effect:{progress:-5,relation:['dev',3]},result:'Tài liệu đúng chỗ cần, {name} tự xử lý được.'},
+  {label:'Để chiều nhé',effect:{relation:['dev',-2]},result:'{name} quay về bàn, trông hơi hụt hẫng.'}]},
+ {id:'coffee',npc:'design',line:'Xuống uống cà phê không, hôm nay {self} mời!',options:[
+  {label:'Đi luôn',effect:{progress:-15,mood:6,stress:-6,relation:['design',3]},result:'Mười lăm phút nói chuyện làm đầu óc nhẹ hẳn.'},
+  {label:'Mua giúp {me} một ly',effect:{money:-25000,energy:8},result:'Ly cà phê đến tận bàn, tỉnh cả người.'},
+  {label:'Đang dở tay, để lần sau',effect:{relation:['design',-1]},result:'{name} đi một mình.'}]},
+ {id:'standup',npc:'pm',line:'Mười phút nữa họp nhanh, {you} trình bày phần việc của mình nhé.',options:[
   {label:'Chuẩn bị thật kỹ',effect:{progress:-20,rating:3},result:'Phần trình bày rõ ràng, cả nhóm nắm được tiến độ.'},
-  {label:'Nói ngắn gọn ý chính',need:['communication',3],effect:{rating:4},result:'Ngắn mà đủ ý, chị Trang khen trước cả nhóm.'},
+  {label:'Nói ngắn gọn ý chính',need:['communication',3],effect:{rating:4},result:'Ngắn mà đủ ý, {name} khen trước cả nhóm.'},
   {label:'Xin vắng để làm cho kịp',effect:{rating:-2},result:'Bạn ở lại bàn làm tiếp, cuộc họp thiếu phần của bạn.'}]},
- {id:'blame',npc:'dev-huy',line:'Lỗi hôm qua hình như bắt nguồn từ phần bạn làm.',options:[
+ {id:'blame',npc:'qa',line:'Lỗi hôm qua hình như bắt nguồn từ phần {you} làm.',options:[
   {label:'Nhận và sửa ngay',effect:{progress:-20,rating:2,stress:4},result:'Lỗi được vá trong buổi. Bạn hơi mệt nhưng yên tâm.'},
-  {label:'Kiểm tra log trước đã',need:['logic',4],effect:{rating:3,relation:['dev-huy',2]},result:'Log cho thấy lỗi nằm ở chỗ khác. Huy xin lỗi và cảm ơn.'},
-  {label:'Không phải phần mình đâu',effect:{relation:['dev-huy',-3],stress:-2},result:'Huy im lặng quay đi.'}]},
- {id:'deploy',npc:'dev-trang',line:'Tối nay nhóm cần người ở lại hỗ trợ triển khai. Em giúp được không?',options:[
-  {label:'Được ạ, em ở lại',effect:{bonus:150000,energy:-15,rating:3},result:'Triển khai suôn sẻ. Khoản hỗ trợ sẽ vào lương ngày 1.'},
-  {label:'Em ở lại một tiếng thôi',effect:{bonus:60000,energy:-6,rating:1},result:'Bạn phụ được phần đầu rồi về.'},
-  {label:'Tối nay em bận rồi',effect:{rating:-1},result:'Chị Trang tìm người khác.'}]},
- {id:'music',npc:'dev-an',line:'Mình bật nhạc hơi to, có làm phiền bạn không?',options:[
-  {label:'Không sao đâu',effect:{stress:3,relation:['dev-an',2]},result:'An vui vẻ, còn bạn cố tập trung giữa tiếng nhạc.'},
-  {label:'Rủ An đeo tai nghe',need:['communication',2],effect:{relation:['dev-an',1]},result:'An cười, lấy tai nghe ra ngay.'},
-  {label:'Hơi phiền thật',effect:{relation:['dev-an',-2],stress:-2},result:'An tắt nhạc, không khí hơi ngượng.'}]},
- {id:'call',npc:'dev-trang',line:'Khách gọi phàn nàn mà chị đang bận. Em nghe máy giúp chị nhé?',options:[
-  {label:'Để em nghe',effect:{progress:-15,xp:['communication',20],stress:5,rating:2},result:'Khách bình tĩnh lại sau khi được nghe giải thích.'},
-  {label:'Ghi lại rồi chuyển chị',need:['management',2],effect:{progress:-5,rating:2},result:'Bạn ghi đủ ý, chị Trang xử lý nhanh.'},
-  {label:'Em chưa quen việc này',effect:{rating:-1},result:'Chị Trang tự nghe máy.'}]},
+  {label:'Kiểm tra log trước đã',need:['logic',4],effect:{rating:3,relation:['qa',2]},result:'Log cho thấy lỗi nằm ở chỗ khác. {name} xin lỗi và cảm ơn.'},
+  {label:'Không phải phần {me} đâu',effect:{relation:['qa',-3],stress:-2},result:'{name} im lặng quay đi.'}]},
+ {id:'deploy',npc:'pm',line:'Tối nay nhóm cần người ở lại hỗ trợ triển khai. {You} giúp được không?',options:[
+  {label:'Được, {me} ở lại',effect:{bonus:150000,energy:-15,rating:3},result:'Triển khai suôn sẻ. Khoản hỗ trợ sẽ vào lương ngày 1.'},
+  {label:'{Me} ở lại một tiếng thôi',effect:{bonus:60000,energy:-6,rating:1},result:'Bạn phụ được phần đầu rồi về.'},
+  {label:'Tối nay {me} bận rồi',effect:{rating:-1},result:'{name} tìm người khác.'}]},
+ {id:'music',npc:'dev',line:'{Self} bật nhạc hơi to, có làm phiền {you} không?',options:[
+  {label:'Không sao đâu',effect:{stress:3,relation:['dev',2]},result:'{name} vui vẻ, còn bạn cố tập trung giữa tiếng nhạc.'},
+  {label:'Rủ {name} đeo tai nghe',need:['communication',2],effect:{relation:['dev',1]},result:'{name} cười, lấy tai nghe ra ngay.'},
+  {label:'Hơi phiền thật',effect:{relation:['dev',-2],stress:-2},result:'{name} tắt nhạc, không khí hơi ngượng.'}]},
+ {id:'call',npc:'pm',line:'Khách gọi phàn nàn mà {self} đang bận. {You} nghe máy giúp {self} nhé?',options:[
+  {label:'Để {me} nghe',effect:{progress:-15,xp:['communication',20],stress:5,rating:2},result:'Khách bình tĩnh lại sau khi được nghe giải thích.'},
+  {label:'Ghi lại rồi chuyển {call}',need:['management',2],effect:{progress:-5,rating:2},result:'Bạn ghi đủ ý, {name} xử lý nhanh.'},
+  {label:'{Me} chưa quen việc này',effect:{rating:-1},result:'{name} tự nghe máy.'}]},
 ];
 
 /** Chọn điểm rẽ của ngày, tránh lặp với điểm rẽ trước đó. */

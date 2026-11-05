@@ -39,7 +39,7 @@ export const houseOf=(s:GameState)=>HOUSES[housingOf(s).house];
 export const residenceOf=(s:GameState):PlaceId=>houseOf(s).place;
 export const atResidence=(s:GameState)=>clockOf(s).location===residenceOf(s);
 export const hasRoom=(s:GameState,use:RoomUse)=>roomsOf(housingOf(s).house).some(r=>r.id===use);
-/** Tiền nhà mỗi tháng: trọ của Bà Tư, nhà phố thuê, nhà đã mua thì không. */
+/** Tiền nhà mỗi tháng: phòng trọ, nhà phố thuê, nhà đã mua thì không. */
 export function monthlyRent(s:GameState,base:number){const h=housingOf(s);if(h.house==='tro')return base;if(h.tenure==='own')return 0;return HOUSES[h.house].rent??0}
 export const rentLabel=(s:GameState)=>housingOf(s).house==='tro'?'Tiền trọ':'Tiền thuê nhà';
 

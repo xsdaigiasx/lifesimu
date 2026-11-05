@@ -56,7 +56,7 @@ export function marksOf(log:readonly JournalEntry[]):SummaryMark[]{
 }
 export function peopleOf(s:GameState):SummaryPerson[]{
  const rel=socialOf(s).relations,mem=storyOf(s).memories;
- return Object.entries(rel).filter(([id,r])=>castById(id)&&r.score>=SUM.minRelation).sort((a,b)=>b[1].score-a[1].score||a[0].localeCompare(b[0])).slice(0,SUM.people).map(([id,r])=>{
+ return Object.entries(rel).filter(([id,r])=>castById(s,id)&&r.score>=SUM.minRelation).sort((a,b)=>b[1].score-a[1].score||a[0].localeCompare(b[0])).slice(0,SUM.people).map(([id,r])=>{
   const m=mem.filter(x=>x.npc===id&&x.topic).sort((a,b)=>b.weight-a.weight||b.day-a.day)[0];
   return{id,score:r.score,...(m?{memory:m.topic.slice(0,120)}:{})};
  });

@@ -1,8 +1,6 @@
 /** T18: thư viện câu thoại theo (ý định × giọng × bậc quan hệ). Từ địa phương dùng nhẹ, khoảng một từ mỗi câu (chốt 04/11).
  * Chỗ trống: {self} NPC tự xưng, {you} gọi người chơi, {Self}/{You} viết hoa đầu câu, {ago}/{Ago} thời gian áng chừng. */
 export type Voice='tay'|'bac'|'trung'|'sg'|'que';
-/** Giọng theo quê trong hồ sơ. */
-export const VOICE:Record<string,Voice>={'ba-tu':'tay','chu-sau':'tay','ba-nam':'tay',me:'que','dev-an':'bac','dev-trang':'bac','bs-quan':'bac','dev-linh':'trung','co-hanh':'trung','chi-mai':'trung','chu-luc':'trung',tuan:'trung','dev-huy':'sg','bao-ngoc':'sg'};
 export interface Line{id:string;intent:string;voice?:Voice;min?:number;max?:number;text:string}
 let n=0;const L=(intent:string,text:string,o:{voice?:Voice;min?:number;max?:number}={}):Line=>({id:`${intent}#${++n}`,intent,text,...o});
 const K=10,C=30;// mốc Quen biết, Thân
@@ -63,16 +61,24 @@ export const LINES:Line[]=[
  L('greet','Bữa nay {you} kể gì nghe coi.',{min:C}),
  L('greet','Ủa, {you} tới mà không báo trước.',{min:C}),
  // Điểm nhấn lồng vào lời (theo người)
- L('quirk:chu-sau','{Self} vừa nghe radio, nói mai trời mưa đó {you}.'),
- L('quirk:chu-sau','Cái radio này theo {self} mấy chục năm rồi nghen.'),
- L('quirk:ba-tu','{Self} mới tưới xong mấy chậu kiểng, {you} coi đẹp hông?'),
- L('quirk:ba-tu','Nhớ đầu tháng đóng tiền đúng hẹn nghen {you}.'),
- L('quirk:dev-an','{You} ăn kẹo không? Ngăn bàn {self} lúc nào cũng có.'),
- L('quirk:dev-an','Hôm nay {self} code một mạch, quên cả uống nước.'),
- L('quirk:dev-trang','Để {self} ghi vào sổ, kẻo quên.'),
- L('quirk:co-hanh','Bữa ni rau tươi lắm, {self} để dành cho {you} bó hành nè.'),
- L('quirk:chu-luc','Đợi {self} mài con dao xíu đã.'),
- L('quirk:ba-nam','{Self} gói lá chuối cho {you} nghen, đỡ bọc ni lông.'),
+// H0: thói quen theo vai (mã vai) và theo thói quen rút từ pool (chữ trong npc-pool.json)
+ L('quirk:landlord','Nhớ đầu tháng đóng tiền đúng hẹn nghen {you}.',{voice:'tay'}),
+ L('quirk:landlord','Nhớ đầu tháng đóng tiền đúng hẹn nhé {you}.'),
+ L('quirk:veg','Bữa ni rau tươi lắm, {self} để dành cho {you} bó hành nè.',{voice:'trung'}),
+ L('quirk:veg','Rau sáng nay mới về, {self} chừa cho {you} bó tươi nhất.'),
+ L('quirk:meat','Đợi {self} lựa miếng thịt ngon nhất cho {you}.'),
+ L('quirk:grocery','{Self} gói lá chuối cho {you} nghen, đỡ bọc ni lông.',{voice:'tay'}),
+ L('quirk:grocery','{Self} gói kỹ cho {you}, đem về khỏi rơi.'),
+ L('quirk:Luôn đội mũ lưỡi trai','Cái mũ này {self} đội quen rồi, bỏ ra thấy trống trống.'),
+ L('quirk:Huýt sáo khi đi bộ','{Self} đi một đoạn là tự nhiên huýt sáo, {you} đừng cười nha.'),
+ L('quirk:Gọi ai cũng là em','Em này, à mà gọi quen miệng rồi, {you} đừng để bụng.'),
+ L('quirk:Mang theo phích trà','{You} uống miếng trà không? {Self} lúc nào cũng mang theo phích.'),
+ L('quirk:Thích kể chuyện thời trẻ','Hồi {self} bằng tuổi {you}, chỗ này còn là bãi đất trống đó.'),
+ L('quirk:Hay quên chìa khoá','Khoan, chìa khoá đâu rồi ta. Lần thứ ba trong tuần.'),
+ L('quirk:Nuôi một con chim chào mào','Sáng nay con chào mào nhà {self} hót hay lắm.'),
+ L('quirk:Đi đâu cũng đếm bước','Từ nhà ra tới đây đúng tám trăm bước, {self} đếm rồi.'),
+ L('quirk:Nói câu nào cũng thêm ca dao','Ăn quả nhớ kẻ trồng cây, {you} nhớ không.'),
+ L('quirk:Sưu tầm vé số trúng nhỏ','Hôm qua {self} lại trúng giải an ủi, cất vô hộp chung với mấy tấm kia.'),
  // Nhắc chuyện cũ (callback) theo chủ đề ký ức; tag-refuse là lần từng từ chối
  L('cb:xách đồ','{Ago} {you} xách đồ phụ {self}, tay hết mỏi chưa?'),
  L('cb:xách đồ','Nhờ {you} {ago} mà {self} đỡ cái lưng ghê.'),
@@ -141,12 +147,12 @@ export const LINES:Line[]=[
  L('debt','{Self} biết còn nợ {you} {amount}. Ngại quá, {self} chưa có đủ.'),
  L('debt','Tiền bữa {ago} {self} chưa trả được, {you} thông cảm nghen.',{voice:'tay'}),
  // Dạy nấu ăn
- L('recipe:co-hanh','Mua rau hoài mà biết nấu canh chua chưa? Để {self} chỉ cho.'),
- L('recipe:co-hanh','Rau muống ni xào tỏi phải lửa to nha, để {self} chỉ.'),
- L('recipe:chu-luc','Thịt kho trứng phải kho lửa liu riu mới thấm, để {self} chỉ {you}.'),
- L('recipe:chu-luc','Mua thịt hoài, biết kho trứng chưa? Nghe {self} nói nè.'),
- L('recipe:chi-mai','Cơm nguội đừng bỏ, chiên với trứng ngon lắm. {Self} chỉ cho.'),
- L('recipe:chi-mai','Bí món thì làm cơm chiên trứng, {self} chỉ {you} cách cho tơi.'),
+ L('recipe:veg','Mua rau hoài mà biết nấu canh chua chưa? Để {self} chỉ cho.'),
+ L('recipe:veg','Rau muống ni xào tỏi phải lửa to nha, để {self} chỉ.'),
+ L('recipe:meat','Thịt kho trứng phải kho lửa liu riu mới thấm, để {self} chỉ {you}.'),
+ L('recipe:meat','Mua thịt hoài, biết kho trứng chưa? Nghe {self} nói nè.'),
+ L('recipe:banhmi','Cơm nguội đừng bỏ, chiên với trứng ngon lắm. {Self} chỉ cho.'),
+ L('recipe:banhmi','Bí món thì làm cơm chiên trứng, {self} chỉ {you} cách cho tơi.'),
  L('recipe:me','Mẹ chỉ con cách kho cá cho đậm nha, nhớ ghi lại kẻo quên.'),
  L('recipe:me','Nấu canh chua phải cho me trước con ơi, mẹ chỉ cho.'),
  // Mẹ
@@ -159,16 +165,19 @@ export const LINES:Line[]=[
  L('mom2','Nhà mình mới thu hoạch xong, mẹ đỡ mệt rồi con.'),
  L('mom2','Mấy đứa trong xóm hỏi con hoài, chừng nào con về?'),
  // Gợi ý gần mốc bậc (không hiện số): câu than nhẹ thay câu chào, 24 đến 29 điểm trước Thân, 54 đến 59 trước Tri kỷ
- L('hint:ba-tu','Mấy bữa nay {self} cứ nhớ thằng con ở xa. Ngồi một mình thấy cái xóm trọ vắng hẻo.',{min:C-6,max:C-1}),
- L('hint:ba-tu','Có chuyện {self} giữ trong bụng lâu rồi, chưa biết nói với ai. {You} có rảnh nghe {self} không?',{min:C*2-6,max:C*2-1}),
- L('hint:dev-an','Dự án sắp tới gấp quá, {self} cứ sợ tụt lại sau mọi người. Giá mà có ai đỡ {self} một tay.',{min:C-6,max:C-1}),
- L('hint:dev-an','Nói thật là dạo này {self} áp lực lắm, mà chẳng dám kể với ai ở công ty.',{min:C*2-6,max:C*2-1}),
- L('hint:dev-trang','Cháu nhà {self} lại sốt từ tối qua, {self} chạy đi chạy về mệt quá.',{min:C-6,max:C-1}),
- L('hint:dev-trang','Có việc {self} muốn hỏi ý kiến {you}, nhưng không tiện nói chỗ đông người.',{min:C*2-6,max:C*2-1}),
- L('hint:co-hanh','Mấy bữa nay tui coi sổ hoài, đầu mùa vốn hụt làm tui mất ngủ.',{min:C-6,max:C-1}),
- L('hint:co-hanh','Sắp tới kỳ đóng học phí cho con rồi, lo quá trời. {You} ngồi nói chuyện với tui chút được không?',{min:C*2-6,max:C*2-1}),
- L('hint:chu-sau','Cái radio của {self} dạo này rè hoài, mà cũng chẳng ai ngồi nghe {self} kể chuyện xưa.',{min:C-6,max:C-1}),
- L('hint:chu-sau','Tuổi này {self} chỉ mong có người cần tới mình thôi, {you} biết không.',{min:C*2-6,max:C*2-1}),
+// H0: câu gợi ý gần mốc theo nỗi lo trong hồ sơ (mọi NPC đều có), không chứa số
+ L('hint:Mất việc','Dạo này chỗ làm {self} không yên, {self} cứ lo mất việc. Có ai để nói chuyện cũng đỡ.',{min:C-6,max:C-1}),
+ L('hint:Mất việc','Có chuyện công việc {self} giữ trong bụng lâu rồi. {You} rảnh nghe {self} kể không?',{min:C*2-6,max:C*2-1}),
+ L('hint:Bệnh tật','Mấy bữa nay {self} không khoẻ, ngồi một mình lại nghĩ lung tung.',{min:C-6,max:C-1}),
+ L('hint:Bệnh tật','Có chuyện sức khoẻ {self} chưa dám kể với ai. {You} ngồi với {self} chút được không?',{min:C*2-6,max:C*2-1}),
+ L('hint:Nợ nần','Tháng này {self} tính tới tính lui mà tiền vẫn hụt, mất ngủ mấy đêm rồi.',{min:C-6,max:C-1}),
+ L('hint:Nợ nần','Có khoản {self} lo hoài chưa biết xoay sao. Nói ra thấy ngại, mà giữ hoài cũng mệt.',{min:C*2-6,max:C*2-1}),
+ L('hint:Con cái hư','Nhà {self} dạo này có chuyện con cái, nghĩ hoài không ra cách.',{min:C-6,max:C-1}),
+ L('hint:Con cái hư','{Self} muốn hỏi ý {you} chuyện trong nhà, mà chỗ đông người khó nói.',{min:C*2-6,max:C*2-1}),
+ L('hint:Cô đơn','Chiều nào {self} cũng ngồi một mình, chẳng có ai ghé hỏi han.',{min:C-6,max:C-1}),
+ L('hint:Cô đơn','Tuổi này {self} chỉ mong có người cần tới mình thôi, {you} biết không.',{min:C*2-6,max:C*2-1}),
+ L('hint:Bị lừa','Bữa trước {self} suýt bị lừa một vố, giờ ai hỏi gì cũng ngại.',{min:C-6,max:C-1}),
+ L('hint:Bị lừa','Có chuyện {self} tin nhầm người, chưa kể với ai. {You} nghe {self} nói chút nhé.',{min:C*2-6,max:C*2-1}),
 ];
 
 const AGO_CAP=(t:string)=>t.charAt(0).toUpperCase()+t.slice(1);
