@@ -1,0 +1,309 @@
+{
+  "issue": 133,
+  "lot": 4,
+  "reference": "app/public/assets/meals/comTam.webp",
+  "reference_sha256": "beddedd4b42c464086f46337abf602059e08c1d3b7cf66232f57f004ea079896",
+  "asset_type": "meal-card",
+  "units": "pixels; no floor footprint or z coordinate",
+  "expected": 9,
+  "exported": 9,
+  "items": [
+    {
+      "id": "rauMuong",
+      "name": "Rau muống xào tỏi",
+      "file": "assets/meals/rauMuong.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        18,
+        44,
+        238,
+        211
+      ],
+      "bytes": 24300,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "8b386b5bfde48382c1485f958127901e8d298abf2c871e1ddadb95ef183eb58a",
+      "source_sha256": "d31452d6e4baa2ab21cdfe3099d15fb638e2889a70f646511c9f1bee702d2813",
+      "source_crop_px": [
+        92,
+        241,
+        1142,
+        1039
+      ]
+    },
+    {
+      "id": "thitKho",
+      "name": "Thịt kho trứng",
+      "file": "assets/meals/thitKho.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        18,
+        19,
+        238,
+        236
+      ],
+      "bytes": 25088,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "80a251195b47721eec4ca172bcae267c16d5ab6ace1925c9154d95eda8c14218",
+      "source_sha256": "e4548d0caa115703581de03f40466158ca9648ff21e13b572d79c3d6bb7b9a4d",
+      "source_crop_px": [
+        80,
+        68,
+        1161,
+        1143
+      ]
+    },
+    {
+      "id": "comChien",
+      "name": "Cơm chiên trứng",
+      "file": "assets/meals/comChien.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        18,
+        45,
+        238,
+        211
+      ],
+      "bytes": 22902,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "b75b62df568460222e9341fce71d09800f2c589516f19e236a2fb436eece46f6",
+      "source_sha256": "4d8863f7c58cb900a973f08989201c0412ea3f21ce19d5d7c90740ea27c417c6",
+      "source_crop_px": [
+        94,
+        231,
+        1149,
+        1028
+      ]
+    },
+    {
+      "id": "improv-com",
+      "name": "Cơm trộn tự chế",
+      "file": "assets/meals/improv-com.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        18,
+        42,
+        238,
+        213
+      ],
+      "bytes": 25502,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "d797cd5c12aa3c427c789e2ebdcca827ea9387ed22fa8d13976d1eb581cbbfea",
+      "source_sha256": "6dd53b91d6e58c33f5246ee27200bd6476221778258f45d728d9f8996e7a0b00",
+      "source_crop_px": [
+        73,
+        223,
+        1153,
+        1063
+      ]
+    },
+    {
+      "id": "improv-xao",
+      "name": "Món xào tự chế",
+      "file": "assets/meals/improv-xao.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        18,
+        30,
+        237,
+        226
+      ],
+      "bytes": 24634,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "d6f2a981c8f9f60779762e6101ad70cc24a8535aae8c140d7e10e25e1d4e23de",
+      "source_sha256": "7458a716e15e7b97ece8dcad527e573b19db531ee70fcca6d90ea7c7e908d8aa",
+      "source_crop_px": [
+        156,
+        156,
+        1154,
+        1047
+      ]
+    },
+    {
+      "id": "improv-rim",
+      "name": "Món rim tự chế",
+      "file": "assets/meals/improv-rim.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        29,
+        18,
+        226,
+        237
+      ],
+      "bytes": 24504,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "4db2d6c08c93801954d16772f0beee67b634be0209739251ff7306d4bdb5f94c",
+      "source_sha256": "c28af9bf9b5f325b11ac451a31c4ee0e3f7d85a76223754e7074f2551d725a71",
+      "source_crop_px": [
+        178,
+        137,
+        1048,
+        1107
+      ]
+    },
+    {
+      "id": "improv-luoc",
+      "name": "Rau luộc tự chế",
+      "file": "assets/meals/improv-luoc.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        18,
+        44,
+        238,
+        212
+      ],
+      "bytes": 22960,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "8507630a24be2594f22984ae3555c6942ef3226b2e9bbcd0d68cec741533232d",
+      "source_sha256": "68ec814a32c749333a12c01e145d59888ee6fdf45f8d4529916556bf61987cda",
+      "source_crop_px": [
+        92,
+        240,
+        1140,
+        1041
+      ]
+    },
+    {
+      "id": "improv-la",
+      "name": "Món lạ tự chế",
+      "file": "assets/meals/improv-la.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        19,
+        29,
+        237,
+        226
+      ],
+      "bytes": 23272,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "fdfee99de262ba2838369e5e91a51262e52f292736e0a8e1dd89f576f1629046",
+      "source_sha256": "5150ff31aa058590619bdde2eb631eb82d4278c66ca5db638e54fbcc146bc623",
+      "source_crop_px": [
+        136,
+        155,
+        1102,
+        1027
+      ]
+    },
+    {
+      "id": "coffee",
+      "name": "Cà phê sữa đá",
+      "file": "assets/meals/coffee.webp",
+      "frame_px": [
+        256,
+        256
+      ],
+      "anchor_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": null,
+      "direction": "three-quarter",
+      "alpha_bbox_px": [
+        19,
+        27,
+        238,
+        227
+      ],
+      "bytes": 30164,
+      "encoding": "lossy",
+      "quality": 95,
+      "alpha_quality": 100,
+      "sha256": "a38be5d67069f6e2c42227814f828e5f10ee9ae86bb3d59a99af83ede2d00bd4",
+      "source_sha256": "50884112ed3c8dc2bfc4f7dcf3f5909cdda722cf799f0a5a3cdbc7bc225f571c",
+      "source_crop_px": [
+        157,
+        199,
+        1100,
+        1060
+      ]
+    }
+  ]
+}

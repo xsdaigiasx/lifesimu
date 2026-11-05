@@ -1,0 +1,71 @@
+{
+  "issue": 133,
+  "lot": 4,
+  "tool": "image_gen built-in",
+  "reference": "app/public/assets/meals/comTam.webp",
+  "items": [
+    {
+      "id": "rauMuong",
+      "name": "Rau muống xào tỏi",
+      "file": "assets/meals/rauMuong.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a shallow cream plate of vivid green stir-fried water spinach, long hollow stems and tender leaves, scattered golden sliced garlic. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    },
+    {
+      "id": "thitKho",
+      "name": "Thịt kho trứng",
+      "file": "assets/meals/thitKho.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a small reddish brown clay pot of Vietnamese caramelized pork belly chunks and two boiled eggs, amber braising broth. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    },
+    {
+      "id": "comChien",
+      "name": "Cơm chiên trứng",
+      "file": "assets/meals/comChien.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a cream plate of golden egg fried rice, distinct grains, yellow egg pieces, tiny carrot and green scallion. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    },
+    {
+      "id": "improv-com",
+      "name": "Cơm trộn tự chế",
+      "file": "assets/meals/improv-com.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a cream plate of mixed rice with many small ingredients: egg, greens, carrot, mushroom and pork, varied but appetizing. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    },
+    {
+      "id": "improv-xao",
+      "name": "Món xào tự chế",
+      "file": "assets/meals/improv-xao.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a small dark frying pan with short handle containing colorful stir-fried vegetables, greens carrot mushroom and a few tofu cubes. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    },
+    {
+      "id": "improv-rim",
+      "name": "Món rim tự chế",
+      "file": "assets/meals/improv-rim.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a small cream bowl of home-made braised bites with thick glossy amber sauce, scallion garnish. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    },
+    {
+      "id": "improv-luoc",
+      "name": "Rau luộc tự chế",
+      "file": "assets/meals/improv-luoc.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a cream plate of simply boiled vegetables, leafy greens and green stems with a few carrot pieces. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    },
+    {
+      "id": "improv-la",
+      "name": "Món lạ tự chế",
+      "file": "assets/meals/improv-la.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a cream plate of an unusual improvised dish, muted slightly purplish green food pieces with a small curl of strange pale lilac steam; whimsical, edible-looking, not horror. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    },
+    {
+      "id": "coffee",
+      "name": "Cà phê sữa đá",
+      "file": "assets/meals/coffee.webp",
+      "direction": "three-quarter",
+      "prompt": "Use case: illustration-story. Generate ONE isolated food game-card illustration: a clear short glass of Vietnamese iced milk coffee, condensed milk layer beneath brown coffee and visible ice cubes; a tiny stainless Vietnamese phin filter beside it. Input image is STYLE REFERENCE ONLY, the existing approved comTam meal. Match its cozy hand-painted storybook food style: delicate warm brown ink contours, soft cream and pastel watercolor fills, simple appetizing highlights, fine small food details. This is NOT the semi-realistic furniture style. Three-quarter slightly top-down view like the reference. Entire serving vessel and any handle/steam visible, centered with generous clear padding. No table, no floor, no external cast shadow, no characters, no lettering, no logos, no borders. True transparent background, not a checkerboard. Only the requested food/drink and its necessary vessel. Final 256x256 card; preserve readable silhouette at 64px."
+    }
+  ]
+}
