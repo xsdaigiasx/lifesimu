@@ -15,3 +15,5 @@
 @media(min-width:761px){.topbar.tb{grid-template-columns:auto 1fr auto auto;grid-template-areas:"time chips weather wallet"}.topbar.tb .weather{display:flex;grid-area:weather}.topbar.tb .vital-chips{grid-auto-columns:max-content;justify-content:start;align-self:center}}
 .topbar.tb .weather.rain{color:#4a78a8}
 .topbar.tb .weather.storm{color:#b5473a}
+.tb-weather{display:inline-flex;align-items:center;gap:3px;margin-left:auto;font-size:11px;font-weight:700;color:#173e38;white-space:nowrap}.tb-weather svg{width:14px!important;height:14px!important;fill:none;stroke:currentColor}.tb-weather.rain{color:#4a78a8}.tb-weather.storm{color:#b5473a}
+@media(min-width:761px){.tb-weather{display:none}}
