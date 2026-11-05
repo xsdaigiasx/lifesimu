@@ -109,7 +109,7 @@ export function sellBack(s:GameState,item:Sale):GameResult{
  const t=spendTime(s,ORDER.mallMinutes);if(!t.ok)return t;
  const n=structuredClone(t.state);
  if(item.kind==='product')n.life={...structuredClone(lifeOf(n)),owned:lifeOf(n).owned.filter(x=>x!==item.id)};
- else n.home={grid:homeOf(n).grid??8,items:homeOf(n).items.filter(i=>uidOf(i)!==item.uid)} as GameState['home'];
+ else{const sold=homeOf(n).items.find(i=>uidOf(i)===item.uid);n.home={grid:homeOf(n).grid??8,items:homeOf(n).items.filter(i=>uidOf(i)!==item.uid)} as GameState['home'];if(sold?.id==='tv')n.life={...structuredClone(lifeOf(n)),owned:lifeOf(n).owned.filter(x=>x!=='tv')}}
  if(post(n,{id:`sell:${n.day}:${n.txSeq??0}`,name:'Bán lại '+q.name.toLocaleLowerCase('vi'),amount:q.value})!=='ok')return bad('Không bán được lúc này.');
  return{ok:true,state:n};
 }

@@ -51,7 +51,9 @@ export function CartButton({onOpen}:{onOpen:()=>void}){
 export const FACT:Record<ProductId,[string,string]>={casual:['smile','+2/ngày'],officeWear:['smile','+2/ngày'],coat:['smile','+2/ngày'],headphones:['bell','Nghe nhạc'],tv:['play','Xem TV'],laptopMid:['bolt','Làm nhanh ×1,0'],laptopPro:['bolt','Làm nhanh ×1,15'],bicycle:['bus','Nhanh 40%'],motorbike:['bus','Nhanh 65%'],scooter:['bus','Nhanh 70%'],backpack:['bag','Túi 8 món']};
 export const FULL='Giỏ chỉ chứa tối đa 8 món.';
 /** Mọi loại nội thất, đèn và tủ lạnh xếp cuối. */
-export const HOME_IDS=[...(Object.keys(HOME_ITEMS) as HomeId[]).filter(id=>id!=='lamp'&&id!=='fridge'),'lamp','fridge'] as HomeId[];
+export const HOME_IDS=[...(Object.keys(HOME_ITEMS) as HomeId[]).filter(id=>id!=='lamp'&&id!=='fridge'&&id!=='tv'),'lamp','fridge'] as HomeId[];
+/** Đồ nội thất bán ở mục Điện tử (TV). */
+export const ELEC_HOME_IDS=['tv'] as HomeId[];
 
 /** Lưới thẻ đồ TTTM theo nhóm (thời trang, điện tử, xe, ba lô). Món đã có thì Mặc, Dùng hoặc Đã có. */
 export function ProductCards({state,category,tone,onFull,onEquip}:{state:GameState;category:string;tone?:string;onFull:()=>void;onEquip:(id:ProductId,category:'clothing'|'transport')=>void}){
@@ -65,10 +67,10 @@ export function ProductCards({state,category,tone,onFull,onEquip}:{state:GameSta
   </article>})}</>;
 }
 
-export interface Zone{id:string;name:string;icon:string;tone:string;count?:number}
+export interface Zone{id:string;name:string;icon:string;tone:string;count?:number;art?:string}
 /** Màn chọn mục: mỗi mục một ô lớn kèm số món. Dùng chung cho TTTM và điện thoại. */
 export function ZoneGrid({zones,onOpen}:{zones:Zone[];onOpen:(id:string)=>void}){
- return <div className="market-stalls mall-zones">{zones.map(z=><button key={z.id} type="button" className="market-stall" onClick={()=>onOpen(z.id)}><span className="market-stall-art" style={{background:z.tone}}><Icon name={z.icon}/></span><strong>{z.name}</strong>{z.count!==undefined&&<small><Icon name="box"/>{z.count}</small>}</button>)}</div>;
+ return <div className="market-stalls mall-zones">{zones.map(z=><button key={z.id} type="button" className="market-stall" onClick={()=>onOpen(z.id)}><span className="market-stall-art" style={{background:z.tone}}>{z.art?<img src={z.art} alt="" loading="lazy"/>:<Icon name={z.icon}/>}</span><strong>{z.name}</strong>{z.count!==undefined&&<small><Icon name="box"/>{z.count}</small>}</button>)}</div>;
 }
 
 /** Nút tròn góc trên: biểu tượng kèm số (Kho, Đơn hàng). */

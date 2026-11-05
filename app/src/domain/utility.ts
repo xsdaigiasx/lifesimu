@@ -10,8 +10,8 @@ type Watts=Record<HomeTier,number>;
 export const DEVICES:Partial<Record<HomeId,{name:string;watt:Watts;hours:number}>>={
  fridge:{name:'Tủ lạnh',watt:{basic:70,comfort:90,premium:110},hours:24},
  desk:{name:'Bàn laptop',watt:{basic:45,comfort:55,premium:70},hours:6},
- lamp:{name:'Đèn',watt:{basic:5,comfort:7,premium:9},hours:6}};
-export const TV={name:'TV',watt:60,hours:4};
+ lamp:{name:'Đèn',watt:{basic:5,comfort:7,premium:9},hours:6},
+ tv:{name:'TV',watt:{basic:60,comfort:85,premium:110},hours:4}};
 export const DAYS_PER_MONTH=30;
 /** Giá điện (đồng/kWh): phòng trọ một giá cao; nhà riêng theo bậc, mỗi bậc tính cho phần kWh trong bậc đó. */
 export const TRO_RATE=3500;
@@ -37,7 +37,6 @@ export function placedDevices(s:GameState):{id:HomeId;tier:HomeTier}[]{
 export function billOf(s:GameState):Bill{
  const house=housingOf(s).house,lines:BillLine[]=[];
  for(const d of placedDevices(s)){const spec=DEVICES[d.id];if(!spec)continue;const watt=d.id==='desk'?MACHINES[machineOf(s)].watt:spec.watt[d.tier],kwh=kwhOf(watt,spec.hours),i=lines.find(l=>l.id===d.id);if(i)i.kwh=Math.round((i.kwh+kwh)*10)/10;else lines.push({id:d.id,label:spec.name,kwh,amount:0})}
- if(s.life?.owned.includes('tv'))lines.push({id:'tv',label:TV.name,kwh:kwhOf(TV.watt,TV.hours),amount:0});
  const kwh=Math.round(lines.reduce((n,l)=>n+l.kwh,0)*10)/10,price=rateFor(house),total=Math.round(price(kwh)/1000)*1000;
  /** Chia tiền điện theo tỷ lệ kWh của từng thiết bị, làm tròn nghìn; dòng cuối nhận phần dư để cộng đúng tổng. */
  let left=total;lines.forEach((l,i)=>{const a=i===lines.length-1?left:Math.round(total*l.kwh/(kwh||1)/1000)*1000;l.amount=a;left-=a});

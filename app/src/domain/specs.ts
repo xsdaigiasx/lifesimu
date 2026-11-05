@@ -13,10 +13,10 @@ const PRODUCT_SPEC:Record<ProductId,{kg:number;cm:Cm;watt?:number}>={
  casual:{kg:.4,cm:[30,25,4]},officeWear:{kg:.9,cm:[35,28,6]},coat:{kg:1.4,cm:[40,30,10]},
  bicycle:{kg:14,cm:[170,60,105]},motorbike:{kg:105,cm:[190,70,105]},scooter:{kg:115,cm:[185,70,110]},
  backpack:{kg:.8,cm:[30,15,45]}};
-const HOME_KG:Record<HomeId,number>={bed:28,wardrobe:35,desk:18,table:9,plant:4,lamp:1.2,rug:3,painting:2.5,fridge:38};
-const HOME_HEIGHT:Record<HomeId,number>={bed:50,wardrobe:180,desk:75,table:75,plant:60,lamp:35,rug:1,painting:4,fridge:85};
+const HOME_KG:Record<HomeId,number>={bed:28,wardrobe:35,desk:18,table:9,plant:4,lamp:1.2,rug:3,painting:2.5,fridge:38,tv:9};
+const HOME_HEIGHT:Record<HomeId,number>={bed:50,wardrobe:180,desk:75,table:75,plant:60,lamp:35,rug:1,painting:4,fridge:85,tv:55};
 const HOME_TIER_KG:Record<HomeTier,number>={basic:1,comfort:1.25,premium:1.6};
-const HOME_WATT:Partial<Record<HomeId,Record<HomeTier,number>>>={lamp:{basic:5,comfort:7,premium:9},fridge:{basic:70,comfort:90,premium:110}};
+const HOME_WATT:Partial<Record<HomeId,Record<HomeTier,number>>>={lamp:{basic:5,comfort:7,premium:9},fridge:{basic:70,comfort:90,premium:110},tv:{basic:60,comfort:85,premium:110}};
 
 export interface Body{kg:number;cm:Cm;watt?:number}
 /** Cân nặng, kích thước (cm: rộng, sâu, cao) và công suất (W) của một dòng hàng. */

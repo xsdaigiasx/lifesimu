@@ -15,8 +15,8 @@ const PX=CW/128;
 /** Hành động của từng phòng (mỗi phòng một việc riêng) và đồ nào mở popup nào. */
 type ActId='sleep'|'cook'|'study'|'fun'|'garden'|'tv';
 const ACT:Record<ActId,{icon:string;label:string;title:string}>={sleep:{icon:'moon',label:'Ngủ',title:'Giường'},cook:{icon:'pan',label:'Nấu ăn',title:'Bếp'},study:{icon:'note',label:'Tự học',title:'Bàn học'},fun:{icon:'play',label:RELAX.fun.name,title:'Giải trí'},garden:{icon:'leaf',label:RELAX.garden.name,title:'Sân vườn'},tv:{icon:'play',label:'Xem TV',title:'TV'}};
-const ROOM_ACT:Partial<Record<RoomUse,ActId>>={living:'tv',bedroom:'sleep',guest:'sleep',kitchen:'cook',study:'study',fun:'fun',garden:'garden'};
-const ITEM_ACT:Partial<Record<HomeId,ActId>>={bed:'sleep',desk:'study',fridge:'cook',table:'cook'};
+const ROOM_ACT:Partial<Record<RoomUse,ActId>>={bedroom:'sleep',guest:'sleep',kitchen:'cook',study:'study',fun:'fun',garden:'garden'};
+const ITEM_ACT:Partial<Record<HomeId,ActId>>={bed:'sleep',desk:'study',fridge:'cook',table:'cook',tv:'tv'};
 export interface HouseHandlers{arrange:(floor:1|2,items:Placed[])=>GameResult;relax:(kind:'fun'|'garden')=>GameResult;sleep:()=>void;cook:()=>void;study:()=>void;tv:()=>GameResult}
 
 const P=(x:number,y:number,z=0)=>({x:(x-y)*CW/2,y:(x+y)*CH/2-z});
@@ -71,7 +71,7 @@ export default function HouseView({state,h}:{state:GameState;h:HouseHandlers}){
  const rotate=()=>{if(!sel)return;const next=items.map(p=>p.id===sel?{...p,rotation:ROTATIONS[(ROTATIONS.indexOf(p.rotation)+1)%4]!}:p);if(placeError(floor,next)){setNote('Xoay không vừa chỗ.');return}save(next)};
  const stow=()=>{if(!sel)return;if(save(items.filter(p=>p.id!==sel)))setSel(null)};
  const act=(fn:()=>GameResult)=>{const res=fn();setNote(res.ok?'':res.error)};
- const used=new Set(hs.relax?Object.entries(hs.relax).filter(([,d])=>d===state.day).map(([k])=>k):[]);const room=active.id,tvOwned=(state.life?.owned??[]).includes('tv'),tvDone=state.life?.daily?.tv===state.day;
+ const used=new Set(hs.relax?Object.entries(hs.relax).filter(([,d])=>d===state.day).map(([k])=>k):[]);const room=active.id,tvDone=state.life?.daily?.tv===state.day;
  return <section className="house-view" aria-label={def.name}>
   <header className="house-head"><strong>{def.name}</strong><small>{hs.tenure==='own'?'Nhà của bạn':`${money(def.rent??0)}/tháng`}</small></header>
   <div className="house-nav">{def.floors.length>1&&<div className="house-floors">{def.floors.map(f=><button key={f.id} aria-pressed={f.id===fid} onClick={()=>switchFloor(f.id)}>T{f.id}</button>)}</div>}
@@ -79,7 +79,7 @@ export default function HouseView({state,h}:{state:GameState;h:HouseHandlers}){
   <FloorPlan floor={floor} art={(FLOORS as Record<string,{f:string;w:number;h:number;ox:number;oy:number}>)[`${house}-${fid}`]} tiers={Object.fromEntries(homeOf(state).items.map(i=>[i.id,i.tier??'basic']))} picking={!!pick} items={items} selected={sel} view={view} setView={setView} onCell={onCell} onItem={id=>{const p0=items.find(i=>i.id===id),r0=p0&&roomAt(floor,p0);if(!editing){const k=ITEM_ACT[id];if(k&&r0){setActive(r0);setUse(k)}return}setPick(null);setSel(s=>s===id?null:id);const p=items.find(i=>i.id===id);const r=p&&roomAt(floor,p);if(r)setActive(r)}}/>
   <div className="house-tools">
    <button onClick={()=>{setEditing(e=>!e);setPick(null);setSel(null);setUse(null);setNote('')}}><Icon name={editing?'close':'move'}/>{editing?'Xong':'Sắp xếp'}</button>
-   {!editing&&ROOM_ACT[room]&&(ROOM_ACT[room]!=='tv'||tvOwned)&&<button className="house-use-icon" aria-label={ACT[ROOM_ACT[room]!].title} title={ACT[ROOM_ACT[room]!].title} onClick={()=>setUse(ROOM_ACT[room]!)}><Icon name={ACT[ROOM_ACT[room]!].icon}/></button>}
+   {!editing&&ROOM_ACT[room]&&<button className="house-use-icon" aria-label={ACT[ROOM_ACT[room]!].title} title={ACT[ROOM_ACT[room]!].title} onClick={()=>setUse(ROOM_ACT[room]!)}><Icon name={ACT[ROOM_ACT[room]!].icon}/></button>}
    {editing&&sel&&<><button onClick={rotate}><Icon name="rotate"/>Xoay</button><button onClick={stow}><Icon name="box"/>Cất</button></>}
   </div>
   {editing&&store.length>0&&<div className="house-store" aria-label="Đồ trong kho">{store.map(id=><button key={id} aria-pressed={pick===id} onClick={()=>{setSel(null);setPick(p=>p===id?null:id)}}>{(()=>{const tier=homeOf(state).items.find(i=>i.id===id)?.tier,sp=spriteFor(id,tier);return sp?<img src={sp.f} alt=""/>:<Icon name={HOME_ITEMS[id].icon}/>})()}<span>{homeName(id,homeOf(state).items.find(i=>i.id===id)?.tier)}</span></button>)}</div>}
