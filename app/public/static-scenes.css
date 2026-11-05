@@ -216,3 +216,12 @@
 .home-use button,.home-use button:not(:last-child){display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;min-width:0;height:auto;min-height:54px;padding:12px 16px;border-radius:16px;font-size:17px;font-weight:700;white-space:nowrap}
 .home-use button:last-child{justify-content:center;min-height:46px;background:#f0efe6}
 .home-use svg{width:26px;height:26px;flex:none}
+
+.kitchen-menu{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:4px 0 12px}
+.kitchen-menu button{display:grid;justify-items:center;align-content:center;gap:6px;min-height:104px;padding:14px 8px;border:1px solid #c9d4bc;border-radius:16px;background:#eef1e5;color:#244a3b;touch-action:manipulation}
+.kitchen-menu button:last-child:nth-child(odd){grid-column:1/-1}
+.kitchen-menu svg{width:34px;height:34px}.kitchen-menu strong{font-size:15px}.kitchen-menu small{font-size:12px;color:#5d7064}
+.kitchen-back{display:flex;align-items:center;gap:6px;margin:0 0 12px;padding:8px 12px 8px 8px;border:1px solid #c9d4bc;border-radius:12px;background:#eef1e5;color:#244a3b;font-size:15px;font-weight:700}.kitchen-back svg{width:20px;height:20px}
+.home-object-actions.home-use{width:min(80vw,280px);padding:14px;gap:8px;box-shadow:0 0 0 100vmax #173e3818,0 10px 30px #183e3055}
+.home-use button,.home-use button:not(:last-child){min-height:46px;padding:10px 14px;font-size:15px;gap:10px}
+.home-use button:last-child{min-height:42px}.home-use svg{width:22px;height:22px}
