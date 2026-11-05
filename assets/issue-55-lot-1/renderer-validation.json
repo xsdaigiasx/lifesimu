@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "surface": "real IsoOffice component in isolated QA harness, not Office owner flow",
+  "viewport": [
+    390,
+    844
+  ],
+  "seats": 8,
+  "sprite_images": 19,
+  "a_models_loaded": 4,
+  "all_spriteBox_coordinates_match": true,
+  "manifest_http": 200,
+  "asset_http": "all200, decoded",
+  "page_errors": [],
+  "integration_note": "Office.tsx still mounts PackedOffice; Claude must wire IsoOffice owner flow separately"
+}

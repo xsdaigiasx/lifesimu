@@ -1,0 +1,348 @@
+{
+  "plan": "buildPlan(small,tech,8)",
+  "submitted": [
+    {
+      "key": "work-0:1",
+      "item": "plant",
+      "x": 0,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": -64,
+        "top": -64,
+        "width": 128,
+        "height": 128
+      },
+      "depth": 1,
+      "anchor_world": [
+        1024,
+        384
+      ]
+    },
+    {
+      "key": "work-0:0",
+      "item": "shelf",
+      "x": 1,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": 0,
+        "top": -64,
+        "width": 192,
+        "height": 192
+      },
+      "depth": 2.5,
+      "anchor_world": [
+        1152,
+        448
+      ]
+    },
+    {
+      "key": "work-0:6",
+      "item": "desk-pc",
+      "x": 1,
+      "y": 2,
+      "zone": "work-0",
+      "box": {
+        "left": -128,
+        "top": 32,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 4.5,
+      "anchor_world": [
+        1024,
+        512
+      ]
+    },
+    {
+      "key": "work-0:7",
+      "item": "chair",
+      "x": 1,
+      "y": 3,
+      "zone": "work-0",
+      "box": {
+        "left": -192,
+        "top": 96,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 5,
+      "anchor_world": [
+        896,
+        512
+      ]
+    },
+    {
+      "key": "work-0:8",
+      "item": "desk-pc",
+      "x": 4,
+      "y": 2,
+      "zone": "work-0",
+      "box": {
+        "left": 64,
+        "top": 128,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 7.5,
+      "anchor_world": [
+        1216,
+        608
+      ]
+    },
+    {
+      "key": "work-0:14",
+      "item": "desk-pc",
+      "x": 1,
+      "y": 5,
+      "zone": "work-0",
+      "box": {
+        "left": -320,
+        "top": 128,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 7.5,
+      "anchor_world": [
+        832,
+        608
+      ]
+    },
+    {
+      "key": "work-0:9",
+      "item": "chair",
+      "x": 4,
+      "y": 3,
+      "zone": "work-0",
+      "box": {
+        "left": 0,
+        "top": 192,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 8,
+      "anchor_world": [
+        1088,
+        608
+      ]
+    },
+    {
+      "key": "work-0:15",
+      "item": "chair",
+      "x": 1,
+      "y": 6,
+      "zone": "work-0",
+      "box": {
+        "left": -384,
+        "top": 192,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 8,
+      "anchor_world": [
+        704,
+        608
+      ]
+    },
+    {
+      "key": "work-0:10",
+      "item": "desk-pc",
+      "x": 7,
+      "y": 2,
+      "zone": "work-0",
+      "box": {
+        "left": 256,
+        "top": 224,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 10.5,
+      "anchor_world": [
+        1408,
+        704
+      ]
+    },
+    {
+      "key": "work-0:16",
+      "item": "desk-pc",
+      "x": 4,
+      "y": 5,
+      "zone": "work-0",
+      "box": {
+        "left": -128,
+        "top": 224,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 10.5,
+      "anchor_world": [
+        1024,
+        704
+      ]
+    },
+    {
+      "key": "work-0:11",
+      "item": "chair",
+      "x": 7,
+      "y": 3,
+      "zone": "work-0",
+      "box": {
+        "left": 192,
+        "top": 288,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 11,
+      "anchor_world": [
+        1280,
+        704
+      ]
+    },
+    {
+      "key": "work-0:17",
+      "item": "chair",
+      "x": 4,
+      "y": 6,
+      "zone": "work-0",
+      "box": {
+        "left": -192,
+        "top": 288,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 11,
+      "anchor_world": [
+        896,
+        704
+      ]
+    },
+    {
+      "key": "work-0:12",
+      "item": "desk-pc",
+      "x": 10,
+      "y": 2,
+      "zone": "work-0",
+      "box": {
+        "left": 448,
+        "top": 320,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 13.5,
+      "anchor_world": [
+        1600,
+        800
+      ]
+    },
+    {
+      "key": "work-0:18",
+      "item": "desk-pc",
+      "x": 7,
+      "y": 5,
+      "zone": "work-0",
+      "box": {
+        "left": 64,
+        "top": 320,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 13.5,
+      "anchor_world": [
+        1216,
+        800
+      ]
+    },
+    {
+      "key": "work-0:2",
+      "item": "plant",
+      "x": 13,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": 768,
+        "top": 352,
+        "width": 128,
+        "height": 128
+      },
+      "depth": 14,
+      "anchor_world": [
+        1856,
+        800
+      ]
+    },
+    {
+      "key": "work-0:13",
+      "item": "chair",
+      "x": 10,
+      "y": 3,
+      "zone": "work-0",
+      "box": {
+        "left": 384,
+        "top": 384,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 14,
+      "anchor_world": [
+        1472,
+        800
+      ]
+    },
+    {
+      "key": "work-0:19",
+      "item": "chair",
+      "x": 7,
+      "y": 6,
+      "zone": "work-0",
+      "box": {
+        "left": 0,
+        "top": 384,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 14,
+      "anchor_world": [
+        1088,
+        800
+      ]
+    },
+    {
+      "key": "work-0:20",
+      "item": "desk-pc",
+      "x": 10,
+      "y": 5,
+      "zone": "work-0",
+      "box": {
+        "left": 256,
+        "top": 416,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 16.5,
+      "anchor_world": [
+        1408,
+        896
+      ]
+    },
+    {
+      "key": "work-0:21",
+      "item": "chair",
+      "x": 10,
+      "y": 6,
+      "zone": "work-0",
+      "box": {
+        "left": 192,
+        "top": 480,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 17,
+      "anchor_world": [
+        1280,
+        896
+      ]
+    }
+  ],
+  "unsubmitted": "gray blocks for lot 2, same KIT coordinates"
+}

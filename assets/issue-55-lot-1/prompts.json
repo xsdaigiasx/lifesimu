@@ -1,0 +1,64 @@
+{
+  "tool": "image_gen built-in",
+  "reference": "assets/style-reference/room-reference.webp",
+  "direction_rule": "User confirmed: direction b swaps w/d, anchor x = rotated w * 64; a 2x1 x128, b1x2 x64",
+  "items": [
+    {
+      "id": "desk-pc",
+      "direction": "a",
+      "prompt": "Use case: stylized-concept. Generate ONE new isolated office game sprite: A single compact work desk, honey-oak rectangular top, four slender matte sage steel legs, one dark charcoal desktop monitor on a simple stand, one slim charcoal keyboard and mouse. No laptop, divider panel or second monitor. Image1 is ONLY a geometry envelope/camera reference, NOT a solid object to copy. Image2 is approved semi-realistic painted STYLE only. Image3 is existing material/design-family reference only, not a size or composition reference. Direction a: front faces lower-left. Orthographic isometric with exact 2:1 floor axes, verticals upright. Target footprint 2x1 tiles; target frame 192x160; tile128x64. Keep entire object including all feet/casters/leaves visible, retain realistic slender proportions; no squashing. Ground diamond has lower vertex at pixel(128,160) in final frame, not canvas center for rectangular footprints; put the foremost base contact there. Actual output may be larger but keep exact target aspect and geometry. Match honey oak grain, matte sage metal/fabric, cream ceramics, soft modeled surfaces, thin same-tone contours and upper-left light. NO cast shadow outside the object's ground-contact footprint, no floor/diamond/platform/pedestal, no guide cube or grid. True transparent exterior, no text, brand, logo, watermark, icon or other objects. Only one item."
+    },
+    {
+      "id": "chair",
+      "direction": "a",
+      "prompt": "Use case: stylized-concept. Generate ONE new isolated office game sprite: A sage-gray upholstered office swivel chair with slim ergonomic backrest, seat, two armrests, matte dark metal five-star caster base. Realistic slender proportions, no padded executive throne. Image1 is ONLY a geometry envelope/camera reference, NOT a solid object to copy. Image2 is approved semi-realistic painted STYLE only. Image3 is existing material/design-family reference only, not a size or composition reference. Direction a: front faces lower-left. Orthographic isometric with exact 2:1 floor axes, verticals upright. Target footprint 1x1 tiles; target frame 128x96; tile128x64. Keep entire object including all feet/casters/leaves visible, retain realistic slender proportions; no squashing. Ground diamond has lower vertex at pixel(64,96) in final frame, not canvas center for rectangular footprints; put the foremost base contact there. Actual output may be larger but keep exact target aspect and geometry. Match honey oak grain, matte sage metal/fabric, cream ceramics, soft modeled surfaces, thin same-tone contours and upper-left light. NO cast shadow outside the object's ground-contact footprint, no floor/diamond/platform/pedestal, no guide cube or grid. True transparent exterior, no text, brand, logo, watermark, icon or other objects. Only one item."
+    },
+    {
+      "id": "shelf",
+      "direction": "a",
+      "prompt": "Use case: stylized-concept. Generate ONE new isolated office game sprite: A low wide honey-oak document bookcase with two shelves and solid side panels, a few cream/sage unlabelled binders and books, tidy restrained arrangement, no readable spines. Image1 is ONLY a geometry envelope/camera reference, NOT a solid object to copy. Image2 is approved semi-realistic painted STYLE only. Image3 is existing material/design-family reference only, not a size or composition reference. Direction a: front faces lower-left. Orthographic isometric with exact 2:1 floor axes, verticals upright. Target footprint 2x1 tiles; target frame 192x192; tile128x64. Keep entire object including all feet/casters/leaves visible, retain realistic slender proportions; no squashing. Ground diamond has lower vertex at pixel(128,192) in final frame, not canvas center for rectangular footprints; put the foremost base contact there. Actual output may be larger but keep exact target aspect and geometry. Match honey oak grain, matte sage metal/fabric, cream ceramics, soft modeled surfaces, thin same-tone contours and upper-left light. NO cast shadow outside the object's ground-contact footprint, no floor/diamond/platform/pedestal, no guide cube or grid. True transparent exterior, no text, brand, logo, watermark, icon or other objects. Only one item."
+    },
+    {
+      "id": "plant",
+      "direction": "a",
+      "prompt": "Use case: stylized-concept. Generate ONE new isolated office game sprite: A compact broad-leaf monstera in a plain warm cream ceramic pot, natural sage-green lobed leaves and slender stems, upright compact silhouette. Image1 is ONLY a geometry envelope/camera reference, NOT a solid object to copy. Image2 is approved semi-realistic painted STYLE only. Image3 is existing material/design-family reference only, not a size or composition reference. Direction a: front faces lower-left. Orthographic isometric with exact 2:1 floor axes, verticals upright. Target footprint 1x1 tiles; target frame 128x128; tile128x64. Keep entire object including all feet/casters/leaves visible, retain realistic slender proportions; no squashing. Ground diamond has lower vertex at pixel(64,128) in final frame, not canvas center for rectangular footprints; put the foremost base contact there. Actual output may be larger but keep exact target aspect and geometry. Match honey oak grain, matte sage metal/fabric, cream ceramics, soft modeled surfaces, thin same-tone contours and upper-left light. NO cast shadow outside the object's ground-contact footprint, no floor/diamond/platform/pedestal, no guide cube or grid. True transparent exterior, no text, brand, logo, watermark, icon or other objects. Only one item."
+    },
+    {
+      "id": "chair",
+      "direction": "b",
+      "prompt": "Use case: precise-object-edit. Produce direction b of the EXACT SAME chair in image1. Image1 is identity/design master; image2 is geometry envelope ONLY; image3 approved style only. Show the alternate FRONT corner, front facing LOWER-RIGHT instead of lower-left. Generate a true new isometric view, NEVER simply mirror the bitmap. Keep every detail and material identical: A sage-gray upholstered office swivel chair with slim ergonomic backrest, seat, two armrests, matte dark metal five-star caster base. Realistic slender proportions, no padded executive throne. Keep exactly the same backrest shape, upholstery seam, armrests and five-star caster base. Upright verticals, 2:1 floor slopes, exact fixed 1x1 world footprint in the envelope, same frame aspect and lower ground-contact anchor x=64 in 128px width. Keep whole object visible. No floor plane/cube/pedestal, no external cast shadow, no lettering, logo, watermark or other objects. TRUE transparent background; same soft upper-left lighting and thin same-tone edges."
+    },
+    {
+      "id": "desk-pc",
+      "direction": "b",
+      "footprint": [
+        1,
+        2
+      ],
+      "anchor_x": 64,
+      "prompt": "Use case: precise-object-edit. Image1 is design/identity master direction a. Image2 is the EXACT NEW direction-b geometry envelope: footprint ONE tile along screen-down-right x-axis and TWO tiles along screen-down-left y-axis (1x2), not2x1. Image3 is style only. Rotate the SAME desk-pc by90 degrees into direction b. CRITICAL visual test: direction a has its wide finished/open FRONT on the LEFT diagonal face and closed side on the RIGHT. The new b MUST instead show the wide finished/open FRONT on the RIGHT diagonal face and closed side on the LEFT. Do NOT return the same camera view. Do NOT mirror the bitmap. Keep identical honey-oak/cream/sage design details in object-local positions. Same four sage legs, honey oak top, single dark monitor with screen FRONT visible facing lower-right, same keyboard, mouse to the user's right (not image-right by mirroring), same monitor stand. The ground diamond is 1x2 at128x64 per tile, frame192x160 with bottom contact at x=64, y=frameheight. Orthographic2:1, verticals upright. Keep all feet/edges visible. Semi-realistic soft material shading, thin same-tone edges, upper-left light. True transparent background, NO floor/diamond/cube/platform, no external cast shadow, no logo/text/watermark."
+    },
+    {
+      "id": "shelf",
+      "direction": "b",
+      "footprint": [
+        1,
+        2
+      ],
+      "anchor_x": 64,
+      "prompt": "Use case: precise-object-edit. Image1 is design/identity master direction a. Image2 is the EXACT NEW direction-b geometry envelope: footprint ONE tile along screen-down-right x-axis and TWO tiles along screen-down-left y-axis (1x2), not2x1. Image3 is style only. Rotate the SAME shelf by90 degrees into direction b. CRITICAL visual test: direction a has its wide finished/open FRONT on the LEFT diagonal face and closed side on the RIGHT. The new b MUST instead show the wide finished/open FRONT on the RIGHT diagonal face and closed side on the LEFT. Do NOT return the same camera view. Do NOT mirror the bitmap. Keep identical honey-oak/cream/sage design details in object-local positions. Same two shelf levels, three upright binders and two stacked books on upper level, same two boxes and upright binders below; keep contents arrangement object-locally. The ground diamond is 1x2 at128x64 per tile, frame192x192 with bottom contact at x=64, y=frameheight. Orthographic2:1, verticals upright. Keep all feet/edges visible. Semi-realistic soft material shading, thin same-tone edges, upper-left light. True transparent background, NO floor/diamond/cube/platform, no external cast shadow, no logo/text/watermark."
+    }
+  ],
+  "superseded": [
+    {
+      "id": "desk-pc",
+      "direction": "b",
+      "prompt": "Use case: precise-object-edit. Produce direction b of the EXACT SAME desk-pc in image1. Image1 is identity/design master; image2 is geometry envelope ONLY; image3 approved style only. Show the alternate FRONT corner, front facing LOWER-RIGHT instead of lower-left. Generate a true new isometric view, NEVER simply mirror the bitmap. Keep every detail and material identical: A single compact work desk, honey-oak rectangular top, four slender matte sage steel legs, one dark charcoal desktop monitor on a simple stand, one slim charcoal keyboard and mouse. No laptop, divider panel or second monitor. Keep the mouse on the user's right of the keyboard, show the display FRONT, same monitor stand and four sage legs. Upright verticals, 2:1 floor slopes, exact fixed 2x1 world footprint in the envelope, same frame aspect and lower ground-contact anchor x=128 in 192px width. Keep whole object visible. No floor plane/cube/pedestal, no external cast shadow, no lettering, logo, watermark or other objects. TRUE transparent background; same soft upper-left lighting and thin same-tone edges."
+    },
+    {
+      "id": "shelf",
+      "direction": "b",
+      "prompt": "Use case: precise-object-edit. Produce direction b of the EXACT SAME shelf in image1. Image1 is identity/design master; image2 is geometry envelope ONLY; image3 approved style only. Show the alternate FRONT corner, front facing LOWER-RIGHT instead of lower-left. Generate a true new isometric view, NEVER simply mirror the bitmap. Keep every detail and material identical: A low wide honey-oak document bookcase with two shelves and solid side panels, a few cream/sage unlabelled binders and books, tidy restrained arrangement, no readable spines. Keep the exact same two levels, three vertical binders upper-left, two horizontal books upper-right, storage boxes lower-left and small binders lower-right in object-local arrangement. Upright verticals, 2:1 floor slopes, exact fixed 2x1 world footprint in the envelope, same frame aspect and lower ground-contact anchor x=128 in 192px width. Keep whole object visible. No floor plane/cube/pedestal, no external cast shadow, no lettering, logo, watermark or other objects. TRUE transparent background; same soft upper-left lighting and thin same-tone edges."
+    }
+  ]
+}

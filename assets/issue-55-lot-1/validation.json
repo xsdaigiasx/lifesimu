@@ -1,0 +1,21 @@
+{
+  "tested_base": "ab1fc6c103172efc11c002f79f2d18b1a89ddadf",
+  "app_version": "0.48.0",
+  "asset_verify": "PASS",
+  "models": 4,
+  "sprites": 7,
+  "encoding": "WebP lossless",
+  "total_bytes": 125464,
+  "max_bytes": 31902,
+  "b_direction_rule": "User confirmed: desk/shelf b1x2, anchor x64; a2x1, anchor x128",
+  "frames": "All match current KIT heights and requested frames",
+  "plan": "buildPlan(small,tech,8):25 pieces;19 submitted sprite placements;no footprint overlaps;door apron clear",
+  "renderer_qa": "PASS: real IsoOffice in isolated browser-only harness;19 SVG images match spriteBox;manifest and all4 a assets HTTP200/decoded;390x844;no page errors/overflow",
+  "owner_flow": "Office.tsx still mounts PackedOffice; not claimed integrated into owner screen",
+  "app_test": "PASS",
+  "app_build": "PASS; existing runtime CSS-resolution and chunk-size warnings",
+  "core_check": "PASS;18 tests;core unchanged",
+  "visual_review": "All7 sprites inspected on contact sheet and dark64px thumbnails;all7 directional footprints inspected on shell;8-seat plan and real renderer captures inspected",
+  "runtime_code_changed": false,
+  "lot2_started": false
+}

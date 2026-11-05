@@ -1,0 +1,100 @@
+[
+  {
+    "id": "shelf",
+    "direction": "a",
+    "x": 0,
+    "y": 0,
+    "footprint_tiles": [
+      2,
+      1
+    ],
+    "anchor_px": [
+      128,
+      192
+    ]
+  },
+  {
+    "id": "shelf",
+    "direction": "b",
+    "x": 0,
+    "y": 5,
+    "footprint_tiles": [
+      1,
+      2
+    ],
+    "anchor_px": [
+      64,
+      192
+    ]
+  },
+  {
+    "id": "desk-pc",
+    "direction": "a",
+    "x": 3,
+    "y": 3,
+    "footprint_tiles": [
+      2,
+      1
+    ],
+    "anchor_px": [
+      128,
+      160
+    ]
+  },
+  {
+    "id": "desk-pc",
+    "direction": "b",
+    "x": 8,
+    "y": 3,
+    "footprint_tiles": [
+      1,
+      2
+    ],
+    "anchor_px": [
+      64,
+      160
+    ]
+  },
+  {
+    "id": "chair",
+    "direction": "a",
+    "x": 3,
+    "y": 5,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      96
+    ]
+  },
+  {
+    "id": "chair",
+    "direction": "b",
+    "x": 10,
+    "y": 3,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      96
+    ]
+  },
+  {
+    "id": "plant",
+    "direction": "a",
+    "x": 12,
+    "y": 9,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      128
+    ]
+  }
+]

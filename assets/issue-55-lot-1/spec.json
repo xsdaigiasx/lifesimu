@@ -1,0 +1,56 @@
+{
+  "issue": 55,
+  "lot": 1,
+  "tool": "image_gen built-in",
+  "reference": "assets/style-reference/room-reference.webp",
+  "direction_rule": "User confirmed in chat: b rotates footprint w/d; desk and shelf b use1x2, anchor x64; canonical a remains2x1, anchor x128",
+  "items": [
+    {
+      "id": "desk-pc",
+      "w": 2,
+      "d": 1,
+      "h": 2,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "reference": "workstation_pair.png",
+      "subject": "A single compact work desk, honey-oak rectangular top, four slender matte sage steel legs, one dark charcoal desktop monitor on a simple stand, one slim charcoal keyboard and mouse. No laptop, divider panel or second monitor."
+    },
+    {
+      "id": "chair",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "reference": "mesh_office_chair.png",
+      "subject": "A sage-gray upholstered office swivel chair with slim ergonomic backrest, seat, two armrests, matte dark metal five-star caster base. Realistic slender proportions, no padded executive throne."
+    },
+    {
+      "id": "shelf",
+      "w": 2,
+      "d": 1,
+      "h": 3,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "reference": "bookcase.png",
+      "subject": "A low wide honey-oak document bookcase with two shelves and solid side panels, a few cream/sage unlabelled binders and books, tidy restrained arrangement, no readable spines."
+    },
+    {
+      "id": "plant",
+      "w": 1,
+      "d": 1,
+      "h": 2,
+      "directions": [
+        "a"
+      ],
+      "reference": "monstera_plant.png",
+      "subject": "A compact broad-leaf monstera in a plain warm cream ceramic pot, natural sage-green lobed leaves and slender stems, upright compact silhouette."
+    }
+  ]
+}
