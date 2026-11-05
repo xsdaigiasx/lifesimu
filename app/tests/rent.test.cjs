@@ -1,12 +1,14 @@
 const assert = require('node:assert/strict');
 const {engine} = require('../.test-build/domain/engine');
 const {finishDay} = require('../.test-build/domain/time');
-const {RENT, UTILITY, GRACE_DAYS, startRent, settleRent, monthKey, validRent} = require('../.test-build/domain/rent');
+const {billOf} = require('../.test-build/domain/utility');
+const {RENT, GRACE_DAYS, startRent, settleRent, monthKey, validRent} = require('../.test-build/domain/rent');
 
 const sleepTo = (s, days) => { for (let i = 0; i < days; i++) { const r = finishDay(s); assert.ok(r.ok, r.error); s = r.state; assert.ok(engine.valid(s), 'save hợp lệ ngày ' + s.day); } return s; };
 
-// Mở đầu: trả tháng đầu và hiện rõ.
 const g0 = engine.initial();
+const UTILITY = billOf(g0).total;
+// Mở đầu: trả tháng đầu và hiện rõ.
 const g = startRent(g0);
 assert.equal(g.money, g0.money - RENT - UTILITY); assert.equal(g.rent.notice.kind, 'first'); assert.equal(g.rent.owed, 0);
 assert.equal(g.ledger[0].amount, -UTILITY); assert.equal(g.ledger[1].amount, -RENT); assert.equal(g.rent.notice.amount, RENT + UTILITY); assert.equal(startRent(g), g, 'không trả lại hai lần'); assert.ok(engine.valid(g));

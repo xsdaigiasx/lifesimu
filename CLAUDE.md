@@ -1,6 +1,6 @@
 # Ghi chú cho Claude
 
-Dự án **Một đời để sống**. Đọc `AGENTS.md` để biết vai trò và quy cách asset. Thiết kế chi tiết nằm trong hai tài liệu Claude Docs: *Workflow phát triển hoàn chỉnh* (thứ tự, vai trò, quyết định đã chốt ở mục 12) và *Kế hoạch và thiết kế Basic 1.0* (cơ chế, công thức, ticket T01–T89).
+Dự án **Một đời để sống**. Đọc `AGENTS.md` để biết vai trò và quy cách asset. Thiết kế chi tiết nằm trong hai tài liệu Claude Docs: *Workflow phát triển hoàn chỉnh* (thứ tự, vai trò, quyết định đã chốt ở mục 12) và *Kế hoạch và thiết kế Basic 1.0* (cơ chế, công thức, ticket T01–T90).
 
 ## Việc của Claude
 
