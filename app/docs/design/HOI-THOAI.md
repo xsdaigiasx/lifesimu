@@ -142,3 +142,117 @@ Mỗi lô: chủ dự án duyệt 20 đến 30 câu mẫu trước, Claude viế
 3. Mốc riêng tư theo độ thân (trục 4).
 4. Ý định đáp và giọng của người chơi (I.4).
 5. Thứ tự lô và 4 NPC đầu tiên của Lô 1.
+
+---
+
+# Phần triển khai
+
+## T.1 Mô-đun mới và chỗ nối với code hiện có
+
+| Tệp | Việc | Nối với |
+|---|---|---|
+| `domain/talk/facts.ts` | Gom **dữ kiện** từ trạng thái game thành danh sách `Fact` (món vừa ăn, thời tiết, lên bậc, nợ, biến cố NPC...) kèm ai được biết | Nhật ký (`journal`), `life`, `office`, `weather`, `bank`, `npcLife` |
+| `domain/talk/npc-life.ts` | Chạy biến cố đời NPC mỗi ngày, giữ cảm xúc ngày của NPC | `settleLifeDay` (cùng chỗ `settleStaff`, `settleBank`) |
+| `domain/talk/axes.ts` | Sáu trục: hàm `allowed...()` trả về giá trị qua điều kiện khống chế, và trọng số | `social` (độ thân), `VOICE`, lịch hiện diện NPC |
+| `domain/talk/compose.ts` | Chọn khung, lọc mảnh, ghép câu, điền biến, ghi vân tay | `story.heard` (đổi thành vân tay mảnh) |
+| `domain/talk/replies.ts` | Sinh 3 đến 4 lựa chọn trả lời cho người chơi và tính hậu quả | `answerEvent`, `replyMessage` |
+| `data/talk/*.json` | Kho khung và mảnh, mỗi tệp một nhóm (chung, theo vùng, theo NPC) | Đọc lúc build, kiểm bằng `npm run talk:check` |
+| `scripts/talk-check.cjs`, `scripts/sim-talk.cjs` | Bộ kiểm tra dữ liệu và mô phỏng 30 ngày | Giống `pool:check`, `sim:npc` |
+
+Code cũ: `director.ts` giữ vai **điều phối** (ai nói, khi nào, mô-típ có lựa chọn và hậu quả lớn như cho mượn tiền). Câu chữ trong mô-típ và mọi câu trò chuyện thường chuyển sang `compose.ts`. `lines.ts` và mẫu tin trong `inbox.ts` được chuyển dần thành mảnh trong `data/talk/`.
+
+## T.2 Kiểu dữ liệu
+
+```ts
+type Intent='brag'|'complain'|'ask'|'invite'|'request'|'news'|'tease'|'apologize';
+type TopicGroup='self'|'player'|'other'|'world';
+type Emotion='happy'|'excited'|'neutral'|'tired'|'sad'|'annoyed';
+type Tier='hostile'|'stranger'|'acquaint'|'close'|'bestie';   // Bất hoà ... Tri kỷ
+type Channel='face'|'text'|'call';
+
+interface Fact{ id:string; topic:TopicGroup; sub:string;        // 'food','rain','promotion','debt','sick'...
+  about:string;                // 'player' | id NPC | 'world'
+  day:number; tone:'good'|'bad'|'plain'; private:0|1|2|3;
+  knownBy:'all'|'present'|string[];  // ai được biết: mọi người, người có mặt hôm đó, hoặc danh sách NPC
+  vars:Record<string,string|number> } // {món:'cơm tấm', nơi:'chợ', tiền:200000}
+
+interface Frame{ id:string; intent:Intent; slots:Slot[]; channel?:Channel[] }   // ví dụ ['open','body','feel','tail']
+interface Piece{ id:string; slot:Slot; text:string;               // "Trời {thời tiết} vầy {tôi} lười ra chợ quá"
+  intent?:Intent[]; topic?:string[]; emotion?:Emotion[];
+  minTier?:Tier; privacy?:0|1|2|3; voice?:Voice; npc?:string;     // npc: mảnh riêng của một người
+  needs?:string[];             // biến phải có trong Fact, thiếu thì loại
+  where?:PlaceId[]; when?:('morning'|'noon'|'evening'|'late')[]; weight?:number }
+
+interface NpcDay{ mood:Emotion; events:NpcEvent[] }               // trạng thái NPC trong ngày
+interface NpcEvent{ id:string; kind:string; start:number; end:number; tone:'good'|'bad'|'plain'; vars:Record<string,string|number> }
+```
+
+## T.3 Thuật toán ghép một câu
+
+```
+say(state, npc, channel):
+  ctx   = bối cảnh(giờ, nơi, kênh)                      // trục 6, loại nếu không được nói
+  tier  = độ thân(npc); voice = giọng(npc)               // trục 4, 5
+  mood  = npcDay(npc).mood                               // trục 3
+  facts = facts(state).filter(f => npc được biết f && f.private <= riêngTư(tier))
+  intents = INTENTS.filter(i => điềuKiện[i](npc, facts, tier, mood, hồiChiêu))   // trục 1
+  for intent in xếpTheoTrọngSố(intents, seed):
+    fact = chọn(facts hợp intent và bảng tương thích)    // trục 2
+    frame = chọn(FRAMES[intent] hợp channel, chưa dùng 3 ngày)
+    text = []
+    for slot in frame.slots:
+      p = chọn(PIECES[slot] lọc: intent, topic=fact.sub, emotion∋mood, tier>=minTier,
+               voice∈{npc, vùng, chung}, needs ⊆ fact.vars, where, when, chưa dùng 14 ngày với npc)
+      if !p and slot bắt buộc: thử frame khác
+      text.push(điền(p.text, fact.vars, xưng hô(npc, tier)))
+    ghi vân tay(npc, frame, các mảnh, intent+topic); return {text, intent, fact}
+  return câu chào ngắn theo giọng
+```
+
+Ghép có hạt giống (seed) theo ngày và NPC nên tải lại save không đổi câu (giống `chooseLine` hiện tại).
+
+## T.4 Ví dụ dữ liệu (thật, sẽ dùng ở Lô 1)
+
+**Mẹ (giọng quê), ý định Hỏi, chủ đề người chơi, sub `food`:**
+
+| Ô | Mảnh (một số) | Điều kiện |
+|---|---|---|
+| open | "Con ơi" / "Mẹ hỏi chút nghe" / "Ăn chưa con" | chung |
+| body | "trưa nay con ăn {món} hả" / "dạo này toàn ăn ngoài phải không" | `needs:['món']` / cần Fact 3 ngày ăn ngoài |
+| feel | "mẹ thấy lo lo" / "nghe cũng yên bụng" | emotion `sad` / `happy` |
+| tail | "nhớ ăn rau nghe con" / "rảnh nấu cơm mà ăn cho đỡ tốn" | chung / cần Fact tiền thấp |
+
+Câu ghép ra ví dụ: "Con ơi, trưa nay con ăn cơm tấm hả, nhớ ăn rau nghe con." hay "Mẹ hỏi chút nghe, dạo này toàn ăn ngoài phải không, mẹ thấy lo lo, rảnh nấu cơm mà ăn cho đỡ tốn."
+
+**Bà Tư (giọng Tây, chủ trọ), ý định Than, chủ đề bản thân, biến cố `sick` (đau lưng):**
+- open: "Ui da" / "Con nè" ; body: "cái lưng bà nó hành từ {khi nào}" / "trời {thời tiết} vầy là bà nhức mình mẩy" (`needs:['thời tiết']`, chỉ khi mưa hoặc lạnh) ; tail: "già rồi con ơi" / "con có rảnh xách giùm bà bao gạo hông" (chỉ khi được Nhờ, độ thân từ Quen biết).
+
+**Lựa chọn của người chơi khi Bà Tư Than:** Đồng cảm Ấm áp ("Bà nghỉ ngơi đi, để con phụ"), Khuyên Thật lòng ("Bà đi khám ở bệnh viện thử", cần Giao tiếp Lv 2), Hỏi thêm Ngắn gọn ("Đau lâu chưa bà?"), Né ("Con đang vội, chút con ghé"). Bà Tư tính Hay giúp đỡ nên Ấm áp được điểm cao nhất; Né trừ nhẹ và ghi ký ức "bận không hỏi han".
+
+## T.5 Thay đổi save
+
+- `talk`: vân tay đã dùng (mảnh, khung, ý định cộng chủ đề) theo NPC, giữ 14 ngày, tối đa vài trăm dòng; thay `story.heard`.
+- `npcLife`: biến cố đang diễn ra và cảm xúc ngày của từng NPC (12 người cộng NPC ngẫu nhiên ở Lô 3).
+- Fact **không lưu**: tính lại từ trạng thái game mỗi lần cần, nên không phình save.
+- Mọi lát cắt mới tuỳ chọn, có validator nối vào `engine.ts`; save cũ không có thì tạo mặc định (theo quy tắc bảo vệ save 0.75.3).
+
+## T.6 Chia ticket
+
+| Ticket | Nội dung | Phụ thuộc | Nghiệm thu |
+|---|---|---|---|
+| H1 | Kiểu dữ liệu, `compose.ts`, `talk:check`, 3 khung mỗi ý định | | Bộ kiểm tra chặn mảnh lỗi; ghép được câu từ dữ liệu mẫu |
+| H2 | `facts.ts`: 25 loại dữ kiện từ Nhật ký và chỉ số, quy tắc ai được biết | H1 | Test: NPC không nhắc điều không thấy |
+| H3 | `npc-life.ts`: 30 loại biến cố, cảm xúc ngày | H1 | Mô phỏng: mỗi NPC 2 đến 5 biến cố mỗi tháng |
+| H4 | `replies.ts`: lựa chọn của người chơi, hậu quả theo tính cách, ghi ký ức | H1 | Mỗi lượt 3 đến 4 lựa chọn, không lặp bộ trong 7 ngày |
+| H5 | Lô 1 dữ liệu: Mẹ, Bà Tư, Minh An, Cô Hạnh, Tuấn (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
+| H6 | Lô 2: 7 NPC còn lại, hội thoại 2 đến 4 lượt, người chơi tự mở lời theo chủ đề | H5 | Như H5 cho cả 12 người |
+| H7 | Lô 3: NPC ngẫu nhiên có chuyện riêng, nhóm chat, tin đồn (gộp T63) | H6 | Người lạ gặp lại nhớ lần trước |
+| H8 | `sim-talk.cjs` và chỉ tiêu trong CI ngắn | H1 | Chạy được 30 ngày x 30 seed |
+
+Thứ tự: H1, H2, H3, H4 (khung chạy được, chưa nhiều chữ), rồi H5 (đổ dữ liệu), H8 đi kèm H5. Mỗi ticket một PR, tăng phiên bản.
+
+## T.7 Rủi ro
+
+- **Câu ghép gượng:** khung giới hạn mảnh theo chức năng, mảnh có nhãn đứng đầu hoặc cần chủ ngữ; đọc 200 câu mẫu mỗi lô.
+- **Hiệu năng trên điện thoại:** kho mảnh được lập chỉ mục theo (ý định, ô) lúc build; mỗi câu chỉ duyệt vài chục mảnh.
+- **Dung lượng:** khoảng 1.500 mảnh nặng chừng 150 đến 250 KB JSON, tách theo lô và tải khi cần.
