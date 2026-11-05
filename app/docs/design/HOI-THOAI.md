@@ -9,6 +9,28 @@
 - Thêm một trục, hoặc thêm mảnh vào một trục, là số câu nhân lên. Điều kiện khống chế giữ cho phần nhân lên không sinh ra câu vô lý.
 - Câu trả lời của người chơi dùng cùng hệ thống.
 
+## I.1b Pool ngẫu nhiên có điều kiện (ưu tiên số 1)
+
+Mọi thứ trong hội thoại và đời NPC đều rút từ **pool có điều kiện** bằng hạt giống (seed), không viết cứng: mảnh câu, khung, biến cố đời, thói quen, lịch sinh hoạt, tính cách và chuyện riêng của NPC mới. Mỗi phần tử trong pool có điều kiện xuất hiện và trọng số; seed theo đời chơi, ngày và NPC quyết định rút cái nào. Nhờ vậy:
+
+- Mỗi đời chơi một seed khác nên cùng một NPC có thói quen, biến cố, chuyện khác nhau.
+- Thêm phần tử vào pool là số tổ hợp nhân lên, không phải viết thêm cảnh.
+- Điều kiện giữ cho tổ hợp luôn hợp lý (tuổi, nghề, nơi ở, mùa, độ thân).
+
+## I.1c Giới hạn số NPC
+
+Đa dạng đến từ tổ hợp, không đến từ số người. Game không sinh vô hạn NPC.
+
+| Nhóm | Số lượng | Quy tắc |
+|---|---|---|
+| Dàn cố định | 12 và Mẹ | Luôn có, tính cách cố định, biến cố và thói quen vẫn rút từ pool theo seed đời chơi |
+| NPC ngẫu nhiên đang hoạt động | Tối đa 12 cùng lúc | Sinh từ pool thuộc tính (T16) khi có chỗ trống |
+| Tốc độ sinh mới | Tối đa 2 người mỗi tuần game | Chỉ sinh ở nơi người chơi hay lui tới |
+| Rời đi | NPC ngẫu nhiên không gặp lại trong 30 ngày và độ thân dưới Quen biết thì rời đi (chuyển nhà, về quê) | Ai đã thân thì ở lại, có thể vào danh bạ |
+| Tổng một năm | Khoảng 60 đến 80 người từng gặp | Đủ mới mẻ mà vẫn nhớ được mặt người quen |
+
+Pool tên và thuộc tính đủ lớn để hai đời chơi gần như không ra cùng một người; NPC ngẫu nhiên đã rời đi có thể quay lại hiếm hoi (ví dụ 5%), nhớ mang máng lần gặp cũ nếu ký ức còn.
+
 ## I.2 Thứ tự chọn
 
 1. Bối cảnh (trục 6) quyết định có được nói không và nói qua kênh nào.
@@ -277,7 +299,7 @@ Như vậy save chỉ thêm khoảng vài KB cho 12 NPC. Lát cắt mới tuỳ 
 | H4 | `replies.ts`: lựa chọn của người chơi, hậu quả theo tính cách, ghi ký ức | H1 | Mỗi lượt 3 đến 4 lựa chọn, không lặp bộ trong 7 ngày |
 | H5 | Lô 1 dữ liệu: Mẹ, Bà Tư, Minh An, Cô Hạnh, Tuấn (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
 | H6 | Lô 2: 7 NPC còn lại, hội thoại 2 đến 4 lượt, người chơi tự mở lời theo chủ đề | H5 | Như H5 cho cả 12 người |
-| H7 | Lô 3: NPC ngẫu nhiên có chuyện riêng, nhóm chat, tin đồn (gộp T63) | H6 | Người lạ gặp lại nhớ lần trước |
+| H7 | Lô 3: NPC ngẫu nhiên có chuyện riêng (giới hạn I.1c), nhóm chat, tin đồn (gộp T63) | H6 | Người lạ gặp lại nhớ lần trước; không quá 12 NPC ngẫu nhiên cùng lúc |
 | H8 | `sim-talk.cjs` và chỉ tiêu trong CI ngắn | H1 | Chạy được 30 ngày x 30 seed |
 
 Thứ tự: H1, H2, H3, H4 (khung chạy được, chưa nhiều chữ), rồi H5 (đổ dữ liệu), H8 đi kèm H5. Mỗi ticket một PR, tăng phiên bản.
