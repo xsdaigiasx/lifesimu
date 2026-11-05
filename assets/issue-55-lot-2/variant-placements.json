@@ -1,0 +1,257 @@
+[
+  {
+    "page": 1,
+    "id": "counter",
+    "direction": "a",
+    "x": 0,
+    "y": 1,
+    "footprint_tiles": [
+      3,
+      1
+    ],
+    "anchor_px": [
+      192,
+      192
+    ]
+  },
+  {
+    "page": 1,
+    "id": "counter",
+    "direction": "b",
+    "x": 4,
+    "y": 1,
+    "footprint_tiles": [
+      1,
+      3
+    ],
+    "anchor_px": [
+      64,
+      192
+    ]
+  },
+  {
+    "page": 1,
+    "id": "water-cooler",
+    "direction": "a",
+    "x": 8,
+    "y": 1,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      128
+    ]
+  },
+  {
+    "page": 1,
+    "id": "cafe-table",
+    "direction": "a",
+    "x": 0,
+    "y": 7,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      96
+    ]
+  },
+  {
+    "page": 1,
+    "id": "printer",
+    "direction": "a",
+    "x": 4,
+    "y": 7,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      96
+    ]
+  },
+  {
+    "page": 1,
+    "id": "printer",
+    "direction": "b",
+    "x": 8,
+    "y": 7,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      96
+    ]
+  },
+  {
+    "page": 2,
+    "id": "whiteboard",
+    "direction": "a",
+    "x": 0,
+    "y": 1,
+    "footprint_tiles": [
+      2,
+      1
+    ],
+    "anchor_px": [
+      128,
+      192
+    ]
+  },
+  {
+    "page": 2,
+    "id": "whiteboard",
+    "direction": "b",
+    "x": 4,
+    "y": 1,
+    "footprint_tiles": [
+      1,
+      2
+    ],
+    "anchor_px": [
+      64,
+      192
+    ]
+  },
+  {
+    "page": 2,
+    "id": "server-rack",
+    "direction": "a",
+    "x": 8,
+    "y": 1,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      192
+    ]
+  },
+  {
+    "page": 2,
+    "id": "server-rack",
+    "direction": "b",
+    "x": 0,
+    "y": 7,
+    "footprint_tiles": [
+      1,
+      1
+    ],
+    "anchor_px": [
+      64,
+      192
+    ]
+  },
+  {
+    "page": 2,
+    "id": "meeting-table",
+    "direction": "a",
+    "x": 4,
+    "y": 7,
+    "footprint_tiles": [
+      3,
+      2
+    ],
+    "anchor_px": [
+      192,
+      192
+    ]
+  },
+  {
+    "page": 2,
+    "id": "sofa",
+    "direction": "a",
+    "x": 8,
+    "y": 7,
+    "footprint_tiles": [
+      2,
+      1
+    ],
+    "anchor_px": [
+      128,
+      128
+    ]
+  },
+  {
+    "page": 3,
+    "id": "sofa",
+    "direction": "b",
+    "x": 0,
+    "y": 1,
+    "footprint_tiles": [
+      1,
+      2
+    ],
+    "anchor_px": [
+      64,
+      128
+    ]
+  },
+  {
+    "page": 3,
+    "id": "boss-desk",
+    "direction": "a",
+    "x": 4,
+    "y": 1,
+    "footprint_tiles": [
+      3,
+      1
+    ],
+    "anchor_px": [
+      192,
+      192
+    ]
+  },
+  {
+    "page": 3,
+    "id": "boss-desk",
+    "direction": "b",
+    "x": 8,
+    "y": 1,
+    "footprint_tiles": [
+      1,
+      3
+    ],
+    "anchor_px": [
+      64,
+      192
+    ]
+  },
+  {
+    "page": 3,
+    "id": "reception",
+    "direction": "a",
+    "x": 0,
+    "y": 7,
+    "footprint_tiles": [
+      3,
+      1
+    ],
+    "anchor_px": [
+      192,
+      192
+    ]
+  },
+  {
+    "page": 3,
+    "id": "reception",
+    "direction": "b",
+    "x": 4,
+    "y": 7,
+    "footprint_tiles": [
+      1,
+      3
+    ],
+    "anchor_px": [
+      64,
+      192
+    ]
+  }
+]

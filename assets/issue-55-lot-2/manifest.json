@@ -1,0 +1,636 @@
+{
+  "issue": 55,
+  "lot": 2,
+  "reference": "assets/style-reference/room-reference.webp",
+  "items": [
+    {
+      "id": "counter",
+      "direction": "a",
+      "file": "assets/office-kit/counter_a_default.webp",
+      "frame_px": [
+        256,
+        192
+      ],
+      "footprint_tiles": [
+        3,
+        1
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        192,
+        192
+      ],
+      "bytes": 33454,
+      "sha256": "aebdf23eb9a8faaeedf3ed0fc974f71513c1112f1c845865722dbc83cf812d9d",
+      "source_sha256": "bbfdc6f89d245ef72320057e03be666ae5cf1977d7f64475a739f3821ce08873",
+      "source_crop": [
+        87,
+        31,
+        1355,
+        1071
+      ],
+      "source_contact": [
+        1092,
+        1068
+      ],
+      "scale": 0.18076923076923077,
+      "offset": [
+        10,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 700
+    },
+    {
+      "id": "counter",
+      "direction": "b",
+      "file": "assets/office-kit/counter_b_default.webp",
+      "frame_px": [
+        256,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        3
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 32338,
+      "sha256": "c465b6b00586a65c6fcf1e21bd5f077e86bd246c4ef3a388c9eca4775e9a2241",
+      "source_sha256": "4140bde6ccae0195818422f2669b80d2c1da8c1c5dfcceea9753f4155ec876d4",
+      "source_crop": [
+        145,
+        18,
+        1360,
+        1086
+      ],
+      "source_contact": [
+        403,
+        1085
+      ],
+      "scale": 0.1760299625468165,
+      "offset": [
+        19,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 46
+    },
+    {
+      "id": "water-cooler",
+      "direction": "a",
+      "file": "assets/office-kit/water-cooler_a_default.webp",
+      "frame_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        64,
+        128
+      ],
+      "bytes": 9180,
+      "sha256": "075e93e89e9c6277b1c930bf81955320a65aefb84abdebed09c48c6f2cf77715",
+      "source_sha256": "30ef21c3d72b3ae97d17c15aad522cf6a2ed513bc382780a265a814d18b0054d",
+      "source_crop": [
+        387,
+        112,
+        861,
+        1165
+      ],
+      "source_contact": [
+        663,
+        1162
+      ],
+      "scale": 0.1177587844254511,
+      "offset": [
+        31,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 54
+    },
+    {
+      "id": "cafe-table",
+      "direction": "a",
+      "file": "assets/office-kit/cafe-table_a_default.webp",
+      "frame_px": [
+        128,
+        96
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 1,
+      "anchor_px": [
+        64,
+        96
+      ],
+      "bytes": 7634,
+      "sha256": "f1c20a99b1d2532b4a81abc7c0004d1cd8989cf012f65b992d5d86d64b07d0ea",
+      "source_sha256": "35278902bfa7979dc9cd4f0008b16813bb8b7848a9c3cb43da952b0b52100c81",
+      "source_crop": [
+        290,
+        95,
+        1154,
+        992
+      ],
+      "source_contact": [
+        731,
+        989
+      ],
+      "scale": 0.10256410256410256,
+      "offset": [
+        19,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 6
+    },
+    {
+      "id": "printer",
+      "direction": "a",
+      "file": "assets/office-kit/printer_a_default.webp",
+      "frame_px": [
+        128,
+        96
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 1,
+      "anchor_px": [
+        64,
+        96
+      ],
+      "bytes": 10198,
+      "sha256": "3205eebe7d01cbb8730b3277025d2487d4d6b85ba1832334f31c4639633870f2",
+      "source_sha256": "294cd7a2769a19c9a524b37b1630c6637c50e83174143783d473a5eef3847378",
+      "source_crop": [
+        234,
+        72,
+        1213,
+        1011
+      ],
+      "source_contact": [
+        741,
+        1008
+      ],
+      "scale": 0.0979765708200213,
+      "offset": [
+        14,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 88
+    },
+    {
+      "id": "printer",
+      "direction": "b",
+      "file": "assets/office-kit/printer_b_default.webp",
+      "frame_px": [
+        128,
+        96
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 1,
+      "anchor_px": [
+        64,
+        96
+      ],
+      "bytes": 9764,
+      "sha256": "6e985f82361e19d168eab093587dfea83e8ebf31b5ddc3565874ab3a95b476ba",
+      "source_sha256": "ec7eed7128dad9206a00bf10a7b89f900a6ab5149ad2a53615361102115fee3d",
+      "source_crop": [
+        239,
+        52,
+        1208,
+        1038
+      ],
+      "source_contact": [
+        726,
+        1035
+      ],
+      "scale": 0.09330628803245436,
+      "offset": [
+        19,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 18
+    },
+    {
+      "id": "whiteboard",
+      "direction": "a",
+      "file": "assets/office-kit/whiteboard_a_default.webp",
+      "frame_px": [
+        192,
+        192
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_z": 3,
+      "anchor_px": [
+        128,
+        192
+      ],
+      "bytes": 16940,
+      "sha256": "56ba13fba69d6aad288f196facf629a02a8bd55c2c24a0d0f66c4fb4315fdd48",
+      "source_sha256": "456c89e414c6ebbb68b0dae0912e87d7988b21e1865958b5649f77947b935deb",
+      "source_crop": [
+        167,
+        26,
+        1111,
+        1235
+      ],
+      "source_contact": [
+        919,
+        1232
+      ],
+      "scale": 0.1555004135649297,
+      "offset": [
+        11,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 86
+    },
+    {
+      "id": "whiteboard",
+      "direction": "b",
+      "file": "assets/office-kit/whiteboard_b_default.webp",
+      "frame_px": [
+        192,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_z": 3,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 16910,
+      "sha256": "d638c32b39e4d5b95bff99e69ad332cb4d4c26cda0550cf42df6296ce1c79e2a",
+      "source_sha256": "a983d0ec83e0fb83f9ff904c654d1c451167413e9409b3c92fb598921f3aa087",
+      "source_crop": [
+        107,
+        23,
+        1151,
+        1235
+      ],
+      "source_contact": [
+        308,
+        1232
+      ],
+      "scale": 0.1494661921708185,
+      "offset": [
+        34,
+        9
+      ],
+      "foreground_alpha_pixels_clipped": 125
+    },
+    {
+      "id": "server-rack",
+      "direction": "a",
+      "file": "assets/office-kit/server-rack_a_default.webp",
+      "frame_px": [
+        128,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 4,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 15686,
+      "sha256": "4316753ccb1ef536b054777590441b1e003f93b434c393320ec54f5969268be8",
+      "source_sha256": "71fb9bbd32450b741f2dde681b37e5ef4afed392f59169091f43ba506b8b5627",
+      "source_crop": [
+        260,
+        142,
+        763,
+        1410
+      ],
+      "source_contact": [
+        520,
+        1407
+      ],
+      "scale": 0.14826498422712933,
+      "offset": [
+        25,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 27
+    },
+    {
+      "id": "server-rack",
+      "direction": "b",
+      "file": "assets/office-kit/server-rack_b_default.webp",
+      "frame_px": [
+        128,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 4,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 16678,
+      "sha256": "363c1151bb8b650a94a618540a7d087f66f2ed1f86ae439d4d67bef816671d23",
+      "source_sha256": "9acbdcd95f0d481bd343ef58171f70d242b7934c8d4d0f1d7dd9d73016e86a5b",
+      "source_crop": [
+        209,
+        12,
+        816,
+        1493
+      ],
+      "source_contact": [
+        509,
+        1490
+      ],
+      "scale": 0.12694125590817015,
+      "offset": [
+        26,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 3
+    },
+    {
+      "id": "meeting-table",
+      "direction": "a",
+      "file": "assets/office-kit/meeting-table_a_default.webp",
+      "frame_px": [
+        320,
+        192
+      ],
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "height_z": 1,
+      "anchor_px": [
+        192,
+        192
+      ],
+      "bytes": 30388,
+      "sha256": "51839b1692d04fd2f095f9f9f2d665de086afa924ec8b6a46ee2722e7061373b",
+      "source_sha256": "f7ae239ee10c1f34a0ce343c497126108d65557afc319823ed2ca63ae89b0409",
+      "source_crop": [
+        118,
+        3,
+        1492,
+        969
+      ],
+      "source_contact": [
+        1051,
+        966
+      ],
+      "scale": 0.19461697722567287,
+      "offset": [
+        10,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 324
+    },
+    {
+      "id": "sofa",
+      "direction": "a",
+      "file": "assets/office-kit/sofa_a_default.webp",
+      "frame_px": [
+        192,
+        128
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_z": 1,
+      "anchor_px": [
+        128,
+        128
+      ],
+      "bytes": 17158,
+      "sha256": "f266e6f65bdc2a383dd351112d49a62e6ee41b8a2a2939ef9d703c916e0c9c50",
+      "source_sha256": "523f112b1a13996aae92e752e7c4068088de5c96e8a363ec9e21044178d539d1",
+      "source_crop": [
+        142,
+        19,
+        1351,
+        1006
+      ],
+      "source_contact": [
+        998,
+        1003
+      ],
+      "scale": 0.12563323201621074,
+      "offset": [
+        20,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 31
+    },
+    {
+      "id": "sofa",
+      "direction": "b",
+      "file": "assets/office-kit/sofa_b_default.webp",
+      "frame_px": [
+        192,
+        128
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_z": 1,
+      "anchor_px": [
+        64,
+        128
+      ],
+      "bytes": 16170,
+      "sha256": "409ab1422a130a5e5619a04b31a949b805b2e488292fcd9e2d97b8a6ade952ee",
+      "source_sha256": "4c0e58205844c0058b56065a14e51eec8e5eb20bcb7dd51cb10f1e5691504c35",
+      "source_crop": [
+        250,
+        24,
+        1345,
+        1005
+      ],
+      "source_contact": [
+        595,
+        1002
+      ],
+      "scale": 0.12640163098878696,
+      "offset": [
+        20,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 1
+    },
+    {
+      "id": "boss-desk",
+      "direction": "a",
+      "file": "assets/office-kit/boss-desk_a_default.webp",
+      "frame_px": [
+        256,
+        192
+      ],
+      "footprint_tiles": [
+        3,
+        1
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        192,
+        192
+      ],
+      "bytes": 28368,
+      "sha256": "fcfa268e41bef1dfafefbd434ec9fac5bc9d2f3a3eba2be99fa4c7c3e508a359",
+      "source_sha256": "94fb98b6c2476ac21edb2f46d451bd2c12e86c2ff8815365aa15e80bf1aeda03",
+      "source_crop": [
+        70,
+        26,
+        1368,
+        1062
+      ],
+      "source_contact": [
+        1083,
+        1059
+      ],
+      "scale": 0.18146718146718147,
+      "offset": [
+        8,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 134
+    },
+    {
+      "id": "boss-desk",
+      "direction": "b",
+      "file": "assets/office-kit/boss-desk_b_default.webp",
+      "frame_px": [
+        256,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        3
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 30100,
+      "sha256": "e68db527fd65a13211930644a64114c62120e24dcebca13fe9bc17380ec79935",
+      "source_sha256": "71ba8cea2cc6ded391a1cd7c0928d78545c7615741ee5506d43eeb17482e3f9b",
+      "source_crop": [
+        91,
+        21,
+        1400,
+        1063
+      ],
+      "source_contact": [
+        369,
+        1060
+      ],
+      "scale": 0.18042226487523993,
+      "offset": [
+        14,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 44
+    },
+    {
+      "id": "reception",
+      "direction": "a",
+      "file": "assets/office-kit/reception_a_default.webp",
+      "frame_px": [
+        256,
+        192
+      ],
+      "footprint_tiles": [
+        3,
+        1
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        192,
+        192
+      ],
+      "bytes": 35928,
+      "sha256": "b6021904d5eba217873e54d2ffe8e14b74ac2a0de1640fa8dedf7c4a3fb84415",
+      "source_sha256": "5a2271aab51ad1234c9654c4c2e8ca62ac833717c7d647a56cca9afa370bc575",
+      "source_crop": [
+        63,
+        59,
+        1367,
+        1037
+      ],
+      "source_contact": [
+        1068,
+        1034
+      ],
+      "scale": 0.1890547263681592,
+      "offset": [
+        2,
+        6
+      ],
+      "foreground_alpha_pixels_clipped": 339
+    },
+    {
+      "id": "reception",
+      "direction": "b",
+      "file": "assets/office-kit/reception_b_default.webp",
+      "frame_px": [
+        256,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        3
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 35250,
+      "sha256": "42835625d2b36463acc4b8fc5d10535ee40054cb011584d40d405a2653e5d511",
+      "source_sha256": "f46ee1e81a88ce8d1f7505de4fb503edde07dcc563ba4558c39daab0d63e2178",
+      "source_crop": [
+        95,
+        19,
+        1398,
+        1084
+      ],
+      "source_contact": [
+        373,
+        1081
+      ],
+      "scale": 0.17652582159624414,
+      "offset": [
+        15,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 24
+    }
+  ]
+}

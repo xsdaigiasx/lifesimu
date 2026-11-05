@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "base_commit": "7ddab5c30ea349a5dfc1766c38207514a81c0dbe",
+  "sprites": 17,
+  "models": 10,
+  "combined_sprites": 24,
+  "combined_models": 14,
+  "total_new_bytes": 362144,
+  "max_bytes": 35928,
+  "lot1_hashes_unchanged": true,
+  "app_test": "PASS on 7ddab5c",
+  "app_build": "PASS on 7ddab5c; existing runtime CSS and chunk warnings",
+  "core_check": "PASS; 18 tests; core unchanged",
+  "asset_verifier": "PASS",
+  "placement_validation": "PASS small25 / medium51 / large86",
+  "mobile_owner_flow": "PASS production Office/OwnerFloor/IsoOffice,390x844,25sprites",
+  "server_rack_frame_note": "128x192 follows KIT h4 and spriteBox, correcting128x160 typo in issue table"
+}

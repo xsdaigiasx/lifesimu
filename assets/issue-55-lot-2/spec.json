@@ -1,0 +1,116 @@
+{
+  "issue": 55,
+  "lot": 2,
+  "tool": "image_gen built-in",
+  "reference": "assets/style-reference/room-reference.webp",
+  "direction_rule": "b rotates w/d and uses anchor x=d*64; user confirmed",
+  "items": [
+    {
+      "id": "counter",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "subject": "A pantry counter with sage lower cabinets, honey oak worktop, small cream sink and curved tap. No appliances or wall."
+    },
+    {
+      "id": "water-cooler",
+      "w": 1,
+      "d": 1,
+      "h": 2,
+      "directions": [
+        "a"
+      ],
+      "subject": "A compact cream office water dispenser with translucent pale teal bottle, two small taps and recessed drip tray."
+    },
+    {
+      "id": "cafe-table",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "directions": [
+        "a"
+      ],
+      "subject": "A small square honey oak cafe table with four slender sage legs, empty tabletop."
+    },
+    {
+      "id": "printer",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "subject": "A compact cream and charcoal office laser multifunction printer, top scanner lid, front paper output slot and short paper tray."
+    },
+    {
+      "id": "whiteboard",
+      "w": 2,
+      "d": 1,
+      "h": 3,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "subject": "A clean blank warm white mobile whiteboard on slender sage metal frame, two feet with tiny wheels, narrow marker ledge. No writing."
+    },
+    {
+      "id": "server-rack",
+      "w": 1,
+      "d": 1,
+      "h": 4,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "subject": "A tall narrow charcoal server rack, glazed front door showing neatly stacked server units, tiny muted green indicators, plain metal side. No text."
+    },
+    {
+      "id": "meeting-table",
+      "w": 3,
+      "d": 2,
+      "h": 1,
+      "directions": [
+        "a"
+      ],
+      "subject": "A broad rectangular honey oak meeting table with softly rounded corners, four substantial slender sage legs. Empty tabletop, no chairs."
+    },
+    {
+      "id": "sofa",
+      "w": 2,
+      "d": 1,
+      "h": 1,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "subject": "A compact two seat sage upholstered office sofa, two cushions, low back, squared padded arms, short honey oak feet."
+    },
+    {
+      "id": "boss-desk",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "subject": "A team leader desk, long honey oak top, sage drawer pedestal at one end, slim matching legs at the other, one closed cream notebook and small charcoal desk pad. No chair or monitor."
+    },
+    {
+      "id": "reception",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "directions": [
+        "a",
+        "b"
+      ],
+      "subject": "A long modest reception counter, cream front with honey oak inset panel and sage end panels, raised narrow oak visitor ledge, lower staff worktop behind. No signage or objects."
+    }
+  ]
+}

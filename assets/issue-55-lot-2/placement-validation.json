@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "plans": [
+    {
+      "size": "small",
+      "seats": 8,
+      "pieces": 25,
+      "models": 10,
+      "all_spriteBox_anchors": true,
+      "no_footprint_overlaps": true
+    },
+    {
+      "size": "medium",
+      "seats": 16,
+      "pieces": 51,
+      "models": 11,
+      "all_spriteBox_anchors": true,
+      "no_footprint_overlaps": true
+    },
+    {
+      "size": "large",
+      "seats": 24,
+      "pieces": 86,
+      "models": 14,
+      "all_spriteBox_anchors": true,
+      "no_footprint_overlaps": true
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "files": [
+    {
+      "file": "chair_a_default.webp",
+      "sha256": "bc6b343dd31f37f3951a951ff676bbe4b4e9855b237c904b6abe915509345eca"
+    },
+    {
+      "file": "chair_b_default.webp",
+      "sha256": "e2b8675dbbcb4ecd8a3d1ff00523453a7296aa03909483df0e1fdac3cb5cbab4"
+    },
+    {
+      "file": "desk-pc_a_default.webp",
+      "sha256": "1fa7fe3253cd00b03f9c059dfc5b26c3b383dca6bc4f335bd654a37671beb4ca"
+    },
+    {
+      "file": "desk-pc_b_default.webp",
+      "sha256": "0764eecb9fdc38ff96b569bb9e65a01fdb54891e77e34d22f16d39bbb61bf6a9"
+    },
+    {
+      "file": "plant_a_default.webp",
+      "sha256": "8d3918aca6ed119bebb97800c47cfa5c391434d3819593da8dbb97b16417c4c3"
+    },
+    {
+      "file": "shelf_a_default.webp",
+      "sha256": "37c3a82127d87b04e98fa4328c1828dd1b4e3a512442403771b9a82a39aa5d59"
+    },
+    {
+      "file": "shelf_b_default.webp",
+      "sha256": "4cafe7ee176916c4c334f6b165f8b10be643d7b77194bf491698640c93886f74"
+    }
+  ],
+  "items": [
+    {
+      "id": "desk-pc",
+      "w": 2,
+      "d": 1,
+      "h": 2,
+      "files": {
+        "a": "desk-pc_a_default.webp",
+        "b": "desk-pc_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 2,
+          "d": 1,
+          "anchor": [
+            128,
+            160
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 2,
+          "anchor": [
+            64,
+            160
+          ]
+        }
+      }
+    },
+    {
+      "id": "chair",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "files": {
+        "a": "chair_a_default.webp",
+        "b": "chair_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            96
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            96
+          ]
+        }
+      }
+    },
+    {
+      "id": "shelf",
+      "w": 2,
+      "d": 1,
+      "h": 3,
+      "files": {
+        "a": "shelf_a_default.webp",
+        "b": "shelf_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 2,
+          "d": 1,
+          "anchor": [
+            128,
+            192
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 2,
+          "anchor": [
+            64,
+            192
+          ]
+        }
+      }
+    },
+    {
+      "id": "plant",
+      "w": 1,
+      "d": 1,
+      "h": 2,
+      "files": {
+        "a": "plant_a_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            128
+          ]
+        }
+      }
+    }
+  ]
+}
