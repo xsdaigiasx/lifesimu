@@ -82,7 +82,10 @@ import type {GameState,GameResult,ItemId,Item,DailyAction,EngineApi} from './typ
         const s = JSON.parse(raw);
         if (valid(s)) return s;
         const m = migrateSkills(s);
-        return m && valid(m) ? m : null;
+        if (m && valid(m)) return m;
+        /* Lát cắt phụ (Bản tin sáng) hỏng thì bỏ riêng nó, giữ nguyên phần còn lại của đời chơi. */
+        const base = m ?? s; if (base && typeof base === 'object' && 'morning' in base) { const { morning: _drop, ...rest } = base as GameState; if (valid(rest)) return rest; }
+        return null;
     }
     catch {
         return null;
