@@ -9,3 +9,5 @@
 .morning-empty{opacity:.65}
 .morning-dialog{display:grid;gap:14px}
 .morning-dialog .primary{width:100%}
+.morning-sec p b{margin-left:auto;font-variant-numeric:tabular-nums}
+.morning-done{color:#376c50;font-weight:700}
