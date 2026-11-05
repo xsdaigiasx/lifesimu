@@ -62,6 +62,7 @@ function verdict(sum){const v=[];
   v.push([`${n}: từ 30% sự kiện phản ứng trạng thái`,x.react>=.3,pc(x.react)]);
   if(main)v.push([`${n}: callback trong ${p==='chatty'?'80%':'60%'} cửa sổ 5 ngày chơi`,x.cbWin>=(p==='chatty'?.8:.6),pc(x.cbWin)]);
   if(main)v.push([`${n}: Xa lạ không quá ${p==='chatty'?'40%':'70%'} dàn NPC`,x.strange<=(p==='chatty'?.4:.7),pc(x.strange)]);
+  if(main)v.push([`${n}: Tri kỷ không quá ${p==='chatty'?'60%':'30%'} dàn NPC (bậc cao cần thời gian)`,(x.tiers['Tri kỷ']||0)<=(p==='chatty'?.6:.3),pc(x.tiers['Tri kỷ']||0)]);
   if(main)v.push([`${n}: NPC nhiều nhất không quá 30% sự kiện`,x.topShare<=.3,`${x.topNpc} ${pc(x.topShare)}`]);
   v.push([`${n}: save story hợp lệ`,x.invalid===0,`${x.invalid} lần sai`])}
  return v}
