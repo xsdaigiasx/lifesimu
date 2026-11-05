@@ -1,0 +1,1381 @@
+{
+  "issue": 133,
+  "lot": 5,
+  "reference": "assets/style-reference/room-reference.webp",
+  "baseline_commit": "d25988610bf0fa6ee3ffdcf514aee242c81c6622",
+  "projection": "128x64 tile; 2:1; z=32px",
+  "items": [
+    {
+      "id": "rental",
+      "file": "assets/room-master-storybook.webp",
+      "frame_px": [
+        1448,
+        1086
+      ],
+      "anchor_px": [
+        724,
+        350
+      ],
+      "footprint_tiles": [
+        8,
+        8
+      ],
+      "direction": "original camera",
+      "bytes": 118450,
+      "encoding": "WebP",
+      "quality": 92,
+      "colours": null,
+      "sha256": "d5645afcf60c4392aa7f517f63ad586e6b9074fb5c7008e865f38d2b483e4949",
+      "source_sha256": "630273df60ff7ba2a7b24761d32c43e11ad76942915241efe0acf68863803ff9",
+      "registration": {
+        "method": "occupied-frame registration + original alpha",
+        "source_bbox": [
+          204,
+          140,
+          1245,
+          890
+        ],
+        "target_bbox": [
+          205,
+          146,
+          1243,
+          877
+        ],
+        "original_alpha_sha256": "e0638f474eafa5f85feada9106974e395e4f40a26c25fc9154e916e63304571a"
+      }
+    },
+    {
+      "id": "townhouse-t1",
+      "file": "assets/houses/townhouse-t1.webp",
+      "frame_px": [
+        1984,
+        1168
+      ],
+      "anchor_px": [
+        800,
+        160
+      ],
+      "footprint_tiles": [
+        18,
+        12
+      ],
+      "direction": "original camera",
+      "bytes": 118460,
+      "encoding": "WebP",
+      "quality": 85,
+      "colours": null,
+      "sha256": "d04b86b26eb5d239d1040cb4e58766f1362658e27f8b6ed2bb0c4c2e2863e988",
+      "source_sha256": "eecba7da70d2da36ba66488a0349f9a05a595414e8c22e51105d2e438362a849",
+      "registration": {
+        "method": "occupied-frame registration + original alpha",
+        "source_bbox": [
+          18,
+          16,
+          1616,
+          939
+        ],
+        "target_bbox": [
+          21,
+          26,
+          1963,
+          1137
+        ],
+        "original_alpha_sha256": "cc01dbdbf8f4eefd93588b09a7a260e7981eb68d9af561820c7471b8580e2238"
+      },
+      "geometry": {
+        "origin_px": [
+          800,
+          160
+        ],
+        "axis_x_px": [
+          64,
+          32
+        ],
+        "axis_y_px": [
+          -64,
+          32
+        ],
+        "floor_corners": [
+          {
+            "world": [
+              0,
+              0
+            ],
+            "pixel": [
+              800,
+              160
+            ]
+          },
+          {
+            "world": [
+              18,
+              0
+            ],
+            "pixel": [
+              1952,
+              736
+            ]
+          },
+          {
+            "world": [
+              18,
+              12
+            ],
+            "pixel": [
+              1184,
+              1120
+            ]
+          },
+          {
+            "world": [
+              0,
+              12
+            ],
+            "pixel": [
+              32,
+              544
+            ]
+          }
+        ],
+        "rooms": [
+          {
+            "id": "living",
+            "name": "Phòng khách",
+            "x": 0,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#e6c39b"
+          },
+          {
+            "id": "kitchen",
+            "name": "Bếp",
+            "x": 10,
+            "y": 0,
+            "w": 8,
+            "h": 8,
+            "material": "stone",
+            "color": "#e1e8d8"
+          }
+        ],
+        "stairs": {
+          "x": 14,
+          "y": 8,
+          "w": 4,
+          "h": 4,
+          "axis": "x",
+          "steps": 8,
+          "direction": "up",
+          "rise_px": 96
+        },
+        "doors": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "living",
+              "kitchen"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 4,
+            "to": 6,
+            "connects": [
+              "living",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 11,
+            "to": 13,
+            "connects": [
+              "kitchen",
+              "hall"
+            ],
+            "width_tiles": 2
+          }
+        ],
+        "partition_runs": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 5,
+            "to": 10
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 10,
+            "to": 11
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 13,
+            "to": 18
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 0,
+            "to": 4
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 6,
+            "to": 10
+          }
+        ],
+        "outer_wall_height_px": 128,
+        "partition_height_px": 32
+      }
+    },
+    {
+      "id": "townhouse-t2",
+      "file": "assets/houses/townhouse-t2.webp",
+      "frame_px": [
+        1984,
+        1168
+      ],
+      "anchor_px": [
+        800,
+        160
+      ],
+      "footprint_tiles": [
+        18,
+        12
+      ],
+      "direction": "original camera",
+      "bytes": 130374,
+      "encoding": "WebP",
+      "quality": 85,
+      "colours": null,
+      "sha256": "f664342d09f317d917e996eb1290e92c4ed9ef51f8cdb60834d581e74dbcc525",
+      "source_sha256": "14c0991816eaee20573cd47ab9b08533e8236677d4ac5b182007dbf7c6c188b9",
+      "registration": {
+        "method": "occupied-frame registration + original alpha",
+        "source_bbox": [
+          18,
+          16,
+          1616,
+          939
+        ],
+        "target_bbox": [
+          21,
+          26,
+          1963,
+          1137
+        ],
+        "original_alpha_sha256": "831f788c650b8127f027aada312db4adeab3a3b1fe4970afab1d0c38a470071b"
+      },
+      "geometry": {
+        "origin_px": [
+          800,
+          160
+        ],
+        "axis_x_px": [
+          64,
+          32
+        ],
+        "axis_y_px": [
+          -64,
+          32
+        ],
+        "floor_corners": [
+          {
+            "world": [
+              0,
+              0
+            ],
+            "pixel": [
+              800,
+              160
+            ]
+          },
+          {
+            "world": [
+              18,
+              0
+            ],
+            "pixel": [
+              1952,
+              736
+            ]
+          },
+          {
+            "world": [
+              18,
+              12
+            ],
+            "pixel": [
+              1184,
+              1120
+            ]
+          },
+          {
+            "world": [
+              0,
+              12
+            ],
+            "pixel": [
+              32,
+              544
+            ]
+          }
+        ],
+        "rooms": [
+          {
+            "id": "bedroom",
+            "name": "Phòng ngủ",
+            "x": 0,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#ead2c7"
+          },
+          {
+            "id": "study",
+            "name": "Phòng làm việc",
+            "x": 10,
+            "y": 0,
+            "w": 8,
+            "h": 8,
+            "material": "wood",
+            "color": "#d5ddca"
+          },
+          {
+            "id": "bath",
+            "name": "Phòng tắm",
+            "x": 14,
+            "y": 8,
+            "w": 4,
+            "h": 4,
+            "material": "bath",
+            "color": "#d2e5e7"
+          }
+        ],
+        "stairs": {
+          "x": 10,
+          "y": 8,
+          "w": 4,
+          "h": 4,
+          "axis": "x",
+          "steps": 8,
+          "direction": "down",
+          "rise_px": -96
+        },
+        "doors": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "bedroom",
+              "study"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 15,
+            "to": 17,
+            "connects": [
+              "study",
+              "bath"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 4,
+            "to": 6,
+            "connects": [
+              "bedroom",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 8,
+            "to": 10,
+            "connects": [
+              "bedroom",
+              "stairs"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 11,
+            "to": 13,
+            "connects": [
+              "study",
+              "stairs"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 14,
+            "from": 9,
+            "to": 11,
+            "connects": [
+              "bath",
+              "stairs"
+            ],
+            "width_tiles": 2
+          }
+        ],
+        "partition_runs": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 5,
+            "to": 8
+          },
+          {
+            "axis": "x",
+            "at": 14,
+            "from": 8,
+            "to": 9
+          },
+          {
+            "axis": "x",
+            "at": 14,
+            "from": 11,
+            "to": 12
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 10,
+            "to": 11
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 13,
+            "to": 15
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 17,
+            "to": 18
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 0,
+            "to": 4
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 6,
+            "to": 10
+          }
+        ],
+        "outer_wall_height_px": 128,
+        "partition_height_px": 32
+      }
+    },
+    {
+      "id": "villa-t1",
+      "file": "assets/houses/villa-t1.webp",
+      "frame_px": [
+        3904,
+        2128
+      ],
+      "anchor_px": [
+        1952,
+        160
+      ],
+      "footprint_tiles": [
+        30,
+        30
+      ],
+      "direction": "original camera",
+      "bytes": 141368,
+      "encoding": "WebP",
+      "quality": 45,
+      "colours": null,
+      "sha256": "d19e4062f6c9db8a5cc1ed5b9fc3c686f3de872618a475bf845ca232f3e253f6",
+      "source_sha256": "ba53ccc035efa9349eeff1c88c92318647f3e14483442be647a9556763299b4c",
+      "registration": {
+        "method": "occupied-frame registration + original alpha",
+        "source_bbox": [
+          10,
+          9,
+          1688,
+          912
+        ],
+        "target_bbox": [
+          21,
+          26,
+          3883,
+          2097
+        ],
+        "original_alpha_sha256": "60ecdc797258b72adeb682f8973119b4d06e31c23a64e796b225a1fe0672c0ab"
+      },
+      "geometry": {
+        "origin_px": [
+          1952,
+          160
+        ],
+        "axis_x_px": [
+          64,
+          32
+        ],
+        "axis_y_px": [
+          -64,
+          32
+        ],
+        "floor_corners": [
+          {
+            "world": [
+              0,
+              0
+            ],
+            "pixel": [
+              1952,
+              160
+            ]
+          },
+          {
+            "world": [
+              30,
+              0
+            ],
+            "pixel": [
+              3872,
+              1120
+            ]
+          },
+          {
+            "world": [
+              30,
+              30
+            ],
+            "pixel": [
+              1952,
+              2080
+            ]
+          },
+          {
+            "world": [
+              0,
+              30
+            ],
+            "pixel": [
+              32,
+              1120
+            ]
+          }
+        ],
+        "rooms": [
+          {
+            "id": "living",
+            "name": "Phòng khách",
+            "x": 0,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#e6c39b"
+          },
+          {
+            "id": "kitchen",
+            "name": "Bếp",
+            "x": 10,
+            "y": 0,
+            "w": 8,
+            "h": 8,
+            "material": "stone",
+            "color": "#e1e8d8"
+          },
+          {
+            "id": "bath",
+            "name": "Phòng tắm",
+            "x": 10,
+            "y": 8,
+            "w": 6,
+            "h": 6,
+            "material": "bath",
+            "color": "#d2e5e7"
+          },
+          {
+            "id": "fun",
+            "name": "Phòng giải trí",
+            "x": 18,
+            "y": 0,
+            "w": 12,
+            "h": 12,
+            "material": "wood",
+            "color": "#dcd3e5"
+          },
+          {
+            "id": "garden",
+            "name": "Sân vườn",
+            "x": 7,
+            "y": 14,
+            "w": 16,
+            "h": 16,
+            "material": "grass",
+            "color": "#b0ca96"
+          }
+        ],
+        "stairs": {
+          "x": 0,
+          "y": 10,
+          "w": 4,
+          "h": 4,
+          "axis": "y",
+          "steps": 8,
+          "direction": "up",
+          "rise_px": 96
+        },
+        "doors": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "living",
+              "kitchen"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 8,
+            "to": 10,
+            "connects": [
+              "living",
+              "bath"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 12,
+            "to": 14,
+            "connects": [
+              "kitchen",
+              "bath"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 18,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "kitchen",
+              "fun"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 5,
+            "to": 7,
+            "connects": [
+              "living",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 16,
+            "to": 18,
+            "connects": [
+              "kitchen",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 16,
+            "from": 10,
+            "to": 12,
+            "connects": [
+              "bath",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 12,
+            "from": 23,
+            "to": 25,
+            "connects": [
+              "fun",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 14,
+            "from": 12,
+            "to": 14,
+            "connects": [
+              "bath",
+              "garden"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 1,
+            "to": 3,
+            "connects": [
+              "living",
+              "stairs"
+            ],
+            "width_tiles": 2
+          }
+        ],
+        "partition_runs": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 5,
+            "to": 8
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 10,
+            "to": 14
+          },
+          {
+            "axis": "x",
+            "at": 16,
+            "from": 8,
+            "to": 10
+          },
+          {
+            "axis": "x",
+            "at": 16,
+            "from": 12,
+            "to": 14
+          },
+          {
+            "axis": "x",
+            "at": 18,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 18,
+            "from": 5,
+            "to": 12
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 10,
+            "to": 12
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 14,
+            "to": 16
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 0,
+            "to": 1
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 3,
+            "to": 5
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 7,
+            "to": 10
+          },
+          {
+            "axis": "y",
+            "at": 12,
+            "from": 18,
+            "to": 23
+          },
+          {
+            "axis": "y",
+            "at": 12,
+            "from": 25,
+            "to": 30
+          },
+          {
+            "axis": "y",
+            "at": 14,
+            "from": 10,
+            "to": 12
+          },
+          {
+            "axis": "y",
+            "at": 14,
+            "from": 14,
+            "to": 16
+          }
+        ],
+        "outer_wall_height_px": 128,
+        "partition_height_px": 32
+      }
+    },
+    {
+      "id": "villa-t2",
+      "file": "assets/houses/villa-t2.webp",
+      "frame_px": [
+        2752,
+        1552
+      ],
+      "anchor_px": [
+        928,
+        160
+      ],
+      "footprint_tiles": [
+        28,
+        14
+      ],
+      "direction": "original camera",
+      "bytes": 119320,
+      "encoding": "WebP",
+      "quality": 75,
+      "colours": null,
+      "sha256": "521d5170bfd129fbe5dfd95500f68760f556e4a87d84effe88a6dae92875359c",
+      "source_sha256": "5cf51a5d6b2a8c93dd321377f80eeb8930ae6e4b852e0d08e8329bf4abad2385",
+      "registration": {
+        "method": "occupied-frame registration + original alpha",
+        "source_bbox": [
+          13,
+          12,
+          1656,
+          924
+        ],
+        "target_bbox": [
+          21,
+          26,
+          2731,
+          1521
+        ],
+        "original_alpha_sha256": "5e9f1e7a77d4da4412248c5f0ae7a541baa1c2059ac51994b1050df8d975bc93"
+      },
+      "geometry": {
+        "origin_px": [
+          928,
+          160
+        ],
+        "axis_x_px": [
+          64,
+          32
+        ],
+        "axis_y_px": [
+          -64,
+          32
+        ],
+        "floor_corners": [
+          {
+            "world": [
+              0,
+              0
+            ],
+            "pixel": [
+              928,
+              160
+            ]
+          },
+          {
+            "world": [
+              28,
+              0
+            ],
+            "pixel": [
+              2720,
+              1056
+            ]
+          },
+          {
+            "world": [
+              28,
+              14
+            ],
+            "pixel": [
+              1824,
+              1504
+            ]
+          },
+          {
+            "world": [
+              0,
+              14
+            ],
+            "pixel": [
+              32,
+              608
+            ]
+          }
+        ],
+        "rooms": [
+          {
+            "id": "bedroom",
+            "name": "Phòng ngủ",
+            "x": 0,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#ead2c7"
+          },
+          {
+            "id": "guest",
+            "name": "Phòng ngủ phụ",
+            "x": 10,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#eadfc5"
+          },
+          {
+            "id": "study",
+            "name": "Phòng làm việc",
+            "x": 20,
+            "y": 0,
+            "w": 8,
+            "h": 8,
+            "material": "wood",
+            "color": "#d5ddca"
+          }
+        ],
+        "stairs": {
+          "x": 0,
+          "y": 10,
+          "w": 4,
+          "h": 4,
+          "axis": "y",
+          "steps": 8,
+          "direction": "down",
+          "rise_px": -96
+        },
+        "doors": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 4,
+            "to": 6,
+            "connects": [
+              "bedroom",
+              "guest"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 20,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "guest",
+              "study"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 5,
+            "to": 7,
+            "connects": [
+              "bedroom",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 14,
+            "to": 16,
+            "connects": [
+              "guest",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 23,
+            "to": 25,
+            "connects": [
+              "study",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 1,
+            "to": 3,
+            "connects": [
+              "bedroom",
+              "stairs"
+            ],
+            "width_tiles": 2
+          }
+        ],
+        "partition_runs": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 0,
+            "to": 4
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 6,
+            "to": 10
+          },
+          {
+            "axis": "x",
+            "at": 20,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 20,
+            "from": 5,
+            "to": 10
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 20,
+            "to": 23
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 25,
+            "to": 28
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 0,
+            "to": 1
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 3,
+            "to": 5
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 7,
+            "to": 14
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 16,
+            "to": 20
+          }
+        ],
+        "outer_wall_height_px": 128,
+        "partition_height_px": 32
+      }
+    },
+    {
+      "id": "office-shell-small",
+      "file": "assets/offices/small/background.webp",
+      "frame_px": [
+        1536,
+        1536
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 136370,
+      "encoding": "WebP",
+      "quality": 75,
+      "colours": null,
+      "sha256": "3b2e4e570765f43cf18198e6924e8aa406478c889164d173bf61c4445a0beb84",
+      "source_sha256": "46ebf59d1e260e8f74907c82d772746430379825426a4fc6b0186daa4afcde87",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "office-shell-small",
+      "file": "assets/offices/small/room-cleaned-v02.png",
+      "frame_px": [
+        1536,
+        1536
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 142248,
+      "encoding": "indexed PNG; 768px sampling; nearest x2",
+      "quality": 50,
+      "colours": 72,
+      "sha256": "b8f581b051d59a2b336c35fbb75e518c3415a52b6f642c1ea94a7074fe7bf036",
+      "source_sha256": "46ebf59d1e260e8f74907c82d772746430379825426a4fc6b0186daa4afcde87",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "office-shell-medium",
+      "file": "assets/offices/medium/background.webp",
+      "frame_px": [
+        1536,
+        1536
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 143736,
+      "encoding": "WebP",
+      "quality": 75,
+      "colours": null,
+      "sha256": "1e426e1d67ea35bd45dc50d2735df9cff080ed4f6116644f235c9eb94fc2bc4a",
+      "source_sha256": "8f4fbe200c22134bede68a177b15e8e90b7385d22ac30b4abce7aba224cb7e78",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "office-shell-medium",
+      "file": "assets/offices/medium/room-cleaned-v02.png",
+      "frame_px": [
+        1536,
+        1536
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 127162,
+      "encoding": "indexed PNG; 768px sampling; nearest x2",
+      "quality": 50,
+      "colours": 53,
+      "sha256": "d507a1079799c63a2cab091e44a23e6f8be767cfb0d02880e3e7281e5aae258f",
+      "source_sha256": "8f4fbe200c22134bede68a177b15e8e90b7385d22ac30b4abce7aba224cb7e78",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "office-shell-large",
+      "file": "assets/offices/large/background.webp",
+      "frame_px": [
+        1536,
+        1536
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 144606,
+      "encoding": "WebP",
+      "quality": 75,
+      "colours": null,
+      "sha256": "9c9c04f0f08b84e4d75e3915773c92fa8a1afe0ae66edd305aaa3ce614ece3e3",
+      "source_sha256": "f7a804ea8594b5b228aa4c9cb3fbdd1be6803b6444ce0a55053a98daada171a6",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "office-shell-large",
+      "file": "assets/offices/large/room-cleaned-v02.png",
+      "frame_px": [
+        1536,
+        1536
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 140944,
+      "encoding": "indexed PNG; 768px sampling; nearest x2",
+      "quality": 50,
+      "colours": 72,
+      "sha256": "bb9824774e1c4707c61e620d3837111c537e4634de22f905eab32560a8529d6d",
+      "source_sha256": "f7a804ea8594b5b228aa4c9cb3fbdd1be6803b6444ce0a55053a98daada171a6",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "office",
+      "file": "assets/static-scenes/office.webp",
+      "frame_px": [
+        1536,
+        1024
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 136238,
+      "encoding": "WebP",
+      "quality": 55,
+      "colours": null,
+      "sha256": "2906454d10d7a68b67411979115d1cfb71e9174544bd720eeb9f5243df1d7ded",
+      "source_sha256": "447ce1e69b36fcca166233aa1e88ddae084f7a3ad7893df015af0af7ef86e2ee",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1536,
+          1024
+        ],
+        "protected_original_character_rectangles": [
+          [
+            828,
+            150,
+            995,
+            376
+          ],
+          [
+            1120,
+            190,
+            1300,
+            455
+          ]
+        ]
+      }
+    },
+    {
+      "id": "work",
+      "file": "assets/static-scenes/work.webp",
+      "frame_px": [
+        1536,
+        1024
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 136092,
+      "encoding": "WebP",
+      "quality": 75,
+      "colours": null,
+      "sha256": "0a95dc26adec5963d8bbc1843c46bdf291948e3e14fc5a291aae99e9c120f2b2",
+      "source_sha256": "d7d0d14723d5388fd563c905f7b2f24e4f1301dfa7ae2740cb182eae278200fe",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1536,
+          1024
+        ]
+      }
+    },
+    {
+      "id": "rental-phone-preview",
+      "file": "assets/room-master.webp",
+      "frame_px": [
+        1448,
+        1086
+      ],
+      "anchor_px": null,
+      "footprint_tiles": null,
+      "direction": "original camera",
+      "bytes": 119900,
+      "encoding": "WebP",
+      "quality": 75,
+      "colours": null,
+      "sha256": "490c92e4cd73529d89ca76db65ca85b249e25479267107c75c825da6bb65ee36",
+      "source_sha256": "28db1db3b38347a0a682406a19a7c04de1f35129eac8533a2e286ccaf3e7f03e",
+      "registration": {
+        "method": "whole canvas resample",
+        "source_frame": [
+          1448,
+          1086
+        ]
+      }
+    }
+  ]
+}

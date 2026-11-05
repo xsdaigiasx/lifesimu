@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "git_directory": false,
+  "baseline_commit_available": false,
+  "verifier_output": {
+    "result": "PASS",
+    "files": 14,
+    "history_required": false,
+    "checks": [
+      "frames",
+      "under 150000 bytes",
+      "SHA-256",
+      "original shell alpha",
+      "office transparent exterior",
+      "character protection",
+      "unchanged geometry manifests",
+      "distinct office finishes"
+    ],
+    "max_bytes": 144606
+  }
+}

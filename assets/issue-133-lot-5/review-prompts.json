@@ -1,0 +1,22 @@
+{
+  "tool": "image_gen built-in",
+  "reference": "assets/style-reference/room-reference.webp",
+  "items": [
+    {
+      "id": "office-shell-medium",
+      "variant": "Medium office finish: honey oak plank floor in glass-enclosed zones, softly mottled warm cream stone in open zone, muted sage-gray ceramic in utility zone, slender sage-painted window and partition frames, cream plaster. Clearly distinguish from the original small office's pale marble and olive frames.",
+      "prompt": "Use case: precise-object-edit. Image1 is exact geometry EDIT TARGET, image2 STYLE ONLY. Change surface materials only for a distinct office variant. Medium office finish: honey oak plank floor in glass-enclosed zones, softly mottled warm cream stone in open zone, muted sage-gray ceramic in utility zone, slender sage-painted window and partition frames, cream plaster. Clearly distinguish from the original small office's pale marble and olive frames. Keep ALL architecture vertices, wall caps, glass door locations, partitions, floor zone boundaries and outer silhouette exactly at the same pixel coordinates. Keep same full 1536x1536 canvas, margins, camera and 2:1 projection. Do not crop, zoom, recenter, add/remove architecture, furniture or people. This edit does NOT change floor plan or physical area. Semi-realistic digital painting, softly modeled materials, subtle grain, thin same-tone edges, fixed upper-left lighting. Empty room shell, actual transparent exterior. No outside cast shadow, text, watermark, logo or sparkles.",
+      "office_size": "medium",
+      "file": "assets/offices/medium/background.webp",
+      "transparent": true
+    },
+    {
+      "id": "office-shell-large",
+      "variant": "Large office premium finish: medium honey oak parquet in glass-enclosed zones, warm ivory honed stone large slabs in open zone, deep muted forest green utility tiles, dark bronze thin window and partition frames. Subtle richer materials but same approved sage/cream/honey oak family.",
+      "prompt": "Use case: precise-object-edit. Image1 is exact geometry EDIT TARGET, image2 STYLE ONLY. Change surface materials only for a distinct office variant. Large office premium finish: medium honey oak parquet in glass-enclosed zones, warm ivory honed stone large slabs in open zone, deep muted forest green utility tiles, dark bronze thin window and partition frames. Subtle richer materials but same approved sage/cream/honey oak family. Keep ALL architecture vertices, wall caps, glass door locations, partitions, floor zone boundaries and outer silhouette exactly at the same pixel coordinates. Keep same full 1536x1536 canvas, margins, camera and 2:1 projection. Do not crop, zoom, recenter, add/remove architecture, furniture or people. This edit does NOT change floor plan or physical area. Semi-realistic digital painting, softly modeled materials, subtle grain, thin same-tone edges, fixed upper-left lighting. Empty room shell, actual transparent exterior. No outside cast shadow, text, watermark, logo or sparkles.",
+      "office_size": "large",
+      "file": "assets/offices/large/background.webp",
+      "transparent": true
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "file": "assets/room-master-storybook.webp",
+    "frame_px": [
+      1448,
+      1086
+    ],
+    "hasAlpha": true,
+    "bytes": 54108,
+    "sha256": "6fe09f0ee124e6acb30034eb47e8239deb1bc0db5708d62223422f7c95fa6f09"
+  },
+  {
+    "file": "assets/static-scenes/rental-storybook-bath-mask.webp",
+    "frame_px": [
+      1536,
+      1536
+    ],
+    "hasAlpha": true,
+    "bytes": 5342,
+    "sha256": "91795cd86f3ad45612115525e421143c5571c82c8733e9363f5cb5c9662e0424"
+  },
+  {
+    "file": "assets/houses/townhouse-t1.webp",
+    "frame_px": [
+      1984,
+      1168
+    ],
+    "hasAlpha": true,
+    "bytes": 97404,
+    "sha256": "233cf2c5a9a2d8bd53b0450e221e03d15b91cf241e39f1fbfcc57bca4fd01179"
+  },
+  {
+    "file": "assets/houses/townhouse-t2.webp",
+    "frame_px": [
+      1984,
+      1168
+    ],
+    "hasAlpha": true,
+    "bytes": 128948,
+    "sha256": "3f063c99a5717d9a8af6f6974dacbbb76a80877bf1aef00d58a4c282aa3b11a3"
+  },
+  {
+    "file": "assets/houses/villa-t1.webp",
+    "frame_px": [
+      3904,
+      2128
+    ],
+    "hasAlpha": true,
+    "bytes": 280490,
+    "sha256": "e3e5f08e7b2d2314efe3bca4699f5f74d595676778246603208e211d2538df7f"
+  },
+  {
+    "file": "assets/houses/villa-t2.webp",
+    "frame_px": [
+      2752,
+      1552
+    ],
+    "hasAlpha": true,
+    "bytes": 152436,
+    "sha256": "eca6b56d988800feda232b2d0dcd70284f5579a7b72232e1338d5932ffad918c"
+  },
+  {
+    "file": "assets/offices/small/background.webp",
+    "frame_px": [
+      1536,
+      1536
+    ],
+    "hasAlpha": false,
+    "bytes": 320840,
+    "sha256": "bc07cb265d9d89e5a0d73aa9efc0c3e28a1b9a29040460fd218a1e5c9556f09c"
+  },
+  {
+    "file": "assets/offices/small/room-cleaned-v02.png",
+    "frame_px": [
+      1536,
+      1536
+    ],
+    "hasAlpha": false,
+    "bytes": 1645724,
+    "sha256": "492515cbd6e11e74d6d5da8b2c3f35cf0530b56120675b4a91bb9f38b5b9f7cf"
+  },
+  {
+    "file": "assets/offices/medium/background.webp",
+    "frame_px": [
+      1536,
+      1536
+    ],
+    "hasAlpha": false,
+    "bytes": 320840,
+    "sha256": "bc07cb265d9d89e5a0d73aa9efc0c3e28a1b9a29040460fd218a1e5c9556f09c"
+  },
+  {
+    "file": "assets/offices/medium/room-cleaned-v02.png",
+    "frame_px": [
+      1536,
+      1536
+    ],
+    "hasAlpha": false,
+    "bytes": 1645724,
+    "sha256": "492515cbd6e11e74d6d5da8b2c3f35cf0530b56120675b4a91bb9f38b5b9f7cf"
+  },
+  {
+    "file": "assets/offices/large/background.webp",
+    "frame_px": [
+      1536,
+      1536
+    ],
+    "hasAlpha": false,
+    "bytes": 320840,
+    "sha256": "bc07cb265d9d89e5a0d73aa9efc0c3e28a1b9a29040460fd218a1e5c9556f09c"
+  },
+  {
+    "file": "assets/offices/large/room-cleaned-v02.png",
+    "frame_px": [
+      1536,
+      1536
+    ],
+    "hasAlpha": false,
+    "bytes": 1645724,
+    "sha256": "492515cbd6e11e74d6d5da8b2c3f35cf0530b56120675b4a91bb9f38b5b9f7cf"
+  },
+  {
+    "file": "assets/static-scenes/office.webp",
+    "frame_px": [
+      1536,
+      1024
+    ],
+    "hasAlpha": false,
+    "bytes": 515326,
+    "sha256": "99755cfba0a4754320a9b7b8810179a6f0a2c1b943fedac48c42ad7607275eb3"
+  },
+  {
+    "file": "assets/static-scenes/work.webp",
+    "frame_px": [
+      1536,
+      1024
+    ],
+    "hasAlpha": false,
+    "bytes": 339990,
+    "sha256": "3cb2918746a7239c9ce50f7da2015a8cf36c6614d1619edf54b20ea932295a69"
+  },
+  {
+    "file": "assets/room-master.webp",
+    "frame_px": [
+      1448,
+      1086
+    ],
+    "hasAlpha": false,
+    "bytes": 167182,
+    "sha256": "c6d899394563fbece3e16e7fb41fc0334c221c2f3a83d020b98bcd3c74402d90"
+  }
+]
