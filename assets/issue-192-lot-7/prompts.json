@@ -1,0 +1,111 @@
+{
+  "issue": 192,
+  "lot": 7,
+  "tool": "image_gen built-in",
+  "reference": "assets/style-reference/room-reference.webp",
+  "file": "assets/offices/small/room-shell.webp",
+  "prompt": "Use case: sketch-to-render. Image1 is an EXACT geometric edit target (not a style reference): a native 2048x1408 isometric office-shell guide. Image2 is the only approved STYLE reference, image3 is finished rental-room material quality only. Turn image1 into a beautifully finished semi-realistic digital-painted EMPTY office shell. LOCK every line endpoint, outer silhouette and floor tile position in image1; do not crop, zoom, rotate, recenter or change aspect ratio. Full 2048x1408 canvas. Floor origin=(1024,320), floor diamond corners=(1024,320),(1920,768),(1024,1216),(128,768), floor size1792x896 pixels, exactly14x14 tiles at128x64. ONE continuous unobstructed workspace, no partitions, furniture, plants, fixtures or people. Cream plaster rear walls with fine modeled thickness and honey-oak skirting, honey-oak floor with fine wood grain and restrained readable tile/plank seams, soft material shading, slender dark same-tone outlines, light strictly upper-left. Preserve the guide's LOW foreground cutaway walls and its OPEN timber doorway frame centered on x6..8,y14; threshold spans two cells, clear inside door apron x6..8,y12..14. Do not close doorway with floor/wall, do not add door swing outside footprint. Keep same192px doorway height and224px rear-wall height from guide. Do not copy furniture, window, bathroom, icons or kitchen from style references. High-quality tactile materials like approved rental, not a flat placeholder diagram. TRUE transparent exterior, no cast shadow outside footprint, no text, watermark or logo.",
+  "frame_px": [
+    2048,
+    1408
+  ],
+  "origin_px": [
+    1024,
+    320
+  ],
+  "tile_px": [
+    128,
+    64
+  ],
+  "floor_tiles": [
+    14,
+    14
+  ],
+  "floor_corners": [
+    [
+      1024,
+      320
+    ],
+    [
+      1920,
+      768
+    ],
+    [
+      1024,
+      1216
+    ],
+    [
+      128,
+      768
+    ]
+  ],
+  "door": {
+    "x": 6,
+    "y": 14,
+    "width_tiles": 2,
+    "apron": {
+      "x": 6,
+      "y": 12,
+      "w": 2,
+      "h": 2
+    }
+  },
+  "samples": [
+    [
+      "executive_desk",
+      2,
+      2,
+      3,
+      2
+    ],
+    [
+      "executive_chair",
+      2,
+      5,
+      1,
+      1
+    ],
+    [
+      "workstation_pair",
+      7,
+      2,
+      4,
+      2
+    ],
+    [
+      "glass_conference_table",
+      7,
+      7,
+      3,
+      2
+    ],
+    [
+      "low_storage_cabinet",
+      0,
+      5,
+      2,
+      1
+    ],
+    [
+      "bookcase",
+      0,
+      8,
+      2,
+      1
+    ],
+    [
+      "monstera_plant",
+      12,
+      2,
+      1,
+      1
+    ],
+    [
+      "bonsai",
+      12,
+      11,
+      1,
+      1
+    ]
+  ]
+}

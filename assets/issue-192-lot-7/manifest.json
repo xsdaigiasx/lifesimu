@@ -1,0 +1,239 @@
+{
+  "issue": 192,
+  "lot": 7,
+  "id": "small-room-shell",
+  "file": "assets/offices/small/room-shell.webp",
+  "frame_px": [
+    2048,
+    1408
+  ],
+  "anchor_px": [
+    1024,
+    320
+  ],
+  "origin_px": [
+    1024,
+    320
+  ],
+  "footprint_tiles": [
+    14,
+    14
+  ],
+  "tile_px": [
+    128,
+    64
+  ],
+  "floor_size_px": [
+    1792,
+    896
+  ],
+  "floor_corners": [
+    [
+      1024,
+      320
+    ],
+    [
+      1920,
+      768
+    ],
+    [
+      1024,
+      1216
+    ],
+    [
+      128,
+      768
+    ]
+  ],
+  "door": {
+    "x": 6,
+    "y": 14,
+    "width_tiles": 2,
+    "apron": {
+      "x": 6,
+      "y": 12,
+      "w": 2,
+      "h": 2
+    }
+  },
+  "direction": "2:1 orthographic",
+  "bytes": 261906,
+  "quality": 95,
+  "sha256": "fe345296a72210e04a8ab6993cbef40bea5423e056bf0e9273f6097ecf796f23",
+  "source_sha256": "bedd95a7d3e624f5deea5a11c5ab730bbfd1f7a2f9cde919e16775fd6304b46c",
+  "guide_alpha_sha256": "fba1b4253e7d68c7dd256ac0dbbe8a6478ce98ec1ca55cffd1c4aa618696f291",
+  "registration": {
+    "source_bbox": [
+      93,
+      66,
+      1421,
+      915
+    ],
+    "target_bbox": [
+      127,
+      95,
+      1921,
+      1233
+    ]
+  },
+  "samples": [
+    {
+      "id": "executive_desk",
+      "x": 2,
+      "y": 2,
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "file": "assets/offices/small/sprites/executive_desk.png",
+      "frame_px": [
+        306,
+        271
+      ],
+      "anchor_px": [
+        153,
+        257
+      ]
+    },
+    {
+      "id": "executive_chair",
+      "x": 2,
+      "y": 5,
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "file": "assets/offices/small/sprites/executive_chair.png",
+      "frame_px": [
+        143,
+        222
+      ],
+      "anchor_px": [
+        72,
+        210
+      ]
+    },
+    {
+      "id": "workstation_pair",
+      "x": 7,
+      "y": 2,
+      "footprint_tiles": [
+        4,
+        2
+      ],
+      "file": "assets/offices/small/sprites/workstation_pair.png",
+      "frame_px": [
+        249,
+        221
+      ],
+      "anchor_px": [
+        124,
+        211
+      ]
+    },
+    {
+      "id": "glass_conference_table",
+      "x": 7,
+      "y": 7,
+      "footprint_tiles": [
+        3,
+        2
+      ],
+      "file": "assets/offices/small/sprites/glass_conference_table.png",
+      "frame_px": [
+        336,
+        250
+      ],
+      "anchor_px": [
+        168,
+        229
+      ]
+    },
+    {
+      "id": "low_storage_cabinet",
+      "x": 0,
+      "y": 5,
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "file": "assets/offices/small/sprites/low_storage_cabinet.png",
+      "frame_px": [
+        216,
+        208
+      ],
+      "anchor_px": [
+        108,
+        198
+      ]
+    },
+    {
+      "id": "bookcase",
+      "x": 0,
+      "y": 8,
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "file": "assets/offices/small/sprites/bookcase.png",
+      "frame_px": [
+        172,
+        262
+      ],
+      "anchor_px": [
+        86,
+        253
+      ]
+    },
+    {
+      "id": "monstera_plant",
+      "x": 12,
+      "y": 2,
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "file": "assets/offices/small/sprites/monstera_plant.png",
+      "frame_px": [
+        156,
+        205
+      ],
+      "anchor_px": [
+        78,
+        188
+      ]
+    },
+    {
+      "id": "bonsai",
+      "x": 12,
+      "y": 11,
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "file": "assets/offices/small/sprites/bonsai.png",
+      "frame_px": [
+        119,
+        148
+      ],
+      "anchor_px": [
+        60,
+        137
+      ]
+    }
+  ],
+  "protected_files": [
+    {
+      "file": "app/src/domain/layout.ts",
+      "sha256": "3da493e8e1cc51d5d444d51dac3c76add8d1a67c47bf9698923534e5fcf5cbc1"
+    },
+    {
+      "file": "app/src/domain/office-packs.json",
+      "sha256": "4d5a5775fb190577bfd81f4777f1108f86079192a84731304320ac9c547e1782"
+    },
+    {
+      "file": "app/public/assets/offices/small/manifest.json",
+      "sha256": "958b1ba7d2e47fda9af00834d3bdeee38b7ff32d917c481bbc3355c3b454e244"
+    }
+  ]
+}
