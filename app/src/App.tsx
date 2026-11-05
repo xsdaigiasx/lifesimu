@@ -16,7 +16,7 @@ import {napAtHome,onlineGig,playAtHome,watchTv} from './domain/home-use';
 import {overtimeOffered,lunchBreak,workAction,workTick,fixBug,canEnterOffice,settleNewDay,studySkill,type WorkAction,type SkillId} from './domain/work';
 import type {StudyMode} from './domain/study';
 import {startTalk,answerEvent,maybeStart} from './domain/director';
-import {castById} from './domain/npc';import {morningDue,markMorningSeen} from './domain/morning';import Morning from './components/Morning';
+import {castById} from './domain/npc';import {morningDue,markMorningSeen} from './domain/morning';import {snapshotDay,recoverAuto} from './domain/autosave';import Morning from './components/Morning';
 import {statDeltas,type StatDelta} from './domain/stat-delta';
 import {vitalWarnings} from './domain/vitals';
 const WEEK_SHORT=['CN','T2','T3','T4','T5','T6','T7'];
@@ -41,7 +41,7 @@ import Icon,{Sprite} from './components/Icon';import CityMap from './components/
 type ModalId='homeServices'|'report'|'day'|'summary'|'details'|'phone'|'bus'|'relations'|'visit'|'journal'|'skills'|'shiftEnd'|'lunch'|'sleep'|'rent'|'yearSum'|'morning'|null;
 /** Bản lưu không đọc được được giữ lại ở đây trước khi tự động lưu đè bằng đời mới, để còn cứu. */
 const UNREADABLE_KEY='life-simulator-vi-unreadable-v1';
-function initialSession(){try{const raw=localStorage.getItem(engine.KEY),saved=engine.parse(raw);if(raw&&!saved){try{if(!localStorage.getItem(UNREADABLE_KEY))localStorage.setItem(UNREADABLE_KEY,raw)}catch{/* hết chỗ lưu */}}return{state:saved??engine.initial(),profile:parseProfile(localStorage.getItem(PROFILE_KEY)),hasSave:!!saved,storageOK:true}}catch{return{state:engine.initial(),profile:null,hasSave:false,storageOK:false}}}
+function initialSession(){try{const raw=localStorage.getItem(engine.KEY),parsed=engine.parse(raw);if(raw&&!parsed){try{if(!localStorage.getItem(UNREADABLE_KEY))localStorage.setItem(UNREADABLE_KEY,raw)}catch{/* hết chỗ lưu */}}const auto=raw&&!parsed?recoverAuto(localStorage,engine.parse):null,saved=parsed??auto;return{state:saved??engine.initial(),profile:parseProfile(localStorage.getItem(PROFILE_KEY)),hasSave:!!saved,storageOK:true,recovered:auto?auto.day:null}}catch{return{state:engine.initial(),profile:null,hasSave:false,storageOK:false,recovered:null}}}
 const fallback:PlayerProfile={name:'Minh An',gender:'male',complete:false};
 export default function App(){
  const [initial]=useState(initialSession),[state,setState]=useState<GameState>(initial.state),[profile,setProfile]=useState<PlayerProfile|null>(initial.profile),[view,setView]=useState<ViewId>(initial.profile?.complete&&fishingOf(initial.state).atLake?'lake':'city'),[modal,setModal]=useState<ModalId>(null),[selected,setSelected]=useState<PlaceId>(clockOf(initial.state).location==='lake'?'bus':clockOf(initial.state).location),[storageOK,setStorageOK]=useState(initial.storageOK),[travelMode,setTravelMode]=useState<TravelMode|null>(null),[travelSheet,setTravelSheet]=useState(false),[notification,setNotification]=useState(''),[opening,setOpening]=useState(!initial.profile?.complete),[mapReady,setMapReady]=useState(false),[mapError,setMapError]=useState<string|null>(null),[retryToken,setRetryToken]=useState(0),[centerToken,setCenterToken]=useState(0);
@@ -79,7 +79,7 @@ export default function App(){
  const travel=()=>{if(tripLock.current)return;tripLock.current=true;const toLake=!fishingOf(liveState.current).atLake,result=takeBus(liveState.current,toLake);if(!result.ok){tripLock.current=false;toast(result.error);return}if(commitGame(result.state)){tripLock.current=false;return}setModal(null);setTrip(toLake)};
  useEffect(()=>{setTravelMode(null);setTravelSheet(false)},[selected]);
  useEffect(()=>{if(trip===null)return;const id=setTimeout(()=>{setView(trip?'lake':'city');toast(trip?'Đã đến Hồ Sen':'Đã về Trạm xe buýt');if(!trip)setSelected('bus');setTrip(null);tripLock.current=false},2400);return()=>clearTimeout(id)},[trip]);
- const save=useCallback((manual=false)=>{if(resetting.current)return;try{localStorage.setItem(engine.KEY,JSON.stringify(state));setStorageOK(true);if(manual)toast(`Đã lưu ngày ${state.day+1} và căn phòng của bạn.`)}catch{setStorageOK(false);toast('Thiết bị đang chặn lưu. Dữ liệu chỉ giữ trong phiên này.')}},[state,toast]);
+ const save=useCallback((manual=false)=>{if(resetting.current)return;try{localStorage.setItem(engine.KEY,JSON.stringify(state));snapshotDay(localStorage,state);setStorageOK(true);if(manual)toast(`Đã lưu ngày ${state.day+1} và căn phòng của bạn.`)}catch{setStorageOK(false);toast('Thiết bị đang chặn lưu. Dữ liệu chỉ giữ trong phiên này.')}},[state,toast]);
  useEffect(()=>{save();const handler=()=>save();window.addEventListener('pagehide',handler);return()=>window.removeEventListener('pagehide',handler)},[save]);
  useEffect(()=>{if(profile)try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile))}catch{setStorageOK(false)}},[profile]);
  useEffect(()=>{document.body.classList.toggle('opening-visible',opening);return()=>document.body.classList.remove('opening-visible')},[opening]);
