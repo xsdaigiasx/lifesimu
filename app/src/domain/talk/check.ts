@@ -1,5 +1,6 @@
 /** H1: bộ kiểm tra kho khung và mảnh (HOI-THOAI I.6). Dữ liệu sai thì chặn (npm run talk:check, test). */
 import {isNpcId} from '../npc';
+import {isGiftItem,GIFT_MAX} from '../gifts';
 import type {Frame,Piece,TalkData} from './types';
 import {CHANNELS,EMOTIONS,INTENTS,SLOTS,TIERS,VOICES,WHENS} from './types';
 import {ADDRESS_VARS,varsIn} from './compose';
@@ -7,6 +8,8 @@ import {ADDRESS_VARS,varsIn} from './compose';
 /** Biến điền được phép trong mảnh (lấy từ dữ kiện); `when` tự tính từ ngày của dữ kiện. */
 export const FACT_VARS=['dish','place','time','weather','name','amount','item','event','holiday','when'] as const;
 const PLACES=['home','office','market','mall','bank','hospital','bus','park','streetfood','restaurant','apartments','villa','lake'];
+/** Câu có lời hứa cho đồ ("bà cho", "tặng", "biếu"): bắt buộc gắn món thật. */
+export const PROMISE=/\{self\} cho$|\{self\} cho \{you\}|\btặng\b|\bbiếu\b/u;
 const slotOf=(s:string)=>s.replace(/\?$/,'');
 
 export function talkProblems(d:TalkData,opt:{minFramesPerIntent?:number}={}):string[]{const out:string[]=[],bad=(m:string)=>out.push(m);
@@ -43,6 +46,8 @@ export function talkProblems(d:TalkData,opt:{minFramesPerIntent?:number}={}):str
   if(p.when&&p.when.some(x=>!WHENS.includes(x)))bad(`${at}: thời điểm lạ`);
   if(p.channel&&p.channel.some(x=>!CHANNELS.includes(x)))bad(`${at}: kênh lạ`);
   if(p.weight!==undefined&&!(p.weight>0))bad(`${at}: trọng số phải dương`);
+  if(p.gift===undefined&&PROMISE.test(p.text??''))bad(`${at}: câu hứa cho đồ phải khai gift để cho thật`);
+  if(p.gift!==undefined&&!(Array.isArray(p.gift)&&isGiftItem(p.gift[0])&&Number.isInteger(p.gift[1])&&p.gift[1]>=1&&p.gift[1]<=GIFT_MAX))bad(`${at}: quà phải là món có trong danh mục, 1 đến ${GIFT_MAX}`);
   if(p.cold&&p.intent?.some(i=>['invite','request','tease'].includes(i)))bad(`${at}: mảnh lạnh nhạt không dùng cho Rủ, Nhờ, Trêu`);
   // mảnh nào cũng phải có ít nhất một khung dùng được (chào hỏi: ô open không gắn ý định)
   const usable=!p.intent&&p.slot==='open'||d.frames.some(f=>f.slots.map(slotOf).includes(p.slot)&&(!p.intent||p.intent.includes(f.intent))&&(!p.channel||!f.channel||p.channel.some(c=>f.channel!.includes(c))));

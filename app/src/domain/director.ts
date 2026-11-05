@@ -12,7 +12,8 @@ import {addWorkXp} from './study';
 import {SKILLS,type SkillId} from './skill-xp';
 import {hash} from './shift';
 import {weatherOf,OUTDOOR} from './weather';
-import {dueAppointment,markAppointment} from './inbox';
+import {dueAppointment,markAppointment,MOM_PARCEL} from './inbox';
+import {sendParcel} from './gifts';
 import {forgetMemories,reinforce,FORGET} from './talk/npc-life';
 import {chooseLine,lineById,fill,intentsWithLines} from './lines';
 /** T41: ký ức nhẹ (dưới 4) mờ sau 30 ngày; ký ức nặng không quên. Từ H3 ký ức NPC quên theo `forgetMemories`; `alive` còn dùng cho ký ức nhân viên (hr.ts). */
@@ -33,7 +34,7 @@ export interface LogEntry{day:number;npc:string;motif:MotifId;variant:number;by:
 export interface StoryState{version:1;seq:number;log:LogEntry[];memories:Memory[];hooks:Hook[];loans:Loan[];pending?:PendingEvent;/** T18: các câu gần nhất đã nói với từng người (gồm câu điểm nhấn) để không lặp trong 10 câu */heard?:Record<string,string[]>}
 export const storyOf=(s:GameState):StoryState=>s.story??{version:1,seq:0,log:[],memories:[],hooks:[],loans:[]};
 
-type Effect={debt?:'extend'|'half'|'forgive'|'demand';minutes?:number;money?:number;bonusMoney?:number;relation?:number;mood?:number;stress?:number;energy?:number;fullness?:number;xp?:[SkillId,number];learn?:RecipeId;gift?:[IngredientId,number];loan?:number};
+type Effect={debt?:'extend'|'half'|'forgive'|'demand';minutes?:number;money?:number;bonusMoney?:number;relation?:number;mood?:number;stress?:number;energy?:number;fullness?:number;xp?:[SkillId,number];learn?:RecipeId;gift?:[IngredientId,number];/** Mẹ gửi kiện quà ra bến xe */parcel?:boolean;loan?:number};
 interface Option{label:string;tag:string;need?:[SkillId,number];needMoney?:number;effect:Effect;result:string}
 interface Ctx{s:GameState;npc:NpcProfile;score:number;variant:number;memory?:Memory;self:string;you:string;Self:string;/** người chơi tự xưng */me:string}
 interface Motif{id:MotifId;name:string;by:('npc'|'player')[];variants:number;eligible:(c:Omit<Ctx,'variant'>)=>boolean;line:(c:Ctx)=>string;options:(c:Ctx)=>Option[];memory?:(c:Ctx,tag:string)=>{topic:string;weight:number}|null;hook?:(c:Ctx,tag:string)=>{motif:MotifId;after:[number,number]}|null}
@@ -77,8 +78,8 @@ export const MOTIFS:Motif[]=[
   options:c=>[{label:'Ghi lại cẩn thận',tag:'learn',effect:{minutes:15,xp:['cooking',30],relation:3,...(NPC_TEACHES[c.npc.id]&&!knowsRecipe(c.s,NPC_TEACHES[c.npc.id]!)?{learn:NPC_TEACHES[c.npc.id]}:{}),...(c.npc.id==='veg'?{gift:['vegetable',1] as [IngredientId,number]}:{})},result:NPC_TEACHES[c.npc.id]&&!knowsRecipe(c.s,NPC_TEACHES[c.npc.id]!)?`Sổ công thức có thêm món ${RECIPES[NPC_TEACHES[c.npc.id]!].name}.`:'Sổ tay có thêm một mẹo nấu ăn.'},{label:'Nghe qua thôi',tag:'skim',effect:{minutes:5,xp:['cooking',10],relation:1},result:'Nhớ được đại khái.'},{label:'Để hôm khác',tag:'later',effect:{},result:'Hẹn lần sau học.'}],
   memory:(c,tag)=>tag==='learn'?{topic:'dạy nấu ăn',weight:2}:null},
  {id:'mom',name:'Tin nhắn của Mẹ',by:['npc'],variants:3,eligible:c=>c.npc.id==='me'&&minute(c.s)>=1080&&!recentlyDone(c.s,'me','mom',3),
-  line:c=>[`Con ơi, ăn uống đầy đủ không? Đừng thức khuya quá nghe.`,`Mẹ gửi xe khách cho con ít gạo với trứng, mai ra bến lấy nha.`,`Ở quê mấy bữa nay mưa suốt. Con trên đó ổn không?`][c.variant]!,
-  options:c=>{const gift=c.variant===1?{gift:['rice',3] as [IngredientId,number]}:{};return[{label:'Gọi lại cho mẹ',tag:'call',effect:{minutes:15,mood:5,stress:-4,relation:4,...gift},result:'Nghe giọng mẹ, bao mệt mỏi như vơi bớt.'},{label:'Nhắn trả lời',tag:'text',effect:{mood:2,relation:2,...gift},result:'Mẹ thả tim tin nhắn.'},{label:'Để lát nữa',tag:'later',effect:{...gift},result:'Tin nhắn nằm đó chưa trả lời.'}]},
+  line:c=>[`Con ơi, ăn uống đầy đủ không? Đừng thức khuya quá nghe.`,`Mẹ gửi xe khách cho con ít gạo với trứng, mai ra bến xe lấy nha.`,`Ở quê mấy bữa nay mưa suốt. Con trên đó ổn không?`][c.variant]!,
+  options:c=>{const gift=c.variant===1?{parcel:true}:{};return[{label:'Gọi lại cho mẹ',tag:'call',effect:{minutes:15,mood:5,stress:-4,relation:4,...gift},result:'Nghe giọng mẹ, bao mệt mỏi như vơi bớt.'},{label:'Nhắn trả lời',tag:'text',effect:{mood:2,relation:2,...gift},result:'Mẹ thả tim tin nhắn.'},{label:'Để lát nữa',tag:'later',effect:{...gift},result:'Tin nhắn nằm đó chưa trả lời.'}]},
   memory:(c,tag)=>tag==='later'?{topic:'chưa trả lời mẹ',weight:2}:null},
  {id:'debt',name:'Khất nợ',by:['npc','player'],variants:1,eligible:c=>!c.npc.remote&&!!unpaidLoan(c.s,c.npc.id)&&!recentlyDone(c.s,c.npc.id,'debt',5),
   line:c=>`Tiền mượn bữa trước, ${c.self} chưa xoay kịp. ${cap(c.you)} cho ${c.self} khất thêm ít bữa được không?`,
@@ -135,7 +136,7 @@ export function answerEvent(s:GameState,choice:number):GameResult&{text?:string}
  if(e.minutes&&clockOf(n).minute+e.minutes<END){const r=spendTime(n,e.minutes);if(r.ok)n=r.state}
  if(e.money&&post(n,{id:`story:${p.key}`,name:e.loan?`Cho ${npc.name} mượn`:`Chi cùng ${npc.name}`,amount:e.money})!=='ok')return{ok:false,error:'Không đủ tiền.'};
  if(e.mood)n.mood=clamp(n.mood+e.mood);if(e.stress)n.stress=clamp(n.stress+e.stress);if(e.energy)n.energy=clamp(n.energy+e.energy);if(e.fullness)n.fullness=clamp((n.fullness??70)+e.fullness);
- if(e.relation)n=adjustRelation(n,npc.id,e.relation,true,m.id==='greet');else n=adjustRelation(n,npc.id,0);if(e.xp)n=addWorkXp(n,e.xp[0],e.xp[1]);if(e.gift)n=giftIngredient(n,e.gift[0],e.gift[1]);if(e.learn)n=learnRecipe(n,e.learn,npc.id,npc.name);
+ if(e.relation)n=adjustRelation(n,npc.id,e.relation,true,m.id==='greet');else n=adjustRelation(n,npc.id,0);if(e.xp)n=addWorkXp(n,e.xp[0],e.xp[1]);if(e.gift)n=giftIngredient(n,e.gift[0],e.gift[1]);if(e.parcel)n=sendParcel(n,npc.id,MOM_PARCEL,`story:${p.key}`);if(e.learn)n=learnRecipe(n,e.learn,npc.id,npc.name);
  const ns:StoryState=structuredClone(storyOf(n));delete ns.pending;{const h=ns.heard?.[npc.id]??[];ns.heard={...ns.heard,[npc.id]:[...h,...[p.line,p.quirk].filter((x):x is string=>!!x)].slice(-HEARD_KEEP)}}
  if(e.debt){const l=ns.loans.find(x=>x.npc===npc.id&&x.settled==='unpaid'&&!x.resolved);if(l){if(e.debt==='extend'){delete l.settled;l.due=s.day+7;l.repay=hash(`extend:${p.key}`)%100>=30}else{l.resolved=true;const back=e.debt==='half'?Math.floor(l.amount/2):e.debt==='demand'&&hash(`demand:${p.key}`)%2===0?l.amount:0;if(back)post(n,{id:`debt-back:${l.id}:${p.key}`,name:`${npc.name} trả nợ`,amount:back})}}}
  if(mem){ns.memories=ns.memories.map(y=>y.id===mem.id?reinforce(y,s.day):y);ns.hooks=ns.hooks.filter(h=>!(h.npc===npc.id&&h.memory===mem.id))}

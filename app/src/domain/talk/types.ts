@@ -43,5 +43,6 @@ export interface Piece{id:string;slot:Slot;text:string;
  /** biến phải có trong dữ kiện, thiếu thì loại */needs?:string[];
  where?:PlaceId[];when?:When[];channel?:Channel[];
  /** tuổi NPC [từ, đến] */age?:[number,number];
+ /** câu hứa cho đồ: món (mã trong danh mục quà) và số lượng, người chơi Nhận thì cho thật */gift?:[string,number];
  /** mảnh lạnh nhạt: chỉ dùng khi Bất hoà */cold?:boolean;weight?:number}
 export interface TalkData{frames:Frame[];pieces:Piece[]}

@@ -2,7 +2,8 @@
 import type {GameState} from './types';
 import {weatherOf,forecastOf,WEATHER_LABEL,type Weather} from './weather';
 import {inboxOf,unreadCount} from './inbox';
-import {castById} from './npc';
+import {castById,nameOf} from './npc';
+import {readyParcels} from './gifts';
 import {places} from './places';
 import {isWorkday,holidayName} from './work';
 import {officeOf} from './office';
@@ -103,6 +104,7 @@ export function morningOf(s:GameState):Morning{
  const a=o.application;
  if(a?.status==='interview'||(a?.status==='pending'&&a.interviewDay===s.day))agenda.push({icon:'briefcase',text:'Hôm nay có buổi phỏng vấn'});
  if(a?.status==='passed'&&a.startDay===s.day)agenda.push({icon:'briefcase',text:'Hôm nay nhận việc'});
+ for(const p of readyParcels(s))agenda.push({icon:'box',text:`Quà của ${nameOf(s,p.from)} ở bến xe, còn ${p.until-s.day+1} ngày`});
  for(const p of ib.appts.filter(x=>x.status==='set'&&x.day===s.day).sort((x,y)=>x.minute-y.minute)){
   const h=String(Math.floor(p.minute/60)).padStart(2,'0'),m=String(p.minute%60).padStart(2,'0');
   agenda.push({icon:'people',text:`${h}:${m} Hẹn ${castById(s,p.npc)?.name??p.npc} tại ${places.find(x=>x.id===p.place)?.name??p.place}`})}

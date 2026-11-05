@@ -55,7 +55,7 @@ test('hao mòn khi lâu không gặp, có sàn theo bậc đã đạt',()=>{
 });
 
 test('Mẹ nhắn tin buổi tối; dữ liệu câu chuyện sai bị từ chối',()=>{
- let s=withPending(at(0,1140,'home'),'me','mom',1);s=ok(D.answerEvent(s,1));const {stock}=require('../.test-build/domain/life');assert.equal(stock(s,'rice'),3,'mẹ gửi gạo');
+ let s=withPending(at(0,1140,'home'),'me','mom',1);s=ok(D.answerEvent(s,1));const {stock}=require('../.test-build/domain/life');assert.equal(stock(s,'rice'),0,'quà mẹ ở bến xe');assert.equal(require('../.test-build/domain/gifts').parcelsOf(s).length,1,'mẹ gửi kiện ra bến');
  assert.equal(engine.valid({...s,story:{...D.storyOf(s),pending:{key:'x',npc:'khong-co',motif:'greet',variant:0,by:'npc',day:0}}}),false);
  assert.equal(engine.valid({...s,story:{...D.storyOf(s),loans:[{id:'l',npc:'landlord',amount:-5,due:3,repay:true}]}}),false);
  assert.equal(N.agoText(1),'hôm qua');assert.equal(N.agoText(3),'mấy hôm trước');assert.equal(N.agoText(30),'tháng trước');
