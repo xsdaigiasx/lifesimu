@@ -54,3 +54,9 @@ const later={...y,day:5+365};assert(M.morningOf(later).ago.some(l=>l.text.includ
 assert.equal(M.morningOf({...y,day:5+200}).ago.length,0);
 const old=M.markMorningSeen({...y,day:5+500});assert.equal(old.morning.memories.length,0,'quá một năm rưỡi thì bỏ');
 console.log('morning memory/friday ok');
+// Lát cắt morning hỏng không làm mất cả đời chơi
+{const ok=engine.initial(),good={...ok,day:3,money:1234567};
+ for(const bad of [{seen:99},{seen:'x'},{seen:2,week:{start:-5,ids:['la']}},{seen:2,month:{key:'sai',worth:NaN,lv:{}}},{seen:2,recap:{day:9,lines:[]}}]){
+  const p=engine.parse(JSON.stringify({...good,morning:bad}));assert(p,'vẫn đọc được: '+JSON.stringify(bad));assert.equal(p.money,1234567);assert.equal(p.day,3);assert.equal(p.morning,undefined);}
+ assert.equal(engine.parse(JSON.stringify({...good,money:-5,morning:{seen:1}})),null,'lỗi ở chỗ khác vẫn bị từ chối');
+ console.log('morning parse fallback ok')}
