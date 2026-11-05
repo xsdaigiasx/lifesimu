@@ -77,18 +77,28 @@ import type {GameState,GameResult,ItemId,Item,DailyAction,EngineApi} from './typ
     }
     /** Save cũ dùng cấp nội bộ 1–50: đổi sang Lv 1–10 (cấp / 5), XP dư bỏ đi. */
     function migrateSkills(s: any): GameState | null { const k = s?.skills; if (!k || typeof k !== 'object' || validSkills(k)) return null; const out: any = {}; for (const id of Object.keys(SKILLS)) { const q = k[id]; if (q === undefined && id === 'cooking') continue; if (!q || !Number.isInteger(q.level) || q.level < 1 || q.level > 50) return null; out[id] = { level: Math.max(1, Math.min(MAX_LEVEL, Math.floor(q.level / 5))), xp: 0 }; } return { ...s, skills: out }; }
-    function parse(raw: string | null): GameState | null { if (typeof raw !== 'string')
-        return null; try {
-        const s = JSON.parse(raw);
-        if (valid(s)) return s;
-        const m = migrateSkills(s);
-        if (m && valid(m)) return m;
-        /* Lát cắt phụ (Bản tin sáng) hỏng thì bỏ riêng nó, giữ nguyên phần còn lại của đời chơi. */
-        const base = m ?? s; if (base && typeof base === 'object' && 'morning' in base) { const { morning: _drop, ...rest } = base as GameState; if (valid(rest)) return rest; }
-        return null;
-    }
-    catch {
-        return null;
-    } }
+/** Các lát cắt tuỳ chọn của save, xếp từ ít giá trị tới nhiều giá trị. Khi save không hợp lệ (thường do bản cập nhật siết
+ * điều kiện kiểm tra), bỏ một hoặc hai lát cắt hỏng để giữ phần còn lại của đời chơi thay vì về Ngày 1. */
+export const OPTIONAL_SLICES = ['morning','summary','bauCuaLast','coffee','fullness','officeLayout','journal','fishing','story','inbox','study','side','orders','officeItems','home','social','work','clock','housing','rent','office','skills','company','bank','life','txIds','txSeq'] as const;
+export type SliceKey = typeof OPTIONAL_SLICES[number];
+export interface LoadedSave { state: GameState; dropped: SliceKey[]; }
+const without = (s: any, keys: readonly string[]) => { const n = { ...s }; for (const k of keys) delete n[k]; return n; };
+/** Sửa nhẹ phần lõi: bỏ dòng sổ cái lỗi hoặc quá hạn mức (sổ cái chỉ để xem). */
+function tidyCore(s: any): any { if (!s || typeof s !== 'object' || !Array.isArray(s.ledger)) return s; const ledger = s.ledger.filter((x: any) => x && typeof x.name === 'string' && x.name.length < 200 && Number.isSafeInteger(x.amount) && Number.isSafeInteger(x.day) && x.day >= 0 && x.day <= s.day).slice(-100); return ledger.length === s.ledger.length ? s : { ...s, ledger }; }
+/** Đọc save; nếu cần thì bỏ lát cắt hỏng. `dropped` rỗng nghĩa là đọc nguyên vẹn. */
+export function loadSave(raw: string | null): LoadedSave | null { if (typeof raw !== 'string') return null; const ok = (x: unknown): x is GameState => { try { return valid(x); } catch { return false; } }; try {
+    const s = JSON.parse(raw);
+    if (ok(s)) return { state: s, dropped: [] };
+    const m = migrateSkills(s);
+    if (m && ok(m)) return { state: m, dropped: [] };
+    const base = tidyCore(m ?? s); if (!base || typeof base !== 'object') return null;
+    if (ok(base)) return { state: base, dropped: [] };
+    const present = OPTIONAL_SLICES.filter(k => k in base);
+    for (const k of present) { const n = without(base, [k]); if (ok(n)) return { state: n, dropped: [k] }; }
+    for (let i = 0; i < present.length; i++) for (let j = i + 1; j < present.length; j++) { const n = without(base, [present[i], present[j]]); if (ok(n)) return { state: n, dropped: [present[i], present[j]] }; }
+    return null;
+} catch { return null; } }
+    /** Đọc chặt: chỉ chấp nhận save nguyên vẹn (riêng Bản tin sáng hỏng thì được bỏ). Khi mở game dùng `loadSave` để cứu nhiều hơn. */
+    function parse(raw: string | null): GameState | null { const r = loadSave(raw); return r && r.dropped.every(k => k === 'morning') ? r.state : null; }
 
 export const engine: EngineApi = { KEY, COST, ITEMS, initial, valid, buy, toggle, advance, parse };

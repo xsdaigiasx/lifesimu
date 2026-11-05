@@ -31,6 +31,8 @@ export function validApplication(v:unknown):v is Application{if(!v||typeof v!=='
 /** T11: thử việc 30 ngày (chủ dự án chốt 04/11), lương 85%; đủ 20 ngày đi làm thì qua, không đủ thì mất việc và 30 ngày sau mới nộp lại được. */
 /** Giao tiếp từ Lv2: đúng 2/3 câu vẫn qua phỏng vấn nhờ trình bày tốt. */
 export const INTERVIEW_COMM_RESCUE=2;
+/** Save cũ có thể mang độ dài thử việc khác (trước đây 60 ngày): chấp nhận mọi kỳ tới PROBATION_MAX để không mất save khi đổi số. */
+export const PROBATION_MAX=120;
 export const PROBATION_DAYS=30,PROBATION_PASS_DAYS=20,PROBATION_SALARY=.85,RETRY_AFTER_FAIL=30;
 export interface Probation{start:number;end:number;workDays:number}
 import {isTier,type Tier} from './career';
@@ -42,7 +44,7 @@ export function validOffice(value:unknown):value is OfficeState{
  if(!value||typeof value!=='object')return false;const o=value as OfficeState;
  const level=(v:number,min:number,max:number)=>Number.isInteger(v)&&v>=min&&v<=max;
  const decor=(v:OfficeState['ownerDecor'])=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.entries(v).every(([id,slot])=>Object.hasOwn(DECOR,id)&&(slot===null||level(slot!,0,2)))&&new Set(Object.values(v).filter(v=>v!==null)).size===Object.values(v).filter(v=>v!==null).length;
- if(o.tier!==undefined&&!(o.role==='employee'&&isTier(o.tier)&&Number.isInteger(o.tierSince)&&o.tierSince!>=0))return false;if(o.tierSince!==undefined&&o.tier===undefined)return false;const pr=o.probation;if(pr!==undefined&&!(o.role==='employee'&&pr&&Number.isInteger(pr.start)&&pr.start>=0&&pr.end===pr.start+PROBATION_DAYS&&Number.isInteger(pr.workDays)&&pr.workDays>=0&&pr.workDays<=PROBATION_DAYS))return false;if(o.retryDay!==undefined&&!level(o.retryDay,0,100100))return false;
+ if(o.tier!==undefined&&!(o.role==='employee'&&isTier(o.tier)&&Number.isInteger(o.tierSince)&&o.tierSince!>=0))return false;if(o.tierSince!==undefined&&o.tier===undefined)return false;const pr=o.probation;if(pr!==undefined&&!(o.role==='employee'&&pr&&Number.isInteger(pr.start)&&pr.start>=0&&Number.isInteger(pr.end)&&pr.end>pr.start&&pr.end<=pr.start+PROBATION_MAX&&Number.isInteger(pr.workDays)&&pr.workDays>=0&&pr.workDays<=pr.end-pr.start))return false;if(o.retryDay!==undefined&&!level(o.retryDay,0,100100))return false;
  return (o.application==null||validApplication(o.application))&&['visitor','employee','owner'].includes(o.role)&&(o.employerId===null||COMPANIES.some(c=>c.id===o.employerId))&&(o.role!=='employee'||o.employerId!==null)&&Object.hasOwn(INDUSTRIES,o.industry)&&Object.hasOwn(SIZES,o.size)&&typeof o.name==='string'&&o.name.trim().length>0&&o.name.length<=32&&level(o.leaseUntil,0,100007)&&level(o.workComputer,1,3)&&level(o.computers,1,3)&&level(o.printer,0,2)&&decor(o.employeeDecor)&&!Object.hasOwn(o.employeeDecor,'coffee')&&decor(o.ownerDecor)&&Array.isArray(o.met)&&o.met.length<=STAFF.length&&new Set(o.met).size===o.met.length&&o.met.every(id=>STAFF.some(n=>n.id===id));
 }
 export type OfficeAction={kind:'apply';id:string;cv:string}|{kind:'startInterview'}|{kind:'answer';choice:number}|{kind:'acceptOffer'}|{kind:'cancelApplication'}|{kind:'shift'}|{kind:'endLease'}|{kind:'leave'}|{kind:'rent';size:OfficeSize;industry:Industry;name:string;term?:LeaseTerm}|{kind:'renew';term?:LeaseTerm}|{kind:'upgrade';item:'computer'|'printer'}|{kind:'buyDecor';id:DecorId}|{kind:'place';id:DecorId;slot:number|null}|{kind:'meet';id:string};
