@@ -8,7 +8,7 @@ const sub=(s,x)=>T.factsOf(s).filter(f=>f.sub===x&&f.topic!=='self');
 const say=(s,id,o={})=>C.compose({npc:N.castById(s,id),tier:'close',mood:'neutral',channel:'face',minute:clockOf(s).minute,day:s.day,seed:'x',facts:T.factsOf(s),present:N.peopleHere(s).map(n=>n.id),...o});
 
 test('25 loại dữ kiện; dữ kiện nào cũng hợp lệ',()=>{
- assert.equal(T.FACT_SUBS.length,25);assert.equal(new Set(T.FACT_SUBS).size,25);
+ assert.equal(T.FACT_SUBS.length,27);assert.equal(new Set(T.FACT_SUBS).size,27);
  const s=at(600,'market');for(const f of T.factsOf(s)){assert.ok(f.topic==='self'||T.FACT_SUBS.includes(f.sub),f.sub);assert.ok(f.knownBy==='all'||f.knownBy==='present'||f.knownBy.length>0,f.id);for(const id of Array.isArray(f.knownBy)?f.knownBy:[])assert.ok(N.isNpcId(id),id)}
  assert.ok(sub(s,'weather').length===1&&sub(s,'forecast').length===1,'thời tiết ai cũng biết');assert.equal(sub(s,'weather')[0].knownBy,'all');
 });

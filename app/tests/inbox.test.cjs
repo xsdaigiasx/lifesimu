@@ -18,9 +18,9 @@ test('lịch tin mỗi ngày: tối đa 2, Mẹ cách ít nhất 2 ngày, nhắc
 
 test('tin tới giờ mới vào hộp, đọc và trả lời một lần, nhắn không tốn giờ',()=>{
  let s=at(3,420,'home');s=I.settleInbox(s);const q=I.inboxOf(s).queue.find(x=>x.npc==='me');if(!q){s={...s,inbox:{...I.inboxOf(s),queue:[{id:'q3:me:mom-care',npc:'me',day:3,minute:1150,from:'npc',text:'Ăn chưa con?',kind:'mom-care',replies:['Dạ rồi','Chưa mẹ']}]}}}
- const target=I.inboxOf(s).queue.find(x=>x.npc==='me');assert.equal(I.deliverDue({...s,clock:{...s.clock,minute:target.minute-1}}).from.length,0,'chưa tới giờ');
- const r=I.deliverDue({...s,clock:{...s.clock,minute:target.minute}});assert.deepEqual(r.from,['Mẹ']);s=r.state;assert.equal(I.unreadCount(s,'me'),1);
- s=I.markRead(s,'me');assert.equal(I.unreadCount(s),0);const msg=I.inboxOf(s).threads.me.at(-1),min=clockOf(s).minute;
+ const target=I.inboxOf(s).queue.find(x=>x.npc==='me');assert.ok(!I.deliverDue({...s,clock:{...s.clock,minute:target.minute-1}}).from.includes('Mẹ'),'chưa tới giờ');
+ const r=I.deliverDue({...s,clock:{...s.clock,minute:target.minute}});assert.ok(r.from.includes('Mẹ'));s=r.state;assert.equal(I.unreadCount(s,'me'),1);
+ s=I.markRead(s,'me');assert.equal(I.unreadCount(s,'me'),0);/* H5: em cũng có thể nhắn cùng tối */const msg=I.inboxOf(s).threads.me.at(-1),min=clockOf(s).minute;
  s=ok(I.replyMessage(s,'me',msg.id,0));assert.equal(clockOf(s).minute,min,'nhắn tin không tốn giờ');assert.equal(I.replyMessage(s,'me',msg.id,1).ok,false,'không trả lời hai lần');
  assert.ok(socialOf(s).relations.me.score>0);
 });

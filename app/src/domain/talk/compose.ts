@@ -55,11 +55,23 @@ function pieceFits(p:Piece,slot:Slot,intent:Intent|null,fact:Fact|undefined,c:Ta
 function pick<T extends {id:string;weight?:number}>(list:readonly T[],seed:string,boost:(x:T)=>number=()=>1){if(!list.length)return undefined;const w=list.map(x=>Math.max(0,(x.weight??1)*boost(x))),sum=w.reduce((a,b)=>a+b,0);if(sum<=0)return list[0];let r=hash(seed)%10000/10000*sum;for(let i=0;i<list.length;i++){r-=w[i]!;if(r<0)return list[i]}return list[list.length-1]}
 /** Xáo theo seed (tất định). */
 const order=<T,>(list:readonly T[],seed:string,key:(x:T)=>string)=>[...list].sort((a,b)=>hash(`${seed}:${key(a)}`)-hash(`${seed}:${key(b)}`));
+/** H5: trọng số chọn ý định. Xin lỗi hiếm nếu không có chuyện thật để xin lỗi (lỡ hẹn, còn nợ, nói nặng). */
+export const INTENT_WEIGHT:Record<Intent,number>={brag:1.2,complain:1,ask:1,invite:.7,request:1,news:.7,tease:1,apologize:.15};
+/** Khoe, Nhờ chuyện của chính NPC: hôm NPC không có biến cố thì vẫn nói được bằng mảnh không gắn chủ đề (H5, tránh hiếm). */
+const NO_FACT_OK:readonly Intent[]=['brag','request'];
+export const FRESH_BOOST=3;
+/** Mảnh nhắc đúng dữ kiện được ưu tiên hơn mảnh chung (câu bám chuyện thật, I.9). */
+export const TOPIC_BOOST=2;
+const SORRY_SUBS=['missed','debt','harsh'];
+/** Xáo có trọng số theo seed (rút không hoàn lại, tất định). */
+const weighted=<T,>(list:readonly T[],seed:string,key:(x:T)=>string,w:(x:T)=>number)=>list.map(x=>({x,k:-Math.log((hash(`${seed}:${key(x)}`)%9973+1)/9974)/Math.max(1e-6,w(x))})).sort((a,b)=>a.k-b.k).map(o=>o.x);
 
 /** Nối các mảnh: dấu phẩy giữa mảnh, mảnh đã có dấu câu thì cách bằng khoảng trắng và viết hoa đầu mảnh sau. */
 /** Mảnh kết bằng từ hỏi thì đặt dấu hỏi để phần sau viết hoa thành câu mới. */
-export const QUESTION=/(không|hông|hả|chưa|sao rồi|gì|nhỉ|à|chứ|được không)$/u;
-export function joinParts(parts:readonly string[]){let out='';for(const raw of parts){let p=raw.trim();if(!p)continue;if(!out)out=cap(p);else if(/[.?!]$/.test(out))out+=' '+cap(p);else out+=', '+p;if(QUESTION.test(out))out+='?'}return out&&!/[.?!]$/.test(out)?out+'.':out}
+export const QUESTION=/(?:^|[\s,])(không|hông|hả|chưa|sao rồi|gì|nhỉ|à|chứ|được không)$/u;
+/** Trợ từ cuối câu: hai mảnh liền nhau cùng kết bằng trợ từ thì bỏ trợ từ của mảnh trước ("ăn chè với cô nha, đi nha" thành "ăn chè với cô, đi nha"). */
+const PARTICLE_END=/\s(nha|nhé|nghe|nghen)$/u;
+export function joinParts(parts:readonly string[]){let out='';for(const raw of parts){let p=raw.trim();if(!p)continue;if(out&&PARTICLE_END.test(p)&&PARTICLE_END.test(out))out=out.replace(PARTICLE_END,'');if(!out)out=cap(p);else if(/[.?!]$/.test(out))out+=' '+cap(p);else out+=', '+p;if(QUESTION.test(out))out+='?'}return out&&!/[.?!]$/.test(out)?out+'.':out}
 
 function varsFor(c:TalkCtx,fact?:Fact):Record<string,string|number>{const n=c.npc;return{...(fact?.vars??{}),...(fact?{when:agoText(c.day-fact.day)}:{}),self:n.self,you:n.you,Self:cap(n.self),You:cap(n.you),p:PARTICLE[n.voiceKey]??'nha'}}
 const fill=(text:string,vars:Record<string,string|number>)=>text.replace(VAR,(_,k:string)=>String(vars[k]));
@@ -67,23 +79,26 @@ const fill=(text:string,vars:Record<string,string|number>)=>text.replace(VAR,(_,
 function tryFrame(c:TalkCtx,data:TalkData,frame:Frame,intent:Intent,fact:Fact|undefined):Said|null{
  const vars=varsFor(c,fact),parts:string[]=[],ids:string[]=[];
  for(const raw of frame.slots){const optional=raw.endsWith('?'),slot=raw.replace('?','') as Slot;
-  const cand=data.pieces.filter(p=>pieceFits(p,slot,intent,fact,c,vars)),p=pick(cand,`${c.seed}:${frame.id}:${slot}`,x=>x.npc||x.voice?2:1);
+  const cand=data.pieces.filter(p=>pieceFits(p,slot,intent,fact,c,vars)),p=pick(cand,`${c.seed}:${frame.id}:${slot}`,x=>(x.npc||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
   if(!p){if(optional)continue;return null}parts.push(fill(p.text,vars));ids.push(p.id)}
  const text=joinParts(parts);if(!text)return null;
  const gift=ids.map(id=>data.pieces.find(p=>p.id===id)?.gift).find(Boolean);
  return{...(gift?{gift}:{}),text,intent,fact,frame:frame.id,pieces:ids,prints:[...ids.map(id=>'p:'+id),'f:'+frame.id,`t:${intent}:${fact?.sub??'-'}`]}}
 
 /** Câu chào ngắn theo giọng khi không ghép được gì (mảnh `open` không gắn ý định). */
-export function greeting(c:TalkCtx,data:TalkData=c.data??TALK):Said{const vars=varsFor(c),p=pick(data.pieces.filter(x=>pieceFits(x,'open',null,undefined,c,vars)),`${c.seed}:hi`,x=>x.npc||x.voice?2:1);
+export function greeting(c:TalkCtx,data:TalkData=c.data??TALK):Said{const vars=varsFor(c),p=pick(data.pieces.filter(x=>pieceFits(x,'open',null,undefined,c,vars)),`${c.seed}:hi`,x=>(x.npc||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
  return p?{text:joinParts([fill(p.text,vars)]),intent:null,pieces:[p.id],prints:['p:'+p.id]}:{text:joinParts([fill('Chào {you}',vars)]),intent:null,pieces:[],prints:[]}}
 
 /** Ghép một câu cho NPC (trục 6 → 4, 5 → 3 → 1 → 2 → khung và mảnh). Trả về null nếu bối cảnh không cho nói. */
 export function compose(c:TalkCtx):Said|null{const data=c.data??TALK,when=whenOf(c.minute);
  if(!channelAllowed(c.channel,when,c.tier,c.npc.age,!!c.npc.family))return null;
- const intents=order((c.intents??INTENTS).filter(i=>intentAllowed(i,c.tier,c.mood)),`${c.seed}:intent`,i=>i);
+ const sorry=c.facts.some(f=>SORRY_SUBS.includes(f.sub)&&factFits(f,'apologize',c.tier,c.npc.id,c.present??[]));
+ /* ý định chưa nói với người này trong 14 ngày được ưu tiên gấp đôi (đa dạng, I.9) */const said14=new Set((c.recent??[]).filter(x=>x.k.startsWith('t:')&&c.day-x.d<14).map(x=>x.k.split(':')[1]));
+ const intents=weighted((c.intents??INTENTS).filter(i=>intentAllowed(i,c.tier,c.mood)),`${c.seed}:intent`,i=>i,i=>(i==='apologize'&&sorry?1.5:INTENT_WEIGHT[i])*(said14.has(i)?1:FRESH_BOOST));
  for(const intent of intents){
   const facts=order(c.facts.filter(f=>factFits(f,intent,c.tier,c.npc.id,c.present??[])&&!used(c.recent??[],`t:${intent}:${f.sub}`,c.day)),`${c.seed}:fact:${intent}`,f=>f.id);
   for(const fact of facts){
    const frames=order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:${fact.id}`,f=>f.id);
-   for(const frame of frames){const said=tryFrame(c,data,frame,intent,fact);if(said)return said}}}
+   for(const frame of frames){const said=tryFrame(c,data,frame,intent,fact);if(said)return said}}
+  if(NO_FACT_OK.includes(intent)&&!used(c.recent??[],`t:${intent}:-`,c.day))for(const frame of order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:-`,f=>f.id)){const said=tryFrame(c,data,frame,intent,undefined);if(said)return said}}
  return greeting(c,data)}

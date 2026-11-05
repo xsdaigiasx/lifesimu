@@ -19,8 +19,8 @@ import {fitValue} from '../fitness';
 import {dateAt} from '../format';
 import {npcFacts} from './npc-life';
 
-/** Các loại dữ kiện (25). */
-export const FACT_SUBS=['food','eatout','cook','home','job','probation','tier','salary','money','loan','sick','tired','study','recipe','company','project','side','rent','missed','debt','fit','weather','forecast','holiday','weekend'] as const;
+/** Các loại dữ kiện (27; `rain`, `rainsoon` là mưa hoặc bão hôm nay, ngày mai, để câu than mưa không nói lúc nắng). */
+export const FACT_SUBS=['food','eatout','cook','home','job','probation','tier','salary','money','loan','sick','tired','study','recipe','company','project','side','rent','missed','debt','fit','weather','forecast','holiday','weekend','rain','rainsoon'] as const;
 export type FactSub=typeof FACT_SUBS[number];
 /** Số ngày dữ kiện còn được nhắc. */
 export const FACT_DAYS={food:1,cook:2,home:14,job:14,probation:14,tier:14,salary:3,study:3,recipe:14,company:30,project:7,side:7,missed:14} as const;
@@ -70,8 +70,8 @@ export function factsOf(s:GameState):Fact[]{const out:Fact[]=[],day=s.day,o=offi
  for(const l of storyOf(s).loans)if(l.settled!=='paid'&&!l.resolved)add({id:`debt:${l.id}`,topic:'player',sub:'debt',day:l.due,tone:'bad',private:1,knownBy:[l.npc],vars:{amount:fmt(l.amount)}});
  // Ngoài đời: ai cũng biết
  const world=(sub:FactSub,vars:Record<string,string>,tone:Fact['tone']='plain')=>add({id:`${sub}:${day}`,topic:'world',sub,about:'world',day,tone,knownBy:'all',vars});
- {const w=weatherOf(day);world('weather',{weather:WEATHER_WORD[w]},w==='storm'||w==='rain'?'bad':'good')}
- {const w=forecastOf(day);world('forecast',{weather:WEATHER_WORD[w]},w==='storm'||w==='rain'?'bad':'good')}
+ {const w=weatherOf(day),wet=w==='storm'||w==='rain';world('weather',{weather:WEATHER_WORD[w]},wet?'bad':'good');if(wet)world('rain',{weather:WEATHER_WORD[w]},'bad')}
+ {const w=forecastOf(day),wet=w==='storm'||w==='rain';world('forecast',{weather:WEATHER_WORD[w]},wet?'bad':'good');if(wet)world('rainsoon',{weather:WEATHER_WORD[w]},'bad')}
  for(let k=0;k<=3;k++){const h=holidayName(day+k);if(h){world('holiday',{holiday:h},'good');break}}
  {const dow=dateAt(day).getUTCDay();if(dow===5||dow===6)world('weekend',{},'good')}
  out.push(...npcFacts(s));

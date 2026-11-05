@@ -18,8 +18,8 @@ test('giọng theo người: giọng miền Tây không dùng câu của giọng
 test('60 ngày nói chuyện: không lặp câu với cùng người trong 10 lần; có nhắc chuyện cũ đều',()=>{
  let s=at(0,1140,'home'),said=[],callbacks=new Set();
  for(let day=0;day<60;day++){s={...s,day,clock:{...clockOf(s),minute:1110,location:'home'}};
-  for(const m of [1110,1180]){s={...s,clock:{...clockOf(s),minute:m}};const r=D.startTalk(s,'landlord');if(!r.ok)continue;s=r.state;const p=D.storyOf(s).pending;if(p.line)said.push(p.line);if(p.memory)callbacks.add(day);s=ok(D.answerEvent(s,firstOpen(D.openEvent(s))))}
-  s={...s,clock:{...clockOf(s),minute:1200}};const m=D.maybeStart(s,'arrive');if(D.storyOf(m).pending){const p=D.storyOf(m).pending;if(p.npc==='landlord'&&p.line)said.push(p.line);if(p.memory&&p.npc==='landlord')callbacks.add(day);s=ok(D.answerEvent(m,firstOpen(D.openEvent(m))))}
+  for(const m of [1110,1180]){s={...s,clock:{...clockOf(s),minute:m}};const r=D.startTalk(s,'landlord');if(!r.ok)continue;s=r.state;const p=D.storyOf(s).pending;/* H5: câu ghép (chủ trọ có mảnh riêng) cũng tính vào 10 lần nói */if(p.line||p.talk)said.push(p.line??'talk:'+p.talk.text);if(p.memory)callbacks.add(day);s=ok(D.answerEvent(s,firstOpen(D.openEvent(s))))}
+  s={...s,clock:{...clockOf(s),minute:1200}};const m=D.maybeStart(s,'arrive');if(D.storyOf(m).pending){const p=D.storyOf(m).pending;if(p.npc==='landlord'&&(p.line||p.talk))said.push(p.line??'talk:'+p.talk.text);if(p.memory&&p.npc==='landlord')callbacks.add(day);s=ok(D.answerEvent(m,firstOpen(D.openEvent(m))))}
   if(day%4===0){s={...s,story:{...D.storyOf(s),pending:{key:`${day}:fav`,npc:'landlord',motif:'favor',variant:day%3===2?0:day%3,by:'npc',day}}};s=ok(D.answerEvent(s,0))}
   s=D.settleStory(s,{...s,day:day+1})}
  for(let i=0;i<said.length;i++)assert.ok(!said.slice(Math.max(0,i-10),i).includes(said[i]),`lặp câu ${said[i]} ở lần ${i}`);

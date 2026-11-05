@@ -14,6 +14,10 @@ import {dateAt} from './format';
 import {hash} from './shift';
 import {sendParcel} from './gifts';
 import {storyOf} from './director';
+import {sayNow,replyCtxOf} from './talk/live';
+import {buildReplies} from './talk/replies';
+import {notePrintsFor} from './talk/state';
+import type {Intent} from './talk/types';
 
 export type MsgKind='mom-care'|'mom-aid'|'mom-gift'|'mom-recipe'|'invite'|'checkin'|'rent'|'missed'|'note';
 export interface Msg{id:string;day:number;minute:number;from:'npc'|'me';text:string;kind:MsgKind;replies?:string[];answered?:number;read?:boolean;recipe?:RecipeId;appt?:{day:number;minute:number;place:PlaceId}}
@@ -56,6 +60,8 @@ const T={
  missed:{elder:'Hôm qua {self} chờ {you} hoài mà không thấy.',senior:'Hôm qua {self} chờ mãi không thấy {you}.',peer:'Hôm qua chờ hoài không thấy đâu hết.',junior:'Hôm qua em chờ {you} mãi.'} as Record<Rank,string>,
 };
 
+/** Em nhắn: mọi ý định trừ Nhờ (nhờ tiền, nhờ việc cần gặp mặt). */
+const EM_INTENTS:readonly Intent[]=['brag','complain','ask','invite','news','tease','apologize'];
 /** Ai được gọi điện: Mẹ và người từ bậc Thân. */
 export const canCall=(s:GameState,id:string)=>FAMILY_IDS.includes(id)||scoreOf(s,id)>=30;
 /** Danh bạ: Mẹ và người từ Quen biết (đã cho số). */
@@ -68,11 +74,15 @@ const lastAidDay=(ib:InboxState)=>[...(ib.threads.me??[]),...ib.queue.filter(q=>
 /** Tin Mẹ gửi tiền còn hạn nhận, chưa nhận. */
 const openAid=(s:GameState)=>(inboxOf(s).threads.me??[]).find(m=>m.kind==='mom-aid'&&m.answered===undefined&&s.day-m.day<=MOM_AID.claimDays);
 /** Lên lịch tin nhắn cho ngày mới (tối đa 2), chọn theo seed. */
-function schedule(s:GameState,ib:InboxState):Queued[]{const out:Queued[]=[],day=s.day,mk=(npc:string,minute:number,kind:MsgKind,text:string,replies?:string[],appt?:Msg['appt'])=>out.push({id:`q${day}:${npc}:${kind}`,npc,day,minute,from:'npc',text,kind,...(replies?{replies}:{}),...(appt?{appt}:{})});
+/** H5: tin nhắn ghép từ bộ sinh hội thoại; trả lời gợi ý lấy hai lựa chọn đầu hợp ý định (một tích cực, một không). Câu không ghép được thì trả null để giữ câu cũ. */
+function composed(s:GameState,id:string,minute:number,seed:string,intents?:readonly Intent[]){const npc=castById(s,id);if(!npc)return null;const said=sayNow(s,npc,'text',seed,{minute,...(intents?{intents}:{})});if(!said?.intent)return null;
+ const replies=buildReplies(replyCtxOf(s,npc,said.intent,seed)).filter(o=>o.action!=='help'||o.minutes<=5).slice(0,2).map(o=>o.label);return{text:said.text,replies:replies.length===2?replies:undefined,prints:said.prints}}
+function schedule(s:GameState,ib:InboxState,prints:Record<string,string[]>={}):Queued[]{const out:Queued[]=[],day=s.day,mk=(npc:string,minute:number,kind:MsgKind,text:string,replies?:string[],appt?:Msg['appt'])=>out.push({id:`q${day}:${npc}:${kind}`,npc,day,minute,from:'npc',text,kind,...(replies?{replies}:{}),...(appt?{appt}:{})});
  const h=(k:string)=>hash(`inbox:${day}:${k}`);
  if(needsAid(s)&&!lastAidDay(ib).some(d=>day-d<MOM_AID.cooldown))mk('me',480,'mom-aid','Mẹ nghe nói dạo này con túng. Mẹ gửi con ít tiền, con gọi cho mẹ một cuộc để mẹ chuyển nhé.');
  if(dateAt(day+2).getUTCDate()===1&&(s.housing?.house??'tro')==='tro')mk('landlord',480,'rent',fillV(s,'landlord','Còn hai ngày nữa tới hạn tiền trọ {p} {you}.'),[fillV(s,'landlord','Dạ {me} nhớ rồi'),fillV(s,'landlord','{Call} cho {me} khất vài bữa')]);
- const lastMom=Math.max(-9,...(ib.threads.me??[]).filter(m=>m.from==='npc').map(m=>m.day));if(day-lastMom>=2&&h('mom')%3!==0){const v=h('momv')%3,teach=nextMomRecipe(s);const kind:MsgKind=v===0?'mom-care':v===1?'mom-gift':teach?'mom-recipe':'mom-care';mk('me',1140+h('momt')%90,kind,kind==='mom-care'?'Con ăn uống đầy đủ không? Đừng thức khuya quá nghe.':kind==='mom-gift'?'Mẹ gửi xe khách cho con ít gạo với trứng, mai ra bến xe lấy nha con.':(MOM_RECIPE_TEXT[teach!]??""),kind==='mom-recipe'?['Con ghi lại rồi','Để con thử nấu']:['Con khoẻ, mẹ yên tâm','Dạ con biết rồi']);if(kind==='mom-recipe')out[out.length-1]!.recipe=teach}
+ const lastMom=Math.max(-9,...(ib.threads.me??[]).filter(m=>m.from==='npc').map(m=>m.day));if(day-lastMom>=2&&h('mom')%3!==0){const v=h('momv')%3,teach=nextMomRecipe(s);const kind:MsgKind=v===0?'mom-care':v===1?'mom-gift':teach?'mom-recipe':'mom-care';const at=1140+h('momt')%90,care=kind==='mom-care'?composed(s,'me',at,`mom:${day}`):null;if(care)prints.me=care.prints;mk('me',at,kind,kind==='mom-care'?care?.text??'Con ăn uống đầy đủ không? Đừng thức khuya quá nghe.':kind==='mom-gift'?'Mẹ gửi xe khách cho con ít gạo với trứng, mai ra bến xe lấy nha con.':(MOM_RECIPE_TEXT[teach!]??""),kind==='mom-recipe'?['Con ghi lại rồi','Để con thử nấu']:care?.replies??['Con khoẻ, mẹ yên tâm','Dạ con biết rồi']);if(kind==='mom-recipe')out[out.length-1]!.recipe=teach}
+ {const lastEm=Math.max(-9,...(ib.threads.em??[]).filter(m=>m.from==='npc').map(m=>m.day));if(castById(s,'em')&&day-lastEm>=3&&h('em')%2===0){const at=1080+h('emt')%180,m=composed(s,'em',at,`em:${day}`,EM_INTENTS);if(m){prints.em=m.prints;mk('em',at,'checkin',m.text,m.replies??sayAll(s,'em',T.checkinReplies))}}}
  const close=rosterOf(s).filter(n=>n.story&&!n.remote&&scoreOf(s,n.id)>=30);const dow=dateAt(day).getUTCDay();
  for(const n of close.sort((a,b)=>h(a.id)-h(b.id))){if(out.length>=DAILY_MESSAGES)break;const rel=socialOf(s).relations[n.id]!;
   if((dow===5||dow===6)&&h('inv'+n.id)%3===0){const apDay=day+1,apMin=1110;mk(n.id,600+h('t'+n.id)%300,'invite',say(s,n.id,T.invite(placeName('streetfood'),hhmm(apMin))),sayAll(s,n.id,T.inviteReplies),{day:apDay,minute:apMin,place:'streetfood'});continue}
@@ -96,7 +106,7 @@ export function replyMessage(s:GameState,id:string,msgId:string,choice:number):G
  else if(m.kind==='rent'){answer=choice===0?'Ừ, giỏi lắm.':'Thôi được, nhưng đừng trễ quá nghen.';n=adjustRelation(n,id,choice===0?1:-1)}
  else if(m.kind==='mom-gift'){answer='Ừ, nhớ ra lấy sớm kẻo để lâu hư.';n=adjustRelation(n,id,2);n={...n,mood:Math.min(100,n.mood+3)}}
  else if(m.kind==='mom-recipe'){if(m.recipe&&RECIPES[m.recipe])n=learnRecipe(n,m.recipe,'me','Mẹ');n=addWorkXp(n,'cooking',choice===0?20:10);answer='Nấu được thì chụp hình cho mẹ coi.';n=adjustRelation(n,id,2)}
- else{answer=id==='me'?'Ừ, mẹ thương.':say(s,id,T.fine);n=adjustRelation(n,id,2,true,true);n={...n,mood:Math.min(100,n.mood+2)}}
+ else{answer=id==='me'?'Ừ, mẹ thương.':id==='em'?fillV(s,id,['Hihi, vậy nha {you}.','Dạ, em biết rồi.','Ok {you}!'][hash(`em-re:${msgId}`)%3]!):say(s,id,T.fine);n=adjustRelation(n,id,2,true,true);n={...n,mood:Math.min(100,n.mood+2)}}
  const nm=inboxOf(n),now=clockOf(s).minute;const thread=[...(nm.threads[id]??[])].map(x=>x.id===msgId?{...x,answered:choice,read:true}:x);thread.push({id:`m${seq}:me`,day:s.day,minute:now,from:'me',text:label,kind:'note',read:true},{id:`m${seq}:re`,day:s.day,minute:now,from:'npc',text:answer,kind:'note',read:true});
  n={...n,inbox:{...nm,seq,appts,threads:{...nm.threads,[id]:thread.slice(-40)}}};
  if(m.kind==='invite'&&choice===0&&m.appt)n=recordJournal(n,`appt:a${seq}`,`Hẹn đi ăn với ${npc.name}`,`${placeName(m.appt.place)}, ${whenText(s.day,m.appt.day,m.appt.minute)}.`,id);return{ok:true,state:n}}
@@ -124,7 +134,7 @@ export function markAppointment(s:GameState,apptId:string,status:'done'|'missed'
 export function settleInbox(next:GameState):GameState{let n=next;const ib=structuredClone(inboxOf(n));
  for(const a of ib.appts){if(a.status!=='set'||a.day>=n.day)continue;a.status='missed';const npc=castById(n,a.npc);n=adjustRelation(n,a.npc,MISSED_PENALTY,false);const st=storyOf(n);n={...n,story:{...st,memories:[...st.memories,{id:`m-miss-${a.id}`,day:a.day,npc:a.npc,motif:'meal',topic:'lỡ hẹn đi ăn',tag:'missed',weight:3}]}};ib.queue.push({id:`q${n.day}:${a.npc}:missed`,npc:a.npc,day:n.day,minute:480,from:'npc',text:say(n,a.npc,T.missed),kind:'missed'});n=recordJournal(n,`appt-missed:${a.id}`,`Lỡ hẹn với ${npc?.name??''}`,'Không đến chỗ hẹn đi ăn.',a.npc)}
  for(const [id,t] of Object.entries(ib.threads))for(const m of t)if(m.from==='npc'&&m.replies&&m.answered===undefined&&n.day-m.day>=2){m.answered=-1;if(id==='me'){const st=storyOf(n);if(!st.memories.some(x=>x.topic==='chưa trả lời mẹ'&&x.recalled===undefined))n={...n,story:{...st,memories:[...st.memories,{id:`m-mom-${m.id}`,day:n.day,npc:'me',motif:'mom',topic:'chưa trả lời mẹ',tag:'later',weight:2}]}}}}
- ib.appts=ib.appts.filter(a=>n.day-a.day<=30);const fresh=schedule(n,ib).filter(q=>!ib.queue.some(x=>x.id===q.id));ib.queue=[...ib.queue,...fresh].filter(q=>n.day-q.day<=3);return{...n,inbox:ib}}
+ ib.appts=ib.appts.filter(a=>n.day-a.day<=30);const prints:Record<string,string[]>={},fresh=schedule(n,ib,prints).filter(q=>!ib.queue.some(x=>x.id===q.id));ib.queue=[...ib.queue,...fresh].filter(q=>n.day-q.day<=3);let out:GameState={...n,inbox:ib};for(const [id,k] of Object.entries(prints))if(fresh.some(q=>q.npc===id))out=notePrintsFor(out,id,k);return out}
 
 export function validInbox(v:unknown,day:number):v is InboxState{if(!v||typeof v!=='object')return false;const b=v as InboxState,id=isNpcId,d=(x:unknown,max=day+2)=>Number.isInteger(x)&&(x as number)>=0&&(x as number)<=max,msg=(m:Msg)=>m&&typeof m.id==='string'&&d(m.day)&&Number.isInteger(m.minute)&&['npc','me'].includes(m.from)&&typeof m.text==='string'&&m.text.length<300&&(m.replies===undefined||(Array.isArray(m.replies)&&m.replies.length<=4))&&(m.answered===undefined||Number.isInteger(m.answered))&&(m.recipe===undefined||Object.hasOwn(RECIPES,m.recipe));
  if(b.version!==1||!Number.isInteger(b.seq)||!b.threads||typeof b.threads!=='object'||!Array.isArray(b.queue)||b.queue.length>20||!Array.isArray(b.appts)||b.appts.length>60)return false;

@@ -254,7 +254,7 @@
   ],
   "topic": [
    "sick",
-   "weather"
+   "rain"
   ],
   "needs": [
    "weather"
@@ -296,7 +296,7 @@
    "complain"
   ],
   "topic": [
-   "weather"
+   "rain"
   ],
   "needs": [
    "weather"
@@ -436,40 +436,43 @@
   "text": "lâu rồi chưa đi đâu",
   "intent": [
    "invite"
-  ]
+  ],
+  "weight": 0.4
  },
  {
   "id": "ask-001",
   "slot": "ask",
-  "text": "tối nay ra {place} ăn với {self} không",
+  "text": "tối nay ra quán nướng ăn với {self} không",
   "intent": [
    "invite"
   ],
-  "needs": [
-   "place"
+  "channel": [
+   "face"
   ]
  },
  {
   "id": "ask-002",
   "slot": "ask",
-  "text": "{time} ghé {place} với {self} nha",
+  "text": "{time} ghé quán cà phê với {self} nha",
   "intent": [
    "invite"
   ],
   "needs": [
-   "place",
    "time"
+  ],
+  "channel": [
+   "face"
   ]
  },
  {
   "id": "ask-003",
   "slot": "ask",
-  "text": "cuối tuần đi {place} chơi không",
+  "text": "cuối tuần đi công viên chơi không",
   "intent": [
    "invite"
   ],
-  "needs": [
-   "place"
+  "channel": [
+   "face"
   ]
  },
  {
@@ -482,8 +485,8 @@
  },
  {
   "id": "body-021",
-  "slot": "body",
-  "text": "cái lưng {self} không mang nổi đồ nặng",
+  "slot": "ask",
+  "text": "cái lưng {self} không mang nổi đồ nặng, {you} phụ {self} một tay được không",
   "intent": [
    "request"
   ],
@@ -675,7 +678,6 @@
   ],
   "intent": [
    "brag",
-   "news",
    "invite"
   ]
  },
@@ -689,7 +691,6 @@
   "voice": "sg",
   "intent": [
    "brag",
-   "news",
    "invite"
   ]
  },
@@ -705,9 +706,7 @@
   "intent": [
    "complain",
    "request",
-   "apologize",
-   "ask",
-   "news"
+   "apologize"
   ]
  },
  {
@@ -720,10 +719,9 @@
   "intent": [
    "complain",
    "request",
-   "apologize",
-   "ask",
-   "news"
-  ]
+   "apologize"
+  ],
+  "weight": 0.4
  },
  {
   "id": "feel-005",
@@ -735,9 +733,7 @@
   "intent": [
    "complain",
    "request",
-   "apologize",
-   "ask",
-   "news"
+   "apologize"
   ]
  },
  {
@@ -750,20 +746,7 @@
   "intent": [
    "complain",
    "request",
-   "apologize",
-   "ask",
-   "news"
-  ]
- },
- {
-  "id": "feel-007",
-  "slot": "feel",
-  "text": "cũng yên bụng",
-  "emotion": [
-   "happy"
-  ],
-  "intent": [
-   "ask"
+   "apologize"
   ]
  },
  {
@@ -785,7 +768,8 @@
    "complain",
    "brag",
    "news"
-  ]
+  ],
+  "weight": 0.4
  },
  {
   "id": "tail-002",
@@ -858,7 +842,10 @@
   "intent": [
    "invite"
   ],
-  "minTier": "close"
+  "minTier": "close",
+  "channel": [
+   "face"
+  ]
  },
  {
   "id": "tail-009",
