@@ -1,4 +1,5 @@
 import {validSeed} from './npc';
+import {validTalk} from './talk/state';
 import {OLD_STAFF_IDS} from './office';
 import {validMorning} from './morning';
 import {validLife} from './life';
@@ -26,6 +27,7 @@ import type {GameState,GameResult,ItemId,Item,DailyAction,EngineApi} from './typ
     }
     function validate(s: GameState): boolean { if (!s || s.version !== 1)
         return false; if (s.seed !== undefined && !validSeed(s.seed))
+        return false; if (s.talk !== undefined && !validTalk(s.talk, s.day))
         return false; for (const k of ['day', 'money', 'energy', 'mood', 'health', 'stress', 'xp'] as const)
         if (!Number.isSafeInteger(s[k]) || s[k] < 0)
             return false; if (s.day > 100000 || s.money > 1e12 || s.xp > 1e9)
@@ -84,7 +86,7 @@ import type {GameState,GameResult,ItemId,Item,DailyAction,EngineApi} from './typ
     function migrateSkills(s: any): GameState | null { const k = s?.skills; if (!k || typeof k !== 'object' || validSkills(k)) return null; const out: any = {}; for (const id of Object.keys(SKILLS)) { const q = k[id]; if (q === undefined && id === 'cooking') continue; if (!q || !Number.isInteger(q.level) || q.level < 1 || q.level > 50) return null; out[id] = { level: Math.max(1, Math.min(MAX_LEVEL, Math.floor(q.level / 5))), xp: 0 }; } return { ...s, skills: out }; }
 /** Các lát cắt tuỳ chọn của save, xếp từ ít giá trị tới nhiều giá trị. Khi save không hợp lệ (thường do bản cập nhật siết
  * điều kiện kiểm tra), bỏ một hoặc hai lát cắt hỏng để giữ phần còn lại của đời chơi thay vì về Ngày 1. */
-export const OPTIONAL_SLICES = ['morning','summary','bauCuaLast','coffee','fullness','officeLayout','journal','fishing','story','inbox','study','side','orders','officeItems','home','social','work','clock','housing','rent','office','skills','company','bank','life','txIds','txSeq'] as const;
+export const OPTIONAL_SLICES = ['talk','morning','summary','bauCuaLast','coffee','fullness','officeLayout','journal','fishing','story','inbox','study','side','orders','officeItems','home','social','work','clock','housing','rent','office','skills','company','bank','life','txIds','txSeq'] as const;
 export type SliceKey = typeof OPTIONAL_SLICES[number];
 export interface LoadedSave { state: GameState; dropped: SliceKey[]; }
 const without = (s: any, keys: readonly string[]) => { const n = { ...s }; for (const k of keys) delete n[k]; return n; };
