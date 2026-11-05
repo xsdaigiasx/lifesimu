@@ -869,14 +869,18 @@
  {
   "id": "l1-075",
   "slot": "tail",
-  "text": "lấy thêm bó hành nha, {self} cho",
+  "text": "lấy thêm bó rau nha, {self} cho",
   "npc": "veg",
   "intent": [
    "ask",
    "complain",
    "brag"
   ],
-  "minTier": "acquaint"
+  "minTier": "acquaint",
+  "gift": [
+   "vegetable",
+   1
+  ]
  },
  {
   "id": "l1-076",
