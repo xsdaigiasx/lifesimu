@@ -2,6 +2,8 @@
 import type {GameState,PlaceId} from './types';
 import {dateAt} from './format';
 import {hash} from './shift';
+import poolData from './npc-pool.json';
+import type {PoolData} from './pool-check';
 
 /** Lịch: các ngày trong tuần (0 = Chủ nhật … 6 = Thứ bảy), giờ tính bằng phút trong ngày. */
 export interface Slot{days:number[];from:number;to:number;place:PlaceId}
@@ -44,19 +46,10 @@ export function presentAt(n:NpcProfile,day:number,minute:number,place:PlaceId){i
 export function peopleHere(s:GameState,place?:PlaceId){const loc=place??s.clock?.location??'home',minute=s.clock?.minute??420;return NPCS.filter(n=>presentAt(n,s.day,minute,loc))}
 
 // ---------- Pool thuộc tính và bộ sinh NPC phụ (bản chơi thử: khoảng 40 tên, 10 điểm nhấn)
-export const POOL={
- family:['Nguyễn','Trần','Lê','Phạm','Hoàng','Vũ','Đặng','Bùi','Đỗ','Hồ'],
- male:['Văn Hùng','Minh Khoa','Quốc Bảo','Đức Anh','Thành Long','Hữu Phước','Công Thịnh','Gia Bảo','Tấn Lộc','Văn Toàn','Hoàng Nam','Trọng Nghĩa','Quang Vinh','Đình Khang','Anh Tuấn','Văn Sơn','Thế Hiển','Hải Đăng','Minh Trí','Văn Lực'],
- female:['Thị Lan','Ngọc Ánh','Thu Hà','Mỹ Linh','Thanh Tâm','Kim Ngân','Phương Thảo','Hồng Nhung','Bích Ngọc','Thị Hoa','Diệu Linh','Minh Thư','Thuỳ Dung','Khánh Vy','Ngọc Hân','Thị Mai','Hải Yến','Bảo Trâm','Thanh Hương','Thị Nga'],
- origin:['Hà Nội','Nam Định','Thanh Hoá','Nghệ An','Huế','Đà Nẵng','Quảng Nam','Sài Gòn','Cần Thơ','Bến Tre'],
- job:[{name:'Sinh viên',min:18,max:25},{name:'Thợ sửa xe',min:20,max:60},{name:'Nhân viên văn phòng',min:22,max:55},{name:'Tài xế xe ôm',min:20,max:62},{name:'Bán hàng tạp hoá',min:25,max:70},{name:'Bảo vệ',min:30,max:65},{name:'Giáo viên',min:23,max:60},{name:'Trưởng phòng',min:30,max:60},{name:'Về hưu',min:56,max:80},{name:'Phụ hồ',min:18,max:55}],
- traits:['hay nói','kiệm lời','hào phóng','keo kiệt','vui vẻ','cau có','cẩn thận','vội vàng','tốt bụng','tò mò','tự trọng','dễ xúc động'],
- quirk:['Luôn đội mũ lưỡi trai','Huýt sáo khi đi bộ','Gọi ai cũng là em','Mang theo phích trà','Thích kể chuyện thời trẻ','Hay quên chìa khoá','Nuôi một con chim chào mào','Đi đâu cũng đếm bước','Nói câu nào cũng thêm ca dao','Sưu tầm vé số trúng nhỏ'],
- goal:['Có nhà riêng','Cho con đi học','Mở hàng quán','Đi du lịch một lần','Trả hết nợ','Được thăng chức'],
- fear:['Mất việc','Bệnh tật','Nợ nần','Con cái hư','Cô đơn','Bị lừa'],
-} as const;
+/** Bể thuộc tính nằm ở npc-pool.json; kiểm bằng npm run pool:check. */
+export const POOL=poolData as unknown as PoolData;
 /** Cặp tính cách xung khắc không được đi cùng nhau. */
-export const TRAIT_CONFLICTS:[string,string][]=[['hay nói','kiệm lời'],['hào phóng','keo kiệt'],['vui vẻ','cau có'],['cẩn thận','vội vàng']];
+export const TRAIT_CONFLICTS:[string,string][]=poolData.conflicts as [string,string][];
 export interface PoolNpc{id:string;seed:string;name:string;gender:'male'|'female';age:number;origin:string;job:string;traits:string[];quirk:string;goal:string;fear:string}
 
 /** Trộn bit (murmur3 fmix) để các trường rút từ seed gần giống nhau không tương quan. */
