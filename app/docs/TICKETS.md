@@ -21,6 +21,8 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 10. T36: mục tiêu tuần đã có; thành tựu cơ bản làm cùng T65; hướng dẫn đầu game hoãn tới khi xong game.
 
 **Nhóm 2: hoàn tất bản 1.0**
+
+> Bộ sinh hội thoại (`docs/design/HOI-THOAI.md`, ticket H0 đến H8) đang chờ duyệt; khi duyệt sẽ đứng đầu nhóm này và thay T63, T64 (xem mục I.11 của tài liệu).
 11. T63 Quan hệ NPC với NPC, tin đồn (bản nhẹ).
 12. T64 Cốt truyện đời NPC (phần mở đầu).
 13. T86 Cộng đồng khu trọ (bản nhẹ).
