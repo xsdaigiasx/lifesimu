@@ -1,6 +1,7 @@
 /** T32: khách tay trái và dự án riêng buổi tối (chủ dự án duyệt 05/11).
  * Cần bàn làm việc mẫu cao đặt trong phòng. Tối đa 2 đơn mở, hạn 7 ngày, 4 buổi tối (2 giờ) xong một đơn, trả 2 đến 5 triệu theo Lv.
  * Nộp trễ trả 70%; quá hạn 3 ngày thì huỷ. Uy tín tay trái 0–100 (khởi đầu 50) quyết định số đơn xuất hiện; T33 dùng làm điều kiện mở công ty. */
+import {fitMult} from './fitness';
 import type {GameState,GameResult} from './types';
 import {placedAt} from './home';
 import {clockOf,spendTime} from './time';
@@ -49,7 +50,7 @@ export function sideWork(s:GameState,id:string):GameResult{
  if(levelOf(s,o.kind)<o.minLevel)return{ok:false,error:`Cần ${o.kind==='programming'?'Lập trình':o.kind==='graphics'?'Đồ họa':'Logic'} Lv${o.minLevel}.`};
  if(s.energy<SIDE.minEnergy)return{ok:false,error:'Mệt quá, nghỉ đã.'};
  const t=spendTime(s,SIDE.minutes);if(!t.ok)return t;let n=structuredClone(t.state);
- n.energy=clamp(n.energy-SIDE.energy);n.stress=clamp(n.stress+SIDE.stress);n=addWorkXp(n,o.kind as SkillId,SIDE.xp);
+ n.energy=clamp(n.energy-Math.round(SIDE.energy*fitMult(n)));n.stress=clamp(n.stress+SIDE.stress);n=addWorkXp(n,o.kind as SkillId,SIDE.xp);
  o.sessions++;side.last=s.day;
  if(o.sessions>=SIDE.sessions){
   const late=s.day>o.due,pay=late?Math.round(o.pay*SIDE.latePct/100):o.pay;

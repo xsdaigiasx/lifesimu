@@ -1,3 +1,4 @@
+import {fitMult} from './fitness';
 import type {GameState} from './types';
 /** T06: chỉ số No, hệ số thể trạng m và cảnh báo sớm (workflow mục 11, 68, 73). Số liệu là đề xuất, chỉnh ở đây. */
 export const VITALS={fullStart:70,awakeDrainPerHour:5,sleepDrainPerHour:2,sleepHours:8,mFull:60,mFloor:20,mMin:.5,sickHealth:40,stressHigh:70,stressBurnout:85,warn:{low:40,soon:60,stress:60,health:50}} as const;
@@ -27,10 +28,10 @@ export const dailyHealthPenalty=(s:GameState)=>Math.min(s.energy,fullnessOf(s),s
 /** T07: thời gian trôi hao Năng lượng 2,5/giờ (ca làm và học đã tự tính riêng); ngủ +10/giờ; nghỉ ngồi +3/giờ. */
 export const REST={idleEnergyPerHour:2.5,sleepEnergyPerHour:10,sitEnergyPerHour:3,fullBlock:90} as const;
 /** Số nguyên, cố định theo đồng hồ (không cần lưu phần lẻ): mỗi mốc 24 phút hao 1 năng lượng. */
-export const drainIdleEnergy=(s:GameState,from:number,to:number):GameState=>{const lost=Math.floor(to*REST.idleEnergyPerHour/60)-Math.floor(from*REST.idleEnergyPerHour/60);return lost<=0?s:{...s,energy:Math.max(0,s.energy-lost)}};
+export const drainIdleEnergy=(s:GameState,from:number,to:number):GameState=>{const r=REST.idleEnergyPerHour*fitMult(s),lost=Math.floor(to*r/60)-Math.floor(from*r/60);return lost<=0?s:{...s,energy:Math.max(0,s.energy-lost)}};
 /** Số phút ngủ thật nếu đi ngủ lúc `minute` (tính từ 00:00 hôm nay) đến lúc dậy 07:00 hôm sau. */
 export const sleepMinutes=(minute:number,wake:number)=>Math.max(0,1440+wake-minute);
-export const sleepEnergy=(minutes:number)=>Math.round(minutes/60*REST.sleepEnergyPerHour);
+export const sleepEnergy=(minutes:number,boost=1)=>Math.round(minutes/60*REST.sleepEnergyPerHour*boost);
 /** Cà phê: +10 năng lượng ngay, 3 giờ sau tụt lại 10; tối đa 2 ly mỗi ngày. */
 export const COFFEE={price:25000,minutes:10,boost:10,crashAfter:180,perDay:2} as const;
 export const coffeeToday=(s:GameState)=>s.coffee&&s.coffee.day===s.day?s.coffee.count:0;

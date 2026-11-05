@@ -1,4 +1,5 @@
 /** T31: ca làm thêm cuối tuần (chủ dự án duyệt 05/11): Thứ 7 và Chủ nhật, 4 giờ, 240.000đ, tốn năng lượng, mỗi ngày một ca, mở mọi lúc. */
+import {fitMult} from './fitness';
 import type {GameState,GameResult} from './types';
 import {post,posted} from './money';
 import {spendTime} from './time';
@@ -15,6 +16,6 @@ export function weekendJob(s:GameState):GameResult{
  if(weekendDone(s))return{ok:false,error:'Hôm nay đã làm một ca rồi.'};
  if(s.energy<WEEKEND.minEnergy)return{ok:false,error:'Mệt quá, nghỉ đã.'};
  const t=spendTime(s,WEEKEND.minutes);if(!t.ok)return t;
- const n=structuredClone(t.state);n.energy=clamp(n.energy-WEEKEND.energy);n.stress=clamp(n.stress+WEEKEND.stress);
+ const n=structuredClone(t.state);n.energy=clamp(n.energy-Math.round(WEEKEND.energy*fitMult(n)));n.stress=clamp(n.stress+WEEKEND.stress);
  if(post(n,{id:shiftId(s.day),name:'Làm thêm cuối tuần',amount:WEEKEND.pay})!=='ok')return{ok:false,error:'Không ghi được thu nhập.'};
  return{ok:true,state:n}}

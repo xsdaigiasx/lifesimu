@@ -1,4 +1,5 @@
 import type {LifeAction} from '../domain/life';
+import {fitLevel} from '../domain/fitness';
 import type {HomeTier} from '../domain/home';
 import FurnitureShop from './FurnitureShop';
 import type {ShopAction} from '../domain/orders';
@@ -119,7 +120,7 @@ export default function Phone({ state, profile, onAction, onResetStart, onPlayBa
     })}</div><div className="phone-page-dots" aria-hidden="true"><i /></div></>; break;
     case 'health': body = <>{intro('Sức khỏe của bạn', 'Lắng nghe bản thân, từng ngày.')}<div className="phone-person"><span>{profile.gender === 'female' ? '👩🏻‍💻' : '🧑🏻‍💻'}</span><div><strong>{profile.name}</strong><small>Lập trình viên mới</small></div></div><div className="phone-stat-list">{([
       ['energy', 'Năng lượng', 'bolt', 'gold'], ['fullness', 'No', 'restaurant', 'orange'], ['mood', 'Tinh thần', 'smile', 'green'], ['health', 'Sức khỏe', 'heart', 'teal'], ['stress', 'Căng thẳng', 'wave', 'purple'],
-    ] as const).map(([key, label, icon, tone]) => <div key={key}><header><strong className={`phone-stat-name ${tone}`}><Icon id={icon} />{label}</strong><b>{Math.round(vital(key))}<small>/100</small></b></header><div className={`phone-meter ${tone}`}><i style={{ width: `${vital(key)}%` }} /></div></div>)}</div>{warnings.length>0&&<div className="phone-warnings" role="status">{warnings.map(w=>(<p key={w.key} className={w.level}>{w.text}</p>))}</div>}</>; break;
+    ] as const).map(([key, label, icon, tone]) => <div key={key}><header><strong className={`phone-stat-name ${tone}`}><Icon id={icon} />{label}</strong><b>{Math.round(vital(key))}<small>/100</small></b></header><div className={`phone-meter ${tone}`}><i style={{ width: `${vital(key)}%` }} /></div></div>)}<div><header><strong className="phone-stat-name teal"><Icon id="leaf" />Thể lực</strong><b>{fitLevel(state)}</b></header></div></div>{warnings.length>0&&<div className="phone-warnings" role="status">{warnings.map(w=>(<p key={w.key} className={w.level}>{w.text}</p>))}</div>}</>; break;
     case 'bank': body = <PhoneBank state={state} onLifeAction={onLifeAction}/>; break;
     case 'finance': {
       const date = dateAt(state.day), transactions = state.ledger.filter(entry => { const d = dateAt(entry.day); return d.getUTCMonth() === date.getUTCMonth() && d.getUTCFullYear() === date.getUTCFullYear(); });
