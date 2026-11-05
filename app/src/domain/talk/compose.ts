@@ -8,9 +8,10 @@ import {INTENTS} from './types';
 import {channelAllowed,factFits,intentAllowed,privacyCap,tierRank,whenOf} from './axes';
 import framesData from './data/frames.json';
 import piecesData from './data/pieces.json';
+import lo1Data from './data/lo1.json';
 
 /** Kho khung và mảnh mặc định (kiểm bằng npm run talk:check). */
-export const TALK:TalkData={frames:framesData as Frame[],pieces:piecesData as Piece[]};
+export const TALK:TalkData={frames:framesData as Frame[],pieces:[...piecesData,...lo1Data] as Piece[]};
 
 /** Vân tay chống lặp (I.7): mảnh 14 ngày, khung 3 ngày, ý định cùng chủ đề 2 ngày. Chỉ lưu mã, không lưu câu. */
 export interface Print{k:string;d:number}

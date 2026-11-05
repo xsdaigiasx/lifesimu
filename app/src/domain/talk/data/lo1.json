@@ -1,0 +1,979 @@
+[
+ {
+  "id": "l1-001",
+  "slot": "open",
+  "text": "Mẹ nè con",
+  "npc": "me"
+ },
+ {
+  "id": "l1-002",
+  "slot": "open",
+  "text": "Con ơi, mẹ hỏi chút",
+  "npc": "me",
+  "intent": [
+   "ask"
+  ]
+ },
+ {
+  "id": "l1-003",
+  "slot": "open",
+  "text": "Con à",
+  "npc": "me",
+  "intent": [
+   "complain",
+   "brag",
+   "news"
+  ]
+ },
+ {
+  "id": "l1-004",
+  "slot": "body",
+  "text": "bữa nay con ăn {dish} hả",
+  "npc": "me",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "l1-005",
+  "slot": "body",
+  "text": "nghe giọng con mệt lắm đó",
+  "npc": "me",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "tired",
+   "work",
+   "job"
+  ]
+ },
+ {
+  "id": "l1-006",
+  "slot": "body",
+  "text": "nghe nói con mới lên {event}, mẹ mừng quá trời",
+  "npc": "me",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "tier"
+  ],
+  "needs": [
+   "event"
+  ]
+ },
+ {
+  "id": "l1-007",
+  "slot": "body",
+  "text": "ở công ty {place} người ta đối xử với con có tốt không",
+  "npc": "me",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "job"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "l1-008",
+  "slot": "body",
+  "text": "tiền bạc trên đó có đủ xài không con",
+  "npc": "me",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "money",
+   "salary",
+   "rent"
+  ],
+  "privacy": 2
+ },
+ {
+  "id": "l1-009",
+  "slot": "body",
+  "text": "con mới chuyển qua {place} hả, có rộng không",
+  "npc": "me",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "home"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "l1-010",
+  "slot": "body",
+  "text": "dạo này ngoại yếu lắm con",
+  "npc": "me",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "family"
+  ]
+ },
+ {
+  "id": "l1-011",
+  "slot": "body",
+  "text": "mấy bữa nay mẹ hơi mệt trong người",
+  "npc": "me",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "sick"
+  ]
+ },
+ {
+  "id": "l1-012",
+  "slot": "body",
+  "text": "năm nay lúa rớt giá quá con",
+  "npc": "me",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "money"
+  ]
+ },
+ {
+  "id": "l1-013",
+  "slot": "body",
+  "text": "mẹ mới mua được {item}",
+  "npc": "me",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "buy"
+  ],
+  "needs": [
+   "item"
+  ]
+ },
+ {
+  "id": "l1-014",
+  "slot": "body",
+  "text": "dì Út mới lên nhà mình chơi",
+  "npc": "me",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "family"
+  ]
+ },
+ {
+  "id": "l1-015",
+  "slot": "feel",
+  "text": "mẹ nghe mà thương",
+  "npc": "me",
+  "intent": [
+   "ask",
+   "complain"
+  ],
+  "emotion": [
+   "sad",
+   "tired",
+   "neutral"
+  ]
+ },
+ {
+  "id": "l1-016",
+  "slot": "feel",
+  "text": "mẹ mừng lắm",
+  "npc": "me",
+  "intent": [
+   "ask",
+   "brag"
+  ],
+  "emotion": [
+   "happy",
+   "excited"
+  ]
+ },
+ {
+  "id": "l1-017",
+  "slot": "tail",
+  "text": "con nhớ giữ sức khoẻ nghe",
+  "npc": "me",
+  "intent": [
+   "ask"
+  ]
+ },
+ {
+  "id": "l1-018",
+  "slot": "tail",
+  "text": "có gì thì gọi về cho mẹ",
+  "npc": "me",
+  "intent": [
+   "ask",
+   "complain"
+  ]
+ },
+ {
+  "id": "l1-019",
+  "slot": "tail",
+  "text": "con đừng lo cho mẹ",
+  "npc": "me",
+  "intent": [
+   "complain"
+  ]
+ },
+ {
+  "id": "l1-020",
+  "slot": "open",
+  "text": "{You} ơi",
+  "npc": "em"
+ },
+ {
+  "id": "l1-021",
+  "slot": "open",
+  "text": "Nè {you}",
+  "npc": "em",
+  "intent": [
+   "tease",
+   "brag",
+   "news"
+  ]
+ },
+ {
+  "id": "l1-022",
+  "slot": "open",
+  "text": "{You} ơi, em than chút",
+  "npc": "em",
+  "intent": [
+   "complain"
+  ]
+ },
+ {
+  "id": "l1-023",
+  "slot": "body",
+  "text": "tuần này em thi cuối kỳ, học muốn xỉu luôn",
+  "npc": "em",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "study"
+  ]
+ },
+ {
+  "id": "l1-024",
+  "slot": "body",
+  "text": "em qua môn rồi nha",
+  "npc": "em",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "study"
+  ]
+ },
+ {
+  "id": "l1-025",
+  "slot": "body",
+  "text": "{you} ở trên đó ăn uống sao rồi",
+  "npc": "em",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food",
+   "eatout",
+   "cook"
+  ]
+ },
+ {
+  "id": "l1-026",
+  "slot": "body",
+  "text": "nghe mẹ nói {you} mới lên {event} hả",
+  "npc": "em",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "tier"
+  ],
+  "needs": [
+   "event"
+  ]
+ },
+ {
+  "id": "l1-027",
+  "slot": "body",
+  "text": "{you} lên thành phố có người yêu chưa",
+  "npc": "em",
+  "intent": [
+   "tease"
+  ],
+  "topic": [
+   "player"
+  ]
+ },
+ {
+  "id": "l1-028",
+  "slot": "body",
+  "text": "tiền học kỳ này hơi nhiều",
+  "npc": "em",
+  "intent": [
+   "request"
+  ],
+  "topic": [
+   "study",
+   "money"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "l1-029",
+  "slot": "ask",
+  "text": "{you} cho em mượn ít tiền mua sách được không",
+  "npc": "em",
+  "intent": [
+   "request"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "l1-030",
+  "slot": "tail",
+  "text": "em nói mẹ nghe đó",
+  "npc": "em",
+  "intent": [
+   "tease",
+   "ask"
+  ]
+ },
+ {
+  "id": "l1-031",
+  "slot": "tail",
+  "text": "hihi",
+  "npc": "em",
+  "intent": [
+   "tease",
+   "brag"
+  ]
+ },
+ {
+  "id": "l1-032",
+  "slot": "open",
+  "text": "{You} nè",
+  "npc": "landlord"
+ },
+ {
+  "id": "l1-033",
+  "slot": "open",
+  "text": "Đi đâu sớm vậy {you}",
+  "npc": "landlord",
+  "when": [
+   "morning"
+  ]
+ },
+ {
+  "id": "l1-034",
+  "slot": "body",
+  "text": "mới sáng ra mà cái lưng {self} đã ê ẩm",
+  "npc": "landlord",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "sick"
+  ],
+  "age": [
+   45,
+   99
+  ]
+ },
+ {
+  "id": "l1-035",
+  "slot": "body",
+  "text": "tiền trọ tháng này {you} nhớ đóng nha",
+  "npc": "landlord",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "rent"
+  ]
+ },
+ {
+  "id": "l1-036",
+  "slot": "body",
+  "text": "{self} đang tính sơn lại dãy trọ",
+  "npc": "landlord",
+  "intent": [
+   "brag",
+   "complain"
+  ],
+  "topic": [
+   "home"
+  ]
+ },
+ {
+  "id": "l1-037",
+  "slot": "body",
+  "text": "phòng có gì hư hỏng thì báo {self} liền nha",
+  "npc": "landlord",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "home",
+   "rent"
+  ]
+ },
+ {
+  "id": "l1-038",
+  "slot": "body",
+  "text": "trời {weather} vầy nhớ đóng cửa sổ",
+  "npc": "landlord",
+  "intent": [
+   "news"
+  ],
+  "topic": [
+   "weather",
+   "forecast"
+  ],
+  "needs": [
+   "weather"
+  ]
+ },
+ {
+  "id": "l1-039",
+  "slot": "body",
+  "text": "dãy trọ dạo này ồn quá",
+  "npc": "landlord",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "mood",
+   "home"
+  ]
+ },
+ {
+  "id": "l1-040",
+  "slot": "ask",
+  "text": "{you} xách phụ {self} mấy thùng nước được không",
+  "npc": "landlord",
+  "intent": [
+   "request"
+  ]
+ },
+ {
+  "id": "l1-041",
+  "slot": "tail",
+  "text": "ở đây có gì cứ nói {self}",
+  "npc": "landlord",
+  "intent": [
+   "ask",
+   "news"
+  ]
+ },
+ {
+  "id": "l1-042",
+  "slot": "open",
+  "text": "Ê {you}",
+  "npc": "sen-dev",
+  "minTier": "acquaint"
+ },
+ {
+  "id": "l1-043",
+  "slot": "open",
+  "text": "Ê {you}",
+  "npc": "ant-dev",
+  "minTier": "acquaint"
+ },
+ {
+  "id": "l1-044",
+  "slot": "open",
+  "text": "{You} rảnh chút không",
+  "npc": "sen-dev",
+  "intent": [
+   "request",
+   "invite",
+   "complain"
+  ]
+ },
+ {
+  "id": "l1-045",
+  "slot": "open",
+  "text": "{You} rảnh chút không",
+  "npc": "ant-dev",
+  "intent": [
+   "request",
+   "invite",
+   "complain"
+  ]
+ },
+ {
+  "id": "l1-046",
+  "slot": "body",
+  "text": "tuần này hạn chót dí quá, {self} ngồi tới khuya",
+  "npc": "sen-dev",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "work"
+  ]
+ },
+ {
+  "id": "l1-047",
+  "slot": "body",
+  "text": "tuần này hạn chót dí quá, {self} ngồi tới khuya",
+  "npc": "ant-dev",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "work"
+  ]
+ },
+ {
+  "id": "l1-048",
+  "slot": "body",
+  "text": "sếp vừa bắt sửa lại hết phần của {self}",
+  "npc": "sen-dev",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "work"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "l1-049",
+  "slot": "body",
+  "text": "sếp vừa bắt sửa lại hết phần của {self}",
+  "npc": "ant-dev",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "work"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "l1-050",
+  "slot": "body",
+  "text": "{self} mới được tăng lương",
+  "npc": "sen-dev",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "promotion"
+  ]
+ },
+ {
+  "id": "l1-051",
+  "slot": "body",
+  "text": "{self} mới được tăng lương",
+  "npc": "ant-dev",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "promotion"
+  ]
+ },
+ {
+  "id": "l1-052",
+  "slot": "body",
+  "text": "trông {you} mệt vậy, tối qua thức khuya hả",
+  "npc": "sen-dev",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "tired"
+  ]
+ },
+ {
+  "id": "l1-053",
+  "slot": "body",
+  "text": "trông {you} mệt vậy, tối qua thức khuya hả",
+  "npc": "ant-dev",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "tired"
+  ]
+ },
+ {
+  "id": "l1-054",
+  "slot": "body",
+  "text": "nghe nói {you} lên {event} rồi hả, khao đi",
+  "npc": "sen-dev",
+  "intent": [
+   "ask",
+   "tease"
+  ],
+  "topic": [
+   "tier"
+  ],
+  "needs": [
+   "event"
+  ]
+ },
+ {
+  "id": "l1-055",
+  "slot": "body",
+  "text": "nghe nói {you} lên {event} rồi hả, khao đi",
+  "npc": "ant-dev",
+  "intent": [
+   "ask",
+   "tease"
+  ],
+  "topic": [
+   "tier"
+  ],
+  "needs": [
+   "event"
+  ]
+ },
+ {
+  "id": "l1-056",
+  "slot": "body",
+  "text": "{you} lại ăn {dish} nữa hả",
+  "npc": "sen-dev",
+  "intent": [
+   "tease"
+  ],
+  "topic": [
+   "food"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "l1-057",
+  "slot": "body",
+  "text": "{you} lại ăn {dish} nữa hả",
+  "npc": "ant-dev",
+  "intent": [
+   "tease"
+  ],
+  "topic": [
+   "food"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "l1-058",
+  "slot": "body",
+  "text": "đoạn này {self} bí quá",
+  "npc": "sen-dev",
+  "intent": [
+   "request"
+  ]
+ },
+ {
+  "id": "l1-059",
+  "slot": "body",
+  "text": "đoạn này {self} bí quá",
+  "npc": "ant-dev",
+  "intent": [
+   "request"
+  ]
+ },
+ {
+  "id": "l1-060",
+  "slot": "ask",
+  "text": "trưa nay ra {place} ăn không",
+  "npc": "sen-dev",
+  "intent": [
+   "invite"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "l1-061",
+  "slot": "ask",
+  "text": "trưa nay ra {place} ăn không",
+  "npc": "ant-dev",
+  "intent": [
+   "invite"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "l1-062",
+  "slot": "ask",
+  "text": "{you} xem giùm {self} chút được không",
+  "npc": "sen-dev",
+  "intent": [
+   "request"
+  ]
+ },
+ {
+  "id": "l1-063",
+  "slot": "ask",
+  "text": "{you} xem giùm {self} chút được không",
+  "npc": "ant-dev",
+  "intent": [
+   "request"
+  ]
+ },
+ {
+  "id": "l1-064",
+  "slot": "tail",
+  "text": "đi đi mà",
+  "npc": "sen-dev",
+  "intent": [
+   "invite"
+  ]
+ },
+ {
+  "id": "l1-065",
+  "slot": "tail",
+  "text": "đi đi mà",
+  "npc": "ant-dev",
+  "intent": [
+   "invite"
+  ]
+ },
+ {
+  "id": "l1-066",
+  "slot": "tail",
+  "text": "cứu {self} với",
+  "npc": "sen-dev",
+  "intent": [
+   "request",
+   "complain"
+  ]
+ },
+ {
+  "id": "l1-067",
+  "slot": "tail",
+  "text": "cứu {self} với",
+  "npc": "ant-dev",
+  "intent": [
+   "request",
+   "complain"
+  ]
+ },
+ {
+  "id": "l1-068",
+  "slot": "open",
+  "text": "Mua gì {you}",
+  "npc": "veg",
+  "where": [
+   "market"
+  ]
+ },
+ {
+  "id": "l1-069",
+  "slot": "open",
+  "text": "Rau mới về nè {you}",
+  "npc": "veg",
+  "where": [
+   "market"
+  ]
+ },
+ {
+  "id": "l1-070",
+  "slot": "body",
+  "text": "bữa nay chợ vắng hoe, rau ế quá trời",
+  "npc": "veg",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "money"
+  ]
+ },
+ {
+  "id": "l1-071",
+  "slot": "body",
+  "text": "sáng nay bán hết sạch rau rồi",
+  "npc": "veg",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "money"
+  ]
+ },
+ {
+  "id": "l1-072",
+  "slot": "body",
+  "text": "trời {weather} vầy rau dập hết trơn",
+  "npc": "veg",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "weather"
+  ],
+  "needs": [
+   "weather"
+  ]
+ },
+ {
+  "id": "l1-073",
+  "slot": "body",
+  "text": "bữa trước {you} nấu {dish} có ngon không",
+  "npc": "veg",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "cook",
+   "recipe"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "l1-074",
+  "slot": "body",
+  "text": "ăn ngoài hoài sao được, mua rau về nấu đi",
+  "npc": "veg",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "eatout",
+   "food"
+  ]
+ },
+ {
+  "id": "l1-075",
+  "slot": "tail",
+  "text": "lấy thêm bó hành nha, {self} cho",
+  "npc": "veg",
+  "intent": [
+   "ask",
+   "complain",
+   "brag"
+  ],
+  "minTier": "acquaint"
+ },
+ {
+  "id": "l1-076",
+  "slot": "open",
+  "text": "{You} ơi",
+  "npc": "courier"
+ },
+ {
+  "id": "l1-077",
+  "slot": "open",
+  "text": "Ủa {you}",
+  "npc": "courier",
+  "intent": [
+   "ask",
+   "tease"
+  ]
+ },
+ {
+  "id": "l1-078",
+  "slot": "body",
+  "text": "mai em thi mà giờ còn chạy đơn",
+  "npc": "courier",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "study"
+  ]
+ },
+ {
+  "id": "l1-079",
+  "slot": "body",
+  "text": "tháng này em hụt tiền học phí",
+  "npc": "courier",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "money"
+  ],
+  "privacy": 2
+ },
+ {
+  "id": "l1-080",
+  "slot": "body",
+  "text": "dạo này {you} chạy bộ hả, nhìn khoẻ ghê",
+  "npc": "courier",
+  "intent": [
+   "ask",
+   "tease"
+  ],
+  "topic": [
+   "fit"
+  ]
+ },
+ {
+  "id": "l1-081",
+  "slot": "body",
+  "text": "{you} mới dọn tới hả, có cần em chở đồ không",
+  "npc": "courier",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "home"
+  ]
+ },
+ {
+  "id": "l1-082",
+  "slot": "ask",
+  "text": "tối nay ra {place} ăn với em không",
+  "npc": "courier",
+  "intent": [
+   "invite"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "l1-083",
+  "slot": "tail",
+  "text": "em chạy đơn tiếp đây",
+  "npc": "courier",
+  "intent": [
+   "complain",
+   "ask",
+   "news"
+  ]
+ },
+ {
+  "id": "l1-084",
+  "slot": "tail",
+  "text": "đi nha {you}",
+  "npc": "courier",
+  "intent": [
+   "invite"
+  ]
+ }
+]

@@ -110,7 +110,7 @@
  {
   "id": "open-016",
   "slot": "open",
-  "text": "Mệt ghê {you} ơi",
+  "text": "Haiz {you} ơi",
   "intent": [
    "complain"
   ],
@@ -760,12 +760,10 @@
   "slot": "feel",
   "text": "cũng yên bụng",
   "emotion": [
-   "neutral",
    "happy"
   ],
   "intent": [
-   "ask",
-   "news"
+   "ask"
   ]
  },
  {
@@ -773,26 +771,37 @@
   "slot": "feel",
   "text": "nghe cũng mừng",
   "intent": [
-   "news",
-   "ask"
+   "news"
   ],
   "emotion": [
-   "happy",
-   "neutral"
+   "happy"
   ]
  },
  {
   "id": "tail-001",
   "slot": "tail",
-  "text": "vậy đó {p}"
+  "text": "vậy đó {p}",
+  "intent": [
+   "complain",
+   "brag",
+   "news"
+  ]
  },
  {
   "id": "tail-002",
   "slot": "tail",
   "text": "{you} nhớ giữ sức {p}",
   "intent": [
-   "ask",
-   "complain"
+   "ask"
+  ],
+  "topic": [
+   "tired",
+   "sick",
+   "work",
+   "job",
+   "tier",
+   "food",
+   "eatout"
   ]
  },
  {
@@ -854,7 +863,7 @@
  {
   "id": "tail-008",
   "slot": "tail",
-  "text": "cảm ơn {you} nhiều",
+  "text": "nha {you}",
   "intent": [
    "request"
   ]
@@ -889,7 +898,6 @@
   "slot": "tail",
   "text": "để mai tính",
   "intent": [
-   "complain",
    "news"
   ],
   "emotion": [
@@ -976,6 +984,9 @@
   ],
   "needs": [
    "dish"
+  ],
+  "where": [
+   "home"
   ]
  },
  {
