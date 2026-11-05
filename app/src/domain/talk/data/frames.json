@@ -1,0 +1,299 @@
+[
+ {
+  "id": "brag-1",
+  "intent": "brag",
+  "slots": [
+   "open",
+   "body",
+   "feel?",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "brag-2",
+  "intent": "brag",
+  "slots": [
+   "body",
+   "feel"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "brag-3",
+  "intent": "brag",
+  "slots": [
+   "open?",
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "text"
+  ]
+ },
+ {
+  "id": "complain-1",
+  "intent": "complain",
+  "slots": [
+   "open",
+   "body",
+   "feel?",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "complain-2",
+  "intent": "complain",
+  "slots": [
+   "body",
+   "feel",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "complain-3",
+  "intent": "complain",
+  "slots": [
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "text"
+  ]
+ },
+ {
+  "id": "ask-1",
+  "intent": "ask",
+  "slots": [
+   "open",
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "ask-2",
+  "intent": "ask",
+  "slots": [
+   "open?",
+   "body",
+   "feel?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "ask-3",
+  "intent": "ask",
+  "slots": [
+   "open?",
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "text"
+  ]
+ },
+ {
+  "id": "invite-1",
+  "intent": "invite",
+  "slots": [
+   "open",
+   "ask",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "invite-2",
+  "intent": "invite",
+  "slots": [
+   "body?",
+   "ask",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "invite-3",
+  "intent": "invite",
+  "slots": [
+   "ask",
+   "tail?"
+  ],
+  "channel": [
+   "text"
+  ]
+ },
+ {
+  "id": "request-1",
+  "intent": "request",
+  "slots": [
+   "open",
+   "body",
+   "ask",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "request-2",
+  "intent": "request",
+  "slots": [
+   "body",
+   "ask"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "request-3",
+  "intent": "request",
+  "slots": [
+   "open?",
+   "ask",
+   "tail?"
+  ],
+  "channel": [
+   "text"
+  ]
+ },
+ {
+  "id": "news-1",
+  "intent": "news",
+  "slots": [
+   "open",
+   "body",
+   "feel?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "news-2",
+  "intent": "news",
+  "slots": [
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "news-3",
+  "intent": "news",
+  "slots": [
+   "open?",
+   "body"
+  ],
+  "channel": [
+   "text"
+  ]
+ },
+ {
+  "id": "tease-1",
+  "intent": "tease",
+  "slots": [
+   "open?",
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "tease-2",
+  "intent": "tease",
+  "slots": [
+   "body",
+   "tail"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "tease-3",
+  "intent": "tease",
+  "slots": [
+   "body"
+  ],
+  "channel": [
+   "text"
+  ]
+ },
+ {
+  "id": "apologize-1",
+  "intent": "apologize",
+  "slots": [
+   "open",
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "apologize-2",
+  "intent": "apologize",
+  "slots": [
+   "body",
+   "ask?",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "apologize-3",
+  "intent": "apologize",
+  "slots": [
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "text"
+  ]
+ }
+]
