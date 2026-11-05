@@ -17,7 +17,7 @@ function Block({x,y,item}:{x:number;y:number;item:KitId}){const k=KIT[item],h=k.
 /** Cảnh văn phòng isometric: sàn liền chia khu, kéo và phóng như bản đồ thành phố. */
 export default function IsoOffice({plan,people,bug,afternoon,onPerson}:Props){
  const view=useRef<HTMLDivElement>(null),[zoom,setZoom]=useState(START),[sprites,setSprites]=useState<Record<string,Sprite>>({});
- const box=useMemo(()=>{const left=iso(0,plan.d).x-PAD,right=iso(plan.w,0).x+PAD,top=-WALL-PAD,bottom=iso(plan.w,plan.d).y+PAD;return{left,top,width:right-left,height:bottom-top}},[plan]);
+ const box=useMemo(()=>{let left=iso(0,plan.d).x-PAD,right=iso(plan.w,0).x+PAD,top=-WALL-PAD,bottom=iso(plan.w,plan.d).y+PAD;const s=plan.shell;if(s){left=Math.min(left,-s.ox);right=Math.max(right,s.w-s.ox);top=Math.min(top,-s.oy);bottom=Math.max(bottom,s.h-s.oy)}return{left,top,width:right-left,height:bottom-top}},[plan]);
  const player=people.find(p=>p.player),seatOf=(i:number)=>plan.seats[i];
  const centerOn=(wx:number,wy:number,z=zoom,smooth=false)=>{const v=view.current;if(!v)return;const p={x:(wx-box.left)*z,y:(wy-box.top)*z};v.scrollTo({left:p.x-v.clientWidth/2,top:p.y-v.clientHeight/2,behavior:smooth?'smooth':'auto'})};
  useEffect(()=>{let live=true;fetch('/assets/office-kit/manifest.json').then(r=>r.ok?r.json():null).then((m:unknown)=>{if(!live||!m||!Array.isArray((m as {items?:unknown}).items))return;const out:Record<string,Sprite>={};for(const it of (m as {items:{id?:unknown;files?:{a?:unknown}}[]}).items){if(typeof it.id==='string'&&it.id in KIT&&typeof it.files?.a==='string'&&/^[\w.-]+$/.test(it.files.a))out[it.id]={file:'/assets/office-kit/'+it.files.a}}setSprites(out)}).catch(()=>{});return()=>{live=false}},[]);
@@ -39,10 +39,11 @@ export default function IsoOffice({plan,people,bug,afternoon,onPerson}:Props){
  return <div className="iso-office">
   <div className="iso-office-view" ref={view} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onWheel={e=>{if(e.ctrlKey){e.preventDefault();zoomTo(zoom*(e.deltaY<0?1.1:.9),local(e as unknown as React.PointerEvent))}}}>
    <svg className="iso-office-svg" style={{width:box.width*zoom,height:box.height*zoom}} viewBox={`${box.left} ${box.top} ${box.width} ${box.height}`} role="img" aria-label="Văn phòng">
+    {plan.shell?<image className="iso-shell" href={plan.shell.src} x={-plan.shell.ox} y={-plan.shell.oy} width={plan.shell.w} height={plan.shell.h} preserveAspectRatio="none"/>:<>
     {plan.zones.filter(z=>z.y===0).map(z=><g key={'wr'+z.id}>{wall(iso(z.x,0),iso(z.x+z.w,0))}</g>)}
     {plan.zones.filter(z=>z.x===0).map(z=><g key={'wl'+z.id}>{wall(iso(0,z.y),iso(0,z.y+z.d))}</g>)}
     {plan.zones.map(z=><g key={z.id}><polygon className="iso-floor" points={pts([iso(z.x,z.y),iso(z.x+z.w,z.y),iso(z.x+z.w,z.y+z.d),iso(z.x,z.y+z.d)])} fill={ZONE_FILL[z.kind]}/>
-     <g className="iso-grid">{Array.from({length:z.w-1},(_,i)=><line key={'gx'+i} {...line(iso(z.x+i+1,z.y),iso(z.x+i+1,z.y+z.d))}/>)}{Array.from({length:z.d-1},(_,i)=><line key={'gy'+i} {...line(iso(z.x,z.y+i+1),iso(z.x+z.w,z.y+i+1))}/>)}</g></g>)}
+     <g className="iso-grid">{Array.from({length:z.w-1},(_,i)=><line key={'gx'+i} {...line(iso(z.x+i+1,z.y),iso(z.x+i+1,z.y+z.d))}/>)}{Array.from({length:z.d-1},(_,i)=><line key={'gy'+i} {...line(iso(z.x,z.y+i+1),iso(z.x+z.w,z.y+i+1))}/>)}</g></g>)}</>}
     {plan.zones.map(z=><g key={'p'+z.id} className="iso-partition">{z.x>0&&<Edge from={{x:z.x,y:z.y}} to={{x:z.x,y:z.y+z.d}} doors={plan.doors.filter(d=>d.axis==='y'&&d.x===z.x)}/>}{z.y>0&&<Edge from={{x:z.x,y:z.y}} to={{x:z.x+z.w,y:z.y}} doors={plan.doors.filter(d=>d.axis==='x'&&d.y===z.y)}/>}</g>)}
     {playerDesk&&<polygon className="iso-mine" points={pts([iso(playerDesk.x-.2,playerDesk.y-.2),iso(playerDesk.x+KIT[playerDesk.item].w+.2,playerDesk.y-.2),iso(playerDesk.x+KIT[playerDesk.item].w+.2,playerDesk.y+2.2),iso(playerDesk.x-.2,playerDesk.y+2.2)])}/>}
     {items.map(it=>it.kind==='piece'?<Thing key={it.p.key} p={it.p} sprite={sprites[it.p.item]}/>:<Person key={it.person.id} person={it.person} at={iso(it.s.x+.5,it.s.y+.5)} onTap={onPerson?()=>tap(it.person.id):undefined}/>)}

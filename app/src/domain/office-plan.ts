@@ -32,7 +32,11 @@ export interface Zone{id:string;kind:ZoneKind;name:string;x:number;y:number;w:nu
 export interface Piece{key:string;item:KitId;x:number;y:number;zone:string}
 export interface Seat{index:number;x:number;y:number;desk:string;zone:string}
 export interface Door{x:number;y:number;axis:'x'|'y'}
-export interface OfficePlan{w:number;d:number;zones:Zone[];pieces:Piece[];seats:Seat[];doors:Door[]}
+export interface ShellArt{src:string;ox:number;oy:number;w:number;h:number}
+export interface OfficePlan{w:number;d:number;zones:Zone[];pieces:Piece[];seats:Seat[];doors:Door[];shell?:ShellArt}
+
+/** Vỏ ảnh theo cỡ (ô 128×64, gốc ox/oy là điểm iso(0,0) trong ảnh). Cỡ chưa có ảnh thì vẽ sàn khối. */
+export const SHELL_ART:Partial<Record<OfficeSize,ShellArt>>={small:{src:'/assets/offices/small/room-shell.webp',ox:1024,oy:320,w:2048,h:1408}};
 
 type ZoneSpec={kind:ZoneKind;x:number;y:number;w:number;d:number;label?:string};
 /** Khuôn theo cỡ. Diện tích: Nhỏ 13×12 ≈ 40 m², Vừa 16×12 + 12×12 ≈ 85 m², Lớn 16×12 ×2 + 8×12 ×2 + 16×8 ≈ 160 m². */
@@ -61,7 +65,8 @@ export function buildPlan(size:OfficeSize,industry:Industry,seats:number):Office
   f.seats.forEach(s=>out.push({index:out.length,x:z.x+s.x,y:z.y+s.y,desk:`${id}:${s.desk}`,zone:id}))});
  const w=Math.max(...zones.map(z=>z.x+z.w)),d=Math.max(...zones.map(z=>z.y+z.d));
  const doors:Door[]=[];for(const a of zones)for(const b of zones){if(a.x+a.w===b.x&&a.y<b.y+b.d&&b.y<a.y+a.d){const y0=Math.max(a.y,b.y),y1=Math.min(a.y+a.d,b.y+b.d);doors.push({x:b.x,y:Math.floor((y0+y1)/2)-1,axis:'y'})}if(a.y+a.d===b.y&&a.x<b.x+b.w&&b.x<a.x+a.w){const x0=Math.max(a.x,b.x),x1=Math.min(a.x+a.w,b.x+b.w);doors.push({x:Math.floor((x0+x1)/2)-1,y:b.y,axis:'x'})}}
- return{w,d,zones,pieces,seats:out,doors}}
+ const shell=SHELL_ART[size];
+ return{w,d,zones,pieces,seats:out,doors,...(shell?{shell}:{})}}
 
 /** Toạ độ màn hình (px, chưa phóng) của một điểm trên sàn. */
 export const iso=(x:number,y:number)=>({x:(x-y)*TILE_W/2,y:(x+y)*TILE_H/2});
