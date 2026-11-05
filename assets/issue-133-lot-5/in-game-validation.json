@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "viewport": [
+    390,
+    844
+  ],
+  "fixture": "synthetic save in isolated Edge context",
+  "asset_hash_matches": true,
+  "initial_desk": [
+    5,
+    5
+  ],
+  "dragged_desk": [
+    4,
+    6
+  ],
+  "invalid_drop": "kitchen (1,0) rejected",
+  "reload_persists": true,
+  "fixture_layout_valid": true,
+  "page_errors": []
+}

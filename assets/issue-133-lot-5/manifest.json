@@ -1148,7 +1148,7 @@
       }
     },
     {
-      "id": "office-shell",
+      "id": "office-shell-small",
       "file": "assets/offices/small/background.webp",
       "frame_px": [
         1536,
@@ -1172,7 +1172,7 @@
       }
     },
     {
-      "id": "office-shell",
+      "id": "office-shell-small",
       "file": "assets/offices/small/room-cleaned-v02.png",
       "frame_px": [
         1536,
@@ -1196,7 +1196,7 @@
       }
     },
     {
-      "id": "office-shell",
+      "id": "office-shell-medium",
       "file": "assets/offices/medium/background.webp",
       "frame_px": [
         1536,
@@ -1205,12 +1205,12 @@
       "anchor_px": null,
       "footprint_tiles": null,
       "direction": "original camera",
-      "bytes": 136370,
+      "bytes": 143736,
       "encoding": "WebP",
       "quality": 75,
       "colours": null,
-      "sha256": "3b2e4e570765f43cf18198e6924e8aa406478c889164d173bf61c4445a0beb84",
-      "source_sha256": "46ebf59d1e260e8f74907c82d772746430379825426a4fc6b0186daa4afcde87",
+      "sha256": "1e426e1d67ea35bd45dc50d2735df9cff080ed4f6116644f235c9eb94fc2bc4a",
+      "source_sha256": "8f4fbe200c22134bede68a177b15e8e90b7385d22ac30b4abce7aba224cb7e78",
       "registration": {
         "method": "whole canvas resample",
         "source_frame": [
@@ -1220,7 +1220,7 @@
       }
     },
     {
-      "id": "office-shell",
+      "id": "office-shell-medium",
       "file": "assets/offices/medium/room-cleaned-v02.png",
       "frame_px": [
         1536,
@@ -1229,12 +1229,12 @@
       "anchor_px": null,
       "footprint_tiles": null,
       "direction": "original camera",
-      "bytes": 142248,
+      "bytes": 127162,
       "encoding": "indexed PNG; 768px sampling; nearest x2",
       "quality": 50,
-      "colours": 72,
-      "sha256": "b8f581b051d59a2b336c35fbb75e518c3415a52b6f642c1ea94a7074fe7bf036",
-      "source_sha256": "46ebf59d1e260e8f74907c82d772746430379825426a4fc6b0186daa4afcde87",
+      "colours": 53,
+      "sha256": "d507a1079799c63a2cab091e44a23e6f8be767cfb0d02880e3e7281e5aae258f",
+      "source_sha256": "8f4fbe200c22134bede68a177b15e8e90b7385d22ac30b4abce7aba224cb7e78",
       "registration": {
         "method": "whole canvas resample",
         "source_frame": [
@@ -1244,7 +1244,7 @@
       }
     },
     {
-      "id": "office-shell",
+      "id": "office-shell-large",
       "file": "assets/offices/large/background.webp",
       "frame_px": [
         1536,
@@ -1253,12 +1253,12 @@
       "anchor_px": null,
       "footprint_tiles": null,
       "direction": "original camera",
-      "bytes": 136370,
+      "bytes": 144606,
       "encoding": "WebP",
       "quality": 75,
       "colours": null,
-      "sha256": "3b2e4e570765f43cf18198e6924e8aa406478c889164d173bf61c4445a0beb84",
-      "source_sha256": "46ebf59d1e260e8f74907c82d772746430379825426a4fc6b0186daa4afcde87",
+      "sha256": "9c9c04f0f08b84e4d75e3915773c92fa8a1afe0ae66edd305aaa3ce614ece3e3",
+      "source_sha256": "f7a804ea8594b5b228aa4c9cb3fbdd1be6803b6444ce0a55053a98daada171a6",
       "registration": {
         "method": "whole canvas resample",
         "source_frame": [
@@ -1268,7 +1268,7 @@
       }
     },
     {
-      "id": "office-shell",
+      "id": "office-shell-large",
       "file": "assets/offices/large/room-cleaned-v02.png",
       "frame_px": [
         1536,
@@ -1277,12 +1277,12 @@
       "anchor_px": null,
       "footprint_tiles": null,
       "direction": "original camera",
-      "bytes": 142248,
+      "bytes": 140944,
       "encoding": "indexed PNG; 768px sampling; nearest x2",
       "quality": 50,
       "colours": 72,
-      "sha256": "b8f581b051d59a2b336c35fbb75e518c3415a52b6f642c1ea94a7074fe7bf036",
-      "source_sha256": "46ebf59d1e260e8f74907c82d772746430379825426a4fc6b0186daa4afcde87",
+      "sha256": "bb9824774e1c4707c61e620d3837111c537e4634de22f905eab32560a8529d6d",
+      "source_sha256": "f7a804ea8594b5b228aa4c9cb3fbdd1be6803b6444ce0a55053a98daada171a6",
       "registration": {
         "method": "whole canvas resample",
         "source_frame": [

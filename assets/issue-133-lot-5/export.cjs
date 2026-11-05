@@ -8,7 +8,7 @@ const txt=(x,y,s,z=15)=>'<text x="'+x+'" y="'+y+'" font-family="Arial" font-size
 function bbox(d,w,h){let l=w,t=h,r=-1,b=-1;for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(d[(y*w+x)*4+3]>=128){l=Math.min(l,x);t=Math.min(t,y);r=Math.max(r,x);b=Math.max(b,y)}return [l,t,r+1,b+1]}
 (async()=>{const items=[];
 for(const j of spec.items){const old=baseline.find(m=>m.file===j.file),[w,h]=old.frame_px,src=fs.readFileSync(sources[j.id]),meta=await sharp(src).metadata();let img,registration;
-if(j.transparent&&j.id!=='office-shell'){
+if(j.transparent&&!j.id.startsWith('office-shell')){
  const before=await sharp(original(j.file)).ensureAlpha().raw().toBuffer(),raw=await sharp(src).ensureAlpha().raw().toBuffer(),a=bbox(before,w,h),b=bbox(raw,meta.width,meta.height);
  const resized=await sharp(src).extract({left:b[0],top:b[1],width:b[2]-b[0],height:b[3]-b[1]}).resize(a[2]-a[0],a[3]-a[1],{fit:'fill'}).toBuffer();
  const canvas=await sharp({create:{width:w,height:h,channels:4,background:'#00000000'}}).composite([{input:resized,left:a[0],top:a[1]}]).raw().toBuffer();
@@ -25,9 +25,9 @@ if(j.transparent&&j.id!=='office-shell'){
   img=sharp(generated,{raw:{width:w,height:h,channels:4}});registration.protected_original_character_rectangles=protectedRegions;
  }
 }
-let buffer,quality=92;const files=j.id==='office-shell'?['small','medium','large'].flatMap(s=>['assets/offices/'+s+'/background.webp','assets/offices/'+s+'/room-cleaned-v02.png']):[j.file];
+let buffer,quality=92;const files=j.office_size?['assets/offices/'+j.office_size+'/background.webp','assets/offices/'+j.office_size+'/room-cleaned-v02.png']:[j.file];
 for(const f of files){
- let encoding,colours=null;if(f.endsWith('.png')){const small=await img.clone().resize(768,768).png({palette:true,quality:50,colours:256,dither:0}).toBuffer();buffer=await sharp(small).resize(w,h,{kernel:'nearest'}).png({compressionLevel:9,palette:true,quality:100,colours:256,dither:0}).toBuffer();colours=buffer.readUInt32BE(buffer.indexOf(Buffer.from('PLTE'))-4)/3;encoding='indexed PNG; 768px sampling; nearest x2';quality=50;}else{for(quality of [92,85,75,65,55,45,35]){buffer=await img.clone().webp({quality,alphaQuality:100,effort:5}).toBuffer();if(buffer.length<150000)break}encoding='WebP';}
+ let encoding,colours=null;if(f.endsWith('.png')){for(quality of [50,40,30,20]){const small=await img.clone().resize(768,768).png({palette:true,quality,colours:256,dither:0}).toBuffer();buffer=await sharp(small).resize(w,h,{kernel:'nearest'}).png({compressionLevel:9,palette:true,quality:100,colours:256,dither:0}).toBuffer();if(buffer.length<150000)break}colours=buffer.readUInt32BE(buffer.indexOf(Buffer.from('PLTE'))-4)/3;encoding='indexed PNG; 768px sampling; nearest x2';}else{for(quality of [92,85,75,65,55,45,35]){buffer=await img.clone().webp({quality,alphaQuality:100,effort:5}).toBuffer();if(buffer.length<150000)break}encoding='WebP';}
  if(buffer.length>=150000)throw Error(f+' exceeds 150000 bytes');const dest=path.join(root,'app/public',f);fs.writeFileSync(dest,buffer);
  items.push({id:j.id,file:f,frame_px:[w,h],anchor_px:j.id==='rental'?[724,350]:null,footprint_tiles:j.id==='rental'?[8,8]:null,direction:'original camera',bytes:buffer.length,encoding,quality,colours,sha256:hash(buffer),source_sha256:hash(src),registration});console.log(f,buffer.length,quality,colours);
 }
@@ -41,8 +41,8 @@ layers.push({input:svg(W,H,labels),left:0,top:0});await sharp({create:{width:W,h
 for(let y=0,p=1;y<H;y+=800,p++)await sharp(path.join(__dirname,'contact-sheet.webp')).extract({left:0,top:y,width:W,height:Math.min(800,H-y)}).webp({quality:92}).toFile(path.join(__dirname,'page-'+p+'.webp'));
 const fw=1448,fh=1086,P=(x,y)=>[724+64*(x-y),350+32*(x+y)],furniture=JSON.parse(fs.readFileSync(path.join(root,'app/src/domain/furniture-sprites.json')));let grid='';for(let i=0;i<=8;i++)for(const [a,b]of [[P(i,0),P(i,8)],[P(0,i),P(8,i)]])grid+='<path d="M'+a+'L'+b+'" stroke="#4d786c" opacity=".35"/>';
 const scene=[{input:path.join(root,'app/public/assets/room-master-storybook.webp'),left:0,top:0},{input:svg(fw,fh,grid),left:0,top:0}];
-for(const [key,x,y]of [['rug-comfort_a',3,4],['bed-basic_a',0,3],['wardrobe-comfort_a',0,6],['desk-comfort_a',5,4],['plant-comfort_a',6,6]]){const m=furniture[key],[px,py]=P(x+m.fw,y+m.fh);scene.push({input:path.join(root,'app/public',m.f),left:px-m.ax,top:py-m.ay})}
-scene.push({input:path.join(root,'app/public/assets/furniture/lamp-comfort_a.webp'),left:745,top:463});
+for(const [key,x,y]of [['rug-comfort_a',3,3],['bed-basic_a',0,3],['wardrobe-comfort_a',0,6],['desk-comfort_a',5,5],['plant-comfort_a',7,5]]){const m=furniture[key],[px,py]=P(x+m.fw,y+m.fh);scene.push({input:path.join(root,'app/public',m.f),left:px-m.ax,top:py-m.ay})}
+const lamp=furniture['lamp-comfort_a'],lampPoint=P(5+2*.3+.5,5+2*.5+.5);scene.push({input:path.join(root,'app/public',lamp.f),left:Math.round(lampPoint[0]-lamp.ax),top:Math.round(lampPoint[1]-32*1.6-lamp.ay)});
 await sharp({create:{width:fw,height:fh,channels:4,background:'#f4f0e5'}}).composite(scene).webp({quality:92}).toFile(path.join(__dirname,'room-grid-preview.webp'));
 console.log(JSON.stringify({exported:items.length,max_bytes:Math.max(...items.map(m=>m.bytes)),total_bytes:items.reduce((s,m)=>s+m.bytes,0)}));
 })().catch(e=>{console.error(e);process.exitCode=1});

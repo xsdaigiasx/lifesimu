@@ -1,0 +1,56 @@
+{
+  "baseline_commit": "d25988610bf0fa6ee3ffdcf514aee242c81c6622",
+  "text_normalization": "CRLF to LF",
+  "protected_files": [
+    {
+      "file": "app/src/domain/house-floors.json",
+      "normalized_sha256": "652f2ef409d980cf3c341744c9ce09fa6c1074fce34020eb6fa304e59943db16"
+    },
+    {
+      "file": "app/src/domain/home-geometry.ts",
+      "normalized_sha256": "5c2a503c94342f7495b1ed5c0a401ac4271ede466604f28441a331ab6dc31ac0"
+    },
+    {
+      "file": "app/src/domain/furniture-sprites.json",
+      "normalized_sha256": "b4a3cf4baa134207cbbbbb67ef1612e010d5b3c74dd92579b66a271313ac47df"
+    },
+    {
+      "file": "app/src/domain/office-packs.json",
+      "normalized_sha256": "4d5a5775fb190577bfd81f4777f1108f86079192a84731304320ac9c547e1782"
+    },
+    {
+      "file": "app/public/assets/offices/small/manifest.json",
+      "normalized_sha256": "958b1ba7d2e47fda9af00834d3bdeee38b7ff32d917c481bbc3355c3b454e244"
+    },
+    {
+      "file": "app/public/assets/offices/medium/manifest.json",
+      "normalized_sha256": "e8c7ff2d7af07e0aef10311489a0738782f45d4b881b41dd69fdb410e42e66d1"
+    },
+    {
+      "file": "app/public/assets/offices/large/manifest.json",
+      "normalized_sha256": "e0f9af3922e3101e2726036d214a2338e3b8cbda380caeb80fc00868d472c391"
+    }
+  ],
+  "characters": [
+    {
+      "file": "baseline-characters/person-1.png",
+      "rectangle": [
+        828,
+        150,
+        995,
+        376
+      ],
+      "sha256": "7ef6f3dc712182dbcde7a397507b49294f0ca50f9aa1a43fd2c713e03e0ed2ef"
+    },
+    {
+      "file": "baseline-characters/person-2.png",
+      "rectangle": [
+        1120,
+        190,
+        1300,
+        455
+      ],
+      "sha256": "ccb1a45566a367b6427517af5c1bea60f1201b0fb251d4e69937cc307d7b08d8"
+    }
+  ]
+}
