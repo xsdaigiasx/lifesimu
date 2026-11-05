@@ -43,7 +43,7 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
  let n=structuredClone(s);const o=n.office=structuredClone(officeOf(s));
  const fail=(error:string):GameResult=>({ok:false,error});
  if(o.application?.status==='interview'&&a.kind!=='answer')return fail('Hãy trả lời hết câu hỏi trong buổi phỏng vấn.');
- const pay=(amount:number,label:string)=>amount<=0||post(n,{name:label,amount:-amount})==='ok';
+ const pay=(amount:number,label:string)=>{if(amount<=0)return true;if(n.company&&(o.role==='owner'||a.kind==='rent')){if(n.company.fund<amount)return false;n.company={...n.company,fund:n.company.fund-amount};return true}return post(n,{name:label,amount:-amount})==='ok'};
  if(o.role==='employee'&&!canEnterOffice(s))return fail('Công ty đã hết giờ làm.');if(o.role==='employee'&&['upgrade','buyDecor','place','rent','renew'].includes(a.kind))return fail('Thiết bị công ty do công ty quản lý.');
  if(a.kind==='meet'){if(!STAFF.some(p=>p.id===a.id))return fail('Không tìm thấy nhân vật.');if(o.met.includes(a.id))return fail('Bạn đã làm quen với người này.');o.met.push(a.id)}
  else if(a.kind==='apply'){
@@ -69,6 +69,7 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
  } else if(a.kind==='endLease'){if(o.role!=='owner')return fail('Bạn không có hợp đồng thuê.');o.role='visitor';o.leaseUntil=s.day;o.employerId=null}
  else if(a.kind==='leave'){if(o.role!=='employee')return fail('Bạn không ở vai nhân viên.');o.role='visitor';o.employerId=null;o.application=null;delete o.probation;delete o.tier;delete o.tierSince}
  else if(a.kind==='rent'){
+  if(!s.company)return fail('Hãy lập công ty trước khi thuê văn phòng.');
   if(o.role!=='visitor')return fail('Bạn đang có văn phòng.');if(o.application&&['pending','interview','passed'].includes(o.application.status))return fail('Hãy hủy hồ sơ tuyển dụng trước khi thuê.');
   if(!Object.hasOwn(SIZES,a.size)||!Object.hasOwn(INDUSTRIES,a.industry)||typeof a.name!=='string'||!a.name.trim()||a.name.trim().length>32)return fail('Hãy chọn ngành, diện tích và tên công ty tối đa 32 ký tự.');
   if(!pay(SIZES[a.size].rent,`Thuê văn phòng ${SIZES[a.size].area} m² 7 ngày`))return fail('Chưa đủ tiền trả kỳ thuê 7 ngày.');o.role='owner';o.size=a.size;o.industry=a.industry;o.name=a.name.trim();o.leaseUntil=s.day+7;
