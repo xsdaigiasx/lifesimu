@@ -211,3 +211,4 @@
 .bug-bar{position:relative;height:44px;border-radius:12px;background:#ffffff1f;margin:18px 0 8px;overflow:hidden}.bug-bar .zone{position:absolute;top:0;bottom:0;background:#4fb06b88}.bug-bar .mark{position:absolute;top:0;bottom:0;width:6px;margin-left:-3px;background:#fff;border-radius:3px}
 .home-use button:not(:last-child){display:flex;gap:6px;width:auto;min-width:96px;padding:7px 12px;border-radius:18px;white-space:nowrap;font-weight:600;font-size:14px}
 .home-kitchen-hotspot{background:transparent;border:0;box-shadow:none}.home-kitchen-hotspot svg{display:none}
+.home-sleep-action{background:transparent;border:0;box-shadow:none}.home-sleep-action svg{display:none}
