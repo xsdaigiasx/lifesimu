@@ -1,7 +1,7 @@
 /* 04/11: Nhà phố, Biệt thự nhiều phòng (khối dựng tạm, ảnh vẽ giao sau) */
 .house-view{display:grid;gap:10px;padding:12px;border-radius:18px;background:#fbfaf3;border:1px solid #e1e6dc}
 .house-head{display:flex;justify-content:space-between;align-items:baseline}.house-head strong{font-size:17px;color:#173e38}.house-head small{font-size:12px;color:#6b7d70}
-.house-rooms{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.house-rooms{display:flex;flex-wrap:wrap;gap:6px}
 .house-rooms button{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 12px;border:1px solid #d7dfcf;border-radius:17px;background:#fcfcf6;color:#294d3d;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
 .house-rooms button small{font-size:10px;color:#8b978d}
 .house-rooms button[aria-pressed=true]{background:#2f6b4f;border-color:#2f6b4f;color:#fff}.house-rooms button[aria-pressed=true] small{color:#d6e6dc}
@@ -41,3 +41,7 @@
 .scene.room-mode .home-interior .room-viewport>.room-world.home-scene.storybook{aspect-ratio:1448/1086!important;width:min(100cqw,calc(100cqh * 1.62))!important}
 .home-scene.storybook .home-object.sprite img.home-art{width:100%;height:auto}
 .home-scene.storybook .home-floor polygon{vector-effect:non-scaling-stroke}
+
+.house-tools{display:flex;gap:8px;align-items:center}
+.house-tools button{display:flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:0 12px;border:1px solid #c3d0b6;border-radius:12px;background:#fcfcf6;color:#294d3d;font:inherit;font-size:12px;font-weight:700}
+.house-tools .house-use-icon{width:42px;padding:0}.house-tools svg{width:18px!important;height:18px!important;fill:none;stroke:currentColor}
