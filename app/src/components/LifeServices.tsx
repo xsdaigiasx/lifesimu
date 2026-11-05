@@ -1,3 +1,4 @@
+import {tileArt} from './tile-art';
 import {useState} from 'react';
 import PeopleHere from './PeopleHere';
 import Market from './Market';
@@ -35,7 +36,7 @@ export default function LifeServices({state,place,onAction,onShop,onTalk}:{state
  {place==='mall'&&onShop&&<MallShop state={state} onAction={onAction} onShop={onShop}/>}
 
  {place==='market'&&<Market state={state} stock={id=>stock(state,id)} onAction={onAction} onTalk={onTalk}/>}
- {place==='home'&&<>{l.cooking?<CookingGame cooking={l.cooking} onAction={onAction} onDone={message=>{setNotice(message);setPage('meals')}}/>:<>{page==='menu'?<div className="kitchen-menu">{KITCHEN.map(([id,label,icon,count])=><button key={id} onClick={()=>go(id)}><Icon name={icon}/><strong>{label}</strong>{count!==''&&<small>{count}</small>}</button>)}</div>:page!=='improv'&&kitchenBack}
+ {place==='home'&&<>{l.cooking?<CookingGame cooking={l.cooking} onAction={onAction} onDone={message=>{setNotice(message);setPage('meals')}}/>:<>{page==='menu'?<div className="kitchen-menu">{KITCHEN.map(([id,label,icon,count])=><button key={id} onClick={()=>go(id)}>{tileArt('kitchen',id)?<img className="tile-art" src={tileArt('kitchen',id)} alt="" loading="lazy"/>:<Icon name={icon}/>}<strong>{label}</strong>{count!==''&&<small>{count}</small>}</button>)}</div>:page!=='improv'&&kitchenBack}
  {page==='improv'&&<Improvise state={state} onBack={()=>go('menu')} onCook={items=>run({kind:'improvise',items},'Bắt đầu nấu.')}/>}
  {page==='recipes'&&<div className="market-grid meal-grid">{(Object.keys(RECIPES) as RecipeId[]).sort((a,b)=>Number(knowsRecipe(state,b))-Number(knowsRecipe(state,a))).map(id=>{const r=RECIPES[id],known=knowsRecipe(state,id),rec=l.learned?.[id],teacher=rec&&rec.by!=='self'?castById(rec.by):undefined,src=recipeSources(id);return <article key={id} className={`market-item ${known?'':'is-locked'}`}><span className="market-item-art meal-art"><img src={mealArt(id)} alt="" loading="lazy" decoding="async" onError={e=>{e.currentTarget.src=mealArt('eggRice')}}/></span><strong>{r.name}</strong>
   {known?<><span className="recipe-from">{teacher?<><span className="recipe-face"><NpcFace id={teacher.id} label={teacher.label}/></span>{teacher.name}{rec&&<small>{agoText(state.day-rec.day)}</small>}</>:RECIPE_LEVEL[id]!==undefined&&!rec?<><Icon name="chart"/>Lv {RECIPE_LEVEL[id]}</>:<><Icon name="pan"/>{id==='eggRice'?'Biết sẵn':'Tự khám phá'}</>}</span>

@@ -1,3 +1,4 @@
+import {tileArt} from './tile-art';
 import NpcFace from './NpcFace';
 import {InfoButton} from './ShopInfo';
 import {foodSpec} from '../domain/specs';
@@ -20,7 +21,7 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
  const [stallId,setStall]=useState<StallId|null>(null),[pick,setPick]=useState<IngredientId|null>(null),[qty,setQty]=useState(1),[note,setNote]=useState(''),[chat,setChat]=useState(false);
  const c=clockOf(state),rel=socialOf(state).relations,stall=STALLS.find(s=>s.id===stallId);
  if(!stall){const sellers:string[]=STALLS.map(s=>s.seller);return <div className="market">
-  <div className="market-stalls">{STALLS.map(s=>{const seller=castById(s.seller)!,here=presentAt(seller,state.day,c.minute,'market');return <button key={s.id} className={`market-stall market-stall-${s.id}`} onClick={()=>{setStall(s.id);setNote('');setChat(false)}}><span className="market-stall-art"><Icon name={s.icon}/></span><strong>{s.name}</strong><small>{here?seller.name:'Người nhà trông quầy'}</small></button>})}</div>
+  <div className="market-stalls">{STALLS.map(s=>{const seller=castById(s.seller)!,here=presentAt(seller,state.day,c.minute,'market');return <button key={s.id} className={`market-stall market-stall-${s.id}`} onClick={()=>{setStall(s.id);setNote('');setChat(false)}}><span className="market-stall-art">{tileArt('market',s.id)?<img src={tileArt('market',s.id)} alt="" loading="lazy"/>:<Icon name={s.icon}/>}</span><strong>{s.name}</strong><small>{here?seller.name:'Người nhà trông quầy'}</small></button>})}</div>
   {onTalk&&<PeopleHereFiltered state={state} exclude={sellers} onTalk={onTalk}/>}
  </div>}
  const seller=castById(stall.seller)!,here=presentAt(seller,state.day,c.minute,'market');

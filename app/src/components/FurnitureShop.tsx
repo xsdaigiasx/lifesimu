@@ -5,6 +5,7 @@ import type {GameState,GameResult} from '../domain/types';
 import {money} from '../domain/format';
 import {useState} from 'react';
 import Icon from './Icon';
+import {tileArt} from './tile-art';
 import {HomeCards,ProductCards,CartPanel,CartButton,BarChip,ZoneGrid,LineArt,FULL,HOME_IDS,ELEC_HOME_IDS,type Zone as ZoneTile} from './ShopCards';
 import {cart,useCart} from './cart';
 
@@ -22,7 +23,7 @@ export default function FurnitureShop({state,onShop,onLife}:{state:GameState;onS
  const balance=<header className="furniture-shop-balance"><span>Số dư<strong className="t-stat">{money(state.money)}</strong></span></header>;
  const chips=<><BarChip icon="box" label="Đơn hàng" count={orders.length} onOpen={()=>go('orders')}/><CartButton onOpen={()=>go('cart')}/></>;
  const count=(id:string)=>id==='furniture'?HOME_IDS.length*3:(Object.keys(PRODUCTS) as (keyof typeof PRODUCTS)[]).filter(p=>PRODUCTS[p].category===id).length+(id==='electronics'?ELEC_HOME_IDS.length*3:0);
- if(!view)return <section className="furniture-shop" aria-label="Cửa hàng mua sắm">{balance}<div className="mall-bar">{chips}</div><ZoneGrid zones={ZONES.map((z):ZoneTile=>({...z,count:count(z.id)}))} onOpen={id=>go(id as View)}/>{status}</section>;
+ if(!view)return <section className="furniture-shop" aria-label="Cửa hàng mua sắm">{balance}<div className="mall-bar">{chips}</div><ZoneGrid zones={ZONES.map((z):ZoneTile=>({...z,count:count(z.id),art:tileArt('shop',z.id)}))} onOpen={id=>go(id as View)}/>{status}</section>;
  const tone=ZONES.find(z=>z.id===view)?.tone;
  return <section className="furniture-shop" aria-label="Cửa hàng mua sắm">{balance}
   <header className="market-seller"><button className="market-back" aria-label="Về các mục" onClick={()=>go(null)}><Icon name="chevron-left"/></button><span className="market-seller-copy"><strong className="t-title">{TITLE[view]}</strong></span>{view!=='orders'&&chips}</header>

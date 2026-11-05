@@ -6,7 +6,7 @@ import {money} from '../domain/format';
 import Icon from './Icon';
 import HomeArt from './HomeArt';
 import {productArt} from './NpcFace';
-import {spriteFor,catalogFor} from './furniture-art';
+import {spriteFor} from './furniture-art';
 import {cart,useCart} from './cart';
 import {specOf} from '../domain/specs';
 import {InfoButton} from './ShopInfo';
@@ -14,7 +14,6 @@ import {InfoButton} from './ShopInfo';
 /** Ảnh nhỏ của một dòng trong giỏ. */
 export function LineArt({line}:{line:Line}){
  if(line.kind==='product')return <img src={productArt(line.id)} alt="" loading="lazy" decoding="async"/>;
- const cat=catalogFor(line.id,line.tier);if(cat)return <img src={cat} alt="" loading="lazy"/>;
  const sp=spriteFor(line.id,line.tier);return sp?<img src={sp.f} alt="" loading="lazy"/>:<HomeArt id={line.id}/>;
 }
 
@@ -68,10 +67,10 @@ export function ProductCards({state,category,tone,onFull,onEquip}:{state:GameSta
   </article>})}</>;
 }
 
-export interface Zone{id:string;name:string;icon:string;tone:string;count?:number}
+export interface Zone{id:string;name:string;icon:string;tone:string;count?:number;art?:string}
 /** Màn chọn mục: mỗi mục một ô lớn kèm số món. Dùng chung cho TTTM và điện thoại. */
 export function ZoneGrid({zones,onOpen}:{zones:Zone[];onOpen:(id:string)=>void}){
- return <div className="market-stalls mall-zones">{zones.map(z=><button key={z.id} type="button" className="market-stall" onClick={()=>onOpen(z.id)}><span className="market-stall-art" style={{background:z.tone}}><Icon name={z.icon}/></span><strong>{z.name}</strong>{z.count!==undefined&&<small><Icon name="box"/>{z.count}</small>}</button>)}</div>;
+ return <div className="market-stalls mall-zones">{zones.map(z=><button key={z.id} type="button" className="market-stall" onClick={()=>onOpen(z.id)}><span className="market-stall-art" style={{background:z.tone}}>{z.art?<img src={z.art} alt="" loading="lazy"/>:<Icon name={z.icon}/>}</span><strong>{z.name}</strong>{z.count!==undefined&&<small><Icon name="box"/>{z.count}</small>}</button>)}</div>;
 }
 
 /** Nút tròn góc trên: biểu tượng kèm số (Kho, Đơn hàng). */
