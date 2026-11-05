@@ -6,6 +6,7 @@ import {shortDate,money} from '../domain/format';
 import {GameScreen} from './GameUI';
 import NpcFace from './NpcFace';
 import Icon from './Icon';
+import {shareSummary} from './summaryImage';
 
 /** T35: nội dung một bản tổng kết. Chỉ hiện những gì đã ghi trong save và Nhật ký. */
 export function SummaryBody({m}:{m:Summary}){
@@ -27,14 +28,19 @@ export function SummaryBody({m}:{m:Summary}){
    {m.marks.map((k,i)=><div className="sum-mark" key={i}><small>{shortDate(k.day)}</small><strong>{k.title}</strong></div>)}</section>}
  </div>}
 
+export function ShareButton({m}:{m:Summary}){
+ const [note,setNote]=useState(''),[busy,setBusy]=useState(false);
+ const go=async()=>{if(busy)return;setBusy(true);try{const r=await shareSummary(m);setNote(r==='saved'?'Đã lưu ảnh':r==='shared'?'Đã chia sẻ':'')}catch{setNote('Chưa tạo được ảnh')}setBusy(false);setTimeout(()=>setNote(''),2500)};
+ return <button className="sum-share" disabled={busy} onClick={go}><Icon name="save"/>{note||'Chia sẻ ảnh'}</button>}
+
 /** Hộp thoại tự mở khi có bản tổng kết mới. */
 export function SummaryPopup({m,onClose}:{m:Summary;onClose:()=>void}){
- return <div className="sum-popup"><SummaryBody m={m}/><button className="sum-close" onClick={onClose}>Tiếp tục chơi</button></div>}
+ return <div className="sum-popup"><SummaryBody m={m}/><ShareButton m={m}/><button className="sum-close" onClick={onClose}>Tiếp tục chơi</button></div>}
 
 /** Tab Tổng kết trong Nhật ký: các bản đã lưu, mới nhất trước. */
 export function SummaryTab({state}:{state:GameState}){
  const list=[...summaryOf(state).list].reverse(),[open,setOpen]=useState<string|null>(null),m=list.find(x=>x.id===open);
- if(m)return <GameScreen title={titleOf(m)} onBack={()=>setOpen(null)}><SummaryBody m={m}/></GameScreen>;
+ if(m)return <GameScreen title={titleOf(m)} onBack={()=>setOpen(null)}><SummaryBody m={m}/><ShareButton m={m}/></GameScreen>;
  return list.length?<div className="journal-group">{list.map(x=><button key={x.id} className="journal-row" onClick={()=>setOpen(x.id)}>
   <span className="journal-icon" aria-hidden="true"><Icon name="chart"/></span><span className="journal-copy"><strong>{titleOf(x)}</strong></span><span className="journal-time">{shortDate(x.day)}</span></button>)}</div>
  :<div className="game-empty"><Icon name="chart"/><h3>Chưa có tổng kết</h3></div>}

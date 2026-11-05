@@ -9,3 +9,4 @@
 .sum-mark{display:flex;align-items:baseline;gap:10px;padding:8px 2px;border-bottom:1px solid #e3ead8}.sum-mark small{flex:none;min-width:64px;color:#7f8c73}.sum-mark strong{min-width:0;overflow-wrap:anywhere}
 .sum-popup{display:flex;flex-direction:column;gap:12px}
 .sum-close{min-height:44px;border-radius:10px;background:#38644e;color:#fff;font-weight:600}
+.sum-share{min-height:44px;border-radius:10px;background:#fffef4;border:1px solid #38644e;color:#38644e;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px}.sum-share svg{width:18px;height:18px}.sum-share:disabled{opacity:.6}
