@@ -1,0 +1,23 @@
+{
+  "tested_base": "1316f0fc34a4c99d6b0fc30388213e065881577f",
+  "app_version": "0.45.0",
+  "asset_verify": "PASS",
+  "frame_px": [2048,1408],
+  "floor_raster_bbox": [128,320,1920,1216],
+  "floor_size_px": [1792,896],
+  "origin_px": [1024,320],
+  "tile_px": [128,64],
+  "grid": [14,14],
+  "bytes": 261906,
+  "webp_quality": 95,
+  "all196cellCentersCovered": true,
+  "sample_items": 8,
+  "sample_footprints": "inside floor, no overlaps, doorway apron x6..8/y12..14 clear",
+  "app_test": "PASS",
+  "app_build": "PASS; existing runtime CSS-resolution and chunk-size warnings",
+  "core_check": "PASS; 18 tests",
+  "mobile": "PASS: 390x844 review, all images decoded, no overflow; not wired into game",
+  "visual_review": "empty shell/grid, eight native-size samples, same-pixel-scale rental comparison and before/after inspected",
+  "runtime_code_changed": false,
+  "integration": "Claude wires room-shell.webp and recalibrates 38 placements after review"
+}
