@@ -1,0 +1,931 @@
+[
+ {
+  "id": "open-001",
+  "slot": "open",
+  "text": "Chào {you}"
+ },
+ {
+  "id": "open-002",
+  "slot": "open",
+  "text": "{You} đi đâu đó"
+ },
+ {
+  "id": "open-003",
+  "slot": "open",
+  "text": "Ủa {you}",
+  "minTier": "acquaint"
+ },
+ {
+  "id": "open-004",
+  "slot": "open",
+  "text": "{You} ơi",
+  "voice": "tay"
+ },
+ {
+  "id": "open-005",
+  "slot": "open",
+  "text": "Ê {you}",
+  "voice": "sg",
+  "minTier": "acquaint"
+ },
+ {
+  "id": "open-006",
+  "slot": "open",
+  "text": "{You} đấy à",
+  "voice": "bac"
+ },
+ {
+  "id": "open-007",
+  "slot": "open",
+  "text": "Răng rồi {you}",
+  "voice": "trung",
+  "minTier": "acquaint"
+ },
+ {
+  "id": "open-008",
+  "slot": "open",
+  "text": "Con ơi",
+  "npc": "me"
+ },
+ {
+  "id": "open-009",
+  "slot": "open",
+  "text": "Mẹ hỏi chút {p}",
+  "npc": "me"
+ },
+ {
+  "id": "open-010",
+  "slot": "open",
+  "text": "Ừ",
+  "cold": true
+ },
+ {
+  "id": "open-011",
+  "slot": "open",
+  "text": "{You} có việc gì",
+  "cold": true
+ },
+ {
+  "id": "open-012",
+  "slot": "open",
+  "text": "{You} biết gì không",
+  "intent": [
+   "brag",
+   "news"
+  ]
+ },
+ {
+  "id": "open-013",
+  "slot": "open",
+  "text": "Nói {you} nghe nè",
+  "intent": [
+   "brag",
+   "news",
+   "complain"
+  ],
+  "voice": "sg"
+ },
+ {
+  "id": "open-014",
+  "slot": "open",
+  "text": "Kể {you} nghe cái này",
+  "intent": [
+   "brag",
+   "news"
+  ]
+ },
+ {
+  "id": "open-015",
+  "slot": "open",
+  "text": "Haiz",
+  "intent": [
+   "complain"
+  ],
+  "emotion": [
+   "tired",
+   "sad",
+   "annoyed"
+  ]
+ },
+ {
+  "id": "open-016",
+  "slot": "open",
+  "text": "Mệt ghê {you} ơi",
+  "intent": [
+   "complain"
+  ],
+  "emotion": [
+   "tired"
+  ]
+ },
+ {
+  "id": "open-017",
+  "slot": "open",
+  "text": "{You} nè",
+  "intent": [
+   "ask",
+   "request",
+   "invite"
+  ]
+ },
+ {
+  "id": "open-018",
+  "slot": "open",
+  "text": "Hỏi {you} chút",
+  "intent": [
+   "ask"
+  ]
+ },
+ {
+  "id": "open-019",
+  "slot": "open",
+  "text": "Rảnh không {you}",
+  "intent": [
+   "invite",
+   "request"
+  ],
+  "minTier": "acquaint"
+ },
+ {
+  "id": "open-020",
+  "slot": "open",
+  "text": "{Self} xin lỗi {you} nghe",
+  "intent": [
+   "apologize"
+  ]
+ },
+ {
+  "id": "open-021",
+  "slot": "open",
+  "text": "Chuyện hôm trước đó",
+  "intent": [
+   "apologize"
+  ]
+ },
+ {
+  "id": "open-022",
+  "slot": "open",
+  "text": "Ui da",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "sick"
+  ]
+ },
+ {
+  "id": "body-001",
+  "slot": "body",
+  "text": "{self} mới được lên lương",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "promotion"
+  ]
+ },
+ {
+  "id": "body-002",
+  "slot": "body",
+  "text": "tháng này {self} được thưởng {amount}",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "promotion",
+   "money"
+  ],
+  "needs": [
+   "amount"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "body-003",
+  "slot": "body",
+  "text": "{self} mới mua được {item}",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "buy"
+  ],
+  "needs": [
+   "item"
+  ]
+ },
+ {
+  "id": "body-004",
+  "slot": "body",
+  "text": "con {self} vừa thi đậu",
+  "intent": [
+   "brag"
+  ],
+  "topic": [
+   "family"
+  ],
+  "privacy": 1,
+  "age": [
+   38,
+   99
+  ]
+ },
+ {
+  "id": "body-005",
+  "slot": "body",
+  "text": "cái lưng {self} nó hành từ {when}",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "sick"
+  ],
+  "age": [
+   45,
+   99
+  ]
+ },
+ {
+  "id": "body-006",
+  "slot": "body",
+  "text": "trời {weather} vầy là {self} nhức mình mẩy",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "sick",
+   "weather"
+  ],
+  "needs": [
+   "weather"
+  ],
+  "age": [
+   45,
+   99
+  ]
+ },
+ {
+  "id": "body-007",
+  "slot": "body",
+  "text": "tháng này {self} hụt tiền quá",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "money"
+  ],
+  "privacy": 2
+ },
+ {
+  "id": "body-008",
+  "slot": "body",
+  "text": "chỗ làm {self} dạo này căng lắm",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "work"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "body-009",
+  "slot": "body",
+  "text": "trời {weather} hoài, buôn bán ế ẩm",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "weather"
+  ],
+  "needs": [
+   "weather"
+  ],
+  "where": [
+   "market",
+   "streetfood"
+  ]
+ },
+ {
+  "id": "body-010",
+  "slot": "body",
+  "text": "{name} dạo này khó tính quá",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "other"
+  ],
+  "needs": [
+   "name"
+  ],
+  "minTier": "close",
+  "privacy": 2
+ },
+ {
+  "id": "body-011",
+  "slot": "body",
+  "text": "trưa nay {you} ăn {dish} hả",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "body-012",
+  "slot": "body",
+  "text": "dạo này toàn ăn ngoài phải không",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food"
+  ],
+  "npc": "me"
+ },
+ {
+  "id": "body-013",
+  "slot": "body",
+  "text": "{you} mới chuyển chỗ ở hả",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "home"
+  ]
+ },
+ {
+  "id": "body-014",
+  "slot": "body",
+  "text": "công việc của {you} sao rồi",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "work"
+  ]
+ },
+ {
+  "id": "body-015",
+  "slot": "body",
+  "text": "nghe nói {you} mới lên {event}",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "work"
+  ],
+  "needs": [
+   "event"
+  ],
+  "minTier": "acquaint"
+ },
+ {
+  "id": "body-016",
+  "slot": "body",
+  "text": "{you} khỏi bệnh chưa",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "sick"
+  ],
+  "privacy": 2
+ },
+ {
+  "id": "body-017",
+  "slot": "body",
+  "text": "{name} dạo này sao rồi {you}",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "other"
+  ],
+  "needs": [
+   "name"
+  ]
+ },
+ {
+  "id": "body-018",
+  "slot": "body",
+  "text": "trời {weather} vầy {you} có đi đâu không",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "weather"
+  ],
+  "needs": [
+   "weather"
+  ]
+ },
+ {
+  "id": "body-019",
+  "slot": "body",
+  "text": "lâu rồi chưa đi đâu",
+  "intent": [
+   "invite"
+  ]
+ },
+ {
+  "id": "ask-001",
+  "slot": "ask",
+  "text": "tối nay ra {place} ăn với {self} không",
+  "intent": [
+   "invite"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "ask-002",
+  "slot": "ask",
+  "text": "{time} ghé {place} với {self} nha",
+  "intent": [
+   "invite"
+  ],
+  "needs": [
+   "place",
+   "time"
+  ]
+ },
+ {
+  "id": "ask-003",
+  "slot": "ask",
+  "text": "cuối tuần đi {place} chơi không",
+  "intent": [
+   "invite"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "body-020",
+  "slot": "body",
+  "text": "{self} có việc này hơi kẹt",
+  "intent": [
+   "request"
+  ]
+ },
+ {
+  "id": "body-021",
+  "slot": "body",
+  "text": "cái lưng {self} không mang nổi đồ nặng",
+  "intent": [
+   "request"
+  ],
+  "topic": [
+   "sick"
+  ],
+  "age": [
+   45,
+   99
+  ]
+ },
+ {
+  "id": "ask-004",
+  "slot": "ask",
+  "text": "{you} giúp {self} một tay được không",
+  "intent": [
+   "request"
+  ]
+ },
+ {
+  "id": "ask-005",
+  "slot": "ask",
+  "text": "{you} xách giùm {self} bao gạo được hông",
+  "intent": [
+   "request"
+  ],
+  "topic": [
+   "sick"
+  ],
+  "voice": "tay",
+  "age": [
+   45,
+   99
+  ]
+ },
+ {
+  "id": "ask-006",
+  "slot": "ask",
+  "text": "{you} gặp lúc nào được",
+  "intent": [
+   "apologize"
+  ]
+ },
+ {
+  "id": "ask-007",
+  "slot": "ask",
+  "text": "cho {self} cơ hội bù lại nha",
+  "intent": [
+   "apologize"
+  ]
+ },
+ {
+  "id": "body-022",
+  "slot": "body",
+  "text": "nghe nói {place} mới mở",
+  "intent": [
+   "news"
+  ],
+  "topic": [
+   "world"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "body-023",
+  "slot": "body",
+  "text": "mai trời {weather} đó",
+  "intent": [
+   "news"
+  ],
+  "topic": [
+   "weather"
+  ],
+  "needs": [
+   "weather"
+  ]
+ },
+ {
+  "id": "body-024",
+  "slot": "body",
+  "text": "{holiday} sắp tới rồi",
+  "intent": [
+   "news"
+  ],
+  "topic": [
+   "holiday"
+  ],
+  "needs": [
+   "holiday"
+  ]
+ },
+ {
+  "id": "body-025",
+  "slot": "body",
+  "text": "{name} mới đổi chỗ làm",
+  "intent": [
+   "news"
+  ],
+  "topic": [
+   "other"
+  ],
+  "needs": [
+   "name"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "body-026",
+  "slot": "body",
+  "text": "{you} ăn {dish} hoài không ngán hả",
+  "intent": [
+   "tease"
+  ],
+  "topic": [
+   "food"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "body-027",
+  "slot": "body",
+  "text": "dạo này {you} về trễ ghê",
+  "intent": [
+   "tease"
+  ],
+  "topic": [
+   "work"
+  ]
+ },
+ {
+  "id": "body-028",
+  "slot": "body",
+  "text": "{self} lên lương mà mặt vẫn như cũ",
+  "intent": [
+   "tease"
+  ],
+  "topic": [
+   "promotion"
+  ]
+ },
+ {
+  "id": "body-029",
+  "slot": "body",
+  "text": "hôm {when} {self} lỡ hẹn với {you}",
+  "intent": [
+   "apologize"
+  ],
+  "topic": [
+   "missed"
+  ]
+ },
+ {
+  "id": "body-030",
+  "slot": "body",
+  "text": "{self} chưa trả tiền {you}, {self} nhớ mà",
+  "intent": [
+   "apologize"
+  ],
+  "topic": [
+   "debt"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "body-031",
+  "slot": "body",
+  "text": "bữa đó {self} nói hơi nặng",
+  "intent": [
+   "apologize"
+  ],
+  "topic": [
+   "harsh"
+  ]
+ },
+ {
+  "id": "feel-001",
+  "slot": "feel",
+  "text": "{self} vui lắm",
+  "emotion": [
+   "happy",
+   "excited"
+  ],
+  "intent": [
+   "brag",
+   "news",
+   "invite"
+  ]
+ },
+ {
+  "id": "feel-002",
+  "slot": "feel",
+  "text": "mừng muốn xỉu",
+  "emotion": [
+   "excited"
+  ],
+  "voice": "sg",
+  "intent": [
+   "brag",
+   "news",
+   "invite"
+  ]
+ },
+ {
+  "id": "feel-003",
+  "slot": "feel",
+  "text": "{self} thấy lo lo",
+  "emotion": [
+   "sad",
+   "tired",
+   "neutral"
+  ],
+  "intent": [
+   "complain",
+   "request",
+   "apologize",
+   "ask",
+   "news"
+  ]
+ },
+ {
+  "id": "feel-004",
+  "slot": "feel",
+  "text": "mệt muốn đứt hơi",
+  "emotion": [
+   "tired"
+  ],
+  "intent": [
+   "complain",
+   "request",
+   "apologize",
+   "ask",
+   "news"
+  ]
+ },
+ {
+  "id": "feel-005",
+  "slot": "feel",
+  "text": "buồn hiu",
+  "emotion": [
+   "sad"
+  ],
+  "intent": [
+   "complain",
+   "request",
+   "apologize",
+   "ask",
+   "news"
+  ]
+ },
+ {
+  "id": "feel-006",
+  "slot": "feel",
+  "text": "bực mình hết sức",
+  "emotion": [
+   "annoyed"
+  ],
+  "intent": [
+   "complain",
+   "request",
+   "apologize",
+   "ask",
+   "news"
+  ]
+ },
+ {
+  "id": "feel-007",
+  "slot": "feel",
+  "text": "cũng yên bụng",
+  "emotion": [
+   "neutral",
+   "happy"
+  ],
+  "intent": [
+   "ask",
+   "news"
+  ]
+ },
+ {
+  "id": "feel-008",
+  "slot": "feel",
+  "text": "nghe cũng mừng",
+  "intent": [
+   "news",
+   "ask"
+  ],
+  "emotion": [
+   "happy",
+   "neutral"
+  ]
+ },
+ {
+  "id": "tail-001",
+  "slot": "tail",
+  "text": "vậy đó {p}"
+ },
+ {
+  "id": "tail-002",
+  "slot": "tail",
+  "text": "{you} nhớ giữ sức {p}",
+  "intent": [
+   "ask",
+   "complain"
+  ]
+ },
+ {
+  "id": "tail-003",
+  "slot": "tail",
+  "text": "già rồi {you} ơi",
+  "intent": [
+   "complain"
+  ],
+  "voice": "tay",
+  "age": [
+   45,
+   99
+  ]
+ },
+ {
+  "id": "tail-004",
+  "slot": "tail",
+  "text": "nhớ ăn rau {p} con",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food"
+  ],
+  "npc": "me"
+ },
+ {
+  "id": "tail-005",
+  "slot": "tail",
+  "text": "rảnh nấu cơm mà ăn cho đỡ tốn",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food"
+  ],
+  "npc": "me"
+ },
+ {
+  "id": "tail-006",
+  "slot": "tail",
+  "text": "đi nha",
+  "intent": [
+   "invite"
+  ]
+ },
+ {
+  "id": "tail-007",
+  "slot": "tail",
+  "text": "{self} bao",
+  "intent": [
+   "invite"
+  ],
+  "minTier": "close"
+ },
+ {
+  "id": "tail-008",
+  "slot": "tail",
+  "text": "cảm ơn {you} nhiều",
+  "intent": [
+   "request"
+  ]
+ },
+ {
+  "id": "tail-009",
+  "slot": "tail",
+  "text": "{you} đừng giận {self} nha",
+  "intent": [
+   "apologize"
+  ]
+ },
+ {
+  "id": "tail-010",
+  "slot": "tail",
+  "text": "đùa thôi",
+  "intent": [
+   "tease"
+  ]
+ },
+ {
+  "id": "tail-011",
+  "slot": "tail",
+  "text": "há há",
+  "intent": [
+   "tease"
+  ],
+  "voice": "sg"
+ },
+ {
+  "id": "tail-012",
+  "slot": "tail",
+  "text": "để mai tính",
+  "intent": [
+   "complain",
+   "news"
+  ],
+  "emotion": [
+   "tired"
+  ]
+ },
+ {
+  "id": "tail-013",
+  "slot": "tail",
+  "text": "thôi {self} đi đây",
+  "cold": true
+ },
+ {
+  "id": "body-032",
+  "slot": "body",
+  "text": "{dish} ăn có ngon không {you}",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "body-033",
+  "slot": "body",
+  "text": "bữa nay {you} ăn gì chưa",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food"
+  ]
+ },
+ {
+  "id": "body-034",
+  "slot": "body",
+  "text": "dạo này {you} ăn uống sao rồi",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "food"
+  ]
+ }
+]
