@@ -60,7 +60,7 @@ export const TRAIT_CONFLICTS:[string,string][]=[['hay nói','kiệm lời'],['h�
 export interface PoolNpc{id:string;seed:string;name:string;gender:'male'|'female';age:number;origin:string;job:string;traits:string[];quirk:string;goal:string;fear:string}
 
 /** Trộn bit (murmur3 fmix) để các trường rút từ seed gần giống nhau không tương quan. */
-const mix=(x:number)=>{x^=x>>>16;x=Math.imul(x,0x85ebca6b);x^=x>>>13;x=Math.imul(x,0xc2b2ae35);x^=x>>>16;return x>>>0};
+export const mix=(x:number)=>{x^=x>>>16;x=Math.imul(x,0x85ebca6b);x^=x>>>13;x=Math.imul(x,0xc2b2ae35);x^=x>>>16;return x>>>0};
 /** Sinh một NPC phụ theo seed: cùng seed cho cùng người; luôn thoả ràng buộc tuổi và nghề, tính cách không xung khắc. */
 export function generateNpc(seed:string):PoolNpc{const r=(salt:string,n:number)=>mix(hash(`${seed}:${salt}`))%n,pick=<T,>(list:readonly T[],salt:string)=>list[r(salt,list.length)]!;
  const gender=r('g',2)===0?'male':'female',job=pick(POOL.job,'job'),age=job.min+r('age',job.max-job.min+1);
