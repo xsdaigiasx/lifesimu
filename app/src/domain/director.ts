@@ -13,8 +13,9 @@ import {SKILLS,type SkillId} from './skill-xp';
 import {hash} from './shift';
 import {weatherOf,OUTDOOR} from './weather';
 import {dueAppointment,markAppointment} from './inbox';
+import {forgetMemories,reinforce,FORGET} from './talk/npc-life';
 import {chooseLine,lineById,fill,intentsWithLines} from './lines';
-/** T41: ký ức nhẹ (dưới 4) mờ sau 30 ngày; ký ức nặng không quên. */
+/** T41: ký ức nhẹ (dưới 4) mờ sau 30 ngày; ký ức nặng không quên. Từ H3 ký ức NPC quên theo `forgetMemories`; `alive` còn dùng cho ký ức nhân viên (hr.ts). */
 export const FADE_DAYS=30,RECALL_GAP=7,HEARD_KEEP=16;
 export const alive=(m:Memory,day:number)=>m.weight>=4||day-m.day<=FADE_DAYS;
 const unpaidLoan=(s:GameState,npc:string)=>storyOf(s).loans.find(l=>l.npc===npc&&l.settled==='unpaid'&&!l.resolved);
@@ -24,7 +25,7 @@ const NEAR_DEEP:MotifId[]=['favor','meal','recipe','private'],NEAR_BOOST=70;
 
 export type MotifId='greet'|'favor'|'return'|'meal'|'private'|'loan'|'recipe'|'mom'|'debt';
 export const NPC_DAILY_LIMIT=3,PLAYER_COOLDOWN=60,REPEAT_DAYS=14,LOAN_BASE_RISK=20;
-export interface Memory{id:string;day:number;npc:string;motif:MotifId;topic:string;tag:string;weight:number;recalled?:number}
+export interface Memory{id:string;day:number;npc:string;motif:MotifId;topic:string;tag:string;weight:number;recalled?:number;/** H3: ngày trọng số đổi gần nhất (nhắc lại, giảm dần) */at?:number}
 export interface Hook{npc:string;motif:MotifId;from:number;to:number;memory:string}
 export interface Loan{id:string;npc:string;amount:number;due:number;repay:boolean;settled?:'paid'|'unpaid';/** đã xử lý xong khoản quỵt (xoá nợ, đòi, trả một nửa) */resolved?:boolean}
 export interface PendingEvent{key:string;npc:string;motif:MotifId;variant:number;by:'npc'|'player';day:number;memory?:string;/** T18: câu thoại đã chọn và câu điểm nhấn kèm theo */line?:string;quirk?:string}
@@ -100,7 +101,7 @@ function pickMotif(s:GameState,npc:NpcProfile,by:'npc'|'player',salt:string):{mo
 /** Ý định câu thoại của một mô-típ (T18). */
 function intentOf(m:MotifId,variant:number,npc:string,memory?:Memory){switch(m){case'greet':return memory?`${REFUSE.includes(memory.tag)?'cb-refuse':'cb'}:${memory.topic}`:'greet';case'favor':return`favor${variant}`;case'return':return memory&&!REFUSE.includes(memory.tag)?'return-good':'return-bad';case'recipe':return`recipe:${npc}`;case'mom':return`mom${variant}`;default:return m}}
 /** Ký ức để nhắc khi hỏi thăm (T41): nặng nhất, còn nhớ, chưa nhắc trong 7 ngày; mỗi lần gặp tối đa một lần. */
-function callbackMemory(s:GameState,npc:string){const hooked=new Set(storyOf(s).hooks.map(h=>h.memory));return storyOf(s).memories.filter(m=>m.npc===npc&&!hooked.has(m.id)&&m.weight>=2&&alive(m,s.day)&&s.day-m.day>=1&&(m.recalled===undefined||s.day-m.recalled>=RECALL_GAP)&&intentsWithLines.has(`${REFUSE.includes(m.tag)?'cb-refuse':'cb'}:${m.topic}`)).sort((a,b)=>b.weight-a.weight||b.day-a.day)[0]}
+function callbackMemory(s:GameState,npc:string){const hooked=new Set(storyOf(s).hooks.map(h=>h.memory));return storyOf(s).memories.filter(m=>m.npc===npc&&!hooked.has(m.id)&&m.weight>=2&&s.day-m.day>=1&&(m.recalled===undefined||s.day-m.recalled>=RECALL_GAP)&&intentsWithLines.has(`${REFUSE.includes(m.tag)?'cb-refuse':'cb'}:${m.topic}`)).sort((a,b)=>b.weight-a.weight||b.day-a.day)[0]}
 function open(s:GameState,npc:NpcProfile,pick:{motif:Motif;variant:number;memory?:Memory},by:'npc'|'player'):GameState{const st=storyOf(s),seq=st.seq+1,key=`${s.day}:${seq}`,heard=st.heard?.[npc.id]??[],score=socialOf(s).relations[npc.id]?.score??0,voice=npc.voiceKey;
  let memory=pick.memory??(pick.motif.id==='greet'?callbackMemory(s,npc.id):undefined);let line=chooseLine(intentOf(pick.motif.id,pick.variant,npc.id,memory),voice,score,heard,hash(`line:${key}:${npc.id}`));
  /* gần mốc bậc: chào hỏi thường đổi thành câu than nhẹ (mỗi câu một lần trong 16 câu gần nhất) */
@@ -137,8 +138,8 @@ export function answerEvent(s:GameState,choice:number):GameResult&{text?:string}
  if(e.relation)n=adjustRelation(n,npc.id,e.relation,true,m.id==='greet');else n=adjustRelation(n,npc.id,0);if(e.xp)n=addWorkXp(n,e.xp[0],e.xp[1]);if(e.gift)n=giftIngredient(n,e.gift[0],e.gift[1]);if(e.learn)n=learnRecipe(n,e.learn,npc.id,npc.name);
  const ns:StoryState=structuredClone(storyOf(n));delete ns.pending;{const h=ns.heard?.[npc.id]??[];ns.heard={...ns.heard,[npc.id]:[...h,...[p.line,p.quirk].filter((x):x is string=>!!x)].slice(-HEARD_KEEP)}}
  if(e.debt){const l=ns.loans.find(x=>x.npc===npc.id&&x.settled==='unpaid'&&!x.resolved);if(l){if(e.debt==='extend'){delete l.settled;l.due=s.day+7;l.repay=hash(`extend:${p.key}`)%100>=30}else{l.resolved=true;const back=e.debt==='half'?Math.floor(l.amount/2):e.debt==='demand'&&hash(`demand:${p.key}`)%2===0?l.amount:0;if(back)post(n,{id:`debt-back:${l.id}:${p.key}`,name:`${npc.name} trả nợ`,amount:back})}}}
- if(mem){const x=ns.memories.find(y=>y.id===mem.id);if(x)x.recalled=s.day;ns.hooks=ns.hooks.filter(h=>!(h.npc===npc.id&&h.memory===mem.id))}
- const mm=m.memory?.(c,o.tag);let memId:string|undefined;if(mm){memId=`m${ns.seq}`;ns.memories=[...ns.memories,{id:memId,day:s.day,npc:npc.id,motif:m.id,topic:mm.topic,tag:o.tag,weight:mm.weight}];if(ns.memories.length>200){const drop=ns.memories.filter(x=>x.weight<4).sort((a,b)=>a.weight-b.weight||a.day-b.day)[0];if(drop)ns.memories=ns.memories.filter(x=>x!==drop)}}
+ if(mem){ns.memories=ns.memories.map(y=>y.id===mem.id?reinforce(y,s.day):y);ns.hooks=ns.hooks.filter(h=>!(h.npc===npc.id&&h.memory===mem.id))}
+ const mm=m.memory?.(c,o.tag);let memId:string|undefined;if(mm&&mm.weight>=FORGET.minWeight){memId=`m${ns.seq}`;ns.memories=[...ns.memories,{id:memId,day:s.day,npc:npc.id,motif:m.id,topic:mm.topic,tag:o.tag,weight:mm.weight}];if(ns.memories.length>200){const drop=ns.memories.filter(x=>x.weight<4).sort((a,b)=>a.weight-b.weight||a.day-b.day)[0];if(drop)ns.memories=ns.memories.filter(x=>x!==drop)}}
  const hk=memId&&m.hook?.(c,o.tag);if(hk&&memId){const span=hk.after[1]-hk.after[0],from=s.day+hk.after[0]+hash(`hook:${p.key}`)%(span+1);ns.hooks=[...ns.hooks,{npc:npc.id,motif:hk.motif,from,to:from+10,memory:memId}]}
  if(e.loan){const risky=['liều','hay quên','vội vàng'].filter(t=>npc.traits.includes(t)).length,safe=['giữ chữ tín','thật thà','cẩn thận'].filter(t=>npc.traits.includes(t)).length,risk=Math.max(5,Math.min(40,LOAN_BASE_RISK+15*risky-15*safe));ns.loans=[...ns.loans,{id:`loan${ns.seq}`,npc:npc.id,amount:e.loan,due:s.day+7+hash(`due:${p.key}`)%8,repay:hash(`repay:${p.key}`)%100>=risk}]}
  if(e.bonusMoney)post(n,{id:`story-gift:${p.key}`,name:`Quà của ${npc.name}`,amount:e.bonusMoney});
@@ -148,14 +149,14 @@ export function answerEvent(s:GameState,choice:number):GameResult&{text?:string}
 export function settleStory(prev:GameState,next:GameState):GameState{let n=next;const st=structuredClone(storyOf(n));
  for(const l of st.loans){if(l.settled||n.day<l.due)continue;const npc=castById(n,l.npc)!;if(l.repay){l.settled='paid';post(n,{id:`loan-back:${l.id}`,name:`${npc.name} trả tiền mượn`,amount:l.amount});n=adjustRelation(n,l.npc,3,false);n=recordJournal(n,`loan-back:${l.id}`,`${npc.name} trả tiền`,`${npc.name} trả lại ${(l.amount/1000).toLocaleString('vi-VN')} nghìn như đã hẹn.`,l.npc)}else{l.settled='unpaid';st.memories.push({id:`m-loan-${l.id}`,day:n.day,npc:l.npc,motif:'loan',topic:'chưa trả tiền mượn',tag:'unpaid',weight:3});n=recordJournal(n,`loan-late:${l.id}`,`${npc.name} chưa trả tiền`,`Đã quá hẹn mà ${npc.name} chưa trả khoản mượn.`,l.npc)}}
  const rel=socialOf(n).relations,peak=socialOf(n).peak??{};for(const [id,r] of Object.entries(rel)){const away=n.day-r.lastDay;if(away>0&&away%7===0){const floor=tierFloor(peak[id]??r.score);if(r.score>floor)n=adjustRelation(n,id,-1,false)}}
- st.log=st.log.filter(l=>n.day-l.day<=60);st.memories=st.memories.filter(m=>alive(m,n.day)||st.hooks.some(h=>h.memory===m.id));st.hooks=st.hooks.filter(h=>h.to>=n.day);st.loans=st.loans.filter(l=>!l.settled||n.day-l.due<=60);
+ st.log=st.log.filter(l=>n.day-l.day<=60);st.memories=forgetMemories(st.memories,n.day,id=>castById(n,id)?.traits??[],m=>st.hooks.some(h=>h.memory===m.id));st.hooks=st.hooks.filter(h=>h.to>=n.day);st.loans=st.loans.filter(l=>!l.settled||n.day-l.due<=60);
  void prev;delete st.pending;return{...n,story:st}}
 
 const MOTIF_IDS=MOTIFS.map(m=>m.id) as string[];
 export function validStory(v:unknown,day:number):v is StoryState{if(!v||typeof v!=='object')return false;const s=v as StoryState,id=isNpcId,d=(x:unknown,max=day+40)=>Number.isInteger(x)&&(x as number)>=0&&(x as number)<=max;
  if(s.version!==1||!Number.isInteger(s.seq)||s.seq<0||!Array.isArray(s.log)||s.log.length>300||!Array.isArray(s.memories)||s.memories.length>220||!Array.isArray(s.hooks)||s.hooks.length>100||!Array.isArray(s.loans)||s.loans.length>100)return false;
  if(!s.log.every(l=>l&&d(l.day,day)&&id(l.npc)&&MOTIF_IDS.includes(l.motif)&&Number.isInteger(l.variant)&&['npc','player'].includes(l.by)))return false;
- if(!s.memories.every(m=>m&&typeof m.id==='string'&&d(m.day,day)&&id(m.npc)&&MOTIF_IDS.includes(m.motif)&&typeof m.topic==='string'&&m.topic.length<80&&typeof m.tag==='string'&&Number.isInteger(m.weight)&&m.weight>=1&&m.weight<=5))return false;
+ if(!s.memories.every(m=>m&&typeof m.id==='string'&&d(m.day,day)&&id(m.npc)&&MOTIF_IDS.includes(m.motif)&&typeof m.topic==='string'&&m.topic.length<80&&typeof m.tag==='string'&&Number.isInteger(m.weight)&&m.weight>=1&&m.weight<=5&&(m.at===undefined||d(m.at,day))))return false;
  if(!s.hooks.every(h=>h&&id(h.npc)&&MOTIF_IDS.includes(h.motif)&&d(h.from)&&d(h.to)&&h.from<=h.to&&typeof h.memory==='string'))return false;
  if(!s.loans.every(l=>l&&typeof l.id==='string'&&id(l.npc)&&Number.isSafeInteger(l.amount)&&l.amount>0&&l.amount<=1e7&&d(l.due)&&typeof l.repay==='boolean'&&(l.settled===undefined||['paid','unpaid'].includes(l.settled))&&(l.resolved===undefined||typeof l.resolved==='boolean')))return false;
  if(s.heard!==undefined&&!(s.heard&&typeof s.heard==='object'&&Object.entries(s.heard).every(([k,v])=>id(k)&&Array.isArray(v)&&v.length<=HEARD_KEEP&&v.every(x=>typeof x==='string'&&!!lineById(x)))))return false;

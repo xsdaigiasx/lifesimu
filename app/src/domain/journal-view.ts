@@ -2,7 +2,7 @@
 import type {GameState} from './types';
 import type {JournalEntry} from './journal';
 import {castById,agoText,type NpcProfile} from './npc';
-import {storyOf,alive,type Memory} from './director';
+import {storyOf,type Memory} from './director';
 import {socialOf} from './social';
 import {places} from './places';
 import {dateAt} from './format';
@@ -34,6 +34,6 @@ export function memoryText(m:Memory,name:string){const helped=m.tag==='help'||m.
 /** Hồ sơ đầy đủ cho màn Quan hệ: chỉ những gì người chơi đã biết. */
 export function profileOf(s:GameState,id:string){const n=castById(s,id);if(!n)return null;const family=!!n.family,score=socialOf(s).relations[id]?.score??0,known=family||score>=10,st=storyOf(s);
  const facts:[string,string][]=known?[['Quê',n.origin],['Tính cách',n.traits.join(', ')],['Điểm nhấn',n.quirk]]:[];if(family||score>=30)facts.push(['Mong muốn',n.goal]);if(st.memories.some(m=>m.npc===id&&m.topic==='chuyện riêng'))facts.push(['Đang lo',n.fear]);
- const shared=st.memories.filter(m=>m.npc===id&&alive(m,s.day)).sort((a,b)=>b.day-a.day).slice(0,12).map(m=>({id:m.id,text:memoryText(m,n.name),when:agoText(s.day-m.day)}));
+ const shared=st.memories.filter(m=>m.npc===id&&m.weight>=2).sort((a,b)=>b.day-a.day).slice(0,12).map(m=>({id:m.id,text:memoryText(m,n.name),when:agoText(s.day-m.day)}));
  const loans=st.loans.filter(l=>l.npc===id&&(!l.settled||l.settled==='unpaid')).map(l=>({amount:l.amount,late:s.day>l.due,days:Math.max(0,l.due-s.day)}));
  return{npc:n,score,known,facts,shared,loans,places:known&&!n.remote?usualPlaces(n):[],progress:family?{pct:100,next:''}:tierProgress(score)}}
