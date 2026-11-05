@@ -1,0 +1,741 @@
+{
+  "commit": "9bd086477bb52041fb5bf630270275f9dbf8a314",
+  "protected_files": [
+    {
+      "file": "app/src/domain/office-plan.ts",
+      "sha256": "75b0828307b56aa928a407411d549becf257f7a09245a61bafe92755d2f0c50c"
+    },
+    {
+      "file": "app/src/components/IsoOffice.tsx",
+      "sha256": "308a1ddb7fd085a570371aae960afbf7f8bc5f172fc1a1bcda37ab4e8a067856"
+    },
+    {
+      "file": "app/public/assets/offices/small/room-shell.webp",
+      "sha256": "fe345296a72210e04a8ab6993cbef40bea5423e056bf0e9273f6097ecf796f23"
+    }
+  ],
+  "kit": {
+    "desk-pc": {
+      "name": "Bàn làm việc có máy tính",
+      "w": 2,
+      "d": 1,
+      "h": 2,
+      "set": "tech",
+      "color": "#c9a97a"
+    },
+    "chair": {
+      "name": "Ghế xoay",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "set": "common",
+      "color": "#7c9a7e"
+    },
+    "shelf": {
+      "name": "Kệ tài liệu",
+      "w": 2,
+      "d": 1,
+      "h": 3,
+      "set": "common",
+      "color": "#a98c66"
+    },
+    "plant": {
+      "name": "Chậu cây",
+      "w": 1,
+      "d": 1,
+      "h": 2,
+      "set": "common",
+      "color": "#6f9a5b"
+    },
+    "counter": {
+      "name": "Quầy pantry",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "set": "common",
+      "color": "#b9b1a1"
+    },
+    "water-cooler": {
+      "name": "Cây nước",
+      "w": 1,
+      "d": 1,
+      "h": 2,
+      "set": "common",
+      "color": "#9cc0cf"
+    },
+    "cafe-table": {
+      "name": "Bàn cà phê",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "set": "common",
+      "color": "#c9a97a"
+    },
+    "meeting-table": {
+      "name": "Bàn họp",
+      "w": 3,
+      "d": 2,
+      "h": 1,
+      "set": "common",
+      "color": "#b08d64"
+    },
+    "whiteboard": {
+      "name": "Bảng trắng",
+      "w": 2,
+      "d": 1,
+      "h": 3,
+      "set": "tech",
+      "color": "#e8ece9"
+    },
+    "sofa": {
+      "name": "Sofa",
+      "w": 2,
+      "d": 1,
+      "h": 1,
+      "set": "common",
+      "color": "#8e9fb5"
+    },
+    "boss-desk": {
+      "name": "Bàn trưởng nhóm",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "set": "common",
+      "color": "#8f6d4c"
+    },
+    "reception": {
+      "name": "Quầy lễ tân",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "set": "common",
+      "color": "#c2b49a"
+    },
+    "server-rack": {
+      "name": "Tủ máy chủ",
+      "w": 1,
+      "d": 1,
+      "h": 4,
+      "set": "tech",
+      "color": "#5e6670"
+    },
+    "printer": {
+      "name": "Máy in",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "set": "common",
+      "color": "#d8d6cf"
+    }
+  },
+  "plan": {
+    "w": 14,
+    "d": 14,
+    "zones": [
+      {
+        "id": "work-0",
+        "kind": "work",
+        "name": "Khu làm việc",
+        "x": 0,
+        "y": 0,
+        "w": 14,
+        "d": 14
+      }
+    ],
+    "pieces": [
+      {
+        "key": "work-0:0",
+        "item": "shelf",
+        "x": 1,
+        "y": 0,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:1",
+        "item": "plant",
+        "x": 0,
+        "y": 0,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:2",
+        "item": "plant",
+        "x": 13,
+        "y": 0,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:3",
+        "item": "whiteboard",
+        "x": 4,
+        "y": 0,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:4",
+        "item": "server-rack",
+        "x": 12,
+        "y": 0,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:5",
+        "item": "printer",
+        "x": 11,
+        "y": 0,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:6",
+        "item": "desk-pc",
+        "x": 1,
+        "y": 2,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:7",
+        "item": "chair",
+        "x": 1,
+        "y": 3,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:8",
+        "item": "desk-pc",
+        "x": 4,
+        "y": 2,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:9",
+        "item": "chair",
+        "x": 4,
+        "y": 3,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:10",
+        "item": "desk-pc",
+        "x": 7,
+        "y": 2,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:11",
+        "item": "chair",
+        "x": 7,
+        "y": 3,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:12",
+        "item": "desk-pc",
+        "x": 10,
+        "y": 2,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:13",
+        "item": "chair",
+        "x": 10,
+        "y": 3,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:14",
+        "item": "desk-pc",
+        "x": 1,
+        "y": 5,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:15",
+        "item": "chair",
+        "x": 1,
+        "y": 6,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:16",
+        "item": "desk-pc",
+        "x": 4,
+        "y": 5,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:17",
+        "item": "chair",
+        "x": 4,
+        "y": 6,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:18",
+        "item": "desk-pc",
+        "x": 7,
+        "y": 5,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:19",
+        "item": "chair",
+        "x": 7,
+        "y": 6,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:20",
+        "item": "desk-pc",
+        "x": 10,
+        "y": 5,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:21",
+        "item": "chair",
+        "x": 10,
+        "y": 6,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:22",
+        "item": "counter",
+        "x": 10,
+        "y": 13,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:23",
+        "item": "water-cooler",
+        "x": 13,
+        "y": 13,
+        "zone": "work-0"
+      },
+      {
+        "key": "work-0:24",
+        "item": "cafe-table",
+        "x": 11,
+        "y": 11,
+        "zone": "work-0"
+      }
+    ],
+    "seats": [
+      {
+        "index": 0,
+        "x": 1,
+        "y": 3,
+        "desk": "work-0:6",
+        "zone": "work-0"
+      },
+      {
+        "index": 1,
+        "x": 4,
+        "y": 3,
+        "desk": "work-0:8",
+        "zone": "work-0"
+      },
+      {
+        "index": 2,
+        "x": 7,
+        "y": 3,
+        "desk": "work-0:10",
+        "zone": "work-0"
+      },
+      {
+        "index": 3,
+        "x": 10,
+        "y": 3,
+        "desk": "work-0:12",
+        "zone": "work-0"
+      },
+      {
+        "index": 4,
+        "x": 1,
+        "y": 6,
+        "desk": "work-0:14",
+        "zone": "work-0"
+      },
+      {
+        "index": 5,
+        "x": 4,
+        "y": 6,
+        "desk": "work-0:16",
+        "zone": "work-0"
+      },
+      {
+        "index": 6,
+        "x": 7,
+        "y": 6,
+        "desk": "work-0:18",
+        "zone": "work-0"
+      },
+      {
+        "index": 7,
+        "x": 10,
+        "y": 6,
+        "desk": "work-0:20",
+        "zone": "work-0"
+      }
+    ],
+    "doors": [],
+    "shell": {
+      "src": "/assets/offices/small/room-shell.webp",
+      "ox": 1024,
+      "oy": 320,
+      "w": 2048,
+      "h": 1408
+    }
+  },
+  "pieces": [
+    {
+      "key": "work-0:0",
+      "item": "shelf",
+      "x": 1,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": 0,
+        "top": -64,
+        "width": 192,
+        "height": 192
+      },
+      "depth": 2.5
+    },
+    {
+      "key": "work-0:1",
+      "item": "plant",
+      "x": 0,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": -64,
+        "top": -64,
+        "width": 128,
+        "height": 128
+      },
+      "depth": 1
+    },
+    {
+      "key": "work-0:2",
+      "item": "plant",
+      "x": 13,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": 768,
+        "top": 352,
+        "width": 128,
+        "height": 128
+      },
+      "depth": 14
+    },
+    {
+      "key": "work-0:3",
+      "item": "whiteboard",
+      "x": 4,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": 192,
+        "top": 32,
+        "width": 192,
+        "height": 192
+      },
+      "depth": 5.5
+    },
+    {
+      "key": "work-0:4",
+      "item": "server-rack",
+      "x": 12,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": 704,
+        "top": 256,
+        "width": 128,
+        "height": 192
+      },
+      "depth": 13
+    },
+    {
+      "key": "work-0:5",
+      "item": "printer",
+      "x": 11,
+      "y": 0,
+      "zone": "work-0",
+      "box": {
+        "left": 640,
+        "top": 320,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 12
+    },
+    {
+      "key": "work-0:6",
+      "item": "desk-pc",
+      "x": 1,
+      "y": 2,
+      "zone": "work-0",
+      "box": {
+        "left": -128,
+        "top": 32,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 4.5
+    },
+    {
+      "key": "work-0:7",
+      "item": "chair",
+      "x": 1,
+      "y": 3,
+      "zone": "work-0",
+      "box": {
+        "left": -192,
+        "top": 96,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 5
+    },
+    {
+      "key": "work-0:8",
+      "item": "desk-pc",
+      "x": 4,
+      "y": 2,
+      "zone": "work-0",
+      "box": {
+        "left": 64,
+        "top": 128,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 7.5
+    },
+    {
+      "key": "work-0:9",
+      "item": "chair",
+      "x": 4,
+      "y": 3,
+      "zone": "work-0",
+      "box": {
+        "left": 0,
+        "top": 192,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 8
+    },
+    {
+      "key": "work-0:10",
+      "item": "desk-pc",
+      "x": 7,
+      "y": 2,
+      "zone": "work-0",
+      "box": {
+        "left": 256,
+        "top": 224,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 10.5
+    },
+    {
+      "key": "work-0:11",
+      "item": "chair",
+      "x": 7,
+      "y": 3,
+      "zone": "work-0",
+      "box": {
+        "left": 192,
+        "top": 288,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 11
+    },
+    {
+      "key": "work-0:12",
+      "item": "desk-pc",
+      "x": 10,
+      "y": 2,
+      "zone": "work-0",
+      "box": {
+        "left": 448,
+        "top": 320,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 13.5
+    },
+    {
+      "key": "work-0:13",
+      "item": "chair",
+      "x": 10,
+      "y": 3,
+      "zone": "work-0",
+      "box": {
+        "left": 384,
+        "top": 384,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 14
+    },
+    {
+      "key": "work-0:14",
+      "item": "desk-pc",
+      "x": 1,
+      "y": 5,
+      "zone": "work-0",
+      "box": {
+        "left": -320,
+        "top": 128,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 7.5
+    },
+    {
+      "key": "work-0:15",
+      "item": "chair",
+      "x": 1,
+      "y": 6,
+      "zone": "work-0",
+      "box": {
+        "left": -384,
+        "top": 192,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 8
+    },
+    {
+      "key": "work-0:16",
+      "item": "desk-pc",
+      "x": 4,
+      "y": 5,
+      "zone": "work-0",
+      "box": {
+        "left": -128,
+        "top": 224,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 10.5
+    },
+    {
+      "key": "work-0:17",
+      "item": "chair",
+      "x": 4,
+      "y": 6,
+      "zone": "work-0",
+      "box": {
+        "left": -192,
+        "top": 288,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 11
+    },
+    {
+      "key": "work-0:18",
+      "item": "desk-pc",
+      "x": 7,
+      "y": 5,
+      "zone": "work-0",
+      "box": {
+        "left": 64,
+        "top": 320,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 13.5
+    },
+    {
+      "key": "work-0:19",
+      "item": "chair",
+      "x": 7,
+      "y": 6,
+      "zone": "work-0",
+      "box": {
+        "left": 0,
+        "top": 384,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 14
+    },
+    {
+      "key": "work-0:20",
+      "item": "desk-pc",
+      "x": 10,
+      "y": 5,
+      "zone": "work-0",
+      "box": {
+        "left": 256,
+        "top": 416,
+        "width": 192,
+        "height": 160
+      },
+      "depth": 16.5
+    },
+    {
+      "key": "work-0:21",
+      "item": "chair",
+      "x": 10,
+      "y": 6,
+      "zone": "work-0",
+      "box": {
+        "left": 192,
+        "top": 480,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 17
+    },
+    {
+      "key": "work-0:22",
+      "item": "counter",
+      "x": 10,
+      "y": 13,
+      "zone": "work-0",
+      "box": {
+        "left": -256,
+        "top": 672,
+        "width": 256,
+        "height": 192
+      },
+      "depth": 25
+    },
+    {
+      "key": "work-0:23",
+      "item": "water-cooler",
+      "x": 13,
+      "y": 13,
+      "zone": "work-0",
+      "box": {
+        "left": -64,
+        "top": 768,
+        "width": 128,
+        "height": 128
+      },
+      "depth": 27
+    },
+    {
+      "key": "work-0:24",
+      "item": "cafe-table",
+      "x": 11,
+      "y": 11,
+      "zone": "work-0",
+      "box": {
+        "left": -64,
+        "top": 672,
+        "width": 128,
+        "height": 96
+      },
+      "depth": 23
+    }
+  ]
+}

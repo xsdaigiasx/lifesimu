@@ -1,0 +1,266 @@
+{
+  "issue": 55,
+  "lot": 1,
+  "reference": "assets/style-reference/room-reference.webp",
+  "items": [
+    {
+      "id": "desk-pc",
+      "direction": "a",
+      "file": "assets/office-kit/desk-pc_a_default.webp",
+      "frame_px": [
+        192,
+        160
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        128,
+        160
+      ],
+      "bytes": 17038,
+      "sha256": "1fa7fe3253cd00b03f9c059dfc5b26c3b383dca6bc4f335bd654a37671beb4ca",
+      "source_sha256": "5de0b99e98e413c759cc827aa0d4a7df0e9086cf82360aa51bffde4d0c1f3858",
+      "source_crop": [
+        182,
+        88,
+        1164,
+        1116
+      ],
+      "source_contact": [
+        823,
+        1113
+      ],
+      "scale": 0.1517509727626459,
+      "offset": [
+        31,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 3
+    },
+    {
+      "id": "desk-pc",
+      "direction": "b",
+      "file": "assets/office-kit/desk-pc_b_default.webp",
+      "frame_px": [
+        192,
+        160
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        64,
+        160
+      ],
+      "bytes": 16880,
+      "sha256": "0764eecb9fdc38ff96b569bb9e65a01fdb54891e77e34d22f16d39bbb61bf6a9",
+      "source_sha256": "b052466b797f4f5ee56bdac198309829421d57a65bfced73ed2f831922603f57",
+      "source_crop": [
+        202,
+        92,
+        1172,
+        1118
+      ],
+      "source_contact": [
+        511,
+        1115
+      ],
+      "scale": 0.15204678362573099,
+      "offset": [
+        17,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 0
+    },
+    {
+      "id": "chair",
+      "direction": "a",
+      "file": "assets/office-kit/chair_a_default.webp",
+      "frame_px": [
+        128,
+        96
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 1,
+      "anchor_px": [
+        64,
+        96
+      ],
+      "bytes": 6252,
+      "sha256": "bc6b343dd31f37f3951a951ff676bbe4b4e9855b237c904b6abe915509345eca",
+      "source_sha256": "a45436f415c56a1104a8bb528f586559d107594f03a0b8eb6942f7e8a0f61c75",
+      "source_crop": [
+        446,
+        56,
+        988,
+        1044
+      ],
+      "source_contact": [
+        726,
+        1041
+      ],
+      "scale": 0.0931174089068826,
+      "offset": [
+        38,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 38
+    },
+    {
+      "id": "chair",
+      "direction": "b",
+      "file": "assets/office-kit/chair_b_default.webp",
+      "frame_px": [
+        128,
+        96
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 1,
+      "anchor_px": [
+        64,
+        96
+      ],
+      "bytes": 6032,
+      "sha256": "e2b8675dbbcb4ecd8a3d1ff00523453a7296aa03909483df0e1fdac3cb5cbab4",
+      "source_sha256": "c034cc9f32aeb08f387f8d2979438ea503d34ada747c2e9fe1de5a554b789bc8",
+      "source_crop": [
+        465,
+        41,
+        1018,
+        1045
+      ],
+      "source_contact": [
+        722,
+        1042
+      ],
+      "scale": 0.09163346613545817,
+      "offset": [
+        40,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 30
+    },
+    {
+      "id": "shelf",
+      "direction": "a",
+      "file": "assets/office-kit/shelf_a_default.webp",
+      "frame_px": [
+        192,
+        192
+      ],
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_z": 3,
+      "anchor_px": [
+        128,
+        192
+      ],
+      "bytes": 31190,
+      "sha256": "37c3a82127d87b04e98fa4328c1828dd1b4e3a512442403771b9a82a39aa5d59",
+      "source_sha256": "e16e2daccb4dd234be572cb69cc331b16d278c7a1ec0db48db136f01a1e8b112",
+      "source_crop": [
+        165,
+        145,
+        1088,
+        1233
+      ],
+      "source_contact": [
+        834,
+        1230
+      ],
+      "scale": 0.17279411764705882,
+      "offset": [
+        12,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 20
+    },
+    {
+      "id": "shelf",
+      "direction": "b",
+      "file": "assets/office-kit/shelf_b_default.webp",
+      "frame_px": [
+        192,
+        192
+      ],
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_z": 3,
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 31902,
+      "sha256": "4cafe7ee176916c4c334f6b165f8b10be643d7b77194bf491698640c93886f74",
+      "source_sha256": "3b19643f5e5ed1c3cdc4c4191b96606ac30d44c9003cabdc71ebce73b8e15184",
+      "source_crop": [
+        348,
+        10,
+        1188,
+        1024
+      ],
+      "source_contact": [
+        547,
+        1022
+      ],
+      "scale": 0.1854043392504931,
+      "offset": [
+        27,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 36
+    },
+    {
+      "id": "plant",
+      "direction": "a",
+      "file": "assets/office-kit/plant_a_default.webp",
+      "frame_px": [
+        128,
+        128
+      ],
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "height_z": 2,
+      "anchor_px": [
+        64,
+        128
+      ],
+      "bytes": 16170,
+      "sha256": "8d3918aca6ed119bebb97800c47cfa5c391434d3819593da8dbb97b16417c4c3",
+      "source_sha256": "eff68b5cdf020bfd155cc71947e8eb27507430ea2deebd4685dff5d4a34287b4",
+      "source_crop": [
+        302,
+        180,
+        948,
+        1115
+      ],
+      "source_contact": [
+        618,
+        1112
+      ],
+      "scale": 0.13262032085561498,
+      "offset": [
+        22,
+        2
+      ],
+      "foreground_alpha_pixels_clipped": 26
+    }
+  ]
+}

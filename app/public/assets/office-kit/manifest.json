@@ -1,0 +1,107 @@
+{
+  "items": [
+    {
+      "id": "desk-pc",
+      "w": 2,
+      "d": 1,
+      "h": 2,
+      "files": {
+        "a": "desk-pc_a_default.webp",
+        "b": "desk-pc_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 2,
+          "d": 1,
+          "anchor": [
+            128,
+            160
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 2,
+          "anchor": [
+            64,
+            160
+          ]
+        }
+      }
+    },
+    {
+      "id": "chair",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "files": {
+        "a": "chair_a_default.webp",
+        "b": "chair_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            96
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            96
+          ]
+        }
+      }
+    },
+    {
+      "id": "shelf",
+      "w": 2,
+      "d": 1,
+      "h": 3,
+      "files": {
+        "a": "shelf_a_default.webp",
+        "b": "shelf_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 2,
+          "d": 1,
+          "anchor": [
+            128,
+            192
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 2,
+          "anchor": [
+            64,
+            192
+          ]
+        }
+      }
+    },
+    {
+      "id": "plant",
+      "w": 1,
+      "d": 1,
+      "h": 2,
+      "files": {
+        "a": "plant_a_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            128
+          ]
+        }
+      }
+    }
+  ]
+}
