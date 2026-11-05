@@ -22,7 +22,7 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 
 **Nhóm 2: hoàn tất bản 1.0**
 
-> Bộ sinh hội thoại (`docs/design/HOI-THOAI.md`, ticket H0 đến H8) đang chờ duyệt; khi duyệt sẽ đứng đầu nhóm này và thay T63, T64 (xem mục I.11 của tài liệu).
+> Bộ sinh hội thoại (`docs/design/HOI-THOAI.md`, ticket H0 đến H8) đã duyệt, đứng đầu nhóm này và thay T63, T64 (mục I.11). H0 làm mới dàn NPC theo seed: PR chờ gộp (#306, 0.77.0). Kế tiếp H1.
 11. T63 Quan hệ NPC với NPC, tin đồn (bản nhẹ).
 12. T64 Cốt truyện đời NPC (phần mở đầu).
 13. T86 Cộng đồng khu trọ (bản nhẹ).

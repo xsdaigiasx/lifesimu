@@ -94,7 +94,7 @@ export function validMorning(v:unknown,day:number):v is MorningState{
 export function morningOf(s:GameState):Morning{
  const today=weatherOf(s.day),tomorrow=forecastOf(s.day);
  const hood=today==='storm'||today==='rain'?WEATHER_NEWS[today]:HOOD[s.day%HOOD.length];
- const ib=inboxOf(s),names=Object.entries(ib.threads).filter(([,m])=>m.some(x=>x.from==='npc'&&!x.read)).map(([id])=>castById(id)?.name??id);
+ const ib=inboxOf(s),names=Object.entries(ib.threads).filter(([,m])=>m.some(x=>x.from==='npc'&&!x.read)).map(([id])=>castById(s,id)?.name??id);
  const agenda:Line[]=[],hol=holidayName(s.day),dow=dateAt(s.day).getUTCDay();
  const o=officeOf(s);
  if(hol)agenda.push({icon:'calendar',text:`Nghỉ lễ: ${hol}`});
@@ -105,7 +105,7 @@ export function morningOf(s:GameState):Morning{
  if(a?.status==='passed'&&a.startDay===s.day)agenda.push({icon:'briefcase',text:'Hôm nay nhận việc'});
  for(const p of ib.appts.filter(x=>x.status==='set'&&x.day===s.day).sort((x,y)=>x.minute-y.minute)){
   const h=String(Math.floor(p.minute/60)).padStart(2,'0'),m=String(p.minute%60).padStart(2,'0');
-  agenda.push({icon:'people',text:`${h}:${m} Hẹn ${castById(p.npc)?.name??p.npc} tại ${places.find(x=>x.id===p.place)?.name??p.place}`})}
+  agenda.push({icon:'people',text:`${h}:${m} Hẹn ${castById(s,p.npc)?.name??p.npc} tại ${places.find(x=>x.id===p.place)?.name??p.place}`})}
  const r=rentOf(s);
  if(r.dueDay!==null&&r.dueDay!==undefined&&r.owed>0&&r.dueDay-s.day<=1)agenda.push({icon:'home',text:r.dueDay<=s.day?'Tiền trọ đang đến hạn':'Mai đến hạn tiền trọ'});
  for(const p of projectsOf(s).active.filter(x=>x.due-s.day<=1))agenda.push({icon:'note',text:`${p.title} ${p.due<=s.day?'hết hạn hôm nay':'hết hạn ngày mai'}`});

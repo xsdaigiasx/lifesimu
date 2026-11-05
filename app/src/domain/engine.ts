@@ -1,3 +1,5 @@
+import {validSeed} from './npc';
+import {OLD_STAFF_IDS} from './office';
 import {validMorning} from './morning';
 import {validLife} from './life';
 import {validRent} from './rent';
@@ -23,6 +25,7 @@ import type {GameState,GameResult,ItemId,Item,DailyAction,EngineApi} from './typ
         return validate(value);
     }
     function validate(s: GameState): boolean { if (!s || s.version !== 1)
+        return false; if (s.seed !== undefined && !validSeed(s.seed))
         return false; for (const k of ['day', 'money', 'energy', 'mood', 'health', 'stress', 'xp'] as const)
         if (!Number.isSafeInteger(s[k]) || s[k] < 0)
             return false; if (s.day > 100000 || s.money > 1e12 || s.xp > 1e9)
@@ -75,6 +78,8 @@ import type {GameState,GameResult,ItemId,Item,DailyAction,EngineApi} from './typ
         n.lastReport = { action, earn, cost: COST, xp, net: n.money - before, efficiency: Math.round(efficiency * 100), day: n.day };
         return { ok: true, state: n };
     }
+    /** H0: người quen ở sảnh tòa nhà đổi sang mã vai (giữ lát cắt văn phòng của save cũ). */
+    function migrateNpcIds(s: any): void { const met = s?.office?.met; if (Array.isArray(met)) s.office.met = met.map((id: unknown) => typeof id === 'string' ? OLD_STAFF_IDS[id] ?? id : id); }
     /** Save cũ dùng cấp nội bộ 1–50: đổi sang Lv 1–10 (cấp / 5), XP dư bỏ đi. */
     function migrateSkills(s: any): GameState | null { const k = s?.skills; if (!k || typeof k !== 'object' || validSkills(k)) return null; const out: any = {}; for (const id of Object.keys(SKILLS)) { const q = k[id]; if (q === undefined && id === 'cooking') continue; if (!q || !Number.isInteger(q.level) || q.level < 1 || q.level > 50) return null; out[id] = { level: Math.max(1, Math.min(MAX_LEVEL, Math.floor(q.level / 5))), xp: 0 }; } return { ...s, skills: out }; }
 /** Các lát cắt tuỳ chọn của save, xếp từ ít giá trị tới nhiều giá trị. Khi save không hợp lệ (thường do bản cập nhật siết
@@ -89,6 +94,7 @@ function tidyCore(s: any): any { if (!s || typeof s !== 'object' || !Array.isArr
 export function loadSave(raw: string | null): LoadedSave | null { if (typeof raw !== 'string') return null; const ok = (x: unknown): x is GameState => { try { return valid(x); } catch { return false; } }; try {
     const s = JSON.parse(raw);
     if (ok(s)) return { state: s, dropped: [] };
+    migrateNpcIds(s);
     const m = migrateSkills(s);
     if (m && ok(m)) return { state: m, dropped: [] };
     const base = tidyCore(m ?? s); if (!base || typeof base !== 'object') return null;

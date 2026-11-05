@@ -4,14 +4,14 @@ const {socialOf}=require('../.test-build/domain/social');const N=require('../.te
 const at=(day,minute,location,extra={})=>{const s=engine.initial();return{...s,day,money:5e6,clock:{...clockOf(s),minute,location},...extra}};
 const withRel=(s,id,score,lastDay=s.day)=>({...s,social:{...socialOf(s),relations:{...socialOf(s).relations,[id]:{score,lastDay,minutes:0}}}});
 const ok=r=>{assert.ok(r.ok,r.error);assert.ok(engine.valid(r.state),'state hợp lệ');return r.state};
-const close=N.NPCS.find(n=>n.story&&!n.remote&&n.id!=='me');
+const close=N.rosterOf({}).find(n=>n.story&&!n.remote&&n.id!=='me');
 const day=(d,s)=>I.settleInbox({...s,day:d});
 
 test('lịch tin mỗi ngày: tối đa 2, Mẹ cách ít nhất 2 ngày, nhắc trọ trước 2 ngày',()=>{
- let s=at(0,420,'home');for(const n of N.NPCS.filter(n=>n.story&&!n.remote))s=withRel(s,n.id,40,0);
+ let s=at(0,420,'home');for(const n of N.rosterOf({}).filter(n=>n.story&&!n.remote))s=withRel(s,n.id,40,0);
  const momDays=[];for(let d=1;d<60;d++){s=I.deliverDue(day(d,{...s,clock:{...s.clock,minute:1439}})).state;
   const q=I.inboxOf(s).threads;const today=Object.values(q).flat().filter(m=>m.day===d&&m.from==='npc'&&m.kind!=='note'&&m.kind!=='missed');assert.ok(today.length<=I.DAILY_MESSAGES,`ngày ${d}: ${today.length} tin`);
-  if((q.me??[]).some(m=>m.day===d&&m.from==='npc'))momDays.push(d);if(dateAt(d+2).getUTCDate()===1)assert.ok((q['ba-tu']??[]).some(m=>m.day===d&&m.kind==='rent'),'nhắc trọ')}
+  if((q.me??[]).some(m=>m.day===d&&m.from==='npc'))momDays.push(d);if(dateAt(d+2).getUTCDate()===1)assert.ok((q['landlord']??[]).some(m=>m.day===d&&m.kind==='rent'),'nhắc trọ')}
  assert.ok(momDays.length>=8,'Mẹ nhắn đều');for(let i=1;i<momDays.length;i++)assert.ok(momDays[i]-momDays[i-1]>=2,'Mẹ cách ít nhất 2 ngày');
  assert.ok(engine.valid(s));assert.ok(engine.parse(JSON.stringify(s)),'giữ qua lưu');
 });
@@ -70,10 +70,11 @@ test('dữ liệu hộp thư hỏng bị từ chối',()=>{
 });
 
 test('lời nhắn theo vai vế: người lớn nói kiểu người lớn, người chơi đáp có dạ ạ',()=>{
- const s=withRel(at(4,700,'home'),'ba-tu',35);
- const hi=I.inboxOf(I.sendMessage(s,'ba-tu','hello').state).threads['ba-tu'];assert.match(hi[0].text,/bà.*ạ\?$/);
- const inv=I.inboxOf(I.sendMessage(s,'ba-tu','invite').state).threads['ba-tu'];assert.match(inv[0].text,/con mời bà/);assert.doesNotMatch(inv[1].text,/Ok|nha!/);
- let t=s;const seen=[];for(let d=1;d<40;d++){t=I.settleInbox({...t,day:d});for(const q of I.inboxOf(t).queue)if(q.npc==='ba-tu'&&(q.kind==='invite'||q.kind==='checkin'))seen.push(q)}
- assert.ok(seen.length,'Bà Tư có nhắn');for(const q of seen){assert.match(q.text,/bà|con/);assert.ok(q.replies.every(r=>r.startsWith('Dạ')),q.replies.join('/'))}
- assert.equal(I.voiceFor('dev-an').rank,'peer');assert.equal(I.voiceFor('tuan').rank,'junior');assert.equal(I.voiceFor('dev-trang').rank,'senior');
+ const s=withRel(at(4,700,'home'),'landlord',35);
+ const L=N.castById(s,'landlord');assert.ok(['bà','ông','cô','chú'].includes(L.self));
+ const hi=I.inboxOf(I.sendMessage(s,'landlord','hello').state).threads['landlord'];assert.match(hi[0].text,new RegExp(`${L.self}.*ạ\\?$`));
+ const inv=I.inboxOf(I.sendMessage(s,'landlord','invite').state).threads['landlord'];assert.match(inv[0].text,new RegExp(`${L.you} mời ${L.self}`));assert.doesNotMatch(inv[1].text,/Ok|nha!/);
+ let t=s;const seen=[];for(let d=1;d<40;d++){t=I.settleInbox({...t,day:d});for(const q of I.inboxOf(t).queue)if(q.npc==='landlord'&&(q.kind==='invite'||q.kind==='checkin'))seen.push(q)}
+ assert.ok(seen.length,'chủ trọ có nhắn');for(const q of seen){assert.ok(q.text.includes(L.self)||q.text.includes(L.you),q.text);assert.ok(q.replies.every(r=>r.startsWith('Dạ')),q.replies.join('/'))}
+ assert.equal(I.voiceFor(s,'landlord').rank,'elder');assert.equal(I.voiceFor(s,'courier').rank,'junior');assert.equal(I.voiceFor(s,'sen-pm').rank,'senior');assert.equal(I.voiceFor(s,'sen-dev').rank,N.castById(s,'sen-dev').age>=28?'senior':'peer');
 });

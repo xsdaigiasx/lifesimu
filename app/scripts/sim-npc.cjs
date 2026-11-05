@@ -30,7 +30,7 @@ function visitsOf(persona,day,rnd){const dow=dateAt(day).getUTCDay(),T=([p,lo,hi
  const v=[PLACES[4]];if(rnd()<1/3)v.unshift(PLACES[Math.floor(rnd()*PLACES.length)]);return v.map(T).sort((a,b)=>a[1]-b[1])}
 
 function run(persona,seed,days){
- const rnd=rngOf(`${persona}:${seed}`),events=[],played=[];let s={...engine.initial()};const day0=s.day+seed*37;s={...s,day:day0,money:3_000_000};
+ const rnd=rngOf(`${persona}:${seed}`),events=[],played=[];let s={...engine.initial()};const day0=s.day+seed*37;s={...s,day:day0,money:3_000_000,seed:{world:`sim${seed}`,life:`sim${seed}`},office:{...require('../.test-build/domain/office').initialOffice(),role:'employee',employerId:seed%2?'an-nhien-tech':'sen-code'}};
  const answer=()=>{const ev=D.openEvent(s);if(!ev)return;const open=ev.options.map((o,i)=>o.locked?-1:i).filter(i=>i>=0);
   const order=open.length?[rnd()<.65?open[0]:open[Math.floor(rnd()*open.length)],...open]:[0];
   for(const i of order){s={...s,money:Math.max(s.money,3_000_000)};const r=D.answerEvent(s,i);if(r.ok){s=r.state;return}}
@@ -41,10 +41,10 @@ function run(persona,seed,days){
   const vs=visitsOf(persona,s.day,rnd);if(vs.length)played.push(s.day-day0);
   for(const[place,minute]of vs){at(place,minute);
    const a=D.maybeStart(s,'arrive');if(a!==s){s=a;record();answer()}
-   const here=N.NPCS.filter(n=>!n.remote&&N.presentAt(n,s.day,clockOf(s).minute,place)).sort(()=>rnd()-.5);
+   const here=N.peopleHere(s,place).sort(()=>rnd()-.5);
    for(const n of here){if(rnd()>=TALK[persona])continue;const r=D.startTalk(s,n.id);if(!r.ok)continue;s=r.state;record();answer()}}
   const next={...s,day:s.day+1,clock:{...clockOf(s),minute:START,location:'home'}};s=D.settleStory(s,next)}
- const tiers={};for(const n of N.CAST)if(n.id!=='me'){const t=N.relationTier(socialOf(s).relations[n.id]?.score??0,n.id);tiers[t]=(tiers[t]||0)+1}
+ const tiers={};for(const n of [...['landlord','veg','neighbor','courier','banhmi','doctor','teller'].map(id=>N.castById(s,id)),...N.coworkersOf(s)]){const t=N.relationTier(socialOf(s).relations[n.id]?.score??0,n.id);tiers[t]=(tiers[t]||0)+1}
  return{persona,seed,days,events,played,tiers,valid:D.validStory(s.story,s.day)}}
 
 /** Chỉ số tổng hợp cho một persona (gộp mọi seed). */

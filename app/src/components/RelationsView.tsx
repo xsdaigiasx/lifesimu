@@ -1,7 +1,7 @@
 import NpcFace from './NpcFace';
 import {useState} from 'react';
 import type {GameState} from '../domain/types';
-import {NPCS,relationTier} from '../domain/npc';
+import {rosterOf,relationTier} from '../domain/npc';
 import {socialOf} from '../domain/social';
 import {profileOf} from '../domain/journal-view';
 import {money} from '../domain/format';
@@ -11,7 +11,7 @@ import Icon from './Icon';
 /** T19: Quan hệ dạng lưới thẻ người quen (thân nhất lên đầu) và hồ sơ từng người, chỉ hiện điều đã biết. */
 export default function RelationsView({state,initialId,extra}:{state:GameState;initialId?:string;extra?:React.ReactNode}){
  const rel=socialOf(state).relations,[selected,setSelected]=useState<string|undefined>(initialId&&(rel[initialId]||state.office?.met?.includes(initialId))?initialId:undefined);
- const met=state.office?.met??[],known=NPCS.filter(n=>rel[n.id]||met.includes(n.id)).sort((a,b)=>(Number(b.id==='me')-Number(a.id==='me'))||((rel[b.id]?.score??0)-(rel[a.id]?.score??0))||a.name.localeCompare(b.name,'vi'));
+ const met=state.office?.met??[],known=rosterOf(state).filter(n=>n.family||rel[n.id]||met.includes(n.id)).sort((a,b)=>(Number(!!b.family)-Number(!!a.family))||((rel[b.id]?.score??0)-(rel[a.id]?.score??0))||a.name.localeCompare(b.name,'vi'));
  const p=selected?profileOf(state,selected):null;
  if(p)return <GameScreen title={p.npc.name} onBack={()=>setSelected(undefined)}>
   <header className="profile-head"><span className="profile-avatar" style={{background:p.npc.tone}} aria-hidden="true"><NpcFace id={p.npc.id} label={p.npc.label}/></span><span className="profile-title"><strong>{p.npc.role}</strong><span className="profile-tier">{relationTier(p.score,p.npc.id)}</span></span></header>
