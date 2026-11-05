@@ -344,7 +344,7 @@
    "ask"
   ],
   "topic": [
-   "food"
+   "eatout"
   ],
   "npc": "me"
  },
@@ -367,7 +367,12 @@
    "ask"
   ],
   "topic": [
-   "work"
+   "work",
+   "job",
+   "probation",
+   "tier",
+   "study",
+   "project"
   ]
  },
  {
@@ -378,7 +383,7 @@
    "ask"
   ],
   "topic": [
-   "work"
+   "tier"
   ],
   "needs": [
    "event"
@@ -552,7 +557,7 @@
    "news"
   ],
   "topic": [
-   "weather"
+   "forecast"
   ],
   "needs": [
    "weather"
@@ -609,7 +614,10 @@
    "tease"
   ],
   "topic": [
-   "work"
+   "work",
+   "job",
+   "tier",
+   "project"
   ]
  },
  {
@@ -808,7 +816,8 @@
    "ask"
   ],
   "topic": [
-   "food"
+   "food",
+   "eatout"
   ],
   "npc": "me"
  },
@@ -820,7 +829,8 @@
    "ask"
   ],
   "topic": [
-   "food"
+   "food",
+   "eatout"
   ],
   "npc": "me"
  },
@@ -927,5 +937,225 @@
   "topic": [
    "food"
   ]
+ },
+ {
+  "id": "body-035",
+  "slot": "body",
+  "text": "nghe nói {you} mới vô làm ở {place}",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "job"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "body-036",
+  "slot": "body",
+  "text": "{you} qua thử việc rồi hả",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "probation"
+  ]
+ },
+ {
+  "id": "body-037",
+  "slot": "body",
+  "text": "hôm qua {you} nấu {dish} thơm cả dãy",
+  "intent": [
+   "ask",
+   "tease"
+  ],
+  "topic": [
+   "cook"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "body-038",
+  "slot": "body",
+  "text": "{you} học được món {dish} rồi hả",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "recipe"
+  ],
+  "needs": [
+   "dish"
+  ]
+ },
+ {
+  "id": "body-039",
+  "slot": "body",
+  "text": "nghe nói {you} mở công ty {place}",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "company"
+  ],
+  "needs": [
+   "place"
+  ],
+  "minTier": "acquaint"
+ },
+ {
+  "id": "body-040",
+  "slot": "body",
+  "text": "dự án của {you} xong chưa",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "project"
+  ],
+  "minTier": "acquaint"
+ },
+ {
+  "id": "body-041",
+  "slot": "body",
+  "text": "{you} lại nhận việc làm thêm hả",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "side"
+  ],
+  "minTier": "acquaint"
+ },
+ {
+  "id": "body-042",
+  "slot": "body",
+  "text": "{you} mới nhận lương hả",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "salary"
+  ],
+  "privacy": 2
+ },
+ {
+  "id": "body-043",
+  "slot": "body",
+  "text": "dạo này {you} có kẹt tiền không",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "money"
+  ],
+  "privacy": 2
+ },
+ {
+  "id": "body-044",
+  "slot": "body",
+  "text": "khoản vay của {you} còn {amount}",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "loan"
+  ],
+  "needs": [
+   "amount"
+  ],
+  "privacy": 2,
+  "npc": "teller"
+ },
+ {
+  "id": "body-045",
+  "slot": "body",
+  "text": "sắp tới hạn tiền trọ rồi",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "rent"
+  ],
+  "npc": "landlord"
+ },
+ {
+  "id": "body-046",
+  "slot": "body",
+  "text": "trông {you} mệt quá",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "tired"
+  ]
+ },
+ {
+  "id": "body-047",
+  "slot": "body",
+  "text": "dạo này {you} trông khoẻ ra",
+  "intent": [
+   "ask",
+   "tease"
+  ],
+  "topic": [
+   "fit"
+  ]
+ },
+ {
+  "id": "body-048",
+  "slot": "body",
+  "text": "cuối tuần rồi, {you} có đi đâu chơi không",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "weekend"
+  ]
+ },
+ {
+  "id": "body-049",
+  "slot": "body",
+  "text": "{you} đỡ {event} chưa",
+  "intent": [
+   "ask"
+  ],
+  "topic": [
+   "sick"
+  ],
+  "needs": [
+   "event"
+  ],
+  "privacy": 1
+ },
+ {
+  "id": "body-050",
+  "slot": "body",
+  "text": "mới chuyển tới {place} mà",
+  "intent": [
+   "tease"
+  ],
+  "topic": [
+   "home"
+  ],
+  "needs": [
+   "place"
+  ]
+ },
+ {
+  "id": "body-051",
+  "slot": "body",
+  "text": "bữa hẹn {you} không tới, {self} chờ hoài",
+  "intent": [
+   "complain"
+  ],
+  "topic": [
+   "missed"
+  ],
+  "minTier": "acquaint"
  }
 ]

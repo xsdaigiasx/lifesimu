@@ -23,7 +23,7 @@ export function intentAllowed(i:Intent,tier:Tier,mood:Emotion){
  if(tier==='hostile')return!NO_HOSTILE.includes(i);
  return tierRank(tier)>=tierRank(INTENT_MIN_TIER[i])&&!(MOOD_BAN[i]??[]).includes(mood)}
 /** Bảng tương thích ý định và nhóm chủ đề (Xin lỗi chỉ về người chơi; Kể tin không về bản thân NPC). */
-export const INTENT_TOPICS:Record<Intent,TopicGroup[]>={brag:['self'],complain:['self','world','other'],ask:['player','other','world'],invite:['player','world','self'],request:['self'],news:['world','other'],tease:['player','self'],apologize:['player']};
+export const INTENT_TOPICS:Record<Intent,TopicGroup[]>={brag:['self'],complain:['self','world','other','player'],ask:['player','other','world'],invite:['player','world','self'],request:['self'],news:['world','other'],tease:['player','self'],apologize:['player']};
 /** NPC có được biết dữ kiện này không: mọi người, người có mặt hôm đó, hoặc danh sách. */
 export function canKnow(f:Fact,npc:string,present:readonly string[]=[]){return f.knownBy==='all'||(f.knownBy==='present'?present.includes(npc):f.knownBy.includes(npc))}
 /** Dữ kiện dùng được cho ý định: đúng nhóm chủ đề, đủ độ thân về riêng tư, NPC được biết, chuyện của người khác thì không phải chính NPC. */
