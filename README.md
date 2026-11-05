@@ -1,4 +1,6 @@
-# Một đời để sống
+# Next Day
+
+Slogan: *Một đời để sống.*
 
 Game mô phỏng đời sống một thanh niên từ quê lên phố, kết hợp trang trí nhà cửa isometric.
 

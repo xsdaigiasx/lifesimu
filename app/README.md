@@ -1,4 +1,4 @@
-# Một đời để sống v0.35
+# Next Day v0.35 (slogan: Một đời để sống)
 
 Đọc docs/HANDOVER.md để biết trạng thái hiện hành và giới hạn.
 

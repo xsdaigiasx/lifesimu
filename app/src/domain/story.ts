@@ -11,7 +11,7 @@ import type { StoryBeat } from './types';
         { art: '08_open_door', scene: 'city', duration: 7, tag: '08:00 THÀNH PHỐ', text: 'Xe dừng. Cánh cửa mở ra.\nThành phố chẳng biết bạn là ai.' },
         { art: '09_arrival', scene: 'city', duration: 8, tag: 'NGÀY ĐẦU TIÊN', text: 'Bạn đến đây để tìm công việc đầu tiên.\nNhưng trước hết… phải tìm một chỗ ở, một bữa ăn, một cơ hội.' },
         { art: '10_first_step', scene: 'city', duration: 8, tag: 'BƯỚC XUỐNG', text: 'Bạn siết lại quai ba lô.\nKhông ai biết ngày mai sẽ ra sao.\nLần này, chính bạn sẽ quyết định.' },
-        { scene: 'title', duration: 9, tag: 'LIFE SIMULATOR', text: 'MỘT ĐỜI\nĐỂ SỐNG', sub: 'Từ một chuyến xe. Đến cuộc đời của bạn.' }
+        { scene: 'title', duration: 9, tag: 'MỘT ĐỜI ĐỂ SỐNG', text: 'NEXT DAY', sub: 'Từ một chuyến xe. Đến cuộc đời của bạn.' }
     ];
     let t = 0;
     const beats = rawBeats.map(b => { const next = { ...b, start: t }; t += b.duration; return next; });
