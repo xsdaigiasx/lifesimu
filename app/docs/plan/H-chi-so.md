@@ -228,3 +228,4 @@ Danh sách việc cố ý làm nhỏ hoặc hoãn, để không quên khi mở r
 - Văn phòng isometric và bộ đồ văn phòng cho giai đoạn mở công ty (Issue #55 đang hoãn).
 - Vẽ lại đồ nội thất phòng trọ theo phong cách v0.35 (Issue #18).
 - Ảnh khi đang làm việc theo từng loại việc (hiện dùng một ảnh màn hình code).
+- Hội thoại Lô 1 (H5): cuộc gọi Mẹ, em và câu đáp của họ sau lựa chọn vẫn là câu cố định; tin nhắn của người ngoài gia đình giữ câu cũ tới Lô 2 (H6). Bản chép này cần chép lại vào tài liệu Kế hoạch gốc khi tiện.

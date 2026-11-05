@@ -65,5 +65,6 @@ test('chống lặp: mảnh 14 ngày, khung 3 ngày, cùng ý định và chủ 
 });
 
 test('nối mảnh: dấu phẩy, viết hoa sau dấu câu, thêm dấu chấm',()=>{
- assert.equal(C.joinParts(['chào em','ăn chưa']),'Chào em, ăn chưa.');assert.equal(C.joinParts(['Ủa?','đi đâu']),'Ủa? Đi đâu.');assert.equal(C.joinParts(['','đi nha!']),'Đi nha!');
+ assert.equal(C.joinParts(['tối nay xuống ăn chè với cô nha','đi nha']),'Tối nay xuống ăn chè với cô, đi nha.');assert.equal(C.joinParts(['có gì cần thì kêu bà']),'Có gì cần thì kêu bà.','bà không phải từ hỏi à');
+ assert.equal(C.joinParts(['chào em','ăn chưa']),'Chào em, ăn chưa?');assert.equal(C.joinParts(['có cần em chở đồ không','đi nha anh']),'Có cần em chở đồ không? Đi nha anh.');assert.equal(C.joinParts(['Ủa?','đi đâu']),'Ủa? Đi đâu.');assert.equal(C.joinParts(['','đi nha!']),'Đi nha!');
 });
