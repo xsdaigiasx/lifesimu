@@ -1,3 +1,4 @@
+import {TECH} from './professions';
 import type {GameResult,GameState} from './types';
 import {activeLease,officeOf,SIZES} from './office';
 import {skillsOf} from './work';
@@ -10,7 +11,7 @@ import {validWork,type WorkState} from './staff';
 export const HIRE_SKILLS=['programming','logic','graphics','management','communication'] as const;
 export type HireSkill=typeof HIRE_SKILLS[number];
 export const HIRE_SKILL_NAME:Record<HireSkill,string>={programming:'Lập trình',logic:'Logic',graphics:'Đồ họa',management:'Quản lý',communication:'Giao tiếp'};
-const CRAFT:HireSkill[]=['programming','logic','graphics'];
+const CRAFT=TECH.craft as HireSkill[];
 export const PERSONALITIES=['Cầu toàn','Hay khoe','Ngại','Nóng tính','Hay giúp đỡ','Tham'] as const;
 export type Personality=typeof PERSONALITIES[number];
 export const MOTIVES=['Lương cao','Học hỏi','Ổn định'] as const;

@@ -1,3 +1,4 @@
+import {TECH} from './professions';
 import {fitMult} from './fitness';
 import {fullnessOf,vitalFactor,drainFullness,applyCoffeeCrash,applyIllness} from './vitals';
 import type {GameState,GameResult} from './types';
@@ -119,7 +120,7 @@ function closeUrgent(w:WorkState,now:number){const as=w.assignment;if(as?.kind==
 function scheduleTurn(w:WorkState,day:number,companyId:string,slot:'am'|'pm',start:number,end:number){if(w.turn?.day!==day){const ev=pickTurn(day,companyId,w.turn?.id),h=hash(`turnslot:${day}:${companyId}`),pick:'am'|'pm'=slot==='pm'||h%2===0?slot:'pm',[lo,hi]=pick==='am'?[540,690]:[840,990];w.turn={day,id:ev.id,slot:pick,at:lo+h%(hi-lo),state:'waiting'}}const tw=w.turn!;if(tw.state==='waiting'&&tw.slot===slot&&tw.at<start+20){if(start+20<=end-15)tw.at=start+20;else if(slot==='am'){tw.slot='pm';tw.at=840+hash(`turnslot:${day}:${companyId}`)%150}else tw.state='done'}}
 /** Bảng việc trong ngày: Chắc ăn, Thử sức, Gấp, đôi khi Giúp đồng nghiệp. Theo seed nên mở lại game vẫn ra đúng bảng; thẻ đã nhận trong ngày bị bỏ khỏi bảng. */
 export function taskBoard(s:GameState):TaskCard[]{const companyId=officeOf(s).employerId??'sen-code',k=skillsOf(s),seed=hash(`board:${s.day}:${companyId}`);
- const main=TASKS.filter(t=>['programming','logic','graphics'].includes(t.skill)),gap=(t:typeof TASKS[number])=>t.level-k[t.skill].level;
+ const main=TASKS.filter(t=>(TECH.craft as string[]).includes(t.skill)),gap=(t:typeof TASKS[number])=>t.level-k[t.skill].level;
  const byLevel=[...main].sort((a,b)=>gap(a)-gap(b));
  const used:TaskId[]=[],pick=(list:readonly typeof TASKS[number][],fallback:readonly typeof TASKS[number][],salt:string)=>{const free=(l:readonly typeof TASKS[number][])=>l.filter(t=>!used.includes(t.id)),from=[free(list),free(fallback),free(byLevel),list.length?list:fallback].find(l=>l.length)!;const t=from[hash(`${seed}:${salt}`)%from.length]!;used.push(t.id);return t};
  const safe=pick(main.filter(t=>gap(t)<=-1),main.filter(t=>gap(t)<=0),'safe'),stretch=pick(main.filter(t=>gap(t)>=1&&gap(t)<=2),byLevel.slice(-2),'stretch'),urgent=pick(main.filter(t=>gap(t)<=0),byLevel.slice(0,3),'urgent');

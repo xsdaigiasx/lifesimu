@@ -1,3 +1,4 @@
+import {TECH} from './professions';
 import type {GameResult,GameState} from './types';
 import {staffOf,levelOf,HIRE_SKILLS,type Employee,type HireSkill} from './hiring';
 import {FX,bondOf,fairWage,knowOf,quitRisk,wageRatio,withKnow,workAt} from './staff';
@@ -29,7 +30,7 @@ export const hrOf=(s:GameState):HrState=>s.company?.hr??{version:1,last:s.day-1,
 export const pendingFor=(s:GameState,emp:string)=>hrOf(s).pending.find(p=>p.emp===emp);
 export const pendingCount=(s:GameState)=>hrOf(s).pending.length;
 export const alive=(m:HrMemory,day:number)=>m.weight>=4||day-m.day<=HR.fadeDays;
-const mainKey=(e:Employee):HireSkill=>(['programming','logic','graphics'] as HireSkill[]).reduce((a,k)=>e.skills[k]>e.skills[a]?k:a,'programming' as HireSkill);
+const mainKey=(e:Employee):HireSkill=>(TECH.craft as HireSkill[]).reduce((a,k)=>e.skills[k]>e.skills[a]?k:a,'programming' as HireSkill);
 const mainLv=(e:Employee)=>e.skills[mainKey(e)];
 
 type Eff={/** T51: đổi số giờ (%), thưởng dự án (%), hạn (ngày) và độ biết. */hoursPct?:number;rewardPct?:number;dueDays?:number;know?:number;fund?:number;wagePct?:number;morale?:number;loyalty?:number;bond?:number;fatigue?:number;minutes?:number;off?:number;progress?:number;errCut?:number;exp?:number;rep?:number;unassign?:boolean;leave?:boolean;other?:{morale?:number;bond?:number;loyalty?:number};roll?:{p:number;ok:Eff;no:Eff}};

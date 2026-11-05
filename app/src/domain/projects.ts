@@ -1,3 +1,4 @@
+import {TECH} from './professions';
 import type {GameResult,GameState} from './types';
 import {isWorkday,skillsOf} from './work';
 import {spendTime} from './time';
@@ -15,7 +16,7 @@ import {FIN,addReceivable,advanceOf,book,slowDays} from './finance';
  *  lỗi theo chỉ số nhân viên, điểm kiểm tra, kết quả 1–5 sao. T47: khách ứng 30% khi nhận, phần còn lại trả sau 30 ngày (`finance.ts`).
  *  T51: độ biết (`Employee.know`) tăng theo việc, dự đoán là khoảng thay vì một số, cập nhật sau việc ở `strain.ts`. Chưa có: phối hợp theo quan hệ cặp. */
 export type CraftSkill='programming'|'logic'|'graphics';
-export const CRAFTS:CraftSkill[]=['programming','logic','graphics'];
+export const CRAFTS=TECH.craft as CraftSkill[];
 export const CRAFT_NAME:Record<CraftSkill,string>={programming:'Lập trình',logic:'Logic',graphics:'Đồ họa'};
 
 export const PROJ={maxOffers:4,offerDays:7,maxActive:3,maxTeam:4,dayHours:6,grace:3,checkMinutes:45,maxChecks:2,checkErr:.8,latePct:4,lateMax:40,unitHours:4,
