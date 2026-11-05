@@ -17,7 +17,7 @@ export const MOTIVES=['Lương cao','Học hỏi','Ổn định'] as const;
 /** Trình độ theo Lv (mục 33.3); lương cơ sở là đề xuất. */
 export const LEVELS=[{name:'Thực tập',min:1,max:2,base:5_000_000,years:0},{name:'Junior',min:3,max:4,base:9_000_000,years:2},{name:'Middle',min:5,max:6,base:14_000_000,years:4},{name:'Senior',min:7,max:8,base:22_000_000,years:6},{name:'Chuyên gia',min:9,max:10,base:32_000_000,years:9}] as const;
 export const levelOf=(lv:number)=>LEVELS.find(l=>lv>=l.min&&lv<=l.max)??LEVELS[0];
-export const HIRING={postFee:500_000,postDays:28,batchDays:7,keepDays:14,seniorRep:60,expertRep:80,maxTests:2,refShare:30,errStart:3,errMin:.5,errQuestion:.7,errSoft:.5,
+export const HIRING={postFee:500_000,postDays:28,batchDays:7,keepDays:14,seniorRep:60,expertRep:80,maxTests:2,maxQuestions:5,refShare:30,errStart:3,errMin:.5,errQuestion:.7,errSoft:.5,
  times:{cv:10,tech:20,test:60,situation:20,motive:15,ref:15}} as const;
 export type InterviewKind=keyof typeof HIRING.times;
 
@@ -120,6 +120,7 @@ export function hiringAction(s:GameState,a:HiringAction):GameResult{
  if(a.what==='ref'&&!cand.ref)return fail('Ứng viên này không có người giới thiệu.');
  if(a.what==='cv'&&p.cv||a.what==='situation'&&p.sit||a.what==='motive'&&p.mot||a.what==='ref'&&p.ref)return fail('Bạn đã làm bước này rồi.');
  if(a.what==='test'&&p.test?.[a.skill!])return fail('Đã làm bài test kỹ năng này.');
+ if(a.what==='tech'&&(p.q?.[a.skill!]??0)>=HIRING.maxQuestions)return fail('Hỏi thêm cũng không rõ hơn.');
  const t=spendTime(n,HIRING.times[a.what],'office');if(!t.ok)return t;n=t.state;const c2=n.company!,h2=c2.hiring!,p2=h2.progress[cand.id]??={};
  if(a.what==='test'&&testsDone(p)>=HIRING.maxTests){h2.gone=[...h2.gone,cand.id].slice(-200);delete h2.progress[cand.id];return{ok:true,state:n}}
  if(a.what==='cv')p2.cv=1;else if(a.what==='situation')p2.sit=1;else if(a.what==='motive')p2.mot=1;else if(a.what==='ref')p2.ref=1;

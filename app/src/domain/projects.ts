@@ -19,7 +19,7 @@ export const CRAFT_NAME:Record<CraftSkill,string>={programming:'Lập trình',lo
 
 export const PROJ={maxOffers:4,offerDays:7,maxActive:3,maxTeam:4,dayHours:6,grace:3,checkMinutes:45,maxChecks:2,checkErr:.8,latePct:4,lateMax:40,unitHours:4,
  repStart:50,repStars:{1:-6,2:-3,3:0,4:2,5:4} as Record<number,number>,repLate:-2,repCancel:-10,payStars:{1:.3,2:.6,3:.85,4:1,5:1.1} as Record<number,number>,
- loadMult:[1,1,.9,.75],fatigueBase:12,fatigueExtra:12,errMin:.03,errMax:.6,catchUp:30} as const;
+ loadMult:[1,1,.9,.75],lvSpread:3,rewardBase:4,rewardDiff:.1,fatigueBase:12,fatigueExtra:12,errMin:.03,errMax:.6,catchUp:30} as const;
 
 export interface Offer{id:string;client:string;title:string;skill:CraftSkill;lv:number;hours:number;difficulty:number;picky:number;urgent:boolean;traits:Trait[];reward:number;days:number;opened:number;expires:number}
 export interface Project extends Offer{accepted:number;due:number;team:string[];progress:number;checks:number;/** T47: khoản khách đã ứng khi nhận dự án. */adv?:number;/** Tổng giờ nhân lỗi và tổng giờ đã làm để tính tỉ lệ lỗi thật. */ew:number;eh:number}
@@ -47,12 +47,12 @@ function newOffer(s:GameState,ps:ProjectsState,day:number):Offer|null{
  const co=s.company!;if(ps.offers.length>=PROJ.maxOffers)return null;
  if(hash(`proj:${day}:roll`)%100>=30+(co.rep??PROJ.repStart)*.3)return null;
  const pool=POOL[officeOf(s).industry]??CRAFTS,skill=pool[hash(`proj:${day}:skill`)%pool.length]!;
- const best=Math.max(2,...staffOf(s).map(e=>e.skills[skill])),lv=1+hash(`proj:${day}:lv`)%Math.min(8,best+1);
+ const best=Math.max(2,...staffOf(s).map(e=>e.skills[skill])),top=Math.min(8,best+1),lo=Math.max(1,top-PROJ.lvSpread),lv=lo+hash(`proj:${day}:lv`)%(top-lo+1);
  const difficulty=1+hash(`proj:${day}:diff`)%5,hours=clamp(Math.round((12+difficulty*6+lv*3+hash(`proj:${day}:h`)%8)/2)*2,12,96);
  const urgent=hash(`proj:${day}:urg`)%4===0,picky=hash(`proj:${day}:pk`)%5===0?2:hash(`proj:${day}:pk2`)%3===0?1:0;
  const traits:Trait[]=[];if(urgent)traits.push('urgent');if(hours>=56)traits.push('long');if(difficulty>=4)traits.push('hard');if(difficulty<=1)traits.push('easy');if(picky===2)traits.push('picky');
  const k=hash(`proj:${day}:tr`)%5;if(k===0)traits.push('client');if(k===1)traits.push('reward');if(k===2)traits.push('routine');if(k===3)traits.push('risky');if(hash(`proj:${day}:tm`)%4===0)traits.push('team');
- const perHour=levelBase(lv)/176,bonus=traits.includes('reward')?1.15:1,reward=Math.round(hours*perHour*(1.35+.08*difficulty)*bonus/100_000)*100_000;
+ const perHour=levelBase(lv)/176,bonus=traits.includes('reward')?1.15:1,reward=Math.round(hours*perHour*(PROJ.rewardBase+PROJ.rewardDiff*difficulty)*bonus/100_000)*100_000;
  const days=Math.ceil(Math.ceil(hours/PROJ.dayHours)*7/5*(urgent?1.05:1.6))+1;
  return{id:`p${ps.seq}`,client:CLIENTS[hash(`proj:${day}:cl`)%CLIENTS.length]!,title:TITLES[skill][hash(`proj:${day}:ti`)%TITLES[skill].length]!,skill,lv,hours,difficulty,picky,urgent,traits,reward,days,opened:day,expires:day+PROJ.offerDays}}
 

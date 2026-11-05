@@ -6,7 +6,8 @@ import {repOf} from './side';
 import {post} from './money';
 import {validHiring,validStaff,type HiringState,type Employee} from './hiring';
 import {validProjects,type ProjectsState} from './projects';
-import {validFinance,type FinanceState} from './finance';
+import {validFinance,book,type FinanceState} from './finance';
+import {recordJournal} from './journal';
 import {validHr,type HrState} from './hr';
 import {validPolicy,type PolicyState} from './policy';
 import {SIZES} from './office';
@@ -27,8 +28,18 @@ export function checksOf(s:GameState):Check[]{
  return[mk('management','Quản lý',k.management.level,COMPANY.mgmt),mk('main','Kỹ năng chính',mainLevel(s),COMPANY.main),mk('months','Tháng làm việc',monthsWorked(s),COMPANY.months),mk('rep','Uy tín tay trái',repOf(s),COMPANY.rep),mk('cash','Tiền mặt',s.money,COMPANY.fund),mk('own','Tiền tự có',ownCash(s),COMPANY.ownMin)];
 }
 export const canFound=(s:GameState)=>!s.company&&officeOf(s).role!=='owner'&&checksOf(s).every(c=>c.ok);
-export type CompanyAction={kind:'found';name:string;industry:Industry};
-export function foundCompany(s:GameState,a:CompanyAction):GameResult{
+export type CompanyAction={kind:'found';name:string;industry:Industry}|{kind:'invest';amount:number};
+/** T50: góp vốn từ tiền mặt cá nhân vào quỹ công ty, để cứu công ty khi cạn quỹ (không rút ngược lại). */
+export const INVEST_AMOUNTS=[5_000_000,10_000_000] as const;
+export function investFund(s:GameState,amount:number):GameResult{
+ const fail=(error:string):GameResult=>({ok:false,error});
+ if(!s.company||officeOf(s).role!=='owner')return fail('Chỉ chủ công ty mới góp vốn.');
+ if(!(INVEST_AMOUNTS as readonly number[]).includes(amount))return fail('Số tiền không hợp lệ.');
+ const n=structuredClone(s);
+ if(post(n,{id:`invest:${s.day}:${s.company.fund}`,name:'Góp vốn vào công ty',amount:-amount})!=='ok')return fail('Tiền mặt của bạn chưa đủ.');
+ n.company!.fund+=amount;book(n.company!,s.day,'Chủ góp vốn',amount);
+ return{ok:true,state:recordJournal(n,`invest:${s.day}:${s.company.fund}`,'Góp vốn','Đã chuyển tiền cá nhân vào quỹ công ty.')}}
+export function foundCompany(s:GameState,a:Extract<CompanyAction,{kind:'found'}>):GameResult{
  const fail=(error:string):GameResult=>({ok:false,error});
  if(s.company||officeOf(s).role==='owner')return fail('Bạn đã có công ty.');
  if(!Object.hasOwn(INDUSTRIES,a.industry)||typeof a.name!=='string'||!a.name.trim()||a.name.trim().length>32)return fail('Hãy chọn ngành và đặt tên công ty tối đa 32 ký tự.');
