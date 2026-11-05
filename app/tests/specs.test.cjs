@@ -8,7 +8,7 @@ for(const id of Object.keys(PRODUCTS)){const s=specOf(p(id));assert(s.rows.lengt
 for(const id of Object.keys(HOME_ITEMS))for(const t of Object.keys(HOME_TIERS)){const s=specOf(h(id,t));assert.equal(s.kind,'furniture');assert(s.rows.some(r=>r.label==='Kích thước')&&s.rows.some(r=>r.label==='Cân nặng'))}
 for(const id of Object.keys(INGREDIENTS)){const s=foodSpec(id);assert.equal(s.kind,'food');assert(s.rows.some(r=>r.label==='Hạn dùng'))}
 // mỗi loại một bộ dòng riêng
-assert(specOf(p('tv')).rows.some(r=>r.label==='Điện năng'));
+assert(specOf(p('laptopMid')).rows.some(r=>r.label==='Điện năng'));assert(specOf(h('tv','comfort')).rows.some(r=>r.label==='Điện năng'));
 assert(specOf(p('motorbike')).rows.some(r=>r.label==='Tốc độ'));
 assert(!specOf(p('casual')).rows.some(r=>r.label==='Điện năng'));
 assert(specOf(h('fridge')).rows.some(r=>r.label==='Điện năng'));

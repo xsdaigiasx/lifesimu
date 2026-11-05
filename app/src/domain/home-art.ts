@@ -2,6 +2,7 @@ import {alignHomeAxes} from './home-geometry';
 import type {HomeId} from './home';
 interface HomeArtVariant {src:string;scale:number;anchorX:number;anchorY:number}
 export const HOME_ART:Record<HomeId,[HomeArtVariant,HomeArtVariant]> = {
+  "tv": [{"src":"/assets/furniture/tv-basic_a.webp","scale":1,"anchorX":50,"anchorY":100},{"src":"/assets/furniture/tv-basic_b.webp","scale":1,"anchorX":50,"anchorY":100}],
   "fridge": [{"src":"/assets/furniture/fridge-basic_a.webp","scale":1,"anchorX":50,"anchorY":100},{"src":"/assets/furniture/fridge-basic_b.webp","scale":1,"anchorX":50,"anchorY":100}],
   "bed": [
     {
@@ -112,5 +113,6 @@ export const HOME_GROUND:Record<HomeId,[{x:number;y:number;scale:number},{x:numb
  lamp:[{x:50,y:85.8108,scale:HOME_ART.lamp[0].scale*.5},{x:50,y:85.8108,scale:HOME_ART.lamp[1].scale*.5}],
  painting:[{x:50,y:100,scale:1},{x:50,y:100,scale:1}],
  rug:[{x:50,y:50,scale:1},{x:50,y:50,scale:1}],
- fridge:[{x:50,y:85,scale:1},{x:50,y:85,scale:1}]
+ fridge:[{x:50,y:85,scale:1},{x:50,y:85,scale:1}],
+ tv:[{x:50,y:90,scale:1},{x:50,y:90,scale:1}]
 };

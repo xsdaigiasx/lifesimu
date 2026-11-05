@@ -1,15 +1,15 @@
 import type {GameState,GameResult} from './types';
 import {post} from './money';
 import {clockOf} from './time';
-export const HOME_ITEMS={bed:{name:'Giường đơn',price:1400000,w:2,h:3,icon:'home'},wardrobe:{name:'Tủ quần áo',price:950000,w:2,h:1,icon:'bag'},desk:{name:'Bàn laptop',price:850000,w:2,h:2,icon:'briefcase'},table:{name:'Bàn ăn nhỏ',price:420000,w:2,h:2,icon:'cup'},plant:{name:'Chậu cây',price:180000,w:1,h:1,icon:'health'},lamp:{name:'Đèn ngủ',price:350000,w:1,h:1,icon:'bell'},rug:{name:'Thảm nhỏ',price:650000,w:3,h:2,icon:'grid'},painting:{name:'Tranh treo tường',price:280000,w:2,h:1,icon:'map'},fridge:{name:'Tủ lạnh',price:2500000,w:1,h:1,icon:'snow'}} as const;
+export const HOME_ITEMS={bed:{name:'Giường đơn',price:1400000,w:2,h:3,icon:'home'},wardrobe:{name:'Tủ quần áo',price:950000,w:2,h:1,icon:'bag'},desk:{name:'Bàn laptop',price:850000,w:2,h:2,icon:'briefcase'},table:{name:'Bàn ăn nhỏ',price:420000,w:2,h:2,icon:'cup'},plant:{name:'Chậu cây',price:180000,w:1,h:1,icon:'health'},lamp:{name:'Đèn ngủ',price:350000,w:1,h:1,icon:'bell'},rug:{name:'Thảm nhỏ',price:650000,w:3,h:2,icon:'grid'},painting:{name:'Tranh treo tường',price:280000,w:2,h:1,icon:'map'},fridge:{name:'Tủ lạnh',price:2500000,w:1,h:1,icon:'snow'},tv:{name:'TV',price:3200000,w:2,h:1,icon:'play'}} as const;
 export type HomeId=keyof typeof HOME_ITEMS;
 export const HOME_TIERS={basic:{name:'Cơ bản',factor:1,comfort:0},comfort:{name:'Tiện nghi',factor:1.6,comfort:1},premium:{name:'Cao cấp',factor:2.5,comfort:2}} as const;
 export type HomeTier=keyof typeof HOME_TIERS;
 /** Mỗi mẫu một món riêng (chốt 04/11): không ghi hạng, mẫu đắt hơn đẹp hơn, êm hơn. Khoá là hạng nội bộ. */
-export const HOME_MODELS:Record<HomeId,Record<HomeTier,string>>={bed:{basic:'Giường đơn khung sắt',comfort:'Giường gỗ có ngăn kéo',premium:'Giường bọc nệm có đèn đầu giường'},wardrobe:{basic:'Tủ vải khung thép',comfort:'Tủ gỗ hai cánh',premium:'Tủ gỗ có gương và đèn'},desk:{basic:'Bàn gấp gọn',comfort:'Bàn gỗ có kệ sách',premium:'Bàn nâng hạ có màn phụ'},table:{basic:'Bàn nhựa xếp',comfort:'Bàn gỗ tròn',premium:'Bàn mặt đá chân gỗ'},plant:{basic:'Chậu xương rồng',comfort:'Chậu trầu bà',premium:'Bàng Singapore chậu gốm'},lamp:{basic:'Đèn kẹp',comfort:'Đèn gốm',premium:'Đèn đồng chao vải'},rug:{basic:'Thảm cói',comfort:'Thảm len',premium:'Thảm dệt hoa văn'},painting:{basic:'Tranh in',comfort:'Tranh sơn dầu nhỏ',premium:'Tranh khung gỗ lớn'},fridge:{basic:'Tủ lạnh mini',comfort:'Tủ lạnh hai cửa',premium:'Tủ lạnh ngăn đông mềm'}};
+export const HOME_MODELS:Record<HomeId,Record<HomeTier,string>>={bed:{basic:'Giường đơn khung sắt',comfort:'Giường gỗ có ngăn kéo',premium:'Giường bọc nệm có đèn đầu giường'},wardrobe:{basic:'Tủ vải khung thép',comfort:'Tủ gỗ hai cánh',premium:'Tủ gỗ có gương và đèn'},desk:{basic:'Bàn gấp gọn',comfort:'Bàn gỗ có kệ sách',premium:'Bàn nâng hạ có màn phụ'},table:{basic:'Bàn nhựa xếp',comfort:'Bàn gỗ tròn',premium:'Bàn mặt đá chân gỗ'},plant:{basic:'Chậu xương rồng',comfort:'Chậu trầu bà',premium:'Bàng Singapore chậu gốm'},lamp:{basic:'Đèn kẹp',comfort:'Đèn gốm',premium:'Đèn đồng chao vải'},rug:{basic:'Thảm cói',comfort:'Thảm len',premium:'Thảm dệt hoa văn'},painting:{basic:'Tranh in',comfort:'Tranh sơn dầu nhỏ',premium:'Tranh khung gỗ lớn'},fridge:{basic:'Tủ lạnh mini',comfort:'Tủ lạnh hai cửa',premium:'Tủ lạnh ngăn đông mềm'},tv:{basic:'TV 32 inch chân đế',comfort:'TV 43 inch kèm kệ',premium:'TV 55 inch kèm kệ gỗ'}};
 export const homeName=(id:HomeId,tier:HomeTier='basic')=>HOME_MODELS[id]?.[tier]??HOME_ITEMS[id].name;
 /** Giá riêng khi không theo hệ số hạng (T21: tủ lạnh 2,5 / 4,5 / 8 triệu). */
-const PRICE:Partial<Record<HomeId,Record<HomeTier,number>>>={fridge:{basic:2500000,comfort:4500000,premium:8000000}};
+const PRICE:Partial<Record<HomeId,Record<HomeTier,number>>>={fridge:{basic:2500000,comfort:4500000,premium:8000000},tv:{basic:3200000,comfort:5500000,premium:9500000}};
 export const homePrice=(id:HomeId,tier:HomeTier='basic')=>PRICE[id]?.[tier]??Math.round(HOME_ITEMS[id].price*HOME_TIERS[tier].factor);
 /** T21: tủ lạnh (chủ dự án duyệt 04/11): sức chứa theo phần, hạn dùng kéo dài theo hệ số; gạo không đổi. */
 export const FRIDGE:Record<HomeTier,{cap:number;factor:number}>={basic:{cap:20,factor:2},comfort:{cap:35,factor:2.5},premium:{cap:60,factor:3}};
@@ -18,7 +18,7 @@ export interface HomeObject{uid?:string;tier?:HomeTier;mount?:'floor'|'surface'|
 export interface HomeState{items:HomeObject[];grid?:8}
 export const HOME_GRID=8;
 /** Số lượng tối đa mỗi món (T26). */
-export const HOME_MAX:Record<HomeId,number>={bed:1,wardrobe:1,desk:1,table:1,plant:3,lamp:3,rug:1,painting:2,fridge:1};
+export const HOME_MAX:Record<HomeId,number>={bed:1,wardrobe:1,desk:1,table:1,plant:3,lamp:3,rug:1,painting:2,fridge:1,tv:1};
 /** Mã bản thể (instanceId): bản đầu của mỗi loại giữ mã loại để save cũ khớp. */
 export const uidOf=(i:{id:HomeId;uid?:string})=>i.uid??i.id;
 function withUids(items:HomeObject[]):HomeObject[]{const seen=new Map<HomeId,number>();return items.map(i=>{const n=(seen.get(i.id)??0)+1;seen.set(i.id,n);return i.uid?i:{...i,uid:n===1?i.id:`${i.id}-${n}`}})}
@@ -33,7 +33,7 @@ export function decorRelief(s:GameState){if(!livesInTro(s))return 0;const t=home
 export const HOME_BATH={x:5,y:0,w:3,h:3};
 export const HOME_KITCHEN={x:0,y:0,w:5,h:1};
 export const LEGACY_SIZE:Partial<Record<HomeId,{w:number;h:number}>>={bed:{w:2,h:4}};
-export function homeOf(s:GameState):HomeState{const items=s.home?(s.home.grid===HOME_GRID?s.home.items:migrateHome(s.home.items)):[{id:'bed' as const,x:0,y:3,rotation:0 as const,placed:true},{id:'desk' as const,x:0,y:6,rotation:0 as const,placed:true}];const legacy=s.owned.filter(id=>!items.some(i=>i.id===id)).map(id=>({id,x:0,y:0,rotation:0 as const,placed:false}));return {items:withUids(legacy.length?[...items,...legacy]:items),grid:HOME_GRID}}
+export function homeOf(s:GameState):HomeState{const items=s.home?(s.home.grid===HOME_GRID?s.home.items:migrateHome(s.home.items)):[{id:'bed' as const,x:0,y:3,rotation:0 as const,placed:true},{id:'desk' as const,x:0,y:6,rotation:0 as const,placed:true}];const legacy=s.owned.filter(id=>!items.some(i=>i.id===id)).map(id=>({id,x:0,y:0,rotation:0 as const,placed:false}));const oldTv=s.life?.owned.includes('tv')&&!items.some(i=>i.id==='tv')?[{id:'tv' as const,tier:'basic' as const,x:0,y:0,rotation:0 as const,placed:false}]:[],extra=[...legacy,...oldTv];return {items:withUids(extra.length?[...items,...extra]:items),grid:HOME_GRID}}
 export function homeBlocked(x:number,y:number){return x>=HOME_BATH.x&&y<HOME_BATH.y+HOME_BATH.h||x<HOME_KITCHEN.x+HOME_KITCHEN.w&&y<HOME_KITCHEN.y+HOME_KITCHEN.h}
 function rectBlocked(x:number,y:number,w:number,h:number){for(let cx=Math.floor(x);cx<Math.ceil(x+w);cx++)for(let cy=Math.floor(y);cy<Math.ceil(y+h);cy++)if(homeBlocked(cx,cy))return true;return false}
 /** Xoay 90° theo chiều kim đồng hồ quanh tâm, đủ 4 hướng (chốt 04/11). */

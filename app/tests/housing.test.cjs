@@ -7,7 +7,7 @@ test('thuê nhà phố: phải đến xem, trả tháng đầu, chuyển nơi �
  const s=at('apartments'),n=ok(H.moveHouse(s,'townhouse','rent'));assert.equal(n.money,s.money-6e6);assert.equal(H.residenceOf(n),'apartments');assert.equal(T.clockOf(n).minute,600+H.MOVE_MINUTES);
  {const f2=H.HOUSES.townhouse.floors[1],bed=H.layoutOf(n,'townhouse',2).find(p=>p.id==='bed');assert.ok(bed,'giường lên tầng 2');assert.equal(H.roomAt(f2,bed).id,'bedroom')}assert.equal(H.monthlyRent(n,1500000),6e6);
  const sl=ok(T.finishDay(n));assert.equal(T.clockOf(sl).location,'apartments','ngủ ở nhà mới');assert.ok(sl.energy>=n.energy);
- assert.equal(L.lifeAction({...n,clock:{...n.clock,location:'home'}},{kind:'tv'}).ok,false,'phòng trọ không còn là nhà');
+ assert.equal(require('../.test-build/domain/home-use.js').watchTv({...n,clock:{...n.clock,location:'home'}}).ok,false,'phòng trọ không còn là nhà');
  const back=ok(H.moveHouse({...n,clock:{...n.clock,location:'home'}},'tro','rent'));assert.equal(H.residenceOf(back),'home');assert.equal(back.money,n.money,'về trọ miễn phí');
 });
 test('mua biệt thự: không còn tiền nhà, có sân vườn và phòng giải trí',()=>{

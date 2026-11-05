@@ -6,7 +6,7 @@ import {money} from '../domain/format';
 import Icon from './Icon';
 import HomeArt from './HomeArt';
 import {productArt} from './NpcFace';
-import {spriteFor} from './furniture-art';
+import {spriteFor,catalogFor} from './furniture-art';
 import {cart,useCart} from './cart';
 import {specOf} from '../domain/specs';
 import {InfoButton} from './ShopInfo';
@@ -14,6 +14,7 @@ import {InfoButton} from './ShopInfo';
 /** Ảnh nhỏ của một dòng trong giỏ. */
 export function LineArt({line}:{line:Line}){
  if(line.kind==='product')return <img src={productArt(line.id)} alt="" loading="lazy" decoding="async"/>;
+ const cat=catalogFor(line.id,line.tier);if(cat)return <img src={cat} alt="" loading="lazy"/>;
  const sp=spriteFor(line.id,line.tier);return sp?<img src={sp.f} alt="" loading="lazy"/>:<HomeArt id={line.id}/>;
 }
 
@@ -51,7 +52,9 @@ export function CartButton({onOpen}:{onOpen:()=>void}){
 export const FACT:Record<ProductId,[string,string]>={casual:['smile','+2/ngày'],officeWear:['smile','+2/ngày'],coat:['smile','+2/ngày'],headphones:['bell','Nghe nhạc'],tv:['play','Xem TV'],laptopMid:['bolt','Làm nhanh ×1,0'],laptopPro:['bolt','Làm nhanh ×1,15'],bicycle:['bus','Nhanh 40%'],motorbike:['bus','Nhanh 65%'],scooter:['bus','Nhanh 70%'],backpack:['bag','Túi 8 món']};
 export const FULL='Giỏ chỉ chứa tối đa 8 món.';
 /** Mọi loại nội thất, đèn và tủ lạnh xếp cuối. */
-export const HOME_IDS=[...(Object.keys(HOME_ITEMS) as HomeId[]).filter(id=>id!=='lamp'&&id!=='fridge'),'lamp','fridge'] as HomeId[];
+export const HOME_IDS=[...(Object.keys(HOME_ITEMS) as HomeId[]).filter(id=>id!=='lamp'&&id!=='fridge'&&id!=='tv'),'lamp','fridge'] as HomeId[];
+/** Đồ nội thất bán ở mục Điện tử (TV). */
+export const ELEC_HOME_IDS=['tv'] as HomeId[];
 
 /** Lưới thẻ đồ TTTM theo nhóm (thời trang, điện tử, xe, ba lô). Món đã có thì Mặc, Dùng hoặc Đã có. */
 export function ProductCards({state,category,tone,onFull,onEquip}:{state:GameState;category:string;tone?:string;onFull:()=>void;onEquip:(id:ProductId,category:'clothing'|'transport')=>void}){

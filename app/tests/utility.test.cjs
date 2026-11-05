@@ -22,9 +22,12 @@ assert.equal(Math.round(bf.kwh * TRO_RATE / 1000) * 1000, bf.electricity.reduce(
 const stored = {...withFridge, home: {grid: 8, items: withFridge.home.items.map(i => i.id === 'fridge' ? {...i, placed: false} : i)}};
 assert.equal(billOf(stored).total, base.total);
 
-// TV đã mua tốn điện (60 W × 4 h × 30 = 7,2 kWh).
-const tv = {...g, life: {...(g.life ?? {version: 1, pantry: [], meals: [], savings: [], loan: null, conditions: [], owned: [], outfit: null, transport: null, daily: {}, lastMeal: null, settledDay: g.day}), owned: ['tv']}};
-assert.equal(billOf(tv).electricity.find(l => l.id === 'tv').kwh, 7.2);
+// TV đang đặt trong phòng tốn điện (60 W × 4 h × 30 = 7,2 kWh); TV trong kho thì không.
+const tvItem = {id: 'tv', x: 3, y: 6, rotation: 0, placed: true, tier: 'basic'};
+const tvOn = {...g, home: {grid: 8, items: [...homeOf(g).items, tvItem]}};
+assert.equal(billOf(tvOn).electricity.find(l => l.id === 'tv').kwh, 7.2);
+const tvOff = {...g, home: {grid: 8, items: [...homeOf(g).items, {...tvItem, placed: false}]}};
+assert.ok(!billOf(tvOff).electricity.some(l => l.id === 'tv'));
 
 // Bậc thang: nhà riêng rẻ hơn trọ ở cùng số kWh, và tăng dần theo bậc.
 const tier = rateFor('townhouse');

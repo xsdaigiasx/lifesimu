@@ -1,6 +1,8 @@
 /** T28: điểm dùng của đồ trong phòng trọ: Nghỉ ở giường, Làm thêm online ở bàn laptop. */
 import type {GameState,GameResult} from './types';
 import {placedAt,BED_ENERGY} from './home';
+import {atResidence} from './housing';
+import {placedDevices} from './utility';
 import {machineMult,PLAY} from './computer';
 import {lifeOf} from './life';
 import {spendTime,clockOf} from './time';
@@ -41,3 +43,11 @@ export function playAtHome(s:GameState):GameResult{
  const l=lifeOf(s);if(l.daily.play===s.day)return{ok:false,error:'Hôm nay đã giải trí rồi.'};
  const t=spendTime(s,PLAY.minutes);if(!t.ok)return t;const n=structuredClone(t.state),v=structuredClone(lifeOf(s));
  v.daily.play=s.day;n.life=v;n.energy=clamp(n.energy-PLAY.energy);n.mood=clamp(n.mood+PLAY.mood);n.stress=clamp(n.stress-PLAY.stress);return{ok:true,state:n}}
+
+/** Xem TV (TV đặt trong nhà đang ở): mỗi ngày một lần, độc lập với Giải trí ở bàn laptop. */
+export const TV_USE={minutes:30,energy:8,mood:6,stress:10};
+export function watchTv(s:GameState):GameResult{
+ if(!atResidence(s)||!placedDevices(s).some(d=>d.id==='tv'))return{ok:false,error:'Cần TV đặt trong nhà.'};
+ const l=lifeOf(s);if(l.daily.tv===s.day)return{ok:false,error:'Hôm nay đã xem TV rồi.'};
+ const t=spendTime(s,TV_USE.minutes);if(!t.ok)return t;const n=structuredClone(t.state),v=structuredClone(lifeOf(s));
+ v.daily.tv=s.day;n.life=v;n.energy=clamp(n.energy+TV_USE.energy);n.mood=clamp(n.mood+TV_USE.mood);n.stress=clamp(n.stress-TV_USE.stress);return{ok:true,state:n}}
