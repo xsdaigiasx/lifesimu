@@ -129,7 +129,7 @@ export function answerEvent(s:GameState,choice:number):GameResult&{text?:string}
  if(e.minutes&&clockOf(n).minute+e.minutes<END){const r=spendTime(n,e.minutes);if(r.ok)n=r.state}
  if(e.money&&post(n,{id:`story:${p.key}`,name:e.loan?`Cho ${npc.name} mượn`:`Chi cùng ${npc.name}`,amount:e.money})!=='ok')return{ok:false,error:'Không đủ tiền.'};
  if(e.mood)n.mood=clamp(n.mood+e.mood);if(e.stress)n.stress=clamp(n.stress+e.stress);if(e.energy)n.energy=clamp(n.energy+e.energy);if(e.fullness)n.fullness=clamp((n.fullness??70)+e.fullness);
- if(e.relation)n=adjustRelation(n,npc.id,e.relation);else n=adjustRelation(n,npc.id,0);if(e.xp)n=addWorkXp(n,e.xp[0],e.xp[1]);if(e.gift)n=giftIngredient(n,e.gift[0],e.gift[1]);if(e.learn)n=learnRecipe(n,e.learn,npc.id,npc.name);
+ if(e.relation)n=adjustRelation(n,npc.id,e.relation,true,m.id==='greet');else n=adjustRelation(n,npc.id,0);if(e.xp)n=addWorkXp(n,e.xp[0],e.xp[1]);if(e.gift)n=giftIngredient(n,e.gift[0],e.gift[1]);if(e.learn)n=learnRecipe(n,e.learn,npc.id,npc.name);
  const ns:StoryState=structuredClone(storyOf(n));delete ns.pending;{const h=ns.heard?.[npc.id]??[];ns.heard={...ns.heard,[npc.id]:[...h,...[p.line,p.quirk].filter((x):x is string=>!!x)].slice(-HEARD_KEEP)}}
  if(e.debt){const l=ns.loans.find(x=>x.npc===npc.id&&x.settled==='unpaid'&&!x.resolved);if(l){if(e.debt==='extend'){delete l.settled;l.due=s.day+7;l.repay=hash(`extend:${p.key}`)%100>=30}else{l.resolved=true;const back=e.debt==='half'?Math.floor(l.amount/2):e.debt==='demand'&&hash(`demand:${p.key}`)%2===0?l.amount:0;if(back)post(n,{id:`debt-back:${l.id}:${p.key}`,name:`${npc.name} trả nợ`,amount:back})}}}
  if(mem){const x=ns.memories.find(y=>y.id===mem.id);if(x)x.recalled=s.day;ns.hooks=ns.hooks.filter(h=>!(h.npc===npc.id&&h.memory===mem.id))}

@@ -93,14 +93,14 @@ export function replyMessage(s:GameState,id:string,msgId:string,choice:number):G
  else if(m.kind==='rent'){answer=choice===0?'Ừ, giỏi lắm.':'Thôi được, nhưng đừng trễ quá nghen.';n=adjustRelation(n,id,choice===0?1:-1)}
  else if(m.kind==='mom-gift'){n=giftIngredient(n,'rice',3);answer='Nhớ ra bến lấy sớm kẻo người ta đợi.';n=adjustRelation(n,id,2);n={...n,mood:Math.min(100,n.mood+3)}}
  else if(m.kind==='mom-recipe'){if(m.recipe&&RECIPES[m.recipe])n=learnRecipe(n,m.recipe,'me','Mẹ');n=addWorkXp(n,'cooking',choice===0?20:10);answer='Nấu được thì chụp hình cho mẹ coi.';n=adjustRelation(n,id,2)}
- else{answer=id==='me'?'Ừ, mẹ thương.':say(id,T.fine);n=adjustRelation(n,id,2);n={...n,mood:Math.min(100,n.mood+2)}}
+ else{answer=id==='me'?'Ừ, mẹ thương.':say(id,T.fine);n=adjustRelation(n,id,2,true,true);n={...n,mood:Math.min(100,n.mood+2)}}
  const nm=inboxOf(n),now=clockOf(s).minute;const thread=[...(nm.threads[id]??[])].map(x=>x.id===msgId?{...x,answered:choice,read:true}:x);thread.push({id:`m${seq}:me`,day:s.day,minute:now,from:'me',text:label,kind:'note',read:true},{id:`m${seq}:re`,day:s.day,minute:now,from:'npc',text:answer,kind:'note',read:true});
  n={...n,inbox:{...nm,seq,appts,threads:{...nm.threads,[id]:thread.slice(-40)}}};
  if(m.kind==='invite'&&choice===0&&m.appt)n=recordJournal(n,`appt:a${seq}`,`Hẹn đi ăn với ${npc.name}`,`${placeName(m.appt.place)}, ${whenText(s.day,m.appt.day,m.appt.minute)}.`,id);return{ok:true,state:n}}
 
 /** Người chơi nhắn trước: hỏi thăm (mỗi người mỗi ngày một lần) hoặc rủ đi ăn tối mai. */
 export function sendMessage(s:GameState,id:string,kind:'hello'|'invite'):GameResult{const npc=castById(id);if(!npc||!(id==='me'||scoreOf(s,id)>=10))return{ok:false,error:'Chưa có số của người này.'};const ib=inboxOf(s),seq=ib.seq+1,now=clockOf(s).minute,day=s.day;let n:GameState=s;const appts=[...ib.appts];let text:string,answer:string;
- if(kind==='hello'){if(ib.hello[id]===day)return{ok:false,error:'Hôm nay đã nhắn hỏi thăm rồi.'};text=id==='me'?'Dạo này mẹ khoẻ không?':say(id,T.hello);answer=id==='me'?'Mẹ khoẻ, con lo ăn uống đi.':sayAll(id,T.helloBack)[hash(`hi:${day}:${id}`)%3]!;n=adjustRelation(n,id,1)}
+ if(kind==='hello'){if(ib.hello[id]===day)return{ok:false,error:'Hôm nay đã nhắn hỏi thăm rồi.'};text=id==='me'?'Dạo này mẹ khoẻ không?':say(id,T.hello);answer=id==='me'?'Mẹ khoẻ, con lo ăn uống đi.':sayAll(id,T.helloBack)[hash(`hi:${day}:${id}`)%3]!;n=adjustRelation(n,id,1,true,true)}
  else{if(id==='me')return{ok:false,error:'Mẹ ở quê xa.'};if(appts.some(a=>a.npc===id&&a.status==='set'))return{ok:false,error:'Đã có hẹn với người này rồi.'};text=say(id,T.ask(placeName('streetfood'),hhmm(1110)));const yes=hash(`inv:${day}:${id}`)%100<70;answer=yes?say(id,T.yes):say(id,T.no);if(yes)appts.push({id:`a${seq}`,npc:id,day:day+1,minute:1110,place:'streetfood',status:'set'})}
  const thread=[...(ib.threads[id]??[]),{id:`m${seq}:me`,day,minute:now,from:'me' as const,text,kind:'note' as const,read:true},{id:`m${seq}:re`,day,minute:now,from:'npc' as const,text:answer,kind:'note' as const,read:true}];
  n={...n,inbox:{...inboxOf(n),seq,appts,threads:{...inboxOf(n).threads,[id]:thread.slice(-40)},hello:kind==='hello'?{...ib.hello,[id]:day}:ib.hello}};
