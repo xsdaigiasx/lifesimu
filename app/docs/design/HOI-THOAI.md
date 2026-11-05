@@ -16,12 +16,15 @@ Mọi thứ trong hội thoại và đời NPC đều rút từ **pool có đi�
 - Mỗi đời chơi một seed khác nên cùng một NPC có thói quen, biến cố, chuyện khác nhau.
 - Thêm phần tử vào pool là số tổ hợp nhân lên, không phải viết thêm cảnh.
 - Điều kiện giữ cho tổ hợp luôn hợp lý (tuổi, nghề, nơi ở, mùa, độ thân).
+- Pool tên dùng chung với ứng viên tuyển dụng (T44): không cho hai người đang tồn tại trùng cả họ và tên.
 
 ## I.1c Dàn NPC: vai cố định, con người ngẫu nhiên
 
-**12 vai cố định** gắn với địa điểm và chức năng game: chủ trọ, hàng xóm về hưu, bán rau, bán bánh mì, sinh viên giao hàng, bác sĩ, giao dịch viên ngân hàng, 5 đồng nghiệp (lập trình, thiết kế, kiểm thử, điều phối, trưởng nhóm). Vai cố định, **con người** thì rút từ pool theo seed mỗi đời chơi: tên, giới, tuổi, quê và giọng, tính cách, sở thích, hoàn cảnh gia đình, thói quen. Pool có điều kiện theo vai (chủ trọ từ 45 tuổi, sinh viên dưới 24, bác sĩ từ 30...).
+**17 vai cố định** (theo code hiện tại: 11 người trong `CAST` và 6 vai phụ trong `EXTRAS`) gắn với địa điểm và chức năng game: chủ trọ, hàng xóm về hưu, bán rau, bán thịt cá, bán tạp hoá, bán bánh mì, sinh viên giao hàng, bác sĩ, giao dịch viên ngân hàng, lễ tân toà nhà, quản lý mặt bằng, điều phối tuyển dụng, kỹ thuật viên toà nhà, và 4 đồng nghiệp (lập trình, thiết kế, kiểm thử, điều phối). Vai cố định, **con người** thì rút từ pool theo seed mỗi đời chơi: tên, giới, tuổi, quê và giọng, tính cách, sở thích, hoàn cảnh gia đình, thói quen. Pool có điều kiện theo vai (chủ trọ từ 45 tuổi, sinh viên dưới 24, bác sĩ từ 30...).
 
-- Mã NPC trong save giữ theo ô vai (`ba-tu` thành ô chủ trọ) nên save cũ không vỡ.
+- **Đồng nghiệp theo công ty:** mỗi công ty tuyển dụng (Sen Code, An Nhiên Tech) có bộ 4 đồng nghiệp riêng, rút từ pool; đổi việc thì gặp đồng nghiệp mới, người cũ vẫn còn trong thế giới và có thể giữ liên lạc.
+- **Vai dịch vụ** (bác sĩ, giao dịch viên, người bán ở chợ và quán, lễ tân, quản lý mặt bằng, điều phối tuyển dụng, kỹ thuật viên) phải luôn có người: người giữ vai mất hoặc rời đi thì có người thay ngay; vai không gắn chức năng game mới được để trống một thời gian.
+- Không giữ tương thích save cũ (chủ dự án cho phép trong giai đoạn thử nghiệm kín, Claude nhắc trước khi gộp PR làm mất save).
 - Mạch chuyện viết tay hiện có chuyển thành **mạch chuyện mẫu** gắn theo vai và tính cách, không gắn theo tên (chuyện "chủ trọ lo con ở xa" rút cho bất kỳ chủ trọ nào có con).
 - Người nối tiếp khi NPC mất (I.5c) điền lại đúng ô vai.
 
@@ -35,12 +38,12 @@ Mọi thứ trong hội thoại và đời NPC đều rút từ **pool có đi�
 
 | Nhóm | Số lượng | Quy tắc |
 |---|---|---|
-| Ban đầu | khoảng 20 | 12 vai cố định và khoảng 8 NPC ngẫu nhiên quanh khu trọ, chợ, công ty |
+| Ban đầu | khoảng 25 | 17 vai cố định, 4 đồng nghiệp ở công ty đầu tiên đã tính trong đó, cộng khoảng 6 NPC ngẫu nhiên quanh khu trọ, chợ, công viên |
 | Dải giữ ổn định | 30 đến 40 | Dưới 30 thì sinh bù người mất hoặc rời đi; trên 40 thì ngừng sinh |
 | Sinh thêm mỗi năm | 4 đến 6 | Gắn với nơi mới người chơi mở ra (đổi việc, chuyển nhà, mở công ty) |
 | Tốc độ | tối đa 2 người mỗi tuần game | Chỉ sinh ở nơi người chơi hay lui tới |
 | Rời đi | NPC ngẫu nhiên không gặp lại trong 30 ngày và độ thân dưới Quen biết | Chuyển nhà, về quê; người đã thân thì ở lại; quay lại hiếm (khoảng 5%), nhớ mang máng nếu ký ức còn |
-| Đếm riêng | Người thân, nhân viên công ty (theo số ghế), trẻ dưới 16 | Dùng chung hệ NPC nhưng không chiếm chỗ người ngoài đời |
+| Đếm riêng | Người thân, nhân viên công ty của người chơi (theo số ghế), đồng nghiệp ở công ty không phải nơi người chơi đang làm, trẻ dưới 16 | Dùng chung hệ NPC nhưng không chiếm chỗ người ngoài đời |
 
 Với khoảng 40 người, mỗi năm chừng 1 người mất và 1 đến 2 người được sinh ra: đủ cảm giác luân hồi mà không ồn ào.
 
@@ -131,6 +134,10 @@ Mục tiêu: không có câu "đúng cho mọi người", người chơi không 
 | Lựa chọn tiêu cực có lợi | Từ chối tiết kiệm giờ và tiền; Thẳng thắn có thể làm NPC tôn trọng hơn; Lạnh nhạt cắt bớt người hay nhờ vả |
 | Tính cách người chơi | Thái độ chọn nhiều lần tích thành thói quen (cơ chế thói quen tích luỹ đã duyệt); NPC nhận xét theo đó ("dạo này cậu cộc tính") |
 
+Ràng buộc với quyết định đã chốt:
+- Đường cong quan hệ (#240): Hỏi thêm, Đùa, Kể chuyện mình, Im lặng là **việc nhẹ**, chỉ đưa quan hệ tới 29 điểm; Giúp, Nhận lời rủ, quà, cho mượn, chuyện riêng là **việc có chủ đích**.
+- Chỉ hiện chi phí (giờ, tiền, năng lượng) trên lựa chọn như các nút khác, không hiện thay đổi quan hệ; không hiện số tiến độ (gợi ý gần mốc #242 giữ nguyên).
+
 Điều kiện khống chế:
 - Hành động phải hợp ý định của NPC (NPC Rủ thì có Nhận lời và Từ chối; NPC Than thì có Giúp, Khuyên, Hỏi thêm).
 - Lựa chọn cần kỹ năng, tiền hoặc lịch trống mà thiếu thì hiện mờ (quy tắc đã chốt); không lộ hậu quả trước (đã chốt).
@@ -195,11 +202,12 @@ Mọi NPC (cố định và ngẫu nhiên) có **ngày sinh** và già đi đún
 **Vòng đời và luân hồi**
 - **Mất đi:** xác suất theo tuổi và sức khỏe, rất thấp trước 70, tăng dần sau đó; có dấu hiệu trước (ốm nhiều, ít ra ngoài, gặp người chơi kể chuyện cũ). Không ai mất đột ngột khi đang trong chuỗi chuyện dở.
 - **Khi mất:** sự kiện báo tin nhẹ nhàng, đám tang hoặc giỗ đầu (người chơi có thể đến viếng), ký ức với người đó giữ ở Nhật ký. Không mô tả chi tiết gây nặng nề.
-- **Nối tiếp:** nếu NPC có con cháu (rút khi sinh NPC, theo tuổi và hoàn cảnh) thì người nối tiếp có thể kế vai trò: con Bà Tư làm chủ trọ, cháu Cô Hạnh bán tiếp sạp rau. Người nối tiếp là NPC mới, tính cách rút từ pool nhưng mang vài nét của cha mẹ, nhớ mang máng người chơi qua lời kể ("mẹ con hay nhắc anh").
+- **Nối tiếp:** nếu NPC có con cháu (rút khi sinh NPC, theo tuổi và hoàn cảnh) thì người nối tiếp có thể kế vai trò: con của chủ trọ kế nghiệp khu trọ, cháu người bán rau bán tiếp sạp. Người nối tiếp là NPC mới, tính cách rút từ pool nhưng mang vài nét của cha mẹ, nhớ mang máng người chơi qua lời kể ("mẹ con hay nhắc anh").
 - **Không có người nối tiếp:** vai trò để trống một thời gian rồi NPC mới từ pool đến thay (chủ trọ mới, người bán khác).
 - **Sinh ra và lớn lên:** NPC lập gia đình có thể có con; trẻ con lớn theo lịch, sau nhiều năm game có thể thành NPC ngẫu nhiên có câu chuyện riêng.
 - Vòng đời áp dụng cho cả dàn cố định, trừ Mẹ chỉ được già đi và yếu dần, mạch chuyện riêng về Mẹ do chủ dự án duyệt sau.
-- Giới hạn ở I.1c vẫn giữ: người mất hoặc rời đi thì giải phóng chỗ cho người mới.
+- Giới hạn ở I.1d vẫn giữ: người mất hoặc rời đi thì giải phóng chỗ cho người mới.
+- **Sang đời mới (T70) thế giới tiếp nối:** NPC già đi, con cháu NPC nối vai, ký ức nặng về đời trước có thể thành chuyện kể ("hồi xưa có anh thuê phòng này..."). Seed thế giới giữ nguyên qua các đời, seed đời chơi mới cho nhân vật mới.
 
 **Lưu gì:** ngày sinh, cha mẹ hoặc người nối tiếp (mã NPC), trạng thái còn hay đã mất. Khoảng vài chục byte mỗi người.
 
@@ -233,9 +241,29 @@ Mỗi lô: chủ dự án duyệt 20 đến 30 câu mẫu trước, Claude viế
 - Mỗi NPC thường gặp xuất hiện ít nhất 6 trong 8 ý định mỗi tháng.
 - Ít nhất 30% câu nhắc tới trạng thái người chơi hoặc biến cố thật (mục 30 kế hoạch).
 
+## I.11 Quan hệ với các ticket khác
+
+| Ticket | Cách xử lý |
+|---|---|
+| T16, T17, T18, T41, T42 (đã xong) | Làm lại phần câu chữ và ký ức theo tài liệu này; `director.ts` giữ vai điều phối; pool NPC (`npc-pool.json`, `pool:check`) mở rộng thêm thuộc tính theo vai |
+| T43 mô phỏng NPC (đã xong, chạy trong CI) | Chỉ tiêu phân bố quan hệ đổi theo hệ mới, chỉnh lại cùng H8 |
+| T20 tin nhắn, T31 Mẹ gửi tiền | Tin nhắn chuyển sang bộ ghép; cuộc gọi Mẹ gửi tiền giữ cơ chế, đổi câu chữ |
+| T22 công thức học từ NPC | Người dạy món gắn theo vai (bán rau dạy canh, chủ trọ dạy kho), không theo tên |
+| T35 tổng kết năm, T75 bản tin sáng | Giữ; bản tin thêm nhắc sinh nhật NPC hôm sau; NPC mất được ghi vào mục Năm ngoái |
+| T75 mục tiêu tuần | Hệ mới phải ghi đúng nhãn Nhật ký `chat:`, `call:` mà mục tiêu tuần đang đếm |
+| T44–T49 nhân viên công ty | Giữ hệ nhân sự riêng (điểm gắn bó, 15 mô-típ nhân sự); hệ hội thoại chỉ lo trò chuyện thường với nhân viên; pool tên dùng chung, chặn trùng |
+| T63 quan hệ NPC với NPC, tin đồn | Gộp vào H7 cùng cảnh nhóm (I.4b) |
+| T64 cốt truyện đời NPC | Thay bằng I.5 và I.5c |
+| T69, T70, T71 đời chơi | Trường `seed` dùng chung với `playthroughId`; sang đời mới thế giới tiếp nối (I.5c) |
+| T76 lễ, T88 cuối tuần có kế hoạch | Lễ thành chủ đề "ngoài đời" và lịch đặc biệt của NPC; T88 dùng ý định Rủ |
+| T86 cộng đồng khu trọ | Hàng xóm và sự kiện nhóm dùng hệ này; điểm hoà thuận khu trọ làm riêng trong T86 |
+| T87 hồi ức | Đọc ký ức của hệ này và `morning.memories` |
+| T89 mạng xã hội | Làm riêng, lấy tin đồn và biến cố từ hệ này |
+| Chân dung NPC | Quyết định cũ "vẽ một lượt sau khi xong hệ NPC" đổi thành ghép từ mảnh; mở issue Codex riêng khi tới H5 |
+
 ## I.10 Đã chốt (05/11) và còn mở
 
-Đã chốt: không dùng AI sinh câu; pool ngẫu nhiên có điều kiện là nguyên tắc chính; 12 vai cố định với con người ngẫu nhiên; người thân là Mẹ và 1 em (bố để sau); chân dung ghép từ mảnh; số NPC theo I.1d; tuổi, sinh nhật, vòng đời theo I.5c; chỉ lưu ký ức đáng nhớ, NPC biết quên (T.5).
+Đã chốt: không dùng AI sinh câu; mỗi công ty có đồng nghiệp riêng; sang đời mới thế giới tiếp nối; làm mới không giữ tương thích save cũ (nhắc chủ dự án trước khi gộp); pool ngẫu nhiên có điều kiện là nguyên tắc chính; 17 vai cố định với con người ngẫu nhiên; người thân là Mẹ và 1 em (bố để sau); chân dung ghép từ mảnh; số NPC theo I.1d; tuổi, sinh nhật, vòng đời theo I.5c; chỉ lưu ký ức đáng nhớ, NPC biết quên (T.5).
 
 Còn mở, duyệt khi review tài liệu này: giá trị và hồi chiêu ở bảng trục 1, 2, 6; mốc riêng tư theo độ thân; bộ thái độ và hành động của người chơi (I.4); tỷ lệ giảm dần khi lặp.
 
@@ -254,6 +282,8 @@ Còn mở, duyệt khi review tài liệu này: giá trị và hồi chiêu ở 
 | `domain/talk/replies.ts` | Sinh 3 đến 4 lựa chọn trả lời cho người chơi và tính hậu quả | `answerEvent`, `replyMessage` |
 | `data/talk/*.json` | Kho khung và mảnh, mỗi tệp một nhóm (chung, theo vùng, theo NPC) | Đọc lúc build, kiểm bằng `npm run talk:check` |
 | `scripts/talk-check.cjs`, `scripts/sim-talk.cjs` | Bộ kiểm tra dữ liệu và mô phỏng 30 ngày | Giống `pool:check`, `sim:npc` |
+
+Bỏ tên viết cứng: khoảng 10 tệp đang ghi thẳng mã hoặc tên NPC (`shift.ts`, `projects.ts`, `inbox.ts`, `lines.ts`, `life.ts`, `social.ts`, `director.ts`, `PackedOffice.tsx`, `OfficeWorkScene.tsx`, `OfficeEditor.tsx`); đổi sang mã vai và điền tên lúc hiển thị.
 
 Code cũ: `director.ts` giữ vai **điều phối** (ai nói, khi nào, mô-típ có lựa chọn và hậu quả lớn như cho mượn tiền). Câu chữ trong mô-típ và mọi câu trò chuyện thường chuyển sang `compose.ts`. `lines.ts` và mẫu tin trong `inbox.ts` được chuyển dần thành mảnh trong `data/talk/`.
 
@@ -337,23 +367,24 @@ Nguyên tắc: **chỉ lưu chuyện đáng nhớ**, phần còn lại tính l�
 | Biến cố đời NPC | Chỉ biến cố đang diễn ra và chuỗi dài | Xong thì chuyển thành ký ức nếu đủ nặng, không thì bỏ |
 | Ký ức | Chỉ ký ức có **trọng số cao** | Xem quy tắc quên bên dưới |
 
-**Trọng số ký ức** (1 đến 10, dùng `Memory.weight` đang có): chào hỏi, trò chuyện thường 1 đến 2 (không lưu); hỏi han khi NPC ốm, đi ăn cùng 3 đến 4; giúp đỡ, cho mượn tiền, lỡ hẹn quan trọng 5 đến 7; cứu giúp lúc khó, phản bội, quỵt tiền 8 đến 10.
+**Trọng số ký ức** theo thang 1 đến 5 đang dùng (T41, `Memory.weight`, kế hoạch mục 25): chào hỏi, trò chuyện thường là 1 (không lưu); hỏi han khi NPC ốm, đi ăn cùng là 2; giúp đỡ, cho mượn tiền, lỡ hẹn quan trọng là 3 đến 4; cứu giúp lúc khó, phản bội, quỵt tiền là 5.
 
-**NPC quên:**
-- Chỉ lưu ký ức từ trọng số 3.
-- Mỗi ký ức mờ dần: sau mỗi 30 ngày không ai nhắc lại thì trọng số giảm 1; về dưới 3 thì xoá.
-- Mỗi lần NPC nhắc lại hoặc người chơi làm việc liên quan thì trọng số tăng 1 (tối đa 10), nên chuyện hay được nhắc thì nhớ lâu.
-- Từ 8 trở lên giảm chậm gấp đôi (chuyện lớn nhớ rất lâu).
-- Tính cách ảnh hưởng: người Hay giúp đỡ quên lỗi nhanh hơn, người Nóng tính nhớ lỗi lâu hơn.
-- Mỗi NPC giữ tối đa 12 ký ức; đầy thì bỏ ký ức nhẹ nhất.
+**NPC quên** (thay quy tắc "còn sống khi trọng số từ 4 hoặc trong 30 ngày" hiện tại):
+- Chỉ lưu ký ức từ trọng số 2.
+- Sau mỗi 30 ngày không ai nhắc lại thì trọng số giảm 1; về dưới 2 thì xoá.
+- Mỗi lần nhắc lại hoặc người chơi làm việc liên quan thì tăng 1 (tối đa 5).
+- Trọng số 5 giảm chậm gấp đôi (60 ngày mới giảm).
+- Tính cách: người Hay giúp đỡ quên lỗi nhanh hơn, người Nóng tính nhớ lỗi lâu hơn.
+- Mỗi NPC giữ tối đa 12 ký ức, tổng không quá 200 như hiện tại; đầy thì bỏ ký ức nhẹ nhất.
+- Mục "Năm ngoái" của bản tin sáng (`morning.memories`) vẫn là kho riêng cho sự kiện của người chơi; NPC mất và sinh nhật NPC đáng nhớ được ghi thêm vào đó.
 
-Như vậy save chỉ thêm khoảng vài KB cho 12 NPC. Lát cắt mới tuỳ chọn, có validator nối vào `engine.ts`; save cũ không có thì tạo mặc định (theo quy tắc bảo vệ save 0.75.3).
+Như vậy save chỉ thêm khoảng vài KB. Lát cắt mới có validator nối vào `engine.ts`. Save trong trường `seed` (seed thế giới và seed đời chơi), dùng chung với `playthroughId` của T69 khi T69 được làm.
 
 ## T.6 Chia ticket
 
 | Ticket | Nội dung | Phụ thuộc | Nghiệm thu |
 |---|---|---|---|
-| H0 | Sinh dàn NPC theo vai từ pool (12 vai, người thân, chân dung chữ cái tạm), chuyển mạch chuyện cũ thành mạch mẫu theo vai | | Hai seed khác nhau ra hai dàn khác nhau; save cũ vẫn mở được |
+| H0 | Làm mới dàn NPC: trường `seed` trong save, 17 vai theo pool (đồng nghiệp riêng theo công ty, vai dịch vụ luôn có người), người thân Mẹ và 1 em, bỏ tên viết cứng ở khoảng 10 tệp, mạch chuyện cũ thành mạch mẫu theo vai, chân dung chữ cái tạm. **Làm mất save cũ: nhắc chủ dự án trước khi gộp** | | Hai seed ra hai dàn khác nhau; không còn tên viết cứng (kiểm bằng grep trong test); `npm test` xanh |
 | H1 | Kiểu dữ liệu, `compose.ts`, `talk:check`, 3 khung mỗi ý định | | Bộ kiểm tra chặn mảnh lỗi; ghép được câu từ dữ liệu mẫu |
 | H2 | `facts.ts`: 25 loại dữ kiện từ Nhật ký và chỉ số, quy tắc ai được biết | H1 | Test: NPC không nhắc điều không thấy |
 | H3 | `npc-life.ts`: sinh hoạt hằng ngày (lịch, hoạt động, thói quen, mệt và đói), 30 loại biến cố, cảm xúc ngày, ký ức có trọng số và quên | H1 | Mô phỏng: mỗi NPC 2 đến 5 biến cố mỗi tháng; save thêm không quá 5 KB sau 1 năm |
@@ -361,8 +392,8 @@ Như vậy save chỉ thêm khoảng vài KB cho 12 NPC. Lát cắt mới tuỳ 
 | H5 | Lô 1 dữ liệu: Mẹ, em, chủ trọ, 1 đồng nghiệp, bán rau, sinh viên giao hàng (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
 | H6 | Lô 2: 7 NPC còn lại, hội thoại 2 đến 4 lượt, người chơi tự mở lời theo chủ đề | H5 | Như H5 cho cả 12 người |
 | H7b | Tuổi, sinh nhật, vòng đời và người nối tiếp (I.5c) | H3 | Mô phỏng 20 năm: vai trò không bị trống quá 30 ngày; tuổi và lịch đúng |
-| H7 | Lô 3: NPC ngẫu nhiên có chuyện riêng (giới hạn I.1c), nhóm chat, tin đồn (gộp T63) | H6 | Người lạ gặp lại nhớ lần trước; không quá 12 NPC ngẫu nhiên cùng lúc |
-| H8 | `sim-talk.cjs` và chỉ tiêu trong CI ngắn | H1 | Chạy được 30 ngày x 30 seed |
+| H7 | Lô 3: NPC ngẫu nhiên có chuyện riêng (giới hạn I.1d), nhóm chat, tin đồn (gộp T63) | H6 | Người lạ gặp lại nhớ lần trước; không quá 12 NPC ngẫu nhiên cùng lúc |
+| H8 | `sim-talk.cjs` và chỉ tiêu trong CI ngắn; chỉnh chỉ tiêu `sim:npc` (T43) theo hệ mới | H1 | Chạy được 30 ngày x 30 seed |
 
 Thứ tự: H0, H1, H2, H3, H4 (khung chạy được, chưa nhiều chữ), rồi H5 (đổ dữ liệu), H8 đi kèm H5. Mỗi ticket một PR, tăng phiên bản.
 
