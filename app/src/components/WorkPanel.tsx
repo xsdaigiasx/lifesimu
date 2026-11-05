@@ -17,7 +17,7 @@ export function SkillsPanel({state,onStudy,onBack}:{state:GameState;onStudy:(id:
  const q=selected?studyQuote(state,selected,mode):null;
  return <GameScreen title={selected?'Học '+SKILLS[selected]:'Kỹ năng'} onBack={()=>selected?(setSelected(null),setError('')):onBack()} footer={selected&&q?<button className="primary wide" disabled={!q.ok} onClick={()=>{const r=onStudy(selected,mode);setError(r.ok?'Đã hoàn thành buổi học.':r.error)}}>Học 2 giờ <span>{q.ok&&q.fee?money(q.fee):'Miễn phí'}</span></button>:undefined}>
  {selected&&q?<><div className="work-hour-picks">{(['self',...COURSE_IDS] as StudyMode[]).map(m=><button key={m} aria-pressed={m===mode} onClick={()=>{setMode(m);setError('')}}>{m==='self'?SELF_STUDY.name:COURSES[m].name}</button>)}</div>
- <DataRow label="Lv hiện tại" value={`Lv ${skills[selected].level}`}/><DataRow label="Trần khi đi làm" value={`Lv ${workCap(state,selected)}`}/>
+ <DataRow label="Lv hiện tại" value={`Lv ${skills[selected].level}`}/><DataRow label="Đi làm tăng được tới" value={`Lv ${workCap(state,selected)}`}/>
  {mode==='self'?<DataRow label="Học tới" value={`Lv ${SELF_STUDY.to}, không có chứng chỉ`}/>:<><DataRow label="Học tới" value={`Lv ${COURSES[mode].to}`}/><DataRow label="Chứng chỉ" value={hasCert(state,selected,mode)?'Đã có':`${sessionsOf(state,selected,mode)} / ${CERT_SESSIONS} buổi`}/></>}
  {q.ok&&<DataRow label="Kinh nghiệm" value={`+${q.xp} XP`}/>}<DataRow label="Năng lượng" value={`−${SESSION_ENERGY}`}/>
  {!q.ok&&<p className="game-status">{q.error}</p>}</>

@@ -13,13 +13,13 @@ const FLOOR:Record<RoomUse,string>={living:'#efe4d0',kitchen:'#e3e8de',bedroom:'
 /** Ảnh Codex #89: mặt bằng lô 4, nội thất lô 5 (ô 128×64 px, neo ở đỉnh dưới chân đế). */
 const PX=CW/128;
 /** Hành động của từng phòng (mỗi phòng một việc riêng) và đồ nào mở popup nào. */
-type ActId='sleep'|'cook'|'fun'|'garden'|'tv'|'nap'|'gig'|'play';
-const ACT:Record<ActId,{icon:string;label:string;title:string}>={sleep:{icon:'moon',label:'Ngủ',title:'Giường'},cook:{icon:'pan',label:'Nấu ăn',title:'Bếp'},fun:{icon:'play',label:RELAX.fun.name,title:'Giải trí'},garden:{icon:'leaf',label:RELAX.garden.name,title:'Sân vườn'},tv:{icon:'play',label:'Xem TV',title:'TV'},nap:{icon:'moon',label:'Nghỉ 1 giờ',title:'Giường'},gig:{icon:'briefcase',label:'Làm thêm',title:'Bàn làm việc'},play:{icon:'play',label:'Giải trí',title:'Bàn làm việc'}};
+type ActId='sleep'|'cook'|'study'|'fun'|'garden'|'tv'|'nap'|'gig'|'play';
+const ACT:Record<ActId,{icon:string;label:string;title:string}>={sleep:{icon:'moon',label:'Ngủ',title:'Giường'},cook:{icon:'pan',label:'Nấu ăn',title:'Bếp'},study:{icon:'note',label:'Tự học',title:'Bàn học'},fun:{icon:'play',label:RELAX.fun.name,title:'Giải trí'},garden:{icon:'leaf',label:RELAX.garden.name,title:'Sân vườn'},tv:{icon:'play',label:'Xem TV',title:'TV'},nap:{icon:'moon',label:'Nghỉ 1 giờ',title:'Giường'},gig:{icon:'briefcase',label:'Làm thêm',title:'Bàn học'},play:{icon:'play',label:'Giải trí',title:'Bàn học'}};
 /** Việc thêm cùng đồ: giường có Nghỉ 1 giờ; bàn có Làm thêm và Giải trí (như phòng trọ). */
-const EXTRA:Partial<Record<ActId,ActId[]>>={sleep:['nap'],gig:['play']};
-const ROOM_ACT:Partial<Record<RoomUse,ActId>>={bedroom:'sleep',guest:'sleep',kitchen:'cook',study:'gig',fun:'fun',garden:'garden'};
-const ITEM_ACT:Partial<Record<HomeId,ActId>>={bed:'sleep',desk:'gig',fridge:'cook',table:'cook',tv:'tv'};
-export interface HouseHandlers{arrange:(floor:1|2,items:Placed[])=>GameResult;relax:(kind:'fun'|'garden')=>GameResult;sleep:()=>void;cook:()=>void;tv:()=>GameResult;use:(k:'nap'|'gig'|'play')=>GameResult}
+const EXTRA:Partial<Record<ActId,ActId[]>>={sleep:['nap'],study:['gig','play']};
+const ROOM_ACT:Partial<Record<RoomUse,ActId>>={bedroom:'sleep',guest:'sleep',kitchen:'cook',study:'study',fun:'fun',garden:'garden'};
+const ITEM_ACT:Partial<Record<HomeId,ActId>>={bed:'sleep',desk:'study',fridge:'cook',table:'cook',tv:'tv'};
+export interface HouseHandlers{arrange:(floor:1|2,items:Placed[])=>GameResult;relax:(kind:'fun'|'garden')=>GameResult;sleep:()=>void;cook:()=>void;study:()=>void;tv:()=>GameResult;use:(k:'nap'|'gig'|'play')=>GameResult}
 
 const P=(x:number,y:number,z=0)=>({x:(x-y)*CW/2,y:(x+y)*CH/2-z});
 const pts=(a:{x:number;y:number}[])=>a.map(p=>`${p.x},${p.y}`).join(' ');
@@ -85,6 +85,6 @@ export default function HouseView({state,h}:{state:GameState;h:HouseHandlers}){
    {editing&&sel&&<><button onClick={rotate}><Icon name="rotate"/>Xoay</button><button onClick={stow}><Icon name="box"/>Cất</button></>}
   </div>
   {editing&&store.length>0&&<div className="house-store" aria-label="Đồ trong kho">{store.map(id=><button key={id} aria-pressed={pick===id} onClick={()=>{setSel(null);setPick(p=>p===id?null:id)}}>{(()=>{const tier=homeOf(state).items.find(i=>i.id===id)?.tier,sp=spriteFor(id,tier);return sp?<img src={sp.f} alt=""/>:<Icon name={HOME_ITEMS[id].icon}/>})()}<span>{homeName(id,homeOf(state).items.find(i=>i.id===id)?.tier)}</span></button>)}</div>}
-  {use&&!editing&&(()=>{const k=use as ActId,a=ACT[k],ex=EXTRA[k]??[],lf=state.life?.daily,fire=(x:ActId)=>{setUse(null);if(x==='sleep')h.sleep();else if(x==='cook')h.cook();else if(x==='tv')act(()=>h.tv());else if(x==='nap'||x==='gig'||x==='play')act(()=>h.use(x));else act(()=>h.relax(x as 'fun'|'garden'))},isDone=(x:ActId)=>(x==='fun'||x==='garden')?used.has(x):x==='tv'?tvDone:x==='nap'||x==='gig'||x==='play'?lf?.[x]===state.day:false;return <div className="home-object-actions home-use" role="toolbar" aria-label={a.title}>{[k,...ex].map(x=>{const b=ACT[x];return <button key={x} disabled={isDone(x)} onClick={()=>fire(x)}><Icon name={b.icon}/>{b.label}{(x==='fun'||x==='garden')&&<small><Icon name="clock"/>{RELAX[x].minutes}'</small>}{x==='tv'&&<small><Icon name="clock"/>30'</small>}</button>})}<button aria-label="Đóng" onClick={()=>setUse(null)}><Icon name="close"/></button></div>})()}
+  {use&&!editing&&(()=>{const k=use as ActId,a=ACT[k],ex=EXTRA[k]??[],lf=state.life?.daily,fire=(x:ActId)=>{setUse(null);if(x==='sleep')h.sleep();else if(x==='cook')h.cook();else if(x==='study')h.study();else if(x==='tv')act(()=>h.tv());else if(x==='nap'||x==='gig'||x==='play')act(()=>h.use(x));else act(()=>h.relax(x as 'fun'|'garden'))},isDone=(x:ActId)=>(x==='fun'||x==='garden')?used.has(x):x==='tv'?tvDone:x==='nap'||x==='gig'||x==='play'?lf?.[x]===state.day:false;return <div className="home-object-actions home-use" role="toolbar" aria-label={a.title}>{[k,...ex].map(x=>{const b=ACT[x];return <button key={x} disabled={isDone(x)} onClick={()=>fire(x)}><Icon name={b.icon}/>{b.label}{(x==='fun'||x==='garden')&&<small><Icon name="clock"/>{RELAX[x].minutes}'</small>}{x==='tv'&&<small><Icon name="clock"/>30'</small>}</button>})}<button aria-label="Đóng" onClick={()=>setUse(null)}><Icon name="close"/></button></div>})()}
   {note&&<p className="ps-note" role="status">{note}</p>}
  </section>}
