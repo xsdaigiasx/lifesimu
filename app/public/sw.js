@@ -1,4 +1,4 @@
-/* Service worker của "Một đời để sống".
+/* Service worker của "Next Day".
  * Mục đích: cho phép cài game lên màn hình chính và mở lại khi mất mạng.
  * Chiến lược: mạng trước, bộ nhớ đệm sau. Có mạng thì luôn lấy bản mới nhất nên không bao giờ bị kẹt bản cũ;
  * mất mạng thì dùng bản đã tải lần trước. version.json không bao giờ được lưu đệm để biết có bản mới. */

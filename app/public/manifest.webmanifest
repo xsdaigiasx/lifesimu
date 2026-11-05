@@ -1,7 +1,7 @@
 {
-  "name": "Một đời để sống",
-  "short_name": "Một đời",
-  "description": "Game mô phỏng cuộc sống một thanh niên từ quê lên phố.",
+  "name": "Next Day",
+  "short_name": "Next Day",
+  "description": "Next Day, một đời để sống. Game mô phỏng cuộc sống một thanh niên từ quê lên phố.",
   "lang": "vi",
   "start_url": "./",
   "scope": "./",

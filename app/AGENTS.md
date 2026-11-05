@@ -1,4 +1,4 @@
-# Quy tắc của chủ dự án — Một đời để sống
+# Quy tắc của chủ dự án — Next Day (slogan: Một đời để sống)
 
 Đây là game, không phải website giới thiệu sản phẩm. Áp dụng các quy tắc này cho mọi giao diện mới và khi chỉnh giao diện cũ.
 

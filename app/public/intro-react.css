@@ -24,3 +24,5 @@
 .life-intro .intro-name-field input:focus,.life-intro .intro-name-field input:focus-visible{outline:none}
 
 .intro-primary.is-waiting{cursor:wait;opacity:.6}
+.intro-logo{display:block;width:72px;height:auto;margin:0 0 10px}
+@media(max-height:650px) and (max-width:760px){.intro-logo{width:48px;margin-bottom:4px}}

@@ -1,21 +1,19 @@
-# Icon chính thức — issue #11
+# Logo và icon Next Day
 
-Biểu tượng L và mũi tên đi lên-phải theo nhận diện `L↗` đang có trong game. Dùng xanh đậm `#173e38`, vàng ấm `#e8c98b` và kem `#fef0d7`, nét lớn để đọc được ở 32/48 px. Không có chữ nhỏ hay chi tiết căn phòng khó đọc ở màn hình chính.
+Tên game là **Next Day**, slogan **Một đời để sống**. Logo là mặt trời mọc trên con đường bậc đá, xanh đậm `#175239`, vàng `#ecb04e` và kem `#fef7eb`. Bản gốc do chủ dự án gửi 05/11: `docs/assets/brand/next-day-source.png` (logo tròn, chữ NEXT DAY, icon ứng dụng).
 
-Nguồn: Codex tự vẽ vector; `app/public/icons/icon.svg` là bản gốc. PNG raster hóa bằng sharp, không dùng ảnh stock, thương hiệu/nhân vật của bên thứ ba hoặc ảnh AI. Không thay code, manifest, service worker hoặc dữ liệu game.
+## Tệp trong `public/icons/`
 
-## Tệp
-
-- `icon-192.png`, `icon-512.png`: nền bo góc; ngoài góc có alpha.
-- `icon-maskable-512.png`: nền xanh tràn viền, hoàn toàn opaque. Hình chính nằm trong đường tròn an toàn tâm (256,256), bán kính 204.8 px (80% chiều rộng).
-- `apple-touch-icon.png`: 180×180, nền tràn viền, hoàn toàn opaque; iOS tự cắt góc.
+- `logo.png`: logo tròn nền trong suốt, dùng ở màn mở đầu và thanh bên.
+- `icon-192.png`, `icon-512.png`: ô vuông bo góc, ngoài góc có alpha.
+- `icon-maskable-512.png`: nền xanh tràn viền, hoàn toàn opaque; hình chính thu 92% để nằm trong vùng an toàn.
+- `apple-touch-icon.png`: 180×180 nền xanh tràn viền; iOS tự cắt góc.
 - `favicon-32.png`: 32×32.
-- Giữ nguyên tên và đường dẫn nên các tham chiếu hiện tại trong manifest/index.html tiếp tục dùng được.
 
-## Kiểm tra và tái tạo
+Tên và đường dẫn giữ nguyên nên manifest và `index.html` vẫn dùng được. Không còn `icon.svg`.
 
-Ảnh xem: `assets/pwa-icons/sizes.png`, `mask-circle.png`, `mask-squircle.png` (tương đối với thư mục docs này). Cỡ 48 và 32 được hiển thị ở kích thước thật trong ảnh sizes.
+## Tái tạo
 
-Cần Node + sharp. Đặt `SHARP_MODULE` trỏ đến module sharp nếu cài ngoài repo. Chạy `node app/scripts/build-pwa-icons.cjs` từ gốc repo. `--verify-only` chỉ kiểm tra file hiện có: kích thước, dưới 50 KB, alpha, mọi pixel hình chính nằm trong vùng an toàn maskable, và đường dẫn manifest.
+`python3 app/scripts/build-brand-icons.py` (cần Pillow). Script cắt logo và icon từ ảnh gốc, tạo alpha, làm phẳng màu xanh nền cho bản maskable và nén bảng màu 64 màu. Đã xem ảnh kết quả bằng mắt; tệp đều dưới 50 KB trừ maskable ở mức khoảng 38 KB.
 
-Các preview là ảnh render tĩnh. Chưa cài PWA trên thiết bị Android/iOS thật; cách làm mới icon đã được hệ điều hành cache cần được kiểm tra khi phát hành. Đây là thay đổi asset, không đụng TypeScript nên không cần check core.
+Lưu ý: ảnh gốc chỉ khoảng 385 px cho icon, nên `icon-512` là bản phóng to nhẹ. Khi có ảnh vector hoặc ảnh lớn hơn, chạy lại script với ảnh mới.

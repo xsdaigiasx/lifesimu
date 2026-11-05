@@ -160,3 +160,4 @@ body.phone-active{overflow:hidden}
 .travel-sheet button[aria-selected=true]{background:#e4ecd3;border-color:#bccaa0}
 .travel-sheet button em{grid-column:1/-1;margin-top:-4px;font-style:normal;font-size:11.5px;color:#5f7b4a;font-weight:600}
 .travel-sheet button span{font-variant-numeric:tabular-nums;color:#4c5a43}
+.brand-logo{height:40px;width:auto;flex:none;display:block}
