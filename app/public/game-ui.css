@@ -65,3 +65,6 @@
 .hire-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}.hire-head>div{flex:1;min-width:0}.hire-head strong{display:block;font-size:13px;color:#416947}.hire-head small{font-size:11px;color:#738866}
 .hire-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
 .hire-actions .game-secondary{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:39px}
+
+.finance-runway{display:flex;flex-direction:column;gap:4px;padding:16px;margin-bottom:6px;border-radius:10px;background:#eef5e3;border:1px solid #cfdcbb}.finance-runway small{font-size:var(--fs-note);color:#687760}.finance-runway strong{font-size:var(--fs-stat);font-weight:700}.finance-runway p{margin:4px 0 0;font-size:var(--fs-note)}.finance-runway[data-level=warn]{background:#fbf2d6;border-color:#e6d28f}.finance-runway[data-level=danger]{background:#f8e1dc;border-color:#e2a99f}.finance-head{margin:16px 0 2px;font-size:var(--fs-note);color:#869576;font-weight:600}
+.finance-runway~.game-data-row>strong{white-space:nowrap;flex-shrink:0}.finance-runway~.game-data-row>span{min-width:0}

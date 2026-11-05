@@ -45,7 +45,7 @@ let c=P.projectAction(sa,{kind:'projCheck',id:'px'});assert(c.ok,c.error);assert
 const f1=P.forecast(c.state,c.state.company.projects.active[0]);assert(f1.errRate<fa.errRate,'kiểm tra giảm lỗi');
 c=P.projectAction(c.state,{kind:'projCheck',id:'px'});assert(c.ok);assert(!P.projectAction(c.state,{kind:'projCheck',id:'px'}).ok,'tối đa 2 lần');
 // 6. Kết quả: tiền vào quỹ, uy tín, kinh nghiệm, tinh thần
-assert(ra.pay>=Math.round(ra.reward*.3/1000)*1000*.9&&ra.pay<=ra.reward*1.1+1000);assert.equal(endA.company.fund,1_000_000+ra.pay);
+assert(ra.pay>=Math.round(ra.reward*.3/1000)*1000*.9&&ra.pay<=ra.reward*1.1+1000);assert.equal(endA.company.fund,1_000_000,'T47: giao xong chưa nhận tiền, thành khoản phải thu');assert.equal(endA.company.finance.recv[0].amount,ra.pay);
 const repDelta=P.PROJ.repStars[ra.stars]+(ra.late>0?P.PROJ.repLate:0);assert.equal(P.repOfCompany(endA),Math.min(100,Math.max(0,50+repDelta)));
 const ex=endA.company.staff[0].work.exp;if(ra.stars>=3)assert.equal(ex.programming,1);
 assert(S.expMult({exp:{programming:10}},'programming')>S.expMult({exp:{programming:4}},'programming')&&Math.abs(S.expMult({exp:{programming:99}},'programming')-1.2)<1e-9);

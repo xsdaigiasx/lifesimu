@@ -43,6 +43,7 @@ const f=foundCompany(s,{name:'Lâm Tech',industry:'tech'});
 if(!f.ok){console.log('bỏ qua luồng đầy đủ: '+f.error);process.exit(1)}
 s=f.state;assert(H.candidatesOf(s).length===0);assert(!H.hiringAction(s,{kind:'interview',id:'x',what:'cv'}).ok);
 let p=H.hiringAction(s,{kind:'post'});assert(p.ok,p.error);s=p.state;assert.equal(s.company.fund,f.state.company.fund-H.HIRING.postFee);assert(engine.valid(s));assert(engine.parse(JSON.stringify(s)));
+assert.equal(s.company.hiring.rep,50,'T47: Senior và Chuyên gia theo uy tín công ty (mặc định 50), không theo uy tín tay trái');
 assert(!H.hiringAction(s,{kind:'post'}).ok,'không đăng trùng');
 const list=H.candidatesOf(s);assert(list.length>=3&&list.length<=5);
 assert.deepEqual(H.candidatesOf(s).map(c=>c.id),list.map(c=>c.id),'ổn định sau reload');

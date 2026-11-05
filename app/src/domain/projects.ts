@@ -7,9 +7,10 @@ import {money} from './format';
 import {officeOf} from './office';
 import {LEVELS,staffOf,type Employee} from './hiring';
 import {FX,errorOf,speedOf,workAt,type Job,type Trait,type WorkState} from './staff';
+import {FIN,addReceivable,advanceOf,book,slowDays} from './finance';
 
 /** T46 (Kế hoạch mục 35, 35.1, 35.4; chủ dự án duyệt 05/11): dự án, giao việc, tiến độ tự chạy theo ngày làm việc,
- *  lỗi theo chỉ số nhân viên, điểm kiểm tra, kết quả 1–5 sao. Thưởng vào quỹ ngay (T47 đổi thành ứng trước, trả sau).
+ *  lỗi theo chỉ số nhân viên, điểm kiểm tra, kết quả 1–5 sao. T47: khách ứng 30% khi nhận, phần còn lại trả sau 30 ngày (`finance.ts`).
  *  Chưa có: dự đoán theo độ biết (T51), sự kiện giữa việc (T48), phối hợp theo quan hệ cặp (T48). */
 export type CraftSkill='programming'|'logic'|'graphics';
 export const CRAFTS:CraftSkill[]=['programming','logic','graphics'];
@@ -20,8 +21,8 @@ export const PROJ={maxOffers:4,offerDays:7,maxActive:3,maxTeam:4,dayHours:6,grac
  loadMult:[1,1,.9,.75],fatigueBase:12,fatigueExtra:12,errMin:.03,errMax:.6,catchUp:30} as const;
 
 export interface Offer{id:string;client:string;title:string;skill:CraftSkill;lv:number;hours:number;difficulty:number;picky:number;urgent:boolean;traits:Trait[];reward:number;days:number;opened:number;expires:number}
-export interface Project extends Offer{accepted:number;due:number;team:string[];progress:number;checks:number;/** Tổng giờ nhân lỗi và tổng giờ đã làm để tính tỉ lệ lỗi thật. */ew:number;eh:number}
-export interface Result{id:string;title:string;client:string;skill:CraftSkill;stars:number;errors:number;units:number;late:number;pay:number;reward:number;day:number;canceled?:boolean}
+export interface Project extends Offer{accepted:number;due:number;team:string[];progress:number;checks:number;/** T47: khoản khách đã ứng khi nhận dự án. */adv?:number;/** Tổng giờ nhân lỗi và tổng giờ đã làm để tính tỉ lệ lỗi thật. */ew:number;eh:number}
+export interface Result{id:string;title:string;client:string;skill:CraftSkill;stars:number;errors:number;units:number;late:number;pay:number;reward:number;day:number;canceled?:boolean;/** T47: đã ứng, còn nợ và số ngày chờ (huỷ thì adv là khoản thu hồi). */adv?:number;owed?:number;wait?:number}
 export interface ProjectsState{version:1;seq:number;last:number;offers:Offer[];active:Project[];done:Result[]}
 
 const clamp=(v:number,a:number,b:number)=>Math.min(b,Math.max(a,v));
@@ -74,7 +75,8 @@ export function projectAction(s:GameState,a:ProjectAction):GameResult{
  return withProjects(s,(ps,n)=>{
   const offer=ps.offers.find(o=>o.id===a.id),proj=ps.active.find(p=>p.id===a.id);
   if(a.kind==='projAccept'){if(!offer)return'Dự án này không còn.';if(!staffOf(s).length)return'Cần có nhân viên trước khi nhận dự án.';if(ps.active.length>=PROJ.maxActive)return`Đang làm tối đa ${PROJ.maxActive} dự án.`;
-   ps.offers=ps.offers.filter(o=>o.id!==a.id);ps.active.push({...offer,accepted:s.day,due:s.day+offer.days,team:[],progress:0,checks:0,ew:0,eh:0});return}
+   const adv=advanceOf(offer.reward);ps.offers=ps.offers.filter(o=>o.id!==a.id);ps.active.push({...offer,accepted:s.day,due:s.day+offer.days,team:[],progress:0,checks:0,adv,ew:0,eh:0});
+   n.company!.fund+=adv;book(n.company!,s.day,`${offer.client}: ứng trước ${offer.title}`,adv);return}
   if(a.kind==='projDecline'){if(!offer)return'Dự án này không còn.';ps.offers=ps.offers.filter(o=>o.id!==a.id);return}
   if(!proj)return'Dự án này không còn.';
   if(a.kind==='projAssign'){const e=staffById(s,a.emp);if(!e)return'Không có nhân viên này.';if(proj.team.includes(e.id))return'Đã giao cho người này.';if(proj.team.length>=PROJ.maxTeam)return`Mỗi dự án tối đa ${PROJ.maxTeam} người.`;
@@ -114,14 +116,17 @@ export function settleProjects(next:GameState):GameState{
    if(p.progress>=p.hours){
     const rate=clamp((p.eh>0?p.ew/p.eh:.2)*(1+.1*(p.difficulty-2))*PROJ.checkErr**p.checks,PROJ.errMin,PROJ.errMax),r=starsOf(p,rate,d);
     const pay=Math.round(p.reward*PROJ.payStars[r.stars]!*(1-Math.min(PROJ.lateMax,PROJ.latePct*r.late)/100)/1000)*1000;
-    n.company!.fund+=pay;n.company!.rep=clamp((n.company!.rep??PROJ.repStart)+PROJ.repStars[r.stars]!+(r.late>0?PROJ.repLate:0),0,100);
+    const adv=p.adv??0,owed=Math.max(0,pay-adv),wait=FIN.payDays+slowDays(p.id);
+    if(owed>0)addReceivable(n.company!,d,{id:p.id,title:p.title,client:p.client,amount:owed,due:d+wait});
+    n.company!.rep=clamp((n.company!.rep??PROJ.repStart)+PROJ.repStars[r.stars]!+(r.late>0?PROJ.repLate:0),0,100);
     for(const e of team){const w=touch(e,d),exp={...(w.exp??{})};if(r.stars>=3)exp[p.skill]=(exp[p.skill]??0)+1;
      work.set(e.id,{...w,morale:clamp(w.morale+(r.stars>=4?3:r.stars<=2?-5:0)-(r.late>0?2:0),0,100),exp})}
-    ps.active=ps.active.filter(x=>x.id!==p.id);ps.done=[{id:p.id,title:p.title,client:p.client,skill:p.skill,stars:r.stars,errors:r.errors,units:r.units,late:r.late,pay,reward:p.reward,day:d},...ps.done].slice(0,8);
+    ps.active=ps.active.filter(x=>x.id!==p.id);ps.done=[{id:p.id,title:p.title,client:p.client,skill:p.skill,stars:r.stars,errors:r.errors,units:r.units,late:r.late,pay,reward:p.reward,day:d,adv,owed,wait:owed>0?wait:0},...ps.done].slice(0,8);
    }else if(d>p.due+PROJ.grace){
+    const back=Math.min(n.company!.fund,p.adv??0);n.company!.fund-=back;if(back>0)book(n.company!,d,`${p.client}: thu hồi khoản ứng`,-back);
     n.company!.rep=clamp((n.company!.rep??PROJ.repStart)+PROJ.repCancel,0,100);
     for(const e of team){const w=touch(e,d);work.set(e.id,{...w,morale:clamp(w.morale-5,0,100)})}
-    ps.active=ps.active.filter(x=>x.id!==p.id);ps.done=[{id:p.id,title:p.title,client:p.client,skill:p.skill,stars:0,errors:0,units:0,late:d-p.due,pay:0,reward:p.reward,day:d,canceled:true},...ps.done].slice(0,8);
+    ps.active=ps.active.filter(x=>x.id!==p.id);ps.done=[{id:p.id,title:p.title,client:p.client,skill:p.skill,stars:0,errors:0,units:0,late:d-p.due,pay:0,reward:p.reward,day:d,canceled:true,adv:back},...ps.done].slice(0,8);
    }
   }
  }
@@ -130,7 +135,7 @@ export function settleProjects(next:GameState):GameState{
  n.company!.staff=staff.map(e=>{const w=work.get(e.id);return w?{...e,work:{...w,day:Math.max(w.day,next.day)}}:e});
  let out=n;
  for(const r of ps.done.filter(x=>x.day>ps0.last&&!ps0.done.some(y=>y.id===x.id))){
-  out=recordJournal(out,`project:${r.id}`,r.canceled?'Khách huỷ dự án':'Dự án hoàn thành',r.canceled?`${r.title} (${r.client}): quá hạn.`:`${r.title} (${r.client}): ${r.stars} sao, nhận ${money(r.pay)}.`)}
+  out=recordJournal(out,`project:${r.id}`,r.canceled?'Khách huỷ dự án':'Dự án hoàn thành',r.canceled?`${r.title} (${r.client}): quá hạn${r.adv?`, khách thu hồi khoản ứng ${money(r.adv)}`:''}.`:`${r.title} (${r.client}): ${r.stars} sao, tổng ${money(r.pay)}${r.owed?`, còn ${money(r.owed)} trả sau ${r.wait} ngày`:''}.`)}
  return out}
 
 const validOffer=(o:unknown):o is Offer=>{if(!o||typeof o!=='object')return false;const x=o as Offer;
@@ -139,9 +144,9 @@ const validOffer=(o:unknown):o is Offer=>{if(!o||typeof o!=='object')return fals
   &&typeof x.urgent==='boolean'&&Array.isArray(x.traits)&&x.traits.length<=8&&x.traits.every(t=>typeof t==='string'&&t.length<12)};
 const validProject=(day:number)=>(p:unknown):p is Project=>{if(!validOffer(p))return false;const x=p as Project;
  return Number.isInteger(x.accepted)&&x.accepted>=0&&x.accepted<=day&&Number.isInteger(x.due)&&x.due>=x.accepted&&Array.isArray(x.team)&&x.team.length<=PROJ.maxTeam&&new Set(x.team).size===x.team.length&&x.team.every(id=>typeof id==='string'&&id.length<40)
-  &&Number.isFinite(x.progress)&&x.progress>=0&&x.progress<=1000&&Number.isInteger(x.checks)&&x.checks>=0&&x.checks<=PROJ.maxChecks&&Number.isFinite(x.ew)&&x.ew>=0&&Number.isFinite(x.eh)&&x.eh>=0};
+  &&(x.adv===undefined||Number.isInteger(x.adv)&&x.adv>=0&&x.adv<=1e9)&&Number.isFinite(x.progress)&&x.progress>=0&&x.progress<=1000&&Number.isInteger(x.checks)&&x.checks>=0&&x.checks<=PROJ.maxChecks&&Number.isFinite(x.ew)&&x.ew>=0&&Number.isFinite(x.eh)&&x.eh>=0};
 const validResult=(r:unknown):r is Result=>{if(!r||typeof r!=='object')return false;const x=r as Result;
- return typeof x.id==='string'&&typeof x.title==='string'&&x.title.length<80&&typeof x.client==='string'&&CRAFTS.includes(x.skill)&&[x.stars,x.errors,x.units,x.late,x.pay,x.reward,x.day].every(Number.isInteger)&&x.stars>=0&&x.stars<=5&&x.pay>=0&&x.pay<=1e9&&x.day>=0};
+ return typeof x.id==='string'&&typeof x.title==='string'&&x.title.length<80&&typeof x.client==='string'&&CRAFTS.includes(x.skill)&&[x.stars,x.errors,x.units,x.late,x.pay,x.reward,x.day].every(Number.isInteger)&&x.stars>=0&&x.stars<=5&&x.pay>=0&&x.pay<=1e9&&x.day>=0&&[x.adv,x.owed,x.wait].every(v=>v===undefined||Number.isInteger(v)&&v>=0&&v<=1e9)};
 export function validProjects(v:unknown,day:number):v is ProjectsState{
  if(!v||typeof v!=='object')return false;const p=v as ProjectsState;
  return p.version===1&&Number.isInteger(p.seq)&&p.seq>=0&&Number.isInteger(p.last)&&p.last>=-1&&p.last<=day&&Array.isArray(p.offers)&&p.offers.length<=PROJ.maxOffers+2&&p.offers.every(validOffer)
