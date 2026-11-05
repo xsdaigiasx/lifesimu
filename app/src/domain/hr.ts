@@ -8,6 +8,7 @@ import {recordJournal} from './journal';
 import {skillsOf} from './work';
 import {agoText} from './npc';
 import {hash} from './shift';
+import {policyOf} from './policy';
 
 /** T48 (Kế hoạch mục 34; chủ dự án duyệt 05/11): sự kiện nhân sự. Nhân viên tự báo việc (xin tăng lương, xung đột, bị chào mời…),
  *  chủ chọn cách xử lý. 15 mô-típ, mỗi mô-típ 2 biến thể, ký ức và móc tiếp nối như bộ điều phối NPC (director.ts).
@@ -63,7 +64,7 @@ export const MOTIFS:Motif[]=[
    O(`Đứng về phía ${c.e.name}`,'side',{morale:4,bond:4,other:{morale:-4,bond:-4,loyalty:-2}},`${c.e.name} yên tâm, ${c.other?.name} thì không vui.`),
    O('Bảo tự giải quyết','ignore',{morale:-3,bond:-1,other:{morale:-3}},'Hai người im lặng, căng thẳng vẫn còn.')]},
  {id:'late',name:'Báo lỗi muộn',variants:2,gap:21,
-  weight:c=>!c.proj?0:FX[c.e.personality].reportDelay>=.6?3:FX[c.e.personality].reportDelay>=.3?1:0,
+  weight:c=>!c.proj?0:(FX[c.e.personality].reportDelay>=.6?3:FX[c.e.personality].reportDelay>=.3?1:0)*(policyOf(c.s.company).candor==='open'?.3:policyOf(c.s.company).candor==='closed'?1.5:1),
   line:c=>withRecall(c,[`Sếp ơi, dự án ${title(c)} em làm hơi lệch ý khách. Em định báo sớm mà ngại quá.`,`Em xin lỗi sếp, em thấy lỗi ở dự án ${title(c)} từ mấy hôm trước mà giờ mới dám nói.`][c.variant]!),
   options:c=>[O('Cùng xem và sửa','fix',{minutes:30,errCut:25,morale:2,bond:2},'Hai người sửa xong phần lỗi nặng nhất.'),
    O('Cảm ơn đã báo','thank',{errCut:10,morale:3,bond:2},`${c.e.name} nhẹ cả người, tự đi sửa phần còn lại.`),
@@ -155,11 +156,12 @@ function pick(s:GameState,e:Employee,day:number):{motif:Motif;variant:number;oth
  let chosen:Motif|undefined=hook?motifOf(hook.motif):undefined;
  if(!chosen&&weights.length){const total=weights.reduce((a,x)=>a+x.w,0);let r=hash(`hr:p:${day}:${e.id}`)%1000/1000*total;for(const x of weights){r-=x.w;if(r<0){chosen=x.m;break}}chosen??=weights[weights.length-1]!.m}
  if(!chosen)return null;
+ if(chosen.id==='late'&&policyOf(s.company).candor==='open'&&hash(`hr:c:${day}:${e.id}`)%100<70)return null;
  const last=h.log.filter(l=>l.emp===e.id&&l.motif===chosen!.id).pop();let variant=hash(`hr:v:${day}:${e.id}`)%chosen.variants;
  if(last&&chosen.variants>1&&hrOf(s).log.some(l=>l.emp===e.id&&l.motif===chosen!.id)&&variant===(hash(`hr:v:${last.day}:${e.id}`)%chosen.variants))variant=(variant+1)%chosen.variants;
  return{motif:chosen,variant,other:chosen.id==='conflict'?other?.id:undefined,memory:hook?.motif===chosen.id?hook.memory:undefined}}
 
-function removeEmployee(n:GameState,emp:string){
+export function removeEmployee(n:GameState,emp:string){
  const c=n.company!;c.staff=(c.staff??[]).filter(x=>x.id!==emp);
  for(const p of c.projects?.active??[])p.team=p.team.filter(id=>id!==emp);
  for(const d of c.finance?.debts??[])if(d.emp===emp)d.left=true;

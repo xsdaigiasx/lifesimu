@@ -6,6 +6,7 @@ import {hash} from './shift';
 import {money} from './format';
 import {officeOf} from './office';
 import {LEVELS,staffOf,type Employee} from './hiring';
+import {hourMult} from './policy';
 import {FX,errorOf,speedOf,workAt,type Job,type Trait,type WorkState} from './staff';
 import {FIN,addReceivable,advanceOf,book,slowDays} from './finance';
 
@@ -105,7 +106,7 @@ export function settleProjects(next:GameState):GameState{
    for(const p of [...ps.active]){
     const team=p.team.map(id=>staff.find(e=>e.id===id)).filter((e):e is Employee=>!!e);
     const coord=coordOf(n,team);let sum=0;
-    for(const e of team){const load=Math.max(1,loadOf(ps,e.id)),w=touch(e,d);if((w.off??0)>=d)continue;const h=PROJ.dayHours/load*loadFactor(load)*speedOf({...e,work:w},d,jobOf(p));
+    for(const e of team){const load=Math.max(1,loadOf(ps,e.id)),w=touch(e,d);if((w.off??0)>=d)continue;const h=PROJ.dayHours/load*loadFactor(load)*speedOf({...e,work:w},d,jobOf(p))*hourMult(n.company,e,d);
      sum+=h;p.eh+=h;p.ew+=h*errorOf({...e,work:w},d,jobOf(p))*(load>=3?1.25:1)}
     p.progress=Math.round((p.progress+sum*coord)*10)/10;
    }

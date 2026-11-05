@@ -28,7 +28,7 @@ export interface Candidate{id:string;seed:string;name:string;gender:'male'|'fema
  claim:Record<HireSkill,number>;claimYears:number;wage:number;fee:number;ref:boolean}
 export interface Progress{cv?:1;sit?:1;mot?:1;ref?:1;q?:Partial<Record<HireSkill,number>>;test?:Partial<Record<HireSkill,1>>}
 export interface HiringState{postedDay:number;rep:number;progress:Record<string,Progress>;gone:string[]}
-export interface Employee{id:string;name:string;gender:'male'|'female';age:number;origin:string;hiredDay:number;wage:number;skills:Record<HireSkill,number>;years:number;trust:number;risk:number;potential:number;personality:Personality;motive:typeof MOTIVES[number];/** T45: chỉ số công việc; thiếu thì suy ra từ hồ sơ (save cũ). */work?:WorkState;/** T48: điểm thân với chủ 0–100; thiếu thì suy ra từ độ tin cậy. */bond?:number}
+export interface Employee{id:string;name:string;gender:'male'|'female';age:number;origin:string;hiredDay:number;wage:number;skills:Record<HireSkill,number>;years:number;trust:number;risk:number;potential:number;personality:Personality;motive:typeof MOTIVES[number];/** T45: chỉ số công việc; thiếu thì suy ra từ hồ sơ (save cũ). */work?:WorkState;/** T48: điểm thân với chủ 0–100; thiếu thì suy ra từ độ tin cậy. */bond?:number;/** T49: đang học (tới hết ngày), cảnh cáo, lần học và họp 1-1 gần nhất. */train?:{skill:HireSkill;until:number};warns?:number;warnDay?:number;trainedDay?:number;talkDay?:number}
 
 const rnd=(seed:string,salt:string,n:number)=>mix(hash(`${seed}:${salt}`))%n;
 const clamp=(v:number,a:number,b:number)=>Math.min(b,Math.max(a,v));
@@ -140,5 +140,5 @@ export function validStaff(v:unknown,day:number,cap:number):v is Employee[]{
  if(!Array.isArray(v)||v.length>cap)return false;const seen=new Set<string>();
  return v.every((e:Employee)=>{if(!e||typeof e!=='object'||typeof e.id!=='string'||seen.has(e.id))return false;seen.add(e.id);
   return typeof e.name==='string'&&e.name.length<60&&(e.gender==='male'||e.gender==='female')&&Number.isInteger(e.hiredDay)&&e.hiredDay>=0&&e.hiredDay<=day&&Number.isInteger(e.wage)&&e.wage>=0&&e.wage<=1e8&&SK(e.skills)
-   &&[e.age,e.years,e.trust,e.risk,e.potential].every(x=>Number.isFinite(x)&&x>=0&&x<=200)&&PERSONALITIES.includes(e.personality)&&MOTIVES.includes(e.motive)&&(e.work===undefined||validWork(e.work,day))&&(e.bond===undefined||Number.isFinite(e.bond)&&e.bond>=0&&e.bond<=100)});
+   &&[e.age,e.years,e.trust,e.risk,e.potential].every(x=>Number.isFinite(x)&&x>=0&&x<=200)&&PERSONALITIES.includes(e.personality)&&MOTIVES.includes(e.motive)&&(e.work===undefined||validWork(e.work,day))&&(e.bond===undefined||Number.isFinite(e.bond)&&e.bond>=0&&e.bond<=100)&&(e.train===undefined||HIRE_SKILLS.includes(e.train.skill)&&Number.isInteger(e.train.until)&&e.train.until>=0)&&(e.warns===undefined||Number.isInteger(e.warns)&&e.warns>=0&&e.warns<=3)&&[e.warnDay,e.trainedDay,e.talkDay].every(x=>x===undefined||Number.isInteger(x)&&x>=0&&x<=day)});
 }
