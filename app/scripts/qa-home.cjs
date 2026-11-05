@@ -6,7 +6,7 @@ const path=require('node:path');const fs=require('node:fs');const artifacts=path
  const page=await browser.newPage({viewport:{width:390,height:780},hasTouch:true,isMobile:true});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{if(localStorage.getItem('life-simulator-profile-v1'))return;localStorage.setItem('life-simulator-profile-v1',JSON.stringify({name:'Minh An',gender:'male',complete:true}));localStorage.setItem('life-simulator-vi-v1',JSON.stringify({version:1,day:0,money:5200000,energy:85,mood:75,health:90,stress:20,xp:0,owned:['plant'],equipped:[],ledger:[],lastReport:null}));});
- async function enter(){await page.getByRole('button',{name:'Đến',exact:true}).click();await page.getByRole('button',{name:'Vào phòng',exact:true}).click();}
+ async function enter(){await page.getByRole('button',{name:/^(Đến|Vào)$/}).click();await page.getByRole('button',{name:'Vào phòng',exact:true}).click();}
  await page.goto(process.env.QA_BASE_URL || 'http://127.0.0.1:5173');await enter();await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
  async function scene(){await page.locator('.home-scene').scrollIntoViewIfNeeded();return page.locator('.home-scene').boundingBox()}
  async function dragTo(locator,x,y){const r=await scene();const f=await page.evaluate(async({x,y})=>(await import('/src/domain/home-geometry.ts')).floorPoint(x,y),{x,y});x=f.x;y=f.y;const b=await locator.boundingBox();await page.mouse.move(b.x+b.width/2,b.y+b.height/2);await page.mouse.down();await page.mouse.move(r.x+x/100*r.width,r.y+y/100*r.height,{steps:12});await page.mouse.up();}
