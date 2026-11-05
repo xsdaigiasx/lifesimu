@@ -4,6 +4,47 @@ Cập nhật 05/11/2026, app 0.75.3, Kế hoạch bản rev 65. Sửa bảng nà
 
 Xong 51, một phần 10, còn lại chưa làm, bỏ hoặc hoãn. Cột Tệp chỉ tệp trong `docs/plan/` có bảng ticket đó.
 
+## Thứ tự ưu tiên (đề xuất 05/11)
+
+Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn thiếu của bản 1.0, sau đó 1.1, 1.2. Trong mỗi nhóm, ticket nào bị phụ thuộc thì làm trước. Mỗi ticket vẫn cần chủ dự án duyệt đề xuất trước khi code.
+
+**Nhóm 1: làm nốt phần dở**
+1. T55 Bếp và tủ lạnh nối hạn dùng (S): soát chỗ còn thiếu so với kế hoạch.
+2. T59 Quán vỉa hè, nhà hàng: rủi ro bệnh ẩn.
+3. T87 Hồi ức một tháng trước, ghi chú tuần (S).
+4. T88 Cuối tuần có kế hoạch: phần chọn kế hoạch (gợi ý thứ Sáu đã có).
+5. T61 Điện thoại mở rộng: báo, giải trí (phần cần chứng khoán để sau T57).
+6. Giá chợ đổi theo ngày (mục 58, chưa có số ticket).
+7. T53 Nhà ở: hợp đồng thuê, mua, thế chấp (L; mở đường cho T58, T84).
+8. T52 Nhiều bản đồ, rồi T67 bản đồ sông (1.2, mở đường cho T68).
+9. T62 Thêm mini game giải trí (1.2).
+10. T36: mục tiêu tuần đã có; thành tựu cơ bản làm cùng T65; hướng dẫn đầu game hoãn tới khi xong game.
+
+**Nhóm 2: hoàn tất bản 1.0**
+11. T63 Quan hệ NPC với NPC, tin đồn (bản nhẹ).
+12. T64 Cốt truyện đời NPC (phần mở đầu).
+13. T86 Cộng đồng khu trọ (bản nhẹ).
+14. T37 Cân bằng toàn game bằng mô phỏng 3 persona.
+15. T38 Hiệu năng điện thoại.
+16. T39 Hồi quy toàn bộ, đóng gói Basic 1.0.
+
+**Nhóm 3: bản 1.1**
+17. T76 Sự kiện mùa và lễ.
+18. T65 Thành tựu (gồm thành tựu cơ bản của T36).
+19. T57 Tin tức và chứng khoán, rồi T58 Bất động sản.
+20. T66 Nâng cấp công ty.
+21. T84 Thú cưng, T85 Sở thích trong nhà.
+22. T89 Mạng xã hội trong game (sau T63).
+23. T69 Hồ sơ đời (đang hoãn), rồi T71 Khe lưu nhẹ và T83 Bối cảnh năm.
+
+**Nhóm 4: bản 1.2 trở đi**
+24. T73 Ca phục vụ, T74 Ngành ẩm thực.
+25. T68 Quê và nông trại (1.3).
+26. Online: T77 tài khoản và cloud save, T78 thăm nhà, T79–T81 Arcade, so điểm, xếp hạng, T82 đối đầu (1.3).
+27. T70 Chuyển đời và di sản (sau 1.2, có điều kiện).
+
+## Bảng trạng thái
+
 | ID | Việc | Trạng thái | Tệp |
 |---|---|---|---|
 | T01 | Cấu trúc dự án và schema nội dung, trình kiểm tra JSON | Xong | A-ke-hoach |
