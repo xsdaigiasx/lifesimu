@@ -4,7 +4,7 @@ import {hash} from './shift';
 
 /** T45 (Kế hoạch mục 34, 35.1; chủ dự án duyệt 05/11): chỉ số công việc của nhân viên và hành vi theo tính cách.
  *  Chưa giao việc (T46), chưa trả lương (T47), chưa sự kiện nhân sự (T48): tải việc luôn 0, mệt chỉ hồi. */
-export interface WorkState{morale:number;loyalty:number;fatigue:number;ambition:number;/** Ngày đã cập nhật tới. */day:number;/** T46: số lần làm tốt (3 sao trở lên) theo loại việc; mỗi 5 lần cộng 5% tốc độ, tối đa 20%. */exp?:Partial<Record<HireSkill,number>>}
+export interface WorkState{morale:number;loyalty:number;fatigue:number;ambition:number;/** Ngày đã cập nhật tới. */day:number;/** T46: số lần làm tốt (3 sao trở lên) theo loại việc; mỗi 5 lần cộng 5% tốc độ, tối đa 20%. */exp?:Partial<Record<HireSkill,number>>;/** T48: nghỉ (ốm, phép) tới hết ngày này; không tính tiến độ dự án. */off?:number}
 
 /** Tính chất việc (mục 35.1) để khớp tính cách. */
 export type Trait='urgent'|'risky'|'routine'|'client'|'team'|'solo'|'reward'|'long'|'easy'|'hard'|'picky';
@@ -31,6 +31,11 @@ const mainSkill=(e:Employee)=>Math.max(e.skills.programming,e.skills.logic,e.ski
 export const fairWage=(e:Employee)=>levelOf(mainSkill(e)).base;
 export const wageRatio=(e:Employee)=>e.wage/Math.max(1,fairWage(e));
 
+/** T48: điểm thân với chủ 0–100 (mặc định theo độ tin cậy), bậc Bất hoà, Quen biết, Thân, Tri kỷ. */
+export const bondOf=(e:Employee)=>e.bond??Math.round(20+e.trust/10);
+export const bondTier=(b:number)=>b>=60?'Tri kỷ':b>=30?'Thân':b>=15?'Quen biết':'Bất hoà';
+/** Bất hoà làm cầm chừng, Tri kỷ làm hăng hơn. */
+export const bondMult=(b:number)=>b>=60?1.05:b<15?.9:1;
 /** Chỉ số ban đầu lúc thuê, không cần lưu: suy ra từ hồ sơ. */
 export function initialWork(e:Employee):WorkState{return{morale:STAFF.startMorale,loyalty:LOYAL_START[e.motive],fatigue:0,ambition:clamp(FX[e.personality].ambition+(hash(`amb:${e.id}`)%11)-5,0,100),day:e.hiredDay}}
 
@@ -42,7 +47,7 @@ function step(w:WorkState,e:Employee,day:number):WorkState{
  const loyaltyGoal=clamp(45+(morale-50)*.6+tenure+(e.motive==='Ổn định'?5:0),0,100);
  const loyalty=w.loyalty+(loyaltyGoal-w.loyalty)*STAFF.loyaltyRate;
  const grows=e.personality==='Tham'||e.personality==='Hay khoe';
- return{morale:r1(clamp(morale,0,100)),loyalty:r1(clamp(loyalty,0,100)),fatigue:Math.max(0,w.fatigue-STAFF.fatigueRest),ambition:r1(clamp(w.ambition+(grows?.3:0),0,100)),day,...(w.exp?{exp:w.exp}:{})}}
+ return{morale:r1(clamp(morale,0,100)),loyalty:r1(clamp(loyalty,0,100)),fatigue:Math.max(0,w.fatigue-STAFF.fatigueRest),ambition:r1(clamp(w.ambition+(grows?.3:0),0,100)),day,...(w.exp?{exp:w.exp}:{}),...(w.off!==undefined?{off:w.off}:{})}}
 
 /** Chỉ số tại một ngày (dẫn xuất từ bản đã lưu, không ghi vào save). */
 export function workAt(e:Employee,day:number):WorkState{
@@ -63,7 +68,7 @@ const has=(list:Trait[]|undefined,t:Trait[])=>!!list&&t.some(x=>list.includes(x)
 
 export function speedOf(e:Employee,day:number,job?:Job){
  const w=workAt(e,day),fx=FX[e.personality],d=job?e.skills[job.skill]-job.lv:0;
- let s=clamp(1+.12*d,.5,1.6)*moraleMult(w.morale)*fx.speed*(job?expMult(w,job.skill):1);
+ let s=clamp(1+.12*d,.5,1.6)*moraleMult(w.morale)*fx.speed*bondMult(bondOf(e))*(job?expMult(w,job.skill):1);
  if(has(job?.traits,fx.fit))s*=fx.fitSpeed;if(has(job?.traits,fx.unfit))s*=2-fx.fitSpeed;
  return r1(s*100)/100}
 export function errorOf(e:Employee,day:number,job?:Job){
@@ -75,7 +80,7 @@ export function errorOf(e:Employee,day:number,job?:Job){
 /** Nguy cơ xin nghỉ 0–1: thấp khi gắn bó cao; tăng khi tinh thần thấp, lương dưới mức hợp lý (nặng với người Tham). */
 export function quitRisk(e:Employee,day:number){
  const w=workAt(e,day),ratio=wageRatio(e),under=ratio<.9?(.9-ratio)*(e.personality==='Tham'?1.5:1):0;
- return Math.round(clamp((STAFF.quitLoyalty-w.loyalty)/100+(STAFF.quitMorale-w.morale)/150+under,0,1)*100)/100}
+ return Math.round(clamp((STAFF.quitLoyalty-w.loyalty)/100+(STAFF.quitMorale-w.morale)/150+under+(bondOf(e)<15?.1:bondOf(e)>=60?-.05:0),0,1)*100)/100}
 /** Khả năng xin tăng lương 0–1 (T48 dùng để phát sự kiện). */
 export function raiseChance(e:Employee,day:number){
  const w=workAt(e,day),fx=FX[e.personality],gap=Math.max(0,1.05-wageRatio(e));
@@ -87,5 +92,5 @@ export function behaviorOf(e:Employee,day:number,job?:Job){const fx=FX[e.persona
 
 export function validWork(v:unknown,day:number):v is WorkState{
  if(!v||typeof v!=='object')return false;const w=v as WorkState;
- return [w.morale,w.loyalty,w.fatigue,w.ambition].every(x=>Number.isFinite(x)&&x>=0&&x<=100)&&Number.isInteger(w.day)&&w.day>=0&&w.day<=day&&(w.exp===undefined||typeof w.exp==='object'&&w.exp!==null&&Object.entries(w.exp).every(([k,n])=>HIRE_SKILLS.includes(k as HireSkill)&&Number.isInteger(n)&&n>=0&&n<=9999))}
+ return [w.morale,w.loyalty,w.fatigue,w.ambition].every(x=>Number.isFinite(x)&&x>=0&&x<=100)&&Number.isInteger(w.day)&&w.day>=0&&w.day<=day&&(w.off===undefined||Number.isInteger(w.off)&&w.off>=0&&w.off<=1e6)&&(w.exp===undefined||typeof w.exp==='object'&&w.exp!==null&&Object.entries(w.exp).every(([k,n])=>HIRE_SKILLS.includes(k as HireSkill)&&Number.isInteger(n)&&n>=0&&n<=9999))}
 
