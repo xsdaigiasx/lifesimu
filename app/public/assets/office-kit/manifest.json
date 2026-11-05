@@ -102,6 +102,259 @@
           ]
         }
       }
+    },
+    {
+      "id": "counter",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "files": {
+        "a": "counter_a_default.webp",
+        "b": "counter_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 3,
+          "d": 1,
+          "anchor": [
+            192,
+            192
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 3,
+          "anchor": [
+            64,
+            192
+          ]
+        }
+      }
+    },
+    {
+      "id": "water-cooler",
+      "w": 1,
+      "d": 1,
+      "h": 2,
+      "files": {
+        "a": "water-cooler_a_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            128
+          ]
+        }
+      }
+    },
+    {
+      "id": "cafe-table",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "files": {
+        "a": "cafe-table_a_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            96
+          ]
+        }
+      }
+    },
+    {
+      "id": "printer",
+      "w": 1,
+      "d": 1,
+      "h": 1,
+      "files": {
+        "a": "printer_a_default.webp",
+        "b": "printer_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            96
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            96
+          ]
+        }
+      }
+    },
+    {
+      "id": "whiteboard",
+      "w": 2,
+      "d": 1,
+      "h": 3,
+      "files": {
+        "a": "whiteboard_a_default.webp",
+        "b": "whiteboard_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 2,
+          "d": 1,
+          "anchor": [
+            128,
+            192
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 2,
+          "anchor": [
+            64,
+            192
+          ]
+        }
+      }
+    },
+    {
+      "id": "server-rack",
+      "w": 1,
+      "d": 1,
+      "h": 4,
+      "files": {
+        "a": "server-rack_a_default.webp",
+        "b": "server-rack_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            192
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 1,
+          "anchor": [
+            64,
+            192
+          ]
+        }
+      }
+    },
+    {
+      "id": "meeting-table",
+      "w": 3,
+      "d": 2,
+      "h": 1,
+      "files": {
+        "a": "meeting-table_a_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 3,
+          "d": 2,
+          "anchor": [
+            192,
+            192
+          ]
+        }
+      }
+    },
+    {
+      "id": "sofa",
+      "w": 2,
+      "d": 1,
+      "h": 1,
+      "files": {
+        "a": "sofa_a_default.webp",
+        "b": "sofa_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 2,
+          "d": 1,
+          "anchor": [
+            128,
+            128
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 2,
+          "anchor": [
+            64,
+            128
+          ]
+        }
+      }
+    },
+    {
+      "id": "boss-desk",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "files": {
+        "a": "boss-desk_a_default.webp",
+        "b": "boss-desk_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 3,
+          "d": 1,
+          "anchor": [
+            192,
+            192
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 3,
+          "anchor": [
+            64,
+            192
+          ]
+        }
+      }
+    },
+    {
+      "id": "reception",
+      "w": 3,
+      "d": 1,
+      "h": 2,
+      "files": {
+        "a": "reception_a_default.webp",
+        "b": "reception_b_default.webp"
+      },
+      "views": {
+        "a": {
+          "w": 3,
+          "d": 1,
+          "anchor": [
+            192,
+            192
+          ]
+        },
+        "b": {
+          "w": 1,
+          "d": 3,
+          "anchor": [
+            64,
+            192
+          ]
+        }
+      }
     }
   ]
 }
