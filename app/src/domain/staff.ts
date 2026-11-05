@@ -1,10 +1,10 @@
 import type {GameState} from './types';
-import {levelOf,staffOf,type Employee,type HireSkill,type Personality} from './hiring';
+import {HIRE_SKILLS,levelOf,staffOf,type Employee,type HireSkill,type Personality} from './hiring';
 import {hash} from './shift';
 
 /** T45 (Kế hoạch mục 34, 35.1; chủ dự án duyệt 05/11): chỉ số công việc của nhân viên và hành vi theo tính cách.
  *  Chưa giao việc (T46), chưa trả lương (T47), chưa sự kiện nhân sự (T48): tải việc luôn 0, mệt chỉ hồi. */
-export interface WorkState{morale:number;loyalty:number;fatigue:number;ambition:number;/** Ngày đã cập nhật tới. */day:number}
+export interface WorkState{morale:number;loyalty:number;fatigue:number;ambition:number;/** Ngày đã cập nhật tới. */day:number;/** T46: số lần làm tốt (3 sao trở lên) theo loại việc; mỗi 5 lần cộng 5% tốc độ, tối đa 20%. */exp?:Partial<Record<HireSkill,number>>}
 
 /** Tính chất việc (mục 35.1) để khớp tính cách. */
 export type Trait='urgent'|'risky'|'routine'|'client'|'team'|'solo'|'reward'|'long'|'easy'|'hard'|'picky';
@@ -42,7 +42,7 @@ function step(w:WorkState,e:Employee,day:number):WorkState{
  const loyaltyGoal=clamp(45+(morale-50)*.6+tenure+(e.motive==='Ổn định'?5:0),0,100);
  const loyalty=w.loyalty+(loyaltyGoal-w.loyalty)*STAFF.loyaltyRate;
  const grows=e.personality==='Tham'||e.personality==='Hay khoe';
- return{morale:r1(clamp(morale,0,100)),loyalty:r1(clamp(loyalty,0,100)),fatigue:Math.max(0,w.fatigue-STAFF.fatigueRest),ambition:r1(clamp(w.ambition+(grows?.3:0),0,100)),day}}
+ return{morale:r1(clamp(morale,0,100)),loyalty:r1(clamp(loyalty,0,100)),fatigue:Math.max(0,w.fatigue-STAFF.fatigueRest),ambition:r1(clamp(w.ambition+(grows?.3:0),0,100)),day,...(w.exp?{exp:w.exp}:{})}}
 
 /** Chỉ số tại một ngày (dẫn xuất từ bản đã lưu, không ghi vào save). */
 export function workAt(e:Employee,day:number):WorkState{
@@ -55,13 +55,15 @@ export function settleStaff(next:GameState):GameState{
  let changed=false;const out=staff.map(e=>{const w=workAt(e,next.day);if(e.work&&e.work.day===w.day)return e;changed=true;return{...e,work:w}});
  return changed?{...next,company:{...next.company,staff:out}}:next}
 
+/** Hệ số kinh nghiệm cùng loại việc (mục 35.1): +5% mỗi 5 lần, tối đa +20%. */
+export const expMult=(w:WorkState,skill:HireSkill)=>1+Math.min(.2,.05*Math.floor((w.exp?.[skill]??0)/5));
 /** Hệ số tốc độ theo tinh thần (mục 35.1). */
 export const moraleMult=(m:number)=>m>=70?1.1:m>=40?1:m>=20?.85:.6;
 const has=(list:Trait[]|undefined,t:Trait[])=>!!list&&t.some(x=>list.includes(x));
 
 export function speedOf(e:Employee,day:number,job?:Job){
  const w=workAt(e,day),fx=FX[e.personality],d=job?e.skills[job.skill]-job.lv:0;
- let s=clamp(1+.12*d,.5,1.6)*moraleMult(w.morale)*fx.speed;
+ let s=clamp(1+.12*d,.5,1.6)*moraleMult(w.morale)*fx.speed*(job?expMult(w,job.skill):1);
  if(has(job?.traits,fx.fit))s*=fx.fitSpeed;if(has(job?.traits,fx.unfit))s*=2-fx.fitSpeed;
  return r1(s*100)/100}
 export function errorOf(e:Employee,day:number,job?:Job){
@@ -85,5 +87,5 @@ export function behaviorOf(e:Employee,day:number,job?:Job){const fx=FX[e.persona
 
 export function validWork(v:unknown,day:number):v is WorkState{
  if(!v||typeof v!=='object')return false;const w=v as WorkState;
- return [w.morale,w.loyalty,w.fatigue,w.ambition].every(x=>Number.isFinite(x)&&x>=0&&x<=100)&&Number.isInteger(w.day)&&w.day>=0&&w.day<=day}
+ return [w.morale,w.loyalty,w.fatigue,w.ambition].every(x=>Number.isFinite(x)&&x>=0&&x<=100)&&Number.isInteger(w.day)&&w.day>=0&&w.day<=day&&(w.exp===undefined||typeof w.exp==='object'&&w.exp!==null&&Object.entries(w.exp).every(([k,n])=>HIRE_SKILLS.includes(k as HireSkill)&&Number.isInteger(n)&&n>=0&&n<=9999))}
 
