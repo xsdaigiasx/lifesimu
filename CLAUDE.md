@@ -1,12 +1,12 @@
 # Ghi chú cho Claude
 
-Dự án **Một đời để sống**. Đọc `AGENTS.md` để biết vai trò và quy cách asset. Thiết kế chi tiết nằm trong hai tài liệu Claude Docs: *Workflow phát triển hoàn chỉnh* (thứ tự, vai trò, quyết định đã chốt ở mục 12) và *Kế hoạch và thiết kế Basic 1.0* (cơ chế, công thức, ticket T01–T90).
+Dự án **Một đời để sống**. Đọc `AGENTS.md` để biết vai trò và quy cách asset. Thiết kế chi tiết nằm trong hai tài liệu Claude Docs: *Workflow phát triển hoàn chỉnh* (thứ tự, vai trò, quyết định đã chốt ở mục 12) và *Kế hoạch và thiết kế Basic 1.0* (cơ chế, công thức, ticket T01–T90). Đọc Kế hoạch ở bản chép `app/docs/plan/` và tiến độ ở `app/docs/TICKETS.md`; chỉ mở tài liệu gốc khi cần sửa nó.
 
 ## Việc của Claude
 
 - Code lõi trong `core/` và logic game; giữ bảy quy tắc ở `README.md`.
 - Không bắt đầu ticket khi kế hoạch hoặc quyết định liên quan chưa được chủ dự án duyệt.
-- Mỗi ticket một nhánh `claude/<số-issue>-<tên>`, mở PR, không tự gộp.
+- Mỗi ticket một nhánh `claude/<số-issue>-<tên>`, mở PR, không tự gộp. Gộp xong thì sửa dòng ticket trong `app/docs/TICKETS.md`.
 - Trước khi đẩy: `cd core && npm run check` phải xanh.
 - Việc cố ý làm nhỏ trước hoặc hoãn (quy mô nội dung, đồ hoạ) ghi thêm một dòng vào mục "Để dành phát triển sau" cuối tài liệu Kế hoạch triển khai.
 
