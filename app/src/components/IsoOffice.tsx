@@ -2,7 +2,7 @@ import {useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
 import {KIT,Z_PX,depth,iso,spriteBox,type KitId,type OfficePlan,type Piece,type Zone} from '../domain/office-plan';
 import {pinchStart,pinchCamera,type Point} from '../map/gestures';
 
-export interface OfficePerson{id:string;label:string;seat:number;tone:string;player?:boolean;name:string}
+export interface OfficePerson{id:string;label:string;seat:number;tone:string;player?:boolean;name:string;/** Có việc cần chủ xử lý: hiện bong bóng "!". */alert?:boolean}
 interface Props{plan:OfficePlan;people:OfficePerson[];bug?:boolean;afternoon?:boolean;onPerson?:(id:string)=>void}
 type Sprite={file:string};
 const ZONE_FILL:Record<Zone['kind'],string>={work:'#efe4cc',pantry:'#e6ead6',meeting:'#e3e7ea',boss:'#ece0d2',reception:'#eee8dc'};
@@ -68,4 +68,5 @@ function Person({person,at,onTap}:{person:OfficePerson;at:{x:number;y:number};on
   <line x1={at.x} y1={at.y} x2={at.x} y2={at.y-lift+24} className="iso-person-stem"/>
   <circle cx={at.x} cy={at.y-lift} r={26} fill={person.tone}/>
   <text x={at.x} y={at.y-lift+8} textAnchor="middle">{person.label}</text>
+  {person.alert&&<g className="iso-alert"><circle cx={at.x+24} cy={at.y-lift-26} r={15}/><text x={at.x+24} y={at.y-lift-19} textAnchor="middle">!</text></g>}
  </g>}

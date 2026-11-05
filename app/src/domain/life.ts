@@ -8,6 +8,7 @@ import {sideWork,settleSide} from './side';
 import {settleStaff} from './staff';
 import {settleProjects} from './projects';
 import {settleFinance} from './finance';
+import {settleHr} from './hr';
 import {fridgeOf,placedAt,BED_ENERGY,TABLE_MOOD,decorRelief} from './home';
 import {recordJournal} from './journal';
 import {residenceOf,hasRoom,COOK_FACTOR} from './housing';
@@ -168,4 +169,4 @@ function settleLife(previous:GameState,next:GameState):GameState{const before=li
 export function giftIngredient(s:GameState,id:IngredientId,qty:number):GameState{const l=structuredClone(lifeOf(s));if(l.pantry.length>=99)return s;stockLot(s,l,id,qty);return{...s,life:l}}
 
 /** Qua ngày: sinh hoạt rồi ngân hàng (phí trễ hạn, điểm tín dụng). */
-export function settleLifeDay(previous:GameState,next:GameState):GameState{return settleFinance(settleProjects(settleStaff(settleSide(settleBank(settleLife(previous,next))))))}
+export function settleLifeDay(previous:GameState,next:GameState):GameState{return settleHr(settleFinance(settleProjects(settleStaff(settleSide(settleBank(settleLife(previous,next)))))))}
