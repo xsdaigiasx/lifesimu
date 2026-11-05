@@ -57,7 +57,9 @@ function pick<T extends {id:string;weight?:number}>(list:readonly T[],seed:strin
 const order=<T,>(list:readonly T[],seed:string,key:(x:T)=>string)=>[...list].sort((a,b)=>hash(`${seed}:${key(a)}`)-hash(`${seed}:${key(b)}`));
 
 /** Nối các mảnh: dấu phẩy giữa mảnh, mảnh đã có dấu câu thì cách bằng khoảng trắng và viết hoa đầu mảnh sau. */
-export function joinParts(parts:readonly string[]){let out='';for(const raw of parts){const p=raw.trim();if(!p)continue;if(!out)out=cap(p);else if(/[.?!]$/.test(out))out+=' '+cap(p);else out+=', '+p}return out&&!/[.?!]$/.test(out)?out+'.':out}
+/** Mảnh kết bằng từ hỏi thì đặt dấu hỏi để phần sau viết hoa thành câu mới. */
+export const QUESTION=/(không|hông|hả|chưa|sao rồi|gì|nhỉ|à|chứ|được không)$/u;
+export function joinParts(parts:readonly string[]){let out='';for(const raw of parts){let p=raw.trim();if(!p)continue;if(!out)out=cap(p);else if(/[.?!]$/.test(out))out+=' '+cap(p);else out+=', '+p;if(QUESTION.test(out))out+='?'}return out&&!/[.?!]$/.test(out)?out+'.':out}
 
 function varsFor(c:TalkCtx,fact?:Fact):Record<string,string|number>{const n=c.npc;return{...(fact?.vars??{}),...(fact?{when:agoText(c.day-fact.day)}:{}),self:n.self,you:n.you,Self:cap(n.self),You:cap(n.you),p:PARTICLE[n.voiceKey]??'nha'}}
 const fill=(text:string,vars:Record<string,string|number>)=>text.replace(VAR,(_,k:string)=>String(vars[k]));

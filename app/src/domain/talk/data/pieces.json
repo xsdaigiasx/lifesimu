@@ -861,14 +861,6 @@
   "minTier": "close"
  },
  {
-  "id": "tail-008",
-  "slot": "tail",
-  "text": "nha {you}",
-  "intent": [
-   "request"
-  ]
- },
- {
   "id": "tail-009",
   "slot": "tail",
   "text": "{you} đừng giận {self} nha",
