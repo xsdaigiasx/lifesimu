@@ -6,7 +6,7 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 
 - **Kế hoạch và thiết kế Basic 1.0** (cơ chế, công thức, ticket T01 đến T89, mục "Để dành phát triển sau"): Claude Docs, project `BvJJ1urceVRjfoNmQYohLr` (cũng là https://claude.ai/artifact/BvJJ1urceVRjfoNmQYohLr). Đọc bằng công cụ Docs: `read` với `ref {"object":"project","id":"BvJJ1urceVRjfoNmQYohLr"}` (dùng đúng id này, đừng đoán id khác), lấy danh sách tab rồi đọc từng phần; tài liệu dài nên bị phân trang (`payload {"kind":"view"}`, tìm bằng `search`). Phần công ty: mục 32 đến 41 (ticket T44 đến T51 ở mục 41); sai số phỏng vấn mục 33.2; hậu quả tuyển sai mục 37; chính sách mục 38.
 - **Workflow phát triển hoàn chỉnh** (thứ tự, vai trò Claude và Codex, quyết định đã chốt mục 12, checklist asset mục 10): https://claude.ai/artifact/FB7QmKgQ1GrVPmhUdYGdKp
-- Trong repo: `CLAUDE.md` (quy tắc làm việc và giao diện), `AGENTS.md` (vai trò, quy cách asset), `README.md` (bảy quy tắc), file này. Bản xuất `.md` đính kèm trong phiên cũ (`Một đời để sống Kế hoạch triển khai chi tiết v0.20.md`) chỉ là bản cũ v0.20; dùng bản Claude Docs ở trên. Nếu không đọc được bằng id, hỏi chủ dự án chia sẻ lại tài liệu.
+- Trong repo: `CLAUDE.md` (quy tắc làm việc và giao diện), `AGENTS.md` (vai trò, quy cách asset), `README.md` (bảy quy tắc), file này. Chỉ dùng bản Claude Docs ở trên làm lộ trình mới nhất; các bản xuất `.md` cũ (v0.20) đã bỏ. Nếu không đọc được bằng id, hỏi chủ dự án chia sẻ lại tài liệu.
 - Quyết định của chủ dự án nằm cả trong bộ nhớ Claude (`/areas/mot-doi-de-song.md`).
 
 ## 1b. Cập nhật cuối phiên 05/11 (đọc trước mục 1)
