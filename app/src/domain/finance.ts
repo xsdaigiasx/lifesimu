@@ -2,6 +2,7 @@ import type {GameState} from './types';
 import type {CompanyState} from './company';
 import {dateAt,money} from './format';
 import {hash} from './shift';
+import {wageMult} from './policy';
 import {recordJournal} from './journal';
 import {SIZES,officeOf} from './office';
 import {staffOf,type Employee} from './hiring';
@@ -52,7 +53,7 @@ export function settleFinance(next:GameState):GameState{
   f.debts=f.debts.filter(x=>{if(x.amount>c.fund)return true;c.fund-=x.amount;book(c,d,`Trả nợ lương ${x.name}`,-x.amount);return false});
   if(dateAt(d).getUTCDate()===1){
    let missed=0;
-   for(const e of staff){const amt=wageDue(e,d);if(amt<=0)continue;
+   for(const e of staff){const amt=Math.round(wageDue(e,d)*wageMult(c)/1000)*1000;if(amt<=0)continue;
     if(amt<=c.fund){c.fund-=amt;book(c,d,`Lương ${e.name}`,-amt)}else{f.debts.push({emp:e.id,name:e.name,amount:amt,since:d});missed++}}
    if(missed){c.rep=clamp((c.rep??50)+FIN.repUnpaid,0,100);notes.push([`payday:${d}`,'Chưa đủ tiền trả lương',`Quỹ không đủ trả lương cho ${missed} người, uy tín công ty giảm.`])}}
   for(const e of [...staff]){
@@ -69,7 +70,7 @@ export function settleFinance(next:GameState):GameState{
  return out}
 
 /** Chi phí cố định mỗi tháng: lương và thuê văn phòng (chưa có vay công ty nên chưa có lãi vay). */
-export const monthlyCost=(s:GameState)=>staffOf(s).reduce((a,e)=>a+e.wage,0)+(officeOf(s).role==='owner'?SIZES[officeOf(s).size].rent:0);
+export const monthlyCost=(s:GameState)=>Math.round(staffOf(s).reduce((a,e)=>a+e.wage,0)*wageMult(s.company))+(officeOf(s).role==='owner'?SIZES[officeOf(s).size].rent:0);
 export const owedWages=(s:GameState)=>financeOf(s).debts.reduce((a,x)=>a+x.amount,0);
 export const incomingOf=(s:GameState)=>[...financeOf(s).recv].sort((a,b)=>a.due-b.due);
 export type RunwayLevel='ok'|'warn'|'danger';
