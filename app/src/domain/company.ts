@@ -31,7 +31,7 @@ export function foundCompany(s:GameState,a:CompanyAction):GameResult{
  if(officeOf(n).role==='employee'){const r=officeAction(n,{kind:'leave'});if(!r.ok)return r;n=r.state}
  if(post(n,{id:`company:${s.day}`,name:'Vốn lập công ty',amount:-COMPANY.fund})!=='ok')return fail('Chưa đủ vốn để lập công ty.');
  n.company={version:1,founded:s.day,fund:COMPANY.fund};
- return officeAction(n,{kind:'rent',size:'small',industry:a.industry,name:a.name});
+ return officeAction(n,{kind:'rent',size:'small',industry:a.industry,name:a.name,term:'month'});
 }
 export function validCompany(v:unknown,day:number):v is CompanyState{
  if(!v||typeof v!=='object')return false;const c=v as CompanyState;
