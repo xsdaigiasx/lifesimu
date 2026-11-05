@@ -1,6 +1,13 @@
-# Bàn giao — Một đời để sống, Basic 1.0 (05/11/2026, cập nhật sau T46)
+# Bàn giao — Một đời để sống, Basic 1.0 (05/11/2026, cập nhật sau T50)
 
 Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude mới: đọc hết trước khi làm, rồi đọc `CLAUDE.md`, `AGENTS.md`, `README.md`.
+
+## 0. Tài liệu thiết kế nằm ở đâu (đọc trước, khỏi phải tìm lại)
+
+- **Kế hoạch và thiết kế Basic 1.0** (cơ chế, công thức, ticket T01 đến T89, mục "Để dành phát triển sau"): Claude Docs, project `BvJJ1urceVRjfoNmQYohLr` (cũng là https://claude.ai/artifact/BvJJ1urceVRjfoNmQYohLr). Đọc bằng công cụ Docs: `read` với `ref {"object":"project","id":"BvJJ1urceVRjfoNmQYohLr"}` (dùng đúng id này, đừng đoán id khác), lấy danh sách tab rồi đọc từng phần; tài liệu dài nên bị phân trang (`payload {"kind":"view"}`, tìm bằng `search`). Phần công ty: mục 32 đến 41 (ticket T44 đến T51 ở mục 41); sai số phỏng vấn mục 33.2; hậu quả tuyển sai mục 37; chính sách mục 38.
+- **Workflow phát triển hoàn chỉnh** (thứ tự, vai trò Claude và Codex, quyết định đã chốt mục 12, checklist asset mục 10): https://claude.ai/artifact/FB7QmKgQ1GrVPmhUdYGdKp
+- Trong repo: `CLAUDE.md` (quy tắc làm việc và giao diện), `AGENTS.md` (vai trò, quy cách asset), `README.md` (bảy quy tắc), file này. Chỉ dùng bản Claude Docs ở trên làm lộ trình mới nhất; các bản xuất `.md` cũ (v0.20) đã bỏ. Nếu không đọc được bằng id, hỏi chủ dự án chia sẻ lại tài liệu.
+- Quyết định của chủ dự án nằm cả trong bộ nhớ Claude (`/areas/mot-doi-de-song.md`).
 
 ## 1b. Cập nhật cuối phiên 05/11 (đọc trước mục 1)
 
@@ -30,8 +37,8 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 
 - Repo `xsdaigiasx/lifesimu`, game ở `app/` (React 19, TypeScript, Vite 8), engine kiểm tra ở `core/`.
 - Thiết kế chi tiết: hai tài liệu Claude Docs *Workflow phát triển hoàn chỉnh* và *Kế hoạch và thiết kế Basic 1.0* (project `BvJJ1urceVRjfoNmQYohLr`, node `eb588493-56a5`; ticket T01–T89, mục "Để dành phát triển sau" ở cuối).
-- Tiến độ Basic 1.0: T01–T24, T26–T30, T40, T41 xong (T29 đã gộp; T30 ở #165 chờ gộp); T25 bỏ, gộp vào issue #124.
-- main ở `164f344` (app 0.39.1, đã gộp #158 nối ảnh Codex lô 1). **PR mở 05/11, gộp theo thứ tự**: #161 (TTTM và Mua sắm: ô mục, nút i, thang chữ, phí giao theo cỡ, 0.40.0), rồi #164 (nút i trong suốt, 0.40.1) và #165 (T30 Ngân hàng, 0.41.0); #164 và #165 tách từ nhánh của #161, sau khi #161 gộp thì đổi base về main. Issue mở: #133 (Codex asset), #55 (hoãn).
+- Tiến độ Basic 1.0: T01–T24, T26–T33, T40, T41, T44–T50 xong (đều đã gộp vào main); T25 bỏ, gộp vào issue #124. **Còn: T51** rồi các ticket sau mục 41 của Kế hoạch. Issue mở: #55 (asset bộ đồ văn phòng, lô 2 đang chờ Codex).
+- (Dòng cũ, bỏ qua; main hiện ở app 0.52.0 sau PR #220) main ở `164f344` (app 0.39.1, đã gộp #158 nối ảnh Codex lô 1). **PR mở 05/11, gộp theo thứ tự**: #161 (TTTM và Mua sắm: ô mục, nút i, thang chữ, phí giao theo cỡ, 0.40.0), rồi #164 (nút i trong suốt, 0.40.1) và #165 (T30 Ngân hàng, 0.41.0); #164 và #165 tách từ nhánh của #161, sau khi #161 gộp thì đổi base về main. Issue mở: #133 (Codex asset), #55 (hoãn).
 
 ## 2. Quy trình bắt buộc
 
