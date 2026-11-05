@@ -1,0 +1,37 @@
+/* T55: Tủ bếp, Tủ lạnh, Túi; màn Kỹ năng chỉ xem */
+.food-card .food-card-actions{display:flex;gap:6px;width:100%;margin-top:2px}
+.food-card .food-card-actions button{flex:1 1 0;display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:34px;padding:0 6px;border-radius:9px;font-size:12px;font-weight:700;white-space:nowrap}
+.food-card .food-card-actions button.ghost,.food-card .food-card-actions button:only-child:has(svg){background:#e7f0f5;color:#2f6f93;border:1px solid #c6dbe7}
+.food-card .food-card-actions button:disabled{opacity:.45}
+.food-card .food-card-actions svg{width:14px!important;height:14px!important}
+.food-card .market-item-art{border-radius:10px}
+.fridge-cap{display:grid!important;grid-template-columns:auto 1fr;align-items:center;gap:4px 10px;margin:0 0 10px!important;padding:10px 12px;border-radius:12px;background:#e9f2f6;color:#2f6f93!important}
+.fridge-cap span{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.fridge-cap span svg{width:15px!important;height:15px!important}
+.fridge-cap b{justify-self:end;font-size:18px;font-variant-numeric:tabular-nums;color:#1f5675}
+.fridge-cap progress{grid-column:1/-1;width:100%;height:7px;appearance:none;border:0;border-radius:99px;overflow:hidden;background:#cfe1ea}
+.fridge-cap progress::-webkit-progress-bar{background:#cfe1ea}.fridge-cap progress::-webkit-progress-value{background:#3f86ae;border-radius:99px}.fridge-cap progress::-moz-progress-bar{background:#3f86ae}
+.fridge-empty{display:grid;justify-items:center;gap:6px;padding:26px 16px;margin:4px 0 10px;border:1px dashed #c9d4bc;border-radius:14px;background:#f6f8f0;text-align:center;color:#5f7062}
+.fridge-empty svg{width:34px!important;height:34px!important;color:#3f86ae}
+.fridge-empty strong{font-size:16px;color:#244a3b}.fridge-empty p{margin:0;font-size:12.5px}
+.bag-panel{display:grid;gap:12px}
+.bag-slots{display:flex;align-items:center;gap:6px;padding:10px 12px;border-radius:12px;background:#f3ede0}
+.bag-slots span{flex:1 1 0;height:10px;border-radius:99px;background:#e2d7c1}
+.bag-slots span.on{background:#c98a3c}
+.bag-slots b{margin-left:6px;font-size:16px;font-variant-numeric:tabular-nums;color:#6b4a1f}
+.mobile-nav button{position:relative}
+.mobile-nav .nav-badge{position:absolute;top:4px;left:calc(50% + 6px);min-width:16px;height:16px;padding:0 4px;border-radius:99px;background:#c98a3c;color:#fff;font-size:10px;font-style:normal;font-weight:800;line-height:16px;text-align:center}
+.journal-app{background:linear-gradient(160deg,#5b7f6b,#2f5446)!important;color:#fff!important}
+.skill-cards{display:grid;gap:10px}
+.skill-card{display:grid;gap:8px;padding:12px 14px;border:1px solid #dce3d3;border-radius:14px;background:#fbfcf6}
+.skill-card header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.skill-card header strong{font-size:15px;color:#244a3b}
+.skill-card .skill-lv{min-width:52px;padding:3px 10px;border-radius:99px;background:#38644e;color:#fff;font-size:13px;text-align:center;font-variant-numeric:tabular-nums}
+.skill-card progress{width:100%;height:8px;appearance:none;border:0;border-radius:99px;overflow:hidden;background:#e3e9da}
+.skill-card progress::-webkit-progress-bar{background:#e3e9da}.skill-card progress::-webkit-progress-value{background:#6aa06f;border-radius:99px}.skill-card progress::-moz-progress-bar{background:#6aa06f}
+.skill-facts{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:#5f7062}
+.skill-facts span{display:inline-flex;align-items:center;gap:4px}
+.skill-facts svg{width:13px!important;height:13px!important}
+.skill-facts .cert{color:#9a6a1f;font-weight:700}
+@media(min-width:761px){.skill-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.food-card .food-card-note{flex:1 1 0;display:grid;place-items:center;min-height:34px;border-radius:9px;background:#f1ede2;color:#8a7a5c;font-size:12px;font-weight:700}

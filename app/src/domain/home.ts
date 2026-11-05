@@ -12,7 +12,8 @@ export const homeName=(id:HomeId,tier:HomeTier='basic')=>HOME_MODELS[id]?.[tier]
 const PRICE:Partial<Record<HomeId,Record<HomeTier,number>>>={fridge:{basic:2500000,comfort:4500000,premium:8000000},tv:{basic:3200000,comfort:5500000,premium:9500000}};
 export const homePrice=(id:HomeId,tier:HomeTier='basic')=>PRICE[id]?.[tier]??Math.round(HOME_ITEMS[id].price*HOME_TIERS[tier].factor);
 /** T21: tủ lạnh (chủ dự án duyệt 04/11): sức chứa theo phần, hạn dùng kéo dài theo hệ số; gạo không đổi. */
-export const FRIDGE:Record<HomeTier,{cap:number;factor:number}>={basic:{cap:20,factor:2},comfort:{cap:35,factor:2.5},premium:{cap:60,factor:3}};
+/** T55: `cap` là số loại đồ (ô), không phải số lượng: 26 kg gạo cùng loại chỉ chiếm 1 ô. */
+export const FRIDGE:Record<HomeTier,{cap:number;factor:number}>={basic:{cap:6,factor:2},comfort:{cap:10,factor:2.5},premium:{cap:16,factor:3}};
 export function fridgeOf(s:GameState){const f=homeOf(s).items.find(i=>i.id==='fridge');return f?FRIDGE[f.tier??'basic']:null}
 export interface HomeObject{uid?:string;tier?:HomeTier;mount?:'floor'|'surface'|'wall';parentId?:string;wall?:'left'|'right';id:HomeId;x:number;y:number;rotation:0|90|180|270;placed:boolean}
 export interface HomeState{items:HomeObject[];grid?:8}
