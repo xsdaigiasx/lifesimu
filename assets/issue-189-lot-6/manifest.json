@@ -1,0 +1,1238 @@
+{
+  "issue": 189,
+  "lot": 6,
+  "baseline_commit": "1316f0fc34a4c99d6b0fc30388213e065881577f",
+  "tile_px": [
+    128,
+    64
+  ],
+  "items": [
+    {
+      "id": "townhouse-t1",
+      "file": "assets/houses/townhouse-t1.webp",
+      "frame_px": [
+        1984,
+        1168
+      ],
+      "anchor_px": [
+        800,
+        160
+      ],
+      "footprint_tiles": [
+        18,
+        12
+      ],
+      "direction": "original 2:1 camera",
+      "bytes": 146308,
+      "quality": 85,
+      "sha256": "fcb5b85ce8fa3fecb1c682aa40d9f0cd5ece66aa747632e03e1ededf82f189c0",
+      "source_sha256": "4e9f1c7bd93135ef67cc605c7f55bdd9214ef07e76fd07a14727edfc620ef2c2",
+      "alpha_sha256": "cc01dbdbf8f4eefd93588b09a7a260e7981eb68d9af561820c7471b8580e2238",
+      "source_bbox": [
+        17,
+        14,
+        1616,
+        948
+      ],
+      "target_bbox": [
+        21,
+        26,
+        1963,
+        1137
+      ],
+      "geometry": {
+        "id": "townhouse-t1",
+        "house": "townhouse",
+        "floor": 1,
+        "name": "Nhà phố — tầng 1",
+        "file": "/assets/houses/townhouse-t1.webp",
+        "frame_px": [
+          1984,
+          1168
+        ],
+        "floor_tiles": [
+          18,
+          12
+        ],
+        "tile_px": [
+          128,
+          64
+        ],
+        "origin_px": [
+          800,
+          160
+        ],
+        "axis_x_px": [
+          64,
+          32
+        ],
+        "axis_y_px": [
+          -64,
+          32
+        ],
+        "floor_corners": [
+          {
+            "world": [
+              0,
+              0
+            ],
+            "pixel": [
+              800,
+              160
+            ]
+          },
+          {
+            "world": [
+              18,
+              0
+            ],
+            "pixel": [
+              1952,
+              736
+            ]
+          },
+          {
+            "world": [
+              18,
+              12
+            ],
+            "pixel": [
+              1184,
+              1120
+            ]
+          },
+          {
+            "world": [
+              0,
+              12
+            ],
+            "pixel": [
+              32,
+              544
+            ]
+          }
+        ],
+        "anchor_px": [
+          1184,
+          1120
+        ],
+        "outer_walls": [
+          "x=0",
+          "y=0"
+        ],
+        "outer_wall_height_px": 128,
+        "partition_height_px": 32,
+        "partition_width_tiles": 0.08,
+        "rooms": [
+          {
+            "id": "living",
+            "name": "Phòng khách",
+            "x": 0,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#e6c39b"
+          },
+          {
+            "id": "kitchen",
+            "name": "Bếp",
+            "x": 10,
+            "y": 0,
+            "w": 8,
+            "h": 8,
+            "material": "stone",
+            "color": "#e1e8d8"
+          }
+        ],
+        "stairs": {
+          "x": 14,
+          "y": 8,
+          "w": 4,
+          "h": 4,
+          "axis": "x",
+          "steps": 8,
+          "direction": "up",
+          "rise_px": 96
+        },
+        "doors": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "living",
+              "kitchen"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 4,
+            "to": 6,
+            "connects": [
+              "living",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 11,
+            "to": 13,
+            "connects": [
+              "kitchen",
+              "hall"
+            ],
+            "width_tiles": 2
+          }
+        ],
+        "partition_runs": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 5,
+            "to": 10
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 10,
+            "to": 11
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 13,
+            "to": 18
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 0,
+            "to": 4
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 6,
+            "to": 10
+          }
+        ],
+        "bytes": 97404,
+        "compression": "lossless",
+        "rgba": true,
+        "alpha_bbox_px": [
+          21,
+          26,
+          1963,
+          1137
+        ],
+        "sha256": "233cf2c5a9a2d8bd53b0450e221e03d15b91cf241e39f1fbfcc57bca4fd01179"
+      }
+    },
+    {
+      "id": "townhouse-t2",
+      "file": "assets/houses/townhouse-t2.webp",
+      "frame_px": [
+        1984,
+        1168
+      ],
+      "anchor_px": [
+        800,
+        160
+      ],
+      "footprint_tiles": [
+        18,
+        12
+      ],
+      "direction": "original 2:1 camera",
+      "bytes": 145388,
+      "quality": 85,
+      "sha256": "7071706bfc28d3835cf206747a56fa0bb23400bf95ae4e845b4af1cee7b6ea2a",
+      "source_sha256": "db3e1edef048c5cc255c92ede71bcd2c883b1632d658c191ddd234107122a3cd",
+      "alpha_sha256": "831f788c650b8127f027aada312db4adeab3a3b1fe4970afab1d0c38a470071b",
+      "source_bbox": [
+        15,
+        10,
+        1615,
+        948
+      ],
+      "target_bbox": [
+        21,
+        26,
+        1963,
+        1137
+      ],
+      "geometry": {
+        "id": "townhouse-t2",
+        "house": "townhouse",
+        "floor": 2,
+        "name": "Nhà phố — tầng 2",
+        "file": "/assets/houses/townhouse-t2.webp",
+        "frame_px": [
+          1984,
+          1168
+        ],
+        "floor_tiles": [
+          18,
+          12
+        ],
+        "tile_px": [
+          128,
+          64
+        ],
+        "origin_px": [
+          800,
+          160
+        ],
+        "axis_x_px": [
+          64,
+          32
+        ],
+        "axis_y_px": [
+          -64,
+          32
+        ],
+        "floor_corners": [
+          {
+            "world": [
+              0,
+              0
+            ],
+            "pixel": [
+              800,
+              160
+            ]
+          },
+          {
+            "world": [
+              18,
+              0
+            ],
+            "pixel": [
+              1952,
+              736
+            ]
+          },
+          {
+            "world": [
+              18,
+              12
+            ],
+            "pixel": [
+              1184,
+              1120
+            ]
+          },
+          {
+            "world": [
+              0,
+              12
+            ],
+            "pixel": [
+              32,
+              544
+            ]
+          }
+        ],
+        "anchor_px": [
+          1184,
+          1120
+        ],
+        "outer_walls": [
+          "x=0",
+          "y=0"
+        ],
+        "outer_wall_height_px": 128,
+        "partition_height_px": 32,
+        "partition_width_tiles": 0.08,
+        "rooms": [
+          {
+            "id": "bedroom",
+            "name": "Phòng ngủ",
+            "x": 0,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#ead2c7"
+          },
+          {
+            "id": "study",
+            "name": "Phòng làm việc",
+            "x": 10,
+            "y": 0,
+            "w": 8,
+            "h": 8,
+            "material": "wood",
+            "color": "#d5ddca"
+          },
+          {
+            "id": "bath",
+            "name": "Phòng tắm",
+            "x": 14,
+            "y": 8,
+            "w": 4,
+            "h": 4,
+            "material": "bath",
+            "color": "#d2e5e7"
+          }
+        ],
+        "stairs": {
+          "x": 10,
+          "y": 8,
+          "w": 4,
+          "h": 4,
+          "axis": "x",
+          "steps": 8,
+          "direction": "down",
+          "rise_px": -96
+        },
+        "doors": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "bedroom",
+              "study"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 15,
+            "to": 17,
+            "connects": [
+              "study",
+              "bath"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 4,
+            "to": 6,
+            "connects": [
+              "bedroom",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 8,
+            "to": 10,
+            "connects": [
+              "bedroom",
+              "stairs"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 11,
+            "to": 13,
+            "connects": [
+              "study",
+              "stairs"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 14,
+            "from": 9,
+            "to": 11,
+            "connects": [
+              "bath",
+              "stairs"
+            ],
+            "width_tiles": 2
+          }
+        ],
+        "partition_runs": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 5,
+            "to": 8
+          },
+          {
+            "axis": "x",
+            "at": 14,
+            "from": 8,
+            "to": 9
+          },
+          {
+            "axis": "x",
+            "at": 14,
+            "from": 11,
+            "to": 12
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 10,
+            "to": 11
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 13,
+            "to": 15
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 17,
+            "to": 18
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 0,
+            "to": 4
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 6,
+            "to": 10
+          }
+        ],
+        "bytes": 128948,
+        "compression": "lossless",
+        "rgba": true,
+        "alpha_bbox_px": [
+          21,
+          26,
+          1963,
+          1137
+        ],
+        "sha256": "3f063c99a5717d9a8af6f6974dacbbb76a80877bf1aef00d58a4c282aa3b11a3"
+      }
+    },
+    {
+      "id": "villa-t1",
+      "file": "assets/houses/villa-t1.webp",
+      "frame_px": [
+        3904,
+        2128
+      ],
+      "anchor_px": [
+        1952,
+        160
+      ],
+      "footprint_tiles": [
+        30,
+        30
+      ],
+      "direction": "original 2:1 camera",
+      "bytes": 135800,
+      "quality": 35,
+      "sha256": "21315ca1c3578a8d1ac255d093185d1758bf3241f9d6a4a3d319811b48484804",
+      "source_sha256": "c4988f6a89e121213d915bbb211501a87a2b55f249e9ced3dc1a7445d2a16d53",
+      "alpha_sha256": "60ecdc797258b72adeb682f8973119b4d06e31c23a64e796b225a1fe0672c0ab",
+      "source_bbox": [
+        12,
+        6,
+        1684,
+        917
+      ],
+      "target_bbox": [
+        21,
+        26,
+        3883,
+        2097
+      ],
+      "geometry": {
+        "id": "villa-t1",
+        "house": "villa",
+        "floor": 1,
+        "name": "Biệt thự — tầng 1",
+        "file": "/assets/houses/villa-t1.webp",
+        "frame_px": [
+          3904,
+          2128
+        ],
+        "floor_tiles": [
+          30,
+          30
+        ],
+        "tile_px": [
+          128,
+          64
+        ],
+        "origin_px": [
+          1952,
+          160
+        ],
+        "axis_x_px": [
+          64,
+          32
+        ],
+        "axis_y_px": [
+          -64,
+          32
+        ],
+        "floor_corners": [
+          {
+            "world": [
+              0,
+              0
+            ],
+            "pixel": [
+              1952,
+              160
+            ]
+          },
+          {
+            "world": [
+              30,
+              0
+            ],
+            "pixel": [
+              3872,
+              1120
+            ]
+          },
+          {
+            "world": [
+              30,
+              30
+            ],
+            "pixel": [
+              1952,
+              2080
+            ]
+          },
+          {
+            "world": [
+              0,
+              30
+            ],
+            "pixel": [
+              32,
+              1120
+            ]
+          }
+        ],
+        "anchor_px": [
+          1952,
+          2080
+        ],
+        "outer_walls": [
+          "x=0",
+          "y=0"
+        ],
+        "outer_wall_height_px": 128,
+        "partition_height_px": 32,
+        "partition_width_tiles": 0.08,
+        "rooms": [
+          {
+            "id": "living",
+            "name": "Phòng khách",
+            "x": 0,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#e6c39b"
+          },
+          {
+            "id": "kitchen",
+            "name": "Bếp",
+            "x": 10,
+            "y": 0,
+            "w": 8,
+            "h": 8,
+            "material": "stone",
+            "color": "#e1e8d8"
+          },
+          {
+            "id": "bath",
+            "name": "Phòng tắm",
+            "x": 10,
+            "y": 8,
+            "w": 6,
+            "h": 6,
+            "material": "bath",
+            "color": "#d2e5e7"
+          },
+          {
+            "id": "fun",
+            "name": "Phòng giải trí",
+            "x": 18,
+            "y": 0,
+            "w": 12,
+            "h": 12,
+            "material": "wood",
+            "color": "#dcd3e5"
+          },
+          {
+            "id": "garden",
+            "name": "Sân vườn",
+            "x": 7,
+            "y": 14,
+            "w": 16,
+            "h": 16,
+            "material": "grass",
+            "color": "#b0ca96"
+          }
+        ],
+        "stairs": {
+          "x": 0,
+          "y": 10,
+          "w": 4,
+          "h": 4,
+          "axis": "y",
+          "steps": 8,
+          "direction": "up",
+          "rise_px": 96
+        },
+        "doors": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "living",
+              "kitchen"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 8,
+            "to": 10,
+            "connects": [
+              "living",
+              "bath"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 12,
+            "to": 14,
+            "connects": [
+              "kitchen",
+              "bath"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 18,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "kitchen",
+              "fun"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 5,
+            "to": 7,
+            "connects": [
+              "living",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 16,
+            "to": 18,
+            "connects": [
+              "kitchen",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 16,
+            "from": 10,
+            "to": 12,
+            "connects": [
+              "bath",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 12,
+            "from": 23,
+            "to": 25,
+            "connects": [
+              "fun",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 14,
+            "from": 12,
+            "to": 14,
+            "connects": [
+              "bath",
+              "garden"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 1,
+            "to": 3,
+            "connects": [
+              "living",
+              "stairs"
+            ],
+            "width_tiles": 2
+          }
+        ],
+        "partition_runs": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 5,
+            "to": 8
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 10,
+            "to": 14
+          },
+          {
+            "axis": "x",
+            "at": 16,
+            "from": 8,
+            "to": 10
+          },
+          {
+            "axis": "x",
+            "at": 16,
+            "from": 12,
+            "to": 14
+          },
+          {
+            "axis": "x",
+            "at": 18,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 18,
+            "from": 5,
+            "to": 12
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 10,
+            "to": 12
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 14,
+            "to": 16
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 0,
+            "to": 1
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 3,
+            "to": 5
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 7,
+            "to": 10
+          },
+          {
+            "axis": "y",
+            "at": 12,
+            "from": 18,
+            "to": 23
+          },
+          {
+            "axis": "y",
+            "at": 12,
+            "from": 25,
+            "to": 30
+          },
+          {
+            "axis": "y",
+            "at": 14,
+            "from": 10,
+            "to": 12
+          },
+          {
+            "axis": "y",
+            "at": 14,
+            "from": 14,
+            "to": 16
+          }
+        ],
+        "bytes": 280490,
+        "compression": "lossless",
+        "rgba": true,
+        "alpha_bbox_px": [
+          21,
+          26,
+          3883,
+          2097
+        ],
+        "sha256": "e3e5f08e7b2d2314efe3bca4699f5f74d595676778246603208e211d2538df7f"
+      }
+    },
+    {
+      "id": "villa-t2",
+      "file": "assets/houses/villa-t2.webp",
+      "frame_px": [
+        2752,
+        1552
+      ],
+      "anchor_px": [
+        928,
+        160
+      ],
+      "footprint_tiles": [
+        28,
+        14
+      ],
+      "direction": "original 2:1 camera",
+      "bytes": 121976,
+      "quality": 75,
+      "sha256": "b488a8176c0674cee4e09c14319bf7431fc035b909c6421bb58c427ab3ed8893",
+      "source_sha256": "51552b2ed7f29875f550135e62fa767b3ccf3977b058c9f193540695468199b3",
+      "alpha_sha256": "5e9f1e7a77d4da4412248c5f0ae7a541baa1c2059ac51994b1050df8d975bc93",
+      "source_bbox": [
+        10,
+        3,
+        1658,
+        936
+      ],
+      "target_bbox": [
+        21,
+        26,
+        2731,
+        1521
+      ],
+      "geometry": {
+        "id": "villa-t2",
+        "house": "villa",
+        "floor": 2,
+        "name": "Biệt thự — tầng 2",
+        "file": "/assets/houses/villa-t2.webp",
+        "frame_px": [
+          2752,
+          1552
+        ],
+        "floor_tiles": [
+          28,
+          14
+        ],
+        "tile_px": [
+          128,
+          64
+        ],
+        "origin_px": [
+          928,
+          160
+        ],
+        "axis_x_px": [
+          64,
+          32
+        ],
+        "axis_y_px": [
+          -64,
+          32
+        ],
+        "floor_corners": [
+          {
+            "world": [
+              0,
+              0
+            ],
+            "pixel": [
+              928,
+              160
+            ]
+          },
+          {
+            "world": [
+              28,
+              0
+            ],
+            "pixel": [
+              2720,
+              1056
+            ]
+          },
+          {
+            "world": [
+              28,
+              14
+            ],
+            "pixel": [
+              1824,
+              1504
+            ]
+          },
+          {
+            "world": [
+              0,
+              14
+            ],
+            "pixel": [
+              32,
+              608
+            ]
+          }
+        ],
+        "anchor_px": [
+          1824,
+          1504
+        ],
+        "outer_walls": [
+          "x=0",
+          "y=0"
+        ],
+        "outer_wall_height_px": 128,
+        "partition_height_px": 32,
+        "partition_width_tiles": 0.08,
+        "rooms": [
+          {
+            "id": "bedroom",
+            "name": "Phòng ngủ",
+            "x": 0,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#ead2c7"
+          },
+          {
+            "id": "guest",
+            "name": "Phòng ngủ phụ",
+            "x": 10,
+            "y": 0,
+            "w": 10,
+            "h": 10,
+            "material": "wood",
+            "color": "#eadfc5"
+          },
+          {
+            "id": "study",
+            "name": "Phòng làm việc",
+            "x": 20,
+            "y": 0,
+            "w": 8,
+            "h": 8,
+            "material": "wood",
+            "color": "#d5ddca"
+          }
+        ],
+        "stairs": {
+          "x": 0,
+          "y": 10,
+          "w": 4,
+          "h": 4,
+          "axis": "y",
+          "steps": 8,
+          "direction": "down",
+          "rise_px": -96
+        },
+        "doors": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 4,
+            "to": 6,
+            "connects": [
+              "bedroom",
+              "guest"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "x",
+            "at": 20,
+            "from": 3,
+            "to": 5,
+            "connects": [
+              "guest",
+              "study"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 5,
+            "to": 7,
+            "connects": [
+              "bedroom",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 14,
+            "to": 16,
+            "connects": [
+              "guest",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 23,
+            "to": 25,
+            "connects": [
+              "study",
+              "hall"
+            ],
+            "width_tiles": 2
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 1,
+            "to": 3,
+            "connects": [
+              "bedroom",
+              "stairs"
+            ],
+            "width_tiles": 2
+          }
+        ],
+        "partition_runs": [
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 0,
+            "to": 4
+          },
+          {
+            "axis": "x",
+            "at": 10,
+            "from": 6,
+            "to": 10
+          },
+          {
+            "axis": "x",
+            "at": 20,
+            "from": 0,
+            "to": 3
+          },
+          {
+            "axis": "x",
+            "at": 20,
+            "from": 5,
+            "to": 10
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 20,
+            "to": 23
+          },
+          {
+            "axis": "y",
+            "at": 8,
+            "from": 25,
+            "to": 28
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 0,
+            "to": 1
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 3,
+            "to": 5
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 7,
+            "to": 14
+          },
+          {
+            "axis": "y",
+            "at": 10,
+            "from": 16,
+            "to": 20
+          }
+        ],
+        "bytes": 152436,
+        "compression": "lossless",
+        "rgba": true,
+        "alpha_bbox_px": [
+          21,
+          26,
+          2731,
+          1521
+        ],
+        "sha256": "eca6b56d988800feda232b2d0dcd70284f5579a7b72232e1338d5932ffad918c"
+      }
+    }
+  ]
+}

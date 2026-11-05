@@ -1,0 +1,17 @@
+{
+  "tool": "image_gen built-in",
+  "items": [
+    {
+      "id": "townhouse-t2",
+      "prompt": "Use case: precise-object-edit. Correct ONLY flooring MATERIALS in image1, preserve EVERY architectural edge, footprint, wall, opening, stair, canvas and camera exactly. Image2 is approved semi-realistic STYLE only. Large upper-left peach/pink room is a BEDROOM: replace its square terracotta floor with warm rose-tinted oak WOOD PLANKS, fine directional grain. Right sage room is a STUDY: replace its square tiles with pale sage-tinted oak WOOD PLANKS. Keep pale teal lower-right bathroom as ceramic tiles. Neutral circulation tiles and existing wooden stairs unchanged. Retain existing plaster and modeled skirting, upper-left light and thin same-tone contours. Empty shell, no furniture or new objects. True transparent exterior with clean edges, no exterior shadow, text, logos or watermark. Do not crop, zoom, recenter or change silhouette."
+    },
+    {
+      "id": "villa-t2",
+      "prompt": "Use case: precise-object-edit. Correct ONLY flooring MATERIALS in image1, preserve EVERY architectural edge, footprint, wall, opening, stair, canvas and camera exactly. Image2 is approved semi-realistic STYLE only. ALL THREE large rooms are INDOOR WOOD-FLOORED ROOMS, not gardens. Upper-left peach room is BEDROOM, replace square peach tiles with rose-tinted oak WOOD PLANKS. Center cream room is GUEST BEDROOM, replace square yellow tiles with warm honey oak WOOD PLANKS. Right green room is STUDY, remove ALL grass and replace with pale sage-tinted oak WOOD PLANKS and visible fine grain. Neutral circulation floor remains stone tiles. Stairs remain wood. Absolutely no lawn or grass anywhere on this floor. Retain existing plaster and modeled skirting, upper-left light and thin same-tone contours. Empty shell, no furniture or new objects. True transparent exterior with clean edges, no exterior shadow, text, logos or watermark. Do not crop, zoom, recenter or change silhouette."
+    },
+    {
+      "id": "villa-t1",
+      "prompt": "Use case: precise-object-edit. Image1 exact edit target. Correct ONLY the large pink/lilac entertainment-room floor on the RIGHT: it is an INDOOR WOOD-FLOORED room, not ceramic. Replace its square pink tiles with realistic narrow light ash-oak WOOD PLANKS with subtle cool lavender undertone and directional grain. Keep upper-left honey oak living room unchanged, kitchen/bath/circulation tile unchanged, garden grass and paving and original five shrubs unchanged, all stairs and wall skirting unchanged. Preserve every vertex, opening, footprint, wall height, camera, canvas and exterior alpha. Thin same-tone contours, soft semi-realistic paint, upper-left light. No new objects, no external shadow, no text or logos. Image2 is only approved style reference, do not copy furniture or icons."
+    }
+  ]
+}
