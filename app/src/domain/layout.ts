@@ -6,7 +6,7 @@ export type FurnitureKind='desk'|'chair'|'printer'|DecorId;
 export interface OfficeFurniture {id:string;kind:FurnitureKind;x:number;y:number;rotation:0|90|180|270;placed:boolean}
 export interface OfficeRoomLayout {size:OfficeSize;companyId:string|null;items:OfficeFurniture[]}
 export interface OfficeLayout {version:1;employee:OfficeRoomLayout|null;owner:OfficeRoomLayout|null}
-export const ROOM_GRIDS={small:{columns:12,rows:12},medium:{columns:16,rows:14},large:{columns:20,rows:16}} as const;
+export const ROOM_GRIDS={small:{columns:14,rows:14},medium:{columns:20,rows:20},large:{columns:26,rows:24}} as const;
 export const FURNITURE_NAMES:Record<FurnitureKind,string>={desk:'Bàn máy tính',chair:'Ghế',printer:'Máy in',plant:'Chậu cây',lamp:'Đèn bàn',coffee:'Góc cà phê'};
 export const layoutScope=(s:GameState):LayoutScope|null=>officeOf(s).role==='visitor'?null:officeOf(s).role as LayoutScope;
 export function footprint(item:OfficeFurniture){const w=item.kind==='desk'||item.kind==='coffee'?2:1;return item.rotation%180?{w:1,h:w}:{w,h:1}}

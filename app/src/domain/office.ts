@@ -2,7 +2,15 @@ import {canEnterOffice,skillsOf} from './work';
 import {post} from './money';
 import type {GameState,GameResult} from './types';
 import {spendTime,clockOf,HALF_DAY} from './time';
-export const SIZES={small:{name:'Nhỏ',area:40,seats:6,rent:1200000},medium:{name:'Vừa',area:85,seats:12,rent:2400000},large:{name:'Lớn',area:160,seats:24,rent:4200000}} as const;
+/** `rent` là giá thuê một tháng; thuê năm rẻ hơn YEAR_DISCOUNT. */
+export const SIZES={small:{name:'Nhỏ',area:50,seats:8,rent:4000000},medium:{name:'Vừa',area:100,seats:16,rent:8000000},large:{name:'Lớn',area:160,seats:24,rent:12800000}} as const;
+export const YEAR_DISCOUNT=.1;
+export type LeaseTerm='month'|'year';
+export const TERM_DAYS:Record<LeaseTerm,number>={month:30,year:365};
+export const RENEW_WINDOW=7;
+export const isTerm=(v:unknown):v is LeaseTerm=>v==='month'||v==='year';
+export const leasePrice=(size:OfficeSize,term:LeaseTerm)=>term==='year'?Math.round(SIZES[size].rent*12*(1-YEAR_DISCOUNT)):SIZES[size].rent;
+export const termText=(term:LeaseTerm)=>term==='year'?'1 năm':'1 tháng';
 export type OfficeSize=keyof typeof SIZES;
 export const INDUSTRIES={tech:{name:'Công nghệ',desc:'Phát triển phần mềm và sản phẩm số.',color:'#507e87'},design:{name:'Thiết kế',desc:'Thiết kế hình ảnh, thương hiệu và nội dung.',color:'#b98460'},trade:{name:'Thương mại',desc:'Kinh doanh, đơn hàng và chăm sóc khách hàng.',color:'#6f8b60'},accounting:{name:'Kế toán',desc:'Sổ sách, báo cáo và dịch vụ tài chính.',color:'#87819a'}} as const;
 export type Industry=keyof typeof INDUSTRIES;
@@ -37,7 +45,7 @@ export function validOffice(value:unknown):value is OfficeState{
  if(o.tier!==undefined&&!(o.role==='employee'&&isTier(o.tier)&&Number.isInteger(o.tierSince)&&o.tierSince!>=0))return false;if(o.tierSince!==undefined&&o.tier===undefined)return false;const pr=o.probation;if(pr!==undefined&&!(o.role==='employee'&&pr&&Number.isInteger(pr.start)&&pr.start>=0&&pr.end===pr.start+PROBATION_DAYS&&Number.isInteger(pr.workDays)&&pr.workDays>=0&&pr.workDays<=PROBATION_DAYS))return false;if(o.retryDay!==undefined&&!level(o.retryDay,0,100100))return false;
  return (o.application==null||validApplication(o.application))&&['visitor','employee','owner'].includes(o.role)&&(o.employerId===null||COMPANIES.some(c=>c.id===o.employerId))&&(o.role!=='employee'||o.employerId!==null)&&Object.hasOwn(INDUSTRIES,o.industry)&&Object.hasOwn(SIZES,o.size)&&typeof o.name==='string'&&o.name.trim().length>0&&o.name.length<=32&&level(o.leaseUntil,0,100007)&&level(o.workComputer,1,3)&&level(o.computers,1,3)&&level(o.printer,0,2)&&decor(o.employeeDecor)&&!Object.hasOwn(o.employeeDecor,'coffee')&&decor(o.ownerDecor)&&Array.isArray(o.met)&&o.met.length<=STAFF.length&&new Set(o.met).size===o.met.length&&o.met.every(id=>STAFF.some(n=>n.id===id));
 }
-export type OfficeAction={kind:'apply';id:string;cv:string}|{kind:'startInterview'}|{kind:'answer';choice:number}|{kind:'acceptOffer'}|{kind:'cancelApplication'}|{kind:'shift'}|{kind:'endLease'}|{kind:'leave'}|{kind:'rent';size:OfficeSize;industry:Industry;name:string}|{kind:'renew'}|{kind:'upgrade';item:'computer'|'printer'}|{kind:'buyDecor';id:DecorId}|{kind:'place';id:DecorId;slot:number|null}|{kind:'meet';id:string};
+export type OfficeAction={kind:'apply';id:string;cv:string}|{kind:'startInterview'}|{kind:'answer';choice:number}|{kind:'acceptOffer'}|{kind:'cancelApplication'}|{kind:'shift'}|{kind:'endLease'}|{kind:'leave'}|{kind:'rent';size:OfficeSize;industry:Industry;name:string;term?:LeaseTerm}|{kind:'renew';term?:LeaseTerm}|{kind:'upgrade';item:'computer'|'printer'}|{kind:'buyDecor';id:DecorId}|{kind:'place';id:DecorId;slot:number|null}|{kind:'meet';id:string};
 export function officeAction(s:GameState,a:OfficeAction):GameResult{
  if(s.fishing?.atLake)return{ok:false,error:'Hãy về thành phố để tới văn phòng.'};
  let n=structuredClone(s);const o=n.office=structuredClone(officeOf(s));
@@ -72,11 +80,13 @@ export function officeAction(s:GameState,a:OfficeAction):GameResult{
   if(!s.company)return fail('Hãy lập công ty trước khi thuê văn phòng.');
   if(o.role!=='visitor')return fail('Bạn đang có văn phòng.');if(o.application&&['pending','interview','passed'].includes(o.application.status))return fail('Hãy hủy hồ sơ tuyển dụng trước khi thuê.');
   if(!Object.hasOwn(SIZES,a.size)||!Object.hasOwn(INDUSTRIES,a.industry)||typeof a.name!=='string'||!a.name.trim()||a.name.trim().length>32)return fail('Hãy chọn ngành, diện tích và tên công ty tối đa 32 ký tự.');
-  if(!pay(SIZES[a.size].rent,`Thuê văn phòng ${SIZES[a.size].area} m² 7 ngày`))return fail('Chưa đủ tiền trả kỳ thuê 7 ngày.');o.role='owner';o.size=a.size;o.industry=a.industry;o.name=a.name.trim();o.leaseUntil=s.day+7;
+  const term=a.term??'month';if(!isTerm(term))return fail('Hãy chọn thuê theo tháng hoặc năm.');
+  if(!pay(leasePrice(a.size,term),`Thuê văn phòng ${SIZES[a.size].area} m² ${termText(term)}`))return fail(`Chưa đủ tiền thuê ${termText(term)}.`);o.role='owner';o.size=a.size;o.industry=a.industry;o.name=a.name.trim();o.leaseUntil=s.day+TERM_DAYS[term];
  }
  else if(a.kind==='renew'){
-  if(o.role!=='owner'||activeLease(s))return fail('Chỉ gia hạn khi hợp đồng đã hết hạn.');
-  if(!pay(SIZES[o.size].rent,'Gia hạn văn phòng 7 ngày'))return fail('Chưa đủ tiền gia hạn.');o.leaseUntil=s.day+7;
+  const term=a.term??'month';if(!isTerm(term))return fail('Hãy chọn gia hạn theo tháng hoặc năm.');
+  if(o.role!=='owner')return fail('Bạn không có hợp đồng thuê.');if(o.leaseUntil-s.day>RENEW_WINDOW)return fail(`Chỉ gia hạn trong ${RENEW_WINDOW} ngày cuối hạn.`);
+  if(!pay(leasePrice(o.size,term),`Gia hạn văn phòng ${termText(term)}`))return fail('Chưa đủ tiền gia hạn.');o.leaseUntil=Math.max(o.leaseUntil,s.day)+TERM_DAYS[term];
  }
  else{
   if(o.role==='visitor')return fail('Hãy nhận chỗ làm hoặc thuê văn phòng trước.');

@@ -37,8 +37,8 @@ export interface OfficePlan{w:number;d:number;zones:Zone[];pieces:Piece[];seats:
 type ZoneSpec={kind:ZoneKind;x:number;y:number;w:number;d:number;label?:string};
 /** Khuôn theo cỡ. Diện tích: Nhỏ 13×12 ≈ 40 m², Vừa 16×12 + 12×12 ≈ 85 m², Lớn 16×12 ×2 + 8×12 ×2 + 16×8 ≈ 160 m². */
 const SHELLS:Record<OfficeSize,ZoneSpec[]>={
- small:[{kind:'work',x:0,y:0,w:13,d:12}],
- medium:[{kind:'work',x:0,y:0,w:16,d:12},{kind:'meeting',x:16,y:0,w:12,d:12}],
+ small:[{kind:'work',x:0,y:0,w:14,d:14}],
+ medium:[{kind:'work',x:0,y:0,w:20,d:12},{kind:'meeting',x:20,y:0,w:14,d:12}],
  large:[{kind:'reception',x:0,y:0,w:16,d:8},{kind:'work',x:0,y:8,w:16,d:12,label:'Khu làm việc A'},{kind:'work',x:16,y:8,w:16,d:12,label:'Khu làm việc B'},{kind:'meeting',x:16,y:0,w:8,d:8},{kind:'boss',x:24,y:0,w:8,d:8}],
 };
 
