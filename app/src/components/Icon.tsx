@@ -4,7 +4,7 @@ export function Sprite(){return (<svg className="defs" xmlns="http://www.w3.org/
 <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 8h16l1 13H3zM8 9V6a4 4 0 0 1 8 0v3"/></symbol>
 <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3v18h17M8 17v-5m5 5V8m5 9V4"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
-<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-1-7.9A6 6 0 0 1 17.7 9 4.5 4.5 0 0 1 17 18z"/></symbol><symbol id="i-rain" viewBox="0 0 24 24"><path d="M7 15a4 4 0 0 1-1-7.9A6 6 0 0 1 17.7 6 4.5 4.5 0 0 1 17 15zM8 18l-1 3m5-3-1 3m5-3-1 3"/></symbol><symbol id="i-storm" viewBox="0 0 24 24"><path d="M7 14a4 4 0 0 1-1-7.9A6 6 0 0 1 17.7 5 4.5 4.5 0 0 1 17 14zm5-1-3 5h4l-2 5"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/></symbol>
 <symbol id="i-save" viewBox="0 0 24 24"><path d="M4 3h14l3 3v15H3V3zm3 0v7h10V3M7 21v-7h10v7"/></symbol>
 <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
 <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4 20C1 5 9 3 21 3c0 13-5 20-15 13M4 21 17 7"/></symbol>

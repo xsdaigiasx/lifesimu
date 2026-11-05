@@ -1,6 +1,6 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const T=require('../.test-build/domain/time');const {MODES}=require('../.test-build/domain/travel');const F=require('../.test-build/domain/fitness');const {engine}=require('../.test-build/domain/engine');const {lifeOf}=require('../.test-build/domain/life');
-const base=(extra={})=>({...engine.initial(),day:10,energy:80,money:2_000_000,clock:{...T.clockOf(engine.initial()),location:'home',minute:600},...extra});
+const base=(extra={})=>({...engine.initial(),day:6,energy:80,money:2_000_000,clock:{...T.clockOf(engine.initial()),location:'home',minute:600},...extra});
 const IDS=['home','office','market','mall','bank','hospital','bus','park','streetfood','restaurant','apartments','villa'];
 const far=(()=>{let best=null;for(const a of IDS)for(const b of IDS)if(a<b){const m=T.route(a,b).meters;if(!best||m>best.m)best={a,b,m}}return best})();
 test('hệ số: đi bộ 3, xe đạp 1,5, các xe khác không tốn sức',()=>{assert.equal(MODES.walk.energyPerKm,3);assert.equal(MODES.bicycle.energyPerKm,1.5);for(const m of ['bus','motorbike','taxi'])assert.equal(MODES[m].energyPerKm,0)});

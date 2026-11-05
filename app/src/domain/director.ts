@@ -11,6 +11,7 @@ import {giftIngredient,learnRecipe,knowsRecipe,NPC_TEACHES,RECIPES,type Ingredie
 import {addWorkXp} from './study';
 import {SKILLS,type SkillId} from './skill-xp';
 import {hash} from './shift';
+import {weatherOf,OUTDOOR} from './weather';
 import {dueAppointment,markAppointment} from './inbox';
 import {VOICE,chooseLine,lineById,fill,intentsWithLines} from './lines';
 /** T41: ký ức nhẹ (dưới 4) mờ sau 30 ngày; ký ức nặng không quên. */
@@ -109,7 +110,7 @@ function open(s:GameState,npc:NpcProfile,pick:{motif:Motif;variant:number;memory
  return{...s,story:{...st,seq,pending:{key,npc:npc.id,motif:pick.motif.id,variant:pick.variant,by,day:s.day,...(memory?{memory:memory.id}:{}),...(line?{line:line.id}:{}),...(quirk?{quirk:quirk.id}:{})},log:[...st.log,{day:s.day,npc:npc.id,motif:pick.motif.id,variant:pick.variant,by}].slice(-300)}}}
 
 /** NPC tự bắt chuyện khi người chơi đến nơi hoặc vừa làm xong việc (tối đa 3 lần mỗi ngày). */
-export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAppointment(s);if(ap&&!storyOf(s).pending&&!s.work?.active){const npc=castById(ap.npc);if(npc)return open(markAppointment(s,ap.id,'done'),npc,{motif:motifOf('meal'),variant:0},'player')}}const st=storyOf(s);if(st.pending||s.work?.active||s.fishing?.atLake||s.office?.application?.status==='interview'||npcCount(s)>=NPC_DAILY_LIMIT)return s;const c=clockOf(s);if(c.minute+30>END)return s;
+export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAppointment(s);if(ap&&!storyOf(s).pending&&!s.work?.active){const npc=castById(ap.npc);if(npc)return open(markAppointment(s,ap.id,'done'),npc,{motif:motifOf('meal'),variant:0},'player')}}const st=storyOf(s);if(st.pending||s.work?.active||s.fishing?.atLake||s.office?.application?.status==='interview'||npcCount(s)>=NPC_DAILY_LIMIT)return s;const c=clockOf(s);if(c.minute+30>END)return s;if(weatherOf(s.day)==='storm'&&OUTDOOR.includes(c.location))return s;
  const here=NPCS.filter(n=>n.story&&presentAt(n,s.day,c.minute,c.location)),candidates=[...here];const roll=hash(`start:${s.day}:${c.minute}:${c.location}:${trigger}:${st.seq}`)%100;
  const due=here.find(n=>pickMotif(s,n,'npc','due')?.motif.id==='return');if(due){const p=pickMotif(s,due,'npc','due')!;return open(s,due,p,'npc')}
  const near=here.some(n=>nearTier(socialOf(s).relations[n.id]?.score??0));if(roll>=(near?65:40))return s;const order=[...candidates].sort((a,b)=>hash(`${s.day}:${a.id}:${roll}`)-hash(`${s.day}:${b.id}:${roll}`));
