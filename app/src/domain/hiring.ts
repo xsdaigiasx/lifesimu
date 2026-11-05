@@ -1,7 +1,6 @@
 import type {GameResult,GameState} from './types';
 import {activeLease,officeOf,SIZES} from './office';
 import {skillsOf} from './work';
-import {repOf} from './side';
 import {hash} from './shift';
 import {generateNpc,mix} from './npc';
 import {spendTime} from './time';
@@ -104,7 +103,7 @@ export function hiringAction(s:GameState,a:HiringAction):GameResult{
  let n=structuredClone(s);const co=n.company!;
  if(a.kind==='post'){
   if(postActive(s))return fail('Tin tuyển dụng vẫn đang đăng.');if(co.fund<HIRING.postFee)return fail('Quỹ công ty không đủ để đăng tin.');
-  co.fund-=HIRING.postFee;co.hiring={postedDay:s.day,rep:repOf(s),progress:{},gone:co.hiring?.gone??[]};return{ok:true,state:n};
+  co.fund-=HIRING.postFee;co.hiring={postedDay:s.day,rep:s.company?.rep??50,progress:{},gone:co.hiring?.gone??[]};return{ok:true,state:n};
  }
  const cand=candidateById(s,a.id);if(!cand)return fail('Hồ sơ này không còn.');
  const h=co.hiring!;
