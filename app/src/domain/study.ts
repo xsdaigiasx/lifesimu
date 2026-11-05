@@ -1,4 +1,5 @@
 /** T14: học tối, chứng chỉ và trần XP theo bậc nghề (kế hoạch mục 12.3 và 12.3b, chủ dự án chốt 04/11). */
+import {fitMult} from './fitness';
 import {hasRoom,atResidence,STUDY_FACTOR} from './housing';
 import type {GameState,GameResult} from './types';
 import {SKILLS,MAX_LEVEL,xpNeeded,defaultSkills,gainXp,type SkillId,type Skills} from './skill-xp';
@@ -71,7 +72,7 @@ export function studyQuote(s:GameState,skill:SkillId,mode:StudyMode):StudyCheck{
 export function studySkill(s:GameState,skill:SkillId,mode:StudyMode):GameResult{const q=studyQuote(s,skill,mode);if(!q.ok)return q;
  const c=clockOf(s),week=Math.floor(s.day/7),old=studyOf(s);let n=structuredClone(s);
  if(q.fee>0&&post(n,{name:`Học phí ${q.title}`,amount:-q.fee})!=='ok')return{ok:false,error:`Cần ${money(q.fee)} học phí.`};
- n.clock={...c,minute:c.minute+SESSION_MINUTES,lastStudyDay:s.day};n.energy=Math.max(0,n.energy-SESSION_ENERGY);n.stress=Math.min(100,n.stress+SESSION_STRESS);
+ n.clock={...c,minute:c.minute+SESSION_MINUTES,lastStudyDay:s.day};n.energy=Math.max(0,n.energy-Math.round(SESSION_ENERGY*fitMult(n)));n.stress=Math.min(100,n.stress+SESSION_STRESS);
  const st:StudyState={certs:[...old.certs],sessions:{...old.sessions},week,weekCount:(old.week===week?old.weekCount:0)+1};
  const before=skillsOf(n)[skill].level;n=addCappedXp(n,skill,q.xp,q.cap);const after=skillsOf(n)[skill].level;
  let note=`2 giờ, +${q.xp} XP${after>before?`, lên Lv${after}`:''}.`;
