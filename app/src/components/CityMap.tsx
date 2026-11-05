@@ -9,7 +9,7 @@ interface Props {places:Place[];currentLocation:PlaceId;playerName:string;gender
 export default function CityMap(props:Props){
  const {places,currentLocation,playerName,gender,selected,onSelect,centerToken,retryToken}=props;
  const viewport=useRef<HTMLDivElement>(null),world=useRef<HTMLDivElement>(null);
- const frame=useRef(0),zoom=useRef(1),[scale,setScale]=useState(1),[loading,setLoading]=useState(true),[error,setError]=useState<string|null>(null),[,rerender]=useState(0),[surfaceRevision,setSurfaceRevision]=useState(0);
+ const frame=useRef(0),zoom=useRef(1),zoomed=useRef(false),[scale,setScale]=useState(1),[loading,setLoading]=useState(true),[error,setError]=useState<string|null>(null),[,rerender]=useState(0),[surfaceRevision,setSurfaceRevision]=useState(0);
  const painted=useRef(new Set<string>()),surfaceErrors=useRef(new Set<string>()),callbacks=useRef(props),requestRefresh=useRef(()=>{});callbacks.current=props;
  const model=useRef<HTMLDivElement>(null),pinchFrame=useRef(0),pinchNext=useRef<{zoom:number;left:number;top:number}|null>(null),pointers=useRef(new Map<number,Point>()),drag=useRef<{point:Point;left:number;top:number}|null>(null),pinch=useRef<ReturnType<typeof pinchStart>|null>(null),suppressClick=useRef(0);
  const rect=()=>{const v=viewport.current!;return{left:v.scrollLeft/zoom.current,top:v.scrollTop/zoom.current,width:v.clientWidth/zoom.current,height:v.clientHeight/zoom.current}};
@@ -17,6 +17,7 @@ export default function CityMap(props:Props){
  const markPainted=(image:HTMLImageElement,id:string)=>{image.decode().then(()=>{if(!image.isConnected)return;painted.current.add(id);surfaceErrors.current.delete(id);requestRefresh.current()}).catch(()=>{surfaceErrors.current.add(id);requestRefresh.current()})};
  useLayoutEffect(()=>{const v=viewport.current;if(!v)return;let stopped=false,scheduled=false,lastReady:boolean|undefined,lastProgress='';center(currentLocation);
  const refresh=()=>{scheduled=false;if(stopped)return;rerender(n=>n+1);
+ if(!zoomed.current&&v.clientWidth>0&&v.clientHeight>0){zoomed.current=true;const z=Math.min(1.15,Math.max(.6,v.clientWidth/WORLD.width,v.clientHeight/WORLD.height));zoom.current=z;if(world.current){world.current.style.width=`${WORLD.width*z}px`;world.current.style.height=`${WORLD.height*z}px`}if(model.current)model.current.style.transform=`scale(${z})`;setScale(z);center(currentLocation)}
  const critical=criticalCityAssets(rect()),hasSize=v.clientWidth>0&&v.clientHeight>0;
  if(hasSize)cityCache.ensure(critical,100).catch(()=>{});
  const failed=critical.find(a=>cityCache.status(a.id)==='error'||surfaceErrors.current.has(a.id));
