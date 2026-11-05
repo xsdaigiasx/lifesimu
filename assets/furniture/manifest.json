@@ -410,6 +410,282 @@
         64,
         128
       ]
+    },
+    {
+      "id": "tv-basic",
+      "file": "tv-basic_a.webp",
+      "direction": "a",
+      "variant": "default",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 60,
+      "height_z": 1.875,
+      "frame_px": [
+        192,
+        156
+      ],
+      "anchor_px": [
+        128,
+        156
+      ],
+      "bytes": 8334,
+      "sha256": "23650a817ea44242b6c6514b29d66123d77a2d504a584ed85047afed5160176e",
+      "source_sha256": "be351a68e75f6f5cb2832269b0fa48c5333cbe093309f2cc867b9e9b3e49c0b7"
+    },
+    {
+      "id": "tv-basic",
+      "file": "tv-basic_b.webp",
+      "direction": "b",
+      "variant": "default",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 60,
+      "height_z": 1.875,
+      "frame_px": [
+        192,
+        156
+      ],
+      "anchor_px": [
+        64,
+        156
+      ],
+      "bytes": 8888,
+      "sha256": "5b980e9a8d8e9e1f16eae71f6f9fff465fcc5eadd328279ddcd5b58673107c41",
+      "source_sha256": "9f2cee766faf5c20610510ce1a8a258ab5e5e95cd94e17d9452482c96b2eaf0e"
+    },
+    {
+      "id": "tv-basic",
+      "file": "tv-basic_c.webp",
+      "direction": "c",
+      "variant": "default",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 60,
+      "height_z": 1.875,
+      "frame_px": [
+        192,
+        156
+      ],
+      "anchor_px": [
+        128,
+        156
+      ],
+      "bytes": 8780,
+      "sha256": "13886649bfdc287232f628cee320f5dd773213315dcf2be66a8ab2755a9ad073",
+      "source_sha256": "62cbbca7909bf6411ff4d9848b4b51cf62140b3d3d3fb81f9158e27ae894298c"
+    },
+    {
+      "id": "tv-basic",
+      "file": "tv-basic_d.webp",
+      "direction": "d",
+      "variant": "default",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 60,
+      "height_z": 1.875,
+      "frame_px": [
+        192,
+        156
+      ],
+      "anchor_px": [
+        64,
+        156
+      ],
+      "bytes": 8768,
+      "sha256": "4300156f0a3e19cce05a8dcb1b3264bd88fef6b18c75aa8df313b61e74c4e39c",
+      "source_sha256": "97608904eaa930df25a9931f3c152d2575fed918efddea8a3343f554f4c46bf9"
+    },
+    {
+      "id": "tv-comfort",
+      "file": "tv-comfort_a.webp",
+      "direction": "a",
+      "variant": "default",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 79,
+      "height_z": 2.46875,
+      "frame_px": [
+        192,
+        175
+      ],
+      "anchor_px": [
+        128,
+        175
+      ],
+      "bytes": 17644,
+      "sha256": "fb177c640c758dfbbd07b57ba723391af66792452aeef80a1ef2d8c778b7bc62",
+      "source_sha256": "79b99d5706cad7e87b851bf01be8ff6468abb4345a5e5cda870f131c81a10e98"
+    },
+    {
+      "id": "tv-comfort",
+      "file": "tv-comfort_b.webp",
+      "direction": "b",
+      "variant": "default",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 79,
+      "height_z": 2.46875,
+      "frame_px": [
+        192,
+        175
+      ],
+      "anchor_px": [
+        64,
+        175
+      ],
+      "bytes": 17976,
+      "sha256": "577c8d534c8d81e2788673e400de4ddb926a5e8160d6b9a2ce9c3ca015cda1b6",
+      "source_sha256": "8838719fa91a1ad54e2a2b9c1a11d9b52366599311822972de5152be1317365e"
+    },
+    {
+      "id": "tv-comfort",
+      "file": "tv-comfort_c.webp",
+      "direction": "c",
+      "variant": "default",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 79,
+      "height_z": 2.46875,
+      "frame_px": [
+        192,
+        175
+      ],
+      "anchor_px": [
+        128,
+        175
+      ],
+      "bytes": 15798,
+      "sha256": "92be9ecf7eb1ec67fbf489cc6c3e46c66eb6025010c5e1c90e57a57b28420d58",
+      "source_sha256": "23b254cf45e8154575d8f829126e7b9ffdb0fdee30fbc21df45e90157fc64e4c"
+    },
+    {
+      "id": "tv-comfort",
+      "file": "tv-comfort_d.webp",
+      "direction": "d",
+      "variant": "default",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 79,
+      "height_z": 2.46875,
+      "frame_px": [
+        192,
+        175
+      ],
+      "anchor_px": [
+        64,
+        175
+      ],
+      "bytes": 16094,
+      "sha256": "df845c6ed6e674e23fc6a6f4e8e79b8a1899964d8a76d2923f58b55f1b22de29",
+      "source_sha256": "696a372153e41e3b6389885f76c5acd99a90b96f70ca4fd88634c0e6ea812192"
+    },
+    {
+      "id": "tv-premium",
+      "file": "tv-premium_a.webp",
+      "direction": "a",
+      "variant": "default",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "frame_px": [
+        192,
+        192
+      ],
+      "anchor_px": [
+        128,
+        192
+      ],
+      "bytes": 22646,
+      "sha256": "9f1b9daf618ca1951a9bbbb793f435bc222e50afb41daa27562860d61703f5b8",
+      "source_sha256": "f8d5af038f99e21c73c12623d9eab19ffe8836d3c3d8ccda6369163805fbdf99"
+    },
+    {
+      "id": "tv-premium",
+      "file": "tv-premium_b.webp",
+      "direction": "b",
+      "variant": "default",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "frame_px": [
+        192,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 24314,
+      "sha256": "a1f27cc372c9f49186f16be50354bcc452fac9e067e96ab1d5cbedf8bdda8103",
+      "source_sha256": "1a5195d4ca105eaa642a53f369fd88a6e6cd698a06d6dfd59c43dedb7b0b35a3"
+    },
+    {
+      "id": "tv-premium",
+      "file": "tv-premium_c.webp",
+      "direction": "c",
+      "variant": "default",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "frame_px": [
+        192,
+        192
+      ],
+      "anchor_px": [
+        128,
+        192
+      ],
+      "bytes": 24202,
+      "sha256": "1f706323bffef96dd70fa80d3586cde020ac90f46143c6ef69257d1f6ae6eee1",
+      "source_sha256": "1cc34d47d043c8602a2eec10edab879508bfe6ae8c5012b5ddcc19a5a70c1018"
+    },
+    {
+      "id": "tv-premium",
+      "file": "tv-premium_d.webp",
+      "direction": "d",
+      "variant": "default",
+      "footprint_tiles": [
+        1,
+        2
+      ],
+      "height_px": 96,
+      "height_z": 3,
+      "frame_px": [
+        192,
+        192
+      ],
+      "anchor_px": [
+        64,
+        192
+      ],
+      "bytes": 24446,
+      "sha256": "22deb4d32c381e4b0c0ae21d5679622cfb96a7c52d0f31c21187eb84fd7f9473",
+      "source_sha256": "b4db27ff48e93a8386e7085daefaa9e20737876e59cc3ef242c922fe0f8b35d5"
     }
   ]
 }
