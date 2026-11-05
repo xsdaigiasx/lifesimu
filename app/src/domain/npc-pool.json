@@ -1,0 +1,182 @@
+{
+ "family": [
+  "Nguyễn",
+  "Trần",
+  "Lê",
+  "Phạm",
+  "Hoàng",
+  "Vũ",
+  "Đặng",
+  "Bùi",
+  "Đỗ",
+  "Hồ"
+ ],
+ "male": [
+  "Văn Hùng",
+  "Minh Khoa",
+  "Quốc Bảo",
+  "Đức Anh",
+  "Thành Long",
+  "Hữu Phước",
+  "Công Thịnh",
+  "Gia Bảo",
+  "Tấn Lộc",
+  "Văn Toàn",
+  "Hoàng Nam",
+  "Trọng Nghĩa",
+  "Quang Vinh",
+  "Đình Khang",
+  "Anh Tuấn",
+  "Văn Sơn",
+  "Thế Hiển",
+  "Hải Đăng",
+  "Minh Trí",
+  "Văn Lực"
+ ],
+ "female": [
+  "Thị Lan",
+  "Ngọc Ánh",
+  "Thu Hà",
+  "Mỹ Linh",
+  "Thanh Tâm",
+  "Kim Ngân",
+  "Phương Thảo",
+  "Hồng Nhung",
+  "Bích Ngọc",
+  "Thị Hoa",
+  "Diệu Linh",
+  "Minh Thư",
+  "Thuỳ Dung",
+  "Khánh Vy",
+  "Ngọc Hân",
+  "Thị Mai",
+  "Hải Yến",
+  "Bảo Trâm",
+  "Thanh Hương",
+  "Thị Nga"
+ ],
+ "origin": [
+  "Hà Nội",
+  "Nam Định",
+  "Thanh Hoá",
+  "Nghệ An",
+  "Huế",
+  "Đà Nẵng",
+  "Quảng Nam",
+  "Sài Gòn",
+  "Cần Thơ",
+  "Bến Tre"
+ ],
+ "job": [
+  {
+   "name": "Sinh viên",
+   "min": 18,
+   "max": 25
+  },
+  {
+   "name": "Thợ sửa xe",
+   "min": 20,
+   "max": 60
+  },
+  {
+   "name": "Nhân viên văn phòng",
+   "min": 22,
+   "max": 55
+  },
+  {
+   "name": "Tài xế xe ôm",
+   "min": 20,
+   "max": 62
+  },
+  {
+   "name": "Bán hàng tạp hoá",
+   "min": 25,
+   "max": 70
+  },
+  {
+   "name": "Bảo vệ",
+   "min": 30,
+   "max": 65
+  },
+  {
+   "name": "Giáo viên",
+   "min": 23,
+   "max": 60
+  },
+  {
+   "name": "Trưởng phòng",
+   "min": 30,
+   "max": 60
+  },
+  {
+   "name": "Về hưu",
+   "min": 56,
+   "max": 80
+  },
+  {
+   "name": "Phụ hồ",
+   "min": 18,
+   "max": 55
+  }
+ ],
+ "traits": [
+  "hay nói",
+  "kiệm lời",
+  "hào phóng",
+  "keo kiệt",
+  "vui vẻ",
+  "cau có",
+  "cẩn thận",
+  "vội vàng",
+  "tốt bụng",
+  "tò mò",
+  "tự trọng",
+  "dễ xúc động"
+ ],
+ "quirk": [
+  "Luôn đội mũ lưỡi trai",
+  "Huýt sáo khi đi bộ",
+  "Gọi ai cũng là em",
+  "Mang theo phích trà",
+  "Thích kể chuyện thời trẻ",
+  "Hay quên chìa khoá",
+  "Nuôi một con chim chào mào",
+  "Đi đâu cũng đếm bước",
+  "Nói câu nào cũng thêm ca dao",
+  "Sưu tầm vé số trúng nhỏ"
+ ],
+ "goal": [
+  "Có nhà riêng",
+  "Cho con đi học",
+  "Mở hàng quán",
+  "Đi du lịch một lần",
+  "Trả hết nợ",
+  "Được thăng chức"
+ ],
+ "fear": [
+  "Mất việc",
+  "Bệnh tật",
+  "Nợ nần",
+  "Con cái hư",
+  "Cô đơn",
+  "Bị lừa"
+ ],
+ "conflicts": [
+  [
+   "hay nói",
+   "kiệm lời"
+  ],
+  [
+   "hào phóng",
+   "keo kiệt"
+  ],
+  [
+   "vui vẻ",
+   "cau có"
+  ],
+  [
+   "cẩn thận",
+   "vội vàng"
+  ]
+ ]
+}

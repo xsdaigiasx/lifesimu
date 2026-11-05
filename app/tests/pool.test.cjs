@@ -1,0 +1,23 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const {poolProblems}=require('../.test-build/domain/pool-check');const N=require('../.test-build/domain/npc');const data=require('../src/domain/npc-pool.json');
+const clone=()=>structuredClone(data);
+test('bể hiện tại hợp lệ và khớp POOL trong game',()=>{assert.deepEqual(poolProblems(data),[]);assert.deepEqual(N.POOL.traits,data.traits);assert.equal(N.TRAIT_CONFLICTS.length,data.conflicts.length)});
+test('dữ liệu sai bị chặn',()=>{
+ const t=(mut,re)=>{const d=clone();mut(d);const p=poolProblems(d);assert.ok(p.some(x=>re.test(x)),`${re}: ${JSON.stringify(p)}`)};
+ t(d=>{d.family.push('Lê')},/trùng mục/);
+ t(d=>{d.origin.push('hà nội ')},/trùng mục|thừa khoảng trắng/);
+ t(d=>{d.female.push(d.male[0])},/cả male và female/);
+ t(d=>{delete d.goal},/goal: thiếu/);
+ t(d=>{d.fear=[]},/fear: thiếu/);
+ t(d=>{d.quirk.push('')},/chữ không rỗng/);
+ t(d=>{d.job.push({name:'Bảo vệ',min:20,max:30})},/trùng nghề/);
+ t(d=>{d.job.push({name:'X',min:40,max:30})},/khoảng tuổi/);
+ t(d=>{d.job.push({name:'Y',min:20.5,max:30})},/số nguyên/);
+ t(d=>{d.conflicts.push(['hay nói','không có'])},/không có trong traits/);
+ t(d=>{d.conflicts.push(['kiệm lời','hay nói'])},/trùng cặp/);
+ t(d=>{d.conflicts.push(['vui vẻ','vui vẻ'])},/giống nhau/);
+ t(d=>{d.traits=d.traits.slice(0,4);d.conflicts=[]},/ít nhất 6/);
+ t(d=>{d.thua=1},/trường lạ/);
+ assert.ok(poolProblems(null).length&&poolProblems([]).length);
+});
+test('bộ sinh vẫn tất định sau khi đưa bể ra file',()=>{assert.equal(N.generateNpc('abc').name,N.generateNpc('abc').name);assert.deepEqual(N.profileProblems(N.generateNpc('abc')),[])});
