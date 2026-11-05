@@ -16,10 +16,11 @@ interface Props {
  onChat:(id:string,minutes:5|15)=>GameResult;
  onSkills:()=>void;
  onContract?:()=>void;
+ onPayslip?:()=>void;
 }
 const colleagues=COWORKERS.filter(p=>p.id==='dev-an'||p.id==='dev-linh');
 
-export default function OfficeWorkScene({state,onWork,onChat,onSkills,onContract}:Props){
+export default function OfficeWorkScene({state,onWork,onChat,onSkills,onContract,onPayslip}:Props){
  const [menu,setMenu]=useState(false);
  const [selected,setSelected]=useState<string|null>(null),[message,setMessage]=useState(''),[pick,setPick]=useState<CardKind|null>(null);
 
@@ -42,7 +43,7 @@ export default function OfficeWorkScene({state,onWork,onChat,onSkills,onContract
  function closeChat(){setSelected(null);setMessage('')}
 
  return <section className={`office-work-scene${active?' is-working':''}`} aria-label={active?'Ca làm hiện tại':'Văn phòng'}>
-  <header className="ows-shiftbar"><div><strong>{shiftLabel}</strong><div className="ows-shift-track" role="progressbar" aria-label="Tiến độ ca" aria-valuemin={0} aria-valuemax={100} aria-valuenow={shiftPct}><span style={{width:`${shiftPct}%`}}/></div></div><button className="ows-more" aria-label="Mục khác" aria-expanded={menu} onClick={()=>setMenu(m=>!m)}>⋯</button>{menu&&<div className="ows-menu" role="menu"><button role="menuitem" onClick={()=>{setMenu(false);onSkills()}}>Kỹ năng và học tối</button>{onContract&&<button role="menuitem" onClick={()=>{setMenu(false);onContract()}}>Hợp đồng</button>}</div>}</header>
+  <header className="ows-shiftbar"><div><strong>{shiftLabel}</strong><div className="ows-shift-track" role="progressbar" aria-label="Tiến độ ca" aria-valuemin={0} aria-valuemax={100} aria-valuenow={shiftPct}><span style={{width:`${shiftPct}%`}}/></div></div><button className="ows-more" aria-label="Mục khác" aria-expanded={menu} onClick={()=>setMenu(m=>!m)}>⋯</button>{menu&&<div className="ows-menu" role="menu"><button role="menuitem" onClick={()=>{setMenu(false);onSkills()}}>Kỹ năng và học tối</button>{onPayslip&&<button role="menuitem" onClick={()=>{setMenu(false);onPayslip()}}>Bảng lương</button>}{onContract&&<button role="menuitem" onClick={()=>{setMenu(false);onContract()}}>Hợp đồng</button>}</div>}</header>
   <div className="ows-room">
    {active?<WorkActivity state={state} drawing={drawing}/>:<PackedOffice state={state} onNpc={meet} afternoon={minute>=780}/>}
    {active&&minute>=780&&<div className="static-afternoon-tint" aria-hidden="true"/>}
