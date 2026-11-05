@@ -1,3 +1,4 @@
+import {clearAuto} from './autosave';
 import {SAVE_KEYS,archiveCurrent,type StorageLike} from './reset';
 import {engine} from './engine';
 import {phoneData} from './phone-data';
@@ -44,7 +45,7 @@ export async function decryptPack(text:string):Promise<{ok:true;pack:Pack}|{ok:f
 }
 /** Ghi gói vào bộ nhớ. Đời hiện tại được chép sang ô sao lưu 7 ngày trước, nên không mất gì. */
 export function applyPack(st:StorageLike,pack:Pack,now:number):boolean{
- try{archiveCurrent(st,now);for(const k of SAVE_KEYS){const v=pack.data[k];if(v===undefined)st.removeItem(k);else st.setItem(k,v)}return true}catch{return false}
+ try{archiveCurrent(st,now);for(const k of SAVE_KEYS){const v=pack.data[k];if(v===undefined)st.removeItem(k);else st.setItem(k,v)}clearAuto(st);return true}catch{return false}
 }
 export const ERRORS:Record<ImportError,string>={format:'Đây không phải tệp save của Next Day.',tamper:'Tệp đã bị sửa hoặc hỏng, không đọc được.',invalid:'Save trong tệp không hợp lệ.',unsupported:'Tệp từ phiên bản mới hơn, hãy cập nhật game.'};
 export const fileName=(day:number)=>`next-day-ngay-${day+1}.json`;
