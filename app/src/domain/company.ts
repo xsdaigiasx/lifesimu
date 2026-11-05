@@ -4,10 +4,12 @@ import {skillsOf,workOf} from './work';
 import {bankOf,owedOf} from './bank';
 import {repOf} from './side';
 import {post} from './money';
+import {validHiring,validStaff,type HiringState,type Employee} from './hiring';
+import {SIZES} from './office';
 
 /** Điều kiện và vốn mở công ty (chủ dự án duyệt 05/11, bản giảm để dễ test). */
 export const COMPANY={mgmt:4,main:5,months:3,rep:60,fund:50_000_000,ownMin:20_000_000} as const;
-export interface CompanyState{version:1;founded:number;/** Quỹ công ty, tách khỏi tiền cá nhân. */fund:number}
+export interface CompanyState{version:1;founded:number;/** Quỹ công ty, tách khỏi tiền cá nhân. */fund:number;/** T44: tin tuyển dụng đang đăng và tiến độ phỏng vấn. */hiring?:HiringState;/** T44: nhân viên đã thuê (hợp đồng; chưa làm việc, chưa trả lương: T45, T47). */staff?:Employee[]}
 export const companyOf=(s:GameState):CompanyState|null=>s.company??null;
 export const fundOf=(s:GameState)=>s.company?.fund??0;
 export interface Check{id:'management'|'main'|'months'|'rep'|'cash'|'own';label:string;have:number;need:number;ok:boolean}
@@ -35,5 +37,5 @@ export function foundCompany(s:GameState,a:CompanyAction):GameResult{
 }
 export function validCompany(v:unknown,day:number):v is CompanyState{
  if(!v||typeof v!=='object')return false;const c=v as CompanyState;
- return c.version===1&&Number.isInteger(c.founded)&&c.founded>=0&&c.founded<=day&&Number.isInteger(c.fund)&&c.fund>=0&&c.fund<=1e9;
+ return c.version===1&&Number.isInteger(c.founded)&&c.founded>=0&&c.founded<=day&&Number.isInteger(c.fund)&&c.fund>=0&&c.fund<=1e9&&(c.hiring===undefined||validHiring(c.hiring,day))&&(c.staff===undefined||validStaff(c.staff,day,SIZES.large.seats));
 }

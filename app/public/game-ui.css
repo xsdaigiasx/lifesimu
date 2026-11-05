@@ -58,3 +58,10 @@
 .person-facts{margin:0;display:flex;flex-direction:column;gap:6px}
 .person-facts>div{display:grid;grid-template-columns:90px minmax(0,1fr);gap:8px;align-items:baseline}
 .person-facts dt{font-size:11px;color:#78876c}.person-facts dd{margin:0;font-size:13px;color:#2f3f35}
+.hire-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.hire-card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;border:1px solid #dce5d0;background:#fffef4;border-radius:12px;text-align:center}
+.hire-card strong{font-size:12px;color:#416947}.hire-card small{font-size:11px;color:#738866}
+.hire-avatar{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;color:#fff;font-weight:700;font-size:18px;flex:none}
+.hire-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}.hire-head>div{flex:1;min-width:0}.hire-head strong{display:block;font-size:13px;color:#416947}.hire-head small{font-size:11px;color:#738866}
+.hire-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.hire-actions .game-secondary{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:39px}
