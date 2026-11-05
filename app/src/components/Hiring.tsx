@@ -2,6 +2,7 @@ import {useState} from 'react';
 import type {GameResult,GameState} from '../domain/types';
 import {HIRING,HIRE_SKILLS,HIRE_SKILL_NAME,candidatesOf,capacityOf,hiringOf,levelOf,postActive,staffOf,viewOf,type CandidateView,type HireSkill,type HiringAction,type InterviewKind} from '../domain/hiring';
 import {fundOf} from '../domain/company';
+import {workAt} from '../domain/staff';
 import {hash} from '../domain/shift';
 import {money} from '../domain/format';
 import {ActionRow,DataRow,GameScreen,Facts} from './GameUI';
@@ -19,7 +20,7 @@ export default function Hiring({state,onAction,onBack}:{state:GameState;onAction
  const list=candidatesOf(state),h=hiringOf(state),cand=list.find(c=>c.id===id),team=staffOf(state),cap=capacityOf(state);
  const status=error&&<p className="game-status" role="status">{error}</p>;
  const goList=()=>{setPage('list');setId('');setPick(null);setError('')};
- if(page==='team')return <GameScreen title="Nhân viên" onBack={goList}>{team.length?team.map(e=>{const main=Math.max(e.skills.programming,e.skills.logic,e.skills.graphics);return <DataRow key={e.id} label={`${e.name} ${levelOf(main).name}`} value={money(e.wage)}/>}):<p className="game-faint">Chưa có nhân viên.</p>}</GameScreen>;
+ if(page==='team')return <GameScreen title="Nhân viên" onBack={goList}>{team.length?<div className="hire-grid">{team.map(e=>{const main=Math.max(e.skills.programming,e.skills.logic,e.skills.graphics),w=workAt(e,state.day);return <div key={e.id} className="hire-card"><Avatar v={e}/><strong>{e.name}</strong><small>{levelOf(main).name}, {e.personality}</small><Facts items={[['smile',String(Math.round(w.morale))],['people',String(Math.round(w.loyalty))],['moon',String(Math.round(w.fatigue))]]}/><small>{money(e.wage)}</small></div>})}</div>:<p className="game-faint">Chưa có nhân viên.</p>}</GameScreen>;
  if(page!=='list'&&!cand){return <GameScreen title="Hồ sơ" onBack={goList}><p className="game-faint">Hồ sơ này không còn.</p></GameScreen>}
  if(page==='hire'&&cand){const v=viewOf(state,cand);return <GameScreen title="Thuê nhân viên" onBack={()=>setPage('cand')} footer={<div className="game-button-pair"><button className="game-secondary" onClick={()=>setPage('cand')}>Hủy</button><button className="primary" onClick={()=>run({kind:'hire',id:cand.id},goList)}>Xác nhận</button></div>}>
   <DataRow label="Nhân viên" value={v.name}/><DataRow label="Lương mỗi tháng" value={money(v.wage)}/><DataRow label="Phí tuyển" value={money(v.fee)}/><DataRow label="Quỹ công ty" value={money(fundOf(state))}/><DataRow label="Chỗ ngồi" value={`${team.length+1}/${cap}`}/>{status}</GameScreen>}
