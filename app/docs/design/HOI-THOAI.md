@@ -17,19 +17,32 @@ Mọi thứ trong hội thoại và đời NPC đều rút từ **pool có đi�
 - Thêm phần tử vào pool là số tổ hợp nhân lên, không phải viết thêm cảnh.
 - Điều kiện giữ cho tổ hợp luôn hợp lý (tuổi, nghề, nơi ở, mùa, độ thân).
 
-## I.1c Giới hạn số NPC
+## I.1c Dàn NPC: vai cố định, con người ngẫu nhiên
 
-Đa dạng đến từ tổ hợp, không đến từ số người. Game không sinh vô hạn NPC.
+**12 vai cố định** gắn với địa điểm và chức năng game: chủ trọ, hàng xóm về hưu, bán rau, bán bánh mì, sinh viên giao hàng, bác sĩ, giao dịch viên ngân hàng, 5 đồng nghiệp (lập trình, thiết kế, kiểm thử, điều phối, trưởng nhóm). Vai cố định, **con người** thì rút từ pool theo seed mỗi đời chơi: tên, giới, tuổi, quê và giọng, tính cách, sở thích, hoàn cảnh gia đình, thói quen. Pool có điều kiện theo vai (chủ trọ từ 45 tuổi, sinh viên dưới 24, bác sĩ từ 30...).
+
+- Mã NPC trong save giữ theo ô vai (`ba-tu` thành ô chủ trọ) nên save cũ không vỡ.
+- Mạch chuyện viết tay hiện có chuyển thành **mạch chuyện mẫu** gắn theo vai và tính cách, không gắn theo tên (chuyện "chủ trọ lo con ở xa" rút cho bất kỳ chủ trọ nào có con).
+- Người nối tiếp khi NPC mất (I.5c) điền lại đúng ô vai.
+
+**Người thân:** Mẹ luôn có, cộng 1 em rút ngẫu nhiên (em gái hoặc em trai), mỗi người có pool mạch chuyện riêng (em thi đại học, em xin tiền học...). Bố và gia đình lớn hơn để dành phát triển sau. Người thân không tính vào giới hạn bên dưới.
+
+**Chân dung** ghép từ mảnh (khuôn mặt, tóc, nét theo tuổi và giới), rút theo hồ sơ NPC; Codex vẽ bộ mảnh khi tới lô hội thoại, trước đó dùng chữ cái đầu.
+
+## I.1d Số NPC cùng tồn tại
+
+Đa dạng đến từ tổ hợp, không đến từ số người. Người chơi chỉ giữ được khoảng 5 người thân, 15 người quen, vài chục người biết mặt; mỗi ngày game có khoảng 3 đến 6 lần gặp. Với 30 đến 40 NPC, mỗi người được gặp lại sau khoảng 7 đến 10 ngày, kịp trước khi ký ức mờ (30 ngày).
 
 | Nhóm | Số lượng | Quy tắc |
 |---|---|---|
-| Dàn cố định | 12 và Mẹ | Luôn có, tính cách cố định, biến cố và thói quen vẫn rút từ pool theo seed đời chơi |
-| NPC ngẫu nhiên đang hoạt động | Tối đa 12 cùng lúc | Sinh từ pool thuộc tính (T16) khi có chỗ trống |
-| Tốc độ sinh mới | Tối đa 2 người mỗi tuần game | Chỉ sinh ở nơi người chơi hay lui tới |
-| Rời đi | NPC ngẫu nhiên không gặp lại trong 30 ngày và độ thân dưới Quen biết thì rời đi (chuyển nhà, về quê) | Ai đã thân thì ở lại, có thể vào danh bạ |
-| Tổng một năm | Khoảng 60 đến 80 người từng gặp | Đủ mới mẻ mà vẫn nhớ được mặt người quen |
+| Ban đầu | khoảng 20 | 12 vai cố định và khoảng 8 NPC ngẫu nhiên quanh khu trọ, chợ, công ty |
+| Dải giữ ổn định | 30 đến 40 | Dưới 30 thì sinh bù người mất hoặc rời đi; trên 40 thì ngừng sinh |
+| Sinh thêm mỗi năm | 4 đến 6 | Gắn với nơi mới người chơi mở ra (đổi việc, chuyển nhà, mở công ty) |
+| Tốc độ | tối đa 2 người mỗi tuần game | Chỉ sinh ở nơi người chơi hay lui tới |
+| Rời đi | NPC ngẫu nhiên không gặp lại trong 30 ngày và độ thân dưới Quen biết | Chuyển nhà, về quê; người đã thân thì ở lại; quay lại hiếm (khoảng 5%), nhớ mang máng nếu ký ức còn |
+| Đếm riêng | Người thân, nhân viên công ty (theo số ghế), trẻ dưới 16 | Dùng chung hệ NPC nhưng không chiếm chỗ người ngoài đời |
 
-Pool tên và thuộc tính đủ lớn để hai đời chơi gần như không ra cùng một người; NPC ngẫu nhiên đã rời đi có thể quay lại hiếm hoi (ví dụ 5%), nhớ mang máng lần gặp cũ nếu ký ức còn.
+Với khoảng 40 người, mỗi năm chừng 1 người mất và 1 đến 2 người được sinh ra: đủ cảm giác luân hồi mà không ồn ào.
 
 ## I.2 Thứ tự chọn
 
@@ -82,9 +95,9 @@ Bất hòa, Lạ, Quen biết (từ 10), Thân (từ 30), Tri kỷ (từ 60), th
 - Quyết định cách xưng hô, độ dài câu và mức riêng tư.
 - Điều kiện khống chế: mỗi mảnh có **mức riêng tư** 0 đến 3; chỉ dùng mảnh khi độ thân đủ (Lạ dùng 0, Quen biết tới 1, Thân tới 2, Tri kỷ tới 3); Bất hòa chỉ dùng các mảnh lạnh nhạt, không Rủ, không Nhờ, không Trêu.
 
-### Trục 5. Giọng (12 NPC và Mẹ)
+### Trục 5. Giọng
 
-Hai lớp: **vùng** (Tây, Quê, Bắc, Trung, Sài Gòn, theo `VOICE` hiện có) và **nét riêng** (Chú Sáu kể dài, Tuấn nói nhanh, Chị Mai ngắn gọn, Bảo Ngọc lịch sự...).
+Hai lớp: **vùng** (Tây, Quê, Bắc, Trung, Sài Gòn) rút theo quê của NPC, và **nét riêng** rút từ pool (kể dài, nói nhanh, ngắn gọn, lịch sự, hay than...).
 
 - Điều kiện khống chế: mảnh có nhãn vùng chỉ dùng cho đúng vùng; mảnh trung tính dùng chung; mỗi NPC có ít nhất 40% mảnh mang giọng riêng để không ai nói giống ai; từ xưng hô lấy từ hồ sơ NPC (con, mình, tui, chị...).
 
@@ -104,15 +117,31 @@ Tâm trạng người chơi, chuỗi chuyện đang dở, mùa và lễ, quan h�
 
 Mỗi lượt có 3 đến 4 lựa chọn, ghép từ hai trục:
 
-- **Ý định đáp:** Đồng cảm, Hỏi thêm, Khuyên, Đùa, Né, Từ chối, Nhận lời, Kể lại chuyện mình.
-- **Giọng người chơi:** Ấm áp, Ngắn gọn, Đùa, Thật lòng.
+- **Thái độ:** Ấm áp, Thẳng thắn, Đùa, Lạnh nhạt, Khó chịu, Né.
+- **Hành động:** Giúp, Từ chối, Hỏi thêm, Khuyên, Nhận lời, Kể chuyện mình, Im lặng.
+
+Mục tiêu: không có câu "đúng cho mọi người", người chơi không thể bấm mãi một kiểu (ví dụ suốt ngày Giúp).
+
+| Cơ chế | Nội dung |
+|---|---|
+| Giúp đỡ có giá | Giúp tốn giờ, tiền hoặc năng lượng thật; giúp mãi thì NPC quen dựa dẫm, nhờ nhiều hơn; vài tính cách lợi dụng |
+| Hợp tính cách | Người tự trọng không thích bị thương hại, người Nóng tính quý Thẳng thắn, người Hay khoe thích được trêu; độ hợp quyết định điểm quan hệ |
+| Giảm dần khi lặp | Cùng thái độ với cùng NPC trong 7 ngày thì hiệu quả giảm dần (lần 2 còn 60%, lần 3 còn 30%) |
+| Trạng thái người chơi | Mệt hoặc căng thẳng cao: Ấm áp tốn thêm năng lượng hoặc hiện mờ, Khó chịu dễ xuất hiện; tâm trạng tốt mở thêm Đùa |
+| Lựa chọn tiêu cực có lợi | Từ chối tiết kiệm giờ và tiền; Thẳng thắn có thể làm NPC tôn trọng hơn; Lạnh nhạt cắt bớt người hay nhờ vả |
+| Tính cách người chơi | Thái độ chọn nhiều lần tích thành thói quen (cơ chế thói quen tích luỹ đã duyệt); NPC nhận xét theo đó ("dạo này cậu cộc tính") |
 
 Điều kiện khống chế:
-- Ý định đáp phải hợp với ý định của NPC (NPC Rủ thì có Nhận lời và Từ chối; NPC Than thì có Đồng cảm và Khuyên).
-- Lựa chọn cần kỹ năng thì hiện mờ khi thiếu (quy tắc đã chốt). Ví dụ Khuyên về sức khỏe cần Giao tiếp Lv 3; Nhận lời cho mượn cần đủ tiền; Nhận lời rủ cần lịch trống.
-- Không lộ hậu quả trước (quy tắc đã chốt).
+- Hành động phải hợp ý định của NPC (NPC Rủ thì có Nhận lời và Từ chối; NPC Than thì có Giúp, Khuyên, Hỏi thêm).
+- Lựa chọn cần kỹ năng, tiền hoặc lịch trống mà thiếu thì hiện mờ (quy tắc đã chốt); không lộ hậu quả trước (đã chốt).
 
-Hậu quả: điểm quan hệ theo độ hợp giữa giọng người chơi và tính cách NPC (Nóng tính thích Ngắn gọn, Hay giúp đỡ thích Ấm áp...); ghi ký ức để lần sau NPC nhắc lại.
+Hậu quả: điểm quan hệ theo độ hợp, ghi ký ức nếu đủ trọng số, cộng vào thói quen của người chơi.
+
+## I.4b NPC tương tác với nhau trước mặt người chơi
+
+- **Thứ tự NPC tự mở lời với người chơi:** chuyện đang dở, sinh nhật hoặc dịp đặc biệt, biến cố của họ, chuyện thường ngày; giữ trần 3 lần mỗi ngày (đã chốt).
+- **Cảnh nhóm:** khi có từ 2 NPC cùng chỗ, tối đa 1 cảnh mỗi ngày. Họ nói với nhau, nhắc đến nhau, bất đồng hoặc nhờ người chơi phân xử; người chơi chen vào hoặc chỉ đứng nghe. Nghe lỏm là một cách biết tin đồn.
+- **Hệ quả:** đứng về phía ai thì người kia giảm thiện cảm một chút; quan hệ giữa các NPC (T63) đổi theo cảnh nhóm.
 
 ## I.5 Đời sống NPC (nguồn chủ đề "bản thân")
 
@@ -135,9 +164,11 @@ Ngoài biến cố, mỗi NPC có nhịp sống riêng, chạy theo giờ game. 
 |---|---|---|
 | Lịch ngày | Ngủ, thức, ăn ba bữa, đi làm hoặc bán hàng, việc nhà, nghỉ, giờ rảnh; khác nhau ngày thường và cuối tuần (mở rộng lịch hiện diện `schedule` đang có) | Đang làm việc: câu ngắn, ít Rủ; giờ rảnh: dễ Rủ, dễ trò chuyện lâu; đang ngủ: không nhắn lại tới sáng |
 | Hoạt động hiện tại | Đang bán hàng, đang nấu cơm, đang tập thể dục, đang chờ xe buýt... | Thành chủ đề "bản thân" nhỏ ("đang lặt rau nè con"), mở lời theo việc đang làm |
-| Thói quen | Mỗi người 2 đến 4 thói quen: Chú Sáu uống trà sáng ở công viên, Tuấn chạy đơn tới khuya, Cô Hạnh dậy 4 giờ lấy hàng | Người chơi gặp đúng giờ thì có câu riêng; lệch thói quen (Chú Sáu không ra công viên) là dấu hiệu có biến cố |
+| Thói quen | Mỗi người 2 đến 4 thói quen: hàng xóm về hưu uống trà sáng ở công viên, sinh viên giao hàng chạy đơn tới khuya, người bán rau dậy 4 giờ lấy hàng | Người chơi gặp đúng giờ thì có câu riêng; lệch thói quen (ông hàng xóm không ra công viên) là dấu hiệu có biến cố |
 | Mệt và đói của NPC | Thang đơn giản tăng theo giờ làm, giảm khi ăn, ngủ | Cảm xúc Mệt vào cuối ca; NPC đói thì dễ Rủ đi ăn |
 | Lịch đặc biệt | Về quê, đi khám, giỗ, đi chơi cuối tuần (gắn với biến cố) | Vắng mặt có lý do, lần sau gặp kể lại |
+
+Lịch dựng theo lớp: khoảng 15 **lịch mẫu** theo vai và tuổi (sinh viên, văn phòng, bán chợ, về hưu...), cộng độ lệch cá nhân và thói quen rút từ pool, khác ngày thường và cuối tuần; biến cố ghi đè lên lịch. Chỉ tính chi tiết cho NPC đang ở chỗ người chơi; biến cố và quan hệ giữa NPC tính gộp theo ngày hoặc tuần, nhẹ cho điện thoại.
 
 Điều kiện khống chế: sinh hoạt tính từ hạt giống theo ngày và NPC (không lưu save); một NPC chỉ ở một nơi một lúc; thay đổi lịch chỉ do biến cố hoặc thời tiết (bão thì ở nhà).
 
@@ -153,7 +184,7 @@ Mọi NPC (cố định và ngẫu nhiên) có **ngày sinh** và già đi đún
 | Đi làm | 22 đến 60 | Lịch làm, lên lương, lập gia đình, có con |
 | Về hưu | trên 60 | Lịch thong thả, sức khỏe giảm dần, hay kể chuyện xưa |
 
-- Chuyển giai đoạn đổi lịch sinh hoạt và pool biến cố (sinh viên Tuấn ra trường thì đi làm, Chú Sáu đã về hưu).
+- Chuyển giai đoạn đổi lịch sinh hoạt và pool biến cố (sinh viên ra trường thì đi làm).
 - Ngày sinh lưu cho mỗi NPC (một số nguyên); tuổi tính từ ngày game, không lưu riêng.
 
 **Sinh nhật**
@@ -189,8 +220,8 @@ Mọi NPC (cố định và ngẫu nhiên) có **ngày sinh** và già đi đún
 
 | Lô | Nội dung | Mảnh |
 |---|---|---|
-| 1 | Bộ ghép, đời sống NPC; Mẹ, Bà Tư, Minh An, Cô Hạnh, Tuấn | khoảng 500 |
-| 2 | 7 NPC còn lại, hội thoại nhiều lượt, tự mở lời theo chủ đề | khoảng 600 |
+| 1 | Bộ ghép, sinh dàn NPC theo vai, đời sống NPC; Mẹ, em, chủ trọ, 1 đồng nghiệp, bán rau, sinh viên giao hàng | khoảng 500 |
+| 2 | Các vai còn lại, hội thoại nhiều lượt, tự mở lời theo chủ đề, cảnh nhóm | khoảng 600 |
 | 3 | NPC ngẫu nhiên có chuyện riêng, nhóm chat, tin đồn | khoảng 400 |
 
 Mỗi lô: chủ dự án duyệt 20 đến 30 câu mẫu trước, Claude viết hàng loạt, bộ kiểm tra chạy, in khoảng 200 câu để đọc lướt, rồi mới gộp.
@@ -202,13 +233,11 @@ Mỗi lô: chủ dự án duyệt 20 đến 30 câu mẫu trước, Claude viế
 - Mỗi NPC thường gặp xuất hiện ít nhất 6 trong 8 ý định mỗi tháng.
 - Ít nhất 30% câu nhắc tới trạng thái người chơi hoặc biến cố thật (mục 30 kế hoạch).
 
-## I.10 Cần chủ dự án chốt
+## I.10 Đã chốt (05/11) và còn mở
 
-1. Sáu trục và các giá trị của từng trục.
-2. Điều kiện khống chế và hồi chiêu ở bảng trục 1, 2, 6.
-3. Mốc riêng tư theo độ thân (trục 4).
-4. Ý định đáp và giọng của người chơi (I.4).
-5. Thứ tự lô và 4 NPC đầu tiên của Lô 1.
+Đã chốt: không dùng AI sinh câu; pool ngẫu nhiên có điều kiện là nguyên tắc chính; 12 vai cố định với con người ngẫu nhiên; người thân là Mẹ và 1 em (bố để sau); chân dung ghép từ mảnh; số NPC theo I.1d; tuổi, sinh nhật, vòng đời theo I.5c; chỉ lưu ký ức đáng nhớ, NPC biết quên (T.5).
+
+Còn mở, duyệt khi review tài liệu này: giá trị và hồi chiêu ở bảng trục 1, 2, 6; mốc riêng tư theo độ thân; bộ thái độ và hành động của người chơi (I.4); tỷ lệ giảm dần khi lặp.
 
 ---
 
@@ -291,10 +320,10 @@ Ghép có hạt giống (seed) theo ngày và NPC nên tải lại save không �
 
 Câu ghép ra ví dụ: "Con ơi, trưa nay con ăn cơm tấm hả, nhớ ăn rau nghe con." hay "Mẹ hỏi chút nghe, dạo này toàn ăn ngoài phải không, mẹ thấy lo lo, rảnh nấu cơm mà ăn cho đỡ tốn."
 
-**Bà Tư (giọng Tây, chủ trọ), ý định Than, chủ đề bản thân, biến cố `sick` (đau lưng):**
+**Chủ trọ (ví dụ đời này rút ra một bà cụ giọng Tây), ý định Than, chủ đề bản thân, biến cố `sick` (đau lưng):**
 - open: "Ui da" / "Con nè" ; body: "cái lưng bà nó hành từ {khi nào}" / "trời {thời tiết} vầy là bà nhức mình mẩy" (`needs:['thời tiết']`, chỉ khi mưa hoặc lạnh) ; tail: "già rồi con ơi" / "con có rảnh xách giùm bà bao gạo hông" (chỉ khi được Nhờ, độ thân từ Quen biết).
 
-**Lựa chọn của người chơi khi Bà Tư Than:** Đồng cảm Ấm áp ("Bà nghỉ ngơi đi, để con phụ"), Khuyên Thật lòng ("Bà đi khám ở bệnh viện thử", cần Giao tiếp Lv 2), Hỏi thêm Ngắn gọn ("Đau lâu chưa bà?"), Né ("Con đang vội, chút con ghé"). Bà Tư tính Hay giúp đỡ nên Ấm áp được điểm cao nhất; Né trừ nhẹ và ghi ký ức "bận không hỏi han".
+**Lựa chọn của người chơi khi chủ trọ Than** (thái độ × hành động): Ấm áp và Giúp ("Bà nghỉ đi, để con xách giùm", tốn 15 phút và 5 năng lượng); Thẳng thắn và Khuyên ("Bà đi khám thử đi", cần Giao tiếp Lv 2); Đùa và Hỏi thêm ("Lưng bà dự báo thời tiết hay hơn đài đó, đau lâu chưa?", chỉ khi đã Thân); Né và Im lặng ("Dạ... con đang vội"). Nếu chủ trọ đời này tự trọng thì Giúp quá nhiều lần làm bà khó chịu; nếu bà Hay giúp đỡ thì Ấm áp được điểm cao nhất. Né trừ nhẹ và ghi ký ức "bận không hỏi han" nếu đủ trọng số.
 
 ## T.5 Lưu gì và NPC quên ra sao
 
@@ -324,17 +353,18 @@ Như vậy save chỉ thêm khoảng vài KB cho 12 NPC. Lát cắt mới tuỳ 
 
 | Ticket | Nội dung | Phụ thuộc | Nghiệm thu |
 |---|---|---|---|
+| H0 | Sinh dàn NPC theo vai từ pool (12 vai, người thân, chân dung chữ cái tạm), chuyển mạch chuyện cũ thành mạch mẫu theo vai | | Hai seed khác nhau ra hai dàn khác nhau; save cũ vẫn mở được |
 | H1 | Kiểu dữ liệu, `compose.ts`, `talk:check`, 3 khung mỗi ý định | | Bộ kiểm tra chặn mảnh lỗi; ghép được câu từ dữ liệu mẫu |
 | H2 | `facts.ts`: 25 loại dữ kiện từ Nhật ký và chỉ số, quy tắc ai được biết | H1 | Test: NPC không nhắc điều không thấy |
 | H3 | `npc-life.ts`: sinh hoạt hằng ngày (lịch, hoạt động, thói quen, mệt và đói), 30 loại biến cố, cảm xúc ngày, ký ức có trọng số và quên | H1 | Mô phỏng: mỗi NPC 2 đến 5 biến cố mỗi tháng; save thêm không quá 5 KB sau 1 năm |
 | H4 | `replies.ts`: lựa chọn của người chơi, hậu quả theo tính cách, ghi ký ức | H1 | Mỗi lượt 3 đến 4 lựa chọn, không lặp bộ trong 7 ngày |
-| H5 | Lô 1 dữ liệu: Mẹ, Bà Tư, Minh An, Cô Hạnh, Tuấn (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
+| H5 | Lô 1 dữ liệu: Mẹ, em, chủ trọ, 1 đồng nghiệp, bán rau, sinh viên giao hàng (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
 | H6 | Lô 2: 7 NPC còn lại, hội thoại 2 đến 4 lượt, người chơi tự mở lời theo chủ đề | H5 | Như H5 cho cả 12 người |
 | H7b | Tuổi, sinh nhật, vòng đời và người nối tiếp (I.5c) | H3 | Mô phỏng 20 năm: vai trò không bị trống quá 30 ngày; tuổi và lịch đúng |
 | H7 | Lô 3: NPC ngẫu nhiên có chuyện riêng (giới hạn I.1c), nhóm chat, tin đồn (gộp T63) | H6 | Người lạ gặp lại nhớ lần trước; không quá 12 NPC ngẫu nhiên cùng lúc |
 | H8 | `sim-talk.cjs` và chỉ tiêu trong CI ngắn | H1 | Chạy được 30 ngày x 30 seed |
 
-Thứ tự: H1, H2, H3, H4 (khung chạy được, chưa nhiều chữ), rồi H5 (đổ dữ liệu), H8 đi kèm H5. Mỗi ticket một PR, tăng phiên bản.
+Thứ tự: H0, H1, H2, H3, H4 (khung chạy được, chưa nhiều chữ), rồi H5 (đổ dữ liệu), H8 đi kèm H5. Mỗi ticket một PR, tăng phiên bản.
 
 ## T.7 Rủi ro
 
