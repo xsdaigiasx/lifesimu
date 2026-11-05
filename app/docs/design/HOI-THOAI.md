@@ -141,6 +141,37 @@ Ngoài biến cố, mỗi NPC có nhịp sống riêng, chạy theo giờ game. 
 
 Điều kiện khống chế: sinh hoạt tính từ hạt giống theo ngày và NPC (không lưu save); một NPC chỉ ở một nơi một lúc; thay đổi lịch chỉ do biến cố hoặc thời tiết (bão thì ở nhà).
 
+## I.5c Tuổi, sinh nhật và vòng đời NPC
+
+Mọi NPC (cố định và ngẫu nhiên) có **ngày sinh** và già đi đúng theo lịch game. Tuổi quyết định giai đoạn đời, sinh hoạt, biến cố và cách nói.
+
+**Tuổi và giai đoạn**
+
+| Giai đoạn | Tuổi | Ảnh hưởng |
+|---|---|---|
+| Đi học | dưới 22 | Lịch học, thi cử, xin tiền nhà |
+| Đi làm | 22 đến 60 | Lịch làm, lên lương, lập gia đình, có con |
+| Về hưu | trên 60 | Lịch thong thả, sức khỏe giảm dần, hay kể chuyện xưa |
+
+- Chuyển giai đoạn đổi lịch sinh hoạt và pool biến cố (sinh viên Tuấn ra trường thì đi làm, Chú Sáu đã về hưu).
+- Ngày sinh lưu cho mỗi NPC (một số nguyên); tuổi tính từ ngày game, không lưu riêng.
+
+**Sinh nhật**
+- Người chơi biết sinh nhật của NPC khi độ thân từ Thân (NPC tự kể hoặc thấy trong hồ sơ); biết rồi thì hiện trong Lịch và bản tin sáng hôm trước.
+- Đúng ngày: tặng quà (chọn từ đồ mua được), nhắn chúc, rủ đi ăn. Quà hợp sở thích (rút từ pool sở thích của NPC) được nhiều điểm, ghi ký ức trọng số 4 đến 6. Quên sinh nhật của người Tri kỷ thì giảm nhẹ quan hệ.
+- NPC thân cũng nhớ sinh nhật người chơi: Mẹ luôn nhớ, người khác từ Thân mới chúc.
+
+**Vòng đời và luân hồi**
+- **Mất đi:** xác suất theo tuổi và sức khỏe, rất thấp trước 70, tăng dần sau đó; có dấu hiệu trước (ốm nhiều, ít ra ngoài, gặp người chơi kể chuyện cũ). Không ai mất đột ngột khi đang trong chuỗi chuyện dở.
+- **Khi mất:** sự kiện báo tin nhẹ nhàng, đám tang hoặc giỗ đầu (người chơi có thể đến viếng), ký ức với người đó giữ ở Nhật ký. Không mô tả chi tiết gây nặng nề.
+- **Nối tiếp:** nếu NPC có con cháu (rút khi sinh NPC, theo tuổi và hoàn cảnh) thì người nối tiếp có thể kế vai trò: con Bà Tư làm chủ trọ, cháu Cô Hạnh bán tiếp sạp rau. Người nối tiếp là NPC mới, tính cách rút từ pool nhưng mang vài nét của cha mẹ, nhớ mang máng người chơi qua lời kể ("mẹ con hay nhắc anh").
+- **Không có người nối tiếp:** vai trò để trống một thời gian rồi NPC mới từ pool đến thay (chủ trọ mới, người bán khác).
+- **Sinh ra và lớn lên:** NPC lập gia đình có thể có con; trẻ con lớn theo lịch, sau nhiều năm game có thể thành NPC ngẫu nhiên có câu chuyện riêng.
+- Vòng đời áp dụng cho cả dàn cố định, trừ Mẹ chỉ được già đi và yếu dần, mạch chuyện riêng về Mẹ do chủ dự án duyệt sau.
+- Giới hạn ở I.1c vẫn giữ: người mất hoặc rời đi thì giải phóng chỗ cho người mới.
+
+**Lưu gì:** ngày sinh, cha mẹ hoặc người nối tiếp (mã NPC), trạng thái còn hay đã mất. Khoảng vài chục byte mỗi người.
+
 ## I.6 Khung và mảnh
 
 - **Khung** theo ý định, ví dụ Than: `[mở lời][chuyện][cảm xúc][đuôi]`; Rủ: `[mở lời][lời rủ có nơi và giờ][lý do][đuôi]`.
@@ -299,6 +330,7 @@ Như vậy save chỉ thêm khoảng vài KB cho 12 NPC. Lát cắt mới tuỳ 
 | H4 | `replies.ts`: lựa chọn của người chơi, hậu quả theo tính cách, ghi ký ức | H1 | Mỗi lượt 3 đến 4 lựa chọn, không lặp bộ trong 7 ngày |
 | H5 | Lô 1 dữ liệu: Mẹ, Bà Tư, Minh An, Cô Hạnh, Tuấn (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
 | H6 | Lô 2: 7 NPC còn lại, hội thoại 2 đến 4 lượt, người chơi tự mở lời theo chủ đề | H5 | Như H5 cho cả 12 người |
+| H7b | Tuổi, sinh nhật, vòng đời và người nối tiếp (I.5c) | H3 | Mô phỏng 20 năm: vai trò không bị trống quá 30 ngày; tuổi và lịch đúng |
 | H7 | Lô 3: NPC ngẫu nhiên có chuyện riêng (giới hạn I.1c), nhóm chat, tin đồn (gộp T63) | H6 | Người lạ gặp lại nhớ lần trước; không quá 12 NPC ngẫu nhiên cùng lúc |
 | H8 | `sim-talk.cjs` và chỉ tiêu trong CI ngắn | H1 | Chạy được 30 ngày x 30 seed |
 
