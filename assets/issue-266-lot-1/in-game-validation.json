@@ -1,0 +1,130 @@
+{
+  "result": "PASS",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "surface": "production rental room, synthetic saves",
+  "views": [
+    {
+      "model": "basic",
+      "direction": "a",
+      "rotation": 0,
+      "file": "/assets/furniture/tv-basic_a.webp",
+      "dimensions": [
+        192,
+        156
+      ]
+    },
+    {
+      "model": "basic",
+      "direction": "b",
+      "rotation": 90,
+      "file": "/assets/furniture/tv-basic_b.webp",
+      "dimensions": [
+        192,
+        156
+      ]
+    },
+    {
+      "model": "basic",
+      "direction": "c",
+      "rotation": 180,
+      "file": "/assets/furniture/tv-basic_c.webp",
+      "dimensions": [
+        192,
+        156
+      ]
+    },
+    {
+      "model": "basic",
+      "direction": "d",
+      "rotation": 270,
+      "file": "/assets/furniture/tv-basic_d.webp",
+      "dimensions": [
+        192,
+        156
+      ]
+    },
+    {
+      "model": "comfort",
+      "direction": "a",
+      "rotation": 0,
+      "file": "/assets/furniture/tv-comfort_a.webp",
+      "dimensions": [
+        192,
+        175
+      ]
+    },
+    {
+      "model": "comfort",
+      "direction": "b",
+      "rotation": 90,
+      "file": "/assets/furniture/tv-comfort_b.webp",
+      "dimensions": [
+        192,
+        175
+      ]
+    },
+    {
+      "model": "comfort",
+      "direction": "c",
+      "rotation": 180,
+      "file": "/assets/furniture/tv-comfort_c.webp",
+      "dimensions": [
+        192,
+        175
+      ]
+    },
+    {
+      "model": "comfort",
+      "direction": "d",
+      "rotation": 270,
+      "file": "/assets/furniture/tv-comfort_d.webp",
+      "dimensions": [
+        192,
+        175
+      ]
+    },
+    {
+      "model": "premium",
+      "direction": "a",
+      "rotation": 0,
+      "file": "/assets/furniture/tv-premium_a.webp",
+      "dimensions": [
+        192,
+        192
+      ]
+    },
+    {
+      "model": "premium",
+      "direction": "b",
+      "rotation": 90,
+      "file": "/assets/furniture/tv-premium_b.webp",
+      "dimensions": [
+        192,
+        192
+      ]
+    },
+    {
+      "model": "premium",
+      "direction": "c",
+      "rotation": 180,
+      "file": "/assets/furniture/tv-premium_c.webp",
+      "dimensions": [
+        192,
+        192
+      ]
+    },
+    {
+      "model": "premium",
+      "direction": "d",
+      "rotation": 270,
+      "file": "/assets/furniture/tv-premium_d.webp",
+      "dimensions": [
+        192,
+        192
+      ]
+    }
+  ]
+}
