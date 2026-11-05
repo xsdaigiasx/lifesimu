@@ -12,6 +12,7 @@ import {settleHr} from './hr';
 import {settleManage} from './manage';
 import {fridgeOf,placedAt,BED_ENERGY,TABLE_MOOD,decorRelief} from './home';
 import {recordJournal} from './journal';
+import {settleSummary} from './summary';
 import {residenceOf,hasRoom,COOK_FACTOR} from './housing';
 import {clockOf,spendTime,END} from './time';
 export const INGREDIENTS={rice:{name:'Gạo',price:10000,days:30},egg:{name:'Trứng',price:5000,days:5},vegetable:{name:'Rau củ',price:12000,days:2},pork:{name:'Thịt heo',price:35000,days:1},tofu:{name:'Đậu phụ',price:8000,days:2},fish:{name:'Cá tươi',price:30000,days:1}} as const;
@@ -170,4 +171,4 @@ function settleLife(previous:GameState,next:GameState):GameState{const before=li
 export function giftIngredient(s:GameState,id:IngredientId,qty:number):GameState{const l=structuredClone(lifeOf(s));if(l.pantry.length>=99)return s;stockLot(s,l,id,qty);return{...s,life:l}}
 
 /** Qua ngày: sinh hoạt rồi ngân hàng (phí trễ hạn, điểm tín dụng). */
-export function settleLifeDay(previous:GameState,next:GameState):GameState{return settleManage(settleHr(settleFinance(settleProjects(settleStaff(settleSide(settleBank(settleLife(previous,next))))))))}
+export function settleLifeDay(previous:GameState,next:GameState):GameState{return settleSummary(settleManage(settleHr(settleFinance(settleProjects(settleStaff(settleSide(settleBank(settleLife(previous,next)))))))))}

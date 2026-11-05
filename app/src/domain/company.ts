@@ -8,6 +8,7 @@ import {validHiring,validStaff,type HiringState,type Employee} from './hiring';
 import {validProjects,type ProjectsState} from './projects';
 import {validFinance,book,type FinanceState} from './finance';
 import {recordJournal} from './journal';
+import {noteInvest} from './summary';
 import {validHr,type HrState} from './hr';
 import {validPolicy,type PolicyState} from './policy';
 import {SIZES} from './office';
@@ -38,7 +39,7 @@ export function investFund(s:GameState,amount:number):GameResult{
  const n=structuredClone(s);
  if(post(n,{id:`invest:${s.day}:${s.company.fund}`,name:'Góp vốn vào công ty',amount:-amount})!=='ok')return fail('Tiền mặt của bạn chưa đủ.');
  n.company!.fund+=amount;book(n.company!,s.day,'Chủ góp vốn',amount);
- return{ok:true,state:recordJournal(n,`invest:${s.day}:${s.company.fund}`,'Góp vốn','Đã chuyển tiền cá nhân vào quỹ công ty.')}}
+ return{ok:true,state:recordJournal(noteInvest(n,amount),`invest:${s.day}:${s.company.fund}`,'Góp vốn','Đã chuyển tiền cá nhân vào quỹ công ty.')}}
 export function foundCompany(s:GameState,a:Extract<CompanyAction,{kind:'found'}>):GameResult{
  const fail=(error:string):GameResult=>({ok:false,error});
  if(s.company||officeOf(s).role==='owner')return fail('Bạn đã có công ty.');

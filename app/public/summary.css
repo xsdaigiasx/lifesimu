@@ -1,0 +1,11 @@
+.sum-body{display:flex;flex-direction:column;gap:12px}
+.sum-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.sum-card{display:flex;flex-direction:column;gap:4px;padding:12px;border-radius:10px;background:#fffef4;border:1px solid #dce5d2;min-width:0}
+.sum-card svg{width:18px;height:18px;color:#67865b}.sum-card strong{overflow-wrap:anywhere}.sum-card small{color:#7f8c73}
+.sum-wide{grid-column:1/-1}
+.sum-section{display:flex;flex-direction:column;gap:6px}.sum-section h4{margin:0 2px;font-size:11px;font-weight:600;color:#7f8c73}
+.sum-person{display:flex;align-items:center;gap:10px;padding:9px 10px;background:#fffef4;border:1px solid #dce5d2;border-radius:10px}
+.sum-person-copy{display:flex;flex-direction:column;gap:2px;min-width:0}.sum-person-copy small{color:#7f8c73}.sum-person-copy em{font-style:normal;color:#4b6b4f;overflow-wrap:anywhere}
+.sum-mark{display:flex;align-items:baseline;gap:10px;padding:8px 2px;border-bottom:1px solid #e3ead8}.sum-mark small{flex:none;min-width:64px;color:#7f8c73}.sum-mark strong{min-width:0;overflow-wrap:anywhere}
+.sum-popup{display:flex;flex-direction:column;gap:12px}
+.sum-close{min-height:44px;border-radius:10px;background:#38644e;color:#fff;font-weight:600}
