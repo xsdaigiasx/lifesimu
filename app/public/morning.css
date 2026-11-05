@@ -1,0 +1,11 @@
+.morning{display:grid;gap:12px}
+.morning-sec{display:grid;gap:6px;padding:12px;border-radius:14px;background:rgba(255,255,255,.7);border:1px solid rgba(23,62,56,.12)}
+.morning-sec small{font-size:var(--fs-min);letter-spacing:.08em;color:#5a6f6a;font-weight:700}
+.morning-sec p{margin:0;display:flex;align-items:center;gap:8px;font-size:var(--fs-body)}
+.morning-sec svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor}
+.morning-weather{display:flex;gap:16px;align-items:center;font-size:var(--fs-body);font-weight:700}
+.morning-weather span{display:flex;align-items:center;gap:6px}
+.morning-next{font-weight:500;opacity:.75}
+.morning-empty{opacity:.65}
+.morning-dialog{display:grid;gap:14px}
+.morning-dialog .primary{width:100%}
