@@ -90,7 +90,7 @@ const npcCount=(s:GameState)=>storyOf(s).log.filter(l=>l.day===s.day&&l.by==='np
 /** Chọn mô-típ cho một người theo seed; ưu tiên gặp lại khi có móc tới hạn. */
 function pickMotif(s:GameState,npc:NpcProfile,by:'npc'|'player',salt:string):{motif:Motif;variant:number;memory?:Memory}|null{const base=ctxFor(s,npc);
  const due=MOTIFS.find(m=>m.id==='return'&&m.by.includes(by)&&m.eligible(base));if(due)return{motif:due,variant:0,memory:memoryForHook(s,npc.id)};
- const list=MOTIFS.filter(m=>m.id!=='return'&&m.by.includes(by)&&m.eligible(base));if(!list.length)return null;
+ const list=MOTIFS.filter(m=>m.id!=='return'&&m.by.includes(by)&&m.eligible(base)&&!(by==='npc'&&m.id==='meal'&&recentlyDone(s,npc.id,'meal')));if(!list.length)return null;
  const prefer=by==='player'?(list.filter(m=>m.id==='debt').length?list.filter(m=>m.id==='debt'):list.filter(m=>m.id==='private')):[];const pool=prefer.length?prefer:by==='player'?list.filter(m=>m.id==='greet'):list;if(!pool.length)return null;
  const h=hash(`${salt}:${s.day}:${npc.id}`),motif=pool[h%pool.length]!;const last=storyOf(s).log.filter(l=>l.npc===npc.id&&l.motif===motif.id).pop();let variant=(h>>>8)%motif.variants;if(last&&motif.variants>1&&last.variant===variant)variant=(variant+1)%motif.variants;return{motif,variant}}
 

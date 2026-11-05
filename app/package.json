@@ -1,7 +1,7 @@
 {
   "name": "mot-doi-de-song",
   "private": true,
-  "version": "0.58.0",
+  "version": "0.59.0",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "typecheck": "tsc --noEmit",
@@ -10,6 +10,7 @@
     "test": "node scripts/test.mjs",
     "sim:company": "node scripts/sim-company.cjs",
     "pool:check": "node scripts/pool-check.cjs",
+    "sim:npc": "node scripts/sim-npc.cjs",
     "art:verify": "python scripts/verify-upscaled-map.py",
     "deploy:workers": "npm run build && wrangler deploy --config wrangler.jsonc",
     "deploy:check": "wrangler deploy --config wrangler.jsonc --dry-run --outdir .wrangler/dry-run"
