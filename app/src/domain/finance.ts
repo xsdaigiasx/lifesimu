@@ -38,6 +38,8 @@ export function addReceivable(co:CompanyState,day:number,r:Receivable){
 
 /** Lương tháng ngày d: người mới thuê trả theo số ngày đã làm (tối đa 30). */
 export const wageDue=(e:Employee,day:number)=>{const days=day-e.hiredDay;return days<=0?0:round1000(e.wage*Math.min(30,days)/30)};
+/** Lương thực trả ngày d: lương theo ngày làm nhân hệ số chính sách (dùng chung cho trả lương và bảng lương). */
+export const wageAmount=(e:Employee,day:number,co?:CompanyState)=>Math.round(wageDue(e,day)*wageMult(co)/1000)*1000;
 
 /** Qua ngày: khách trả tiền, trả nợ lương, trả lương ngày 1, phạt nợ lương. Tối đa 90 ngày bù, idempotent theo `last`. */
 export function settleFinance(next:GameState):GameState{
@@ -52,9 +54,10 @@ export function settleFinance(next:GameState):GameState{
   if(due.length){f.recv=f.recv.filter(r=>r.due>d);for(const r of due){c.fund+=r.amount;book(c,d,`${r.client}: ${r.title}`,r.amount);notes.push([`recv:${r.id}`,'Khách thanh toán',`${r.client} trả ${money(r.amount)} cho ${r.title}.`])}}
   f.debts=f.debts.filter(x=>{if(x.amount>c.fund)return true;c.fund-=x.amount;book(c,d,`Trả nợ lương ${x.name}`,-x.amount);return false});
   if(dateAt(d).getUTCDate()===1){
-   let missed=0;
-   for(const e of staff){const amt=Math.round(wageDue(e,d)*wageMult(c)/1000)*1000;if(amt<=0)continue;
-    if(amt<=c.fund){c.fund-=amt;book(c,d,`Lương ${e.name}`,-amt)}else{f.debts.push({emp:e.id,name:e.name,amount:amt,since:d});missed++}}
+   let missed=0,paidN=0,paidSum=0;
+   for(const e of staff){const amt=wageAmount(e,d,c);if(amt<=0)continue;
+    if(amt<=c.fund){c.fund-=amt;paidN++;paidSum+=amt;book(c,d,`Lương ${e.name}`,-amt)}else{f.debts.push({emp:e.id,name:e.name,amount:amt,since:d});missed++}}
+   if(paidN){const t=dateAt(d);notes.push([`paid:${d}`,'Đã trả lương',`Tháng ${t.getUTCMonth()===0?12:t.getUTCMonth()}/${t.getUTCMonth()===0?t.getUTCFullYear()-1:t.getUTCFullYear()}: ${money(paidSum)} cho ${paidN} người.`])}
    if(missed){c.rep=clamp((c.rep??50)+FIN.repUnpaid,0,100);notes.push([`payday:${d}`,'Chưa đủ tiền trả lương',`Quỹ không đủ trả lương cho ${missed} người, uy tín công ty giảm.`])}}
   for(const e of [...staff]){
    const owed=f.debts.filter(x=>x.emp===e.id&&!x.left);if(!owed.length)continue;
