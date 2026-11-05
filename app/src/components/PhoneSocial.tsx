@@ -9,7 +9,7 @@ import Icon from './Icon';
 
 export interface SocialHandlers{reply:(id:string,msgId:string,choice:number)=>GameResult;send:(id:string,kind:'hello'|'invite')=>GameResult;call:(id:string)=>GameResult;read:(id:string)=>void}
 const tierName=(score:number,id:string)=>relationTier(score,id);
-const Avatar=({id,state}:{id:string;state:GameState})=>{const n=castById(state,id);return n?<span className="ps-avatar" style={{background:n.tone}} aria-hidden="true"><NpcFace id={n.id} label={n.label}/></span>:null};
+const Avatar=({id,state}:{id:string;state:GameState})=>{const n=castById(state,id);return n?<span className="ps-avatar" style={{background:n.tone}} aria-hidden="true"><NpcFace npc={n}/></span>:null};
 
 /** T20: Tin nhắn dạng khung chat. Trả lời nhanh không ghi trước hệ quả; nhắn tin không tốn giờ. */
 export function Messages({state,h,openId,top}:{state:GameState;h:SocialHandlers;openId?:string;top?:ReactNode}){

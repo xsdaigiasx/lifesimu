@@ -22,7 +22,7 @@ export function SummaryBody({m,state}:{m:Summary;state:GameState}){
     <div className="sum-card"><Icon name="box"/><strong className="t-title">{c.done}</strong><small>Dự án xong</small></div></>}
   </div>
   {m.people.length>0&&<section className="sum-section"><h4>Người đồng hành</h4>
-   {m.people.map(p=>{const n=castById(state,p.id);return n?<div className="sum-person" key={p.id}><span className="journal-avatar" style={{background:n.tone}} aria-hidden="true"><NpcFace id={n.id} label={n.label}/></span><span className="sum-person-copy"><strong>{n.name}</strong><small>{relationTier(p.score,n.id)}</small>{p.memory&&<em>“{p.memory}”</em>}</span></div>:null})}</section>}
+   {m.people.map(p=>{const n=castById(state,p.id);return n?<div className="sum-person" key={p.id}><span className="journal-avatar" style={{background:n.tone}} aria-hidden="true"><NpcFace npc={n}/></span><span className="sum-person-copy"><strong>{n.name}</strong><small>{relationTier(p.score,n.id)}</small>{p.memory&&<em>“{p.memory}”</em>}</span></div>:null})}</section>}
   {m.marks.length>0&&<section className="sum-section"><h4>Mốc nổi bật</h4>
    {m.marks.map((k,i)=><div className="sum-mark" key={i}><small>{shortDate(k.day)}</small><strong>{k.title}</strong></div>)}</section>}
  </div>}
