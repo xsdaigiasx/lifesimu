@@ -23,8 +23,8 @@ assert(maxDay<=2,'tối đa 2 việc mỗi ngày');
 assert.deepEqual(H.settleHr(s),s,'idempotent');assert(engine.valid(s)&&engine.parse(JSON.stringify(s)));
 
 
-// 2. đủ 15 mô-típ chạy được: mọi lựa chọn của mọi mô-típ áp dụng không lỗi và giữ save hợp lệ
-assert.equal(H.MOTIFS.length,15);
+// 2. đủ 20 mô-típ chạy được: mọi lựa chọn của mọi mô-típ áp dụng không lỗi và giữ save hợp lệ
+assert.equal(H.MOTIFS.length,20);
 const mk=(motif,variant=0)=>{let t=base(60,[emp('a',{personality:'Tham'}),emp('b')]);comm(t,5);
  t.company.projects={version:1,seq:3,last:60,offers:[],done:[],active:[{id:'p1',client:'K',title:'T',skill:'programming',lv:5,hours:60,difficulty:3,picky:0,urgent:false,traits:[],reward:6e6,days:30,opened:40,expires:47,accepted:50,due:90,team:['a','b'],progress:10,checks:0,ew:20,eh:0}]};
  t.company.hr={version:1,last:60,seq:5,pending:[{id:'h1',emp:'a',motif,variant,day:60,expires:63,other:'b',ref:'p1'}],log:[],memories:[],hooks:[]};return t};

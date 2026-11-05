@@ -1,10 +1,10 @@
 import type {GameState} from './types';
-import {HIRE_SKILLS,levelOf,staffOf,type Employee,type HireSkill,type Personality} from './hiring';
+import {HIRE_SKILLS,KNOW,levelOf,staffOf,type Employee,type HireSkill,type Personality} from './hiring';
 import {hash} from './shift';
 
 /** T45 (Kế hoạch mục 34, 35.1; chủ dự án duyệt 05/11): chỉ số công việc của nhân viên và hành vi theo tính cách.
  *  Chưa giao việc (T46), chưa trả lương (T47), chưa sự kiện nhân sự (T48): tải việc luôn 0, mệt chỉ hồi. */
-export interface WorkState{morale:number;loyalty:number;fatigue:number;ambition:number;/** Ngày đã cập nhật tới. */day:number;/** T46: số lần làm tốt (3 sao trở lên) theo loại việc; mỗi 5 lần cộng 5% tốc độ, tối đa 20%. */exp?:Partial<Record<HireSkill,number>>;/** T48: nghỉ (ốm, phép) tới hết ngày này; không tính tiến độ dự án. */off?:number}
+export interface WorkState{morale:number;loyalty:number;fatigue:number;ambition:number;/** Ngày đã cập nhật tới. */day:number;/** T46: số lần làm tốt (3 sao trở lên) theo loại việc; mỗi 5 lần cộng 5% tốc độ, tối đa 20%. */exp?:Partial<Record<HireSkill,number>>;/** T48: nghỉ (ốm, phép) tới hết ngày này; không tính tiến độ dự án. */off?:number;/** T51: số dự án liên tiếp quá sức và quá dễ. */strain?:{over:number;easy:number}}
 
 /** Tính chất việc (mục 35.1) để khớp tính cách. */
 export type Trait='urgent'|'risky'|'routine'|'client'|'team'|'solo'|'reward'|'long'|'easy'|'hard'|'picky';
@@ -32,10 +32,17 @@ export const fairWage=(e:Employee)=>levelOf(mainSkill(e)).base;
 export const wageRatio=(e:Employee)=>e.wage/Math.max(1,fairWage(e));
 
 /** T48: điểm thân với chủ 0–100 (mặc định theo độ tin cậy), bậc Bất hoà, Quen biết, Thân, Tri kỷ. */
+/** T51: độ biết hiện tại; thiếu (save cũ) tính là khởi đầu. */
+export const knowOf=(e:Employee)=>e.know??KNOW.start;
+const round1=(v:number)=>Math.round(v*10)/10;
+/** Cộng độ biết (kẹp 0–100, làm tròn 0,1). */
+export const withKnow=(e:Employee,delta:number):Employee=>({...e,know:clamp(round1(knowOf(e)+delta),0,100)});
 export const bondOf=(e:Employee)=>e.bond??Math.round(20+e.trust/10);
 export const bondTier=(b:number)=>b>=60?'Tri kỷ':b>=30?'Thân':b>=15?'Quen biết':'Bất hoà';
 /** Bất hoà làm cầm chừng, Tri kỷ làm hăng hơn. */
 export const bondMult=(b:number)=>b>=60?1.05:b<15?.9:1;
+/** T51: độ biết tăng nhanh hơn khi thân hơn (Thân ×1,2, Tri kỷ ×1,5). */
+export const knowGain=(e:Employee,base:number)=>base*(bondOf(e)>=60?KNOW.bondHigh:bondOf(e)>=30?KNOW.bondMid:1);
 /** Chỉ số ban đầu lúc thuê, không cần lưu: suy ra từ hồ sơ. */
 export function initialWork(e:Employee):WorkState{return{morale:STAFF.startMorale,loyalty:LOYAL_START[e.motive],fatigue:0,ambition:clamp(FX[e.personality].ambition+(hash(`amb:${e.id}`)%11)-5,0,100),day:e.hiredDay}}
 
@@ -92,5 +99,5 @@ export function behaviorOf(e:Employee,day:number,job?:Job){const fx=FX[e.persona
 
 export function validWork(v:unknown,day:number):v is WorkState{
  if(!v||typeof v!=='object')return false;const w=v as WorkState;
- return [w.morale,w.loyalty,w.fatigue,w.ambition].every(x=>Number.isFinite(x)&&x>=0&&x<=100)&&Number.isInteger(w.day)&&w.day>=0&&w.day<=day&&(w.off===undefined||Number.isInteger(w.off)&&w.off>=0&&w.off<=1e6)&&(w.exp===undefined||typeof w.exp==='object'&&w.exp!==null&&Object.entries(w.exp).every(([k,n])=>HIRE_SKILLS.includes(k as HireSkill)&&Number.isInteger(n)&&n>=0&&n<=9999))}
+ return [w.morale,w.loyalty,w.fatigue,w.ambition].every(x=>Number.isFinite(x)&&x>=0&&x<=100)&&Number.isInteger(w.day)&&w.day>=0&&w.day<=day&&(w.off===undefined||Number.isInteger(w.off)&&w.off>=0&&w.off<=1e6)&&(w.strain===undefined||!!w.strain&&Number.isInteger(w.strain.over)&&w.strain.over>=0&&w.strain.over<=99&&Number.isInteger(w.strain.easy)&&w.strain.easy>=0&&w.strain.easy<=99)&&(w.exp===undefined||typeof w.exp==='object'&&w.exp!==null&&Object.entries(w.exp).every(([k,n])=>HIRE_SKILLS.includes(k as HireSkill)&&Number.isInteger(n)&&n>=0&&n<=9999))}
 
