@@ -48,7 +48,7 @@ export function CartButton({onOpen}:{onOpen:()=>void}){
 }
 
 /** Hiệu quả ghi rõ đơn vị: tinh thần mỗi ngày, đi nhanh hơn bao nhiêu. */
-export const FACT:Record<ProductId,[string,string]>={casual:['smile','+2/ngày'],officeWear:['smile','+2/ngày'],coat:['smile','+2/ngày'],headphones:['bell','Nghe nhạc'],tv:['play','Xem TV'],bicycle:['bus','Nhanh 40%'],motorbike:['bus','Nhanh 65%'],scooter:['bus','Nhanh 70%'],backpack:['bag','Túi 8 món']};
+export const FACT:Record<ProductId,[string,string]>={casual:['smile','+2/ngày'],officeWear:['smile','+2/ngày'],coat:['smile','+2/ngày'],headphones:['bell','Nghe nhạc'],tv:['play','Xem TV'],laptopMid:['bolt','Làm nhanh ×1,0'],laptopPro:['bolt','Làm nhanh ×1,15'],bicycle:['bus','Nhanh 40%'],motorbike:['bus','Nhanh 65%'],scooter:['bus','Nhanh 70%'],backpack:['bag','Túi 8 món']};
 export const FULL='Giỏ chỉ chứa tối đa 8 món.';
 /** Mọi loại nội thất, đèn và tủ lạnh xếp cuối. */
 export const HOME_IDS=[...(Object.keys(HOME_ITEMS) as HomeId[]).filter(id=>id!=='lamp'&&id!=='fridge'),'lamp','fridge'] as HomeId[];

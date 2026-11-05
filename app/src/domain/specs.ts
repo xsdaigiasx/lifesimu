@@ -9,7 +9,7 @@ export const DELIVERY={base:10000,perKg:800,min:15000,max:120000,kgPerM3:100} as
 
 type Cm=[number,number,number];
 const PRODUCT_SPEC:Record<ProductId,{kg:number;cm:Cm;watt?:number}>={
- headphones:{kg:.25,cm:[18,16,8],watt:2},tv:{kg:8,cm:[90,10,55],watt:60},
+ headphones:{kg:.25,cm:[18,16,8],watt:2},laptopMid:{kg:1.8,cm:[34,24,2],watt:50},laptopPro:{kg:2.2,cm:[36,25,2],watt:100},tv:{kg:8,cm:[90,10,55],watt:60},
  casual:{kg:.4,cm:[30,25,4]},officeWear:{kg:.9,cm:[35,28,6]},coat:{kg:1.4,cm:[40,30,10]},
  bicycle:{kg:14,cm:[170,60,105]},motorbike:{kg:105,cm:[190,70,105]},scooter:{kg:115,cm:[185,70,110]},
  backpack:{kg:.8,cm:[30,15,45]}};

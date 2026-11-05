@@ -2,6 +2,7 @@
  * Điện = công suất × giờ dùng cố định × 30 ngày; giá trọ cao hơn nhà riêng (nhà riêng tính bậc thang). */
 import type {GameState} from './types';
 import {homeOf,livesInTro,type HomeId,type HomeTier} from './home';
+import {MACHINES,machineOf} from './computer';
 import {housingOf,layoutOf,HOUSES,type HouseId} from './housing';
 
 type Watts=Record<HomeTier,number>;
@@ -35,7 +36,7 @@ export function placedDevices(s:GameState):{id:HomeId;tier:HomeTier}[]{
 /** Hoá đơn điện nước, mạng của một tháng theo nhà và đồ hiện có. */
 export function billOf(s:GameState):Bill{
  const house=housingOf(s).house,lines:BillLine[]=[];
- for(const d of placedDevices(s)){const spec=DEVICES[d.id];if(!spec)continue;const kwh=kwhOf(spec.watt[d.tier],spec.hours),i=lines.find(l=>l.id===d.id);if(i)i.kwh=Math.round((i.kwh+kwh)*10)/10;else lines.push({id:d.id,label:spec.name,kwh,amount:0})}
+ for(const d of placedDevices(s)){const spec=DEVICES[d.id];if(!spec)continue;const watt=d.id==='desk'?MACHINES[machineOf(s)].watt:spec.watt[d.tier],kwh=kwhOf(watt,spec.hours),i=lines.find(l=>l.id===d.id);if(i)i.kwh=Math.round((i.kwh+kwh)*10)/10;else lines.push({id:d.id,label:spec.name,kwh,amount:0})}
  if(s.life?.owned.includes('tv'))lines.push({id:'tv',label:TV.name,kwh:kwhOf(TV.watt,TV.hours),amount:0});
  const kwh=Math.round(lines.reduce((n,l)=>n+l.kwh,0)*10)/10,price=rateFor(house),total=Math.round(price(kwh)/1000)*1000;
  /** Chia tiền điện theo tỷ lệ kWh của từng thiết bị, làm tròn nghìn; dòng cuối nhận phần dư để cộng đúng tổng. */

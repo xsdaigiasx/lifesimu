@@ -24,7 +24,6 @@ export const uidOf=(i:{id:HomeId;uid?:string})=>i.uid??i.id;
 function withUids(items:HomeObject[]):HomeObject[]{const seen=new Map<HomeId,number>();return items.map(i=>{const n=(seen.get(i.id)??0)+1;seen.set(i.id,n);return i.uid?i:{...i,uid:n===1?i.id:`${i.id}-${n}`}})}
 /** T28: điểm dùng của đồ. Chỉ đồ đang đặt trong phòng trọ (đang ở trọ) mới có hiệu ứng. */
 export const BED_ENERGY:Record<HomeTier,number>={basic:0,comfort:4,premium:8};
-export const DESK_XP:Record<HomeTier,number>={basic:0,comfort:.1,premium:.2};
 export const TABLE_MOOD:Record<HomeTier,number>={basic:2,comfort:3,premium:4};
 export const DECOR:HomeId[]=['plant','lamp','rug','painting'],DECOR_CAP=6;
 export const livesInTro=(s:GameState)=>(s.housing?.house??'tro')==='tro';
