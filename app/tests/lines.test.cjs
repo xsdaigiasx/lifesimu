@@ -26,9 +26,9 @@ test('60 ngày nói chuyện: không lặp câu với cùng người trong 10 l�
  assert.ok(callbacks.size>=12,'nhắc chuyện cũ ít nhất mỗi 5 ngày: '+callbacks.size);
 });
 
-test('ký ức nhẹ mờ sau 30 ngày, ký ức nặng còn nhớ',()=>{
+test('ký ức lâu không nhắc giảm trọng số, dưới 2 thì quên (H3)',()=>{
  const base=at(40,1140,'home'),mk=w=>({id:'m'+w,day:5,npc:'landlord',motif:'favor',topic:'xách đồ',tag:'help',weight:w});
- const s={...base,story:{...D.storyOf(base),memories:[mk(2),mk(4)]}};const next=D.settleStory(s,{...s,day:41});assert.deepEqual(D.storyOf(next).memories.map(m=>m.weight),[4]);
+ const s={...base,story:{...D.storyOf(base),memories:[mk(2),mk(4)]}};const next=D.settleStory(s,{...s,day:41});assert.deepEqual(D.storyOf(next).memories.map(m=>m.weight),[3]);
 });
 
 test('quỵt nợ: gặp lại thì người đó xin khất; xoá nợ được ghi nhớ lâu',()=>{
