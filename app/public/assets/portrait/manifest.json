@@ -1,0 +1,590 @@
+{
+  "width": 256,
+  "height": 256,
+  "layerOrder": [
+    "base",
+    "outfit",
+    "hair",
+    "extra"
+  ],
+  "items": [
+    {
+      "layer": "base",
+      "id": "m-teen-light",
+      "gender": "m",
+      "ages": [
+        "teen"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-teen-mid",
+      "gender": "m",
+      "ages": [
+        "teen"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-teen-tan",
+      "gender": "m",
+      "ages": [
+        "teen"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-adult-light",
+      "gender": "m",
+      "ages": [
+        "adult"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-adult-mid",
+      "gender": "m",
+      "ages": [
+        "adult"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-adult-tan",
+      "gender": "m",
+      "ages": [
+        "adult"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-mid-light",
+      "gender": "m",
+      "ages": [
+        "mid"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-mid-mid",
+      "gender": "m",
+      "ages": [
+        "mid"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-mid-tan",
+      "gender": "m",
+      "ages": [
+        "mid"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-old-light",
+      "gender": "m",
+      "ages": [
+        "old"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-old-mid",
+      "gender": "m",
+      "ages": [
+        "old"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "m-old-tan",
+      "gender": "m",
+      "ages": [
+        "old"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-teen-light",
+      "gender": "f",
+      "ages": [
+        "teen"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-teen-mid",
+      "gender": "f",
+      "ages": [
+        "teen"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-teen-tan",
+      "gender": "f",
+      "ages": [
+        "teen"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-adult-light",
+      "gender": "f",
+      "ages": [
+        "adult"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-adult-mid",
+      "gender": "f",
+      "ages": [
+        "adult"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-adult-tan",
+      "gender": "f",
+      "ages": [
+        "adult"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-mid-light",
+      "gender": "f",
+      "ages": [
+        "mid"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-mid-mid",
+      "gender": "f",
+      "ages": [
+        "mid"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-mid-tan",
+      "gender": "f",
+      "ages": [
+        "mid"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-old-light",
+      "gender": "f",
+      "ages": [
+        "old"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-old-mid",
+      "gender": "f",
+      "ages": [
+        "old"
+      ]
+    },
+    {
+      "layer": "base",
+      "id": "f-old-tan",
+      "gender": "f",
+      "ages": [
+        "old"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "tee",
+      "gender": "any",
+      "ages": [
+        "teen",
+        "adult",
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "student",
+        "neighbor",
+        "delivery"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "shirt",
+      "gender": "any",
+      "ages": [
+        "teen",
+        "adult",
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "office",
+        "bank",
+        "landlord"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "polo",
+      "gender": "any",
+      "ages": [
+        "teen",
+        "adult",
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "delivery",
+        "landlord",
+        "neighbor"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "hoodie",
+      "gender": "any",
+      "ages": [
+        "teen",
+        "adult"
+      ],
+      "roles": [
+        "student"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "blouse-doctor",
+      "gender": "any",
+      "ages": [
+        "adult",
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "doctor"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "guard",
+      "gender": "any",
+      "ages": [
+        "adult",
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "guard",
+        "lobby"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "apron",
+      "gender": "any",
+      "ages": [
+        "adult",
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "market",
+        "food-vendor"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "ba-ba",
+      "gender": "any",
+      "ages": [
+        "adult",
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "market",
+        "retired",
+        "family"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "cardigan",
+      "gender": "any",
+      "ages": [
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "retired",
+        "landlord",
+        "family"
+      ]
+    },
+    {
+      "layer": "outfit",
+      "id": "office-f",
+      "gender": "f",
+      "ages": [
+        "adult",
+        "mid",
+        "old"
+      ],
+      "roles": [
+        "office",
+        "bank"
+      ]
+    },
+    {
+      "layer": "hair",
+      "id": "m-crop",
+      "gender": "m",
+      "ages": [
+        "teen",
+        "adult",
+        "mid"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "m-sidepart",
+      "gender": "m",
+      "ages": [
+        "adult",
+        "mid"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "m-wavy",
+      "gender": "m",
+      "ages": [
+        "teen",
+        "adult"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "m-fringe",
+      "gender": "m",
+      "ages": [
+        "teen",
+        "adult"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "m-buzz",
+      "gender": "m",
+      "ages": [
+        "adult",
+        "mid"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "m-thinning",
+      "gender": "m",
+      "ages": [
+        "mid",
+        "old"
+      ],
+      "grey": true
+    },
+    {
+      "layer": "hair",
+      "id": "m-silver-sidepart",
+      "gender": "m",
+      "ages": [
+        "old"
+      ],
+      "grey": true
+    },
+    {
+      "layer": "hair",
+      "id": "m-silver-crop",
+      "gender": "m",
+      "ages": [
+        "old"
+      ],
+      "grey": true
+    },
+    {
+      "layer": "hair",
+      "id": "f-bob",
+      "gender": "f",
+      "ages": [
+        "teen",
+        "adult",
+        "mid"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "f-bun",
+      "gender": "f",
+      "ages": [
+        "teen",
+        "adult",
+        "mid"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "f-pixie",
+      "gender": "f",
+      "ages": [
+        "adult",
+        "mid"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "f-fringe",
+      "gender": "f",
+      "ages": [
+        "teen",
+        "adult"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "f-waves",
+      "gender": "f",
+      "ages": [
+        "teen",
+        "adult"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "f-updo",
+      "gender": "f",
+      "ages": [
+        "adult",
+        "mid"
+      ],
+      "grey": false
+    },
+    {
+      "layer": "hair",
+      "id": "f-silver-bob",
+      "gender": "f",
+      "ages": [
+        "old"
+      ],
+      "grey": true
+    },
+    {
+      "layer": "hair",
+      "id": "f-silver-bun",
+      "gender": "f",
+      "ages": [
+        "old"
+      ],
+      "grey": true
+    },
+    {
+      "layer": "extra",
+      "id": "glasses-round",
+      "gender": "any",
+      "ages": [
+        "teen",
+        "adult",
+        "mid",
+        "old"
+      ]
+    },
+    {
+      "layer": "extra",
+      "id": "glasses-square",
+      "gender": "any",
+      "ages": [
+        "teen",
+        "adult",
+        "mid",
+        "old"
+      ]
+    },
+    {
+      "layer": "extra",
+      "id": "cap",
+      "gender": "any",
+      "ages": [
+        "teen",
+        "adult",
+        "mid",
+        "old"
+      ]
+    },
+    {
+      "layer": "extra",
+      "id": "mustache",
+      "gender": "m",
+      "ages": [
+        "adult",
+        "mid",
+        "old"
+      ]
+    },
+    {
+      "layer": "extra",
+      "id": "beard-short",
+      "gender": "m",
+      "ages": [
+        "adult",
+        "mid"
+      ]
+    },
+    {
+      "layer": "extra",
+      "id": "beard-grey",
+      "gender": "m",
+      "ages": [
+        "mid",
+        "old"
+      ]
+    },
+    {
+      "layer": "extra",
+      "id": "earrings",
+      "gender": "f",
+      "ages": [
+        "teen",
+        "adult",
+        "mid",
+        "old"
+      ]
+    },
+    {
+      "layer": "extra",
+      "id": "hairclip",
+      "gender": "f",
+      "ages": [
+        "teen",
+        "adult",
+        "mid",
+        "old"
+      ]
+    }
+  ]
+}
