@@ -1,0 +1,220 @@
+{
+  "townhouse-t1": [
+    {
+      "key": "table-comfort_a",
+      "x": 2,
+      "y": 2,
+      "room": "living",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "anchor_px": [
+        128,
+        224
+      ]
+    },
+    {
+      "key": "wardrobe-comfort_a",
+      "x": 0,
+      "y": 6,
+      "room": "living",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "anchor_px": [
+        128,
+        288
+      ]
+    },
+    {
+      "key": "table-comfort_a",
+      "x": 12,
+      "y": 2,
+      "room": "kitchen",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "anchor_px": [
+        128,
+        224
+      ]
+    }
+  ],
+  "townhouse-t2": [
+    {
+      "key": "bed-comfort_a",
+      "x": 2,
+      "y": 2,
+      "room": "bedroom",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "anchor_px": [
+        128,
+        288
+      ]
+    },
+    {
+      "key": "wardrobe-comfort_a",
+      "x": 0,
+      "y": 6,
+      "room": "bedroom",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "anchor_px": [
+        128,
+        288
+      ]
+    },
+    {
+      "key": "desk-comfort_a",
+      "x": 12,
+      "y": 2,
+      "room": "study",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "anchor_px": [
+        128,
+        256
+      ]
+    }
+  ],
+  "villa-t1": [
+    {
+      "key": "table-comfort_a",
+      "x": 2,
+      "y": 2,
+      "room": "living",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "anchor_px": [
+        128,
+        224
+      ]
+    },
+    {
+      "key": "wardrobe-comfort_a",
+      "x": 0,
+      "y": 6,
+      "room": "living",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "anchor_px": [
+        128,
+        288
+      ]
+    },
+    {
+      "key": "table-comfort_a",
+      "x": 12,
+      "y": 2,
+      "room": "kitchen",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "anchor_px": [
+        128,
+        224
+      ]
+    },
+    {
+      "key": "desk-comfort_a",
+      "x": 20,
+      "y": 2,
+      "room": "fun",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "anchor_px": [
+        128,
+        256
+      ]
+    },
+    {
+      "key": "plant-premium_a",
+      "x": 12,
+      "y": 18,
+      "room": "garden",
+      "footprint_tiles": [
+        1,
+        1
+      ],
+      "anchor_px": [
+        64,
+        192
+      ]
+    }
+  ],
+  "villa-t2": [
+    {
+      "key": "bed-comfort_a",
+      "x": 2,
+      "y": 2,
+      "room": "bedroom",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "anchor_px": [
+        128,
+        288
+      ]
+    },
+    {
+      "key": "wardrobe-comfort_a",
+      "x": 0,
+      "y": 6,
+      "room": "bedroom",
+      "footprint_tiles": [
+        2,
+        1
+      ],
+      "anchor_px": [
+        128,
+        288
+      ]
+    },
+    {
+      "key": "bed-comfort_a",
+      "x": 12,
+      "y": 2,
+      "room": "guest",
+      "footprint_tiles": [
+        2,
+        3
+      ],
+      "anchor_px": [
+        128,
+        288
+      ]
+    },
+    {
+      "key": "desk-comfort_a",
+      "x": 22,
+      "y": 2,
+      "room": "study",
+      "footprint_tiles": [
+        2,
+        2
+      ],
+      "anchor_px": [
+        128,
+        256
+      ]
+    }
+  ]
+}

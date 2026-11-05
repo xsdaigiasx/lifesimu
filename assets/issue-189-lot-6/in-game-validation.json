@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "fixture": "isolated browser contexts; synthetic house ownership",
+  "floors": [
+    {
+      "house": "townhouse",
+      "floor": 1,
+      "viewport": [
+        390,
+        844
+      ],
+      "file": "/assets/houses/townhouse-t1.webp",
+      "result": "PASS"
+    },
+    {
+      "house": "townhouse",
+      "floor": 2,
+      "viewport": [
+        390,
+        844
+      ],
+      "file": "/assets/houses/townhouse-t2.webp",
+      "result": "PASS"
+    },
+    {
+      "house": "villa",
+      "floor": 1,
+      "viewport": [
+        390,
+        844
+      ],
+      "file": "/assets/houses/villa-t1.webp",
+      "result": "PASS"
+    },
+    {
+      "house": "villa",
+      "floor": 2,
+      "viewport": [
+        390,
+        844
+      ],
+      "file": "/assets/houses/villa-t2.webp",
+      "result": "PASS"
+    }
+  ]
+}

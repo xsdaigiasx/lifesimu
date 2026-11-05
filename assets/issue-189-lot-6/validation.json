@@ -1,0 +1,14 @@
+{
+  "tested_base": "1316f0fc34a4c99d6b0fc30388213e065881577f",
+  "app_version": "0.45.0",
+  "asset_verify": "PASS: four frames, exact alpha, SHA-256, under150000, unchanged geometry",
+  "preview_placements": "PASS: all sample footprints inside declared rooms; no overlap",
+  "total_bytes": 549472,
+  "max_bytes": 146308,
+  "app_test": "PASS",
+  "app_build": "PASS; existing runtime CSS resolution and chunk-size warnings",
+  "core_check": "PASS; 18 tests",
+  "real_game_mobile": "PASS; townhouse/villa both floors; 390x844; no page errors or horizontal overflow; isolated synthetic saves",
+  "visual_review": "All four contact-sheet floors, furniture previews, fixed grid and partition-cap comparisons inspected",
+  "runtime_code_changed": false
+}
