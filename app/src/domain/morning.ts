@@ -22,7 +22,9 @@ import {monthKey} from './rent';
 
 export type GoalId='task'|'study'|'chat'|'recipe'|'side'|'project';
 export interface Line{icon:string;text:string}
-export interface MorningState{seen:number;/** Mục tiêu tuần đang chạy: ngày thứ Hai và ba mục tiêu. */week?:{start:number;ids:GoalId[]};/** Mốc đầu tháng để làm báo cáo tháng. */month?:{key:string;worth:number;lv:Partial<Record<SkillId,number>>};/** Phần tổng kết tuần và tháng đã chốt của ngày `day`, để xem lại trong Tin tức. */recap?:{day:number;lines:Line[]}}
+export interface MorningState{seen:number;/** Mục tiêu tuần đang chạy: ngày thứ Hai và ba mục tiêu. */week?:{start:number;ids:GoalId[]};/** Mốc đầu tháng để làm báo cáo tháng. */month?:{key:string;worth:number;lv:Partial<Record<SkillId,number>>};/** Phần tổng kết tuần và tháng đã chốt của ngày `day`, để xem lại trong Tin tức. */recap?:{day:number;lines:Line[]};/** Sự kiện đáng nhớ (mỗi ngày tối đa một) để nhắc lại sau một năm. */memories?:{day:number;text:string}[]}
+export const MEMORY={keep:400,maxList:40,span:1};
+const MEMORABLE=(e:{key:string;title:string})=>/^(tier|probation|move|story|recipe|side-done):/.test(e.key)||(e.key.startsWith('project:')&&e.title==='Dự án hoàn thành');
 export const WEEKLY={money:200000,mood:10};
 const GOALS:Record<GoalId,{text:string;target:number;ok:(s:GameState)=>boolean;hit:(e:{key:string;title:string})=>boolean}>={
  task:{text:'Làm 3 đầu việc ở công ty',target:3,ok:s=>officeOf(s).role==='employee',hit:e=>e.key.startsWith('task:')&&e.key.endsWith(':ok')},
@@ -39,6 +41,8 @@ export function goalProgress(s:GameState,id:GoalId,start:number){const g=GOALS[i
 export const worthOf=(s:GameState)=>s.money+(s.life?.savings??[]).reduce((t,x)=>t+x.principal,0)+fundOf(s)-owedOf(bankOf(s));
 const levelsOf=(s:GameState)=>{const k={...defaultSkills(),...s.skills};return Object.fromEntries((Object.keys(SKILLS) as SkillId[]).map(id=>[id,k[id].level])) as Record<SkillId,number>};
 export interface Morning{
+ weekend:Line[];
+ ago:Line[];
  recap:Line[];
  goals:{id:GoalId;text:string;count:number;target:number}[];
  night:Line[];
@@ -74,13 +78,17 @@ export function markMorningSeen(s:GameState):GameState{
  const lines=recapLines(s),m=s.morning,ws=weekStart(s.day);let n=s;
  if(m?.week&&m.week.start<ws&&m.week.ids.length&&m.week.ids.every(id=>goalProgress(s,id,m.week!.start)>=GOALS[id].target)){const c=structuredClone(s);if(post(c,{id:`weekly:${m.week.start}`,name:'Thưởng mục tiêu tuần',amount:WEEKLY.money})==='ok'){c.mood=Math.min(100,c.mood+WEEKLY.mood);n=c}}
  const week=m?.week&&m.week.start===ws?m.week:{start:ws,ids:pickGoals(s,ws)},k=monthKey(s.day),month=m?.month&&m.month.key===k?m.month:{key:k,worth:worthOf(n),lv:levelsOf(n)};
- return{...n,morning:{seen:s.day,week,month,recap:{day:s.day,lines}}}}
+ const memories=[...(m?.memories??[])];
+ for(const e of [...journalOf(s)].reverse())if(e.day>=(m?.seen??0)&&e.day<s.day&&MEMORABLE(e)&&!memories.some(x=>x.day===e.day))memories.push({day:e.day,text:e.title});
+ const kept=memories.filter(x=>x.day>=s.day-MEMORY.keep).slice(-MEMORY.maxList);
+ return{...n,morning:{seen:s.day,week,month,recap:{day:s.day,lines},memories:kept}}}
 export function validMorning(v:unknown,day:number):v is MorningState{
  if(!v||typeof v!=='object')return false;const m=v as MorningState,int=(x:unknown,lo:number,hi:number)=>Number.isInteger(x)&&(x as number)>=lo&&(x as number)<=hi;
  if(!int(m.seen,0,day))return false;
  if(m.week!==undefined&&(!m.week||!int(m.week.start,0,day)||!Array.isArray(m.week.ids)||m.week.ids.length>3||m.week.ids.some(id=>!(id in GOALS))))return false;
  if(m.month!==undefined&&(!m.month||typeof m.month.key!=='string'||!/^\d{4}-\d{2}$/.test(m.month.key)||!Number.isFinite(m.month.worth)||!m.month.lv||typeof m.month.lv!=='object'))return false;
  if(m.recap!==undefined&&(!m.recap||!int(m.recap.day,0,day)||!Array.isArray(m.recap.lines)||m.recap.lines.length>10||m.recap.lines.some(l=>!l||typeof l.icon!=='string'||typeof l.text!=='string'||l.text.length>200)))return false;
+ if(m.memories!==undefined&&(!Array.isArray(m.memories)||m.memories.length>MEMORY.maxList||m.memories.some(x=>!x||!int(x.day,0,day)||typeof x.text!=='string'||x.text.length===0||x.text.length>100)))return false;
  return true}
 
 export function morningOf(s:GameState):Morning{
@@ -110,6 +118,12 @@ export function morningOf(s:GameState):Morning{
   const hr=hrOf(s).pending.length;if(hr)night.push({icon:'people',text:`${hr} việc nhân sự đang chờ bạn`});
   for(const p of projectsOf(s).active.filter(x=>x.due-s.day>1).slice(0,2))night.push({icon:'note',text:`${p.title} còn ${p.due-s.day} ngày`});
   if(!night.length&&staffOf(s).length)night.push({icon:'briefcase',text:'Công ty vận hành yên ổn qua đêm'})}
- return{weather:{today,tomorrow},hood,unread:{count:unreadCount(s),names},agenda,goals,recap,night};
+ const weekend:Line[]=[];
+ if(dow===5){const sat=weatherOf(s.day+1),sun=weatherOf(s.day+2),fine=(w:Weather)=>w==='sunny'||w==='mild';
+  weekend.push(fine(sat)||fine(sun)?{icon:'sun',text:'Cuối tuần có ngày đẹp trời, hợp đi công viên hoặc hẹn bạn'}:{icon:'rain',text:'Cuối tuần mưa hoặc bão, hợp ở nhà nấu ăn và nghỉ ngơi'});
+  if(s.money<500000)weekend.push({icon:'coin',text:'Tiền đang ít, có thể làm thêm cuối tuần'});
+  if(unreadCount(s)>0)weekend.push({icon:'message',text:'Còn tin nhắn chưa đọc, trả lời trước cuối tuần'})}
+ const ago:Line[]=(s.morning?.memories??[]).filter(x=>Math.abs(x.day-(s.day-365))<=MEMORY.span).map(x=>({icon:'note',text:`Năm ngoái ngày này: ${x.text}`}));
+ return{weather:{today,tomorrow},hood,unread:{count:unreadCount(s),names},agenda,goals,recap,night,weekend,ago};
 }
 export {WEATHER_LABEL};

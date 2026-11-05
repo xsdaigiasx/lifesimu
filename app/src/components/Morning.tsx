@@ -15,6 +15,8 @@ export function MorningBody({state}:{state:GameState}){
    {m.unread.count?<p><Icon name="message"/><b>{m.unread.count}</b> chưa đọc từ {m.unread.names.join(', ')}</p>:<p className="morning-empty">Không có tin nhắn mới.</p>}</section>
   <section className="morning-sec"><small>HÔM NAY</small>
    {m.agenda.length?m.agenda.map((a,i)=><p key={i}><Icon name={a.icon}/>{a.text}</p>):<p className="morning-empty">Một ngày trống, tự do sắp xếp.</p>}</section>
+  {m.weekend.length>0&&<section className="morning-sec"><small>CUỐI TUẦN</small>{m.weekend.map((a,i)=><p key={i}><Icon name={a.icon}/>{a.text}</p>)}</section>}
+  {m.ago.length>0&&<section className="morning-sec"><small>NĂM NGOÁI</small>{m.ago.map((a,i)=><p key={i}><Icon name={a.icon}/>{a.text}</p>)}</section>}
   {m.night.length>0&&<section className="morning-sec"><small>QUA ĐÊM Ở CÔNG TY</small>{m.night.map((a,i)=><p key={i}><Icon name={a.icon}/>{a.text}</p>)}</section>}
   <section className="morning-sec"><small>MỤC TIÊU TUẦN</small>{m.goals.map(g=><p key={g.id} className={g.count>=g.target?'morning-done':''}><Icon name={g.count>=g.target?'heart':'clock'}/>{g.text}<b>{g.count}/{g.target}</b></p>)}</section>
  </div>}

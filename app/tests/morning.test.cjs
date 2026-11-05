@@ -40,3 +40,17 @@ assert(m2.morning.recap.lines.some(l=>l.text.includes('tài sản tăng 2.000.00
 // qua đêm chỉ khi có công ty
 assert.equal(M.morningOf({...engine.initial(),day:4}).night.length,0);
 console.log('morning week/month ok');
+// T75 phần 3: gợi ý thứ Sáu, sự kiện đáng nhớ năm ngoái
+const fri=d=>{while(dateAt(d).getUTCDay()!==5)d++;return d};
+const f=fri(10);assert.equal(M.morningOf({...engine.initial(),day:f}).weekend.length>=1,true,'thứ Sáu có gợi ý');
+assert.equal(M.morningOf({...engine.initial(),day:f+1}).weekend.length,0,'ngày khác không có');
+assert(M.morningOf({...engine.initial(),day:f,money:100000}).weekend.some(l=>l.text.includes('làm thêm')));
+const ev=(day,key,title)=>({id:`${day}:420:${key}`,key,day,minute:420,title,detail:'x'});
+let y={...engine.initial(),day:5,journal:[ev(4,'tier:senior','Thăng bậc'),ev(4,'chat:a:1:1','Trò chuyện'),ev(3,'recipe:pho','Học món phở')]};
+y=M.markMorningSeen(y);
+assert.deepEqual(y.morning.memories.map(x=>x.text).sort(),['Học món phở','Thăng bậc'],'chỉ giữ sự kiện đáng nhớ, trò chuyện bị bỏ');
+assert(engine.valid(y));
+const later={...y,day:5+365};assert(M.morningOf(later).ago.some(l=>l.text.includes('Thăng bậc')));
+assert.equal(M.morningOf({...y,day:5+200}).ago.length,0);
+const old=M.markMorningSeen({...y,day:5+500});assert.equal(old.morning.memories.length,0,'quá một năm rưỡi thì bỏ');
+console.log('morning memory/friday ok');
