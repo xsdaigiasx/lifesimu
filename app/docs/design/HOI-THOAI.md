@@ -105,6 +105,20 @@ Mỗi NPC chạy biến cố riêng mỗi ngày, kể cả khi không gặp ngư
 
 Khoảng 30 loại biến cố cho bản đầu. Mỗi biến cố có tần suất, thời lượng, cảm xúc kéo theo và dữ kiện để điền vào câu (món, nơi, số tiền, ngày tương đối).
 
+## I.5b Sinh hoạt hằng ngày của NPC
+
+Ngoài biến cố, mỗi NPC có nhịp sống riêng, chạy theo giờ game. Sinh hoạt quyết định NPC đang ở đâu, đang làm gì, có rảnh để nói không, và là nguồn chuyện vặt mỗi ngày.
+
+| Thành phần | Nội dung | Ảnh hưởng tới hội thoại |
+|---|---|---|
+| Lịch ngày | Ngủ, thức, ăn ba bữa, đi làm hoặc bán hàng, việc nhà, nghỉ, giờ rảnh; khác nhau ngày thường và cuối tuần (mở rộng lịch hiện diện `schedule` đang có) | Đang làm việc: câu ngắn, ít Rủ; giờ rảnh: dễ Rủ, dễ trò chuyện lâu; đang ngủ: không nhắn lại tới sáng |
+| Hoạt động hiện tại | Đang bán hàng, đang nấu cơm, đang tập thể dục, đang chờ xe buýt... | Thành chủ đề "bản thân" nhỏ ("đang lặt rau nè con"), mở lời theo việc đang làm |
+| Thói quen | Mỗi người 2 đến 4 thói quen: Chú Sáu uống trà sáng ở công viên, Tuấn chạy đơn tới khuya, Cô Hạnh dậy 4 giờ lấy hàng | Người chơi gặp đúng giờ thì có câu riêng; lệch thói quen (Chú Sáu không ra công viên) là dấu hiệu có biến cố |
+| Mệt và đói của NPC | Thang đơn giản tăng theo giờ làm, giảm khi ăn, ngủ | Cảm xúc Mệt vào cuối ca; NPC đói thì dễ Rủ đi ăn |
+| Lịch đặc biệt | Về quê, đi khám, giỗ, đi chơi cuối tuần (gắn với biến cố) | Vắng mặt có lý do, lần sau gặp kể lại |
+
+Điều kiện khống chế: sinh hoạt tính từ hạt giống theo ngày và NPC (không lưu save); một NPC chỉ ở một nơi một lúc; thay đổi lịch chỉ do biến cố hoặc thời tiết (bão thì ở nhà).
+
 ## I.6 Khung và mảnh
 
 - **Khung** theo ý định, ví dụ Than: `[mở lời][chuyện][cảm xúc][đuôi]`; Rủ: `[mở lời][lời rủ có nơi và giờ][lý do][đuôi]`.
@@ -229,12 +243,29 @@ Câu ghép ra ví dụ: "Con ơi, trưa nay con ăn cơm tấm hả, nhớ ăn r
 
 **Lựa chọn của người chơi khi Bà Tư Than:** Đồng cảm Ấm áp ("Bà nghỉ ngơi đi, để con phụ"), Khuyên Thật lòng ("Bà đi khám ở bệnh viện thử", cần Giao tiếp Lv 2), Hỏi thêm Ngắn gọn ("Đau lâu chưa bà?"), Né ("Con đang vội, chút con ghé"). Bà Tư tính Hay giúp đỡ nên Ấm áp được điểm cao nhất; Né trừ nhẹ và ghi ký ức "bận không hỏi han".
 
-## T.5 Thay đổi save
+## T.5 Lưu gì và NPC quên ra sao
 
-- `talk`: vân tay đã dùng (mảnh, khung, ý định cộng chủ đề) theo NPC, giữ 14 ngày, tối đa vài trăm dòng; thay `story.heard`.
-- `npcLife`: biến cố đang diễn ra và cảm xúc ngày của từng NPC (12 người cộng NPC ngẫu nhiên ở Lô 3).
-- Fact **không lưu**: tính lại từ trạng thái game mỗi lần cần, nên không phình save.
-- Mọi lát cắt mới tuỳ chọn, có validator nối vào `engine.ts`; save cũ không có thì tạo mặc định (theo quy tắc bảo vệ save 0.75.3).
+Nguyên tắc: **chỉ lưu chuyện đáng nhớ**, phần còn lại tính lại hoặc để NPC quên.
+
+| Thứ | Lưu? | Cách giữ |
+|---|---|---|
+| Câu đã nói, khung, mảnh | Không lưu nguyên văn | Chỉ lưu **vân tay ngắn** (mã băm) của 14 ngày gần nhất để chống lặp, tối đa khoảng 40 mã mỗi NPC; quá hạn thì xoá |
+| Dữ kiện (`Fact`) | Không | Tính lại từ trạng thái game mỗi lần cần |
+| Sinh hoạt NPC | Không | Tính từ hạt giống theo ngày |
+| Biến cố đời NPC | Chỉ biến cố đang diễn ra và chuỗi dài | Xong thì chuyển thành ký ức nếu đủ nặng, không thì bỏ |
+| Ký ức | Chỉ ký ức có **trọng số cao** | Xem quy tắc quên bên dưới |
+
+**Trọng số ký ức** (1 đến 10, dùng `Memory.weight` đang có): chào hỏi, trò chuyện thường 1 đến 2 (không lưu); hỏi han khi NPC ốm, đi ăn cùng 3 đến 4; giúp đỡ, cho mượn tiền, lỡ hẹn quan trọng 5 đến 7; cứu giúp lúc khó, phản bội, quỵt tiền 8 đến 10.
+
+**NPC quên:**
+- Chỉ lưu ký ức từ trọng số 3.
+- Mỗi ký ức mờ dần: sau mỗi 30 ngày không ai nhắc lại thì trọng số giảm 1; về dưới 3 thì xoá.
+- Mỗi lần NPC nhắc lại hoặc người chơi làm việc liên quan thì trọng số tăng 1 (tối đa 10), nên chuyện hay được nhắc thì nhớ lâu.
+- Từ 8 trở lên giảm chậm gấp đôi (chuyện lớn nhớ rất lâu).
+- Tính cách ảnh hưởng: người Hay giúp đỡ quên lỗi nhanh hơn, người Nóng tính nhớ lỗi lâu hơn.
+- Mỗi NPC giữ tối đa 12 ký ức; đầy thì bỏ ký ức nhẹ nhất.
+
+Như vậy save chỉ thêm khoảng vài KB cho 12 NPC. Lát cắt mới tuỳ chọn, có validator nối vào `engine.ts`; save cũ không có thì tạo mặc định (theo quy tắc bảo vệ save 0.75.3).
 
 ## T.6 Chia ticket
 
@@ -242,7 +273,7 @@ Câu ghép ra ví dụ: "Con ơi, trưa nay con ăn cơm tấm hả, nhớ ăn r
 |---|---|---|---|
 | H1 | Kiểu dữ liệu, `compose.ts`, `talk:check`, 3 khung mỗi ý định | | Bộ kiểm tra chặn mảnh lỗi; ghép được câu từ dữ liệu mẫu |
 | H2 | `facts.ts`: 25 loại dữ kiện từ Nhật ký và chỉ số, quy tắc ai được biết | H1 | Test: NPC không nhắc điều không thấy |
-| H3 | `npc-life.ts`: 30 loại biến cố, cảm xúc ngày | H1 | Mô phỏng: mỗi NPC 2 đến 5 biến cố mỗi tháng |
+| H3 | `npc-life.ts`: sinh hoạt hằng ngày (lịch, hoạt động, thói quen, mệt và đói), 30 loại biến cố, cảm xúc ngày, ký ức có trọng số và quên | H1 | Mô phỏng: mỗi NPC 2 đến 5 biến cố mỗi tháng; save thêm không quá 5 KB sau 1 năm |
 | H4 | `replies.ts`: lựa chọn của người chơi, hậu quả theo tính cách, ghi ký ức | H1 | Mỗi lượt 3 đến 4 lựa chọn, không lặp bộ trong 7 ngày |
 | H5 | Lô 1 dữ liệu: Mẹ, Bà Tư, Minh An, Cô Hạnh, Tuấn (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
 | H6 | Lô 2: 7 NPC còn lại, hội thoại 2 đến 4 lượt, người chơi tự mở lời theo chủ đề | H5 | Như H5 cho cả 12 người |
