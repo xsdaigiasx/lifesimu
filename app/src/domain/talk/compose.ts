@@ -24,7 +24,8 @@ export interface TalkCtx{npc:NpcProfile;tier:Tier;mood:Emotion;channel:Channel;m
  /** hạt giống của lượt nói (ví dụ ngày, giờ, mã NPC) */seed:string;
  facts:readonly Fact[];present?:readonly string[];recent?:readonly Print[];
  /** chỉ thử các ý định này (mặc định: mọi ý định) */intents?:readonly Intent[];data?:TalkData}
-export interface Said{text:string;intent:Intent|null;fact?:Fact;frame?:string;pieces:string[];prints:string[]}
+export interface Said{text:string;intent:Intent|null;fact?:Fact;frame?:string;pieces:string[];prints:string[];
+ /** món NPC vừa hứa cho (từ mảnh có `gift`) */gift?:[string,number]}
 
 /** Biến điền có sẵn ngoài dữ kiện: xưng hô, trợ từ, thời gian áng chừng. */
 export const ADDRESS_VARS=['self','you','Self','You','p'] as const;
@@ -66,7 +67,8 @@ function tryFrame(c:TalkCtx,data:TalkData,frame:Frame,intent:Intent,fact:Fact|un
   const cand=data.pieces.filter(p=>pieceFits(p,slot,intent,fact,c,vars)),p=pick(cand,`${c.seed}:${frame.id}:${slot}`,x=>x.npc||x.voice?2:1);
   if(!p){if(optional)continue;return null}parts.push(fill(p.text,vars));ids.push(p.id)}
  const text=joinParts(parts);if(!text)return null;
- return{text,intent,fact,frame:frame.id,pieces:ids,prints:[...ids.map(id=>'p:'+id),'f:'+frame.id,`t:${intent}:${fact?.sub??'-'}`]}}
+ const gift=ids.map(id=>data.pieces.find(p=>p.id===id)?.gift).find(Boolean);
+ return{...(gift?{gift}:{}),text,intent,fact,frame:frame.id,pieces:ids,prints:[...ids.map(id=>'p:'+id),'f:'+frame.id,`t:${intent}:${fact?.sub??'-'}`]}}
 
 /** Câu chào ngắn theo giọng khi không ghép được gì (mảnh `open` không gắn ý định). */
 export function greeting(c:TalkCtx,data:TalkData=c.data??TALK):Said{const vars=varsFor(c),p=pick(data.pieces.filter(x=>pieceFits(x,'open',null,undefined,c,vars)),`${c.seed}:hi`,x=>x.npc||x.voice?2:1);

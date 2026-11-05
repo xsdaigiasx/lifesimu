@@ -44,7 +44,8 @@ export const REPEAT=[1,.6,.3] as const,REPEAT_DAYS=7,HELP_LIMIT=3,HELP_DAYS=14;
 
 export interface ReplyLog{d:number;n:string;a:Attitude;x:Action}
 export interface PlayerNow{energy:number;stress:number;mood:number;money:number;minute:number;end:number;skills:Partial<Record<'communication'|'cooking'|'logic',number>>}
-export interface ReplyCtx{npc:NpcProfile;intent:Intent;tier:Tier;day:number;seed:string;player:PlayerNow;log:readonly ReplyLog[];recent?:readonly Print[]}
+export interface ReplyCtx{npc:NpcProfile;intent:Intent;tier:Tier;day:number;seed:string;player:PlayerNow;log:readonly ReplyLog[];recent?:readonly Print[];
+ /** NPC vừa hứa cho đồ: luôn có Nhận và Từ chối khéo */gift?:[string,number]}
 export interface ReplyOption{id:string;attitude:Attitude;action:Action;label:string;minutes:number;energy:number;money:number;
  /** thiếu kỹ năng, năng lượng, tiền hoặc giờ: hiện mờ */locked:boolean;need?:string}
 
@@ -56,7 +57,8 @@ const optId=(i:Intent,t:Template)=>`${i}:${t.a}:${t.x}`;
 const SKILL_NAME={communication:'Giao tiếp',cooking:'Nấu ăn',logic:'Logic'} as const;
 
 /** Trạng thái người chơi: mệt hoặc căng thẳng cao thì Ấm áp tốn thêm năng lượng, Khó chịu dễ xuất hiện; tâm trạng tốt mới có Đùa (trừ khi NPC đang trêu). */
-export function buildReplies(c:ReplyCtx):ReplyOption[]{const p=c.player,worn=p.energy<25||p.stress>=70,happy=p.mood>=60;
+const GIFT_OPTS:Template[]=[{a:'warm',x:'accept',text:'Dạ, {me} cảm ơn {call} nhiều'},{a:'blunt',x:'refuse',text:'Thôi {call} để bán đi, {me} còn'}];
+export function buildReplies(c:ReplyCtx):ReplyOption[]{if(c.gift){const rest=buildReplies({...c,gift:undefined}).filter(o=>o.action!=='accept'&&o.action!=='refuse').slice(0,2);return[...GIFT_OPTS.map(t=>({id:`gift:${t.a}:${t.x}`,attitude:t.a,action:t.x,label:fill(t.text,c.npc),minutes:0,energy:0,money:0,locked:false})),...rest]}const p=c.player,worn=p.energy<25||p.stress>=70,happy=p.mood>=60;
  let pool=BY_INTENT[c.intent].filter(t=>!t.minTier||tierRank(c.tier)>=tierRank(t.minTier)).filter(t=>t.a!=='joke'||happy||c.intent==='tease').filter(t=>t.a!=='rude'||worn||c.tier==='hostile');
  if(c.tier==='hostile')pool=pool.filter(t=>t.a!=='warm'||t.x!=='help');
  const rank=(t:Template)=>hash(`${c.seed}:${optId(c.intent,t)}`)%1000;
@@ -71,7 +73,7 @@ export function buildReplies(c:ReplyCtx):ReplyOption[]{const p=c.player,worn=p.e
 /** Vân tay bộ lựa chọn để không lặp nguyên bộ với cùng NPC trong 7 ngày. */
 export const setPrint=(npc:string,opts:readonly ReplyOption[])=>`r:${npc}:${opts.map(o=>o.id).sort().join('|')}`;
 
-export interface ReplyResult{relation:number;light:boolean;memory?:{topic:string;tag:string;weight:number};minutes:number;energy:number;/** tiền phải trả (domain money xử lý) */fee:number;
+export interface ReplyResult{/** món nhận thật (gọi receiveGift) */gift?:[string,number];relation:number;light:boolean;memory?:{topic:string;tag:string;weight:number};minutes:number;energy:number;/** tiền phải trả (domain money xử lý) */fee:number;
  /** NPC quen dựa dẫm (nhờ nhiều hơn) sau nhiều lần được giúp */reliant:boolean}
 /** Hậu quả: điểm quan hệ theo độ hợp tính cách, giảm khi lặp thái độ, ký ức nếu đủ trọng số. Không hiện cho người chơi trước. */
 export function resolveReply(c:ReplyCtx,o:ReplyOption):ReplyResult{const t=c.npc.traits;
@@ -84,7 +86,7 @@ export function resolveReply(c:ReplyCtx,o:ReplyOption):ReplyResult{const t=c.npc
  const reliant=o.action==='help'&&helps>=HELP_LIMIT-1;if(reliant&&gain>0&&t.includes('keo kiệt'))gain=Math.round(gain*.5*10)/10;// quen được giúp, lợi dụng
  const relation=Math.max(-6,Math.min(6,Math.round(gain)));
  const memory=o.action==='help'?{topic:'được giúp',tag:'help',weight:3}:o.attitude==='rude'?{topic:'bị nói nặng',tag:'rude',weight:3}:o.action==='refuse'&&c.intent==='request'&&tierRank(c.tier)>=3?{topic:'bị từ chối giúp',tag:'refuse',weight:2}:o.attitude==='dodge'&&c.intent==='complain'&&tierRank(c.tier)>=3?{topic:'bận không hỏi han',tag:'dodge',weight:2}:c.intent==='apologize'&&o.action==='accept'?{topic:'được bỏ qua',tag:'forgive',weight:3}:undefined;
- return{relation,light:LIGHT.includes(o.action)||o.attitude==='joke',...(memory?{memory}:{}),minutes:o.minutes,energy:o.energy,fee:o.money,reliant}}
+ return{...(c.gift&&o.action==='accept'&&o.id.startsWith('gift:')?{gift:c.gift}:{}),relation,light:LIGHT.includes(o.action)||o.attitude==='joke',...(memory?{memory}:{}),minutes:o.minutes,energy:o.energy,fee:o.money,reliant}}
 
 /** Ghi lựa chọn vào nhật ký trả lời (giữ 30 ngày, tối đa 300 dòng). */
 export function noteReply(log:readonly ReplyLog[],r:ReplyLog):ReplyLog[]{return[...log.filter(l=>r.d-l.d<30),r].slice(-300)}
