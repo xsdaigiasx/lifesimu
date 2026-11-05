@@ -47,6 +47,7 @@ export default function App(){
  const [bauCuaShaking,setBauCuaShaking]=useState(false);
  const [bauCuaSession]=useState(()=>createBauCuaSession(()=>liveState.current,raw=>{const next=faintIfLate(raw);if(next!==raw)setModal('summary');liveState.current=next;setState(next);try{if(!resetting.current)localStorage.setItem(engine.KEY,JSON.stringify(next));setStorageOK(true)}catch{setStorageOK(false);toast('Chưa lưu được ván chơi. Dữ liệu chỉ giữ trong phiên này.')}},setBauCuaShaking));
  useEffect(()=>()=>bauCuaSession.cancel(),[bauCuaSession]);
+ useEffect(()=>{try{void navigator.storage?.persist?.()}catch{/* trình duyệt không hỗ trợ */}},[]);
  const [entering,setEntering]=useState(true),[mapProgress,setMapProgress]=useState({loaded:0,total:0});
  const [phoneClosing,setPhoneClosing]=useState(false),closeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
  const timer=useRef<ReturnType<typeof setTimeout>|null>(null),dayLock=useRef(false),returnFocus=useRef<HTMLElement|null>(null);const player=profile??fallback,place=view==='lake'?LAKE:places.find(p=>p.id===(view==='room'?'home':selected))!;

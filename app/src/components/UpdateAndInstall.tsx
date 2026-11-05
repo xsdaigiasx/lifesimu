@@ -1,4 +1,8 @@
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
+import {packOf,encryptPack,decryptPack,applyPack,shareFile,fileName,ERRORS,type Pack} from '../domain/backup';
+import {SAVE_KEYS} from '../domain/reset';
+import {engine} from '../domain/engine';
+import {money} from '../domain/format';
 import {BUILD_ID,APP_VERSION,fetchRemoteVersion,hasNewVersion} from '../domain/update';
 import type {RemoteVersion} from '../domain/update';
 const CHECK_MS=5*60*1000;
@@ -43,4 +47,17 @@ export function VersionCard(){
   const [state,setState]=useState<'idle'|'checking'|'latest'|'new'|'fail'>('idle');
   const check=async()=>{setState('checking');const v=await fetchRemoteVersion();setState(!v?'fail':hasNewVersion(BUILD_ID,v)?'new':'latest')};
   return <div className="phone-info-card"><small>PHIÊN BẢN</small><h3>Next Day {APP_VERSION}</h3><p>Bản dựng {BUILD_ID}{remote||state==='new'?' đã có bản mới':''}</p>{remote||state==='new'?<button className="primary wide" onClick={reloadForUpdate}>Cập nhật ngay</button>:<button className="phone-secondary" onClick={check} disabled={state==='checking'}>{state==='checking'?'Đang kiểm tra…':'Kiểm tra cập nhật'}</button>}{state==='latest'&&<p className="install-hint" role="status">Bạn đang dùng bản mới nhất.</p>}{state==='fail'&&<p className="install-hint" role="status">Chưa kiểm tra được. Hãy thử lại khi có mạng.</p>}</div>;
+}
+
+/** Thẻ "Sao lưu save": xuất tệp mã hoá và nhập lại. Nhập xong tải lại trang. */
+export function BackupCard({onResetStart}:{onResetStart:(active:boolean)=>void}){
+  const [msg,setMsg]=useState(''),[busy,setBusy]=useState(false),[picked,setPicked]=useState<Pack|null>(null),input=useRef<HTMLInputElement>(null);
+  const out=async()=>{if(busy)return;setBusy(true);setMsg('');try{const pack=packOf(localStorage,Date.now());if(!pack){setMsg('Chưa có save để xuất.')}else{const day=engine.parse(pack.data[SAVE_KEYS[0]]!)?.day??0,r=await shareFile(await encryptPack(pack,day),fileName(day));setMsg(r==='saved'?'Đã lưu tệp. Hãy cất ở nơi an toàn.':r==='shared'?'Đã chia sẻ tệp save.':'')}}catch{setMsg('Chưa tạo được tệp. Trình duyệt này không hỗ trợ.')}setBusy(false)};
+  const pick=async(f?:File)=>{if(!f)return;setMsg('');setPicked(null);if(f.size>5_000_000){setMsg(ERRORS.format);return}try{const r=await decryptPack(await f.text());if(r.ok)setPicked(r.pack);else setMsg(ERRORS[r.error])}catch{setMsg(ERRORS.format)}if(input.current)input.current.value=''};
+  const apply=()=>{if(!picked)return;onResetStart(true);try{if(applyPack(localStorage,picked,Date.now())){location.reload();return}}catch{/* thông báo bên dưới */}setMsg('Chưa ghi được save. Bộ nhớ trình duyệt đầy hoặc bị chặn.');onResetStart(false)};
+  const info=picked?engine.parse(picked.data[SAVE_KEYS[0]]!):null;
+  return <div className="phone-info-card"><small>SAO LƯU SAVE</small><h3>Giữ đời của bạn an toàn</h3><p>Tệp được mã hoá, chỉ Next Day mở được.</p>
+    {picked&&info?<><p>Ngày {info.day+1}, {money(info.money)}. Đời hiện tại được giữ 7 ngày để khôi phục.</p><button className="primary wide" onClick={apply}>Ghi đè và tải lại</button><button className="phone-secondary" onClick={()=>setPicked(null)}>Huỷ</button></>
+    :<><button className="primary wide" disabled={busy} onClick={out}>Xuất save</button><button className="phone-secondary" onClick={()=>input.current?.click()}>Nhập save</button><input ref={input} type="file" accept=".json,application/json" hidden onChange={e=>void pick(e.target.files?.[0])}/></>}
+    {msg&&<p className="install-hint" role="status">{msg}</p>}</div>
 }
