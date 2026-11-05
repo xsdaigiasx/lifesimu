@@ -323,7 +323,7 @@ Câu ghép ra ví dụ: "Con ơi, trưa nay con ăn cơm tấm hả, nhớ ăn r
 **Chủ trọ (ví dụ đời này rút ra một bà cụ giọng Tây), ý định Than, chủ đề bản thân, biến cố `sick` (đau lưng):**
 - open: "Ui da" / "Con nè" ; body: "cái lưng bà nó hành từ {khi nào}" / "trời {thời tiết} vầy là bà nhức mình mẩy" (`needs:['thời tiết']`, chỉ khi mưa hoặc lạnh) ; tail: "già rồi con ơi" / "con có rảnh xách giùm bà bao gạo hông" (chỉ khi được Nhờ, độ thân từ Quen biết).
 
-**Lựa chọn của người chơi khi Bà Tư Than:** Đồng cảm Ấm áp ("Bà nghỉ ngơi đi, để con phụ"), Khuyên Thật lòng ("Bà đi khám ở bệnh viện thử", cần Giao tiếp Lv 2), Hỏi thêm Ngắn gọn ("Đau lâu chưa bà?"), Né ("Con đang vội, chút con ghé"). Bà Tư tính Hay giúp đỡ nên Ấm áp được điểm cao nhất; Né trừ nhẹ và ghi ký ức "bận không hỏi han".
+**Lựa chọn của người chơi khi chủ trọ Than** (thái độ × hành động): Ấm áp và Giúp ("Bà nghỉ đi, để con xách giùm", tốn 15 phút và 5 năng lượng); Thẳng thắn và Khuyên ("Bà đi khám thử đi", cần Giao tiếp Lv 2); Đùa và Hỏi thêm ("Lưng bà dự báo thời tiết hay hơn đài đó, đau lâu chưa?", chỉ khi đã Thân); Né và Im lặng ("Dạ... con đang vội"). Nếu chủ trọ đời này tự trọng thì Giúp quá nhiều lần làm bà khó chịu; nếu bà Hay giúp đỡ thì Ấm áp được điểm cao nhất. Né trừ nhẹ và ghi ký ức "bận không hỏi han" nếu đủ trọng số.
 
 ## T.5 Lưu gì và NPC quên ra sao
 
@@ -358,7 +358,7 @@ Như vậy save chỉ thêm khoảng vài KB cho 12 NPC. Lát cắt mới tuỳ 
 | H2 | `facts.ts`: 25 loại dữ kiện từ Nhật ký và chỉ số, quy tắc ai được biết | H1 | Test: NPC không nhắc điều không thấy |
 | H3 | `npc-life.ts`: sinh hoạt hằng ngày (lịch, hoạt động, thói quen, mệt và đói), 30 loại biến cố, cảm xúc ngày, ký ức có trọng số và quên | H1 | Mô phỏng: mỗi NPC 2 đến 5 biến cố mỗi tháng; save thêm không quá 5 KB sau 1 năm |
 | H4 | `replies.ts`: lựa chọn của người chơi, hậu quả theo tính cách, ghi ký ức | H1 | Mỗi lượt 3 đến 4 lựa chọn, không lặp bộ trong 7 ngày |
-| H5 | Lô 1 dữ liệu: Mẹ, Bà Tư, Minh An, Cô Hạnh, Tuấn (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
+| H5 | Lô 1 dữ liệu: Mẹ, em, chủ trọ, 1 đồng nghiệp, bán rau, sinh viên giao hàng (khoảng 500 mảnh); nối tin nhắn Mẹ và trò chuyện | H1 đến H4 | Bạn duyệt 30 câu mẫu trước; `sim:talk` đạt chỉ tiêu I.9 cho 5 người này |
 | H6 | Lô 2: 7 NPC còn lại, hội thoại 2 đến 4 lượt, người chơi tự mở lời theo chủ đề | H5 | Như H5 cho cả 12 người |
 | H7b | Tuổi, sinh nhật, vòng đời và người nối tiếp (I.5c) | H3 | Mô phỏng 20 năm: vai trò không bị trống quá 30 ngày; tuổi và lịch đúng |
 | H7 | Lô 3: NPC ngẫu nhiên có chuyện riêng (giới hạn I.1c), nhóm chat, tin đồn (gộp T63) | H6 | Người lạ gặp lại nhớ lần trước; không quá 12 NPC ngẫu nhiên cùng lúc |
