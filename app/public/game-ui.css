@@ -68,3 +68,4 @@
 
 .finance-runway{display:flex;flex-direction:column;gap:4px;padding:16px;margin-bottom:6px;border-radius:10px;background:#eef5e3;border:1px solid #cfdcbb}.finance-runway small{font-size:var(--fs-note);color:#687760}.finance-runway strong{font-size:var(--fs-stat);font-weight:700}.finance-runway p{margin:4px 0 0;font-size:var(--fs-note)}.finance-runway[data-level=warn]{background:#fbf2d6;border-color:#e6d28f}.finance-runway[data-level=danger]{background:#f8e1dc;border-color:#e2a99f}.finance-head{margin:16px 0 2px;font-size:var(--fs-note);color:#869576;font-weight:600}
 .finance-runway~.game-data-row>strong{white-space:nowrap;flex-shrink:0}.finance-runway~.game-data-row>span{min-width:0}
+.office-space-screen .owner-tools{flex-wrap:wrap;justify-content:stretch}.office-space-screen .owner-tools button{flex:1 1 calc(33.333% - 5px);justify-content:center}
