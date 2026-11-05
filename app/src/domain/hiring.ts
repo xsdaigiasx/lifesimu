@@ -27,8 +27,13 @@ export interface Candidate{id:string;seed:string;name:string;gender:'male'|'fema
  /** Khai trong CV. */
  claim:Record<HireSkill,number>;claimYears:number;wage:number;fee:number;ref:boolean}
 export interface Progress{cv?:1;sit?:1;mot?:1;ref?:1;q?:Partial<Record<HireSkill,number>>;test?:Partial<Record<HireSkill,1>>}
+/** T51 (Kế hoạch mục 35.2; chủ dự án duyệt 05/11): độ biết nhân viên. Khởi đầu 20, phỏng vấn kỹ cộng ban đầu (tối đa 15), tăng theo việc, không giảm. Các số là đề xuất, chỉnh ở T50. */
+export const KNOW={start:20,interviewMax:15,day:1,talk:4,done:6,bondMid:1.2,bondHigh:1.5} as const;
+export function startKnow(p?:Progress){
+ const q=Object.values(p?.q??{}).reduce((a,n)=>a+(n??0),0),t=Object.keys(p?.test??{}).length;
+ return KNOW.start+Math.min(KNOW.interviewMax,q+3*t+(p?.cv?1:0)+(p?.sit?3:0)+(p?.mot?3:0)+(p?.ref?3:0))}
 export interface HiringState{postedDay:number;rep:number;progress:Record<string,Progress>;gone:string[]}
-export interface Employee{id:string;name:string;gender:'male'|'female';age:number;origin:string;hiredDay:number;wage:number;skills:Record<HireSkill,number>;years:number;trust:number;risk:number;potential:number;personality:Personality;motive:typeof MOTIVES[number];/** T45: chỉ số công việc; thiếu thì suy ra từ hồ sơ (save cũ). */work?:WorkState;/** T48: điểm thân với chủ 0–100; thiếu thì suy ra từ độ tin cậy. */bond?:number;/** T49: đang học (tới hết ngày), cảnh cáo, lần học và họp 1-1 gần nhất. */train?:{skill:HireSkill;until:number};warns?:number;warnDay?:number;trainedDay?:number;talkDay?:number}
+export interface Employee{id:string;name:string;gender:'male'|'female';age:number;origin:string;hiredDay:number;wage:number;skills:Record<HireSkill,number>;years:number;trust:number;risk:number;potential:number;personality:Personality;motive:typeof MOTIVES[number];/** T45: chỉ số công việc; thiếu thì suy ra từ hồ sơ (save cũ). */work?:WorkState;/** T48: điểm thân với chủ 0–100; thiếu thì suy ra từ độ tin cậy. */bond?:number;/** T49: đang học (tới hết ngày), cảnh cáo, lần học và họp 1-1 gần nhất. */train?:{skill:HireSkill;until:number};warns?:number;warnDay?:number;trainedDay?:number;talkDay?:number;/** T51: độ biết (0–100), chủ hiểu nhân viên này đến đâu. Thiếu thì tính là KNOW.start. */know?:number}
 
 const rnd=(seed:string,salt:string,n:number)=>mix(hash(`${seed}:${salt}`))%n;
 const clamp=(v:number,a:number,b:number)=>Math.min(b,Math.max(a,v));
@@ -111,7 +116,7 @@ export function hiringAction(s:GameState,a:HiringAction):GameResult{
  if(a.kind==='hire'){
   if(staffOf(s).some(e=>e.id===cand.id))return fail('Người này đã được tuyển.');
   if(staffOf(s).length>=capacityOf(s))return fail('Văn phòng hết chỗ ngồi.');if(co.fund<cand.fee)return fail('Quỹ công ty không đủ phí tuyển.');
-  co.fund-=cand.fee;co.staff=[...staffOf(s),{id:cand.id,name:cand.name,gender:cand.gender,age:cand.age,origin:cand.origin,hiredDay:s.day,wage:cand.wage,skills:cand.skills,years:cand.years,trust:cand.trust,risk:cand.risk,potential:cand.potential,personality:cand.personality,motive:cand.motive}];
+  co.fund-=cand.fee;co.staff=[...staffOf(s),{id:cand.id,name:cand.name,gender:cand.gender,age:cand.age,origin:cand.origin,hiredDay:s.day,wage:cand.wage,skills:cand.skills,years:cand.years,trust:cand.trust,risk:cand.risk,potential:cand.potential,personality:cand.personality,motive:cand.motive,know:startKnow(h.progress[cand.id])}];
   delete h.progress[cand.id];return{ok:true,state:n};
  }
  if(!(a.what in HIRING.times))return fail('Hành động phỏng vấn không hợp lệ.');
@@ -141,5 +146,5 @@ export function validStaff(v:unknown,day:number,cap:number):v is Employee[]{
  if(!Array.isArray(v)||v.length>cap)return false;const seen=new Set<string>();
  return v.every((e:Employee)=>{if(!e||typeof e!=='object'||typeof e.id!=='string'||seen.has(e.id))return false;seen.add(e.id);
   return typeof e.name==='string'&&e.name.length<60&&(e.gender==='male'||e.gender==='female')&&Number.isInteger(e.hiredDay)&&e.hiredDay>=0&&e.hiredDay<=day&&Number.isInteger(e.wage)&&e.wage>=0&&e.wage<=1e8&&SK(e.skills)
-   &&[e.age,e.years,e.trust,e.risk,e.potential].every(x=>Number.isFinite(x)&&x>=0&&x<=200)&&PERSONALITIES.includes(e.personality)&&MOTIVES.includes(e.motive)&&(e.work===undefined||validWork(e.work,day))&&(e.bond===undefined||Number.isFinite(e.bond)&&e.bond>=0&&e.bond<=100)&&(e.train===undefined||HIRE_SKILLS.includes(e.train.skill)&&Number.isInteger(e.train.until)&&e.train.until>=0)&&(e.warns===undefined||Number.isInteger(e.warns)&&e.warns>=0&&e.warns<=3)&&[e.warnDay,e.trainedDay,e.talkDay].every(x=>x===undefined||Number.isInteger(x)&&x>=0&&x<=day)});
+   &&[e.age,e.years,e.trust,e.risk,e.potential].every(x=>Number.isFinite(x)&&x>=0&&x<=200)&&PERSONALITIES.includes(e.personality)&&MOTIVES.includes(e.motive)&&(e.work===undefined||validWork(e.work,day))&&(e.bond===undefined||Number.isFinite(e.bond)&&e.bond>=0&&e.bond<=100)&&(e.know===undefined||Number.isFinite(e.know)&&e.know>=0&&e.know<=100)&&(e.train===undefined||HIRE_SKILLS.includes(e.train.skill)&&Number.isInteger(e.train.until)&&e.train.until>=0)&&(e.warns===undefined||Number.isInteger(e.warns)&&e.warns>=0&&e.warns<=3)&&[e.warnDay,e.trainedDay,e.talkDay].every(x=>x===undefined||Number.isInteger(x)&&x>=0&&x<=day)});
 }

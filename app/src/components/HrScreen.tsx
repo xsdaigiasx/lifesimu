@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import type {GameState,GameResult} from '../domain/types';
 import {staffOf,levelOf,HIRE_SKILLS,HIRE_SKILL_NAME} from '../domain/hiring';
-import {bondOf,bondTier,workAt} from '../domain/staff';
+import {bondOf,bondTier,knowOf,workAt} from '../domain/staff';
 import {hrView,hrPreview,pendingFor,type HrAction} from '../domain/hr';
 import {MG,canTalk,canTrain,severance,warnsOf,type MgAction} from '../domain/manage';
 import {money} from '../domain/format';
@@ -19,7 +19,7 @@ export default function HrScreen({state,emp,onAction,onBack}:{state:GameState;em
   <DataRow label="Lương" value={money(e.wage)}/>
   <DataRow label="Tinh thần" value={`${Math.round(w.morale)}`}/>
   <DataRow label="Gắn bó" value={`${Math.round(w.loyalty)}`}/>
-  <DataRow label="Quan hệ" value={`${bondTier(bond)} ${bond}`}/>{warns>0&&<DataRow label="Cảnh cáo" value={`${warns}/${MG.warnMax}`}/>}{e.train&&state.day<=e.train.until&&<DataRow label="Đang học" value={`${HIRE_SKILL_NAME[e.train.skill]}, đến ${e.train.until-state.day+1} ngày nữa`}/>}</>;
+  <DataRow label="Quan hệ" value={`${bondTier(bond)} ${bond}`}/><DataRow label="Độ biết" value={`${Math.round(knowOf(e))}/100`}/>{warns>0&&<DataRow label="Cảnh cáo" value={`${warns}/${MG.warnMax}`}/>}{e.train&&state.day<=e.train.until&&<DataRow label="Đang học" value={`${HIRE_SKILL_NAME[e.train.skill]}, đến ${e.train.until-state.day+1} ngày nữa`}/>}</>;
  const choose=(tag:string)=>{if(!pend)return;const text=hrPreview(state,pend.id,tag)??'';const r=onAction({kind:'hrChoose',id:pend.id,tag});if(r.ok){setResult(text);setError('')}else setError(r.error)};
  if(view)return <GameScreen title={e.name} onBack={onBack}>
   <p className="hr-line" role="status">{view.line}</p>

@@ -1,6 +1,6 @@
 import type {GameResult,GameState} from './types';
-import {staffOf,HIRE_SKILLS,type Employee,type HireSkill} from './hiring';
-import {bondOf,workAt} from './staff';
+import {KNOW,staffOf,HIRE_SKILLS,type Employee,type HireSkill} from './hiring';
+import {bondOf,knowGain,withKnow,workAt} from './staff';
 import {book} from './finance';
 import {spendTime} from './time';
 import {recordJournal} from './journal';
@@ -35,7 +35,7 @@ export function manageAction(s:GameState,a:MgAction):GameResult{
  if(a.kind==='mgTalk'){
   if(!canTalk(e,day))return fail(`Mới họp 1-1 gần đây, ${MG.talkGap} ngày mới họp lại được.`);
   const t=spendTime(n,MG.talkMinutes);if(!t.ok)return t;n=t.state;
-  bump(n,e.id,MG.talkMorale,MG.talkBond,0);patch(n,e.id,x=>({...x,talkDay:day}));
+  patch(n,e.id,x=>({...withKnow(x,knowGain(x,KNOW.talk)),talkDay:day}));bump(n,e.id,MG.talkMorale,MG.talkBond,0);
   return{ok:true,state:recordJournal(n,`mg:talk:${e.id}:${day}`,`Họp 1-1 với ${e.name}`,'Hai bên nói chuyện thẳng thắn.')}}
  if(a.kind==='mgTrain'){
   if(!HIRE_SKILLS.includes(a.skill))return fail('Kỹ năng không hợp lệ.');

@@ -1,6 +1,6 @@
 import type {GameResult,GameState} from './types';
 import {staffOf,levelOf,HIRE_SKILLS,type Employee,type HireSkill} from './hiring';
-import {FX,bondOf,fairWage,quitRisk,wageRatio,workAt} from './staff';
+import {FX,bondOf,fairWage,knowOf,quitRisk,wageRatio,withKnow,workAt} from './staff';
 import {projectsOf,type Project} from './projects';
 import {book} from './finance';
 import {spendTime} from './time';
@@ -13,11 +13,11 @@ import {policyOf} from './policy';
 /** T48 (Kế hoạch mục 34; chủ dự án duyệt 05/11): sự kiện nhân sự. Nhân viên tự báo việc (xin tăng lương, xung đột, bị chào mời…),
  *  chủ chọn cách xử lý. 15 mô-típ, mỗi mô-típ 2 biến thể, ký ức và móc tiếp nối như bộ điều phối NPC (director.ts).
  *  Điểm thân `Employee.bond` (0–100): Tri kỷ làm thêm giờ vì chủ, Bất hoà làm cầm chừng và dễ nghỉ. Các số là đề xuất, chỉnh ở T50. */
-export type HrMotifId='raise'|'bonus'|'conflict'|'late'|'poach'|'quit'|'sick'|'leave'|'private'|'idea'|'overtime'|'overreach'|'hoard'|'training'|'moonlight';
+export type HrMotifId='raise'|'bonus'|'conflict'|'late'|'poach'|'quit'|'sick'|'leave'|'private'|'idea'|'overtime'|'overreach'|'hoard'|'training'|'moonlight'|'stuck'|'polish'|'demand'|'scope'|'clash';
 export const HR={chance:14,dailyMax:2,expireDays:3,fadeDays:30,maxMem:60,maxLog:120,maxHooks:24,maxPending:12,ignoreMorale:-3,ignoreLoyalty:-2,ignoreBond:-2} as const;
 
 export interface HrEvent{id:string;emp:string;motif:HrMotifId;variant:number;day:number;expires:number;/** Người thứ hai (xung đột). */other?:string;/** Dự án liên quan. */ref?:string;/** Ký ức làm nảy ra việc này. */memory?:string}
-export interface HrMemory{id:string;day:number;emp:string;motif:HrMotifId|'ignored';topic:string;tag:string;weight:number}
+export interface HrMemory{id:string;day:number;emp:string;motif:HrMotifId|'ignored'|'work';topic:string;tag:string;weight:number}
 export interface HrHook{emp:string;motif:HrMotifId;from:number;to:number;memory:string}
 export interface HrLog{day:number;emp:string;motif:HrMotifId}
 export interface HrState{version:1;last:number;seq:number;pending:HrEvent[];log:HrLog[];memories:HrMemory[];hooks:HrHook[]}
@@ -32,7 +32,7 @@ export const alive=(m:HrMemory,day:number)=>m.weight>=4||day-m.day<=HR.fadeDays;
 const mainKey=(e:Employee):HireSkill=>(['programming','logic','graphics'] as HireSkill[]).reduce((a,k)=>e.skills[k]>e.skills[a]?k:a,'programming' as HireSkill);
 const mainLv=(e:Employee)=>e.skills[mainKey(e)];
 
-type Eff={fund?:number;wagePct?:number;morale?:number;loyalty?:number;bond?:number;fatigue?:number;minutes?:number;off?:number;progress?:number;errCut?:number;exp?:number;rep?:number;unassign?:boolean;leave?:boolean;other?:{morale?:number;bond?:number;loyalty?:number};roll?:{p:number;ok:Eff;no:Eff}};
+type Eff={/** T51: đổi số giờ (%), thưởng dự án (%), hạn (ngày) và độ biết. */hoursPct?:number;rewardPct?:number;dueDays?:number;know?:number;fund?:number;wagePct?:number;morale?:number;loyalty?:number;bond?:number;fatigue?:number;minutes?:number;off?:number;progress?:number;errCut?:number;exp?:number;rep?:number;unassign?:boolean;leave?:boolean;other?:{morale?:number;bond?:number;loyalty?:number};roll?:{p:number;ok:Eff;no:Eff}};
 interface Option{label:string;tag:string;need?:number;needFund?:number;eff:Eff;result:string;resultNo?:string;mem?:[string,number];hook?:[HrMotifId,[number,number]]}
 interface Base{s:GameState;e:Employee;day:number;bond:number;comm:number;ps:ReturnType<typeof projectsOf>;proj?:Project;other?:Employee;mem?:HrMemory;variant:number}
 interface Motif{id:HrMotifId;name:string;variants:number;gap:number;weight:(c:Base)=>number;line:(c:Base)=>string;options:(c:Base)=>Option[]}
@@ -41,6 +41,12 @@ const withRecall=(c:Base,text:string)=>c.mem?`${cap(agoText(c.day-c.mem.day))} $
 const title=(c:Base)=>c.proj?.title??'dự án';
 const projectOf=(ps:Base['ps'],emp:string)=>ps.active.find(p=>p.team.includes(emp));
 const tired=(c:Base)=>workAt(c.e,c.day).fatigue;
+
+/** T51: sự kiện giữa việc chỉ xảy ra khi dự án đã chạy 25–90%. `helpHours`/`helpCost`: giờ và tiền của một đợt hỗ trợ thêm người. */
+const MID_W=4;
+const mid=(c:Base)=>!!c.proj&&c.proj.progress>=c.proj.hours*.25&&c.proj.progress<c.proj.hours*.9;
+const helpHours=(c:Base)=>Math.max(2,Math.round((c.proj?.hours??20)*.05));
+const helpCost=(c:Base)=>Math.max(1_000_000,r100(c.e.wage*.15));
 
 export const MOTIFS:Motif[]=[
  {id:'raise',name:'Xin tăng lương',variants:3,gap:45,
@@ -137,6 +143,45 @@ export const MOTIFS:Motif[]=[
   options:c=>[O('Cho phép nếu không ảnh hưởng việc','allow',{fatigue:15,morale:3,bond:1},`${c.e.name} cảm ơn vì được tin.`),
    O('Đề nghị chia một phần thu nhập','share',{roll:{p:clamp(45+c.bond*.4,5,90),ok:{fund:1_500_000,bond:1},no:{morale:-4,loyalty:-3}}},`${c.e.name} đồng ý đưa một phần vào quỹ.`,{resultNo:`${c.e.name} không vui, thấy như bị đòi tiền.`}),
    O('Cấm làm thêm','ban',{morale:-5,loyalty:-4,bond:-2},`${c.e.name} im lặng, vẻ mặt khó chịu.`)]},
+
+
+ // T51 (Kế hoạch mục 35.3): sự kiện giữa việc theo tính cách. Chỉ khi nhân viên đang làm một dự án đã chạy 25–90%.
+ // Chủ can thiệp bằng họp nhanh (30 phút), điểm kiểm tra (45 phút), thêm người (tốn quỹ), cắt phạm vi hoặc gia hạn; mỗi lựa chọn để lại ký ức.
+ {id:'stuck',name:'Kẹt không dám hỏi',variants:2,gap:14,
+  weight:c=>mid(c)&&c.e.personality==='Ngại'?MID_W:0,
+  line:c=>withRecall(c,[`Sếp ơi, phần giữa của ${title(c)} em đang kẹt, mà em ngại hỏi nên cứ tự mò.`,`Em chưa dám nói sớm: ${title(c)} có chỗ em chưa chắc, em sợ làm phiền sếp.`][c.variant]!),
+  options:c=>[O('Họp nhanh gỡ vướng','sync',{minutes:30,progress:helpHours(c),morale:4,bond:3,know:3},`${c.e.name} thở phào, hai người gỡ xong chỗ vướng.`,{mem:['sếp họp nhanh gỡ vướng cho em',2]}),
+   O('Điểm kiểm tra','check',{minutes:45,errCut:25,morale:1,know:2},'Kiểm tra sớm, phần lỗi tiềm ẩn lộ ra và được sửa.'),
+   O('Thêm người hỗ trợ','help',{fund:-helpCost(c),progress:helpHours(c)*2,morale:1},`${c.e.name} có người cùng làm, tiến độ nhanh hơn.`,{needFund:helpCost(c)}),
+   O('Để em tự xoay xở','alone',{morale:-2,roll:{p:55,ok:{morale:3,know:1},no:{errCut:-25,morale:-3}}},`${c.e.name} tự gỡ được, vẻ mặt nhẹ hơn.`,{resultNo:`${c.e.name} loay hoay thêm mấy hôm, lỗi tích dần.`,mem:['sếp để em tự xoay xở khi bị kẹt',2],hook:['late',[3,10]]})]},
+ {id:'polish',name:'Xin thêm thời gian',variants:2,gap:14,
+  weight:c=>mid(c)&&c.e.personality==='Cầu toàn'?MID_W:0,
+  line:c=>withRecall(c,[`Em chưa hài lòng với ${title(c)}. Sếp cho em thêm ít thời gian được không ạ?`,`Phần này em muốn làm kỹ hơn, nhưng hạn của ${title(c)} sát quá.`][c.variant]!),
+  options:c=>[O('Gia hạn 2 ngày','extend',{dueDays:2,rep:-1,morale:5,errCut:20,know:2},`${c.e.name} làm chắc tay, lỗi giảm rõ nhưng khách phải chờ thêm.`,{mem:['sếp cho thêm thời gian để làm cho chắc',3]}),
+   O('Cắt bớt phạm vi','cut',{hoursPct:-12,rewardPct:-8,morale:2,errCut:10},`${c.e.name} gật đầu, tập trung phần cốt lõi.`),
+   O('Họp nhanh chốt tiêu chuẩn','sync',{minutes:30,know:3,roll:{p:50+c.comm*4,ok:{morale:3,errCut:10,bond:2},no:{morale:-3}}},`${c.e.name} đồng ý mức hoàn thiện vừa đủ.`,{resultNo:`${c.e.name} vẫn lấn cấn nhưng đành nghe theo.`}),
+   O('Giữ nguyên hạn','hold',{morale:-6,bond:-2},`${c.e.name} lặng im, chấp nhận.`,{mem:['sếp không cho thêm thời gian khi em muốn làm cho kỹ',3]})]},
+ {id:'demand',name:'Đòi thưởng giữa việc',variants:2,gap:21,
+  weight:c=>mid(c)&&c.e.personality==='Tham'&&c.proj!.hours>=32?MID_W:0,
+  line:c=>withRecall(c,[`Dự án ${title(c)} lớn thế này, nếu em làm xong thì sếp tính thưởng cho em thế nào ạ?`,`Việc ${title(c)} nặng ký đấy sếp. Em muốn nói chuyện thưởng trước khi làm tiếp.`][c.variant]!),
+  options:c=>{const bonus=Math.max(1_000_000,r100(c.proj!.reward*.05));return[O('Thưởng trước một phần','bonus',{fund:-bonus,morale:6,loyalty:3,bond:2},`${c.e.name} cười tươi, hứa dồn sức cho ${title(c)}.`,{needFund:bonus,mem:['sếp thưởng trước khi em làm xong',2]}),
+   O('Họp nhanh nhắc mục tiêu','sync',{minutes:30,know:3,roll:{p:50+c.comm*4,ok:{morale:2,loyalty:1},no:{morale:-4,loyalty:-2}}},`${c.e.name} nghe ra, quay lại làm.`,{resultNo:`${c.e.name} vẫn tỏ ra không vui.`}),
+   O('Tăng ca có trả','overtime',{fund:-helpCost(c),progress:helpHours(c),fatigue:8,morale:3},`${c.e.name} nhận tăng ca, tiến độ nhích lên.`,{needFund:helpCost(c)}),
+   O('Không thưởng trước','deny',{morale:-6,loyalty:-3,bond:-2},`${c.e.name} cau mày, im lặng.`,{mem:['sếp không thưởng dù em làm việc lớn',3],hook:['raise',[5,15]]})]}},
+ {id:'scope',name:'Nhận thêm phần ngoài yêu cầu',variants:2,gap:14,
+  weight:c=>mid(c)&&c.e.personality==='Hay khoe'?MID_W:0,
+  line:c=>withRecall(c,[`Em tính làm thêm vài phần ngoài yêu cầu của ${title(c)} cho khách choáng luôn, sếp đồng ý nhé.`,`Khách mới nhắc thêm một tính năng ở ${title(c)}, em nhận luôn rồi, làm được hết mà.`][c.variant]!),
+  options:c=>[O('Cho làm thêm','allow',{hoursPct:10,rewardPct:5,morale:4,errCut:-10},`${c.e.name} hào hứng, nhưng khối lượng đã dày thêm.`),
+   O('Giữ đúng phạm vi','keep',{morale:-3,bond:-1,errCut:5},`${c.e.name} tiếc nhưng quay lại phần được giao.`,{mem:['sếp không cho em làm thêm phần ngoài yêu cầu',2]}),
+   O('Điểm kiểm tra','check',{minutes:45,errCut:15,know:2},'Kiểm tra cho thấy phần thêm chưa cần thiết, hai bên cắt bớt.'),
+   O('Thêm người hỗ trợ','help',{fund:-helpCost(c),hoursPct:10,rewardPct:5,progress:helpHours(c)*2,morale:3},`Có thêm người, ${c.e.name} vẫn giữ được phần mình nhận.`,{needFund:helpCost(c)})]},
+ {id:'clash',name:'Va chạm với khách',variants:2,gap:21,
+  weight:c=>mid(c)&&c.e.personality==='Nóng tính'?MID_W:0,
+  line:c=>withRecall(c,[`Khách của ${title(c)} cứ đổi ý hoài, em lỡ to tiếng với họ rồi sếp ạ.`,`Em cãi nhau với bên khách về ${title(c)}. Họ đang khó chịu lắm.`][c.variant]!),
+  options:c=>[O('Gọi xin lỗi khách','apologize',{minutes:30,bond:2,roll:{p:55+c.comm*4,ok:{morale:-1},no:{rep:-2,morale:-2}}},'Khách dịu lại sau cuộc gọi của bạn.',{resultNo:'Khách vẫn phàn nàn và để lại ấn tượng xấu.',mem:['sếp đứng ra xin lỗi khách giúp em',2]}),
+   O('Họp nhanh với nhân viên','sync',{minutes:30,morale:2,bond:3,know:3},`${c.e.name} nguôi giận, hứa nhẹ lời hơn.`),
+   O('Đổi người phụ trách','swap',{unassign:true,morale:-4,bond:-2},`${c.e.name} rời dự án, người khác tiếp nhận khách.`,{mem:['sếp đổi em khỏi dự án sau khi em cãi khách',3]}),
+   O('Bỏ qua','ignore',{rep:-2,morale:1},'Chuyện lắng xuống nhưng khách để lại ấn tượng không tốt.',{mem:['sếp bỏ qua chuyện em cãi khách',2]})]},
 ];
 export const motifOf=(id:HrMotifId)=>MOTIFS.find(m=>m.id===id)!;
 
@@ -176,10 +221,10 @@ function apply(n:GameState,ev:HrEvent,ef:Eff,day:number,label:string):boolean{
  let wage=cur.wage;if(ef.wagePct)wage=Math.max(cur.wage,Math.min(r100(cur.wage*(1+ef.wagePct/100)),Math.max(cur.wage,r100(fairWage(cur)*1.5))));
  if(ef.fund){c.fund=Math.max(0,c.fund+ef.fund);book(c,day,label,ef.fund)}
  if(ef.rep)c.rep=clamp((c.rep??50)+ef.rep,0,100);
- if(proj){if(ef.progress)proj.progress=Math.min(proj.hours,Math.round((proj.progress+ef.progress)*10)/10);if(ef.errCut)proj.ew=Math.max(0,proj.ew*(1-ef.errCut/100));if(ef.unassign&&proj.team.length>1)proj.team=proj.team.filter(id=>id!==cur.id)}
+ if(proj){if(ef.progress)proj.progress=Math.min(proj.hours,Math.round((proj.progress+ef.progress)*10)/10);if(ef.errCut)proj.ew=Math.max(0,proj.ew*(1-ef.errCut/100));if(ef.hoursPct)proj.hours=clamp(Math.round(proj.hours*(1+ef.hoursPct/100)),Math.max(4,Math.ceil(proj.progress)),200);if(ef.rewardPct)proj.reward=Math.round(proj.reward*(1+ef.rewardPct/100)/1000)*1000;if(ef.dueDays)proj.due+=ef.dueDays;if(ef.unassign&&proj.team.length>1)proj.team=proj.team.filter(id=>id!==cur.id)}
  const exp=ef.exp?{...(w.exp??{}),[mainKey(cur)]:((w.exp??{})[mainKey(cur)]??0)+ef.exp}:w.exp;
  w={...w,morale:clamp(w.morale+(ef.morale??0),0,100),loyalty:clamp(w.loyalty+(ef.loyalty??0),0,100),fatigue:clamp(w.fatigue+(ef.fatigue??0),0,100),day:Math.max(w.day,day),...(exp?{exp}:{}),...(ef.off?{off:Math.max(w.off??0,day+ef.off)}:{})};
- c.staff![idx]={...cur,wage,bond:clamp(bondOf(cur)+(ef.bond??0),0,100),work:w};
+ c.staff![idx]={...(ef.know?withKnow(cur,ef.know):cur),wage,bond:clamp(bondOf(cur)+(ef.bond??0),0,100),work:w};
  const o=ev.other?(c.staff??[]).findIndex(x=>x.id===ev.other):-1;
  if(ef.other&&o>=0){const oc=c.staff![o]!,ow=workAt(oc,day);c.staff![o]={...oc,bond:clamp(bondOf(oc)+(ef.other.bond??0),0,100),work:{...ow,morale:clamp(ow.morale+(ef.other.morale??0),0,100),loyalty:clamp(ow.loyalty+(ef.other.loyalty??0),0,100),day:Math.max(ow.day,day)}}}
  return false}
@@ -234,7 +279,7 @@ export function settleHr(next:GameState):GameState{
   if(h.pending.some(p=>p.emp===e.id)||hash(`hr:r:${day}:${e.id}`)%100>=HR.chance)continue;
   const p=pick(n,e,day);if(!p)continue;
   const ps=projectsOf(n),proj=projectOf(ps,e.id);
-  h.pending.push({id:`h${h.seq++}`,emp:e.id,motif:p.motif.id,variant:p.variant,day,expires:day+HR.expireDays,...(p.other?{other:p.other}:{}),...(proj&&['late','overtime','overreach','hoard'].includes(p.motif.id)?{ref:proj.id}:{}),...(p.memory?{memory:p.memory}:{})});
+  h.pending.push({id:`h${h.seq++}`,emp:e.id,motif:p.motif.id,variant:p.variant,day,expires:day+HR.expireDays,...(p.other?{other:p.other}:{}),...(proj&&['late','overtime','overreach','hoard','stuck','polish','demand','scope','clash'].includes(p.motif.id)?{ref:proj.id}:{}),...(p.memory?{memory:p.memory}:{})});
   h.log=[...h.log,{day,emp:e.id,motif:p.motif.id}].slice(-HR.maxLog);made++;
   h.hooks=h.hooks.filter(k=>!(k.emp===e.id&&k.motif===p.motif.id))}
  h.last=day;
@@ -248,7 +293,7 @@ export function validHr(v:unknown,day:number):v is HrState{
  return h.version===1&&Number.isInteger(h.last)&&h.last>=-1&&h.last<=day&&Number.isInteger(h.seq)&&h.seq>=0
   &&Array.isArray(h.pending)&&h.pending.length<=HR.maxPending&&h.pending.every(p=>!!p&&str(p.id,12)&&str(p.emp,40)&&MOTIF_IDS.includes(p.motif)&&Number.isInteger(p.variant)&&p.variant>=0&&p.variant<=3&&Number.isInteger(p.day)&&p.day>=0&&p.day<=day&&Number.isInteger(p.expires)&&p.expires>=p.day&&p.expires<=p.day+30&&(p.other===undefined||str(p.other,40))&&(p.ref===undefined||str(p.ref,12))&&(p.memory===undefined||str(p.memory,12)))
   &&Array.isArray(h.log)&&h.log.length<=HR.maxLog&&h.log.every(l=>!!l&&Number.isInteger(l.day)&&l.day>=0&&l.day<=day&&str(l.emp,40)&&MOTIF_IDS.includes(l.motif))
-  &&Array.isArray(h.memories)&&h.memories.length<=HR.maxMem&&h.memories.every(m=>!!m&&str(m.id,12)&&Number.isInteger(m.day)&&m.day>=0&&m.day<=day&&str(m.emp,40)&&(MOTIF_IDS.includes(m.motif)||m.motif==='ignored')&&str(m.topic,100)&&str(m.tag,20)&&Number.isInteger(m.weight)&&m.weight>=0&&m.weight<=9)
+  &&Array.isArray(h.memories)&&h.memories.length<=HR.maxMem&&h.memories.every(m=>!!m&&str(m.id,12)&&Number.isInteger(m.day)&&m.day>=0&&m.day<=day&&str(m.emp,40)&&(MOTIF_IDS.includes(m.motif)||m.motif==='ignored'||m.motif==='work')&&str(m.topic,100)&&str(m.tag,20)&&Number.isInteger(m.weight)&&m.weight>=0&&m.weight<=9)
   &&Array.isArray(h.hooks)&&h.hooks.length<=HR.maxHooks&&h.hooks.every(k=>!!k&&str(k.emp,40)&&MOTIF_IDS.includes(k.motif)&&Number.isInteger(k.from)&&Number.isInteger(k.to)&&k.to>=k.from&&str(k.memory,12))}
 
 /** Dùng ở test: các mô-típ và khoá kỹ năng chính. */
