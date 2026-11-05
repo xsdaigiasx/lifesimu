@@ -43,7 +43,8 @@ test('điều kiện vào khoá và Lv tối đa của từng kiểu học',()=>
  assert.equal(S.studyQuote(st({prog:3}),'programming','self').ok,false,'tự học chỉ tới Lv3');
  assert.equal(S.studyQuote(st({prog:7}),'programming','expert').ok,false,'Chuyên sâu cần bậc Middle');
  assert.equal(S.studyQuote(st({prog:7,tier:'middle'}),'programming','expert').ok,true);
- const self=ok(S.studySkill(st(),'graphics','self'));assert.equal(totalXp(self.skills.graphics),40);assert.equal(self.money,st().money);
+// T56: laptop cũ khởi đầu ×0,9 nên tự học tại nhà còn 36 XP.
+ const self=ok(S.studySkill(st(),'graphics','self'));assert.equal(totalXp(self.skills.graphics),36);assert.equal(self.money,st().money);
  assert.equal(self.study.certs.length,0);
  const capped=ok(S.studySkill({...st({prog:3}),skills:{...skills(3),programming:{level:3,xp:xpNeeded(3)-1}}},'programming','basic'));
  assert.equal(capped.skills.programming.level,4,'khoá không đẩy vượt Lv đích');assert.equal(S.studyQuote(capped,'programming','basic').ok,false);

@@ -3,7 +3,8 @@ import {fitMult} from './fitness';
 import {hasRoom,atResidence,STUDY_FACTOR} from './housing';
 import type {GameState,GameResult} from './types';
 import {SKILLS,MAX_LEVEL,xpNeeded,defaultSkills,gainXp,type SkillId,type Skills} from './skill-xp';
-import {placedAt,DESK_XP} from './home';
+import {placedAt} from './home';
+import {machineMult} from './computer';
 import {vitalFactor} from './vitals';
 import {post} from './money';
 import {clockOf,END} from './time';
@@ -65,7 +66,7 @@ export function studyQuote(s:GameState,skill:SkillId,mode:StudyMode):StudyCheck{
  if(c.minute+SESSION_MINUTES>END)return{ok:false,error:'Không đủ thời gian cho buổi học 2 giờ.'};
  if(s.energy<SESSION_ENERGY)return{ok:false,error:'Không đủ năng lượng để học.'};
  if(s.money<fee)return{ok:false,error:`Cần ${money(fee)} học phí.`};
- const count=st.week===Math.floor(s.day/7)?st.weekCount:0,base=course?course.xp:Math.round(SELF_STUDY.xp*(hasRoom(s,'study')&&atResidence(s)?STUDY_FACTOR:1)*(atResidence(s)?1+DESK_XP[placedAt(s,'desk')?.tier??'basic']*(placedAt(s,'desk')?1:0):1));
+ const count=st.week===Math.floor(s.day/7)?st.weekCount:0,base=course?course.xp:Math.round(SELF_STUDY.xp*(hasRoom(s,'study')&&atResidence(s)?STUDY_FACTOR:1)*(atResidence(s)?placedAt(s,'desk')?machineMult(s):1:1));
  const xp=Math.max(1,Math.round(base*vitalFactor(s)*(count>=WEEK_FULL_SESSIONS?.5:1)));
  return{ok:true,xp,fee,cap,title:course?`Khoá ${course.name} ${SKILLS[skill]}`:`Tự học ${SKILLS[skill]}`}}
 

@@ -6,7 +6,7 @@ let s={...engine.initial(),money:50000000,energy:50,stress:50};
 // giường, bàn mặc định đã đặt
 assert(placedAt(s,'bed')&&placedAt(s,'desk'));
 const n=napAtHome(s);assert(n.ok,n.error);assert(n.state.energy>s.energy);assert(!napAtHome(n.state).ok);
-const g=onlineGig(s);assert(g.ok,g.error);assert.equal(g.state.money,s.money+gigPay(s));assert(!onlineGig(g.state).ok);
+const g=onlineGig(s);assert(g.ok,g.error);assert.equal(g.state.money,s.money+Math.round(gigPay(s)*require('../.test-build/domain/computer').machineMult(s)/1000)*1000);assert(!onlineGig(g.state).ok);
 assert(engine.valid(g.state));assert(engine.parse(JSON.stringify(g.state)));
 // bàn cất vào kho: không làm thêm; chuyển chỗ vẫn dùng được
 const stored=saveHome(s,homeOf(s).items.map(i=>i.id==='desk'?{...i,placed:false}:i));assert(stored.ok,stored.error);

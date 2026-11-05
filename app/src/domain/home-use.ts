@@ -1,6 +1,7 @@
 /** T28: điểm dùng của đồ trong phòng trọ: Nghỉ ở giường, Làm thêm online ở bàn laptop. */
 import type {GameState,GameResult} from './types';
-import {placedAt,BED_ENERGY,DESK_XP} from './home';
+import {placedAt,BED_ENERGY} from './home';
+import {machineMult,PLAY} from './computer';
 import {lifeOf} from './life';
 import {spendTime,clockOf} from './time';
 import {post} from './money';
@@ -28,8 +29,15 @@ export function onlineGig(s:GameState):GameResult{
  const desk=placedAt(s,'desk');if(!desk||!atHome(s))return{ok:false,error:'Cần bàn laptop trong phòng.'};
  const l=lifeOf(s);if(l.daily.gig===s.day)return{ok:false,error:'Hôm nay đã làm thêm rồi.'};
  if(s.energy<GIG.energy+5)return{ok:false,error:'Mệt quá, nghỉ đã.'};
- const pay=gigPay(s),skill=gigSkill(s);
+ const pay=Math.round(gigPay(s)*machineMult(s)/1000)*1000,skill=gigSkill(s);
  const t=spendTime(s,GIG.minutes);if(!t.ok)return t;let n=structuredClone(t.state);const v=structuredClone(lifeOf(s));
  v.daily.gig=s.day;n.life=v;n.energy=clamp(n.energy-GIG.energy);n.stress=clamp(n.stress+GIG.stress);
  if(post(n,{id:`gig:${s.day}`,name:'Làm thêm online',amount:pay})!=='ok')return{ok:false,error:'Không ghi được thu nhập.'};
- n=addWorkXp(n,skill,GIG.xp*(1+DESK_XP[desk.tier??'basic']));return{ok:true,state:n}}
+ n=addWorkXp(n,skill,GIG.xp*machineMult(s));return{ok:true,state:n}}
+
+/** T56: giải trí trên máy tính (xem video, chơi game nhẹ), một lần mỗi ngày. */
+export function playAtHome(s:GameState):GameResult{
+ const desk=placedAt(s,'desk');if(!desk||!atHome(s))return{ok:false,error:'Cần bàn laptop trong phòng.'};
+ const l=lifeOf(s);if(l.daily.play===s.day)return{ok:false,error:'Hôm nay đã giải trí rồi.'};
+ const t=spendTime(s,PLAY.minutes);if(!t.ok)return t;const n=structuredClone(t.state),v=structuredClone(lifeOf(s));
+ v.daily.play=s.day;n.life=v;n.energy=clamp(n.energy-PLAY.energy);n.mood=clamp(n.mood+PLAY.mood);n.stress=clamp(n.stress-PLAY.stress);return{ok:true,state:n}}
