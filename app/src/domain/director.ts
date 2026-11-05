@@ -3,7 +3,7 @@
  * Lựa chọn không ghi trước hệ quả; lựa chọn thiếu điều kiện hiện mờ. Nhắc chuyện cũ bằng thời gian áng chừng. */
 import type {GameState,GameResult,PlaceId} from './types';
 import {NPCS,castById,presentAt,addressOf,agoText,type NpcProfile} from './npc';
-import {socialOf,adjustRelation,tierFloor} from './social';
+import {socialOf,adjustRelation,tierFloor,nearTier} from './social';
 import {clockOf,spendTime,END} from './time';
 import {post} from './money';
 import {recordJournal} from './journal';
@@ -18,6 +18,8 @@ export const FADE_DAYS=30,RECALL_GAP=7,HEARD_KEEP=16;
 export const alive=(m:Memory,day:number)=>m.weight>=4||day-m.day<=FADE_DAYS;
 const unpaidLoan=(s:GameState,npc:string)=>storyOf(s).loans.find(l=>l.npc===npc&&l.settled==='unpaid'&&!l.resolved);
 const REFUSE=['refuse','dodge','decline','blunt'];
+/** Mô-típ có chủ đích được ưu tiên khi quan hệ gần mốc bậc, và xác suất (phần trăm) ưu tiên. */
+const NEAR_DEEP:MotifId[]=['favor','meal','recipe','private'],NEAR_BOOST=70;
 
 export type MotifId='greet'|'favor'|'return'|'meal'|'private'|'loan'|'recipe'|'mom'|'debt';
 export const NPC_DAILY_LIMIT=3,PLAYER_COOLDOWN=60,REPEAT_DAYS=14,LOAN_BASE_RISK=20;
@@ -91,7 +93,7 @@ const npcCount=(s:GameState)=>storyOf(s).log.filter(l=>l.day===s.day&&l.by==='np
 function pickMotif(s:GameState,npc:NpcProfile,by:'npc'|'player',salt:string):{motif:Motif;variant:number;memory?:Memory}|null{const base=ctxFor(s,npc);
  const due=MOTIFS.find(m=>m.id==='return'&&m.by.includes(by)&&m.eligible(base));if(due)return{motif:due,variant:0,memory:memoryForHook(s,npc.id)};
  const list=MOTIFS.filter(m=>m.id!=='return'&&m.by.includes(by)&&m.eligible(base)&&!(by==='npc'&&m.id==='meal'&&recentlyDone(s,npc.id,'meal')));if(!list.length)return null;
- const prefer=by==='player'?(list.filter(m=>m.id==='debt').length?list.filter(m=>m.id==='debt'):list.filter(m=>m.id==='private')):[];const pool=prefer.length?prefer:by==='player'?list.filter(m=>m.id==='greet'):list;if(!pool.length)return null;
+ const prefer=by==='player'?(list.filter(m=>m.id==='debt').length?list.filter(m=>m.id==='debt'):list.filter(m=>m.id==='private')):[];const base0=prefer.length?prefer:by==='player'?list.filter(m=>m.id==='greet'):list;/* gần mốc Thân, Tri kỷ: NPC dễ tự bắt chuyện bằng việc có chủ đích */const deep=by==='npc'&&nearTier(base.score)?list.filter(m=>NEAR_DEEP.includes(m.id)):[];const pool=deep.length&&hash(`near:${salt}:${s.day}:${npc.id}`)%100<NEAR_BOOST?deep:base0;if(!pool.length)return null;
  const h=hash(`${salt}:${s.day}:${npc.id}`),motif=pool[h%pool.length]!;const last=storyOf(s).log.filter(l=>l.npc===npc.id&&l.motif===motif.id).pop();let variant=(h>>>8)%motif.variants;if(last&&motif.variants>1&&last.variant===variant)variant=(variant+1)%motif.variants;return{motif,variant}}
 
 /** Ý định câu thoại của một mô-típ (T18). */
@@ -100,6 +102,8 @@ function intentOf(m:MotifId,variant:number,npc:string,memory?:Memory){switch(m){
 function callbackMemory(s:GameState,npc:string){const hooked=new Set(storyOf(s).hooks.map(h=>h.memory));return storyOf(s).memories.filter(m=>m.npc===npc&&!hooked.has(m.id)&&m.weight>=2&&alive(m,s.day)&&s.day-m.day>=1&&(m.recalled===undefined||s.day-m.recalled>=RECALL_GAP)&&intentsWithLines.has(`${REFUSE.includes(m.tag)?'cb-refuse':'cb'}:${m.topic}`)).sort((a,b)=>b.weight-a.weight||b.day-a.day)[0]}
 function open(s:GameState,npc:NpcProfile,pick:{motif:Motif;variant:number;memory?:Memory},by:'npc'|'player'):GameState{const st=storyOf(s),seq=st.seq+1,key=`${s.day}:${seq}`,heard=st.heard?.[npc.id]??[],score=socialOf(s).relations[npc.id]?.score??0,voice=VOICE[npc.id]??'que';
  let memory=pick.memory??(pick.motif.id==='greet'?callbackMemory(s,npc.id):undefined);let line=chooseLine(intentOf(pick.motif.id,pick.variant,npc.id,memory),voice,score,heard,hash(`line:${key}:${npc.id}`));
+ /* gần mốc bậc: chào hỏi thường đổi thành câu than nhẹ (mỗi câu một lần trong 16 câu gần nhất) */
+ if(pick.motif.id==='greet'&&!memory&&nearTier(score)){const h=chooseLine(`hint:${npc.id}`,voice,score,heard,hash(`hint:${key}:${npc.id}`));if(h&&!heard.includes(h.id))line=h}
  if(!pick.memory&&memory&&line&&heard.includes(line.id)){memory=undefined;line=chooseLine('greet',voice,score,heard,hash(`line:${key}:${npc.id}`))}
  const quirk=pick.motif.id==='greet'&&!memory&&hash(`quirk:${key}`)%100<30?chooseLine(`quirk:${npc.id}`,voice,score,heard,hash(`q:${key}`)):undefined;
  return{...s,story:{...st,seq,pending:{key,npc:npc.id,motif:pick.motif.id,variant:pick.variant,by,day:s.day,...(memory?{memory:memory.id}:{}),...(line?{line:line.id}:{}),...(quirk?{quirk:quirk.id}:{})},log:[...st.log,{day:s.day,npc:npc.id,motif:pick.motif.id,variant:pick.variant,by}].slice(-300)}}}
@@ -108,7 +112,7 @@ function open(s:GameState,npc:NpcProfile,pick:{motif:Motif;variant:number;memory
 export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAppointment(s);if(ap&&!storyOf(s).pending&&!s.work?.active){const npc=castById(ap.npc);if(npc)return open(markAppointment(s,ap.id,'done'),npc,{motif:motifOf('meal'),variant:0},'player')}}const st=storyOf(s);if(st.pending||s.work?.active||s.fishing?.atLake||s.office?.application?.status==='interview'||npcCount(s)>=NPC_DAILY_LIMIT)return s;const c=clockOf(s);if(c.minute+30>END)return s;
  const here=NPCS.filter(n=>n.story&&presentAt(n,s.day,c.minute,c.location)),candidates=[...here];const roll=hash(`start:${s.day}:${c.minute}:${c.location}:${trigger}:${st.seq}`)%100;
  const due=here.find(n=>pickMotif(s,n,'npc','due')?.motif.id==='return');if(due){const p=pickMotif(s,due,'npc','due')!;return open(s,due,p,'npc')}
- if(roll>=40)return s;const order=[...candidates].sort((a,b)=>hash(`${s.day}:${a.id}:${roll}`)-hash(`${s.day}:${b.id}:${roll}`));
+ const near=here.some(n=>nearTier(socialOf(s).relations[n.id]?.score??0));if(roll>=(near?65:40))return s;const order=[...candidates].sort((a,b)=>hash(`${s.day}:${a.id}:${roll}`)-hash(`${s.day}:${b.id}:${roll}`));
  for(const n of order){const p=pickMotif(s,n,'npc',`npc:${trigger}:${c.minute}`);if(p)return open(s,n,p,'npc')}return s}
 
 /** Người chơi chủ động nói chuyện hoặc rủ đi ăn với người đang ở đây. */

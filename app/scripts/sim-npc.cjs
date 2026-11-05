@@ -35,7 +35,7 @@ function run(persona,seed,days){
   const order=open.length?[rnd()<.65?open[0]:open[Math.floor(rnd()*open.length)],...open]:[0];
   for(const i of order){s={...s,money:Math.max(s.money,3_000_000)};const r=D.answerEvent(s,i);if(r.ok){s=r.state;return}}
   const st=structuredClone(s.story);delete st.pending;s={...s,story:st}};
- const record=()=>{const p=D.storyOf(s).pending;if(p)events.push({day:s.day-day0,npc:p.npc,motif:p.motif,by:p.by,memory:!!p.memory,react:reactive(p,socialOf(s).relations[p.npc]?.score??0)})};
+ const record=()=>{const p=D.storyOf(s).pending;if(p)events.push({day:s.day-day0,npc:p.npc,motif:p.motif,by:p.by,memory:!!p.memory,react:reactive(p,socialOf(s).relations[p.npc]?.score??0),hint:!!p.line&&p.line.startsWith('hint:')})};
  const at=(place,minute)=>{s={...s,clock:{...clockOf(s),minute,location:place}}};
  for(let d=0;d<days;d++){
   const vs=visitsOf(persona,s.day,rnd);if(vs.length)played.push(s.day-day0);
@@ -54,7 +54,7 @@ function summarize(runs){const out={};for(const p of PERSONAS){const rs=runs.fil
  let win=0,winOk=0;for(const r of rs){const cb=new Set(r.events.filter(e=>e.memory).map(e=>e.day));const pd=r.played.filter(d=>d>=14);for(let a=0;a+5<=pd.length;a+=5){win++;if(pd.slice(a,a+5).some(d=>cb.has(d)))winOk++}}
  const tiers={};let tn=0;for(const r of rs)for(const[t,c]of Object.entries(r.tiers)){tiers[t]=(tiers[t]||0)+c;tn+=c}
  const top=Object.entries(byNpc).sort((a,b)=>b[1]-a[1])[0];
- out[p]={runs:rs.length,events:ev.length/rs.length,perDay:ev.length/rs.reduce((a,r)=>a+r.days,0),repeat:repN?rep/repN:0,repeatN:rep,react:ev.filter(e=>e.motif!=='greet'||e.memory).length?ev.filter(e=>e.react).length/ev.filter(e=>e.motif!=='greet'||e.memory).length:0,cbWin:win?winOk/win:0,strange:(tiers['Xa lạ']||0)/Math.max(1,tn),tiers:Object.fromEntries(Object.entries(tiers).map(([k,v])=>[k,v/Math.max(1,tn)])),topNpc:top?top[0]:'-',topShare:top?top[1]/ev.length:0,met:Object.keys(byNpc).length,motifs:Object.entries(ev.reduce((m,e)=>(m[e.motif]=(m[e.motif]||0)+1,m),{})).sort((a,b)=>b[1]-a[1]),invalid:rs.filter(r=>!r.valid).length}}return out}
+ out[p]={runs:rs.length,events:ev.length/rs.length,perDay:ev.length/rs.reduce((a,r)=>a+r.days,0),hints:ev.filter(e=>e.hint).length/rs.length,repeat:repN?rep/repN:0,repeatN:rep,react:ev.filter(e=>e.motif!=='greet'||e.memory).length?ev.filter(e=>e.react).length/ev.filter(e=>e.motif!=='greet'||e.memory).length:0,cbWin:win?winOk/win:0,strange:(tiers['Xa lạ']||0)/Math.max(1,tn),tiers:Object.fromEntries(Object.entries(tiers).map(([k,v])=>[k,v/Math.max(1,tn)])),topNpc:top?top[0]:'-',topShare:top?top[1]/ev.length:0,met:Object.keys(byNpc).length,motifs:Object.entries(ev.reduce((m,e)=>(m[e.motif]=(m[e.motif]||0)+1,m),{})).sort((a,b)=>b[1]-a[1]),invalid:rs.filter(r=>!r.valid).length}}return out}
 const pc=x=>(x*100).toFixed(1)+'%';
 function verdict(sum){const v=[];
  for(const p of PERSONAS){const x=sum[p];if(!x)continue;const n=NAME[p],main=p!=='hermit';
@@ -64,6 +64,7 @@ function verdict(sum){const v=[];
   if(main)v.push([`${n}: Xa lạ không quá ${p==='chatty'?'40%':'70%'} dàn NPC`,x.strange<=(p==='chatty'?.4:.7),pc(x.strange)]);
   if(main)v.push([`${n}: Tri kỷ không quá ${p==='chatty'?'60%':'30%'} dàn NPC (bậc cao cần thời gian)`,(x.tiers['Tri kỷ']||0)<=(p==='chatty'?.6:.3),pc(x.tiers['Tri kỷ']||0)]);
   if(main)v.push([`${n}: NPC nhiều nhất không quá 30% sự kiện`,x.topShare<=.3,`${x.topNpc} ${pc(x.topShare)}`]);
+  if(main)v.push([`${n}: có câu gợi ý gần mốc bậc`,x.hints>=1,`${x.hints.toFixed(1)} câu mỗi năm`]);
   v.push([`${n}: save story hợp lệ`,x.invalid===0,`${x.invalid} lần sai`])}
  return v}
 
@@ -75,7 +76,7 @@ function main(){
  console.log('Persona          Sự kiện/ngày  Phản ứng  Callback5  Xa lạ   Lặp14  NPC nhiều nhất   Số NPC gặp');
  for(const p of PERSONAS){const x=sum[p];console.log(`${NAME[p].padEnd(16)} ${x.perDay.toFixed(2).padStart(12)} ${pc(x.react).padStart(9)} ${pc(x.cbWin).padStart(10)} ${pc(x.strange).padStart(7)} ${String(x.repeatN).padStart(6)}  ${(x.topNpc+' '+pc(x.topShare)).padEnd(16)} ${x.met}`)}
  console.log('\nBậc quan hệ cuối năm (11 NPC, không tính Mẹ):');for(const p of PERSONAS)console.log(`  ${NAME[p].padEnd(16)} `+['Xa lạ','Quen biết','Thân','Tri kỷ'].map(t=>`${t} ${pc(sum[p].tiers[t]||0)}`).join(', '));
- console.log('\nMô-típ (số sự kiện mỗi năm, trung bình):');for(const p of PERSONAS)console.log(`  ${NAME[p].padEnd(16)} `+sum[p].motifs.map(([m,c])=>`${m} ${(c/sum[p].runs).toFixed(0)}`).join(', '));
+ console.log('\nCâu gợi ý gần mốc mỗi năm: '+PERSONAS.map(p=>`${NAME[p]} ${sum[p].hints.toFixed(1)}`).join(', '));console.log('\nMô-típ (số sự kiện mỗi năm, trung bình):');for(const p of PERSONAS)console.log(`  ${NAME[p].padEnd(16)} `+sum[p].motifs.map(([m,c])=>`${m} ${(c/sum[p].runs).toFixed(0)}`).join(', '));
  console.log('');let bad=0;for(const[n,ok,val]of verdict(sum)){console.log(`${ok?'ĐẠT ':'CHƯA'} ${n}: ${val}`);if(!ok)bad++}
  process.exitCode=bad?1:0}
 module.exports={run,summarize,verdict,PERSONAS};

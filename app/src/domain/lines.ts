@@ -158,6 +158,17 @@ export const LINES:Line[]=[
  L('mom2','Ở quê mấy bữa nay mưa suốt. Con trên đó ổn không?'),
  L('mom2','Nhà mình mới thu hoạch xong, mẹ đỡ mệt rồi con.'),
  L('mom2','Mấy đứa trong xóm hỏi con hoài, chừng nào con về?'),
+ // Gợi ý gần mốc bậc (không hiện số): câu than nhẹ thay câu chào, 24 đến 29 điểm trước Thân, 54 đến 59 trước Tri kỷ
+ L('hint:ba-tu','Mấy bữa nay {self} cứ nhớ thằng con ở xa. Ngồi một mình thấy cái xóm trọ vắng hẻo.',{min:C-6,max:C-1}),
+ L('hint:ba-tu','Có chuyện {self} giữ trong bụng lâu rồi, chưa biết nói với ai. {You} có rảnh nghe {self} không?',{min:C*2-6,max:C*2-1}),
+ L('hint:dev-an','Dự án sắp tới gấp quá, {self} cứ sợ tụt lại sau mọi người. Giá mà có ai đỡ {self} một tay.',{min:C-6,max:C-1}),
+ L('hint:dev-an','Nói thật là dạo này {self} áp lực lắm, mà chẳng dám kể với ai ở công ty.',{min:C*2-6,max:C*2-1}),
+ L('hint:dev-trang','Cháu nhà {self} lại sốt từ tối qua, {self} chạy đi chạy về mệt quá.',{min:C-6,max:C-1}),
+ L('hint:dev-trang','Có việc {self} muốn hỏi ý kiến {you}, nhưng không tiện nói chỗ đông người.',{min:C*2-6,max:C*2-1}),
+ L('hint:co-hanh','Mấy bữa nay tui coi sổ hoài, đầu mùa vốn hụt làm tui mất ngủ.',{min:C-6,max:C-1}),
+ L('hint:co-hanh','Sắp tới kỳ đóng học phí cho con rồi, lo quá trời. {You} ngồi nói chuyện với tui chút được không?',{min:C*2-6,max:C*2-1}),
+ L('hint:chu-sau','Cái radio của {self} dạo này rè hoài, mà cũng chẳng ai ngồi nghe {self} kể chuyện xưa.',{min:C-6,max:C-1}),
+ L('hint:chu-sau','Tuổi này {self} chỉ mong có người cần tới mình thôi, {you} biết không.',{min:C*2-6,max:C*2-1}),
 ];
 
 const AGO_CAP=(t:string)=>t.charAt(0).toUpperCase()+t.slice(1);

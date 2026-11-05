@@ -12,6 +12,9 @@ export const DAILY_GAIN=5;
 export const tierMult=(score:number)=>score>=60?.2:score>=30?.35:score>=10?.6:1;
 /** Việc nhẹ (chào hỏi, trò chuyện, nhắn hỏi thăm) chỉ đưa quan hệ tới 29 điểm, không qua mốc này; lên Thân và Tri kỷ cần việc có chủ đích. */
 export const LIGHT_CAP=30;
+/** Gợi ý khi gần mốc (không hiện số): 6 điểm cuối trước Thân (30) hoặc Tri kỷ (60). */
+export const HINT_BAND=6;
+export const nearTier=(score:number):'than'|'tri-ky'|null=>score>=30-HINT_BAND&&score<30?'than':score>=60-HINT_BAND&&score<60?'tri-ky':null;
 export const tierFloor=(score:number)=>score>=60?60:score>=30?30:score>=10?10:0;
 export const socialOf=(s:GameState):SocialState=>s.social??{relations:{},chatMinutesDay:0,chatDay:s.day};
 export function validSocial(v:unknown,day:number):v is SocialState{if(!v||typeof v!=='object')return false;const q=v as SocialState;return Number.isInteger(q.chatDay)&&q.chatDay>=0&&q.chatDay<=day&&Number.isInteger(q.chatMinutesDay)&&q.chatMinutesDay>=0&&q.chatMinutesDay<=480&&!!q.relations&&typeof q.relations==='object'&&Object.entries(q.relations).every(([id,r])=>NPCS.some(p=>p.id===id)&&r&&Number.isInteger(r.score)&&r.score>=0&&r.score<=100&&Number.isInteger(r.lastDay)&&r.lastDay>=0&&r.lastDay<=day&&Number.isInteger(r.minutes)&&r.minutes>=0&&r.minutes<=1320&&(r.carry===undefined||(typeof r.carry==='number'&&r.carry>=0&&r.carry<1)))&&(q.gain===undefined||(Number.isInteger(q.gain.day)&&q.gain.day<=day&&!!q.gain.by&&Object.entries(q.gain.by).every(([id,v])=>NPCS.some(p=>p.id===id)&&Number.isInteger(v)&&v>=0&&v<=DAILY_GAIN)))&&(q.peak===undefined||Object.entries(q.peak).every(([id,v])=>NPCS.some(p=>p.id===id)&&Number.isInteger(v)&&v>=0&&v<=100))}
