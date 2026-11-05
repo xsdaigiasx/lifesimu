@@ -21,11 +21,13 @@ import { sideOf, daysLeft, SIDE, hasProDesk, repOf } from '../domain/side';
 import type { FormEvent, ReactNode } from 'react';
 import type { DailyAction, GameResult, GameState, PhoneState, PlayerProfile } from '../domain/types';
 import { phoneData as data } from '../domain/phone-data';
+import Journal from './Journal';
 import { fullnessOf, vitalWarnings } from '../domain/vitals';
 
 type Action = 'report' | 'day' | 'city' | 'room' | 'save';
-type Page = 'bank' | 'baucua' | 'home' | 'health' | 'contacts' | 'shop' | 'calendar' | 'alarms' | 'clock' | 'news' | 'finance' | 'work' | 'notes' | 'save' | 'leisure' | 'calls' | 'messages' | 'settings' | 'weather' | 'map' | 'room';
+type Page = 'bank' | 'baucua' | 'home' | 'health' | 'contacts' | 'shop' | 'calendar' | 'alarms' | 'clock' | 'news' | 'finance' | 'work' | 'notes' | 'save' | 'leisure' | 'calls' | 'messages' | 'settings' | 'weather' | 'map' | 'room' | 'journal';
 export interface PhoneProps {
+  onJournalNpc?: (id: string) => void;
   social?: SocialHandlers;
   bauCuaShaking: boolean;
   onPlayBauCua: (bets: Bets) => Promise<RoundResult>;
@@ -44,6 +46,7 @@ const APPS: ReadonlyArray<{ page: Page; icon: string; label: string; tone: strin
   { page: 'calendar', icon: 'calendar', label: 'Lịch', tone: 'calendar-app' },
   { page: 'news', icon: 'news', label: 'Đọc báo', tone: 'news-app' },
   { page: 'work', icon: 'briefcase', label: 'Công việc', tone: 'work-app' },
+  { page: 'journal', icon: 'note', label: 'Nhật ký', tone: 'journal-app' },
   { page: 'notes', icon: 'note', label: 'Ghi chú', tone: 'notes-app' },
   { page: 'bank', icon: 'bank', label: 'Ngân hàng', tone: 'bank-app' },
   { page: 'save', icon: 'save', label: 'Lưu game', tone: 'save-app' },
@@ -53,7 +56,7 @@ const DOCK: ReadonlyArray<{ page: Page; icon: string; label: string }> = [
   { page: 'calls', icon: 'call', label: 'Gọi điện' }, { page: 'messages', icon: 'message', label: 'Tin nhắn' },
   { page: 'finance', icon: 'chart', label: 'Tài chính' }, { page: 'settings', icon: 'settings', label: 'Cài đặt' },
 ];
-const TITLES: Partial<Record<Page, string>> = { baucua: 'Bầu cua tôm cá', home: 'Điện thoại', weather: 'Thời tiết', settings: 'Cài đặt', clock: 'Đồng hồ', alarms: 'Báo thức', finance: 'Tài chính', bank: 'Ngân hàng', messages: 'Tin nhắn', calls: 'Gọi điện', map: 'Bản đồ', room: 'Nhà của tôi' };
+const TITLES: Partial<Record<Page, string>> = { journal: 'Nhật ký', baucua: 'Bầu cua tôm cá', home: 'Điện thoại', weather: 'Thời tiết', settings: 'Cài đặt', clock: 'Đồng hồ', alarms: 'Báo thức', finance: 'Tài chính', bank: 'Ngân hàng', messages: 'Tin nhắn', calls: 'Gọi điện', map: 'Bản đồ', room: 'Nhà của tôi' };
 const dateAt = (day: number): Date => new Date(Date.UTC(2026, 10, 2 + day));
 const dateText = (day: number): string => new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: '2-digit', month: 'long', timeZone: 'UTC' }).format(dateAt(day));
 const shortDate = (day: number): string => new Intl.DateTimeFormat('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }).format(dateAt(day));
@@ -68,7 +71,7 @@ function Clock({minute=480}:{minute?:number}) {
   })}<path d="M50 50V27" transform={`rotate(${minute/2} 50 50)`} stroke="#20332c" strokeWidth="5" strokeLinecap="round" /><path d="M50 50V17" transform={`rotate(${minute%60*6} 50 50)`} stroke="#20332c" strokeWidth="3" strokeLinecap="round" /><circle cx="50" cy="50" r="3" fill="#d6a34d" /></svg>;
 }
 
-export default function Phone({ state, profile, onAction, onResetStart, onPlayBauCua, bauCuaShaking, onShop,onLifeAction,social }: PhoneProps) {
+export default function Phone({ onJournalNpc, state, profile, onAction, onResetStart, onPlayBauCua, bauCuaShaking, onShop,onLifeAction,social }: PhoneProps) {
   const [chatWith, setChatWith] = useState<string|undefined>(undefined);
   const [workNote, setWorkNote] = useState('');
   const [phone, setPhone] = useState<PhoneState>(() => { try { return data.parse(localStorage.getItem(data.KEY)) ?? data.initial(); } catch { return data.initial(); } });
@@ -151,6 +154,7 @@ export default function Phone({ state, profile, onAction, onResetStart, onPlayBa
     case 'baucua': body = <BauCua shaking={bauCuaShaking} state={state} onPlay={onPlayBauCua}/>; break;
     case 'leisure': body = <>{intro('Thời gian cho bản thân', 'Sau những giờ làm việc, hãy thở một chút.')}<button className="phone-leisure-card bc-launch" onClick={()=>navigate('baucua')}><span className="leisure-art">🦀</span><span><small>TRÒ CHƠI DÂN GIAN</small><h3>Bầu cua tôm cá</h3><p>Ba xúc xắc</p><b>Vào bàn chơi ↗</b></span></button><button className="phone-leisure-card" onClick={() => onAction('day', 'rest')}><span className="leisure-art">☕</span><span><small>CÓ THỂ CHỌN</small><h3>Nghỉ ngơi trong ngày</h3><p>Nghỉ 1 giờ Năng lượng +15 Stress −10</p><b>Nghỉ 1 giờ ↗</b></span></button></>; break;
     case 'contacts': body = <Contacts state={state} onMessage={id=>{setChatWith(id);setPage('messages');if(social)social.read(id)}}/>; break;
+    case 'journal': body = <Journal state={state} onNpc={id => onJournalNpc?.(id)} />; break;
     case 'notes': body = <>{intro('Ghi chú', 'Dành một chỗ cho những dự định.')}<form className="phone-form" onSubmit={saveNotes}><label htmlFor="phoneNotes">Ghi chú cá nhân</label><textarea id="phoneNotes" value={notesDraft} onChange={event => setNotesDraft(event.target.value)} maxLength={4000} rows={12} placeholder="Mục tiêu mua nhà, món đồ muốn mua, điều cần học…" /><button type="submit" className="primary wide">Lưu ghi chú</button></form></>; break;
     case 'shop': body = <FurnitureShop state={state} onShop={onShop} onLife={onLifeAction}/>; break;
     case 'clock': body = <>{intro('Đồng hồ trong game', 'Buổi sáng, một khởi đầu mới.')}<div className="clock-page"><Clock minute={clockOf(state).minute}/><h2>{clockText(state)}</h2><p>{dateText(state.day)}</p></div><button className="primary wide" onClick={() => navigate('alarms')}>Mở báo thức</button></>; break;

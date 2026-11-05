@@ -2,7 +2,7 @@
 
 Cập nhật 05/11/2026, app 0.75.3, Kế hoạch bản rev 65. Sửa bảng này mỗi khi gộp PR của một ticket.
 
-Xong 51, một phần 10, còn lại chưa làm, bỏ hoặc hoãn. Cột Tệp chỉ tệp trong `docs/plan/` có bảng ticket đó.
+Xong 52, một phần 9, còn lại chưa làm, bỏ hoặc hoãn. Cột Tệp chỉ tệp trong `docs/plan/` có bảng ticket đó.
 
 ## Thứ tự ưu tiên (đề xuất 05/11)
 
@@ -101,7 +101,7 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 | T52 | Nhiều bản đồ: bản đồ phụ, trạm bus, thời gian chuyến | Một phần: có trạm bus và hồ, chưa nhiều bản đồ | E-pham-vi-day-du |
 | T53 | Nhà ở nhiều cấp: thuê, mua, hợp đồng, thế chấp | Một phần: nhà phố, biệt thự thuê/mua; chưa hợp đồng, thế chấp | E-pham-vi-day-du |
 | T54 | Điện nước theo thiết bị, hoá đơn, giá theo loại nhà | Xong | E-pham-vi-day-du |
-| T55 | Bếp và tủ lạnh nối với hạn dùng và nấu ăn | Phần lớn qua T21 (tủ lạnh, hạn dùng) | E-pham-vi-day-du |
+| T55 | Bếp và tủ lạnh nối với hạn dùng và nấu ăn | Xong (#294, 0.76.0) | E-pham-vi-day-du |
 | T56 | Máy tính đa dụng: làm việc, học, giải trí, cấu hình | Xong | E-pham-vi-day-du |
 | T57 | Tin tức và thị trường chứng khoán, chống khai thác | Chưa làm | E-pham-vi-day-du |
 | T58 | Bất động sản: giá theo khu vực, thuê hoặc mua đầu tư | Chưa làm | E-pham-vi-day-du |

@@ -1,6 +1,6 @@
 import type {GameState,GameResult} from './types';
-import {PRODUCTS,lifeOf,BAG,bagItems,type ProductId} from './life';
-import {HOME_ITEMS,HOME_TIERS,homeOf,homePrice,homeName,planHome,uidOf,type HomeId,type HomeTier} from './home';
+import {PRODUCTS,lifeOf,BAG,bagItems,thawAll,type ProductId} from './life';
+import {FRIDGE,HOME_ITEMS,HOME_TIERS,homeOf,homePrice,homeName,planHome,uidOf,type HomeId,type HomeTier} from './home';
 import {post} from './money';
 import {clockOf,spendTime} from './time';
 import {residenceOf} from './housing';
@@ -97,7 +97,6 @@ export function saleOf(s:GameState,item:Sale):{ok:true;value:number;name:string}
  }
  const it=homeOf(s).items.find(i=>uidOf(i)===item.uid);if(!it)return{ok:false,error:'Chưa sở hữu món này.'};
  if(it.placed)return{ok:false,error:'Hãy cất món này vào kho trước.'};
- if(it.id==='fridge')return{ok:false,error:'Tủ lạnh không bán lại.'};
  const tier=it.tier??'basic';
  return{ok:true,value:resaleOf(homePrice(it.id,tier)),name:homeName(it.id,tier)};
 }
@@ -109,7 +108,7 @@ export function sellBack(s:GameState,item:Sale):GameResult{
  const t=spendTime(s,ORDER.mallMinutes);if(!t.ok)return t;
  const n=structuredClone(t.state);
  if(item.kind==='product')n.life={...structuredClone(lifeOf(n)),owned:lifeOf(n).owned.filter(x=>x!==item.id)};
- else{const sold=homeOf(n).items.find(i=>uidOf(i)===item.uid);n.home={grid:homeOf(n).grid??8,items:homeOf(n).items.filter(i=>uidOf(i)!==item.uid)} as GameState['home'];if(sold?.id==='tv')n.life={...structuredClone(lifeOf(n)),owned:lifeOf(n).owned.filter(x=>x!=='tv')}}
+ else{const sold=homeOf(n).items.find(i=>uidOf(i)===item.uid);n.home={grid:homeOf(n).grid??8,items:homeOf(n).items.filter(i=>uidOf(i)!==item.uid)} as GameState['home'];if(sold?.id==='tv')n.life={...structuredClone(lifeOf(n)),owned:lifeOf(n).owned.filter(x=>x!=='tv')};if(sold?.id==='fridge'&&!homeOf(n).items.some(i=>i.id==='fridge')){const l=structuredClone(lifeOf(n));thawAll(l,n.day,FRIDGE[sold.tier??'basic'].factor);n.life=l}}
  if(post(n,{id:`sell:${n.day}:${n.txSeq??0}`,name:'Bán lại '+q.name.toLocaleLowerCase('vi'),amount:q.value})!=='ok')return bad('Không bán được lúc này.');
  return{ok:true,state:n};
 }
