@@ -26,7 +26,7 @@ export const mainLevel=(s:GameState)=>{const k=skillsOf(s);return Math.max(k.pro
 export const ownCash=(s:GameState)=>s.money-owedOf(bankOf(s));
 export function checksOf(s:GameState):Check[]{
  const k=skillsOf(s),mk=(id:Check['id'],label:string,have:number,need:number):Check=>({id,label,have,need,ok:have>=need});
- return[mk('management','Quản lý',k.management.level,COMPANY.mgmt),mk('main','Kỹ năng chính',mainLevel(s),COMPANY.main),mk('months','Tháng làm việc',monthsWorked(s),COMPANY.months),mk('rep','Uy tín tay trái',repOf(s),COMPANY.rep),mk('cash','Tiền mặt',s.money,COMPANY.fund),mk('own','Tiền tự có',ownCash(s),COMPANY.ownMin)];
+ return[mk('management','Cấp Quản lý',k.management.level,COMPANY.mgmt),mk('main','Cấp kỹ năng chính',mainLevel(s),COMPANY.main),mk('months','Tháng đã đi làm',monthsWorked(s),COMPANY.months),mk('rep','Uy tín làm thêm',repOf(s),COMPANY.rep),mk('cash','Tiền mặt góp vào quỹ',s.money,COMPANY.fund),mk('own','Tiền tự có (không tính vay)',ownCash(s),COMPANY.ownMin)];
 }
 export const canFound=(s:GameState)=>!s.company&&officeOf(s).role!=='owner'&&checksOf(s).every(c=>c.ok);
 export type CompanyAction={kind:'found';name:string;industry:Industry}|{kind:'invest';amount:number};
