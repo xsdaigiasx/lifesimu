@@ -63,4 +63,11 @@ assert(lateCount('open')<lateCount('closed'),'thẳng thắn ít báo lỗi mu�
 // hợp lệ
 assert(!engine.valid(base(60,[emp('a',{warns:9})])));assert(!engine.valid(base(60,[emp('a',{train:{skill:'zzz',until:3}})])));
 assert(!engine.valid(base(60,[emp('a')],5e7,{policy:{candor:'x'}})));assert(engine.valid(base(60,[emp('a')],5e7,{policy:{overtime:true,candor:'open',last:59}})));
+// góp vốn từ tiền cá nhân (T50)
+const C=require('../.test-build/domain/company'),O=require('../.test-build/domain/office');
+const own=base(60,[emp('a')],1_000_000);own.office={...O.initialOffice(),role:'owner',size:'small',leaseUntil:90};own.money=20_000_000;
+let iv=C.investFund(own,10_000_000);assert(iv.ok,iv.error);assert.equal(iv.state.company.fund,11_000_000);assert.equal(iv.state.money,10_000_000);assert(engine.valid(iv.state));
+assert.equal(iv.state.company.finance.log[0].amount,10_000_000);
+assert.equal(C.investFund({...own,money:1_000_000},5_000_000).ok,false,'thiếu tiền cá nhân');assert.equal(C.investFund(own,7_000_000).ok,false,'số tiền không hợp lệ');
+assert.equal(C.investFund({...own,office:{...own.office,role:'employee',employerId:'sen-code'}},5_000_000).ok,false);
 console.log('manage.test ok');

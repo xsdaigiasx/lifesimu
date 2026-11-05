@@ -64,7 +64,7 @@ export default function Office({state,onAction,onWork,onChat,onSkills,onLayout,o
  else if(page==='projects')content=<Projects state={state} onAction={onAction} onBack={back}/>;
  else if(page==='hr'&&hrEmp)content=<HrScreen state={state} emp={hrEmp} onAction={onAction} onBack={back}/>;
  else if(page==='policy')content=<Policy state={state} onAction={onAction} onBack={back}/>;
- else if(page==='finance')content=<Finance state={state} onBack={back}/>;
+ else if(page==='finance')content=<Finance state={state} onAction={act} onBack={back}/>;
  else if(page==='work')content=<WorkPanel state={state} onAction={onWork} onBack={back} onSkills={onSkills}/>;
  else if(page==='layout')content=<OfficeEditor state={state} onSave={onLayout} onBack={back}/>;
  else if(page==='equipment')content=<GameScreen title="Thiết bị" onBack={back}><div className="game-equipment-row"><span className="game-row-icon"><Icon name="settings"/></span><div><strong>{owner?'Dàn máy tính':'Máy tính cá nhân'}</strong><small>Cấp {level}/3</small></div><button disabled={!editable||level===3||state.money<upgradePrice(state,'computer')} onClick={()=>setConfirm({kind:'upgrade',item:'computer'})}>{level===3?'Tối đa':money(upgradePrice(state,'computer'))}</button></div><div className="game-equipment-row"><span className="game-row-icon"><Icon name="note"/></span><div><strong>Máy in</strong><small>{owner?['Chưa lắp','Cơ bản','Đa năng'][o.printer]:'Thiết bị công ty'}</small></div>{owner&&<button disabled={!editable||o.printer===2||state.money<upgradePrice(state,'printer')} onClick={()=>setConfirm({kind:'upgrade',item:'printer'})}>{o.printer===2?'Tối đa':money(upgradePrice(state,'printer'))}</button>}</div>{owner&&<DataRow label="Số máy tính" value={SIZES[suite].seats}/>}</GameScreen>;
