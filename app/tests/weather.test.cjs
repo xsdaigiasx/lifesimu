@@ -34,3 +34,14 @@ const ok1 = act(clear), ok2 = act(rain);
 assert.ok(ok1.ok && ok2.ok);
 assert.ok(ok2.state.mood - park(rain).mood < ok1.state.mood - park(clear).mood, 'mưa công viên kém hiệu quả');
 console.log('weather ok');
+// ghi chú lý do chậm: giờ cao điểm hoặc thời tiết
+{const {clockOf}=require('../.test-build/domain/time');
+ let sunny=0,rainy=0;for(let d=1;d<400&&(!sunny||!rainy);d++){const w=weatherOf(d);if(w==='sunny'&&!sunny)sunny=d;if(w==='rain'&&!rainy)rainy=d}
+ const at=(day,minute)=>{const s=engine.initial();return{...s,day,clock:{...clockOf(s),minute,location:'home'}}};
+ const bus=(s)=>travelOptions(s,'home','office').find(o=>o.mode==='bus');
+ assert.equal(bus(at(sunny,480)).note,'Giờ cao điểm');
+ assert.equal(bus(at(sunny,600)).note,undefined,'giờ vắng, trời đẹp thì không ghi chú');
+ assert.equal(bus(at(rainy,600)).note,'Trời mưa');
+ assert.equal(bus(at(rainy,480)).note,'Giờ cao điểm, trời mưa');
+ assert.equal(travelOptions(at(sunny,480),'home','office').find(o=>o.mode==='walk').note,undefined,'đi bộ không bị cao điểm');
+ console.log('travel note ok');}
