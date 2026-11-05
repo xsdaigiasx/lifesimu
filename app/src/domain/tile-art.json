@@ -1,1 +1,14 @@
-[]
+[
+  "market-veg",
+  "market-meat",
+  "market-dry",
+  "shop-clothing",
+  "shop-electronics",
+  "shop-transport",
+  "shop-bag",
+  "shop-furniture",
+  "kitchen-recipes",
+  "kitchen-improv",
+  "kitchen-pantry",
+  "kitchen-meals"
+]

@@ -1,0 +1,90 @@
+{
+  "market-veg": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A low Vietnamese fresh-produce stall, a shallow honey-oak display with three compact woven trays of leafy bok choy, orange carrots and tomatoes. Greens dominate. One coherent shallow horizontal display, no canopy or vendor. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/ingredients/vegetable.webp"
+    ]
+  },
+  "shop-bag": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: One recognizable rounded sage canvas daypack, cream padded straps, small front zip pocket, muted brass zipper pulls. Three-quarter front, upright, centered, no surrounding objects. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/products/backpack.webp"
+    ]
+  },
+  "market-meat": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A low clean Vietnamese market counter with two adjacent trays. Left tray contains neatly arranged pink pork belly cuts with cream fat. Right tray contains two whole silver freshwater fish on a banana leaf. Both are obvious and approximately equal in visual weight. Clean food illustration, no blood or vendor. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/ingredients/pork.webp",
+      "app/public/assets/ingredients/fish.webp"
+    ]
+  },
+  "shop-furniture": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A single compact cozy isometric cutaway room vignette with exactly three clearly visible main pieces: a sage bed with cream linens on the left, a honey-oak wardrobe at the back and a small honey-oak table on the right. Two low cream back wall panels and a tiny wood floor footprint only. No kitchen, bathroom, people, icons or decorations. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only.  No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp"
+    ]
+  },
+  "kitchen-recipes": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A single open cream-paper Vietnamese recipe notebook with sage cover, blank ivory margins and a tiny hand-drawn herb sprig and simple bowl sketches on the paper. Slight overhead three-quarter view. No letters, numbers, pseudo-text or other items. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/meals/porkRice.webp"
+    ]
+  },
+  "market-dry": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A small low Vietnamese grocery stall shelf with a wide open sack of ivory rice at left, a neat tray of eggs at center and two blank kraft packages of dry groceries at right. One shallow two-level honey-oak shelf. No signage. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/ingredients/rice.webp",
+      "app/public/assets/ingredients/egg.webp"
+    ]
+  },
+  "kitchen-improv": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A small sage enamel cooking pot with a softly steaming soup beside a low charcoal frying pan tossing simple greens. Two objects side-by-side in a cohesive compact composition, visibly cooking. Keep steam subtle and close; no stove, cook, hands or scenery. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/ingredients/vegetable.webp",
+      "app/public/assets/meals/porkRice.webp"
+    ]
+  },
+  "shop-clothing": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A low wide freestanding honey-oak clothes rack with three large recognizable neatly hanging garments: a cream shirt, sage jacket and muted terracotta dress. Simple compact rail, no mannequins, no other goods. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only.  No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp"
+    ]
+  },
+  "kitchen-pantry": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A small two-tier honey-oak pantry rack of ingredient jars and a woven basket of eggs and leafy greens to the side. Ingredients are distinct, muted colors, jars unlabelled. Compact household kitchen storage, not a commercial grocery stall. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/ingredients/egg.webp",
+      "app/public/assets/ingredients/vegetable.webp"
+    ]
+  },
+  "shop-electronics": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A compact side-by-side electronics display with an open graphite laptop on the left, a pair of sage-gray over-ear headphones in the lower center and a flat-screen TV with a small stand on the right. All three separated and easy to identify. Unpowered dark screens, no interface or decorations. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/products/tv.webp",
+      "app/public/assets/products/headphones.webp"
+    ]
+  },
+  "kitchen-meals": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: One cream ceramic plate of cooked Vietnamese food: steamed rice, golden sautéed sliced pork and a side of cooked leafy greens, styled like the reference. Oblique top view, centered. No tablecloth, table, garnish scattered around, extra plates or utensils. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/meals/porkRice.webp"
+    ]
+  },
+  "shop-transport": {
+    "prompt": "A small category tile illustration for the Vietnamese cozy life simulation Một đời để sống. Subject: A simple sage city bicycle with two clearly separate spoked wheels to the left and a cream Vietnamese step-through motor scooter with two wheels and a dark saddle to the right, side-by-side, same scale, viewed at a slightly angled side view. Neither hides the other. No road, rider, helmet or license plate. Illustration only: transparent alpha outside the entire subject, entire complete silhouette. Center it in a wide banner composition with generous empty margins on all sides. Keep main identifying objects in one compact central group; do not spread to the left or right edges. It must read when reduced to a roughly 150-pixel-wide mobile card. Style: softly shaded, semi-realistic illustrated objects with delicate same-tone contours, restrained warm cream/honey oak/sage palette, material texture and gentle upper-left lighting. Image 1 shows overall game materials only. Other reference images show the existing in-game ingredient, meal or product look; use as stylistic and identity references. No lettering, text, numbers, symbols, logos, watermarks, stickers, borders, UI, background or cast shadow. Only the described objects.",
+    "references": [
+      "assets/style-reference/room-reference.webp",
+      "app/public/assets/products/bicycle.webp",
+      "app/public/assets/products/motorbike.webp"
+    ]
+  }
+}

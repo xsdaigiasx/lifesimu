@@ -1,0 +1,210 @@
+{
+  "issue": 266,
+  "lot": 2,
+  "tiles": [
+    {
+      "id": "market-veg",
+      "file": "/assets/tiles/market-veg.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 97,
+        "top": 20,
+        "width": 166,
+        "height": 120
+      },
+      "bytes": 28736,
+      "sha256": "ddb81847ba0efb16c8bd4131d6879588ff17f0ce59a5353bcbc52d5ec6291cae",
+      "source_sha256": "0ac5d1f98ce9acd1875a7fcc11515efa6bd8c6463c354696f14e8757a08c7185"
+    },
+    {
+      "id": "market-meat",
+      "file": "/assets/tiles/market-meat.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 58,
+        "top": 28,
+        "width": 244,
+        "height": 103
+      },
+      "bytes": 37074,
+      "sha256": "8dcd2493fc2a2df1892ec847e651071f948104a9365391f40c3accdba9bd3fa8",
+      "source_sha256": "0261e5476ce13cfe2cc3e2f45070be7a889dfb806be120b8e2bff368c63ac669"
+    },
+    {
+      "id": "market-dry",
+      "file": "/assets/tiles/market-dry.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 65,
+        "top": 20,
+        "width": 229,
+        "height": 120
+      },
+      "bytes": 34654,
+      "sha256": "61860de657cebe4e3be11d9f8e14e37ac85990b022e21dc04d3671ce06443019",
+      "source_sha256": "84ed2317c3faf453767f1b99429c3de27bb1b22335d35e62494330e1eb1a8cfd"
+    },
+    {
+      "id": "shop-clothing",
+      "file": "/assets/tiles/shop-clothing.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 96,
+        "top": 20,
+        "width": 167,
+        "height": 120
+      },
+      "bytes": 26902,
+      "sha256": "2c1551deaebfcd6165409922d70789815b7c17577d85d81e47706a45cc086cf3",
+      "source_sha256": "718d7817fdbf2f5960c6b451ed6cda3825bb995ed085ce860114509a740d7bd8"
+    },
+    {
+      "id": "shop-electronics",
+      "file": "/assets/tiles/shop-electronics.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 73,
+        "top": 20,
+        "width": 214,
+        "height": 120
+      },
+      "bytes": 21890,
+      "sha256": "3ce2633535a3dfb479c3563e12deb1c5d364053817908a84945ccf41c86e791c",
+      "source_sha256": "5577b0f80f6a9aed6294e49135357d693338cb80ceb420feee0fd48d9c4060ee"
+    },
+    {
+      "id": "shop-transport",
+      "file": "/assets/tiles/shop-transport.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 58,
+        "top": 23,
+        "width": 244,
+        "height": 113
+      },
+      "bytes": 40766,
+      "sha256": "063733e4970f7f4baffcd404568a486e4b0d7a0063ffe0a5ff96495846a78e28",
+      "source_sha256": "ed896b69514c1a7f3624b2012d489ba90200097c46456fbde0ec466050ee7808"
+    },
+    {
+      "id": "shop-bag",
+      "file": "/assets/tiles/shop-bag.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 130,
+        "top": 20,
+        "width": 99,
+        "height": 120
+      },
+      "bytes": 16330,
+      "sha256": "71df00a6c89f8921dcab95c4013e570e582c9f1396bab8b66e0612297c69f043",
+      "source_sha256": "f217597a8b69879419b08b9d90525ae6afc7484f0350afc24e2e189e4e39b247"
+    },
+    {
+      "id": "shop-furniture",
+      "file": "/assets/tiles/shop-furniture.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 114,
+        "top": 20,
+        "width": 131,
+        "height": 120
+      },
+      "bytes": 19060,
+      "sha256": "30c959f8464f14e1f49b23f7150e259e0f9b9bca6b9339574c9f7c1951beef80",
+      "source_sha256": "88541f3548c4d9bdbc4bb56079ba7712fd88da83a0ee18e9b0c65f938530355e"
+    },
+    {
+      "id": "kitchen-recipes",
+      "file": "/assets/tiles/kitchen-recipes.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 90,
+        "top": 20,
+        "width": 179,
+        "height": 120
+      },
+      "bytes": 23900,
+      "sha256": "c62a838fc1c8cd1e659cbc6eae5a5e690fe22ccf0a3c3c947d763d15dd42a488",
+      "source_sha256": "3da818f8b715e78b6f16cb7a3c377c1cb6fbc489f5a24a9040db01e0aa6e3265"
+    },
+    {
+      "id": "kitchen-improv",
+      "file": "/assets/tiles/kitchen-improv.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 106,
+        "top": 20,
+        "width": 147,
+        "height": 120
+      },
+      "bytes": 29186,
+      "sha256": "92d20c182740f72e742ce4ce81cefee238671b98c3e3e3e2ea9c4f7f68f0a16d",
+      "source_sha256": "ebc019e239f8598853cea23fb5c96d3045eb3da999f6709f30c7cdacc8b69e94"
+    },
+    {
+      "id": "kitchen-pantry",
+      "file": "/assets/tiles/kitchen-pantry.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 98,
+        "top": 20,
+        "width": 164,
+        "height": 120
+      },
+      "bytes": 30742,
+      "sha256": "4289a8e5ed49d0271c5983519ca84131c2a2861fa13a72a29b8a2522dfe050ea",
+      "source_sha256": "fcce4bebecb3b03f715d9c7030abb35ae0ff55302cb7f64422da3c8d22f6905c"
+    },
+    {
+      "id": "kitchen-meals",
+      "file": "/assets/tiles/kitchen-meals.webp",
+      "frame_px": [
+        360,
+        160
+      ],
+      "alpha_bounds_px": {
+        "left": 103,
+        "top": 20,
+        "width": 154,
+        "height": 120
+      },
+      "bytes": 31126,
+      "sha256": "649b155a2aff25e0e0baf76d0eba172da1665e983b8357c17a7fcf6ce3d01117",
+      "source_sha256": "5ef2022b13fa3444465e73191c692100606249cda545570e07ad436171690368"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "result": "PASS",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "checks": [
+    {
+      "screen": "market",
+      "tiles": 3,
+      "allArtInsideCrop": true,
+      "files": [
+        "/assets/tiles/market-veg.webp",
+        "/assets/tiles/market-meat.webp",
+        "/assets/tiles/market-dry.webp"
+      ]
+    },
+    {
+      "screen": "mall",
+      "tiles": 5,
+      "allArtInsideCrop": true,
+      "files": [
+        "/assets/tiles/shop-clothing.webp",
+        "/assets/tiles/shop-electronics.webp",
+        "/assets/tiles/shop-transport.webp",
+        "/assets/tiles/shop-bag.webp",
+        "/assets/tiles/shop-furniture.webp"
+      ]
+    },
+    {
+      "screen": "phone",
+      "tiles": 4,
+      "allArtInsideCrop": true,
+      "files": [
+        "/assets/tiles/shop-furniture.webp",
+        "/assets/tiles/shop-electronics.webp",
+        "/assets/tiles/shop-clothing.webp",
+        "/assets/tiles/shop-transport.webp"
+      ]
+    },
+    {
+      "screen": "kitchen",
+      "tiles": 4,
+      "allArtInsideCrop": true,
+      "files": [
+        "/assets/tiles/kitchen-recipes.webp",
+        "/assets/tiles/kitchen-improv.webp",
+        "/assets/tiles/kitchen-pantry.webp",
+        "/assets/tiles/kitchen-meals.webp"
+      ]
+    }
+  ]
+}
