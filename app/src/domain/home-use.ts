@@ -1,11 +1,11 @@
 /** T28: điểm dùng của đồ trong phòng trọ: Nghỉ ở giường, Làm thêm online ở bàn laptop. */
 import type {GameState,GameResult} from './types';
-import {placedAt,BED_ENERGY} from './home';
-import {atResidence} from './housing';
+import {placedAt,livesInTro,homeOf,BED_ENERGY} from './home';
+import {atResidence,layoutOf} from './housing';
 import {placedDevices} from './utility';
 import {machineMult,PLAY} from './computer';
 import {lifeOf} from './life';
-import {spendTime,clockOf} from './time';
+import {spendTime} from './time';
 import {post} from './money';
 import {addWorkXp} from './study';
 import {defaultSkills,type SkillId} from './skill-xp';
@@ -17,18 +17,21 @@ const GIG_SKILLS:SkillId[]=['programming','graphics','logic'];
 
 export function gigSkill(s:GameState):SkillId{const k={...defaultSkills(),...s.skills};return GIG_SKILLS.reduce((a,b)=>k[b].level>k[a].level?b:a)}
 export function gigPay(s:GameState){const k={...defaultSkills(),...s.skills};return GIG.base+GIG.perLevel*k[gigSkill(s)].level}
-export const napEnergy=(s:GameState)=>{const b=placedAt(s,'bed');return NAP.energy+(b?BED_ENERGY[b.tier??'basic']/2:0)};
+/** Phòng trọ: đồ phải đặt trong phòng; nhà phố và biệt thự: đồ phải có trong bố cục các tầng (T76). */
+export function hasSpot(s:GameState,id:'bed'|'desk'){if(livesInTro(s))return !!placedAt(s,id);const h=s.housing!.house;return([1,2] as const).some(f=>layoutOf(s,h,f).some(i=>i.id===id))}
+const bedTier=(s:GameState)=>homeOf(s).items.find(i=>i.id==='bed')?.tier??'basic';
+export const napEnergy=(s:GameState)=>NAP.energy+(hasSpot(s,'bed')?BED_ENERGY[bedTier(s)]/2:0);
 
-function atHome(s:GameState){return clockOf(s).location==='home'}
+const atHome=atResidence;
 
 export function napAtHome(s:GameState):GameResult{
- const bed=placedAt(s,'bed');if(!bed||!atHome(s))return{ok:false,error:'Cần giường trong phòng.'};
+ if(!hasSpot(s,'bed')||!atHome(s))return{ok:false,error:'Cần giường trong nhà.'};
  const l=lifeOf(s);if(l.daily.nap===s.day)return{ok:false,error:'Hôm nay đã nghỉ trưa rồi.'};
  const t=spendTime(s,NAP.minutes);if(!t.ok)return t;const n=structuredClone(t.state),v=structuredClone(lifeOf(s));
  v.daily.nap=s.day;n.life=v;n.energy=clamp(n.energy+napEnergy(s));n.stress=clamp(n.stress-NAP.stress);return{ok:true,state:n}}
 
 export function onlineGig(s:GameState):GameResult{
- const desk=placedAt(s,'desk');if(!desk||!atHome(s))return{ok:false,error:'Cần bàn laptop trong phòng.'};
+ if(!hasSpot(s,'desk')||!atHome(s))return{ok:false,error:'Cần bàn làm việc trong nhà.'};
  const l=lifeOf(s);if(l.daily.gig===s.day)return{ok:false,error:'Hôm nay đã làm thêm rồi.'};
  if(s.energy<GIG.energy+5)return{ok:false,error:'Mệt quá, nghỉ đã.'};
  const pay=Math.round(gigPay(s)*machineMult(s)/1000)*1000,skill=gigSkill(s);
@@ -39,7 +42,7 @@ export function onlineGig(s:GameState):GameResult{
 
 /** T56: giải trí trên máy tính (xem video, chơi game nhẹ), một lần mỗi ngày. */
 export function playAtHome(s:GameState):GameResult{
- const desk=placedAt(s,'desk');if(!desk||!atHome(s))return{ok:false,error:'Cần bàn laptop trong phòng.'};
+ if(!hasSpot(s,'desk')||!atHome(s))return{ok:false,error:'Cần bàn làm việc trong nhà.'};
  const l=lifeOf(s);if(l.daily.play===s.day)return{ok:false,error:'Hôm nay đã giải trí rồi.'};
  const t=spendTime(s,PLAY.minutes);if(!t.ok)return t;const n=structuredClone(t.state),v=structuredClone(lifeOf(s));
  v.daily.play=s.day;n.life=v;n.energy=clamp(n.energy-PLAY.energy);n.mood=clamp(n.mood+PLAY.mood);n.stress=clamp(n.stress-PLAY.stress);return{ok:true,state:n}}
