@@ -48,7 +48,7 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 ## Bảng trạng thái
 
 
-> Rà xung đột, gộp ticket 06/11 (Claude, chờ chủ dự án xem): T37 vào T39; T63 vào H7c; T64 thay bằng H3, H7a, H7b; T86 chia vào H7c, H7d; T87 vào T88; T62 với T79; T80 xung đột quyết định online đối đầu nên bỏ, dồn sang T82; T81 là bảng xếp hạng tài sản; T57, T58 và phần báo T61 làm chung; T73 với T74. Đợt sửa giao diện 7 việc trong HANDOVER làm trước H7c.
+> Rà xung đột, gộp ticket 06/11 (Claude, chờ chủ dự án xem): T37 vào T39; T63 vào H7c; T64 thay bằng H3, H7a, H7b; T86 chia vào H7c, H7d; T87 vào T88; T62 với T79; mini game chia hai loại trên khung T79: T80 offline (chơi một mình, kỷ lục cá nhân), T82 online (đối đầu 2 người); T81 là bảng xếp hạng tài sản; T57, T58 và phần báo T61 làm chung; T73 với T74. Đợt sửa giao diện 7 việc trong HANDOVER làm trước H7c.
 
 | ID | Việc | Trạng thái | Tệp |
 |---|---|---|---|
@@ -130,10 +130,10 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 | T76 | Sự kiện mùa và lễ | Chưa làm (PR #277 dùng nhầm số T76 cho nhà lớn); dùng thời tiết T90 cho sự kiện mưa bão; lễ là chủ đề của hệ hội thoại | F-doi-nghe-online |
 | T77 | Tài khoản, bạn bè, cloud save | Chưa làm | F-doi-nghe-online |
 | T78 | Bản chụp nhà và thăm nhà | Chưa làm | F-doi-nghe-online |
-| T79 | Khung Arcade tách biệt (lưu riêng, không chạm sổ cái) | Chưa làm; gồm phần còn lại của T62 | F-doi-nghe-online |
-| T80 | Mini game so điểm cùng seed và ghost | Xung đột quyết định (chủ dự án chốt online đối đầu 2 người, không so điểm): bỏ, phần mini game dùng chung chuyển sang T82 | F-doi-nghe-online |
+| T79 | Khung Arcade tách biệt (lưu riêng, không chạm sổ cái) | Chưa làm; khung chung cho mọi mini game (lưu riêng, không chạm sổ cái), mỗi trò khai loại offline hoặc online; gồm phần còn lại của T62 | F-doi-nghe-online |
+| T80 | Mini game offline: chơi một mình trên điện thoại hoặc máy tính trong game (bầu cua, nối dây, xếp hình...), kỷ lục cá nhân, không so điểm với người khác | Chưa làm; dùng khung T79 (đổi phạm vi 06/11: bỏ so điểm cùng seed và ghost) | F-doi-nghe-online |
 | T81 | Bảng xếp hạng tuần và xác minh phía máy chủ | Chưa làm; theo quyết định là bảng xếp hạng tài sản (không xếp hạng điểm mini game) | F-doi-nghe-online |
-| T82 | Phòng đối đầu thời gian thực (tuỳ chọn) | Chưa làm; là chế độ online chính (đối đầu 2 người, mã phòng hoặc ghép trận), nhận phần còn lại của T80 | F-doi-nghe-online |
+| T82 | Mini game online: đối đầu 2 người, vào bằng mã phòng hoặc ghép trận, không ảnh hưởng tiến trình đời chơi | Chưa làm; dùng khung T79 và tài khoản T77 | F-doi-nghe-online |
 | T83 | Bối cảnh năm (biến động thế giới), làm cho một đời trước | Chưa làm | F-doi-nghe-online |
 | T84 | Thú cưng: chỉ số, chăm sóc, sự kiện, quy định nhà ở | Chưa làm; cần quy định nuôi thú theo loại nhà (T53) | G-y-tuong-giu-chan |
 | T85 | Sở thích trong nhà: đồ có điểm dùng, XP sở thích, bộ sưu tập | Một phần: điểm dùng đồ đã có (T28); còn XP sở thích, bộ sưu tập | G-y-tuong-giu-chan |
