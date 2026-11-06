@@ -81,7 +81,6 @@ P(F, 'body', 'dạo này {you} sao rồi, đi làm có ổn không', 'ask', answ
 P(F, 'body', 'vậy hả, dạo này {you} ăn uống được không', 'ask', answer='mine')
 P(F, 'body', '{you} cần gì cứ nói, {self} giúp được thì giúp', answer='favor', where=NOSELL)
 P(F, 'body', 'chuyện đó {you} hỏi đúng người rồi', answer='favor', minTier='acquaint', where=NOSELL)
-P(F, 'open', 'Ờ, để {self} nói', answer='favor')
 P(F, 'tail', 'vậy đó {you}', answer='health theirs')
 
 
