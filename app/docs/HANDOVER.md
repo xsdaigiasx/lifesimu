@@ -1,3 +1,7 @@
+## 06/11 — #364: hội thoại có tag (0.92.0, chờ duyệt PR)
+
+Bổ sung 18 mạch/174 câu trong `talk/thread-data.ts`, bộ chọn và validator `talk/threads.ts`. Biến cố đời NPC có tag chính xác và chi tiết tất định; câu hỏi truyền signal qua gặp mặt/gọi/tin nhắn. Giữ đoạn tự diễn ngắn, câu đáp bám câu hỏi. Không tự chạy bộ/ăn khi chỉ hỏi chuyện. Save cũ vẫn đọc; chưa chuyển toàn bộ kho mảnh cũ hay thêm cốt truyện nhiều ngày. Thiết kế và 30 mẫu: `docs/design/HOI-THOAI-TAGS.md`, `HOI-THOAI-TAGS-SAMPLES.md`. Kiểm thử mới `tests/talk-threads.test.cjs` được đăng ký trong npm test.
+
 # Bàn giao — Next Day, Basic 1.0 (06/11/2026, sau H7a #329; #330, #331 đã gộp)
 
 Bản trước: `docs/history/HANDOVER-v0.35.md` (01/11), nhật ký 05/11 ở `docs/history/HANDOVER-2026-11-05.md`. File này dành cho phiên Claude mới: đọc hết trước khi làm, rồi đọc `CLAUDE.md`, `AGENTS.md`, `README.md`.

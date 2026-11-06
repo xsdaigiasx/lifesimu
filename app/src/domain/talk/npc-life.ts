@@ -49,6 +49,15 @@ export const EVENT_KINDS:EventKind[]=[
  /** H7b: dấu hiệu trước khi mất (yếu dần, ít ra ngoài); chỉ do vòng đời gắn vào, không tự bắt đầu */
  {id:'frail',name:'sức khoẻ yếu dần',sub:'sick',tone:'bad',dur:[1,1],weight:0,privacy:0,chained:true},
 ];
+/** Chi tiết cùng biến cố: sinh một lần theo world/người/ngày, các lượt nói dùng lại đúng chi tiết. */
+const EVENT_DETAILS:Record<string,string[]>={
+ slow:['người ghé xem thì có, nhưng ít người quyết định mua','khách hỏi giá rồi đi xem thêm, chưa quay lại mua','hàng bán ra chậm hơn nhịp mà mình đã dự tính'],
+ brisk:['khách mua đều hơn trong đợt này','khách quay lại mua thêm, nên hàng đi nhanh hơn','mấy món khách hỏi cũng đúng món mình đang có'],
+ overtime:['việc đang dở cần làm xong trước khi chuyển sang phần khác','thời gian sửa lại công việc nhiều hơn dự tính','có nhiều đầu việc phải thu xếp cùng lúc'],
+ boss:['hai bên chưa thống nhất việc nào nên ưu tiên trước','cách mình muốn làm khác với cách cấp trên yêu cầu','mình muốn làm rõ yêu cầu trước, nhưng cấp trên lại muốn đẩy nhanh'],
+ jobhunt:['mình muốn tìm công việc có nhịp sinh hoạt phù hợp hơn','mình muốn có cơ hội học thêm trong công việc','mình muốn hiểu rõ trách nhiệm trước khi nhận việc'],
+ exam:['mình còn có phần kiến thức chưa tự tin','mình đang khó chia thời gian giữa các phần cần ôn','mình lo lúc làm bài lại không nhớ được điều đã học'],
+};
 const KIND=Object.fromEntries(EVENT_KINDS.map(k=>[k.id,k])) as Record<string,EventKind>;
 /** Phần trăm mỗi ngày một NPC bắt đầu biến cố mới (khoảng 3,5 biến cố mỗi tháng cả nối tiếp), tối đa 2 biến cố cùng lúc. */
 export const LIFE={startPct:10,maxActive:2,maxDur:20} as const;
@@ -65,7 +74,7 @@ function startOn(world:string,n:NpcProfile,day:number,active:readonly NpcEvent[]
  let r=roll(world,who(n),`kind:${day}`,sum),pick=list[0]!;for(const k of list){r-=k.weight*(n.fear==='Bị lừa'&&k.id==='scam'?3:1);if(r<0){pick=k;break}}
  return make(world,n,pick,day)}
 function make(world:string,n:NpcProfile,k:EventKind,day:number):NpcEvent{const len=k.dur[0]+roll(world,who(n),`len:${k.id}:${day}`,k.dur[1]-k.dur[0]+1);
- return{id:`${n.id}:${k.id}:${day}`,kind:k.id,start:day,end:day+len,tone:k.tone,vars:{event:k.name,...(k.items?{item:k.items[roll(world,who(n),`item:${day}`,k.items.length)]!}:{})}}}
+ return{id:`${n.id}:${k.id}:${day}`,kind:k.id,start:day,end:day+len,tone:k.tone,vars:{event:k.name,...(EVENT_DETAILS[k.id]?{detail:EVENT_DETAILS[k.id]![roll(world,who(n),`detail:${k.id}:${day}`,EVENT_DETAILS[k.id]!.length)]!}:{}),...(k.items?{item:k.items[roll(world,who(n),`item:${day}`,k.items.length)]!}:{})}}}
 
 const lifeCache=new Map<string,NpcEvent[]>();
 /** Mọi biến cố của một NPC có ngày bắt đầu trong [from, to], kể cả biến cố nối tiếp. Tất định theo seed. */
@@ -108,7 +117,7 @@ export function needsOf(n:NpcProfile,day:number,minute:number){const st=stageOf(
  return{fatigue,hunger:Math.min(100,Math.round(since/3))}}
 
 /** Biến cố đang diễn ra của cả dàn thành dữ kiện "bản thân" (chỉ chính NPC biết; người khác nghe kể ở H7). */
-export function npcFacts(s:GameState,day=s.day):Fact[]{const w=s.seed?.world??'next-day';return rosterOf(s).flatMap(n=>eventsOn(w,n,day).map(e=>{const k=KIND[e.kind]!;return{id:`npc:${e.id}`,topic:'self' as const,sub:k.sub,about:n.id,day:e.start,tone:e.tone,private:k.privacy,knownBy:[n.id],vars:e.vars}}))}
+export function npcFacts(s:GameState,day=s.day):Fact[]{const w=s.seed?.world??'next-day';return rosterOf(s).flatMap(n=>eventsOn(w,n,day).map(e=>{const k=KIND[e.kind]!;return{id:`npc:${e.id}`,topic:'self' as const,sub:k.sub,about:n.id,day:e.start,tone:e.tone,private:k.privacy,knownBy:[n.id],vars:e.vars,tags:[`event:${e.kind}`]}}))}
 /** Đời sống hôm nay của một NPC. */
 export function npcDay(s:GameState,id:string,day=s.day){const n=castById(s,id);if(!n)return null;const w=s.seed?.world??'next-day';return{mood:moodOf(w,n,day),events:eventsOn(w,n,day)}}
 

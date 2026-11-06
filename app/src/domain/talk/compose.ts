@@ -6,6 +6,7 @@ import {agoText} from '../npc';
 import type {After,Channel,Emotion,Fact,Frame,FrameMode,Intent,Piece,PlayerTopic,Slot,TalkData,Tier,TopicGroup} from './types';
 import {INTENTS} from './types';
 import {channelAllowed,factFits,intentAllowed,privacyCap,tierRank,whenOf} from './axes';
+import {startThread,eventOf,type ThreadState} from './threads';
 import framesData from './data/frames.json';
 import piecesData from './data/pieces.json';
 import lo1Data from './data/lo1.json';
@@ -29,7 +30,7 @@ export interface TalkCtx{npc:NpcProfile;tier:Tier;mood:Emotion;channel:Channel;m
  /** chỉ thử các ý định này (mặc định: mọi ý định) */intents?:readonly Intent[];data?:TalkData;
  /** H6: chỉ dùng dữ kiện thuộc các nhóm chủ đề này */groups?:readonly TopicGroup[];
  /** H6: bắt buộc nhắc dữ kiện (không nói câu chung, không chào); không có thì trả null */needFact?:boolean}
-export interface Said{text:string;intent:Intent|null;fact?:Fact;frame?:string;pieces:string[];prints:string[];
+export interface Said{thread?:ThreadState;text:string;intent:Intent|null;fact?:Fact;frame?:string;pieces:string[];prints:string[];
  /** món NPC vừa hứa cho (từ mảnh có `gift`) */gift?:[string,number];
  /** H6: câu đáp chủ đề người chơi mở bằng mảnh `answer` (lựa chọn trả lời dùng bộ khép chuyện) */mode?:'answer'}
 /** H6: lượt đặc biệt (đáp tiếp hoặc đáp chủ đề). */
@@ -128,9 +129,17 @@ export function compose(c:TalkCtx):Said|null{const data=c.data??TALK,when=whenOf
  for(const intent of intents){
   const facts=order(facts0.filter(f=>factFits(f,intent,c.tier,c.npc.id,c.present??[])&&!used(c.recent??[],`t:${intent}:${f.sub}`,c.day)),`${c.seed}:fact:${intent}`,f=>f.id);
   for(const fact of facts){
+   if(!c.data&&c.tier!=='hostile'){
+    const tagged=startThread(fact,intent,c.npc,c.day,c.seed,(c.recent??[]).filter(x=>c.day-x.d<14).map(x=>x.k));
+    if(tagged)return{...tagged,intent,fact,pieces:[],frame:'thread:'+tagged.thread.topic};
+   }
+   // Có biến cố cụ thể: không dùng câu khẳng định từ nhãn rộng money/family/work.
+   if(!c.data&&eventOf(fact))continue;
    const frames=order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:${fact.id}`,f=>f.id);
-   for(const frame of frames){const said=tryFrame(c,data,frame,intent,fact);if(said)return said}}
-  if(!c.needFact&&NO_FACT_OK.includes(intent)&&!used(c.recent??[],`t:${intent}:-`,c.day))for(const frame of order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:-`,f=>f.id)){const said=tryFrame(c,data,frame,intent,undefined);if(said)return said}}
+   for(const frame of frames){const said=tryFrame(c,data,frame,intent,fact);if(said&&(!c.needFact||said.pieces.some(id=>data.pieces.find(p=>p.id===id)?.topic)))return said}}
+  if(!c.needFact&&!facts0.some(f=>eventOf(f)&&f.about===c.npc.id)&&NO_FACT_OK.includes(intent)&&!used(c.recent??[],`t:${intent}:-`,c.day))for(const frame of order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:-`,f=>f.id)){const said=tryFrame(c,data,frame,intent,undefined);if(said)return said}}
+ if(!c.data){const f=facts0.find(f=>eventOf(f)&&f.topic==='self'&&f.about===c.npc.id&&f.vars.event&&intents.some(i=>factFits(f,i,c.tier,c.npc.id,c.present??[])&&(f.tone==='good'?i==='brag':i==='complain')));
+  if(f&&c.tier!=='hostile'){const intent=f.tone==='good'?'brag':'complain',key=`p:event:${f.id}`;if(!used(c.recent??[],key,c.day))return{text:joinParts([`${c.npc.self} đang có chuyện ${f.vars.event}`]),intent,fact:f,pieces:[],prints:[key,`t:${intent}:${f.sub}`]}}}
  return c.needFact?null:greeting(c,data)}
 
 /** H6: NPC đáp tiếp sau lựa chọn của người chơi (Hỏi thêm, Giúp, Kể chuyện mình) ở lượt 2, 3; hoặc đáp tin nhắn trả lời. Dùng khung `follow`, mảnh có `after`; mảnh có chủ đề chỉ khi còn dữ kiện của câu trước. */

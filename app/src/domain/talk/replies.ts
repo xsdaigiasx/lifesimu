@@ -6,6 +6,7 @@ import {hash} from '../shift';
 import type {Intent,Tier} from './types';
 import type {Print} from './compose';
 import {tierRank} from './axes';
+import {threadChoices,type ThreadState} from './threads';
 import {SELLERS} from './npc-life';
 
 export type Attitude='warm'|'blunt'|'joke'|'cold'|'rude'|'dodge';
@@ -73,14 +74,14 @@ export const REPEAT=[1,.6,.3] as const,REPEAT_DAYS=7,HELP_LIMIT=3,HELP_DAYS=14;
 
 export interface ReplyLog{d:number;n:string;a:Attitude;x:Action}
 export interface PlayerNow{energy:number;stress:number;mood:number;money:number;minute:number;end:number;skills:Partial<Record<'communication'|'cooking'|'logic',number>>}
-export interface ReplyCtx{npc:NpcProfile;intent:Intent;tier:Tier;day:number;seed:string;player:PlayerNow;log:readonly ReplyLog[];recent?:readonly Print[];
+export interface ReplyCtx{thread?:ThreadState;npc:NpcProfile;intent:Intent;tier:Tier;day:number;seed:string;player:PlayerNow;log:readonly ReplyLog[];recent?:readonly Print[];
  /** NPC vừa hứa cho đồ: luôn có Nhận và Từ chối khéo */gift?:[string,number];
  /** H6: câu NPC đáp chủ đề người chơi mở: dùng bộ khép chuyện */mode?:'answer';
  /** chủ đề dữ kiện (`sub`) của câu NPC vừa nói, nếu có */sub?:string;/** dạng câu NPC vừa nói (`lineForm`); thiếu thì lấy mặc định theo ý định */form?:Form;
  /** H6: lượt thứ mấy của cuộc nói chuyện (từ 1) */turn?:number;
  /** #357: lời rủ là việc tốn tiền mà chưa ai nói mời (hiện câu "bao") */paid?:boolean;
  /** H6: lựa chọn đã chọn ở lượt trước (không lặp lại; đã Hỏi thêm hay Giúp thì không hỏi, giúp lần nữa) */skip?:readonly string[]}
-export interface ReplyOption{id:string;attitude:Attitude;action:Action;label:string;minutes:number;energy:number;money:number;
+export interface ReplyOption{signal?:string;id:string;attitude:Attitude;action:Action;label:string;minutes:number;energy:number;money:number;
  /** thiếu kỹ năng, năng lượng, tiền hoặc giờ: hiện mờ */locked:boolean;need?:string}
 
 const cap=(x:string)=>x.charAt(0).toUpperCase()+x.slice(1);
@@ -98,7 +99,9 @@ const SKILL_NAME={communication:'Giao tiếp',cooking:'Nấu ăn',logic:'Logic'}
 
 /** Trạng thái người chơi: mệt hoặc căng thẳng cao thì Ấm áp tốn thêm năng lượng, Khó chịu dễ xuất hiện; tâm trạng tốt mới có Đùa (trừ khi NPC đang trêu). */
 const GIFT_OPTS:Template[]=[{a:'warm',x:'accept',text:'Dạ, {me} cảm ơn {call} nhiều'},{a:'blunt',x:'refuse',text:'Thôi {call} để bán đi, {me} còn'}];
-export function buildReplies(c:ReplyCtx):ReplyOption[]{if(c.gift){const rest=buildReplies({...c,gift:undefined}).filter(o=>o.action!=='accept'&&o.action!=='refuse').slice(0,2);return[...GIFT_OPTS.map(t=>({id:`gift:${t.a}:${t.x}`,attitude:t.a,action:t.x,label:fill(t.text,c.npc),minutes:0,energy:0,money:0,locked:false})),...rest]}const p=c.player,worn=p.energy<25||p.stress>=70,happy=p.mood>=60;
+export function buildReplies(c:ReplyCtx):ReplyOption[]{
+ if(c.thread)return threadChoices(c.thread,c.npc,c.seed).map(o=>({id:`thread:${o.attitude}:${o.action}:${c.thread!.topic}:${o.signal}`,signal:o.signal,attitude:o.attitude,action:o.action,label:o.label,minutes:5,energy:0,money:0,locked:c.player.minute+5>c.player.end}));
+ if(c.gift){const rest=buildReplies({...c,gift:undefined}).filter(o=>o.action!=='accept'&&o.action!=='refuse').slice(0,2);return[...GIFT_OPTS.map(t=>({id:`gift:${t.a}:${t.x}`,attitude:t.a,action:t.x,label:fill(t.text,c.npc),minutes:0,energy:0,money:0,locked:false})),...rest]}const p=c.player,worn=p.energy<25||p.stress>=70,happy=p.mood>=60;
  const sk=new Set(c.skip??[]),skAct=new Set<string>([...sk].map(x=>x.split(':')[2]??'').filter(a=>a==='ask'||a==='help'));
  let pool=(c.mode==='answer'?ANSWER:BY_INTENT[c.intent]).filter(t=>!sk.has(optId(c.intent,t))&&!skAct.has(t.x)).filter(t=>!t.minTier||tierRank(c.tier)>=tierRank(t.minTier)).filter(t=>!t.sub||(!!c.sub&&t.sub.includes(c.sub))).filter(t=>!t.goods||!c.sub).filter(t=>{const f=c.form??FORM_DEFAULT[c.intent];return!t.form||(!!f&&t.form.includes(f))}).filter(t=>!t.seller||SELLERS.includes(c.npc.id)).filter(t=>!t.paid||!!c.paid).filter(t=>t.a!=='joke'||happy||c.intent==='tease').filter(t=>t.a!=='rude'||worn||c.tier==='hostile');
  if(c.tier==='hostile')pool=pool.filter(t=>t.a!=='warm'||t.x!=='help');

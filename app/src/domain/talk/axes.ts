@@ -20,7 +20,7 @@ const NO_HOSTILE:Intent[]=['invite','request','tease'];
 /** Trục 1 và 3: ý định hợp cảm xúc (Khoe không đi với Buồn, Bực; Trêu không đi với Bực). */
 const MOOD_BAN:Partial<Record<Intent,Emotion[]>>={brag:['sad','annoyed'],tease:['annoyed']};
 export function intentAllowed(i:Intent,tier:Tier,mood:Emotion){
- if(tier==='hostile')return!NO_HOSTILE.includes(i);
+ if(tier==='hostile')return!NO_HOSTILE.includes(i)&&!(MOOD_BAN[i]??[]).includes(mood);
  return tierRank(tier)>=tierRank(INTENT_MIN_TIER[i])&&!(MOOD_BAN[i]??[]).includes(mood)}
 /** Bảng tương thích ý định và nhóm chủ đề (Xin lỗi chỉ về người chơi; Kể tin không về bản thân NPC). */
 export const INTENT_TOPICS:Record<Intent,TopicGroup[]>={brag:['self'],complain:['self','world','other','player'],ask:['player','other','world'],invite:['player','world','self'],request:['self'],news:['world','other'],tease:['player','self'],apologize:['player']};
