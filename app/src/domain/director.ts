@@ -13,6 +13,9 @@ import {SKILLS,type SkillId} from './skill-xp';
 import {hash} from './shift';
 import {weatherOf,OUTDOOR} from './weather';
 import {dueAppointment,markAppointment,MOM_PARCEL} from './inbox';
+import {npcTells,hear} from './talk/gossip';
+/** H7c: phần trăm lời hỏi thăm của người quen (từ 10 điểm) thành kể tin đồn. */
+export const TELL_PCT=25;
 import {sendParcel} from './gifts';
 import {forgetMemories,reinforce,FORGET} from './talk/npc-life';
 import {chooseLine,lineById,fill,intentsWithLines} from './lines';
@@ -123,11 +126,14 @@ function open(s:GameState,npc:NpcProfile,pick:{motif:Motif;variant:number;memory
  const quirk=pick.motif.id==='greet'&&!memory&&hash(`quirk:${key}`)%100<30?(chooseLine(`quirk:${npc.id}`,voice,score,heard,hash(`q:${key}`))??chooseLine(`quirk:${npc.quirk}`,voice,score,heard,hash(`q:${key}`))):undefined;
  /* H5: hỏi thăm thường của người có mảnh riêng thì ghép câu theo dữ kiện thật; câu gợi ý gần mốc và câu nhắc ký ức giữ như cũ */
  const hinted=!!line&&line.id.startsWith('hint:');let talk:TalkLine|undefined;
- if(pick.motif.id==='greet'&&!memory&&!hinted&&hasOwnLines(npc.id)){const said=sayNow(s,npc,'face',`talk:${key}:${npc.id}`);if(said?.intent)talk=talkLineOf(said)}
+ /* H7c: người quen có khi kể tin đồn (25%); người chơi biết tin ngay */let told:string|undefined;
+ if(pick.motif.id==='greet'&&!memory&&!hinted&&score>=10&&hash(`tell:${key}:${npc.id}`)%100<TELL_PCT){const t=npcTells(s,npc,`${key}:${npc.id}`);if(t){talk={text:t.text,intent:'news',prints:[]};told=t.rumor}}
+ if(!talk&&pick.motif.id==='greet'&&!memory&&!hinted&&hasOwnLines(npc.id)){const said=sayNow(s,npc,'face',`talk:${key}:${npc.id}`);if(said?.intent)talk=talkLineOf(said)}
+ if(told)s=hear(s,told,'npc');
  return{...s,story:{...st,seq,pending:{key,npc:npc.id,motif:pick.motif.id,variant:pick.variant,by,day:s.day,...(memory?{memory:memory.id}:{}),...(talk?{talk}:{}),...(line&&!talk?{line:line.id}:{}),...(quirk&&!talk?{quirk:quirk.id}:{})},log:[...st.log,{day:s.day,npc:npc.id,motif:pick.motif.id,variant:pick.variant,by}].slice(-300)}}}
 
 /** NPC tự bắt chuyện khi người chơi đến nơi hoặc vừa làm xong việc (tối đa 3 lần mỗi ngày). */
-export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAppointment(s);if(ap&&!storyOf(s).pending&&!s.work?.active){const npc=castById(s,ap.npc);if(npc)return open(markAppointment(s,ap.id,'done'),npc,{motif:motifOf('meal'),variant:0},'player')}}const st=storyOf(s);if(st.pending||s.work?.active||s.fishing?.atLake||s.office?.application?.status==='interview'||npcCount(s)>=NPC_DAILY_LIMIT)return s;const c=clockOf(s);if(c.minute+30>END)return s;if(weatherOf(s.day)==='storm'&&OUTDOOR.includes(c.location))return s;
+export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAppointment(s);if(ap&&!storyOf(s).pending&&!s.work?.active){const npc=castById(s,ap.npc);if(npc)return open(markAppointment(s,ap.id,'done'),npc,{motif:motifOf('meal'),variant:0},'player')}}const st=storyOf(s);if(st.pending||s.gossip?.pending||s.work?.active||s.fishing?.atLake||s.office?.application?.status==='interview'||npcCount(s)>=NPC_DAILY_LIMIT)return s;const c=clockOf(s);if(c.minute+30>END)return s;if(weatherOf(s.day)==='storm'&&OUTDOOR.includes(c.location))return s;
  const here=rosterOf(s).filter(n=>n.story&&presentAt(n,s.day,c.minute,c.location)&&inReach(s,n,c.location)),candidates=[...here];const roll=hash(`start:${s.day}:${c.minute}:${c.location}:${trigger}:${st.seq}`)%100;
  const due=here.find(n=>pickMotif(s,n,'npc','due')?.motif.id==='return');if(due){const p=pickMotif(s,due,'npc','due')!;return open(s,due,p,'npc')}
  const near=here.some(n=>nearTier(socialOf(s).relations[n.id]?.score??0));if(roll>=(near?65:40))return s;const order=[...candidates].sort((a,b)=>hash(`${s.day}:${a.id}:${roll}`)-hash(`${s.day}:${b.id}:${roll}`));
@@ -135,7 +141,7 @@ export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAp
 
 /** Người chơi chủ động nói chuyện hoặc rủ đi ăn với người đang ở đây. */
 /** H6: kiểu nói chuyện người chơi chọn trong cửa sổ NPC: chào hỏi, rủ đi ăn, hoặc tự mở lời theo chủ đề. */
-export type TalkKind='talk'|'meal'|`topic:${PlayerTopic}`|`gift:${'bag'|'pantry'|'meal'}:${string}`;
+export type TalkKind='talk'|'meal'|`topic:${PlayerTopic}`|`gift:${'bag'|'pantry'|'meal'}:${string}`|`tell:${string}`;
 /** H6: chủ đề người chơi mở được với người này lúc này (người có mảnh riêng; Hỏi chuyện của họ, Nhờ việc cần Quen biết; người bán thì hỏi hàng ai cũng hỏi được). */
 export function topicsFor(s:GameState,id:string):PlayerTopic[]{const npc=castById(s,id);if(!npc||!hasOwnLines(id))return[];const known=(socialOf(s).relations[id]?.score??0)>=10;
  return PLAYER_TOPICS.filter(t=>t==='health'||t==='mine'||known||(t==='favor'&&SELLERS.includes(id)))}

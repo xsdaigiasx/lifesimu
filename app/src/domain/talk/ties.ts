@@ -16,7 +16,7 @@ function sharedKind(a:NpcProfile,b:NpcProfile):TieKind|null{
  if(a.remote||b.remote||a.family||b.family)return null;
  if(a.company||b.company)return a.company&&a.company===b.company?'work':null;
  const pa=new Set(a.schedule.map(x=>x.place));for(const k of ['home','market','streetfood','park','office'] as PlaceId[])if(pa.has(k)&&b.schedule.some(x=>x.place===k))return PLACE_KIND[k]!;return null}
-function baseScore(world:string,a:NpcProfile,b:NpcProfile){const t=[...a.traits,...b.traits];let v=mix(hash(`${world}:tie:${pairKey(a.id,b.id)}:${a.fullName}:${b.fullName}`))%70-20;
+function baseScore(world:string,a:NpcProfile,b:NpcProfile){const t=[...a.traits,...b.traits];const names=[a,b].sort((x,y)=>x.id<y.id?-1:1).map(n=>n.fullName).join(':');let v=mix(hash(`${world}:tie:${pairKey(a.id,b.id)}:${names}`))%70-20;
  v+=t.filter(x=>(TIE.traitUp as readonly string[]).includes(x)).length*4-t.filter(x=>(TIE.traitDown as readonly string[]).includes(x)).length*5;
  if(SELLERS.includes(a.id)&&SELLERS.includes(b.id))v+=TIE.seller;return v}
 export const deltaOf=(s:Pick<GameState,'gossip'>,a:string,b:string)=>s.gossip?.d?.[pairKey(a,b)]??0;

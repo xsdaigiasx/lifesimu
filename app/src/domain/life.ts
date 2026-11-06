@@ -18,6 +18,7 @@ import {recordJournal} from './journal';
 import {settleSummary} from './summary';
 import {residenceOf,hasRoom,COOK_FACTOR} from './housing';
 import {clockOf,spendTime,END} from './time';
+import {priceUp,PRICE} from './talk/price';
 export const INGREDIENTS={rice:{name:'Gạo',price:10000,days:30},egg:{name:'Trứng',price:5000,days:5},vegetable:{name:'Rau củ',price:12000,days:2},pork:{name:'Thịt heo',price:35000,days:1},tofu:{name:'Đậu phụ',price:8000,days:2},fish:{name:'Cá tươi',price:30000,days:1}} as const;
 export type IngredientId=keyof typeof INGREDIENTS;
 /** Quầy chợ, mỗi quầy một người bán (chốt 04/11). Người bán vắng thì người nhà trông quầy, vẫn mua được. */
@@ -38,7 +39,9 @@ export const LATE_FROM=900,LATE_ITEMS:IngredientId[]=['vegetable','pork','fish',
 export const PROTEIN_ITEMS:IngredientId[]=['pork','fish','tofu','egg'];
 export const RISK={stale:8,raw:15,lastDay:5,perLv:1.5,severe:30} as const;
 export const isLate=(s:GameState,id:IngredientId)=>clockOf(s).minute>=LATE_FROM&&LATE_ITEMS.includes(id);
-export const marketPrice=(s:GameState,id:IngredientId)=>isLate(s,id)?Math.round(INGREDIENTS[id].price*(1-LATE_DISCOUNT)/500)*500:INGREDIENTS[id].price;
+/** H7c: quầy đang trong đợt tăng giá (tin đồn đúng báo trước 3 ngày) thì giá gốc +20%, làm tròn 500đ. */
+export const basePrice=(s:GameState,id:IngredientId)=>{const st=STALLS.find(x=>(x.items as readonly string[]).includes(id));const p=INGREDIENTS[id].price;return st&&priceUp(s,st.seller,s.day)?Math.round(p*(1+PRICE.up)/500)*500:p};
+export const marketPrice=(s:GameState,id:IngredientId)=>isLate(s,id)?Math.round(basePrice(s,id)*(1-LATE_DISCOUNT)/500)*500:basePrice(s,id);
 export const shelfDays=(s:GameState,id:IngredientId)=>isLate(s,id)?Math.max(1,INGREDIENTS[id].days-1):INGREDIENTS[id].days;
 /** Lô sắp hỏng: tới ngày cuối hạn mà không phải mua sáng hôm nay (hàng chiều thì luôn tính sắp hỏng ở ngày cuối). */
 export const isStale=(p:{expiresDay:number;boughtDay:number;late?:boolean},day:number)=>p.expiresDay-day<=1&&(p.boughtDay<day||!!p.late);

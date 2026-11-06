@@ -14,11 +14,12 @@ import {adjustRelation,socialOf} from '../social';
 import {recordJournal} from '../journal';
 import {skillsOf} from '../work';
 import {eventsBetween,SELLERS,EVENT_KINDS} from './npc-life';
+import {priceWave,blocksNear,PRICE} from './price';
 import {tieOf,tiesOf,between,callName,pairKey,TIE,type TieKind} from './ties';
 import {RUMOR_TEXT,PRICE_THING,GOSSIP_OPEN,GOSSIP_REPLY,PRICE_OPEN,PRICE_REPLY,CHAT,SPAT,JUDGE,AFTER,TELL_REPLY,type GroupLine} from './group-data';
 
-export const RUMOR={life:10,eventPct:40,bigPct:20,falsePct:5,block:10,hop1:1,hop2:3,priceBlock:20,pricePct:45,priceDays:4,priceLead:3,priceUp:.2,falsePricePct:30,heardMax:30,toldMax:40,keep:14,retireLead:14} as const;
-export const GROUP={pct:35,spatPct:45,gossipPct:55,mins:5,side:3,tie:6,calmTie:8,calmBase:30,calmPerLv:8,calmMax:90,find:{wrong:50,private:35},findHit:4} as const;
+export const RUMOR={life:10,eventPct:40,bigPct:20,falsePct:5,block:10,hop1:1,hop2:3,falsePricePct:30,heardMax:30,toldMax:40,keep:14,retireLead:14} as const;
+export const GROUP={pct:35,spatPct:30,gossipPct:60,mins:5,side:3,tie:6,calmTie:8,calmBase:30,calmPerLv:8,calmMax:90,find:{wrong:50,private:35},findHit:4} as const;
 /** Bịa được những chuyện này (theo tuổi, người bán thì thêm chuyện buôn bán). */
 const FALSE_POOL=['cold','backache','promotion','jobhunt','short','debt','buy','renovate','lost','scam','newjob'];
 const FALSE_ITEMS=['xe máy mới','điện thoại mới','cái tivi mới'];
@@ -40,11 +41,6 @@ export function parseRumor(id:string):Rumor|null{const p=id.split('~');if(p.leng
  return{id,about,gen,ev,start,truth:truth as Truth,...(item?{item}:{})}}
 const make=(r:Omit<Rumor,'id'>):Rumor=>({...r,id:rumorId(r)});
 
-/** Đợt tăng giá chợ trong một khối 20 ngày (theo seed): người bán nào, từ ngày nào. */
-function priceWave(world:string,block:number):{seller:string;from:number;to:number}|null{if(roll(world,`price:${block}`)>=RUMOR.pricePct)return null;const from=block+8+roll(world,`pfrom:${block}`,6);return{seller:roll(world,`pwho:${block}`,2)?'meat':'veg',from,to:from+RUMOR.priceDays-1}}
-/** Hôm nay món của người bán này có đang lên giá không (hệ quả thật của tin đồn đúng). */
-export function priceUp(s:Pick<GameState,'seed'>,seller:string,day:number){const w=worldSeed(s);for(const b of [Math.floor(day/RUMOR.priceBlock)*RUMOR.priceBlock,Math.floor(day/RUMOR.priceBlock)*RUMOR.priceBlock-RUMOR.priceBlock]){const p=priceWave(w,b);if(p&&p.seller===seller&&day>=p.from&&day<=p.to)return true}return false}
-
 function retireStart(n:NpcProfile,day:number){const at=roleDef(n.id)?.retire;if(at===undefined||n.age>=at)return null;for(let d=day;d<=day+RUMOR.retireLead;d++)if(ageAt(n.born,d)>=at)return d-RUMOR.retireLead;return null}
 /** Các tin đang lan trong ngày (bắt đầu trong 10 ngày qua; tin yếu dần còn tới khi người đó đi; tin giá còn tới hết đợt). */
 export function rumorsOn(s:GameState,day=s.day):Rumor[]{const w=worldSeed(s),out:Rumor[]=[],from=day-RUMOR.life;
@@ -55,15 +51,16 @@ export function rumorsOn(s:GameState,day=s.day):Rumor[]{const w=worldSeed(s),out
    out.push(make({about:n.id,gen:n.gen,ev,start,truth:'false',...(ev==='buy'?{item:FALSE_ITEMS[roll(w,salt+':i',FALSE_ITEMS.length)]!}:{})}))}
   const rs=retireStart(n,day);if(rs!==null&&rs<=day)out.push(make({about:n.id,gen:n.gen,ev:'retire',start:rs,truth:'t'}));
   if(n.frail!==undefined&&day>=n.frail)out.push(make({about:n.id,gen:n.gen,ev:'frail',start:n.frail,truth:'t'}))}
- for(const b of [Math.floor(day/RUMOR.priceBlock)*RUMOR.priceBlock,Math.floor(day/RUMOR.priceBlock)*RUMOR.priceBlock-RUMOR.priceBlock]){const p=priceWave(w,b);
-  if(p){if(day>=p.from-RUMOR.priceLead&&day<=p.to)out.push(make({about:p.seller,gen:0,ev:'price',start:p.from-RUMOR.priceLead,truth:'t'}))}
+ for(const b of blocksNear(day)){const p=priceWave(w,b);
+  if(p){if(day>=p.from-PRICE.lead&&day<=p.to)out.push(make({about:p.seller,gen:0,ev:'price',start:p.from-PRICE.lead,truth:'t'}))}
   else if(roll(w,`fprice:${b}`)<RUMOR.falsePricePct){const start=b+8+roll(w,`fpd:${b}`,6);if(day>=start&&day<start+5)out.push(make({about:roll(w,`fpw:${b}`,2)?'meat':'veg',gen:0,ev:'price',start,truth:'false'}))}}
  return out}
 /** Tin còn đúng người (người trong cuộc chưa đổi), để kể lại hay nhắc lại. */
 export function liveRumor(s:GameState,id:string):Rumor|null{const r=parseRumor(id);if(!r)return null;if(r.ev==='price')return r;const n=castById(s,r.about);return n&&n.gen===r.gen?r:null}
-const TONE=Object.fromEntries(EVENT_KINDS.map(k=>[k.id,k.tone])) as Record<string,'good'|'bad'|'plain'>;
+/* tính lười: gossip nạp giữa vòng director, npc-life nên không đọc EVENT_KINDS lúc nạp module */
+let TONE:Record<string,'good'|'bad'|'plain'>|null=null;
 /** Tin vui hay buồn (bịa thì theo chuyện bịa ra; thổi phồng thì vẫn theo chuyện gốc). */
-const toneOf=(r:Rumor)=>r.ev==='retire'?'plain':TONE[r.ev]??'plain';
+const toneOf=(r:Rumor)=>{TONE??=Object.fromEntries(EVENT_KINDS.map(k=>[k.id,k.tone]));return r.ev==='retire'?'plain':TONE[r.ev]??'plain'};
 const isPrivate=(r:Rumor)=>r.ev!=='price'&&!!RUMOR_TEXT[r.ev]?.private;
 /** Ai biết tin vào ngày đó: người quen của người trong cuộc từ hôm sau, người quen của họ từ ngày thứ 3; tin giá thì ai ở chợ, quán cũng biết. */
 export function knows(s:GameState,r:Rumor,n:NpcProfile,day=s.day){if(n.id===r.about||n.remote||n.family)return false;

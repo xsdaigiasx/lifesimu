@@ -32,13 +32,15 @@ function run(seed,days){const rnd=rngOf(seed),lines=[],errors=[],follows={n:0,te
  const at=(place,minute)=>{s={...s,clock:{...clockOf(s),minute,location:place}}};
  const ate=(n,minute,place,out)=>{const l=B('life').lifeOf(s);s={...s,life:{...l,ate:[...(l.ate??[]),{n,d:s.day,m:minute,p:place,...(out?{out:true}:{})}].slice(-7)}}};
  /** Ghép lại câu từ trạng thái ngay trước khi mở (tất định) để biết dữ kiện đã dùng rồi kiểm. */
+ let rumorTells=0;
  const check=(before,npcId,text,channel,seedKey,o={})=>{const npc=N.castById(before,npcId),said=L.sayNow(before,npc,channel,seedKey,o);if(!said||said.text!==text){errors.push(`${npcId}: ghép lại không khớp`+(process.env.DBG?` [${text}] vs [${said?.text}]`:""));return null}
   const c=clockOf(before),place=channel==='face'?c.location:undefined,present=place?F.witnesses(before,before.day,o.minute??c.minute,place):[];const a=audit(said,npcId,factsOf(before),present);errors.push(...a.errs.map(e=>`${npcId} ngày ${before.day-day0}: ${e}`));return{intent:said.intent,real:a.real,tier:L.tierFor(before,npc)}};
  const answer1=()=>{const ev=D.openEvent(s);if(!ev)return false;const open=ev.options.map((o,i)=>o.locked?-1:i).filter(i=>i>=0);const order=open.length?[rnd()<.6?open[0]:open[Math.floor(rnd()*open.length)],...open]:[0];
   for(const i of order){const r=D.answerEvent(s,i);if(r.ok){s=r.state;return true}}const st=structuredClone(s.story);delete st.pending;s={...s,story:st};return false};
  /* H6: trả lời tới hết chuyện (tối đa 3 lượt); câu NPC đáp tiếp được đếm riêng và kiểm chỗ trống */
  const answer=()=>{for(let k=0;k<3&&D.storyOf(s).pending;k++){if(!answer1())return;const p=D.storyOf(s).pending;if(p?.talk&&(p.talk.turn??1)>1){follows.n++;if(/[{}]/.test(p.talk.text))errors.push(`${p.npc}: câu đáp tiếp còn chỗ trống`);follows.texts.add(p.talk.text)}}};
- const opened=(before,by)=>{const p=D.storyOf(s).pending;if(p?.talk&&TALKERS.includes(p.npc)){const r=check(before,p.npc,p.talk.text,'face',`talk:${p.key}:${p.npc}`);if(r)lines.push({day:s.day-day0,npc:p.npc,by,ch:'face',text:p.talk.text,...r})}answer()};
+ /* H7c: người quen có khi kể tin đồn thay cho câu ghép (không có vân tay mảnh): không ghép lại, chỉ đếm */
+ const opened=(before,by)=>{const p=D.storyOf(s).pending;if(p?.talk&&!p.talk.prints.length&&p.talk.intent==='news'){rumorTells++;answer();return}if(p?.talk&&TALKERS.includes(p.npc)){const r=check(before,p.npc,p.talk.text,'face',`talk:${p.key}:${p.npc}`);if(r)lines.push({day:s.day-day0,npc:p.npc,by,ch:'face',text:p.talk.text,...r})}answer()};
  for(let d=0;d<days;d++){const dow=dateAt(s.day).getUTCDay(),work=dow>=1&&dow<=5;
   {const before=s;s=I.settleInbox(s);const q=I.inboxOf(s).queue.filter(x=>x.day===s.day&&((x.npc==='me'&&x.kind==='mom-care')||(x.npc==='em'&&x.kind==='checkin')));const base={...s,talk:before.talk};
    for(const m of q){const r=check(base,m.npc,m.text,'text',m.npc==='me'?`mom:${s.day}`:`em:${s.day}`,{minute:m.minute,...(m.npc==='em'?{intents:['brag','complain','ask','invite','news','tease','apologize']}:{})});if(r)lines.push({day:d,npc:m.npc,by:'npc',ch:'text',text:m.text,...r})}}
