@@ -12,6 +12,8 @@ Trạng thái 06/11 20:30: main 0.89.5. Chờ gộp theo thứ tự: #358 đoạ
 
 **#360 neo giường, phụ kiện chân dung (0.91.1):** `fit-sprite-anchors.py` thêm nhánh đồ phủ kín chân đế (s tụt dưới 0,6 lần bề ngang thì lấy s theo bề ngang, x đỉnh dưới là giữa hàng điểm ảnh thấp nhất), ghi lại `furniture-sprites.json` (giường, tủ, thảm, vài bàn). Chân dung: mũ hạ 22 px, kính hạ 4 px; bông tai chỉ với tóc lộ tai (`EAR_HAIRS`); râu quai nón, râu bạc, kẹp tóc tạm tắt (`REDRAW`) chờ Codex #361.
 
+**0.91.2 khớp kính, mũ theo số đo:** mắt trên 24 nền ở (118, 104) và (154,5, 104), lệch dưới 3 px (không phải do độ phóng khác nhau giữa các nền); ảnh kính rộng hơn 8% và lệch phải 5 px nên `adjust` kính (−5, −2, ×0,925), mũ (4, 12, ×0,85) quanh tâm (50%, 40%). Người đội mũ không rút tóc lòi lên mũ (`NO_CAP_HAIRS`). Mũ vẫn vẽ chéo 3/4, chờ Codex #361.
+
 **Việc kế tiếp:** T86 điểm hoà thuận khu trọ, T89 mạng xã hội, H8, T38, T39.
 
 Sau đó: T86 điểm hoà thuận khu trọ, T89 mạng xã hội, H8, T38, T39. Tiến độ: 90 ticket T, xong 53, một phần 11, gộp hoặc thay 4, hoãn 1, chưa làm 21. Chủ dự án 06/11: tranh treo tường cho nhà phố, biệt thự để sau (khi có ảnh vỏ nhà Codex #189).
