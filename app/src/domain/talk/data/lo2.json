@@ -7549,5 +7549,113 @@
 "hospital",
 "lake"
 ]
+},
+{
+"id": "l2-520",
+"slot": "ask",
+"text": "sáng mai uống cà phê đầu chợ với {self} không",
+"npc": "meat",
+"intent": [
+"invite"
+]
+},
+{
+"id": "l2-521",
+"slot": "ask",
+"text": "bữa nào rảnh đi chợ đêm với {self} cho vui không",
+"npc": "meat",
+"intent": [
+"invite"
+]
+},
+{
+"id": "l2-522",
+"slot": "body",
+"text": "lần nào {you} cũng hỏi giá rồi đi luôn",
+"npc": "meat",
+"intent": [
+"tease"
+]
+},
+{
+"id": "l2-523",
+"slot": "body",
+"text": "{you} xách giỏ đi chợ nhìn ra dáng nội trợ ghê",
+"npc": "meat",
+"intent": [
+"tease"
+]
+},
+{
+"id": "l2-524",
+"slot": "ask",
+"text": "tối rảnh qua coi đá banh với {self} không",
+"npc": "grocery",
+"intent": [
+"invite"
+]
+},
+{
+"id": "l2-525",
+"slot": "ask",
+"text": "sáng mai đi tập dưỡng sinh với {self} không",
+"npc": "grocery",
+"intent": [
+"invite"
+]
+},
+{
+"id": "l2-526",
+"slot": "body",
+"text": "{you} mua mì gói hoài, coi chừng ốm nhom",
+"npc": "grocery",
+"intent": [
+"tease"
+]
+},
+{
+"id": "l2-527",
+"slot": "body",
+"text": "nhìn mặt {you} là biết lại thức khuya",
+"npc": "grocery",
+"intent": [
+"tease"
+]
+},
+{
+"id": "l2-528",
+"slot": "body",
+"text": "{you} lại quên mang dù rồi phải không",
+"npc": "courier",
+"intent": [
+"tease"
+]
+},
+{
+"id": "l2-529",
+"slot": "body",
+"text": "nhìn {you} ngái ngủ ghê",
+"npc": "courier",
+"intent": [
+"tease"
+]
+},
+{
+"id": "l2-530",
+"slot": "body",
+"text": "tuần này {self} chạy được hơn trăm đơn",
+"npc": "courier",
+"intent": [
+"brag"
+]
+},
+{
+"id": "l2-531",
+"slot": "ask",
+"text": "cuối tuần đi ăn ốc với {self} không",
+"npc": "courier",
+"intent": [
+"invite"
+]
 }
 ]
