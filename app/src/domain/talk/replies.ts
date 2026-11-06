@@ -65,6 +65,8 @@ export function playerAddress(n:NpcProfile){const call=n.self==='mình'?'bạn':
 const fill=(t:string,n:NpcProfile)=>{const {call,me}=playerAddress(n);return t.replace(/\{(call|Call|me|Me)\}/g,(_,k:string)=>k==='call'?call:k==='Call'?cap(call):k==='me'?me:cap(me))};
 const optId=(i:Intent,t:Template)=>`${i}:${t.a}:${t.x}`;
 /** H6: lượt 2, 3 chỉ mở khi lựa chọn trước là Hỏi thêm, Giúp hoặc Kể chuyện mình; tối đa 3 lượt. */
+/** Câu chào kết tử tế khi lượt sau không còn câu tích cực nào (không kéo dài chuyện, cộng nhẹ). */
+const CLOSE:Template[]=[{a:'warm',x:'silent',text:'Vậy thôi {me} đi trước nha {call}'},{a:'warm',x:'silent',text:'Có gì kể {me} nghe tiếp nha {call}'}];
 export const MAX_TURNS=3,CONTINUE:readonly Action[]=['ask','help','share'];
 /** H6: phần cộng quan hệ từ lượt 2 trở đi còn một nửa (nói dài không thành cách cày điểm). */
 export const LATER_TURN=.5;
@@ -78,7 +80,7 @@ export function buildReplies(c:ReplyCtx):ReplyOption[]{if(c.gift){const rest=bui
  if(c.tier==='hostile')pool=pool.filter(t=>t.a!=='warm'||t.x!=='help');
  const rank=(t:Template)=>hash(`${c.seed}:${optId(c.intent,t)}`)%1000;
  // luôn có một lựa chọn tích cực và một lựa chọn không tích cực, phần còn lại rút theo seed
- const pos=pool.filter(t=>['warm','joke'].includes(t.a)).sort((a,b)=>rank(a)-rank(b)),neg=pool.filter(t=>['cold','rude','dodge','blunt'].includes(t.a)).sort((a,b)=>rank(a)-rank(b));
+ const pos=(()=>{const p0=pool.filter(t=>['warm','joke'].includes(t.a)).sort((a,b)=>rank(a)-rank(b));/* lượt sau đã dùng hết câu tích cực: luôn còn một câu chào kết tử tế (H4: luôn có một lựa chọn tích cực) */return p0.length?p0:CLOSE.filter(t=>!sk.has(optId(c.intent,t))).sort((a,b)=>rank(a)-rank(b))})(),neg=pool.filter(t=>['cold','rude','dodge','blunt'].includes(t.a)).sort((a,b)=>rank(a)-rank(b));
  const want=pool.length>=4&&hash(`${c.seed}:n`)%2?4:3,pick=(skip:readonly string[])=>{const out:Template[]=[];for(const t of[pos[0],neg[0],...[...pool].sort((a,b)=>rank(a)-rank(b))])if(t&&out.length<want&&!out.includes(t)&&!skip.includes(optId(c.intent,t)))out.push(t);return out};
  let chosen=pick([]);const key=(ts:Template[])=>`r:${c.npc.id}:${ts.map(t=>optId(c.intent,t)).sort().join('|')}`;
  if((c.recent??[]).some(r=>r.k===key(chosen)&&c.day-r.d<REPEAT_DAYS)){const alt=pick([optId(c.intent,chosen[chosen.length-1]!)]);if(alt.length>=3)chosen=alt}

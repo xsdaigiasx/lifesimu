@@ -6,7 +6,7 @@
  * Chỉ tiêu (mục 30 Kế hoạch, cách đo nằm ở `verdict`): không lặp mô-típ cùng NPC trong 14 ngày; từ 30% sự kiện phản ứng với trạng thái người chơi; callback ít nhất mỗi 5 ngày chơi (cửa sổ 5 ngày có đi chơi liên tiếp, bỏ 14 ngày đầu); bậc quan hệ không dồn vào Xa lạ; không NPC nào chiếm quá nhiều. */
 const fs=require('node:fs'),path=require('node:path'),{spawnSync}=require('node:child_process');
 const root=path.join(__dirname,'..');
-{fs.mkdirSync(path.join(root,'.test-build'),{recursive:true});fs.writeFileSync(path.join(root,'.test-build/package.json'),'{"type":"commonjs"}');
+if(require.main===module||!fs.existsSync(path.join(root,'.test-build/domain/director.js'))){fs.mkdirSync(path.join(root,'.test-build'),{recursive:true});fs.writeFileSync(path.join(root,'.test-build/package.json'),'{"type":"commonjs"}');
  const r=spawnSync('node',['node_modules/typescript/bin/tsc','-p','tsconfig.tests.json'],{cwd:root,stdio:'inherit'});if(r.status)process.exit(r.status)}
 const B=p=>require(path.join(root,'.test-build/domain',p));
 const {engine}=B('engine'),D=B('director'),N=B('npc'),{socialOf}=B('social'),{clockOf,START}=B('time'),{dateAt}=B('format'),{hash}=B('shift');
@@ -31,7 +31,9 @@ function visitsOf(persona,day,rnd){const dow=dateAt(day).getUTCDay(),T=([p,lo,hi
 
 function run(persona,seed,days){
  const rnd=rngOf(`${persona}:${seed}`),events=[],played=[];let s={...engine.initial()};const day0=s.day+seed*37;s={...s,day:day0,money:3_000_000,seed:{world:`sim${seed}`,life:`sim${seed}`},office:{...require('../.test-build/domain/office').initialOffice(),role:'employee',employerId:seed%2?'an-nhien-tech':'sen-code'}};
- const answer=()=>{const ev=D.openEvent(s);if(!ev)return;const open=ev.options.map((o,i)=>o.locked?-1:i).filter(i=>i>=0);
+ /* H6: hội thoại tới 3 lượt; trả lời tới hết chuyện, nếu không lượt sau treo lại và chặn mọi cuộc nói chuyện khác trong ngày */
+ const answer=()=>{for(let k=0;k<3&&D.storyOf(s).pending;k++)answer1()};
+ const answer1=()=>{const ev=D.openEvent(s);if(!ev)return;const open=ev.options.map((o,i)=>o.locked?-1:i).filter(i=>i>=0);
   const order=open.length?[rnd()<.65?open[0]:open[Math.floor(rnd()*open.length)],...open]:[0];
   for(const i of order){s={...s,money:Math.max(s.money,3_000_000)};const r=D.answerEvent(s,i);if(r.ok){s=r.state;return}}
   const st=structuredClone(s.story);delete st.pending;s={...s,story:st}};
@@ -45,7 +47,8 @@ function run(persona,seed,days){
    for(const n of here){if(rnd()>=TALK[persona])continue;const r=D.startTalk(s,n.id);if(!r.ok)continue;s=r.state;record();answer()}}
   const next={...s,day:s.day+1,clock:{...clockOf(s),minute:START,location:'home'}};s=D.settleStory(s,next)}
  const tiers={};for(const n of [...['landlord','veg','neighbor','courier','banhmi','doctor','teller'].map(id=>N.castById(s,id)),...N.coworkersOf(s)]){const t=N.relationTier(socialOf(s).relations[n.id]?.score??0,n.id);tiers[t]=(tiers[t]||0)+1}
- return{persona,seed,days,events,played,tiers,valid:D.validStory(s.story,s.day)}}
+ const scores=Object.fromEntries([...['landlord','veg','neighbor','courier','banhmi','doctor','teller'].map(id=>N.castById(s,id)),...N.coworkersOf(s)].map(n=>[n.id,socialOf(s).relations[n.id]?.score??0]));
+ return{persona,seed,days,events,played,tiers,scores,valid:D.validStory(s.story,s.day)}}
 
 /** Chỉ số tổng hợp cho một persona (gộp mọi seed). */
 function summarize(runs){const out={};for(const p of PERSONAS){const rs=runs.filter(r=>r.persona===p);if(!rs.length)continue;
