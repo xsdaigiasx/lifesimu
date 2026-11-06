@@ -2,7 +2,7 @@
 import {isNpcId} from '../npc';
 import {isGiftItem,GIFT_MAX} from '../gifts';
 import type {Frame,Piece,TalkData} from './types';
-import {CHANNELS,EMOTIONS,INTENTS,SLOTS,TIERS,VOICES,WHENS} from './types';
+import {AFTERS,CHANNELS,EMOTIONS,INTENTS,PLAYER_TOPICS,SLOTS,TIERS,VOICES,WHENS} from './types';
 import {ADDRESS_VARS,varsIn} from './compose';
 
 /** Biến điền được phép trong mảnh (lấy từ dữ kiện); `when` tự tính từ ngày của dữ kiện. */
@@ -17,7 +17,7 @@ export function talkProblems(d:TalkData,opt:{minFramesPerIntent?:number}={}):str
  const ids=new Set<string>();
  for(const f of d.frames as Frame[]){const at=`khung ${f?.id}`;
   if(!f||typeof f.id!=='string'||!f.id){bad('khung thiếu id');continue}if(ids.has(f.id))bad(`${at}: trùng id`);ids.add(f.id);
-  if(!INTENTS.includes(f.intent))bad(`${at}: ý định lạ ${f.intent}`);
+  if(f.mode!==undefined){if(!['follow','answer'].includes(f.mode))bad(`${at}: kiểu khung lạ`);if(f.intent!==undefined)bad(`${at}: khung đặc biệt không ghi ý định`)}else if(!f.intent||!INTENTS.includes(f.intent))bad(`${at}: ý định lạ ${f.intent}`);
   if(!Array.isArray(f.slots)||!f.slots.length)bad(`${at}: không có ô`);else{const ss=f.slots.map(slotOf);
    for(const s of ss)if(!SLOTS.includes(s as never))bad(`${at}: ô lạ ${s}`);
    if(new Set(ss).size!==ss.length)bad(`${at}: hai ô cùng chức năng`);
@@ -48,10 +48,14 @@ export function talkProblems(d:TalkData,opt:{minFramesPerIntent?:number}={}):str
   if(p.weight!==undefined&&!(p.weight>0))bad(`${at}: trọng số phải dương`);
   if(p.gift===undefined&&PROMISE.test(p.text??''))bad(`${at}: câu hứa cho đồ phải khai gift để cho thật`);
   if(p.gift!==undefined&&!(Array.isArray(p.gift)&&isGiftItem(p.gift[0])&&Number.isInteger(p.gift[1])&&p.gift[1]>=1&&p.gift[1]<=GIFT_MAX))bad(`${at}: quà phải là món có trong danh mục, 1 đến ${GIFT_MAX}`);
+  if(p.after!==undefined&&(!Array.isArray(p.after)||!p.after.length||p.after.some(x=>!AFTERS.includes(x))))bad(`${at}: after lạ`);
+  if(p.answer!==undefined&&(!Array.isArray(p.answer)||!p.answer.length||p.answer.some(x=>!PLAYER_TOPICS.includes(x))))bad(`${at}: answer lạ`);
+  if(p.after&&p.answer)bad(`${at}: không ghi cả after và answer`);
   if(p.cold&&p.intent?.some(i=>['invite','request','tease'].includes(i)))bad(`${at}: mảnh lạnh nhạt không dùng cho Rủ, Nhờ, Trêu`);
   // mảnh nào cũng phải có ít nhất một khung dùng được (chào hỏi: ô open không gắn ý định)
-  const usable=!p.intent&&p.slot==='open'||d.frames.some(f=>f.slots.map(slotOf).includes(p.slot)&&(!p.intent||p.intent.includes(f.intent))&&(!p.channel||!f.channel||p.channel.some(c=>f.channel!.includes(c))));
+  const mode=p.after?'follow':p.answer?'answer':undefined;
+  const usable=!mode&&!p.intent&&p.slot==='open'||d.frames.some(f=>f.mode===mode&&f.slots.map(slotOf).includes(p.slot)&&(!!mode||!p.intent||p.intent.includes(f.intent!))&&(!p.channel||!f.channel||p.channel.some(c=>f.channel!.includes(c))));
   if(!usable)bad(`${at}: không khung nào dùng được`)}
  // khung nào cũng phải có mảnh cho mọi ô bắt buộc
- for(const f of d.frames)for(const s of f.slots.filter(x=>!x.endsWith('?')))if(!d.pieces.some(p=>p.slot===s&&(!p.intent||p.intent.includes(f.intent))&&!p.cold))bad(`khung ${f.id}: ô ${s} không có mảnh nào`);
+ for(const f of d.frames)for(const s of f.slots.filter(x=>!x.endsWith('?')))if(!d.pieces.some(p=>p.slot===s&&(f.mode==='follow'?!!p.after:f.mode==='answer'?!!p.answer:!p.after&&!p.answer&&(!p.intent||p.intent.includes(f.intent!)))&&!p.cold))bad(`khung ${f.id}: ô ${s} không có mảnh nào`);
  return out}

@@ -12,7 +12,7 @@ export interface EventKind{id:string;name:string;sub:string;tone:'good'|'bad'|'p
  age?:[number,number];roles?:string[];privacy:0|1|2|3;
  /** biến cố nối tiếp khi biến cố này kết thúc, kèm phần trăm xảy ra */next?:[string,number];
  /** không tự bắt đầu, chỉ nối tiếp */chained?:boolean;items?:string[]}
-const SELLERS=['veg','meat','grocery','banhmi'];
+export const SELLERS=['veg','meat','grocery','banhmi'];
 /** 30 loại biến cố đời NPC. */
 export const EVENT_KINDS:EventKind[]=[
  {id:'cold',name:'cảm lạnh',sub:'sick',tone:'bad',dur:[2,5],weight:6,privacy:0},

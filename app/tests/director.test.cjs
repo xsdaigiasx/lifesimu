@@ -9,7 +9,7 @@ test('người chơi chủ động: chỉ khi người đó ở đây; mở câu
  let s=at(0,1140,'home');assert.equal(D.startTalk(s,'veg').ok,false,'người bán rau không ở khu trọ buổi tối');assert.equal(D.startTalk(s,'me').ok,false,'Mẹ chỉ liên lạc từ xa');
  s=ok(D.startTalk(s,'landlord'));const ev=D.openEvent(s);assert.equal(ev.npc.id,'landlord');assert.ok(ev.options.length>=2);assert.ok(ev.options.every(o=>!/[+−-]\d/.test(o.label)),'không ghi hệ quả');
  const back=engine.parse(JSON.stringify(s));assert.ok(back&&back.story.pending,'câu chuyện đang mở giữ qua lưu');
- assert.equal(D.startTalk(s,'landlord').ok,false,'đang có chuyện dở');s=ok(D.answerEvent(s,0));assert.equal(D.storyOf(s).pending,undefined);
+ assert.equal(D.startTalk(s,'landlord').ok,false,'đang có chuyện dở');for(let k=0;k<3&&D.storyOf(s).pending;k++)s=ok(D.answerEvent(s,D.openEvent(s).options.findIndex(o=>!o.locked)));assert.equal(D.storyOf(s).pending,undefined,'nói tối đa 3 lượt');
  assert.ok(s.journal.some(j=>j.title.startsWith(require('../.test-build/domain/npc').nameOf(s,'landlord'))));assert.equal(D.startTalk(s,'landlord').ok,false,'chưa đủ 60 phút');
  assert.ok(D.startTalk({...s,clock:{...s.clock,minute:clockOf(s).minute+60}},'landlord').ok);
 });
