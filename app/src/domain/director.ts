@@ -21,6 +21,7 @@ import {forgetMemories,reinforce,FORGET} from './talk/npc-life';
 import {chooseLine,lineById,fill,intentsWithLines} from './lines';
 import {answerNow,followNow,hasOwnLines,sayNow,replyCtxOf} from './talk/live';
 import {buildReplies,lineForm,resolveReply,setPrint,playerAddress,MAX_TURNS,CONTINUE} from './talk/replies';
+import {sceneOf,SCENE_MINUTES,type SceneKind,type SceneLine} from './talk/interlude';
 import {noteReplyFor,notePrintsFor} from './talk/state';
 import {receiveGift,isGiftItem,GIFT_MAX,giftText} from './gifts';
 import {INTENTS,PLAYER_TOPICS,CHANNELS,type After,type Channel,type Intent,type PlayerTopic} from './talk/types';
@@ -166,7 +167,7 @@ export function openEvent(s:GameState){const p=storyOf(s).pending;if(!p)return n
  return{npc,motif:m.name,said:undefined as string|undefined,line:[text(p.line)??m.line(c),text(p.quirk)].filter(Boolean).join(' '),recall:mem?`${cap(agoText(s.day-mem.day))}: ${mem.topic}`:undefined,options:m.options(c).map(o=>{const lack=o.need&&(k?.[o.need[0]]?.level??1)<o.need[1],poor=o.needMoney!==undefined&&s.money<o.needMoney;return{label:o.label,locked:!!(lack||poor),need:lack?`${SKILLS[o.need![0]]} Lv${o.need![1]}`:poor?'Không đủ tiền':undefined}})}}
 
 /** Trả lời câu chuyện: áp hệ quả, ghi ký ức, móc tiếp nối, khoản cho mượn và Nhật ký. */
-export function answerEvent(s:GameState,choice:number):GameResult&{text?:string}{const st=storyOf(s),p=st.pending;if(!p)return{ok:false,error:'Không có câu chuyện nào đang mở.'};if(p.talk)return answerTalk(s,p,p.talk,choice);const npc=castById(s,p.npc)!,m=motifOf(p.motif),mem=p.memory?st.memories.find(x=>x.id===p.memory):undefined,c=ctxFor(s,npc,p.variant,mem),o=Number.isInteger(choice)?m.options(c)[choice]:undefined;if(!o)return{ok:false,error:'Lựa chọn không hợp lệ.'};
+export function answerEvent(s:GameState,choice:number):GameResult&{text?:string;scene?:SceneLine[]}{const st=storyOf(s),p=st.pending;if(!p)return{ok:false,error:'Không có câu chuyện nào đang mở.'};if(p.talk)return answerTalk(s,p,p.talk,choice);const npc=castById(s,p.npc)!,m=motifOf(p.motif),mem=p.memory?st.memories.find(x=>x.id===p.memory):undefined,c=ctxFor(s,npc,p.variant,mem),o=Number.isInteger(choice)?m.options(c)[choice]:undefined;if(!o)return{ok:false,error:'Lựa chọn không hợp lệ.'};
  if(o.need&&(s.skills?.[o.need[0]]?.level??1)<o.need[1])return{ok:false,error:`Cần ${SKILLS[o.need[0]]} Lv${o.need[1]}.`};if(o.needMoney!==undefined&&s.money<o.needMoney)return{ok:false,error:'Không đủ tiền.'};
  let n:GameState=structuredClone(s);const e=o.effect,clamp=(v:number)=>Math.max(0,Math.min(100,v));
  if(e.minutes&&clockOf(n).minute+e.minutes<END){const r=spendTime(n,e.minutes);if(r.ok)n=r.state}
@@ -183,7 +184,7 @@ export function answerEvent(s:GameState,choice:number):GameResult&{text?:string}
  n={...n,story:ns};n=recordJournal(n,`story:${p.key}`,`${npc.name}: ${m.name}`,`${o.label}. ${o.result}`,npc.id);return{ok:true,state:n,text:o.result}}
 
 /** H5: trả lời câu ghép bằng một lựa chọn thái độ × hành động; hậu quả theo tính cách NPC (resolveReply), không hiện trước. */
-function answerTalk(s:GameState,p:PendingEvent,t:TalkLine,choice:number):GameResult&{text?:string}{const npc=castById(s,p.npc);if(!npc)return{ok:false,error:'Không tìm thấy người này.'};
+function answerTalk(s:GameState,p:PendingEvent,t:TalkLine,choice:number):GameResult&{text?:string;scene?:SceneLine[]}{const npc=castById(s,p.npc);if(!npc)return{ok:false,error:'Không tìm thấy người này.'};
  const turn=t.turn??1,rc=talkCtxOf(s,npc,p,t),opts=buildReplies(rc),o=Number.isInteger(choice)?opts[choice]:undefined;if(!o)return{ok:false,error:'Lựa chọn không hợp lệ.'};if(o.locked)return{ok:false,error:o.need?`Cần ${o.need}.`:'Lúc này chưa làm được.'};
  const r=resolveReply(rc,o);let n:GameState=structuredClone(s);
  if(r.minutes&&clockOf(n).minute+r.minutes<END){const x=spendTime(n,r.minutes);if(x.ok)n=x.state}
@@ -191,16 +192,18 @@ function answerTalk(s:GameState,p:PendingEvent,t:TalkLine,choice:number):GameRes
  if(r.energy)n.energy=Math.max(0,n.energy-r.energy);
  n=adjustRelation(n,npc.id,r.relation,true,r.light);if(r.gift)n=receiveGift(n,r.gift[0],r.gift[1]);
  n=noteReplyFor(n,{d:s.day,n:npc.id,a:o.attitude,x:o.action});n=notePrintsFor(n,npc.id,[...t.prints,setPrint(npc.id,opts)]);
- /* H6: lượt sau khi người chơi Hỏi thêm, Giúp hoặc Kể chuyện mình (tối đa 3 lượt, còn giờ) */
- let next:TalkLine|undefined;
- if(turn<MAX_TURNS&&CONTINUE.includes(o.action)&&!r.gift&&clockOf(n).minute+5<END){const f=followNow(n,npc,t.ch??'face',`talk:${p.key}:${turn+1}:${npc.id}`,t.intent,o.action as After,t.fact);
-  if(f)next={...talkLineOf(f,{said:o.label,turn:turn+1,skip:[...(t.skip??[]),o.id].slice(-6),...(t.ch?{ch:t.ch}:{}),...(t.mode?{mode:t.mode}:{})}),intent:t.intent,...(t.fact?{fact:t.fact}:{})}}
+ /* #354: chọn câu kéo dài chuyện (Hỏi thêm, Giúp, Kể chuyện mình, nhận lời rủ, làm lành) thì hiện đoạn tự diễn thay cho lượt 2, 3: 10 phút, cộng như một lượt Hỏi thêm */
+ const kind:SceneKind|undefined=r.gift||t.mode==='answer'||t.ch==='text'?undefined:o.action==='help'?'help':t.intent==='invite'&&(o.action==='accept'||o.action==='ask')?'invite':t.intent==='request'?undefined:t.intent==='apologize'&&o.action==='accept'&&o.attitude==='warm'?'forgive':CONTINUE.includes(o.action)&&(o.attitude==='warm'||o.attitude==='joke')?'talk':undefined;
+ let scene:SceneLine[]|undefined;
+ if(kind&&clockOf(n).minute+SCENE_MINUTES<END){const x=spendTime(n,SCENE_MINUTES);if(x.ok){n=x.state;const more=resolveReply({...rc,turn:2},{id:'scene',attitude:'warm',action:'ask',label:'',minutes:0,energy:0,money:0,locked:false});n=adjustRelation(n,npc.id,more.relation,true,true);
+  scene=sceneOf({npc,kind,intent:t.intent,tier:rc.tier,channel:t.ch??'face',...(clockOf(s).location&&t.ch!=='call'?{place:clockOf(s).location}:{}),minute:clockOf(n).minute,seed:`scene:${p.key}`,said:o.label})}}
+ const next:TalkLine|undefined=undefined;
  const ns:StoryState=structuredClone(storyOf(n));delete ns.pending;if(next)ns.pending={...p,talk:next};
  if(r.memory&&r.memory.weight>=FORGET.minWeight){ns.memories=[...ns.memories,{id:`m${ns.seq}`,day:s.day,npc:npc.id,motif:'greet',topic:r.memory.topic,tag:r.memory.tag,weight:r.memory.weight}];if(ns.memories.length>200){const drop=ns.memories.filter(x=>x.weight<4).sort((a,b)=>a.weight-b.weight||a.day-b.day)[0];if(drop)ns.memories=ns.memories.filter(x=>x!==drop)}}
  n={...n,story:ns};
  const text=r.gift?`Nhận ${giftText([r.gift])} của ${npc.name}.`:r.relation>=3?`${npc.name} vui hẳn.`:r.relation>0?`${npc.name} gật gù.`:r.relation<0?`${npc.name} hơi phật ý.`:'Hai người chào nhau rồi ai lo việc nấy.';
- if(next||t.ch==='call')return{ok:true,state:n,text};// cuộc gọi đã ghi Nhật ký ở callNpc
- n=recordJournal(n,`story:${p.key}`,`${npc.name}: Trò chuyện`,`${turn>1?`${turn} lượt. `:''}${o.label}. ${text}`,npc.id);return{ok:true,state:n,text}}
+ const sc=scene?{scene}:{};if(next||t.ch==='call')return{ok:true,state:n,text,...sc};// cuộc gọi đã ghi Nhật ký ở callNpc
+ n=recordJournal(n,`story:${p.key}`,`${npc.name}: Trò chuyện`,scene?`${o.label}. ${scene[1]!.text} ${scene[2]!.text}`:`${turn>1?`${turn} lượt. `:''}${o.label}. ${text}`,npc.id);return{ok:true,state:n,text,...sc}}
 /** Bối cảnh lựa chọn của câu ghép đang chờ (lượt sau có seed riêng, bỏ lựa chọn đã chọn). */
 function talkCtxOf(s:GameState,npc:NpcProfile,p:PendingEvent,t:TalkLine){const turn=t.turn??1;return replyCtxOf(s,npc,t.intent,turn>1?`${p.key}:${turn}`:p.key,t.gift,{turn,...(t.mode?{mode:t.mode}:{}),...(t.skip?{skip:t.skip}:{}),...(t.fact?{fact:t.fact}:{}),...(lineForm(t.intent,t.text,turn)?{form:lineForm(t.intent,t.text,turn)}:{})})}
 
