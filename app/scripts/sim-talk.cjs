@@ -1,5 +1,5 @@
 /* H8: mô phỏng hội thoại Lô 1 (HOI-THOAI I.9). Dùng đúng code domain (.test-build): director (startTalk, maybeStart, openEvent, answerEvent, settleStory), inbox (settleInbox, deliverDue) và bộ ghép câu.
- * Chạy: npm run sim:talk -- [--days 30] [--seeds 30]   (luôn build lại .test-build)
+ * Chạy: npm run sim:talk -- [--days 30] [--seeds 60]   (luôn build lại .test-build; mặc định 60 seed cho đủ tháng đo, chủ dự án 06/11)
  * Người chơi trung bình: đi làm ngày thường, sáng ghé chợ hoặc trạm xe buýt, tối về nhà; gặp người Lô 1 thì nói chuyện 70%; ăn trưa ngoài, tối nấu hoặc ăn ngoài.
  * Chỉ tiêu (I.9): từ 90% câu không trùng nguyên văn (trong một đời chơi); 0 câu nhắc dữ kiện sai (mảnh có chủ đề phải khớp dữ kiện, đủ biến, NPC được biết);
  * người thường gặp (từ 12 câu một tháng) có từ 6 trong 8 ý định; từ 30% câu nhắc trạng thái người chơi hoặc biến cố thật (mảnh có chủ đề khớp dữ kiện). */
@@ -62,7 +62,8 @@ function run(seed,days){const rnd=rngOf(seed),lines=[],errors=[],follows={n:0,te
  return{seed,days,lines,errors,follows:{n:follows.n,uniq:follows.texts.size},topics:topics.n,valid:D.validStory(s.story,s.day)&&engine.valid(s)}}
 
 /** Số ý định cần trong tháng theo bậc lúc đầu tháng: Lạ chỉ được Khoe, Than, Hỏi, Kể tin, Xin lỗi (Xin lỗi để dành cho chuyện thật) nên cần đủ 4; từ Quen biết cần 6 trong 8. */
-const NEED={hostile:3,stranger:4,acquaint:6,close:6,bestie:6};
+/* chủ dự án 06/11: Quen biết chỉ có 7 ý định (Trêu mở từ Thân), trừ Xin lỗi để dành cho chuyện thật thì mốc 5, như cách chỉnh bậc Lạ ở H5 */
+const NEED={hostile:3,stranger:4,acquaint:5,close:6,bestie:6};
 const mostTier=ls=>{const c={};for(const l of ls)c[l.tier]=(c[l.tier]||0)+1;return Object.entries(c).sort((a,b)=>b[1]-a[1])[0][0]};
 /* Câu đáp chủ đề người chơi mở: người chơi chọn chủ đề nên không tính vào chỉ tiêu I.9 (chỉ đếm số lần) */
 function summarize(runs0){const runs=runs0.map(r=>({...r,lines:r.lines.filter(l=>!l.topic)}));const per={},all={n:0,uniq:0,real:0,err:0};
@@ -75,11 +76,11 @@ function verdict(sum){const a=sum.all,v=[];
  v.push(['0 câu nhắc dữ kiện sai',a.err===0,`${a.err} lỗi${sum.errors.length?': '+sum.errors.join('; '):''}`]);
  const freq=Object.entries(sum.per).filter(([,x])=>x.months);const low=freq.flatMap(([,x])=>x.low),allMonths=freq.reduce((a,[,x])=>a+x.months,0),okShare=allMonths?1-low.length/allMonths:0;
  /* chủ dự án 06/11: mốc theo bậc đầu tháng; từ 95% số tháng đạt (thiếu lẻ một ý định là do may rủi trong tháng); câu nhắc chuyện thật từ 29% */
- v.push([`Người thường gặp: từ 95% số tháng có từ 6 trong 8 ý định (Lạ: đủ 4 ý định được phép), đạt ${pc(okShare)}`,freq.length>0&&okShare>=.95,(freq.map(([id,x])=>`${id} ${Math.min(...x.intents)}–${Math.max(...x.intents)}`).join(', ')||'không ai đủ 12 câu')+(low.length?`; thiếu: ${low.join(', ')}`:'')]);
+ v.push([`Người thường gặp: từ 95% số tháng đủ ý định (Lạ 4, Quen biết 5, từ Thân 6 trong 8), đạt ${pc(okShare)}`,freq.length>0&&okShare>=.95,(freq.map(([id,x])=>`${id} ${Math.min(...x.intents)}–${Math.max(...x.intents)}`).join(', ')||'không ai đủ 12 câu')+(low.length?`; thiếu: ${low.join(', ')}`:'')]);
  v.push(['Từ 29% câu nhắc trạng thái người chơi hoặc biến cố thật',a.real/a.n>=.29,pc(a.real/a.n)]);
  v.push(['Save story hợp lệ',sum.invalid===0,`${sum.invalid} lần sai`]);return v}
 
-function main(){const arg=n=>{const i=process.argv.indexOf('--'+n);return i>0?Number(process.argv[i+1]):undefined},days=arg('days')??30,seeds=arg('seeds')??30;
+function main(){const arg=n=>{const i=process.argv.indexOf('--'+n);return i>0?Number(process.argv[i+1]):undefined},days=arg('days')??30,seeds=arg('seeds')??60;
  const runs=[];for(let i=0;i<seeds;i++)runs.push(run(i,days));const sum=summarize(runs);
  console.log(`Mô phỏng hội thoại Lô 1 và Lô 2: ${days} ngày, ${seeds} seed\n\nNgười         Câu/đời   Nhắc thật   Ý định/tháng (người thường gặp)`);
  for(const id of TALKERS){const x=sum.per[id];if(!x)continue;console.log(`${id.padEnd(12)} ${(x.n/seeds).toFixed(1).padStart(8)} ${pc(x.real/x.n).padStart(10)}   ${x.months?`${Math.min(...x.intents)} đến ${Math.max(...x.intents)}`:'-'}`)}
