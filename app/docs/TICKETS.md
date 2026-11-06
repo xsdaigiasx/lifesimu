@@ -1,6 +1,6 @@
 # Tiến độ ticket so với Kế hoạch
 
-Cập nhật 05/11/2026, app 0.75.3, Kế hoạch bản rev 65. Sửa bảng này mỗi khi gộp PR của một ticket.
+Bảng cập nhật lần cuối 05/11/2026 (app 0.75.3, Kế hoạch bản rev 65); app hiện 0.87.0, các việc H0 đến H7a làm sau mốc đó xem `HANDOVER.md`. Sửa bảng này mỗi khi gộp PR của một ticket.
 
 Xong 52, một phần 9, còn lại chưa làm, bỏ hoặc hoãn. Cột Tệp chỉ tệp trong `docs/plan/` có bảng ticket đó.
 

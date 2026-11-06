@@ -9,8 +9,8 @@ Game mô phỏng đời sống một thanh niên từ quê lên phố, kết h�
 | Thư mục | Nội dung | Ai làm |
 |---|---|---|
 | `core/` | Lõi engine thuần TypeScript (không phụ thuộc giao diện): đồng hồ, RNG theo seed, sổ cái giao dịch, save có migration, mô phỏng | Claude |
-| `app/` (sắp thêm) | Giao diện React của bản build v0.35 | Đẩy source v0.35 vào đây |
-| `assets/` (sắp thêm) | Ảnh isometric, icon, âm thanh theo bảng đặc tả asset | Codex |
+| `app/` | Giao diện React và logic game (bản 0.87.0, số bản ở `app/package.json`; xem `app/docs/HANDOVER.md`) | Claude |
+| `assets/` | Ảnh isometric, icon, âm thanh theo bảng đặc tả asset | Codex |
 
 ## Quy tắc chung
 
