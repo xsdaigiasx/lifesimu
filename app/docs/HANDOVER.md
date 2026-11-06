@@ -9,6 +9,22 @@ Bản trước: `HANDOVER-v0.35.md` (01/11). File này dành cho phiên Claude m
 - Trong repo: `CLAUDE.md` (quy tắc làm việc và giao diện), `AGENTS.md` (vai trò, quy cách asset), `README.md` (bảy quy tắc), file này. Chỉ dùng bản Claude Docs ở trên làm lộ trình mới nhất; các bản xuất `.md` cũ (v0.20) đã bỏ. Nếu không đọc được bằng id, hỏi chủ dự án chia sẻ lại tài liệu.
 - Quyết định của chủ dự án nằm cả trong bộ nhớ Claude (`/areas/mot-doi-de-song.md`).
 
+## 1a. Thứ tự việc còn lại (chủ dự án duyệt 06/11, chi tiết trạng thái ở TICKETS.md)
+
+1. Đợt sửa giao diện 7 việc (mục H7a bên dưới; việc 1 đến 6 Sonnet, việc 7 tranh treo tường Opus).
+2. H7c cảnh nhóm, quan hệ NPC với NPC, tin đồn (gồm T63, phần hàng xóm và sự kiện nhóm của T86); Opus.
+3. H7d nhóm chat Khu trọ, Đồng nghiệp, Gia đình (gồm nhóm chat khu trọ của T86); rồi H8 mở rộng mô phỏng hội thoại cho Lô 3.
+4. Sau H7d: T86 phần điểm hoà thuận khu trọ; T89 mạng xã hội trong game (dùng tin đồn và khung nhóm chat).
+5. Basic 1.0: T38 hiệu năng điện thoại; T39 hồi quy, cân bằng lại bằng các sim (gồm T37), đóng gói.
+6. Làm một phần, làm tiếp: T52 bản đồ phụ; T53 hợp đồng, thế chấp; T59 bệnh ẩn ở quán; T61 báo, giải trí; T67 bản đồ sông; T88 cuối tuần có kế hoạch (gồm T87 hồi ức); T85 XP sở thích, bộ sưu tập.
+7. Kinh tế: T57 chứng khoán, T58 bất động sản, phần báo T61 làm chung (tin tức nuôi giá).
+8. Nghề và công ty: T66 nâng cấp công ty; T73 ca phục vụ và T74 ngành ẩm thực làm chung.
+9. Đời sống: T65 thành tựu, T68 quê và nông trại, T76 sự kiện mùa và lễ, T84 thú cưng (cần quy định theo loại nhà T53).
+10. Nhiều đời: T69 hồ sơ đời (đang hoãn, chờ chủ dự án), T70 chuyển đời, T71 nhiều nhân vật, T83 bối cảnh năm.
+11. Mini game: T79 khung chung, mỗi trò khai offline hoặc online (gồm phần còn lại T62); T80 offline chơi một mình, kỷ lục cá nhân, không so điểm; T82 online đối đầu 2 người (mã phòng hoặc ghép trận).
+12. Online: T77 tài khoản, cloud save; T78 thăm nhà; T81 bảng xếp hạng tài sản.
+13. Sau khi xong game: ticket chống gian lận save.
+
 ## 1b. Cập nhật cuối phiên 05/11 (đọc trước mục 1)
 
 - **T30, T31 đã vào main** (#168 khôi phục T30, #175 gom #169, #170, #172: ba lô lô 2, nút i nhỏ mỏng, T31). Đã lạc hai lần vì xếp chồng PR (PR con gộp vào nhánh của PR cha, không vào main). **Từ nay mỗi PR mở thẳng vào main**; nếu phải xếp chồng thì sau khi gộp PR cha phải đổi base về main trước khi gộp PR con.
