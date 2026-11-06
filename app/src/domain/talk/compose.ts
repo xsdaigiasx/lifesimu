@@ -10,9 +10,10 @@ import framesData from './data/frames.json';
 import piecesData from './data/pieces.json';
 import lo1Data from './data/lo1.json';
 import lo2Data from './data/lo2.json';
+import lo3Data from './data/lo3.json';
 
 /** Kho khung và mảnh mặc định (kiểm bằng npm run talk:check). */
-export const TALK:TalkData={frames:framesData as Frame[],pieces:[...piecesData,...lo1Data,...lo2Data] as Piece[]};
+export const TALK:TalkData={frames:framesData as Frame[],pieces:[...piecesData,...lo1Data,...lo2Data,...lo3Data] as Piece[]};
 
 /** Vân tay chống lặp (I.7): mảnh 14 ngày, khung 3 ngày, ý định cùng chủ đề 2 ngày. Chỉ lưu mã, không lưu câu. */
 export interface Print{k:string;d:number}
@@ -53,11 +54,15 @@ function pieceFits(p:Piece,slot:Slot,intent:Intent|null,fact:Fact|undefined,c:Ta
  if((p.privacy??0)>privacyCap(c.tier))return false;
  if(p.voice&&p.voice!==c.npc.voiceKey)return false;
  if(p.npc&&p.npc!==c.npc.id)return false;
+ if(p.arch&&!(c.npc.arch&&p.arch.includes(c.npc.arch)))return false;
+ if(p.tone&&!(fact&&p.tone.includes(fact.tone)))return false;
+ if(p.noArch&&c.npc.arch&&p.noArch.includes(c.npc.arch))return false;
+ if(p.town!==undefined&&p.town!==!!c.npc.arch)return false;
  if(p.age&&(c.npc.age<p.age[0]||c.npc.age>p.age[1]))return false;
  if(p.where&&!(c.place&&p.where.includes(c.place)))return false;
  if(p.when&&!p.when.includes(whenOf(c.minute)))return false;
  if(p.channel&&!p.channel.includes(c.channel))return false;
- if(varsIn(p.text).some(v=>vars[v]===undefined))return false;
+ if(varsIn(p.text).some(v=>vars[v]===undefined)||p.needs?.some(v=>vars[v]===undefined))return false;
  return!used(c.recent??[],'p:'+p.id,c.day)}
 /** Rút có trọng số theo seed; mảnh mang giọng hoặc riêng của NPC được nhân đôi. */
 function pick<T extends {id:string;weight?:number}>(list:readonly T[],seed:string,boost:(x:T)=>number=()=>1){if(!list.length)return undefined;const w=list.map(x=>Math.max(0,(x.weight??1)*boost(x))),sum=w.reduce((a,b)=>a+b,0);if(sum<=0)return list[0];let r=hash(seed)%10000/10000*sum;for(let i=0;i<list.length;i++){r-=w[i]!;if(r<0)return list[i]}return list[list.length-1]}
@@ -71,6 +76,8 @@ export const FRESH_BOOST=20;
 /** Mảnh nhắc đúng dữ kiện được ưu tiên hơn mảnh chung (câu bám chuyện thật, I.9). */
 export const TOPIC_BOOST=6;
 const SORRY_SUBS=['missed','debt','harsh'];
+/** H7a: dữ kiện lần gặp trước (town-data MET_SUBS), luôn thử trước khi chọn chuyện khác. */
+const FIRST_SUBS:readonly string[]=['met','metsame','metnew','back'];
 /** Xáo có trọng số theo seed (rút không hoàn lại, tất định). */
 const weighted=<T,>(list:readonly T[],seed:string,key:(x:T)=>string,w:(x:T)=>number)=>list.map(x=>({x,k:-Math.log((hash(`${seed}:${key(x)}`)%9973+1)/9974)/Math.max(1e-6,w(x))})).sort((a,b)=>a.k-b.k).map(o=>o.x);
 
@@ -90,7 +97,7 @@ function tryFrame(c:TalkCtx,data:TalkData,frame:Frame,intent:Intent|null,fact:Fa
  for(const raw of frame.slots){const optional=raw.endsWith('?'),slot=raw.replace('?','') as Slot;
   /* câu gọn (H6): mảnh tuỳ chọn bỏ khi câu đã đủ 3 phần hoặc dài; câu nhắc chuyện cụ thể đã mang cảm xúc nên bỏ ô cảm xúc */
   if(optional&&(parts.length>=3||joinParts(parts).length>=LONG||(slot==='feel'&&topical)))continue;
-  const cand=data.pieces.filter(p=>pieceFits(p,slot,intent,fact,c,vars,w)),p=pick(cand,`${c.seed}:${frame.id}:${slot}`,x=>(x.npc||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
+  const cand=data.pieces.filter(p=>pieceFits(p,slot,intent,fact,c,vars,w)),p=pick(cand,`${c.seed}:${frame.id}:${slot}`,x=>(x.npc||x.arch||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
   if(!p){if(optional)continue;return null}if(slot==='body'&&p.topic)topical=true;parts.push(fill(p.text,vars));ids.push(p.id)}
  const text=joinParts(parts);if(!text)return null;
  const used=ids.map(id=>data.pieces.find(p=>p.id===id)!),gift=used.map(p=>p.gift).find(Boolean);
@@ -112,6 +119,9 @@ export function compose(c:TalkCtx):Said|null{const data=c.data??TALK,when=whenOf
  /* ý định chưa nói với người này trong 14 ngày được ưu tiên gấp đôi (đa dạng, I.9) */const said14=new Set((c.recent??[]).filter(x=>x.k.startsWith('t:')&&c.day-x.d<14).map(x=>x.k.split(':')[1]));
  const facts0=c.groups?c.facts.filter(f=>c.groups!.includes(f.topic)):c.facts;
  const intents=weighted((c.intents??INTENTS).filter(i=>intentAllowed(i,c.tier,c.mood)),`${c.seed}:intent`,i=>i,i=>(i==='apologize'&&sorry?1.5:INTENT_WEIGHT[i])*(said14.has(i)?1:FRESH_BOOST));
+ /* H7a: người lạ gặp lại nhớ lần trước: dữ kiện lần gặp trước của chính NPC này được thử trước (bỏ câu mở lời kiểu gặp lần đầu) */
+ for(const fact of facts0.filter(f=>FIRST_SUBS.includes(f.sub)&&f.about===c.npc.id)){const only={...data,pieces:data.pieces.filter(p=>(p.slot!=='body'||!!p.topic?.includes(fact.sub))&&!(p.slot==='open'&&p.arch))};for(const intent of intents){if(!factFits(fact,intent,c.tier,c.npc.id,c.present??[])||used(c.recent??[],`t:${intent}:${fact.sub}`,c.day))continue;
+  for(const frame of order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:${fact.id}`,f=>f.id)){const said=tryFrame(c,only,frame,intent,fact);if(said&&said.pieces.some(id=>data.pieces.find(p=>p.id===id)?.topic?.includes(fact.sub)))return said}}}
  for(const intent of intents){
   const facts=order(facts0.filter(f=>factFits(f,intent,c.tier,c.npc.id,c.present??[])&&!used(c.recent??[],`t:${intent}:${f.sub}`,c.day)),`${c.seed}:fact:${intent}`,f=>f.id);
   for(const fact of facts){

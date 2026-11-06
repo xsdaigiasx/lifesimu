@@ -6,6 +6,7 @@ import {hash} from './shift';
 import poolData from './npc-pool.json';
 import type {PoolData} from './pool-check';
 import type {Voice} from './lines';
+import {TOWN_IDS,TOWN_START,START_PLACE,ARCHES,archOf,TOWN_PLACES} from './town-data';
 
 /** Lịch: các ngày trong tuần (0 = Chủ nhật … 6 = Thứ bảy), giờ tính bằng phút trong ngày. */
 export interface Slot{days:number[];from:number;to:number;place:PlaceId}
@@ -20,7 +21,8 @@ export interface NpcProfile{id:string;name:string;label:string;gender:'male'|'fe
  /** ngày sinh của con lớn nhất (nếu có con), dùng cho người nối tiếp */kid?:number;
  /** hai món hợp ý khi được tặng quà */likes:string[];
  /** đang yếu dần từ ngày này (dấu hiệu trước khi mất) */frail?:number;
- /** người đã mất hoặc đã rời đi (chỉ còn trong Nhật ký) */gone?:'died'|'left'}
+ /** người đã mất hoặc đã rời đi (chỉ còn trong Nhật ký) */gone?:'died'|'left';
+ /** H7a: NPC ngẫu nhiên: kiểu người (town-data.ts) và ngày tới khu này */arch?:string;since?:number}
 export type Desk='dev'|'design'|'qa'|'pm';
 const WEEK=[0,1,2,3,4,5,6],WORK=[1,2,3,4,5],h=(t:string)=>{const [a,b]=t.split(':').map(Number);return a!*60+b!};
 const at=(days:number[],from:string,to:string,place:PlaceId):Slot=>({days,from:h(from),to:h(to),place});
@@ -28,7 +30,8 @@ const at=(days:number[],from:string,to:string,place:PlaceId):Slot=>({days,from:h
 /** Định nghĩa vai: tuổi theo vai, giới nếu vai buộc, lịch, có mạch chuyện (story) hay không. */
 interface RoleDef{id:string;role:string;age:[number,number];gender?:'male'|'female';schedule:Slot[];story?:boolean;remote?:boolean;family?:boolean;company?:string;desk?:Desk;title?:'doctor';
  /** H7b: con cái có thể nối nghiệp (khu trọ, sạp chợ, xe bánh mì) */heir?:boolean;
- /** H7b: tới tuổi này thì rời vai (nghỉ hưu, ra trường) */retire?:number}
+ /** H7b: tới tuổi này thì rời vai (nghỉ hưu, ra trường) */retire?:number;
+ /** H7a: ô NPC ngẫu nhiên; kiểu người rút khi người đó tới */town?:boolean;arch?:string}
 const SERVICE:RoleDef[]=[
  {id:'landlord',role:'Chủ trọ',age:[48,70],story:true,heir:true,schedule:[at(WEEK,'07:00','08:30','home'),at(WEEK,'18:30','21:30','home')]},
  {id:'neighbor',role:'Hàng xóm về hưu',age:[62,76],story:true,schedule:[at(WEEK,'07:00','08:30','park'),at(WEEK,'15:00','17:00','home')]},
@@ -58,12 +61,18 @@ const DESKS:{desk:Desk;role:string;age:[number,number];story?:boolean;lunch:numb
 ];
 const deskSchedule=(d:typeof DESKS[number]):Slot[]=>d.desk==='pm'?[at(WORK,'07:45','17:30','office')]:d.desk==='qa'?[at(WORK,'08:00','17:00','office'),at([2,4,6],'18:30','20:00','park')]:[at(WORK,'08:00','12:00','office'),...(d.lunch.length?[at(d.lunch,'12:00','13:00','streetfood')]:[]),at(WORK,'13:00','17:00','office')];
 const TEAM_ROLES:RoleDef[]=TEAMS.flatMap(t=>DESKS.map(d=>({id:`${t.prefix}-${d.desk}`,role:d.role,age:d.age,story:d.story,company:t.company,desk:d.desk,schedule:deskSchedule(d),retire:60})));
-export const ROLES:RoleDef[]=[...SERVICE,...FAMILY,...TEAM_ROLES];
+/** H7a: 12 ô NPC ngẫu nhiên; vai, tuổi, lịch lấy theo kiểu người của người đang giữ ô (`townDef`). */
+const TOWN_ROLES:RoleDef[]=TOWN_IDS.map(id=>({id,role:'Người quanh khu',age:[20,40],schedule:[],town:true,story:true}));
+export const ROLES:RoleDef[]=[...SERVICE,...FAMILY,...TEAM_ROLES,...TOWN_ROLES];
 /** Mọi mã NPC hợp lệ (dùng cho bộ kiểm tra save, không cần seed). */
 export const NPC_IDS:readonly string[]=ROLES.map(r=>r.id);
 /** Mã NPC hợp lệ: mã vai (người đang giữ vai) hoặc mã người đã mất, đã rời đi `vai.đời` (H7b). */
 export const isNpcId=(id:unknown):id is string=>typeof id==='string'&&(NPC_IDS.includes(id)||/^[a-z-]+\.\d{1,3}$/.test(id)&&NPC_IDS.includes(id.split('.')[0]!));
 export const roleDef=(role:string)=>ROLES.find(r=>r.id===role);
+/** H7a: vai của một ô NPC ngẫu nhiên theo kiểu người; lịch rút một phương án theo `salt` của người đó. */
+export function townDef(slot:string,arch:string,salt:string):RoleDef{const a=archOf(arch)??ARCHES[0]!;return{id:slot,role:a.role,age:a.age,schedule:a.sched[mix(hash(`${salt}:sched`))%a.sched.length]!,town:true,story:true,arch:a.id}}
+/** Kiểu người của ô ở đời đầu (theo seed thế giới). */
+export function startArch(world:string,slot:string){const place=START_PLACE[slot],list=place?ARCHES.filter(a=>a.place===place):ARCHES;return list[mix(hash(`${world}:${slot}:arch`))%list.length]!.id}
 export const FAMILY_IDS=FAMILY.map(r=>r.id);
 /** Người làm ở sảnh tòa nhà văn phòng. */
 export const LOBBY=['reception','leasing','recruiter','tech'];
@@ -125,6 +134,9 @@ export function bornFor(day:number,age:number,since:number){const t=dateAt(day);
 /** Món tặng hợp ý: món mang về (Túi), nguyên liệu (Tủ bếp) hoặc món tự nấu. */
 export const GIFT_TASTES=['banhMi','comTam','pho','setLunch','hotpot','steak','rice','egg','vegetable','pork','tofu','fish','meal'] as const;
 
+/** Tên: vai cố định giữ 20 tên đầu của mỗi giới (dàn đã có không đổi tên); NPC ngẫu nhiên (H7a) dùng cả bể tên. */
+const BASE_NAMES=20;
+const namesFor=(def:{town?:boolean},gender:'male'|'female')=>{const l=gender==='male'?POOL.male:POOL.female;return def.town?l:l.slice(0,BASE_NAMES)};
 /** Thông tin cha mẹ truyền cho người nối tiếp: họ, quê, một nét tính cách, ngày sinh của người con. */
 export interface HeirSeed{fam:string;origin:string;trait:string;born:number}
 type Taken={names:Set<string>;givens:Set<string>;full:Set<string>};
@@ -132,7 +144,7 @@ const takenOf=(list:readonly NpcProfile[]):Taken=>({names:new Set(list.map(p=>p.
 /** Rút một người cho vai theo `salt` (đã thêm số lần thử k). Trả null nếu trùng tên với người đang có. */
 function drawPerson(world:string,def:RoleDef,salt:string,day:number,gen:number,taken:Taken,mom?:NpcProfile,heir?:HeirSeed):NpcProfile|null{
  const {r,pick}=roller(salt);
- const gender=def.gender??(r('g',2)===0?'male':'female'),born=heir?heir.born:bornFor(day,def.age[0]+r('age',def.age[1]-def.age[0]+1),r('bd',365)),age=ageAt(born,day),given=pick(gender==='male'?POOL.male:POOL.female,'n');
+ const gender=def.gender??(r('g',2)===0?'male':'female'),born=heir?heir.born:bornFor(day,def.age[0]+r('age',def.age[1]-def.age[0]+1),r('bd',365)),age=ageAt(born,day),given=pick(namesFor(def,gender),'n');
  const family=heir?heir.fam:def.family&&mom?mom.fullName.split(' ')[0]!:pick(POOL.family,'f'),fullName=`${family} ${given}`,name=displayName(def,given,gender,age);
  if(taken.names.has(name)||taken.givens.has(lastWord(given))||taken.full.has(fullName))return null;
  const origin=heir?heir.origin:def.family&&mom?mom.origin:pick(POOL.origin,'o'),[voiceKey,voice]=def.id==='me'?(['que','Giọng quê'] as [Voice,string]):REGION[origin]??['que','Giọng quê'],a=addressFor(def,gender,age);
@@ -140,31 +152,43 @@ function drawPerson(world:string,def:RoleDef,salt:string,day:number,gen:number,t
  const kid=!def.family&&age>=30&&r('kid',100)<80?born+(22+r('kg',13))*365+r('kd',365):undefined;
  const likes=[pick(GIFT_TASTES,'like0')];{const b=pick(GIFT_TASTES,'like1');if(b!==likes[0])likes.push(b)}
  return{id:def.id,name,label:initials(name),gender,age,origin:def.family?'quê nhà':origin,role:def.id==='em'?(gender==='male'?'Em trai':'Em gái'):def.role,traits,quirk:pick(POOL.quirk,'q'),goal:pick(age<30?POOL.goal.filter(g=>!KID_GOALS.includes(g)):POOL.goal,'goal'),fear:pick(age<30?POOL.fear.filter(g=>!KID_GOALS.includes(g)):POOL.fear,'fear'),voice,voiceKey,self:a.self,you:a.you,tone:TONES[r('tone',TONES.length)]!,schedule:def.schedule,fullName,born,gen,likes,
-  ...(kid!==undefined?{kid}:{}),...(def.remote?{remote:true}:{}),...(def.story?{story:true}:{}),...(def.family?{family:true}:{}),...(def.company?{company:def.company,desk:def.desk}:{})}}
-const rosterCache=new Map<string,NpcProfile[]>();
+  ...(kid!==undefined?{kid}:{}),...(def.remote?{remote:true}:{}),...(def.story?{story:true}:{}),...(def.family?{family:true}:{}),...(def.company?{company:def.company,desk:def.desk}:{}),...(def.town?{arch:def.arch,since:day}:{})}}
+const rosterCache=new Map<string,NpcProfile[]>(),startK=new Map<string,number>();
+/** Số lần thử k mà dàn gốc đã dùng cho vai (để dựng lại người đời 0 ở ô khác khi họ quay lại). */
+export const rosterK=(world:string,role:string)=>{buildRoster(world);return startK.get(`${world}:${role}`)??0};
 /** Dàn NPC đời đầu (đời 0) từ seed thế giới, tuổi ở ngày 0: cùng seed cùng dàn; tên hiển thị và họ tên không trùng nhau. */
 export function buildRoster(world:string):NpcProfile[]{const hit=rosterCache.get(world);if(hit)return hit;
  const out:NpcProfile[]=[],taken:Taken={names:new Set(),givens:new Set(),full:new Set()};let mom:NpcProfile|undefined;
  for(const def of ROLES){let p:NpcProfile|null=null;
-  for(let k=0;k<30&&!p;k++)p=drawPerson(world,def,`${world}:${def.id}:${k}`,0,0,taken,mom);
+  let used=0;for(let k=0;k<(def.town?80:30)&&!p;k++){const d=def.town?townDef(def.id,startArch(world,def.id),`${world}:${def.id}:${k}`):def;p=drawPerson(world,d,`${world}:${def.id}:${k}`,0,0,taken,mom);used=k}
+  startK.set(`${world}:${def.id}`,used);
   if(!p)throw new Error(`Không dựng được NPC cho vai ${def.id}`);
   if(def.id==='me')mom=p;taken.names.add(p.name);taken.givens.add(lastWord(p.fullName));taken.full.add(p.fullName);out.push(p)}
  if(rosterCache.size>8)rosterCache.clear();rosterCache.set(world,out);return out}
 
 /** Người giữ vai từ đời 1 trở đi: số lần thử `k` (để tên không trùng) và hạt giống của cha mẹ nếu là con nối nghiệp. */
-export interface Holder{gen:number;k:number;since:number;p?:HeirSeed}
+export interface Holder{gen:number;k:number;since:number;p?:HeirSeed;
+ /** H7a: kiểu người (NPC ngẫu nhiên); danh tính gốc `ô:đời` của người quay lại ở ô khác; ngày quay lại */a?:string;o?:string;r?:number}
 /** Phần save của vòng đời mà dàn NPC cần đọc (khai báo đầy đủ ở lifecycle.ts). */
-export interface RosterCycle{holders:Record<string,Holder>;vacant:Record<string,{from:number;until:number;/** đời của người vừa rời vai */gen:number;heir?:boolean}>;frail:Record<string,number>}
+export interface RosterCycle{holders:Record<string,Holder>;vacant:Record<string,{from:number;until:number;/** đời của người vừa rời vai */gen:number;heir?:boolean}>;frail:Record<string,number>;
+ /** H7a: ô NPC ngẫu nhiên đang có người; nơi người chơi tới gần đây (ngày) */town?:{on:string[];been?:Partial<Record<PlaceId,number>>;/** ngày người mới gần nhất tới */last?:number}}
+/** Ô NPC ngẫu nhiên đang có người (save chưa có thì là 6 ô đầu). */
+export const townOn=(cy?:RosterCycle)=>cy?.town?.on??TOWN_START;
+/** Ghi nơi người chơi vừa tới (để NPC ngẫu nhiên mới chỉ xuất hiện ở nơi hay lui tới). */
+export function markBeen<T extends {day:number;cycle?:RosterCycle}>(s:T,place:PlaceId):T{if(!TOWN_PLACES.includes(place)||!s.cycle?.town)return s;const t=s.cycle.town;if(t.been?.[place]===s.day)return s;return{...s,cycle:{...s.cycle,town:{...t,been:{...t.been,[place]:s.day}}}}}
 const personCache=new Map<string,NpcProfile>();
 /** Người giữ vai `role` ở đời `gen` (đời 0 là dàn gốc). Tất định theo seed thế giới và các số đã lưu. */
-export function personFor(world:string,role:string,h?:Holder):NpcProfile|undefined{if(!h||h.gen===0)return buildRoster(world).find(n=>n.id===role);
- const key=`${world}:${role}:${h.gen}:${h.k}:${h.p?`${h.p.fam}:${h.p.born}`:''}`,hit=personCache.get(key);if(hit)return hit;const def=roleDef(role);if(!def)return undefined;
- const p=drawPerson(world,def,`${world}:${role}:g${h.gen}:${h.k}`,h.since,h.gen,{names:new Set(),givens:new Set(),full:new Set()},undefined,h.p)??undefined;
+/** Hạt giống rút người: theo ô và đời, hoặc theo danh tính gốc (`ô:đời`) nếu là người quay lại. */
+const saltOf=(world:string,role:string,gen:number,k:number,o?:string)=>{const [r,g]=o?o.split(':'):[role,String(gen)];return g==='0'?`${world}:${r}:${k}`:`${world}:${r}:g${g}:${k}`};
+export function personFor(world:string,role:string,h?:Holder):NpcProfile|undefined{if(!h||(h.gen===0&&!h.o))return buildRoster(world).find(n=>n.id===role);
+ const key=`${world}:${role}:${h.gen}:${h.k}:${h.p?`${h.p.fam}:${h.p.born}`:''}:${h.a??''}:${h.o??''}`,hit=personCache.get(key);if(hit)return hit;const base=roleDef(role);if(!base)return undefined;
+ const salt=saltOf(world,role,h.gen,h.k,h.o),def=base.town?townDef(role,h.a??startArch(world,h.o?.split(':')[0]??role),salt):base;
+ const p0=drawPerson(world,def,salt,h.since,h.gen,{names:new Set(),givens:new Set(),full:new Set()},undefined,h.p)??undefined,p=p0&&h.o?{...p0,gen:h.gen}:p0;
  if(p){if(personCache.size>200)personCache.clear();personCache.set(key,p)}return p}
 /** Thử k từ 0 tới khi tên không trùng người đang sống. */
-export function pickHolder(world:string,role:string,gen:number,since:number,living:readonly NpcProfile[],p?:HeirSeed):Holder{const def=roleDef(role)!,taken=takenOf(living);
- for(let k=0;k<40;k++)if(drawPerson(world,def,`${world}:${role}:g${gen}:${k}`,since,gen,taken,undefined,p))return{gen,k,since,...(p?{p}:{})};
- return{gen,k:0,since,...(p?{p}:{})}}
+export function pickHolder(world:string,role:string,gen:number,since:number,living:readonly NpcProfile[],p?:HeirSeed,a?:string):Holder{const base=roleDef(role)!,taken=takenOf(living.filter(n=>n.id!==role));
+ for(let k=0;k<(base.town?80:40);k++){const salt=`${world}:${role}:g${gen}:${k}`,def=base.town?townDef(role,a??ARCHES[0]!.id,salt):base;if(drawPerson(world,def,salt,since,gen,taken,undefined,p))return{gen,k,since,...(p?{p}:{}),...(a?{a}:{})}}
+ return{gen,k:0,since,...(p?{p}:{}),...(a?{a}:{})}}
 
 /** Trạng thái đủ để dựng dàn NPC: seed, ngày và vòng đời (H7b). */
 export type Who=Pick<GameState,'seed'>&{day?:number;cycle?:RosterCycle};
@@ -173,7 +197,8 @@ const dayCache=new Map<string,NpcProfile[]>(),cycleCache=new WeakMap<object,Map<
 export function rosterOf(s:Who):NpcProfile[]{const world=worldSeed(s),day=s.day??0,cy=s.cycle,key=`${world}:${day}`;
  const store=cy?(cycleCache.get(cy)??(cycleCache.set(cy,new Map()),cycleCache.get(cy)!)):dayCache;const hit=store.get(key);if(hit)return hit;
  const out:NpcProfile[]=[];
- for(const def of ROLES){if(cy?.vacant[def.id])continue;const p=personFor(world,def.id,cy?.holders[def.id]);if(!p)continue;const frail=cy?.frail[def.id];
+ const on=townOn(cy);
+ for(const def of ROLES){if(cy?.vacant[def.id]||(def.town&&!on.includes(def.id)))continue;const p=personFor(world,def.id,cy?.holders[def.id]);if(!p)continue;const frail=cy?.frail[def.id];
   out.push({...p,age:ageAt(p.born,day),...(frail!==undefined?{frail}:{})})}
  if(store.size>40)store.clear();store.set(key,out);return out}
 /** Người đang sống có mã này (mã vai). */

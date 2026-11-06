@@ -15,7 +15,7 @@ test('biến cố đời NPC: tất định theo seed; trung bình 2 đến 5 bi
 
 test('cảm xúc ngày giữ nguyên trong ngày, theo biến cố; hoạt động và mệt đói theo giờ',()=>{
  const R=N.buildRoster('mood');let badSad=0,bad=0;
- for(const n of R)for(let d=0;d<120;d++){const m=Lf.moodOf('mood',n,d);assert.equal(m,Lf.moodOf('mood',n,d));const ev=Lf.eventsOn('mood',n,d);
+ for(const n of R.filter(n=>!n.arch))for(let d=0;d<120;d++){const m=Lf.moodOf('mood',n,d);assert.equal(m,Lf.moodOf('mood',n,d));const ev=Lf.eventsOn('mood',n,d);
   if(ev.length&&ev.every(e=>e.tone==='bad')){bad++;if(['sad','tired','annoyed'].includes(m))badSad++}if(ev.length&&ev.every(e=>e.tone==='good'))assert.ok(['happy','excited'].includes(m))}
  assert.equal(badSad,bad,'biến cố xấu thì không vui');
  const veg=R.find(n=>n.id==='veg'),mon=[0,1,2,3,4,5,6,7].find(d=>require('../.test-build/domain/format').dateAt(d).getUTCDay()===1);

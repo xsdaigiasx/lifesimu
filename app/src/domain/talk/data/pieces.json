@@ -292,6 +292,7 @@
   "id": "body-009",
   "slot": "body",
   "text": "trời {weather} hoài, buôn bán ế ẩm",
+  "town": false,
   "intent": [
    "complain"
   ],
@@ -763,7 +764,7 @@
  {
   "id": "tail-001",
   "slot": "tail",
-  "text": "vậy đó {p}",
+  "text": "{self} kể vậy đó {p}",
   "intent": [
    "complain",
    "brag",
@@ -831,6 +832,9 @@
   "id": "tail-006",
   "slot": "tail",
   "text": "đi nha",
+  "noArch": [
+   "chess"
+  ],
   "intent": [
    "invite"
   ]
@@ -858,7 +862,7 @@
  {
   "id": "tail-010",
   "slot": "tail",
-  "text": "đùa thôi",
+  "text": "{self} đùa thôi",
   "intent": [
    "tease"
   ]

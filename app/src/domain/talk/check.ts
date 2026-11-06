@@ -1,12 +1,13 @@
 /** H1: bộ kiểm tra kho khung và mảnh (HOI-THOAI I.6). Dữ liệu sai thì chặn (npm run talk:check, test). */
 import {isNpcId} from '../npc';
+import {archOf} from '../town-data';
 import {isGiftItem,GIFT_MAX} from '../gifts';
 import type {Frame,Piece,TalkData} from './types';
 import {AFTERS,CHANNELS,EMOTIONS,INTENTS,PLAYER_TOPICS,SLOTS,TIERS,VOICES,WHENS} from './types';
 import {ADDRESS_VARS,varsIn} from './compose';
 
 /** Biến điền được phép trong mảnh (lấy từ dữ kiện); `when` tự tính từ ngày của dữ kiện. */
-export const FACT_VARS=['dish','place','time','weather','name','amount','item','event','holiday','when'] as const;
+export const FACT_VARS=['dish','place','time','weather','name','amount','item','event','holiday','when','doing','now','then','where'] as const;
 const PLACES=['home','office','market','mall','bank','hospital','bus','park','streetfood','restaurant','apartments','villa','lake'];
 /** Câu có lời hứa cho đồ ("bà cho", "tặng", "biếu"): bắt buộc gắn món thật. */
 export const PROMISE=/\{self\} cho$|\{self\} cho \{you\}|\btặng\b|\bbiếu\b/u;
@@ -41,6 +42,12 @@ export function talkProblems(d:TalkData,opt:{minFramesPerIntent?:number}={}):str
   if(p.privacy!==undefined&&![0,1,2,3].includes(p.privacy))bad(`${at}: mức riêng tư phải 0 đến 3`);
   if(p.voice!==undefined&&!VOICES.includes(p.voice))bad(`${at}: giọng lạ`);
   if(p.npc!==undefined&&!isNpcId(p.npc))bad(`${at}: mã NPC lạ ${p.npc}`);
+  if(p.arch!==undefined&&(!Array.isArray(p.arch)||!p.arch.length||p.arch.some(a=>!archOf(a))))bad(`${at}: kiểu người lạ`);
+  if(p.arch&&p.npc)bad(`${at}: không ghi cả npc và arch`);
+  if(p.tone!==undefined&&(!Array.isArray(p.tone)||!p.tone.length||p.tone.some(t=>!['good','bad','plain'].includes(t))))bad(`${at}: tông lạ`);
+  if(p.noArch!==undefined&&(!Array.isArray(p.noArch)||p.noArch.some(a=>!archOf(a))))bad(`${at}: kiểu người lạ`);
+  if(p.tone&&!p.topic)bad(`${at}: mảnh có tông phải gắn chủ đề`);
+  if(p.town!==undefined&&typeof p.town!=='boolean')bad(`${at}: town phải là true hoặc false`);
   if(p.age!==undefined&&!(Array.isArray(p.age)&&p.age.length===2&&p.age.every(Number.isInteger)&&p.age[0]<=p.age[1]))bad(`${at}: tuổi phải là [từ, đến]`);
   if(p.where&&p.where.some(x=>!PLACES.includes(x)))bad(`${at}: nơi lạ`);
   if(p.when&&p.when.some(x=>!WHENS.includes(x)))bad(`${at}: thời điểm lạ`);

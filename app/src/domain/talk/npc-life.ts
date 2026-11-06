@@ -7,6 +7,7 @@ import {rosterOf,castById,mix,ageAt,type NpcProfile} from '../npc';
 import {hash} from '../shift';
 import {dateAt} from '../format';
 import {weatherOf} from '../weather';
+import {beatOn} from './arcs';
 
 export interface EventKind{id:string;name:string;sub:string;tone:'good'|'bad'|'plain';dur:[number,number];weight:number;
  age?:[number,number];roles?:string[];privacy:0|1|2|3;
@@ -81,7 +82,7 @@ export function eventsOn(world:string,n:NpcProfile,day:number){const block=Math.
  return n.frail!==undefined&&day>=n.frail?[...list,{id:`${n.id}:frail:${n.frail}`,kind:'frail',start:n.frail,end:day+1,tone:'bad' as const,vars:{event:'sức khoẻ yếu dần'}}]:list}
 
 /** Cảm xúc ngày (giữ nguyên trong ngày): theo biến cố đang diễn ra, tính cách và thời tiết. */
-export function moodOf(world:string,n:NpcProfile,day:number):Emotion{const ev=eventsOn(world,n,day),bad=ev.filter(e=>e.tone==='bad').length,good=ev.filter(e=>e.tone==='good').length;
+export function moodOf(world:string,n:NpcProfile,day:number):Emotion{const ev=eventsOn(world,n,day),arc=n.arch?beatOn(world,n,day):undefined,bad=ev.filter(e=>e.tone==='bad').length+(arc?.beat.tone==='bad'?1:0),good=ev.filter(e=>e.tone==='good').length+(arc?.beat.tone==='good'?1:0);
  const r=roll(world,who(n),`mood:${day}`,100),t=n.traits,wet=['rain','storm'].includes(weatherOf(day));
  if(bad){const sick=ev.some(e=>KIND[e.kind]!.sub==='sick'||e.kind==='overtime');return sick?(r<70?'tired':'sad'):t.includes('cau có')&&r<50?'annoyed':r<55?'sad':r<80?'tired':'annoyed'}
  if(good)return r<55?'happy':'excited';

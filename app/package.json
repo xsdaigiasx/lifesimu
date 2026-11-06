@@ -1,7 +1,7 @@
 {
   "name": "mot-doi-de-song",
   "private": true,
-  "version": "0.86.0",
+  "version": "0.87.0",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "typecheck": "tsc --noEmit",
@@ -16,7 +16,8 @@
     "sim:life": "node scripts/sim-life.cjs",
     "art:verify": "python scripts/verify-upscaled-map.py",
     "deploy:workers": "npm run build && wrangler deploy --config wrangler.jsonc",
-    "deploy:check": "wrangler deploy --config wrangler.jsonc --dry-run --outdir .wrangler/dry-run"
+    "deploy:check": "wrangler deploy --config wrangler.jsonc --dry-run --outdir .wrangler/dry-run",
+    "sim:town": "node scripts/sim-town.cjs"
   },
   "devDependencies": {
     "@types/react": "19.2.18",

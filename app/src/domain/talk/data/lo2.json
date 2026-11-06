@@ -89,7 +89,8 @@
 ],
 "after": [
 "ask"
-]
+],
+"town": false
 },
 {
 "id": "l2-008",

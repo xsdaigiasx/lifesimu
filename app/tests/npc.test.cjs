@@ -5,8 +5,8 @@ const dayOf=dow=>{for(let d=0;d<14;d++)if(dateAt(d).getUTCDay()===dow)return d};
 const at=(day,minute,location)=>{const s=engine.initial();return{...s,day,clock:{...clockOf(s),minute,location}}};
 
 test('dàn theo vai: id không trùng, có chuỗi đúng vai, người thân chỉ liên lạc từ xa',()=>{
- const R=N.rosterOf({});assert.equal(R.length,N.NPC_IDS.length);assert.equal(new Set(R.map(n=>n.id)).size,R.length);assert.equal(R.length,23);
- assert.deepEqual(R.filter(n=>n.story).map(n=>n.id).sort(),['ant-dev','ant-pm','landlord','me','neighbor','sen-dev','sen-pm','veg']);
+ const R=N.rosterOf({});assert.equal(R.length,N.NPC_IDS.length-6,'6 ô NPC ngẫu nhiên chưa có người');assert.equal(new Set(R.map(n=>n.id)).size,R.length);assert.equal(R.length,29);
+ assert.deepEqual(R.filter(n=>n.story&&!n.arch).map(n=>n.id).sort(),['ant-dev','ant-pm','landlord','me','neighbor','sen-dev','sen-pm','veg']);
  for(const n of R){assert.deepEqual(N.profileProblems(n),[],n.id);assert.ok(n.remote||n.schedule.length>0,n.id);for(const s of n.schedule)assert.ok(s.from<s.to&&s.from>=420&&s.to<=1500,n.id)}
  for(const id of ['me','em'])for(const d of [0,1,2,3,4,5,6])for(let m=420;m<1500;m+=30)assert.ok(!N.presentAt(N.castById({},id),d,m,'home'));
  assert.equal(N.relationTier(0,'em'),'Gia đình');assert.equal(N.castById({},'me').name,'Mẹ');
