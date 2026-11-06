@@ -28,6 +28,13 @@ def fit(path, fw, fh):
         s = max(.2, min(1.0, (r - l) / full))
     # đỉnh dưới của chân: x của điểm trái cộng fw*64*s
     l = edge(yf - fw * 32 * s, True)
+    sw = min(1.0, (xs.max() - xs.min() + 1) / full)
+    # 06/11 (chủ dự án: giường lệch hẳn neo): đồ phủ kín chân đế (giường, thảm) có thành, đầu giường làm mép trái, phải đo sai,
+    # s tụt về sàn 0,2 nên neo rơi xuống dưới ảnh cả một ô. Khi s đo được nhỏ hơn nhiều so với bề ngang ảnh thì lấy s theo bề ngang
+    # và x đỉnh dưới là giữa các điểm ảnh đục ở hàng thấp nhất (chân trước hoặc mũi thảm).
+    if s < .6 * sw:
+        low = np.where(a[yf - 3:yf].any(axis=0))[0]
+        return yf, sw, float(low.mean())
     return yf, s, (l if l is not None else xs.min()) + fw * 64 * s
 
 def main():

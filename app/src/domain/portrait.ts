@@ -15,6 +15,10 @@ export const HAIRS:Part[]=[{id:'m-crop',g:'m',ages:['teen','adult','mid']},{id:'
  {id:'f-bob',g:'f',ages:['teen','adult','mid']},{id:'f-bun',g:'f',ages:['teen','adult','mid']},{id:'f-pixie',g:'f',ages:['adult','mid']},{id:'f-fringe',g:'f',ages:['teen','adult']},{id:'f-waves',g:'f',ages:['teen','adult']},{id:'f-updo',g:'f',ages:['adult','mid']},{id:'f-silver-bob',g:'f',ages:['old'],grey:true},{id:'f-silver-bun',g:'f',ages:['old'],grey:true}];
 export const EXTRAS:Part[]=[{id:'glasses-round',g:'any',ages:ALL},{id:'glasses-square',g:'any',ages:ALL},{id:'cap',g:'any',ages:ALL},{id:'mustache',g:'m',ages:['adult','mid','old']},{id:'beard-short',g:'m',ages:['adult','mid']},{id:'beard-grey',g:'m',ages:['mid','old']},{id:'earrings',g:'f',ages:ALL},{id:'hairclip',g:'f',ages:ALL}];
 
+/** Phụ kiện đang chờ vẽ lại (lệch mặt, sai dáng): không rút cho NPC. */
+export const REDRAW:readonly string[]=['beard-short','beard-grey','hairclip'];
+/** Kiểu tóc để lộ tai (đeo bông tai được). */
+export const EAR_HAIRS:readonly string[]=['f-bun','f-updo','f-pixie','f-silver-bun'];
 export const ageBand=(age:number):AgeBand=>age<22?'teen':age<40?'adult':age<60?'mid':'old';
 /** Áo hợp vai (mã vai, hoặc chỗ ngồi của đồng nghiệp); vai lạ mặc áo thường. */
 const ROLE_OUTFIT:Record<string,string[]>={
@@ -39,11 +43,13 @@ export function faceOf(n:Pick<NpcProfile,'id'|'gender'|'age'|'quirk'|'fullName'>
  const extras:string[]=[];
  if(n.quirk==='Luôn đội mũ lưỡi trai')extras.push('cap');
  if(roll('glasses')<(a==='old'?40:a==='mid'?30:20))extras.push(roll('gl-kind')<50?'glasses-round':'glasses-square');
- if(g==='m'&&a!=='teen'&&roll('beard')<25){const b=EXTRAS.filter(e=>['mustache','beard-short','beard-grey'].includes(e.id)&&fits(e,g,a)&&(e.id==='beard-grey')===grey);if(b.length)extras.push(pick(b,`${k}:beard`).id)}
- if(g==='f'){if(roll('ear')<35)extras.push('earrings');if(!extras.includes('cap')&&roll('clip')<15)extras.push('hairclip')}
+ /* 06/11 (chủ dự án: phụ kiện chưa chuẩn): râu quai nón, râu bạc, kẹp tóc chờ Codex vẽ lại (REDRAW) nên tạm không dùng; còn ria mép */
+ if(g==='m'&&a!=='teen'&&roll('beard')<25){const b=EXTRAS.filter(e=>['mustache','beard-short','beard-grey'].includes(e.id)&&!REDRAW.includes(e.id)&&fits(e,g,a));if(b.length)extras.push(pick(b,`${k}:beard`).id)}
+ /* bông tai chỉ khi tóc để lộ tai (búi, vấn, tóc ngắn); tóc che tai thì bông tai nằm đè lên tóc */
+ if(g==='f'){if(EAR_HAIRS.includes(hair)&&roll('ear')<35)extras.push('earrings');if(!extras.includes('cap')&&!REDRAW.includes('hairclip')&&roll('clip')<15)extras.push('hairclip')}
  return{base,outfit,hair,extras:extras.slice(0,2)}}
-/** Chỉnh vị trí lớp phụ kiện trên khung 256 px (dx, dy tính px, scale nhân), khớp `adjust` trong manifest (test kiểm). Mũ lưỡi trai vẽ nổi trên đầu nên hạ xuống 14 px. */
-export const EXTRA_ADJUST:Record<string,{dx:number;dy:number;scale:number}>={cap:{dx:0,dy:14,scale:1}};
+/** Chỉnh vị trí lớp phụ kiện trên khung 256 px (dx, dy tính px, scale nhân), khớp `adjust` trong manifest (test kiểm). Mũ lưỡi trai vẽ nổi trên đầu nên hạ 22 px (vành sát chân mày); kính hạ 4 px cho tròng kính ngang mắt (soi ảnh ghép 06/11). */
+export const EXTRA_ADJUST:Record<string,{dx:number;dy:number;scale:number}>={cap:{dx:0,dy:22,scale:1},'glasses-round':{dx:0,dy:4,scale:1},'glasses-square':{dx:0,dy:4,scale:1}};
 export const FRAME=256;
 /** Độ chỉnh của một lớp theo tên ảnh (`.../extra/cap.webp`), không có thì không chỉnh. */
 export const layerAdjust=(src:string)=>{const m=/\/extra\/([^/]+)\.webp$/.exec(src);return m?EXTRA_ADJUST[m[1]!]:undefined};
