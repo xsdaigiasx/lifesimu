@@ -589,19 +589,19 @@
   ],
   "adjust": {
     "cap": {
-      "dx": 0,
-      "dy": 22,
-      "scale": 1
+      "dx": 4,
+      "dy": 12,
+      "scale": 0.85
     },
     "glasses-round": {
-      "dx": 0,
-      "dy": 4,
-      "scale": 1
+      "dx": -5,
+      "dy": -2,
+      "scale": 0.925
     },
     "glasses-square": {
-      "dx": 0,
-      "dy": 4,
-      "scale": 1
+      "dx": -5,
+      "dy": -2,
+      "scale": 0.925
     }
   }
 }
