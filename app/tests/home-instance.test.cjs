@@ -28,7 +28,27 @@ let t={...engine.initial(),money:50000000};for(let n=0;n<2;n++)t=buyHome(t,'pain
 assert.equal(buyHome(t,'painting').ok,false);
 const wall=(w,x,y)=>homeOf(t).items.map(i=>i.id==='painting'?(uidOf(i)==='painting'?{...i,mount:'wall',wall:'left',x:0,y:6,placed:true}:{...i,mount:'wall',wall:w,x,y,placed:true}):i);
 assert(homeError(wall('left',0,6)));
-assert.equal(homeError(wall('right',0,0)),null);
+assert.equal(homeError(wall('right',5,0)),null);
+// Việc 7: ô tường theo lưới 8 ô, cấm cửa sổ (trái 2–5), tủ bếp (sau 0–4), vòi sen (sau 7)
+{const H=require('../.test-build/domain/home'),G=require('../.test-build/domain/home-geometry');
+ assert.deepEqual(H.wallSlots('painting'),[{wall:'left',at:0},{wall:'left',at:6},{wall:'right',at:5}]);
+ assert(homeError(wall('left',0,2)));assert(homeError(wall('left',0,5)));assert(homeError(wall('right',0,0)));assert(homeError(wall('right',6,0)));assert(homeError(wall('left',0,6.5)));
+ assert.equal(homeError(homeOf(t).items.map(i=>i.id==='painting'?{...i,mount:'wall',wall:'left',x:0,y:uidOf(i)==='painting'?0:6,placed:true}:i)),null);
+ // tranh không đặt trên sàn được
+ assert(homeError(homeOf(t).items.map(i=>uidOf(i)==='painting'?{...i,mount:undefined,x:2,y:4,placed:true}:i)));
+ // kéo: bám ô trống gần điểm chạm nhất, bỏ ô đã có tranh khác
+ const items=wall('left',0,6),p2=items.find(i=>uidOf(i)==='painting-2');
+ const near=s=>G.wallPoint(s.wall,s.at,2);
+ assert.deepEqual(G.nearestWallSlot(p2,items,near({wall:'right',at:5})),{wall:'right',at:5});
+ assert.deepEqual(G.nearestWallSlot(p2,items,near({wall:'left',at:6})),{wall:'left',at:0});
+ const full=items.map(i=>uidOf(i)==='painting'?{...i,wall:'right',x:5,y:0}:i).map(i=>uidOf(i)==='painting-2'?H.onWall(i,{wall:'left',at:0}):i);assert.equal(homeError(full),null);
+ // save cũ: tranh ở ô nay bị cấm (tủ bếp, cửa sổ) thì cất vào kho, lát cắt home vẫn hợp lệ
+ const old=JSON.parse(JSON.stringify(t));old.home={grid:8,items:[...homeOf(t).items.map(i=>uidOf(i)==='painting'?{...i,mount:'wall',wall:'right',x:0,y:0,placed:true}:uidOf(i)==='painting-2'?{...i,mount:'wall',wall:'left',x:0,y:6,placed:true}:i)]};
+ assert(H.validHome(old.home));assert(engine.parse(JSON.stringify(old)));
+ const fixed=homeOf(old).items;assert.equal(fixed.find(i=>uidOf(i)==='painting').placed,false);assert.equal(fixed.find(i=>uidOf(i)==='painting-2').placed,true);
+ // lưu bố cục vẫn chặn ô cấm (không tự sửa khi lưu)
+ assert(!H.saveHome({...old,home:undefined},old.home.items).ok);
+}
 // save cũ chưa có uid vẫn tải được và được gán mã
 const legacy=JSON.parse(JSON.stringify(engine.initial()));legacy.home={grid:8,items:[{id:'bed',x:0,y:3,rotation:0,placed:true},{id:'desk',x:0,y:6,rotation:0,placed:true}]};
 assert(engine.parse(JSON.stringify(legacy)));assert.deepEqual(homeOf(legacy).items.map(uidOf),['bed','desk']);
