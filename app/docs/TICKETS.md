@@ -47,6 +47,9 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 
 ## Bảng trạng thái
 
+
+> Rà xung đột, gộp ticket 06/11 (Claude, chờ chủ dự án xem): T37 vào T39; T63 vào H7c; T64 thay bằng H3, H7a, H7b; T86 chia vào H7c, H7d; T87 vào T88; T62 với T79; mini game chia hai loại trên khung T79: T80 offline (chơi một mình, kỷ lục cá nhân), T82 online (đối đầu 2 người); T81 là bảng xếp hạng tài sản; T57, T58 và phần báo T61 làm chung; T73 với T74. Đợt sửa giao diện 7 việc trong HANDOVER làm trước H7c.
+
 | ID | Việc | Trạng thái | Tệp |
 |---|---|---|---|
 | T01 | Cấu trúc dự án và schema nội dung, trình kiểm tra JSON | Xong | A-ke-hoach |
@@ -85,9 +88,9 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 | T34 | Công ty: dự án, nhân sự, dòng tiền (tách thành T44–T50, Phần D mục 32–41) | Thay bằng T44–T51 | A-ke-hoach |
 | T35 | Màn kết và tổng kết từ Nhật ký | Xong | A-ke-hoach |
 | T36 | Hướng dẫn 10 phút đầu, mục tiêu tuần, thành tựu cơ bản | Một phần: mục tiêu tuần (T75); hướng dẫn đầu game hoãn tới khi xong game | A-ke-hoach |
-| T37 | Cân bằng bằng mô phỏng 3 persona và chỉnh số | Chưa làm | A-ke-hoach |
+| T37 | Cân bằng bằng mô phỏng 3 persona và chỉnh số | Gộp vào T39 (mô phỏng sim:company, sim:npc, sim:talk, sim:life, sim:town đã có; T39 chạy lại tất cả và chỉnh số) | A-ke-hoach |
 | T38 | Hiệu năng điện thoại, giảm hiệu ứng, cuộn trong khung | Chưa làm | A-ke-hoach |
-| T39 | Hồi quy toàn bộ và đóng gói Basic 1.0 | Chưa làm | A-ke-hoach |
+| T39 | Hồi quy toàn bộ và đóng gói Basic 1.0 | Chưa làm; gồm T37 (cân bằng 3 persona bằng các sim có sẵn) | A-ke-hoach |
 | T40 | Quan hệ theo bậc, trần mỗi ngày, hao mòn có sàn, mở khoá theo điều kiện chuyện | Xong | C-noi-dung-npc |
 | T41 | Ký ức có cấu trúc, hook tiếp nối, quy tắc nhắc lại | Xong | C-noi-dung-npc |
 | T42 | Công cụ nhập dữ liệu pool và mô-típ từ file, kèm bộ kiểm tra | Xong | C-noi-dung-npc |
@@ -105,14 +108,14 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 | T54 | Điện nước theo thiết bị, hoá đơn, giá theo loại nhà | Xong | E-pham-vi-day-du |
 | T55 | Bếp và tủ lạnh nối với hạn dùng và nấu ăn | Xong (#294, 0.76.0) | E-pham-vi-day-du |
 | T56 | Máy tính đa dụng: làm việc, học, giải trí, cấu hình | Xong | E-pham-vi-day-du |
-| T57 | Tin tức và thị trường chứng khoán, chống khai thác | Chưa làm | E-pham-vi-day-du |
-| T58 | Bất động sản: giá theo khu vực, thuê hoặc mua đầu tư | Chưa làm | E-pham-vi-day-du |
+| T57 | Tin tức và thị trường chứng khoán, chống khai thác | Chưa làm; làm cùng T58 và phần báo của T61 (tin tức nuôi giá chứng khoán, bất động sản) | E-pham-vi-day-du |
+| T58 | Bất động sản: giá theo khu vực, thuê hoặc mua đầu tư | Chưa làm; làm cùng T57 | E-pham-vi-day-du |
 | T59 | Quán vỉa hè và nhà hàng, rủi ro bệnh ẩn | Một phần: quán vỉa hè, nhà hàng, mang về | E-pham-vi-day-du |
 | T60 | Công viên rèn luyện và chỉ số Thể lực | Xong | E-pham-vi-day-du |
-| T61 | Điện thoại mở rộng: báo, tin tức, giải trí | Một phần: tin tức, bản tin sáng | E-pham-vi-day-du |
-| T62 | Mini game giải trí | Một phần: bầu cua | E-pham-vi-day-du |
-| T63 | Đồ thị quan hệ NPC với NPC, tin đồn | Chưa làm | E-pham-vi-day-du |
-| T64 | Cốt truyện đời NPC: dàn cố định và đường đời mẫu | Chưa làm | E-pham-vi-day-du |
+| T61 | Điện thoại mở rộng: báo, tin tức, giải trí | Một phần: tin tức, bản tin sáng; phần báo làm cùng T57, T58; phần giải trí theo T79 | E-pham-vi-day-du |
+| T62 | Mini game giải trí | Một phần: bầu cua; gộp với T79 (mini game dùng chung khung Arcade, lưu riêng) | E-pham-vi-day-du |
+| T63 | Đồ thị quan hệ NPC với NPC, tin đồn | Gộp vào H7c (cảnh nhóm, quan hệ NPC với NPC, tin đồn) | E-pham-vi-day-du |
+| T64 | Cốt truyện đời NPC: dàn cố định và đường đời mẫu | Thay bằng H3 đời sống NPC, H7a mạch chuyện NPC ngẫu nhiên, H7b vòng đời | E-pham-vi-day-du |
 | T65 | Thành tựu mở rộng | Chưa làm | E-pham-vi-day-du |
 | T66 | Nâng cấp công ty | Chưa làm | E-pham-vi-day-du |
 | T67 | Câu cá và bản đồ sông | Một phần: hồ câu, chưa bản đồ sông | E-pham-vi-day-du |
@@ -121,21 +124,21 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 | T70 | Chuyển đời: di sản, điểm gia tộc, gia phả, tổng kết | Chưa làm | F-doi-nghe-online |
 | T71 | Khe lưu nhẹ: nhiều nhân vật độc lập, quay lại được, không kế thừa | Chưa làm | F-doi-nghe-online |
 | T72 | Khung nghề dạng dữ liệu và loại vòng lặp | Xong | F-doi-nghe-online |
-| T73 | Ca phục vụ (vòng lặp cho ẩm thực, bán hàng) | Chưa làm | F-doi-nghe-online |
-| T74 | Ngành ẩm thực: thực đơn, khách, uy tín, vệ sinh | Chưa làm | F-doi-nghe-online |
+| T73 | Ca phục vụ (vòng lặp cho ẩm thực, bán hàng) | Chưa làm; làm cùng T74 (vòng lặp ca phục vụ cho ngành ẩm thực, khung nghề T72 đã có) | F-doi-nghe-online |
+| T74 | Ngành ẩm thực: thực đơn, khách, uy tín, vệ sinh | Chưa làm; làm cùng T73 | F-doi-nghe-online |
 | T75 | Bản tin sáng, mục tiêu tuần, báo cáo tháng, tiến độ khi vắng mặt | Xong | F-doi-nghe-online |
-| T76 | Sự kiện mùa và lễ | Chưa làm (PR #277 dùng nhầm số T76 cho nhà lớn) | F-doi-nghe-online |
+| T76 | Sự kiện mùa và lễ | Chưa làm (PR #277 dùng nhầm số T76 cho nhà lớn); dùng thời tiết T90 cho sự kiện mưa bão; lễ là chủ đề của hệ hội thoại | F-doi-nghe-online |
 | T77 | Tài khoản, bạn bè, cloud save | Chưa làm | F-doi-nghe-online |
 | T78 | Bản chụp nhà và thăm nhà | Chưa làm | F-doi-nghe-online |
-| T79 | Khung Arcade tách biệt (lưu riêng, không chạm sổ cái) | Chưa làm | F-doi-nghe-online |
-| T80 | Mini game so điểm cùng seed và ghost | Chưa làm | F-doi-nghe-online |
-| T81 | Bảng xếp hạng tuần và xác minh phía máy chủ | Chưa làm | F-doi-nghe-online |
-| T82 | Phòng đối đầu thời gian thực (tuỳ chọn) | Chưa làm | F-doi-nghe-online |
+| T79 | Khung Arcade tách biệt (lưu riêng, không chạm sổ cái) | Chưa làm; khung chung cho mọi mini game (lưu riêng, không chạm sổ cái), mỗi trò khai loại offline hoặc online; gồm phần còn lại của T62 | F-doi-nghe-online |
+| T80 | Mini game offline: chơi một mình trên điện thoại hoặc máy tính trong game (bầu cua, nối dây, xếp hình...), kỷ lục cá nhân, không so điểm với người khác | Chưa làm; dùng khung T79 (đổi phạm vi 06/11: bỏ so điểm cùng seed và ghost) | F-doi-nghe-online |
+| T81 | Bảng xếp hạng tuần và xác minh phía máy chủ | Chưa làm; theo quyết định là bảng xếp hạng tài sản (không xếp hạng điểm mini game) | F-doi-nghe-online |
+| T82 | Mini game online: đối đầu 2 người, vào bằng mã phòng hoặc ghép trận, không ảnh hưởng tiến trình đời chơi | Chưa làm; dùng khung T79 và tài khoản T77 | F-doi-nghe-online |
 | T83 | Bối cảnh năm (biến động thế giới), làm cho một đời trước | Chưa làm | F-doi-nghe-online |
-| T84 | Thú cưng: chỉ số, chăm sóc, sự kiện, quy định nhà ở | Chưa làm | G-y-tuong-giu-chan |
-| T85 | Sở thích trong nhà: đồ có điểm dùng, XP sở thích, bộ sưu tập | Chưa làm | G-y-tuong-giu-chan |
-| T86 | Cộng đồng khu trọ: hàng xóm, chủ trọ, điểm hoà thuận, sự kiện nhóm | Chưa làm | G-y-tuong-giu-chan |
-| T87 | Hồi ức một tháng và một năm trước, ghi chú tuần tuỳ chọn | Một phần: hôm nay năm ngoái (T75) | G-y-tuong-giu-chan |
-| T88 | Cuối tuần có kế hoạch và gợi ý trong bản tin sáng | Một phần: gợi ý thứ Sáu (T75) | G-y-tuong-giu-chan |
-| T89 | Mạng xã hội trong game: bảng tin, bình luận câu mẫu, tin đồn lan | Chưa làm | G-y-tuong-giu-chan |
+| T84 | Thú cưng: chỉ số, chăm sóc, sự kiện, quy định nhà ở | Chưa làm; cần quy định nuôi thú theo loại nhà (T53) | G-y-tuong-giu-chan |
+| T85 | Sở thích trong nhà: đồ có điểm dùng, XP sở thích, bộ sưu tập | Một phần: điểm dùng đồ đã có (T28); còn XP sở thích, bộ sưu tập | G-y-tuong-giu-chan |
+| T86 | Cộng đồng khu trọ: hàng xóm, chủ trọ, điểm hoà thuận, sự kiện nhóm | Gộp: hàng xóm, sự kiện nhóm vào H7c, nhóm chat Khu trọ vào H7d; còn lại điểm hoà thuận khu trọ làm sau H7d | G-y-tuong-giu-chan |
+| T87 | Hồi ức một tháng và một năm trước, ghi chú tuần tuỳ chọn | Một phần: hôm nay năm ngoái (T75); phần còn lại nhỏ, gộp vào T88 | G-y-tuong-giu-chan |
+| T88 | Cuối tuần có kế hoạch và gợi ý trong bản tin sáng | Một phần: gợi ý thứ Sáu (T75); gồm phần còn lại T87; NPC rủ cuối tuần dùng ý định Rủ của hệ hội thoại | G-y-tuong-giu-chan |
+| T89 | Mạng xã hội trong game: bảng tin, bình luận câu mẫu, tin đồn lan | Làm sau H7d: dùng chung tin đồn (H7c) và khung tin nhắn nhóm (H7d) | G-y-tuong-giu-chan |
 | T90 | Thời tiết nhẹ theo mùa: biểu tượng trên đầu màn hình, đi bộ tốn thêm khi nóng/mưa, xe chậm khi mưa, công viên kém hiệu quả khi mưa | Xong | G-y-tuong-giu-chan |
