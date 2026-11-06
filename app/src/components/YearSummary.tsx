@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import type {GameState} from '../domain/types';
 import {summaryOf,titleOf,jobText,skillText,type Summary} from '../domain/summary';
-import {castById,relationTier} from '../domain/npc';
+import {personById as castById,relationTier} from '../domain/npc';
 import {shortDate,money} from '../domain/format';
 import {GameScreen} from './GameUI';
 import NpcFace from './NpcFace';

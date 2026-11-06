@@ -227,3 +227,17 @@
 .home-object-actions.home-use{width:min(80vw,280px);padding:14px;gap:8px;box-shadow:0 0 0 100vmax #173e3818,0 10px 30px #183e3055}
 .home-use button,.home-use button:not(:last-child){min-height:46px;padding:10px 14px;font-size:15px;gap:10px}
 .home-use button:last-child{min-height:42px}.home-use svg{width:22px;height:22px}
+/* H7b: chọn quà sinh nhật từ Túi và Tủ bếp */
+.gift-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px;max-height:220px;overflow-y:auto}
+.gift-grid button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:52px;padding:8px 10px;border-radius:10px;border:1px solid #d9d2c3;background:#fffaf0;color:#2f3b33;text-align:left}
+.gift-grid strong{font-size:var(--fs-body,13px)}
+.gift-grid small{font-size:var(--fs-note,11px);color:#7a6f5c}
+.funeral-card{display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:10px 12px;border-radius:12px;background:#ece9e4;color:#3a3a3a}
+.funeral-card span{flex:1;display:flex;flex-direction:column}
+.funeral-card strong{font-size:var(--fs-body,13px)}
+.funeral-card small{font-size:var(--fs-note,11px);color:#6b6b6b}
+.funeral-card button{min-height:40px;padding:0 14px;border-radius:10px;background:#4b5560;color:#fff;font-size:var(--fs-body,13px)}
+.funeral-card button:disabled{opacity:.55}
+.calendar-month span.bday i{background:#c86b5a}
+.bday-row{display:flex;justify-content:space-between;align-items:center;padding:8px 2px;border-bottom:1px solid rgba(0,0,0,.06);font-size:var(--fs-body,13px)}
+.bday-row small{font-size:var(--fs-note,11px);color:#7a7a7a}

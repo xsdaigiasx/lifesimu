@@ -229,3 +229,4 @@ Danh sách việc cố ý làm nhỏ hoặc hoãn, để không quên khi mở r
 - Vẽ lại đồ nội thất phòng trọ theo phong cách v0.35 (Issue #18).
 - Ảnh khi đang làm việc theo từng loại việc (hiện dùng một ảnh màn hình code).
 - Hội thoại Lô 1 (H5): cuộc gọi Mẹ, em và câu đáp của họ sau lựa chọn vẫn là câu cố định; tin nhắn của người ngoài gia đình giữ câu cũ tới Lô 2 (H6). Bản chép này cần chép lại vào tài liệu Kế hoạch gốc khi tiện.
+- Vòng đời NPC (H7b): tên hiển thị và xưng hô giữ theo tuổi lúc vào vai (người 39 tuổi thành 60 vẫn là "Cô", chưa đổi thành "Bà"); người nghỉ hưu, ra trường rời hẳn thế giới (chưa giữ liên lạc); chưa có NPC lập gia đình và sinh con trong game, trẻ lớn lên thành NPC mới, người quay lại sau khi rời đi; đám tang chỉ là nút Đến viếng ở màn Quan hệ (chưa có cảnh, chưa có giỗ đầu); câu thoại riêng cho người yếu dần, người nối nghiệp nhắc cha mẹ ("mẹ con hay nhắc anh") mới có ở Nhật ký; sở thích quà chỉ là hai món ăn hoặc nguyên liệu, chưa có đồ dùng.

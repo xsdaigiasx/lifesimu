@@ -6,6 +6,7 @@ import {socialOf} from '../domain/social';
 import {storyOf,mealOpen,topicsFor,type TalkKind} from '../domain/director';
 import type {PlayerTopic} from '../domain/talk/types';
 import {SELLERS} from '../domain/talk/npc-life';
+import {birthdaysOn,wishedToday,giftOptions} from '../domain/lifecycle';
 
 type Talk=(id:string,kind:TalkKind)=>GameResult;
 /** Nhãn nút chủ đề người chơi tự mở lời (H6). */
@@ -21,15 +22,17 @@ export default function PeopleHere({state,place,onTalk,only}:{state:GameState;pl
 
 /** Cửa sổ một người (chốt 04/11): đủ quen thì hiện thông tin; chưa quen thì chỉ chào hỏi. */
 export function PersonSheet({state,id,onTalk,onClose}:{state:GameState;id:string;onTalk:Talk;onClose:()=>void}){
- const [note,setNote]=useState('');const p=castById(state,id);if(!p)return null;const score=socialOf(state).relations[id]?.score??0,known=score>=10,close=score>=30,fearKnown=storyOf(state).memories.some(m=>m.npc===id&&m.topic==='chuyện riêng');
+ const [note,setNote]=useState(''),[gift,setGift]=useState(false);const p=castById(state,id);if(!p)return null;const bday=birthdaysOn(state,state.day).some(n=>n.id===id),canGift=bday&&!wishedToday(state,id),gifts=canGift&&gift?giftOptions(state):[];const score=socialOf(state).relations[id]?.score??0,known=score>=10,close=score>=30,fearKnown=storyOf(state).memories.some(m=>m.npc===id&&m.topic==='chuyện riêng');
  const act=(k:TalkKind)=>{const r=onTalk(id,k);if(r.ok)onClose();else setNote(r.error)};
  const topics=topicsFor(state,id);
  const rows:[string,string][]=known?[['Quê',p.origin],['Tính cách',p.traits.join(', ')],['Điểm nhấn',p.quirk],...(close?[['Mong muốn',p.goal] as [string,string]]:[]),...(fearKnown?[['Đang lo',p.fear] as [string,string]]:[])]:[];
  return <div className="story-backdrop" onClick={e=>{if(e.target===e.currentTarget)onClose()}}><section className="story-dialog person-sheet" role="dialog" aria-modal="true" aria-label={p.name}>
-  <header><span className="story-avatar" style={{background:p.tone}} aria-hidden="true"><NpcFace npc={p}/></span><span><strong>{p.name}</strong><small>{p.role}</small></span><span className="story-tier">{relationTier(score,p.id)}</span><button className="person-close" aria-label="Đóng" onClick={onClose}>×</button></header>
+  <header><span className="story-avatar" style={{background:p.tone}} aria-hidden="true"><NpcFace npc={p}/></span><span><strong>{p.name}</strong><small>{p.role}</small></span><span className="story-tier">{bday?'Sinh nhật':relationTier(score,p.id)}</span><button className="person-close" aria-label="Đóng" onClick={onClose}>×</button></header>
   {known&&<dl className="person-facts">{rows.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}
   <div className="person-actions">{known?<button onClick={()=>act('talk')}>Nói chuyện</button>:<button className={topics.length%2?'':'wide'} onClick={()=>act('talk')}>Chào hỏi</button>}
    {topics.map(t=><button key={t} onClick={()=>act(`topic:${t}`)}>{t==='favor'&&SELLERS.includes(id)?'Hỏi hàng':TOPIC_LABEL[t]}</button>)}
-   {known&&<button disabled={!mealOpen(state,id)} onClick={()=>act('meal')}>Rủ đi ăn{!mealOpen(state,id)&&<small>Giờ ăn trưa, tối</small>}</button>}</div>
+   {known&&<button disabled={!mealOpen(state,id)} onClick={()=>act('meal')}>Rủ đi ăn{!mealOpen(state,id)&&<small>Giờ ăn trưa, tối</small>}</button>}
+   {canGift&&<button className="wide" aria-expanded={gift} onClick={()=>setGift(v=>!v)}>Tặng quà sinh nhật</button>}</div>
+  {canGift&&gift&&(gifts.length?<div className="gift-grid">{gifts.map(g=><button key={`${g.src}:${g.id}`} onClick={()=>act(`gift:${g.src}:${g.id}`)}><strong>{g.name}</strong><small>{g.src==='bag'?'Túi':'Tủ bếp'}</small></button>)}</div>:<p className="story-error" role="status">Túi và Tủ bếp chưa có gì để tặng</p>)}
   {note&&<p className="story-error" role="status">{note}</p>}
  </section></div>}

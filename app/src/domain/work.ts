@@ -134,11 +134,11 @@ export function cardInfo(s:GameState,c:TaskCard){const t=TASKS.find(x=>x.id===c.
 /** Cần chọn việc từ bảng khi chưa có việc đang dở trong ngày. */
 export const needsChoice=(s:GameState)=>!s.work?.task||s.work.trackingDay!==s.day;
 /** H0: người nói của điểm rẽ là đồng nghiệp ngồi chỗ `desk` ở công ty đang làm. */
-export const turnNpc=(s:GameState,desk:string):NpcProfile=>castById(s,coworkerId(officeOf(s).employerId,desk as Desk))!;
+export const turnNpc=(s:GameState,desk:string):NpcProfile|undefined=>castById(s,coworkerId(officeOf(s).employerId,desk as Desk));
 /** Điền tên và xưng hô vào câu của điểm rẽ (chỗ trống ghi ở TURNS). */
 export function turnFill(s:GameState,npc:NpcProfile,text:string){const cap=(x:string)=>x.charAt(0).toUpperCase()+x.slice(1),call=npc.self==='mình'?'bạn':npc.self==='tôi'?'anh':npc.self,me=npc.you==='bạn'?'mình':npc.you,qa=castById(s,coworkerId(officeOf(s).employerId,'qa'))?.name??'';
  const v:Record<string,string>={name:npc.name,self:npc.self,Self:cap(npc.self),you:npc.you,You:cap(npc.you),me,Me:cap(me),call,Call:cap(call),qa};return text.replace(/\{(name|self|Self|you|You|me|Me|call|Call|qa)\}/g,(_,k:string)=>v[k]!)}
-export function openTurn(s:GameState){const tw=s.work?.turn;if(!tw||tw.state!=='open'||tw.day!==s.day)return null;const ev=turnOf(tw.id);if(!ev)return null;const k=skillsOf(s),npc=turnNpc(s,ev.npc),f=(x:string)=>turnFill(s,npc,x);return{event:{...ev,line:f(ev.line)},npc,options:ev.options.map(o=>({label:f(o.label),locked:!!o.need&&k[o.need[0]].level<o.need[1],need:o.need?`${SKILLS[o.need[0]]} Lv${o.need[1]}`:undefined}))}}
+export function openTurn(s:GameState){const tw=s.work?.turn;if(!tw||tw.state!=='open'||tw.day!==s.day)return null;const ev=turnOf(tw.id);if(!ev)return null;const k=skillsOf(s),npc=turnNpc(s,ev.npc);if(!npc)return null;const f=(x:string)=>turnFill(s,npc,x);return{event:{...ev,line:f(ev.line)},npc,options:ev.options.map(o=>({label:f(o.label),locked:!!o.need&&k[o.need[0]].level<o.need[1],need:o.need?`${SKILLS[o.need[0]]} Lv${o.need[1]}`:undefined}))}}
 function resolveTurn(s:GameState,draft:GameState,choice:number):GameResult{let n=draft;const w=n.work!,tw=w.turn,ev=tw&&tw.state==='open'&&tw.day===s.day?turnOf(tw.id):undefined;if(!tw||!ev)return{ok:false,error:'Không có tình huống cần trả lời.'};const op=Number.isInteger(choice)?ev.options[choice]:undefined;if(!op)return{ok:false,error:'Lựa chọn không hợp lệ.'};
  if(op.need&&skillsOf(s)[op.need[0]].level<op.need[1])return{ok:false,error:`Cần ${SKILLS[op.need[0]]} Lv${op.need[1]}.`};const e=op.effect,clamp=(v:number)=>Math.max(0,Math.min(100,v));
  if(e.money&&post(n,{id:`turn:${s.day}`,name:'Chi tiêu ở công ty',amount:e.money})!=='ok')return{ok:false,error:'Không đủ tiền.'};
@@ -146,7 +146,7 @@ function resolveTurn(s:GameState,draft:GameState,choice:number):GameResult{let n
  if(e.mood)n.mood=clamp(n.mood+e.mood);if(e.stress)n.stress=clamp(n.stress+e.stress);if(e.energy)n.energy=clamp(n.energy+e.energy);
  if(e.rating)w.rating=clampRating((w.rating??50)+e.rating);if(e.bonus&&w.active)addBonus(n,w.active.companyId,e.bonus);
  if(e.relation)n=adjustRelation(n,coworkerId(officeOf(s).employerId,e.relation[0] as Desk),e.relation[1]);if(e.xp)n=addWorkXp(n,e.xp[0],e.xp[1]);
- const tn=turnNpc(s,ev.npc),tf=(x:string)=>turnFill(s,tn,x);tw.state='done';w.lastResult=tf(op.result);n=recordJournal(n,`turn:${s.day}`,tn.name,`${tf(op.label)}. ${tf(op.result)}`,tn.id);return{ok:true,state:n}}
+ const tn=turnNpc(s,ev.npc);if(!tn)return{ok:false,error:'Không có tình huống cần trả lời.'};const tf=(x:string)=>turnFill(s,tn,x);tw.state='done';w.lastResult=tf(op.result);n=recordJournal(n,`turn:${s.day}`,tn.name,`${tf(op.label)}. ${tf(op.result)}`,tn.id);return{ok:true,state:n}}
 function validShiftExtras(w:WorkState,day:number){const as=w.assignment,kinds=Object.keys(CARD_NAME);
  if(w.rating!==undefined&&!integer(w.rating,0,100))return false;
  if(as&&((as.kind!==undefined&&!kinds.includes(as.kind))||(as.deadline!==undefined&&!integer(as.deadline,480,1140))||(as.bonus!==undefined&&!integer(as.bonus,0,300000))||(as.npcId!==undefined&&!isNpcId(as.npcId))||(as.outcome!==undefined&&!['done','late'].includes(as.outcome))))return false;
