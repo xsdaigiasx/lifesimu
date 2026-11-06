@@ -442,6 +442,7 @@
  },
  {
   "id": "ask-001",
+  "plan": {"at": "evening", "act": "eat", "place": "streetfood"},
   "slot": "ask",
   "text": "tối nay ra quán nướng ăn với {self} không",
   "intent": [
@@ -467,6 +468,7 @@
  },
  {
   "id": "ask-003",
+  "plan": {"at": "weekend", "act": "walk", "place": "park"},
   "slot": "ask",
   "text": "cuối tuần đi công viên chơi không",
   "intent": [

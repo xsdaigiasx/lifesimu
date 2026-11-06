@@ -18,13 +18,15 @@ import {storyOf,openTalk,talkLineOf} from './director';
 import {sayNow,replyCtxOf,followNow,hasOwnLines} from './talk/live';
 import {buildReplies} from './talk/replies';
 import {notePrintsFor} from './talk/state';
+import {OUT_ACTS,PAYS,timeText,whereText,type OutAct,type Pay} from './talk/outing';
 import {INTENTS,type After,type Intent} from './talk/types';
 
 export type MsgKind='bday'|'mom-care'|'mom-aid'|'mom-gift'|'mom-recipe'|'invite'|'checkin'|'rent'|'missed'|'note';
-export interface Msg{id:string;day:number;minute:number;from:'npc'|'me';text:string;kind:MsgKind;replies?:string[];answered?:number;read?:boolean;recipe?:RecipeId;appt?:{day:number;minute:number;place:PlaceId};
+export interface Msg{id:string;day:number;minute:number;from:'npc'|'me';text:string;kind:MsgKind;replies?:string[];answered?:number;read?:boolean;recipe?:RecipeId;appt?:{day:number;minute:number;place:PlaceId;/** #357 tầng 3: lời rủ theo nếp */act?:OutAct};
  /** H6: tin ghép từ bộ sinh: ý định, hành động của từng lựa chọn trả lời, mã dữ kiện (để câu đáp sau cũng ghép) */talk?:{i:Intent;a:string[];f?:string}}
 export interface Queued extends Msg{npc:string}
-export interface Appointment{id:string;npc:string;day:number;minute:number;place:PlaceId;status:'set'|'done'|'missed'}
+/** #357: `act` việc làm cùng (thiếu là đi ăn), `pay` ai trả tiền (thiếu là ai nấy trả). */
+export interface Appointment{id:string;npc:string;day:number;minute:number;place:PlaceId;status:'set'|'done'|'missed';act?:OutAct;pay?:Pay}
 export interface InboxState{version:1;seq:number;threads:Record<string,Msg[]>;queue:Queued[];appts:Appointment[];called:Record<string,number>;hello:Record<string,number>}
 /** T31: khi tiền mặt cộng tiết kiệm dưới ngưỡng, Mẹ nhắn gửi tiền; gọi lại Mẹ trong 3 ngày để nhận; 14 ngày một lần. */
 export const MOM_AID={below:100000,gift:1000000,cooldown:14,claimDays:3};
@@ -86,6 +88,9 @@ function schedule(s:GameState,ib:InboxState,prints:Record<string,string[]>={}):Q
  const lastMom=Math.max(-9,...(ib.threads.me??[]).filter(m=>m.from==='npc').map(m=>m.day));if(day-lastMom>=2&&h('mom')%3!==0){const v=h('momv')%3,teach=nextMomRecipe(s);const kind:MsgKind=v===0?'mom-care':v===1?'mom-gift':teach?'mom-recipe':'mom-care';const at=1140+h('momt')%90,care=kind==='mom-care'?composed(s,'me',at,`mom:${day}`):null;if(care)prints.me=care.prints;mk('me',at,kind,kind==='mom-care'?care?.text??'Con ăn uống đầy đủ không? Đừng thức khuya quá nghe.':kind==='mom-gift'?'Mẹ gửi xe khách cho con ít gạo với trứng, mai ra bến xe lấy nha con.':(MOM_RECIPE_TEXT[teach!]??""),kind==='mom-recipe'?['Con ghi lại rồi','Để con thử nấu']:care?.replies??['Con khoẻ, mẹ yên tâm','Dạ con biết rồi'],undefined,care?.replies?care.talk:undefined);if(kind==='mom-recipe')out[out.length-1]!.recipe=teach}
  {const lastEm=Math.max(-9,...(ib.threads.em??[]).filter(m=>m.from==='npc').map(m=>m.day));if(castById(s,'em')&&day-lastEm>=3&&h('em')%2===0){const at=1080+h('emt')%180,m=composed(s,'em',at,`em:${day}`,EM_INTENTS);if(m){prints.em=m.prints;mk('em',at,'checkin',m.text,m.replies??sayAll(s,'em',T.checkinReplies),undefined,m.replies?m.talk:undefined)}}}
  const close=rosterOf(s).filter(n=>n.story&&!n.remote&&scoreOf(s,n.id)>=30);const dow=dateAt(day).getUTCDay();
+ /* #357 tầng 3: thứ sáu, người có nếp rủ lại cho thứ bảy (ưu tiên trước lời rủ thường) */
+ if(dow===5)for(const n of rosterOf(s).filter(x=>!x.remote&&!x.family)){if(out.length>=DAILY_MESSAGES)break;const hb=habitOf(s,n.id);if(!hb||ib.appts.some(a=>a.npc===n.id&&a.status==='set'))continue;const at={day:day+1,minute:hb.minute};
+  mk(n.id,600+h('hb'+n.id)%240,'invite',cap1(`${HABIT_VERB[hb.act]} nữa không ${n.you}? ${timeText(at,day)} ${whereText(hb.act,hb.place,n)} như mọi bữa nha.`),sayAll(s,n.id,T.inviteReplies),{day:at.day,minute:at.minute,place:hb.place,act:hb.act})}
  for(const n of close.sort((a,b)=>h(a.id)-h(b.id))){if(out.length>=DAILY_MESSAGES)break;const rel=socialOf(s).relations[n.id]!;
   if((dow===5||dow===6)&&h('inv'+n.id)%3===0){const apDay=day+1,apMin=1110;mk(n.id,600+h('t'+n.id)%300,'invite',say(s,n.id,T.invite(placeName('streetfood'),hhmm(apMin))),sayAll(s,n.id,T.inviteReplies),{day:apDay,minute:apMin,place:'streetfood'});continue}
   if(day-rel.lastDay>=5&&h('chk'+n.id)%2===0)mk(n.id,720+h('c'+n.id)%360,'checkin',say(s,n.id,T.checkin),sayAll(s,n.id,T.checkinReplies))}
@@ -104,7 +109,7 @@ export function markRead(s:GameState,id:string):GameState{const ib=inboxOf(s),t=
 /** Trả lời một tin. Nhận lời đi ăn thì có hẹn. */
 export function replyMessage(s:GameState,id:string,msgId:string,choice:number):GameResult{const ib=inboxOf(s),t=ib.threads[id],m=t?.find(x=>x.id===msgId);if(!m||m.from!=='npc'||!m.replies||m.answered!==undefined)return{ok:false,error:'Tin này không cần trả lời.'};const label=m.replies[choice];if(label===undefined)return{ok:false,error:'Lựa chọn không hợp lệ.'};const npc=castById(s,id)!;
  let n:GameState=s,answer='';const seq=ib.seq+1,appts=[...ib.appts];
- if(m.kind==='invite'){if(choice===0&&m.appt){appts.push({id:`a${seq}`,npc:id,day:m.appt.day,minute:m.appt.minute,place:m.appt.place,status:'set'});answer=say(s,id,T.yes);n=adjustRelation(n,id,1)}else{answer=say(s,id,T.no)}}
+ if(m.kind==='invite'){if(choice===0&&m.appt){appts.push({id:`a${seq}`,npc:id,day:m.appt.day,minute:m.appt.minute,place:m.appt.place,status:'set',...(m.appt.act?{act:m.appt.act}:{})});answer=say(s,id,T.yes);n=adjustRelation(n,id,1)}else{answer=say(s,id,T.no);/* tầng 3: từ chối lời rủ theo nếp thì NPC hơi buồn */if(m.appt?.act)n=adjustRelation(n,id,-1,false)}}
  else if(m.kind==='rent'){answer=choice===0?'Ừ, giỏi lắm.':'Thôi được, nhưng đừng trễ quá nghen.';n=adjustRelation(n,id,choice===0?1:-1)}
  else if(m.kind==='mom-gift'){answer='Ừ, nhớ ra lấy sớm kẻo để lâu hư.';n=adjustRelation(n,id,2);n={...n,mood:Math.min(100,n.mood+3)}}
  else if(m.kind==='mom-recipe'){if(m.recipe&&RECIPES[m.recipe])n=learnRecipe(n,m.recipe,'me','Mẹ');n=addWorkXp(n,'cooking',choice===0?20:10);answer='Nấu được thì chụp hình cho mẹ coi.';n=adjustRelation(n,id,2)}
@@ -112,7 +117,7 @@ export function replyMessage(s:GameState,id:string,msgId:string,choice:number):G
   answer=re?.text??(id==='me'?'Ừ, mẹ thương.':id==='em'?fillV(s,id,['Hihi, vậy nha {you}.','Dạ, em biết rồi.','Ok {you}!'][hash(`em-re:${msgId}`)%3]!):say(s,id,T.fine));if(re)n=notePrintsFor(n,id,re.prints);n=adjustRelation(n,id,2,true,true);n={...n,mood:Math.min(100,n.mood+2)}}
  const nm=inboxOf(n),now=clockOf(s).minute;const thread=[...(nm.threads[id]??[])].map(x=>x.id===msgId?{...x,answered:choice,read:true}:x);thread.push({id:`m${seq}:me`,day:s.day,minute:now,from:'me',text:label,kind:'note',read:true},{id:`m${seq}:re`,day:s.day,minute:now,from:'npc',text:answer,kind:'note',read:true});
  n={...n,inbox:{...nm,seq,appts,threads:{...nm.threads,[id]:thread.slice(-40)}}};
- if(m.kind==='invite'&&choice===0&&m.appt)n=recordJournal(n,`appt:a${seq}`,`Hẹn đi ăn với ${npc.name}`,`${placeName(m.appt.place)}, ${whenText(s.day,m.appt.day,m.appt.minute)}.`,id);return{ok:true,state:n}}
+ if(m.kind==='invite'&&choice===0&&m.appt)n=recordJournal(n,`appt:a${seq}`,`Hẹn ${HABIT_VERB[m.appt.act??'eat']} với ${npc.name}`,`${placeName(m.appt.place)}, ${whenText(s.day,m.appt.day,m.appt.minute)}.`,id);return{ok:true,state:n}}
 
 /** Người chơi nhắn trước: hỏi thăm (mỗi người mỗi ngày một lần) hoặc rủ đi ăn tối mai. */
 export function sendMessage(s:GameState,id:string,kind:'hello'|'invite'|'bday'):GameResult{if(kind==='bday')return wishBirthday(s,id);const npc=castById(s,id);if(!npc||!(npc.family||scoreOf(s,id)>=10))return{ok:false,error:'Chưa có số của người này.'};const ib=inboxOf(s),seq=ib.seq+1,now=clockOf(s).minute,day=s.day;let n:GameState=s;const appts=[...ib.appts];let text:string,answer:string;
@@ -134,6 +139,21 @@ export function callNpc(s:GameState,id:string):GameResult{const npc=castById(s,i
 
 /** Hẹn đang tới giờ ở nơi người chơi đang đứng (sớm 30 phút đến trễ 60 phút). */
 export function dueAppointment(s:GameState){const c=clockOf(s);return inboxOf(s).appts.find(a=>a.status==='set'&&a.day===s.day&&a.place===c.location&&c.minute>=a.minute-APPT_EARLY&&c.minute<=a.minute+APPT_LATE)}
+/** #357 tầng 3: cùng làm một việc với cùng người từ 3 lần trong 14 ngày thì thành nếp; NPC rủ lại vào thứ sáu cho thứ bảy.
+ * Hai lần liền người chơi từ chối hoặc lỡ hẹn thì NPC thôi rủ (nếp tự hết khi quá 14 ngày không đi). */
+export const HABIT={need:3,days:14,drop:2} as const;
+const cap1=(x:string)=>x.charAt(0).toUpperCase()+x.slice(1);
+const HABIT_VERB:Record<OutAct,string>={eat:'đi ăn',drink:'đi uống nước',run:'chạy bộ',walk:'đi dạo',chess:'đánh cờ',visit:'qua nhà chơi',sport:'chơi thể thao',out:'đi chơi',fish:'đi câu',show:'đi coi triển lãm'};
+export function habitOf(s:GameState,npc:string):{act:OutAct;place:PlaceId;minute:number}|null{const ib=inboxOf(s),mine=ib.appts.filter(a=>a.npc===npc&&a.act).sort((a,b)=>a.day-b.day);
+ const counts=new Map<OutAct,number>();for(const a of mine)if(a.status==='done'&&s.day-a.day<=HABIT.days)counts.set(a.act!,(counts.get(a.act!)??0)+1);
+ const act=[...counts].filter(([,k])=>k>=HABIT.need).map(([a])=>a).pop();if(!act)return null;const same=mine.filter(a=>a.act===act),last=same.filter(a=>a.status==='done').pop()!;
+ if(same.slice(-HABIT.drop).length===HABIT.drop&&same.slice(-HABIT.drop).every(a=>a.status==='missed'))return null;
+ const asked=(ib.threads[npc]??[]).filter(m=>m.kind==='invite'&&m.appt?.act===act).slice(-HABIT.drop);if(asked.length===HABIT.drop&&asked.every(m=>m.answered===1))return null;
+ return{act,place:last.place,minute:last.minute}}
+/** #357: hẹn sắp tới với mọi người (cho Lịch): việc, người, ngày, giờ, chỗ. */
+export function upcomingAppointments(s:GameState){return inboxOf(s).appts.filter(a=>a.status==='set'&&a.day>=s.day).sort((a,b)=>a.day-b.day||a.minute-b.minute).map(a=>{const n=castById(s,a.npc);return{id:a.id,day:a.day,minute:a.minute,title:`${cap1(HABIT_VERB[a.act??'eat'])} với ${n?.name??'bạn'}`,place:a.act==='visit'?`Nhà ${n?.name??''}`.trim():placeName(a.place)}})}
+/** #357: hẹn từ lời rủ khi nói chuyện trực tiếp (mỗi người một hẹn đang chờ, hẹn mới thay hẹn cũ). */
+export function addAppointment(s:GameState,a:Omit<Appointment,'id'|'status'>):{state:GameState;id:string}{const ib=inboxOf(s),seq=ib.seq+1,id=`a${seq}`;return{id,state:{...s,inbox:{...ib,seq,appts:[...ib.appts.filter(x=>!(x.npc===a.npc&&x.status==='set')),{...a,id,status:'set'}]}}}}
 export function markAppointment(s:GameState,apptId:string,status:'done'|'missed'):GameState{const ib=inboxOf(s);return{...s,inbox:{...ib,appts:ib.appts.map(a=>a.id===apptId?{...a,status}:a)}}}
 
 /** Qua ngày: hẹn lỡ thì trừ điểm, ghi nhớ và người đó nhắn trách; tin chưa trả lời quá một ngày thì thôi chờ (Mẹ nhớ); lên lịch tin của ngày mới. */
@@ -145,6 +165,6 @@ export function settleInbox(next:GameState):GameState{let n=next;const ib=struct
 export function validInbox(v:unknown,day:number):v is InboxState{if(!v||typeof v!=='object')return false;const b=v as InboxState,id=isNpcId,d=(x:unknown,max=day+2)=>Number.isInteger(x)&&(x as number)>=0&&(x as number)<=max,msg=(m:Msg)=>m&&typeof m.id==='string'&&d(m.day)&&Number.isInteger(m.minute)&&['npc','me'].includes(m.from)&&typeof m.text==='string'&&m.text.length<300&&(m.replies===undefined||(Array.isArray(m.replies)&&m.replies.length<=4))&&(m.answered===undefined||Number.isInteger(m.answered))&&(m.recipe===undefined||Object.hasOwn(RECIPES,m.recipe))&&(m.talk===undefined||(!!m.talk&&INTENTS.includes(m.talk.i)&&Array.isArray(m.talk.a)&&m.talk.a.length<=4&&m.talk.a.every(x=>typeof x==='string'&&x.length<20)&&(m.talk.f===undefined||(typeof m.talk.f==='string'&&m.talk.f.length<160))));
  if(b.version!==1||!Number.isInteger(b.seq)||!b.threads||typeof b.threads!=='object'||!Array.isArray(b.queue)||b.queue.length>20||!Array.isArray(b.appts)||b.appts.length>60)return false;
  if(!Object.entries(b.threads).every(([k,t])=>id(k)&&Array.isArray(t)&&t.length<=40&&t.every(msg)))return false;if(!b.queue.every(q=>id(q.npc)&&msg(q)))return false;
- if(!b.appts.every(a=>a&&typeof a.id==='string'&&id(a.npc)&&d(a.day)&&Number.isInteger(a.minute)&&typeof a.place==='string'&&['set','done','missed'].includes(a.status)))return false;
+ if(!b.appts.every(a=>a&&typeof a.id==='string'&&id(a.npc)&&d(a.day,day+8)&&Number.isInteger(a.minute)&&typeof a.place==='string'&&['set','done','missed'].includes(a.status)&&(a.act===undefined||OUT_ACTS.includes(a.act))&&(a.pay===undefined||PAYS.includes(a.pay))))return false;
  return!!b.called&&!!b.hello&&Object.entries({...b.called,...b.hello}).every(([k,v])=>id(k)&&d(v,day))}
 export const presentFor=(s:GameState,id:string)=>{const n=castById(s,id);return!!n&&presentAt(n,s.day,clockOf(s).minute,clockOf(s).location)&&inReach(s,n,clockOf(s).location)};

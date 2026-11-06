@@ -12,7 +12,9 @@ import {addWorkXp} from './study';
 import {SKILLS,type SkillId} from './skill-xp';
 import {hash} from './shift';
 import {weatherOf,OUTDOOR} from './weather';
-import {dueAppointment,markAppointment,MOM_PARCEL} from './inbox';
+import {dueAppointment,markAppointment,addAppointment,inboxOf,MOM_PARCEL} from './inbox';
+import {whenOf,confirmLines,askBackText,helloText,goLabel,skipLabel,outingLines,priceFor,OUT,OUT_RELATION,OUT_WEIGHT,type Plan,type Pay,type OutAct} from './talk/outing';
+import {TALK} from './talk/compose';
 import {npcTells,hear} from './talk/gossip';
 /** H7c: phần trăm lời hỏi thăm của người quen (từ 10 điểm) thành kể tin đồn. */
 export const TELL_PCT=25;
@@ -40,10 +42,16 @@ export interface Memory{id:string;day:number;npc:string;motif:MotifId;topic:stri
 export interface Hook{npc:string;motif:MotifId;from:number;to:number;memory:string}
 export interface Loan{id:string;npc:string;amount:number;due:number;repay:boolean;settled?:'paid'|'unpaid';/** đã xử lý xong khoản quỵt (xoá nợ, đòi, trả một nửa) */resolved?:boolean}
 export interface PendingEvent{key:string;npc:string;motif:MotifId;variant:number;by:'npc'|'player';day:number;memory?:string;/** T18: câu thoại đã chọn và câu điểm nhấn kèm theo */line?:string;quirk?:string;
- /** H5: câu ghép từ bộ sinh hội thoại (người có mảnh riêng); trả lời bằng lựa chọn thái độ × hành động */talk?:TalkLine}
+ /** H5: câu ghép từ bộ sinh hội thoại (người có mảnh riêng); trả lời bằng lựa chọn thái độ × hành động */talk?:TalkLine;
+ /** #357: tới chỗ hẹn (mã hẹn trong inbox): chào hỏi, đi cùng, chào về */appt?:string}
 /** Câu ghép đã chốt lúc mở chuyện (lưu nguyên câu để giao diện và lựa chọn ổn định). */
 export interface TalkLine{text:string;intent:Intent;prints:string[];gift?:[string,number];
  /** H6: lượt thứ mấy (1 đến 3), mã dữ kiện của câu đầu, câu người chơi vừa nói, lựa chọn đã chọn, bộ khép chuyện, kênh (gọi điện) */turn?:number;fact?:string;said?:string;skip?:string[];mode?:'answer';ch?:Channel}
+/** #357: kế hoạch của câu rủ (theo mảnh đã dùng). */
+const PLAN_BY=new Map(TALK.pieces.filter(p=>p.plan).map(p=>[`p:${p.id}`,p.plan!]));
+/** NPC đã nói mình mời (mảnh đuôi "{self} bao"). */
+const npcTreats=(t:Pick<TalkLine,'prints'>)=>t.prints.includes('p:tail-007');
+export const planOf=(t:Pick<TalkLine,'prints'|'intent'>):Plan|undefined=>t.intent==='invite'?t.prints.map(k=>PLAN_BY.get(k)).find(Boolean):undefined;
 /** Câu ghép thành dòng chờ trả lời. */
 export const talkLineOf=(said:Said,more:Partial<TalkLine>={}):TalkLine=>({text:said.text,intent:said.intent??'news',prints:said.prints,...(said.gift?{gift:said.gift}:{}),...(said.fact?{fact:said.fact.id}:{}),...(said.mode?{mode:said.mode}:{}),...more});
 export interface LogEntry{day:number;npc:string;motif:MotifId;variant:number;by:'npc'|'player'}
@@ -134,7 +142,7 @@ function open(s:GameState,npc:NpcProfile,pick:{motif:Motif;variant:number;memory
  return{...s,story:{...st,seq,pending:{key,npc:npc.id,motif:pick.motif.id,variant:pick.variant,by,day:s.day,...(memory?{memory:memory.id}:{}),...(talk?{talk}:{}),...(line&&!talk?{line:line.id}:{}),...(quirk&&!talk?{quirk:quirk.id}:{})},log:[...st.log,{day:s.day,npc:npc.id,motif:pick.motif.id,variant:pick.variant,by}].slice(-300)}}}
 
 /** NPC tự bắt chuyện khi người chơi đến nơi hoặc vừa làm xong việc (tối đa 3 lần mỗi ngày). */
-export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAppointment(s);if(ap&&!storyOf(s).pending&&!s.work?.active){const npc=castById(s,ap.npc);if(npc)return open(markAppointment(s,ap.id,'done'),npc,{motif:motifOf('meal'),variant:0},'player')}}const st=storyOf(s);if(st.pending||s.gossip?.pending||s.work?.active||s.fishing?.atLake||s.office?.application?.status==='interview'||npcCount(s)>=NPC_DAILY_LIMIT)return s;const c=clockOf(s);if(c.minute+30>END)return s;if(weatherOf(s.day)==='storm'&&OUTDOOR.includes(c.location))return s;
+export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAppointment(s);if(ap&&!storyOf(s).pending&&!s.work?.active){const npc=castById(s,ap.npc);if(npc){const n=open(markAppointment(s,ap.id,'done'),npc,{motif:motifOf('meal'),variant:0},'player'),st=storyOf(n);/* #357: tới chỗ hẹn thì vào sự kiện đi cùng */return st.pending?{...n,story:{...st,pending:{...st.pending,appt:ap.id}}}:n}}}const st=storyOf(s);if(st.pending||s.gossip?.pending||s.work?.active||s.fishing?.atLake||s.office?.application?.status==='interview'||npcCount(s)>=NPC_DAILY_LIMIT)return s;const c=clockOf(s);if(c.minute+30>END)return s;if(weatherOf(s.day)==='storm'&&OUTDOOR.includes(c.location))return s;
  const here=rosterOf(s).filter(n=>n.story&&presentAt(n,s.day,c.minute,c.location)&&inReach(s,n,c.location)),candidates=[...here];const roll=hash(`start:${s.day}:${c.minute}:${c.location}:${trigger}:${st.seq}`)%100;
  const due=here.find(n=>pickMotif(s,n,'npc','due')?.motif.id==='return');if(due){const p=pickMotif(s,due,'npc','due')!;return open(s,due,p,'npc')}
  const near=here.some(n=>nearTier(socialOf(s).relations[n.id]?.score??0));if(roll>=(near?65:40))return s;const order=[...candidates].sort((a,b)=>hash(`${s.day}:${a.id}:${roll}`)-hash(`${s.day}:${b.id}:${roll}`));
@@ -162,12 +170,13 @@ export function startTalk(s:GameState,id:string,kind:TalkKind='talk'):GameResult
 
 /** Dữ liệu để giao diện hiện câu chuyện đang mở. Lựa chọn không kèm hệ quả. */
 export function openEvent(s:GameState){const p=storyOf(s).pending;if(!p)return null;const npc=castById(s,p.npc),m=motifOf(p.motif);if(!npc)return null;
+ if(p.appt){const o=outingOf(s,p.appt),price=priceFor(o.act,o.pay);return{npc,motif:'Đi cùng',line:helloText(npc,o.act,`hello:${p.key}`),said:undefined as string|undefined,recall:undefined as string|undefined,options:[{label:goLabel(o.act),locked:s.money<price,need:s.money<price?'Không đủ tiền':undefined},{label:skipLabel(npc),locked:false,need:undefined}]}}
  if(p.talk){const opts=buildReplies(talkCtxOf(s,npc,p,p.talk));return{npc,motif:p.talk.ch==='call'?'Gọi điện':'Trò chuyện',line:p.talk.text,said:p.talk.said,recall:undefined as string|undefined,options:opts.map(o=>({label:o.label,locked:o.locked,need:o.locked?o.need??(s.money<o.money?'Không đủ tiền':s.energy<o.energy?'Không đủ sức':'Không đủ giờ'):undefined}))}}const mem=p.memory?storyOf(s).memories.find(x=>x.id===p.memory):undefined,c=ctxFor(s,npc,p.variant,mem),k=s.skills;
  const loan=unpaidLoan(s,npc.id)??storyOf(s).loans.slice().reverse().find(l=>l.npc===npc.id),text=(id?:string)=>{const l=id?lineById(id):undefined;return l?fill(l.text,{self:c.self,you:c.you,ago:mem?agoText(s.day-mem.day):'hôm trước',topic:mem?.topic,fear:npc.fear.toLowerCase(),amount:`${((p.motif==='loan'?[200000,500000,1000000][p.variant]:loan?.amount)??0)/1000} nghìn`}):undefined};
  return{npc,motif:m.name,said:undefined as string|undefined,line:[text(p.line)??m.line(c),text(p.quirk)].filter(Boolean).join(' '),recall:mem?`${cap(agoText(s.day-mem.day))}: ${mem.topic}`:undefined,options:m.options(c).map(o=>{const lack=o.need&&(k?.[o.need[0]]?.level??1)<o.need[1],poor=o.needMoney!==undefined&&s.money<o.needMoney;return{label:o.label,locked:!!(lack||poor),need:lack?`${SKILLS[o.need![0]]} Lv${o.need![1]}`:poor?'Không đủ tiền':undefined}})}}
 
 /** Trả lời câu chuyện: áp hệ quả, ghi ký ức, móc tiếp nối, khoản cho mượn và Nhật ký. */
-export function answerEvent(s:GameState,choice:number):GameResult&{text?:string;scene?:SceneLine[]}{const st=storyOf(s),p=st.pending;if(!p)return{ok:false,error:'Không có câu chuyện nào đang mở.'};if(p.talk)return answerTalk(s,p,p.talk,choice);const npc=castById(s,p.npc)!,m=motifOf(p.motif),mem=p.memory?st.memories.find(x=>x.id===p.memory):undefined,c=ctxFor(s,npc,p.variant,mem),o=Number.isInteger(choice)?m.options(c)[choice]:undefined;if(!o)return{ok:false,error:'Lựa chọn không hợp lệ.'};
+export function answerEvent(s:GameState,choice:number):GameResult&{text?:string;scene?:SceneLine[]}{const st=storyOf(s),p=st.pending;if(!p)return{ok:false,error:'Không có câu chuyện nào đang mở.'};if(p.appt)return answerOuting(s,p,choice);if(p.talk)return answerTalk(s,p,p.talk,choice);const npc=castById(s,p.npc)!,m=motifOf(p.motif),mem=p.memory?st.memories.find(x=>x.id===p.memory):undefined,c=ctxFor(s,npc,p.variant,mem),o=Number.isInteger(choice)?m.options(c)[choice]:undefined;if(!o)return{ok:false,error:'Lựa chọn không hợp lệ.'};
  if(o.need&&(s.skills?.[o.need[0]]?.level??1)<o.need[1])return{ok:false,error:`Cần ${SKILLS[o.need[0]]} Lv${o.need[1]}.`};if(o.needMoney!==undefined&&s.money<o.needMoney)return{ok:false,error:'Không đủ tiền.'};
  let n:GameState=structuredClone(s);const e=o.effect,clamp=(v:number)=>Math.max(0,Math.min(100,v));
  if(e.minutes&&clockOf(n).minute+e.minutes<END){const r=spendTime(n,e.minutes);if(r.ok)n=r.state}
@@ -183,6 +192,19 @@ export function answerEvent(s:GameState,choice:number):GameResult&{text?:string;
  if(e.bonusMoney)post(n,{id:`story-gift:${p.key}`,name:`Quà của ${npc.name}`,amount:e.bonusMoney});
  n={...n,story:ns};n=recordJournal(n,`story:${p.key}`,`${npc.name}: ${m.name}`,`${o.label}. ${o.result}`,npc.id);return{ok:true,state:n,text:o.result}}
 
+/** #357: hẹn đang tới (thiếu việc là đi ăn, thiếu người trả là ai nấy trả). */
+function outingOf(s:GameState,id:string):{act:OutAct;pay:Pay;place?:PlaceId}{const a=inboxOf(s).appts.find(x=>x.id===id);return{act:a?.act??'eat',pay:a?.pay??'each',...(a?{place:a.place}:{})}}
+/** #357: đi cùng ở chỗ hẹn: tốn giờ, tiền theo người trả, cộng như việc có chủ đích, để lại ký ức theo việc. Không đi thì NPC phật ý. */
+function answerOuting(s:GameState,p:PendingEvent,choice:number):GameResult&{text?:string;scene?:SceneLine[]}{const npc=castById(s,p.npc);if(!npc)return{ok:false,error:'Không tìm thấy người này.'};const {act,pay,place}=outingOf(s,p.appt!),out=OUT[act],price=priceFor(act,pay);
+ if(choice!==0&&choice!==1)return{ok:false,error:'Lựa chọn không hợp lệ.'};let n:GameState=structuredClone(s);const ns:StoryState=structuredClone(storyOf(n));delete ns.pending;
+ if(choice===1){n=adjustRelation(n,npc.id,-2,false);n=markAppointment(n,p.appt!,'missed');n={...n,story:ns};const text=`${npc.name} hơi buồn.`;return{ok:true,state:recordJournal(n,`story:${p.key}`,`${npc.name}: Lỡ hẹn`,text,npc.id),text}}
+ if(s.money<price)return{ok:false,error:'Không đủ tiền.'};
+ if(clockOf(n).minute+out.minutes<END){const x=spendTime(n,out.minutes);if(x.ok)n=x.state}
+ if(price&&post(n,{id:`outing:${p.appt}`,name:`Đi cùng ${npc.name}`,amount:-price})!=='ok')return{ok:false,error:'Không đủ tiền.'};
+ const clamp=(v:number)=>Math.max(0,Math.min(100,v));n.mood=clamp(n.mood+out.mood);if(out.fullness)n.fullness=clamp((n.fullness??70)+out.fullness);if(out.energy)n.energy=clamp(n.energy-out.energy);
+ n=adjustRelation(n,npc.id,OUT_RELATION,true,false);
+ const had=ns.memories.find(y=>y.npc===npc.id&&y.topic===out.topic);if(had)ns.memories=ns.memories.map(y=>y===had?{...reinforce(y,s.day),day:s.day}:y);else{ns.seq++;ns.memories=[...ns.memories,{id:`m${ns.seq}`,day:s.day,npc:npc.id,motif:'meal',topic:out.topic,tag:'go',weight:OUT_WEIGHT}]}
+ const scene=outingLines(npc,act,pay,`out:${p.key}`,place);n={...n,story:ns};n=recordJournal(n,`story:${p.key}`,`${npc.name}: Đi cùng`,`${scene[0]!.text} ${scene[1]!.text}`,npc.id);return{ok:true,state:n,text:scene[0]!.text,scene}}
 /** H5: trả lời câu ghép bằng một lựa chọn thái độ × hành động; hậu quả theo tính cách NPC (resolveReply), không hiện trước. */
 function answerTalk(s:GameState,p:PendingEvent,t:TalkLine,choice:number):GameResult&{text?:string;scene?:SceneLine[]}{const npc=castById(s,p.npc);if(!npc)return{ok:false,error:'Không tìm thấy người này.'};
  const turn=t.turn??1,rc=talkCtxOf(s,npc,p,t),opts=buildReplies(rc),o=Number.isInteger(choice)?opts[choice]:undefined;if(!o)return{ok:false,error:'Lựa chọn không hợp lệ.'};if(o.locked)return{ok:false,error:o.need?`Cần ${o.need}.`:'Lúc này chưa làm được.'};
@@ -192,13 +214,20 @@ function answerTalk(s:GameState,p:PendingEvent,t:TalkLine,choice:number):GameRes
  if(r.energy)n.energy=Math.max(0,n.energy-r.energy);
  n=adjustRelation(n,npc.id,r.relation,true,r.light);if(r.gift)n=receiveGift(n,r.gift[0],r.gift[1]);
  n=noteReplyFor(n,{d:s.day,n:npc.id,a:o.attitude,x:o.action});n=notePrintsFor(n,npc.id,[...t.prints,setPrint(npc.id,opts)]);
+ /* #357: lời rủ có kế hoạch: nhận lời thì NPC chốt giờ và có hẹn thật (rủ ngay thì đi luôn); hỏi "mấy giờ" thì NPC nói giờ, chỗ rồi hỏi lại */
+ const plan=!npc.remote&&t.ch!=='text'?planOf(t):undefined;let planScene:SceneLine[]|undefined,planNext:TalkLine|undefined,goNow:string|undefined;
+ if(plan){const c0=clockOf(n),place=plan.place??c0.location,at=whenOf(plan,n.day,c0.minute);
+  if(o.action==='accept'){const pay:Pay=plan.pay==='npc'||npcTreats(t)||o.id==='invite:joke:accept'?'npc':o.id==='invite:warm:accept:treat'?'me':'each',ap=addAppointment(n,{npc:npc.id,day:at.day,minute:at.minute,place,act:plan.act,pay});n=ap.state;
+   if(plan.at==='now')goNow=ap.id;else planScene=confirmLines(npc,o.label,plan.act,place,at,n.day,`plan:${p.key}`)}
+  else if(o.action==='ask'&&turn<MAX_TURNS)planNext={text:askBackText(npc,plan.act,place,at,n.day),intent:'invite',prints:t.prints.filter(k=>PLAN_BY.has(k)||k==='p:tail-007'),said:o.label,turn:turn+1,skip:[...(t.skip??[]),o.id].slice(-6),...(t.ch?{ch:t.ch}:{})}}
  /* #354: chọn câu kéo dài chuyện (Hỏi thêm, Giúp, Kể chuyện mình, nhận lời rủ, làm lành) thì hiện đoạn tự diễn thay cho lượt 2, 3: 10 phút, cộng như một lượt Hỏi thêm */
  const kind:SceneKind|undefined=r.gift||t.mode==='answer'||t.ch==='text'?undefined:o.action==='help'?'help':t.intent==='invite'||t.intent==='request'?undefined:t.intent==='apologize'&&o.action==='accept'&&o.attitude==='warm'?'forgive':CONTINUE.includes(o.action)&&(o.attitude==='warm'||o.attitude==='joke')?'talk':undefined;
  let scene:SceneLine[]|undefined,sceneMem:string|undefined;
  if(kind&&clockOf(n).minute+SCENE_MINUTES<END){const x=spendTime(n,SCENE_MINUTES);if(x.ok){n=x.state;const more=resolveReply({...rc,turn:2},{id:'scene',attitude:'warm',action:'ask',label:'',minutes:0,energy:0,money:0,locked:false});n=adjustRelation(n,npc.id,more.relation,true,true);
   const sc0=sceneOf({npc,kind,intent:t.intent,tier:rc.tier,channel:t.ch??'face',...(clockOf(s).location&&t.ch!=='call'?{place:clockOf(s).location}:{}),minute:clockOf(n).minute,seed:`scene:${p.key}`,said:o.label});scene=sc0.lines;sceneMem=sc0.mem}}
- const next:TalkLine|undefined=undefined;
+ const next:TalkLine|undefined=planNext;if(planScene)scene=planScene;
  const ns:StoryState=structuredClone(storyOf(n));delete ns.pending;if(next)ns.pending={...p,talk:next};
+ if(goNow){n=markAppointment(n,goNow,'done');ns.seq++;ns.pending={key:`${s.day}:${ns.seq}`,npc:npc.id,motif:'meal',variant:0,by:'player',day:s.day,appt:goNow}}
  /* #354 tầng 1: đoạn tự diễn để lại ký ức nhẹ theo việc (cùng chủ đề thì nhắc lại cho đậm, không thêm dòng) */
  if(sceneMem){const had=ns.memories.find(y=>y.npc===npc.id&&y.topic===sceneMem);if(had)ns.memories=ns.memories.map(y=>y===had?{...reinforce(y,s.day),day:s.day}:y);else{ns.seq++;ns.memories=[...ns.memories,{id:`m${ns.seq}`,day:s.day,npc:npc.id,motif:'greet',topic:sceneMem,tag:'scene',weight:SCENE_WEIGHT}]}}
  if(r.memory&&r.memory.weight>=FORGET.minWeight){ns.memories=[...ns.memories,{id:`m${ns.seq}`,day:s.day,npc:npc.id,motif:'greet',topic:r.memory.topic,tag:r.memory.tag,weight:r.memory.weight}];if(ns.memories.length>200){const drop=ns.memories.filter(x=>x.weight<4).sort((a,b)=>a.weight-b.weight||a.day-b.day)[0];if(drop)ns.memories=ns.memories.filter(x=>x!==drop)}}
@@ -207,7 +236,7 @@ function answerTalk(s:GameState,p:PendingEvent,t:TalkLine,choice:number):GameRes
  const sc=scene?{scene}:{};if(next||t.ch==='call')return{ok:true,state:n,text,...sc};// cuộc gọi đã ghi Nhật ký ở callNpc
  n=recordJournal(n,`story:${p.key}`,`${npc.name}: Trò chuyện`,scene?`${o.label}. ${scene[1]!.text} ${scene[2]!.text}`:`${turn>1?`${turn} lượt. `:''}${o.label}. ${text}`,npc.id);return{ok:true,state:n,text,...sc}}
 /** Bối cảnh lựa chọn của câu ghép đang chờ (lượt sau có seed riêng, bỏ lựa chọn đã chọn). */
-function talkCtxOf(s:GameState,npc:NpcProfile,p:PendingEvent,t:TalkLine){const turn=t.turn??1;return replyCtxOf(s,npc,t.intent,turn>1?`${p.key}:${turn}`:p.key,t.gift,{turn,...(t.mode?{mode:t.mode}:{}),...(t.skip?{skip:t.skip}:{}),...(t.fact?{fact:t.fact}:{}),...(lineForm(t.intent,t.text,turn)?{form:lineForm(t.intent,t.text,turn)}:{})})}
+function talkCtxOf(s:GameState,npc:NpcProfile,p:PendingEvent,t:TalkLine){const turn=t.turn??1,pl=planOf(t);return replyCtxOf(s,npc,t.intent,turn>1?`${p.key}:${turn}`:p.key,t.gift,{turn,...(pl&&!pl.pay&&!npcTreats(t)&&OUT[pl.act].price>0?{paid:true}:{}),...(t.mode?{mode:t.mode}:{}),...(t.skip?{skip:t.skip}:{}),...(t.fact?{fact:t.fact}:{}),...(lineForm(t.intent,t.text,turn)?{form:lineForm(t.intent,t.text,turn)}:{})})}
 
 /** Qua ngày: trả hoặc quỵt nợ khi tới hạn, hao mòn quan hệ khi lâu không gặp (có sàn theo bậc đã đạt), dọn dữ liệu cũ. */
 export function settleStory(prev:GameState,next:GameState):GameState{let n=next;const st=structuredClone(storyOf(n));
@@ -227,7 +256,7 @@ export function validStory(v:unknown,day:number):v is StoryState{if(!v||typeof v
  if(!s.hooks.every(h=>h&&id(h.npc)&&MOTIF_IDS.includes(h.motif)&&d(h.from)&&d(h.to)&&h.from<=h.to&&typeof h.memory==='string'))return false;
  if(!s.loans.every(l=>l&&typeof l.id==='string'&&id(l.npc)&&Number.isSafeInteger(l.amount)&&l.amount>0&&l.amount<=1e7&&d(l.due)&&typeof l.repay==='boolean'&&(l.settled===undefined||['paid','unpaid'].includes(l.settled))&&(l.resolved===undefined||typeof l.resolved==='boolean')))return false;
  if(s.heard!==undefined&&!(s.heard&&typeof s.heard==='object'&&Object.entries(s.heard).every(([k,v])=>id(k)&&Array.isArray(v)&&v.length<=HEARD_KEEP&&v.every(x=>typeof x==='string'&&!!lineById(x)))))return false;
- if(s.pending!==undefined){const p=s.pending;if(!p||typeof p.key!=='string'||(p.line!==undefined&&!lineById(p.line))||(p.quirk!==undefined&&!lineById(p.quirk))||(p.talk!==undefined&&!validTalkLine(p.talk))||!id(p.npc)||!MOTIF_IDS.includes(p.motif)||!Number.isInteger(p.variant)||p.variant<0||p.variant>=motifOf(p.motif).variants||!['npc','player'].includes(p.by)||!d(p.day,day))return false}
+ if(s.pending!==undefined){const p=s.pending;if(!p||typeof p.key!=='string'||(p.line!==undefined&&!lineById(p.line))||(p.quirk!==undefined&&!lineById(p.quirk))||(p.talk!==undefined&&!validTalkLine(p.talk))||(p.appt!==undefined&&!shortStr(p.appt,40))||!id(p.npc)||!MOTIF_IDS.includes(p.motif)||!Number.isInteger(p.variant)||p.variant<0||p.variant>=motifOf(p.motif).variants||!['npc','player'].includes(p.by)||!d(p.day,day))return false}
  return true}
 export const placeHasStory=(s:GameState,place:PlaceId)=>rosterOf(s).some(n=>n.story&&presentAt(n,s.day,clockOf(s).minute,place)&&inReach(s,n,place));
 /** Rủ đi ăn được không lúc này (cho giao diện làm mờ nút). */

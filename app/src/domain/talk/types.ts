@@ -1,6 +1,7 @@
 /** H1: kiểu dữ liệu của bộ sinh hội thoại (HOI-THOAI T.2). Câu NPC ghép từ khung (Frame) và mảnh (Piece) theo 6 trục. */
 import type {PlaceId} from '../types';
 import type {Voice} from '../lines';
+import type {Plan} from './outing';
 
 /** Trục 1: ý định. */
 export type Intent='brag'|'complain'|'ask'|'invite'|'request'|'news'|'tease'|'apologize';
@@ -58,5 +59,6 @@ export interface Piece{id:string;slot:Slot;text:string;
  /** câu hứa cho đồ: món (mã trong danh mục quà) và số lượng, người chơi Nhận thì cho thật */gift?:[string,number];
  /** mảnh lạnh nhạt: chỉ dùng khi Bất hoà */cold?:boolean;weight?:number;
  /** H6: mảnh đáp tiếp sau hành động này của người chơi (chỉ dùng trong khung `follow`) */after?:After[];
+ /** #357: câu rủ mang kế hoạch (lúc nào, ở đâu, làm gì); nhận lời thì thành hẹn thật */plan?:Plan;
  /** H6: mảnh đáp chủ đề người chơi mở (chỉ dùng trong khung `answer`) */answer?:PlayerTopic[]}
 export interface TalkData{frames:Frame[];pieces:Piece[]}

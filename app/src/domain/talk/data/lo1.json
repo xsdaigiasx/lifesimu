@@ -701,6 +701,7 @@
  },
  {
   "id": "l1-060",
+  "plan": {"at": "noon", "act": "eat", "place": "streetfood"},
   "slot": "ask",
   "text": "trưa nay ra quán cơm đầu hẻm ăn không",
   "npc": "sen-dev",
@@ -710,6 +711,7 @@
  },
  {
   "id": "l1-061",
+  "plan": {"at": "noon", "act": "eat", "place": "streetfood"},
   "slot": "ask",
   "text": "trưa nay ra quán bún bò gần công ty ăn không",
   "npc": "ant-dev",
@@ -943,6 +945,7 @@
  },
  {
   "id": "l1-082",
+  "plan": {"at": "evening", "act": "eat", "place": "streetfood"},
   "slot": "ask",
   "text": "tối nay ra quán ốc ăn với em không",
   "npc": "courier",
@@ -3356,6 +3359,7 @@
  },
  {
   "id": "l1-282",
+  "plan": {"at": "evening", "act": "visit", "place": "home", "pay": "npc"},
   "slot": "ask",
   "text": "tối nay xuống ăn chè với {self} nha",
   "npc": "landlord",
@@ -3366,6 +3370,7 @@
  },
  {
   "id": "l1-283",
+  "plan": {"at": "weekend", "act": "visit", "place": "home", "pay": "npc"},
   "slot": "ask",
   "text": "cuối tuần nhà {self} nấu lẩu, {you} xuống ăn chung",
   "npc": "landlord",
@@ -4777,6 +4782,7 @@
  },
  {
   "id": "l1-398",
+  "plan": {"at": "noon", "act": "eat", "place": "streetfood"},
   "slot": "ask",
   "text": "trưa nay ăn cơm tấm đầu hẻm không",
   "npc": "sen-dev",
@@ -4790,6 +4796,7 @@
  },
  {
   "id": "l1-399",
+  "plan": {"at": "noon", "act": "eat", "place": "streetfood"},
   "slot": "ask",
   "text": "trưa nay ăn cơm tấm đầu hẻm không",
   "npc": "ant-dev",
@@ -4803,6 +4810,7 @@
  },
  {
   "id": "l1-400",
+  "plan": {"at": "afterwork", "act": "drink", "place": "streetfood"},
   "slot": "ask",
   "text": "chiều về làm ly cà phê không",
   "npc": "sen-dev",
@@ -4815,6 +4823,7 @@
  },
  {
   "id": "l1-401",
+  "plan": {"at": "afterwork", "act": "drink", "place": "streetfood"},
   "slot": "ask",
   "text": "chiều về làm ly cà phê không",
   "npc": "ant-dev",
@@ -4827,6 +4836,7 @@
  },
  {
   "id": "l1-402",
+  "plan": {"at": "weekend", "act": "sport", "place": "park"},
   "slot": "ask",
   "text": "cuối tuần đi đánh cầu lông với {self} không",
   "npc": "sen-dev",
@@ -4839,6 +4849,7 @@
  },
  {
   "id": "l1-403",
+  "plan": {"at": "weekend", "act": "sport", "place": "park"},
   "slot": "ask",
   "text": "cuối tuần đi đánh cầu lông với {self} không",
   "npc": "ant-dev",
@@ -4851,6 +4862,7 @@
  },
  {
   "id": "l1-404",
+  "plan": {"at": "evening", "act": "eat", "place": "restaurant"},
   "slot": "ask",
   "text": "tối nay đi ăn lẩu với nhóm không",
   "npc": "sen-dev",
@@ -4861,6 +4873,7 @@
  },
  {
   "id": "l1-405",
+  "plan": {"at": "evening", "act": "eat", "place": "restaurant"},
   "slot": "ask",
   "text": "tối nay đi ăn lẩu với nhóm không",
   "npc": "ant-dev",
@@ -5807,6 +5820,7 @@
  },
  {
   "id": "l1-489",
+  "plan": {"at": "weekend", "act": "visit", "place": "market", "pay": "npc"},
   "slot": "ask",
   "text": "cuối tuần ghé nhà {self} ăn bánh xèo",
   "npc": "veg",
@@ -6554,6 +6568,7 @@
  },
  {
   "id": "l1-552",
+  "plan": {"at": "weekend", "act": "sport", "place": "park"},
   "slot": "ask",
   "text": "cuối tuần đi đá banh với em không",
   "npc": "courier",
@@ -6566,6 +6581,7 @@
  },
  {
   "id": "l1-553",
+  "plan": {"at": "evening", "act": "eat", "place": "streetfood"},
   "slot": "ask",
   "text": "tối nay ra quán ốc đầu hẻm với em không",
   "npc": "courier",
@@ -6576,6 +6592,7 @@
  },
  {
   "id": "l1-554",
+  "plan": {"at": "afternoon", "act": "drink", "place": "streetfood"},
   "slot": "ask",
   "text": "đi uống nước mía với em không",
   "npc": "courier",
@@ -7002,6 +7019,7 @@
  },
  {
   "id": "l1-596",
+  "plan": {"at": "evening", "act": "visit", "place": "home", "pay": "npc"},
   "slot": "ask",
   "text": "tối nay ngồi uống trà với {self} chút không",
   "npc": "landlord",
@@ -7087,6 +7105,7 @@
  },
  {
   "id": "l1-605",
+  "plan": {"at": "afterwork", "act": "drink", "place": "streetfood"},
   "slot": "ask",
   "text": "tan ca đi uống trà sữa không",
   "npc": "sen-dev",
@@ -7096,6 +7115,7 @@
  },
  {
   "id": "l1-606",
+  "plan": {"at": "afterwork", "act": "drink", "place": "streetfood"},
   "slot": "ask",
   "text": "tan ca đi uống trà sữa không",
   "npc": "ant-dev",
@@ -7105,6 +7125,7 @@
  },
  {
   "id": "l1-607",
+  "plan": {"at": "weekend", "act": "out", "place": "mall"},
   "slot": "ask",
   "text": "cuối tuần đi xem phim với nhóm không",
   "npc": "sen-dev",
@@ -7117,6 +7138,7 @@
  },
  {
   "id": "l1-608",
+  "plan": {"at": "weekend", "act": "out", "place": "mall"},
   "slot": "ask",
   "text": "cuối tuần đi xem phim với nhóm không",
   "npc": "ant-dev",
@@ -7180,6 +7202,7 @@
  },
  {
   "id": "l1-614",
+  "plan": {"at": "noon", "act": "eat", "place": "market", "pay": "npc"},
   "slot": "ask",
   "text": "trưa ghé sạp {self} ăn miếng bánh bò",
   "npc": "veg",
@@ -7219,6 +7242,7 @@
  },
  {
   "id": "l1-618",
+  "plan": {"at": "afternoon", "act": "eat", "place": "streetfood"},
   "slot": "ask",
   "text": "chiều nay đi ăn bánh tráng trộn không",
   "npc": "courier",
