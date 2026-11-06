@@ -21,6 +21,7 @@ test('khoe: "khao" và "để dành" chỉ hợp tin vui lớn, tiền; người
  assert.ok(/Lấy cho/.test(labels(veg,undefined,'d'))&&/Nhìn ngon/.test(labels(veg,undefined,'e')),'người bán khoe hàng');
  assert.ok(!/Lấy cho|Nhìn ngon/.test(labels(me,undefined,'f')),'người thường không có câu mua hàng');
  assert.ok(!/khao|để dành/.test(labels(veg,undefined,'g')),'người bán khoe hàng không bị chúc khao');
+ for(const sub of ['buy','family','money'])assert.ok(!/Lấy cho|Nhìn ngon/.test(labels(veg,sub,'h'+sub)),'người bán khoe chuyện riêng (tivi, con, tiền) không có câu mua hàng: '+sub);
 });
 
 test('không lặp nguyên bộ lựa chọn với cùng NPC trong 7 ngày',()=>{
