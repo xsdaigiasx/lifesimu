@@ -5,8 +5,9 @@
  * Mã vai luôn chỉ người đang giữ vai. Khi một người mất hoặc rời đi, dữ liệu gắn với họ (quan hệ, tin nhắn, ký ức)
  * được dọn khỏi mã vai; Nhật ký, tổng kết năm đổi sang mã lưu trữ `vai.đời` để còn đọc được tên. */
 import type {GameState,GameResult} from './types';
-import {ROLES,roleDef,rosterOf,personFor,pickHolder,setGoneLookup,worldSeed,ageAt,isBirthday,monthDay,isNpcId,mix,FAMILY_IDS,type NpcProfile,type Holder,type HeirSeed,type RosterCycle,type Who} from './npc';
+import {ROLES,roleDef,rosterOf,personFor,pickHolder,setGoneLookup,worldSeed,ageAt,isBirthday,monthDay,isNpcId,mix,FAMILY_IDS,townOn,rosterK,type NpcProfile,type Holder,type HeirSeed,type RosterCycle,type Who} from './npc';
 import {hash} from './shift';
+import {TOWN_IDS,TOWN_PLACES,archOf} from './town-data';
 import {dateAt} from './format';
 import {recordJournal} from './journal';
 import {socialOf,adjustRelation} from './social';
@@ -29,7 +30,7 @@ export const cycleOf=(s:Pick<GameState,'cycle'>):CycleState=>s.cycle??{version:1
 export function yearlyRisk(age:number){return age<50?.0001:age<60?.0003:age<70?.001:age<75?.01:age<80?.04:age<85?.08:age<90?.15:.3}
 const roll=(world:string,salt:string,n:number)=>mix(hash(`${world}:${salt}`))%n;
 const archiveId=(role:string,gen:number)=>`${role}.${gen}`;
-const holderOf=(cy:CycleState,role:string):Holder=>cy.holders[role]??{gen:0,k:0,since:0};
+export const holderOf=(cy:CycleState,role:string):Holder=>cy.holders[role]??{gen:0,k:0,since:0};
 
 setGoneLookup((s:Who,id:string)=>{const cy=(s as Pick<GameState,'cycle'>).cycle;const g=cy?.gone.find(x=>x.id===id);if(!g)return undefined;const p=personFor(worldSeed(s),g.role,g.h);
  return p?{...p,id,age:ageAt(p.born,g.day),gone:g.why,remote:true,schedule:[]}:undefined});
@@ -89,9 +90,9 @@ function playerBirthdayMessages(s:GameState):GameState{if(!isPlayerBirthday(s,s.
 
 // ---------- Vòng đời
 /** Chuỗi chuyện đang dở với người này thì chưa để họ mất (I.5c). */
-function busyWith(s:GameState,id:string){const st=storyOf(s),ib=inboxOf(s);return st.pending?.npc===id||st.hooks.some(h=>h.npc===id&&h.to>=s.day)||st.loans.some(l=>l.npc===id&&!l.settled)||ib.appts.some(a=>a.npc===id&&a.status==='set')}
+export function busyWith(s:GameState,id:string){const st=storyOf(s),ib=inboxOf(s);return st.pending?.npc===id||st.hooks.some(h=>h.npc===id&&h.to>=s.day)||st.loans.some(l=>l.npc===id&&!l.settled)||ib.appts.some(a=>a.npc===id&&a.status==='set')}
 /** Dọn dữ liệu gắn với mã vai của người vừa ra đi; Nhật ký và tổng kết đổi sang mã lưu trữ. */
-function archive(s:GameState,role:string,aid:string):GameState{let n:GameState={...s};
+export function archive(s:GameState,role:string,aid:string):GameState{let n:GameState={...s};
  if(n.social){const rel={...n.social.relations};delete rel[role];n.social={...n.social,relations:rel}}
  if(n.inbox){const ib=structuredClone(n.inbox);delete ib.threads[role];delete ib.called[role];delete ib.hello[role];ib.queue=ib.queue.filter(q=>q.npc!==role);ib.appts=ib.appts.filter(a=>a.npc!==role);n.inbox=ib}
  if(n.story){const st=structuredClone(n.story);st.memories=st.memories.filter(m=>m.npc!==role);st.log=st.log.filter(l=>l.npc!==role);st.hooks=st.hooks.filter(h=>h.npc!==role);st.loans=st.loans.filter(l=>l.npc!==role);if(st.pending?.npc===role)delete st.pending;if(st.heard)delete st.heard[role];n.story=st}
@@ -101,16 +102,18 @@ function archive(s:GameState,role:string,aid:string):GameState{let n:GameState={
  if(n.summary)n.summary={...n.summary,list:n.summary.list.map(x=>({...x,people:x.people.map(p=>p.id===role?{...p,id:aid}:p)}))};
  if(n.life?.parcels)n.life={...n.life,parcels:n.life.parcels.map(p=>p.from===role?{...p,from:aid}:p)};
  return n}
-const LEFT_TEXT:Record<string,string>={courier:'ra trường, chuyển đi làm nơi khác',landlord:'giao khu trọ cho người khác',neighbor:'về quê sống với con cháu'};
+const LEFT_TEXT:Record<string,string>={'town':'chuyển đi nơi khác sống',courier:'ra trường, chuyển đi làm nơi khác',landlord:'giao khu trọ cho người khác',neighbor:'về quê sống với con cháu'};
 /** Một người rời vai (mất hoặc nghỉ): lưu trữ, mở chỗ trống chờ con nối nghiệp (7 ngày) hoặc người mới (14 ngày). */
-function depart(s:GameState,p:NpcProfile,why:'died'|'left'):GameState{const cy=structuredClone(cycleOf(s)),role=p.id,h=holderOf(cy,role),aid=archiveId(role,h.gen),score=scoreOf(s,role),def=roleDef(role)!,day=s.day;
+export function depart(s:GameState,p:NpcProfile,why:'died'|'left'):GameState{const cy=structuredClone(cycleOf(s)),role=p.id,h0=holderOf(cy,role),h:Holder=roleDef(role)?.town?{...h0,...(cy.holders[role]?{}:{k:rosterK(worldSeed(s),role)}),...(p.arch?{a:p.arch}:{})}:h0,aid=archiveId(role,h.gen),score=scoreOf(s,role),def=roleDef(role)!,day=s.day;
  const heir=!!def.heir&&p.kid!==undefined&&ageAt(p.kid,day)>=CYCLE.heirAge;
  cy.gone=[...cy.gone,{id:aid,role,h,day,why,score}].slice(-CYCLE.goneMax);delete cy.frail[role];delete cy.holders[role];cy.known=cy.known.filter(x=>x!==role);delete cy.wished[role];
- cy.vacant={...cy.vacant,[role]:{from:day,until:day+(heir?CYCLE.heirDays:CYCLE.newDays),gen:h.gen,...(heir?{heir:true}:{})}};
+ /* H7a: ô NPC ngẫu nhiên không chờ người thay; ô trống cho người mới tới theo nhịp sinh của town.ts */
+ if(def.town){cy.town={...cy.town,on:townOn(cy).filter(x=>x!==role)};cy.holders={...cy.holders,[role]:h}}
+ else cy.vacant={...cy.vacant,[role]:{from:day,until:day+(heir?CYCLE.heirDays:CYCLE.newDays),gen:h.gen,...(heir?{heir:true}:{})}};
  let n=archive({...s,cycle:cy},role,aid);
  const known=score>=10||s.office?.met?.includes(role);
  if(known)n=why==='died'?recordJournal(n,`gone-died:${aid}`,`Tin buồn: ${p.name} đã mất`,`${p.name} ra đi nhẹ nhàng ở tuổi ${p.age}. Mọi người quanh ${p.role.toLowerCase()} báo tin, đám tang làm trong ${CYCLE.funeralDays} ngày.`,aid)
-  :recordJournal(n,`gone-left:${aid}`,`${p.name} đã rời đi`,`${p.name} ${LEFT_TEXT[role]??'nghỉ hưu, về sống gần con cháu'}.`,aid);
+  :recordJournal(n,`gone-left:${aid}`,`${p.name} đã rời đi`,`${p.name} ${LEFT_TEXT[def.town?'town':role]??'nghỉ hưu, về sống gần con cháu'}.`,aid);
  return n}
 /** Người nối tiếp vào vai: con nối nghiệp (mang họ, quê, một nét tính cách của cha mẹ, nhớ mang máng người chơi) hoặc người mới. */
 function arrive(s:GameState,role:string):GameState{const cy=structuredClone(cycleOf(s)),v=cy.vacant[role]!,world=worldSeed(s),day=s.day;
@@ -149,10 +152,11 @@ export function visitFuneral(s:GameState,aid:string):GameResult{const cy=cycleOf
 
 export function validCycle(v:unknown,day:number):v is CycleState{if(!v||typeof v!=='object')return false;const c=v as CycleState,int=(x:unknown,lo=-40000,hi=day+30)=>Number.isInteger(x)&&(x as number)>=lo&&(x as number)<=hi;
  const role=(k:string)=>!!roleDef(k);
- const holder=(h:Holder)=>!!h&&int(h.gen,0,999)&&int(h.k,0,40)&&int(h.since,0,day)&&(h.p===undefined||(typeof h.p.fam==='string'&&h.p.fam.length<20&&typeof h.p.origin==='string'&&h.p.origin.length<30&&typeof h.p.trait==='string'&&h.p.trait.length<30&&int(h.p.born)));
+ const holder=(h:Holder)=>!!h&&int(h.gen,0,999)&&int(h.k,0,80)&&int(h.since,0,day)&&(h.a===undefined||!!archOf(h.a))&&(h.o===undefined||(typeof h.o==='string'&&/^town-[a-l]:\d{1,3}$/.test(h.o)))&&(h.r===undefined||int(h.r,0,day))&&(h.p===undefined||(typeof h.p.fam==='string'&&h.p.fam.length<20&&typeof h.p.origin==='string'&&h.p.origin.length<30&&typeof h.p.trait==='string'&&h.p.trait.length<30&&int(h.p.born)));
  if(c.version!==1||!c.holders||typeof c.holders!=='object'||!c.vacant||typeof c.vacant!=='object'||!c.frail||typeof c.frail!=='object'||!Array.isArray(c.gone)||c.gone.length>CYCLE.goneMax||!Array.isArray(c.known)||c.known.length>ROLES.length||!c.wished||typeof c.wished!=='object')return false;
  if(!Object.entries(c.holders).every(([k,h])=>role(k)&&holder(h)))return false;
  if(!Object.entries(c.vacant).every(([k,x])=>role(k)&&!!x&&int(x.from,0,day)&&int(x.until,x.from,x.from+60)&&int(x.gen,0,999)&&(x.heir===undefined||x.heir===true)))return false;
  if(!Object.entries(c.frail).every(([k,d])=>role(k)&&int(d,0,day)))return false;
  if(!c.gone.every(g=>g&&isNpcId(g.id)&&g.id.includes('.')&&role(g.role)&&holder(g.h)&&int(g.day,0,day)&&['died','left'].includes(g.why)&&int(g.score,-1000,100000)&&(g.visit===undefined||int(g.visit,g.day,day))))return false;
+ if(c.town!==undefined&&!(c.town&&Array.isArray(c.town.on)&&c.town.on.length<=TOWN_IDS.length&&new Set(c.town.on).size===c.town.on.length&&c.town.on.every(x=>TOWN_IDS.includes(x))&&(c.town.last===undefined||int(c.town.last,0,day))&&(c.town.been===undefined||(!!c.town.been&&typeof c.town.been==='object'&&Object.entries(c.town.been).every(([k,d])=>TOWN_PLACES.includes(k as never)&&int(d,0,day))))))return false;
  return c.known.every(k=>role(k))&&Object.entries(c.wished).every(([k,d])=>role(k)&&int(d,0,day))}

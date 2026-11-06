@@ -292,6 +292,7 @@
   "id": "body-009",
   "slot": "body",
   "text": "trời {weather} hoài, buôn bán ế ẩm",
+  "town": false,
   "intent": [
    "complain"
   ],

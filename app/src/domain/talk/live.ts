@@ -7,13 +7,14 @@ import {answerTo,compose,followUp,TALK,type Said,type TalkCtx} from './compose';
 import {factsOf,witnesses} from './facts';
 import {npcDay} from './npc-life';
 import {tierOf} from './axes';
+import {isTown} from '../town-data';
 import {printsOf,talkOf} from './state';
 import type {ReplyCtx} from './replies';
 import type {After,Channel,Intent,PlayerTopic,Tier} from './types';
 
 /** Người có mảnh riêng (đã đổ dữ liệu, Lô 1): chỉ những người này nói bằng bộ ghép, người khác giữ câu cũ tới Lô 2. */
 const OWN=new Set(TALK.pieces.map(p=>p.npc).filter((x):x is string=>!!x));
-export const hasOwnLines=(id:string)=>OWN.has(id);
+export const hasOwnLines=(id:string)=>OWN.has(id)||isTown(id);
 /** Độ thân dùng cho câu nói: người thân luôn là Tri kỷ (được hỏi chuyện riêng). */
 export const tierFor=(s:GameState,npc:NpcProfile):Tier=>npc.family?'bestie':tierOf(socialOf(s).relations[npc.id]?.score??0);
 

@@ -1,0 +1,825 @@
+[
+{
+"id": "l3-001",
+"slot": "body",
+"text": "{when} {self} còn đang {then}, giờ thì {now} rồi",
+"intent": [
+"brag"
+],
+"topic": [
+"metnew"
+],
+"tone": [
+"good",
+"plain"
+],
+"needs": [
+"now",
+"then"
+]
+},
+{
+"id": "l3-002",
+"slot": "body",
+"text": "{when} {self} còn đang {then}, giờ lại {now}",
+"intent": [
+"complain"
+],
+"topic": [
+"metnew"
+],
+"tone": [
+"bad"
+],
+"needs": [
+"now",
+"then"
+]
+},
+{
+"id": "l3-003",
+"slot": "body",
+"text": "{when} {self} còn {then}, giờ {now} rồi",
+"intent": [
+"complain"
+],
+"topic": [
+"metnew"
+],
+"tone": [
+"plain"
+],
+"needs": [
+"now",
+"then"
+]
+},
+{
+"id": "l3-004",
+"slot": "body",
+"text": "nhớ {self} không, {when} gặp {you} {where} đó",
+"intent": [
+"ask"
+],
+"topic": [
+"met"
+],
+"needs": [
+"where"
+]
+},
+{
+"id": "l3-005",
+"slot": "body",
+"text": "{when} gặp {you} một lần {where} rồi phải không",
+"intent": [
+"ask"
+],
+"topic": [
+"met"
+],
+"needs": [
+"where"
+]
+},
+{
+"id": "l3-006",
+"slot": "body",
+"text": "{self} vẫn đang {then}, chưa xong nữa",
+"intent": [
+"complain"
+],
+"topic": [
+"metsame"
+],
+"needs": [
+"then"
+]
+},
+{
+"id": "l3-007",
+"slot": "body",
+"text": "vẫn chuyện cũ thôi, {self} còn {then}",
+"intent": [
+"complain"
+],
+"topic": [
+"metsame"
+],
+"needs": [
+"then"
+]
+},
+{
+"id": "l3-008",
+"slot": "body",
+"text": "ủa, lâu quá mới gặp lại {you}",
+"intent": [
+"ask"
+],
+"topic": [
+"back"
+]
+},
+{
+"id": "l3-009",
+"slot": "body",
+"text": "hình như mình từng gặp nhau {where} rồi thì phải",
+"intent": [
+"ask"
+],
+"topic": [
+"back"
+],
+"needs": [
+"where"
+]
+},
+{
+"id": "l3-010",
+"slot": "body",
+"text": "dạo này {self} đang {doing}",
+"intent": [
+"complain"
+],
+"topic": [
+"self"
+],
+"tone": [
+"bad"
+],
+"needs": [
+"doing"
+]
+},
+{
+"id": "l3-011",
+"slot": "body",
+"text": "{self} mới {now} đó",
+"intent": [
+"brag"
+],
+"topic": [
+"self"
+],
+"tone": [
+"good"
+],
+"needs": [
+"doing",
+"now"
+]
+},
+{
+"id": "l3-012",
+"slot": "body",
+"text": "nói {you} nghe, {self} {now} rồi",
+"intent": [
+"brag"
+],
+"topic": [
+"self"
+],
+"tone": [
+"good",
+"plain"
+],
+"needs": [
+"doing",
+"now"
+]
+},
+{
+"id": "l3-013",
+"slot": "body",
+"text": "nộp chỗ nào cũng hẹn rồi im luôn",
+"intent": [
+"complain"
+],
+"topic": [
+"a.lenpho.hoso"
+]
+},
+{
+"id": "l3-014",
+"slot": "body",
+"text": "mới lên phố, chưa quen ai hết",
+"intent": [
+"complain"
+],
+"topic": [
+"a.lenpho.hoso"
+]
+},
+{
+"id": "l3-015",
+"slot": "body",
+"text": "đi phỏng vấn hai chỗ rồi, giờ ngồi chờ",
+"intent": [
+"complain"
+],
+"topic": [
+"a.lenpho.phongvan"
+]
+},
+{
+"id": "l3-016",
+"slot": "body",
+"text": "có chỗ nhận {self} rồi, mai đi làm",
+"intent": [
+"brag"
+],
+"topic": [
+"a.lenpho.coviec"
+]
+},
+{
+"id": "l3-017",
+"slot": "body",
+"text": "chỗ đó không nhận, {self} tìm chỗ khác",
+"intent": [
+"complain"
+],
+"topic": [
+"a.lenpho.truot"
+]
+},
+{
+"id": "l3-018",
+"slot": "body",
+"text": "lãnh lương tháng đầu, {self} gửi về cho má",
+"intent": [
+"brag"
+],
+"topic": [
+"a.lenpho.quenviec"
+]
+},
+{
+"id": "l3-019",
+"slot": "body",
+"text": "tối nào cũng ôn tới khuya",
+"intent": [
+"complain"
+],
+"topic": [
+"a.onthi.on"
+]
+},
+{
+"id": "l3-020",
+"slot": "body",
+"text": "thi xong rồi mà chưa dám coi điểm",
+"intent": [
+"complain"
+],
+"topic": [
+"a.onthi.chodiem"
+]
+},
+{
+"id": "l3-021",
+"slot": "body",
+"text": "qua hết rồi, nhẹ cả người",
+"intent": [
+"brag"
+],
+"topic": [
+"a.onthi.dau"
+]
+},
+{
+"id": "l3-022",
+"slot": "body",
+"text": "rớt một môn, hè này phải học lại",
+"intent": [
+"complain"
+],
+"topic": [
+"a.onthi.rot"
+]
+},
+{
+"id": "l3-023",
+"slot": "body",
+"text": "tối nào cũng đi học tiếng Anh",
+"intent": [
+"brag"
+],
+"topic": [
+"a.hocanh.dangky"
+]
+},
+{
+"id": "l3-024",
+"slot": "body",
+"text": "bài tập tiếng Anh nhiều quá trời",
+"intent": [
+"complain"
+],
+"topic": [
+"a.hocanh.baitap"
+]
+},
+{
+"id": "l3-025",
+"slot": "body",
+"text": "có chứng chỉ rồi, tính kiếm chỗ lương cao hơn",
+"intent": [
+"brag"
+],
+"topic": [
+"a.hocanh.dat"
+]
+},
+{
+"id": "l3-026",
+"slot": "body",
+"text": "để dành mấy năm, giờ tính mở cái quán nhỏ",
+"intent": [
+"brag"
+],
+"topic": [
+"a.moquan.gomtien"
+]
+},
+{
+"id": "l3-027",
+"slot": "body",
+"text": "đi coi mặt bằng mấy chỗ, chỗ nào cũng đắt",
+"intent": [
+"complain"
+],
+"topic": [
+"a.moquan.matbang"
+]
+},
+{
+"id": "l3-028",
+"slot": "body",
+"text": "cuối tuần quán {self} khai trương",
+"intent": [
+"brag"
+],
+"topic": [
+"a.moquan.khaitruong"
+]
+},
+{
+"id": "l3-029",
+"slot": "body",
+"text": "quán mở mấy bữa mà khách còn lèo tèo",
+"intent": [
+"complain"
+],
+"topic": [
+"a.moquan.vang"
+]
+},
+{
+"id": "l3-030",
+"slot": "body",
+"text": "quán mới có khách quen rồi",
+"intent": [
+"brag"
+],
+"topic": [
+"a.moquan.dong"
+]
+},
+{
+"id": "l3-031",
+"slot": "body",
+"text": "đám cưới lo đủ thứ, rối hết cả lên",
+"intent": [
+"complain"
+],
+"topic": [
+"a.cuoi.locuoi"
+]
+},
+{
+"id": "l3-032",
+"slot": "body",
+"text": "{self} mới cưới xong, còn mệt",
+"intent": [
+"brag"
+],
+"topic": [
+"a.cuoi.cuoi"
+]
+},
+{
+"id": "l3-033",
+"slot": "body",
+"text": "tháng sau {self} chạy giải mười cây",
+"intent": [
+"brag"
+],
+"topic": [
+"a.giaichay.dangky"
+]
+},
+{
+"id": "l3-034",
+"slot": "body",
+"text": "chạy tới cây thứ bảy là chuột rút",
+"intent": [
+"complain"
+],
+"topic": [
+"a.giaichay.chan"
+]
+},
+{
+"id": "l3-035",
+"slot": "body",
+"text": "con chó nhà {self} cắn nát đôi dép mới",
+"intent": [
+"complain"
+],
+"topic": [
+"a.nuoicho.phado"
+]
+},
+{
+"id": "l3-036",
+"slot": "body",
+"text": "con chó bỏ ăn hai bữa rồi",
+"intent": [
+"complain"
+],
+"topic": [
+"a.nuoicho.om"
+]
+},
+{
+"id": "l3-037",
+"slot": "body",
+"text": "con chó biết ngồi bắt tay rồi đó",
+"intent": [
+"brag"
+],
+"topic": [
+"a.nuoicho.ngoan"
+]
+},
+{
+"id": "l3-038",
+"slot": "body",
+"text": "con gửi đứa cháu lên ở, nhà vui hẳn",
+"intent": [
+"brag"
+],
+"topic": [
+"a.trongchau.len"
+]
+},
+{
+"id": "l3-039",
+"slot": "body",
+"text": "cháu về rồi, nhà vắng hoe",
+"intent": [
+"complain"
+],
+"topic": [
+"a.trongchau.ve"
+]
+},
+{
+"id": "l3-040",
+"slot": "body",
+"text": "bác sĩ dặn kiêng mặn, ăn gì cũng nhạt",
+"intent": [
+"complain"
+],
+"topic": [
+"a.huyetap.cao"
+]
+},
+{
+"id": "l3-041",
+"slot": "body",
+"text": "sâu ăn hết mấy luống cải của {self}",
+"intent": [
+"complain"
+],
+"topic": [
+"a.trongrau.sau"
+]
+},
+{
+"id": "l3-042",
+"slot": "body",
+"text": "rau nhà trồng hái ăn ngọt lắm",
+"intent": [
+"brag"
+],
+"topic": [
+"a.trongrau.thu"
+]
+},
+{
+"id": "l3-043",
+"slot": "open",
+"text": "Ủa, {you} ở phòng kế bên hả",
+"arch": [
+"tenant"
+]
+},
+{
+"id": "l3-044",
+"slot": "open",
+"text": "{You} mới đi làm về hả",
+"arch": [
+"tenant"
+],
+"when": [
+"evening",
+"late"
+]
+},
+{
+"id": "l3-045",
+"slot": "body",
+"text": "phòng {self} nóng như lò, quạt không ăn thua",
+"arch": [
+"tenant"
+],
+"intent": [
+"complain"
+]
+},
+{
+"id": "l3-046",
+"slot": "body",
+"text": "cầu dao phòng {self} lại nhảy",
+"arch": [
+"tenant"
+],
+"intent": [
+"request"
+]
+},
+{
+"id": "l3-047",
+"slot": "ask",
+"text": "{you} coi giùm {self} chút được không",
+"arch": [
+"tenant"
+],
+"intent": [
+"request"
+]
+},
+{
+"id": "l3-048",
+"slot": "open",
+"text": "{You} ơi, cho {self} hỏi chút",
+"arch": [
+"student"
+],
+"intent": [
+"ask",
+"request"
+]
+},
+{
+"id": "l3-049",
+"slot": "body",
+"text": "tháng này {self} hết tiền sớm quá",
+"arch": [
+"student"
+],
+"intent": [
+"complain"
+]
+},
+{
+"id": "l3-050",
+"slot": "body",
+"text": "mai {self} nộp bài mà máy treo hoài",
+"arch": [
+"student"
+],
+"intent": [
+"request"
+]
+},
+{
+"id": "l3-051",
+"slot": "ask",
+"text": "{you} xem giùm {self} cái máy được không",
+"arch": [
+"student"
+],
+"intent": [
+"request"
+]
+},
+{
+"id": "l3-052",
+"slot": "open",
+"text": "Ủa, lại gặp {you} ở chợ",
+"arch": [
+"shopper"
+]
+},
+{
+"id": "l3-053",
+"slot": "open",
+"text": "{You} đi chợ sớm vậy",
+"arch": [
+"shopper"
+],
+"when": [
+"morning"
+]
+},
+{
+"id": "l3-054",
+"slot": "body",
+"text": "rau hôm nay lên giá nữa rồi",
+"arch": [
+"shopper"
+],
+"intent": [
+"complain"
+]
+},
+{
+"id": "l3-055",
+"slot": "body",
+"text": "{self} mua hơi nhiều, xách không nổi",
+"arch": [
+"shopper"
+],
+"intent": [
+"request"
+]
+},
+{
+"id": "l3-056",
+"slot": "ask",
+"text": "{you} xách phụ {self} ra xe được không",
+"arch": [
+"shopper"
+],
+"intent": [
+"request"
+]
+},
+{
+"id": "l3-057",
+"slot": "open",
+"text": "{You} cũng hay ăn ở đây hả",
+"arch": [
+"diner"
+]
+},
+{
+"id": "l3-058",
+"slot": "body",
+"text": "quán đông quá, chờ muốn xỉu",
+"arch": [
+"diner"
+],
+"intent": [
+"complain"
+]
+},
+{
+"id": "l3-059",
+"slot": "body",
+"text": "{you} ăn ở đây hoài, chắc ghiền rồi",
+"arch": [
+"diner"
+],
+"intent": [
+"tease"
+]
+},
+{
+"id": "l3-060",
+"slot": "ask",
+"text": "mai ăn sáng chung với {self} không",
+"arch": [
+"diner"
+],
+"intent": [
+"invite"
+]
+},
+{
+"id": "l3-061",
+"slot": "open",
+"text": "{You} cũng chạy hả",
+"arch": [
+"jogger"
+]
+},
+{
+"id": "l3-062",
+"slot": "body",
+"text": "sáng nay {self} chạy được năm cây",
+"arch": [
+"jogger"
+],
+"intent": [
+"brag"
+]
+},
+{
+"id": "l3-063",
+"slot": "ask",
+"text": "mai chạy chung với {self} không",
+"arch": [
+"jogger"
+],
+"intent": [
+"invite"
+]
+},
+{
+"id": "l3-064",
+"slot": "open",
+"text": "Nó không cắn đâu, {you} đừng sợ",
+"arch": [
+"dog"
+]
+},
+{
+"id": "l3-065",
+"slot": "body",
+"text": "con chó nhà {self} khôn lắm, kêu tên là chạy lại",
+"arch": [
+"dog"
+],
+"intent": [
+"brag"
+]
+},
+{
+"id": "l3-066",
+"slot": "body",
+"text": "{self} chạy vô mua chai nước",
+"arch": [
+"dog"
+],
+"intent": [
+"request"
+]
+},
+{
+"id": "l3-067",
+"slot": "ask",
+"text": "{you} giữ con chó giùm {self} chút được không",
+"arch": [
+"dog"
+],
+"intent": [
+"request"
+]
+},
+{
+"id": "l3-068",
+"slot": "open",
+"text": "Lại đây ngồi chơi {you}",
+"arch": [
+"chess"
+]
+},
+{
+"id": "l3-069",
+"slot": "body",
+"text": "hôm qua {self} thắng ông kia ba ván liền",
+"arch": [
+"chess"
+],
+"intent": [
+"brag"
+]
+},
+{
+"id": "l3-070",
+"slot": "body",
+"text": "thanh niên giờ ít ai biết đánh cờ",
+"arch": [
+"chess"
+],
+"intent": [
+"tease"
+]
+},
+{
+"id": "l3-071",
+"slot": "ask",
+"text": "{you} ngồi xuống đánh với {self} một ván không",
+"arch": [
+"chess"
+],
+"intent": [
+"invite"
+]
+}
+]

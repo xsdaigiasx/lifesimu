@@ -21,16 +21,18 @@ const ROLE_OUTFIT:Record<string,string[]>={
  me:['ba-ba','cardigan','tee'],em:['tee','hoodie','polo'],landlord:['shirt','polo','cardigan'],neighbor:['cardigan','ba-ba','tee'],
  veg:['apron','ba-ba'],meat:['apron','tee'],grocery:['ba-ba','apron','cardigan'],banhmi:['apron','tee'],courier:['hoodie','tee','polo'],
  doctor:['blouse-doctor'],teller:['office-f','shirt'],reception:['office-f','shirt'],leasing:['shirt','office-f'],recruiter:['office-f','shirt','polo'],tech:['guard','polo'],
- dev:['tee','hoodie','polo','shirt'],design:['tee','hoodie','shirt'],qa:['polo','tee','shirt'],pm:['shirt','office-f','polo']};
+ dev:['tee','hoodie','polo','shirt'],design:['tee','hoodie','shirt'],qa:['polo','tee','shirt'],pm:['shirt','office-f','polo'],
+ /* H7a: NPC ngẫu nhiên theo kiểu người */
+ tenant:['tee','shirt','polo'],student:['tee','hoodie'],shopper:['ba-ba','cardigan','shirt'],diner:['shirt','polo','tee','office-f'],jogger:['tee','polo'],dog:['tee','hoodie','cardigan'],chess:['cardigan','ba-ba','polo']};
 const fits=(p:Part,g:'m'|'f',a:AgeBand)=>(p.g==='any'||p.g===g)&&p.ages.includes(a);
 const pick=<T,>(list:readonly T[],key:string)=>list[hash(key)%list.length]!;
 
 export interface Face{base:string;outfit:string;hair:string;extras:string[]}
 /** Mặt của một người: tất định theo người (mã vai cộng họ tên), đổi người thì đổi mặt. */
-export function faceOf(n:Pick<NpcProfile,'id'|'gender'|'age'|'quirk'|'fullName'>&{desk?:string}):Face{
+export function faceOf(n:Pick<NpcProfile,'id'|'gender'|'age'|'quirk'|'fullName'>&{desk?:string;arch?:string}):Face{
  const g=n.gender==='female'?'f':'m',a=ageBand(n.age),k=`face:${n.id}:${n.fullName}`,roll=(x:string)=>hash(`${k}:${x}`)%100;
  const base=`${g}-${a}-${pick(SKINS,`${k}:skin`)}`;
- const wanted=ROLE_OUTFIT[n.desk??n.id]??ROLE_OUTFIT[n.id.replace(/^.*-/,'')]??['tee','shirt','polo'];
+ const wanted=ROLE_OUTFIT[n.desk??n.arch??n.id]??ROLE_OUTFIT[n.id.replace(/^.*-/,'')]??['tee','shirt','polo'];
  const outs=wanted.filter(id=>{const p=OUTFITS.find(o=>o.id===id);return!!p&&fits(p,g,a)});const outfit=outs.length?pick(outs,`${k}:outfit`):'tee';
  // tóc: người già tóc bạc; trung niên 30% bạc (nam tóc thưa)
  const hairs=HAIRS.filter(h=>fits(h,g,a)),grey=a==='old'||(a==='mid'&&roll('grey')<30),hp=hairs.filter(h=>!!h.grey===grey);const hair=pick(hp.length?hp:hairs,`${k}:hair`).id;

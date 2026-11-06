@@ -18,6 +18,7 @@ import {holidayName} from '../work';
 import {fitValue} from '../fitness';
 import {dateAt} from '../format';
 import {npcFacts} from './npc-life';
+import {townFacts} from './arcs';
 
 /** Các loại dữ kiện (27; `rain`, `rainsoon` là mưa hoặc bão hôm nay, ngày mai, để câu than mưa không nói lúc nắng). */
 export const FACT_SUBS=['food','eatout','cook','home','job','probation','tier','salary','money','loan','sick','tired','study','recipe','company','project','side','rent','missed','debt','fit','weather','forecast','holiday','weekend','rain','rainsoon'] as const;
@@ -74,7 +75,7 @@ export function factsOf(s:GameState):Fact[]{const out:Fact[]=[],day=s.day,o=offi
  {const w=forecastOf(day),wet=w==='storm'||w==='rain';world('forecast',{weather:WEATHER_WORD[w]},wet?'bad':'good');if(wet)world('rainsoon',{weather:WEATHER_WORD[w]},'bad')}
  for(let k=0;k<=3;k++){const h=holidayName(day+k);if(h){world('holiday',{holiday:h},'good');break}}
  {const dow=dateAt(day).getUTCDay();if(dow===5||dow===6)world('weekend',{},'good')}
- out.push(...npcFacts(s));
+ out.push(...npcFacts(s),...townFacts(s));
  return out}
 const clockMinute=(s:GameState)=>s.clock?.minute??420;
 const fmt=(n:number)=>`${Math.round(n/1000).toLocaleString('vi-VN')} nghìn`;
