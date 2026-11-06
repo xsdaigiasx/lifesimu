@@ -6,8 +6,10 @@ import {socialOf} from '../domain/social';
 import {inboxOf,unreadCount,contactsOf,canCall} from '../domain/inbox';
 import {dayLabel,clockLabel} from '../domain/journal-view';
 import Icon from './Icon';
+import {birthdaysOn,wishedToday} from '../domain/lifecycle';
+const bdayToday=(s:GameState,id:string)=>!wishedToday(s,id)&&birthdaysOn(s,s.day).some(n=>n.id===id);
 
-export interface SocialHandlers{reply:(id:string,msgId:string,choice:number)=>GameResult;send:(id:string,kind:'hello'|'invite')=>GameResult;call:(id:string)=>GameResult;read:(id:string)=>void}
+export interface SocialHandlers{reply:(id:string,msgId:string,choice:number)=>GameResult;send:(id:string,kind:'hello'|'invite'|'bday')=>GameResult;call:(id:string)=>GameResult;read:(id:string)=>void}
 const tierName=(score:number,id:string)=>relationTier(score,id);
 const Avatar=({id,state}:{id:string;state:GameState})=>{const n=castById(state,id);return n?<span className="ps-avatar" style={{background:n.tone}} aria-hidden="true"><NpcFace npc={n}/></span>:null};
 
@@ -18,7 +20,7 @@ export function Messages({state,h,openId,top}:{state:GameState;h:SocialHandlers;
   return <div className="ps-chat"><header className="ps-chat-head"><button className="ps-back" aria-label="Quay lại" onClick={()=>{setOpen(null);setNote('')}}><Icon name="chevron-left"/></button><Avatar state={state} id={open}/><span><strong>{n.name}</strong><small>{tierName(score,open)}</small></span></header>
    <div className="ps-bubbles">{t.length?t.map((m,i)=>{const showDay=i===0||t[i-1]!.day!==m.day;return <div key={m.id}>{showDay&&<p className="ps-day">{dayLabel(m.day,state.day)}</p>}<div className={`ps-bubble ${m.from==='me'?'me':'them'}`}><p>{m.text}</p><small>{clockLabel(m.minute)}</small></div>
     {m.from==='npc'&&m.replies&&m.answered===undefined&&<div className="ps-replies">{m.replies.map((r,k)=><button key={k} onClick={()=>{const res=h.reply(open,m.id,k);setNote(res.ok?'':res.error)}}>{r}</button>)}</div>}</div>}):<p className="ps-empty">Chưa có tin nhắn</p>}</div>
-   <div className="ps-compose"><button onClick={()=>{const r=h.send(open,'hello');setNote(r.ok?'':r.error)}}>Hỏi thăm</button>{!castById(state,open)?.remote&&<button onClick={()=>{const r=h.send(open,'invite');setNote(r.ok?'':r.error)}}>Rủ đi ăn</button>}</div>
+   <div className="ps-compose">{bdayToday(state,open)&&<button onClick={()=>{const r=h.send(open,'bday');setNote(r.ok?'':r.error)}}>Chúc sinh nhật</button>}<button onClick={()=>{const r=h.send(open,'hello');setNote(r.ok?'':r.error)}}>Hỏi thăm</button>{!castById(state,open)?.remote&&<button onClick={()=>{const r=h.send(open,'invite');setNote(r.ok?'':r.error)}}>Rủ đi ăn</button>}</div>
    {note&&<p className="ps-note" role="status">{note}</p>}</div>}
  const ids=[...new Set([...Object.keys(ib.threads),...contactsOf(state).map(n=>n.id)])].filter(id=>castById(state,id));
  const last=(id:string)=>{const t=ib.threads[id];return t?.[t.length-1]};

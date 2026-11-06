@@ -3,7 +3,7 @@ import {useState} from 'react';
 import type {GameState} from '../domain/types';
 import {journalOf} from '../domain/journal';
 import {JOURNAL_TABS,journalTab,groupByDay,clockLabel,type JournalTab} from '../domain/journal-view';
-import {castById} from '../domain/npc';
+import {personById as castById} from '../domain/npc';
 import {GameScreen} from './GameUI';
 import Icon from './Icon';
 import {SummaryTab} from './YearSummary';

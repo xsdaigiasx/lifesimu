@@ -22,7 +22,7 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 
 **Nhóm 2: hoàn tất bản 1.0**
 
-> Bộ sinh hội thoại (`docs/design/HOI-THOAI.md`, ticket H0 đến H8) đã duyệt, đứng đầu nhóm này và thay T63, T64 (mục I.11). H0 dàn NPC theo seed: đã gộp (#307, 0.77.0). H1 khung và bộ ghép câu: đã gộp (#309, 0.78.0). H2 dữ kiện và ai được biết: đã gộp (#311, 0.79.0). H3 đời sống NPC và ký ức biết quên: đã gộp (#314, 0.80.0). H4 lựa chọn trả lời: đã gộp (#316, 0.81.0). Quà tặng thật: đã gộp (#320, 0.82.0). H5 Lô 1 (665 mảnh, nối trò chuyện và tin nhắn Mẹ, em) cùng H8 `sim:talk` cho Lô 1: đã gộp (#321, 0.83.0). Chân dung NPC ghép từ mảnh (#305): đã gộp (#322, 0.84.0). H6 Lô 2 (7 vai, 690 mảnh), hội thoại 3 lượt, tự mở lời theo chủ đề, gọi Mẹ và em ghép câu (#323): PR chờ gộp (0.85.0). Tiếp theo: H7b hoặc H7.
+> Bộ sinh hội thoại (`docs/design/HOI-THOAI.md`, ticket H0 đến H8) đã duyệt, đứng đầu nhóm này và thay T63, T64 (mục I.11). H0 dàn NPC theo seed: đã gộp (#307, 0.77.0). H1 khung và bộ ghép câu: đã gộp (#309, 0.78.0). H2 dữ kiện và ai được biết: đã gộp (#311, 0.79.0). H3 đời sống NPC và ký ức biết quên: đã gộp (#314, 0.80.0). H4 lựa chọn trả lời: đã gộp (#316, 0.81.0). Quà tặng thật: đã gộp (#320, 0.82.0). H5 Lô 1 (665 mảnh, nối trò chuyện và tin nhắn Mẹ, em) cùng H8 `sim:talk` cho Lô 1: đã gộp (#321, 0.83.0). Chân dung NPC ghép từ mảnh (#305): đã gộp (#322, 0.84.0). H6 Lô 2 (7 vai, 690 mảnh), hội thoại 3 lượt, tự mở lời theo chủ đề, gọi Mẹ và em ghép câu (#323): đã gộp (#324, 0.85.0). H7b tuổi, sinh nhật, vòng đời và người nối tiếp: PR chờ gộp (0.86.0). Tiếp theo: H7.
 11. T63 Quan hệ NPC với NPC, tin đồn (bản nhẹ).
 12. T64 Cốt truyện đời NPC (phần mở đầu).
 13. T86 Cộng đồng khu trọ (bản nhẹ).

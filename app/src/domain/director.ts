@@ -135,7 +135,7 @@ export function maybeStart(s:GameState,trigger:string):GameState{{const ap=dueAp
 
 /** Người chơi chủ động nói chuyện hoặc rủ đi ăn với người đang ở đây. */
 /** H6: kiểu nói chuyện người chơi chọn trong cửa sổ NPC: chào hỏi, rủ đi ăn, hoặc tự mở lời theo chủ đề. */
-export type TalkKind='talk'|'meal'|`topic:${PlayerTopic}`;
+export type TalkKind='talk'|'meal'|`topic:${PlayerTopic}`|`gift:${'bag'|'pantry'|'meal'}:${string}`;
 /** H6: chủ đề người chơi mở được với người này lúc này (người có mảnh riêng; Hỏi chuyện của họ, Nhờ việc cần Quen biết; người bán thì hỏi hàng ai cũng hỏi được). */
 export function topicsFor(s:GameState,id:string):PlayerTopic[]{const npc=castById(s,id);if(!npc||!hasOwnLines(id))return[];const known=(socialOf(s).relations[id]?.score??0)>=10;
  return PLAYER_TOPICS.filter(t=>t==='health'||t==='mine'||known||(t==='favor'&&SELLERS.includes(id)))}

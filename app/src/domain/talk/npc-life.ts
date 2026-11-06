@@ -3,7 +3,7 @@
  * (cùng seed cùng đời sống). Chỉ ký ức có trọng số được lưu, và biết quên (`forgetMemories`). */
 import type {GameState,PlaceId} from '../types';
 import type {Fact,Emotion} from './types';
-import {rosterOf,castById,mix,type NpcProfile} from '../npc';
+import {rosterOf,castById,mix,ageAt,type NpcProfile} from '../npc';
 import {hash} from '../shift';
 import {dateAt} from '../format';
 import {weatherOf} from '../weather';
@@ -45,6 +45,8 @@ export const EVENT_KINDS:EventKind[]=[
  {id:'anniv',name:'ngày giỗ trong nhà',sub:'family',tone:'plain',dur:[1,2],weight:2,age:[30,99],privacy:0},
  {id:'lonely',name:'thấy cô đơn',sub:'mood',tone:'bad',dur:[3,7],weight:2,age:[55,99],privacy:2},
  {id:'pet',name:'thú nuôi ốm',sub:'hobby',tone:'bad',dur:[2,4],weight:2,privacy:0},
+ /** H7b: dấu hiệu trước khi mất (yếu dần, ít ra ngoài); chỉ do vòng đời gắn vào, không tự bắt đầu */
+ {id:'frail',name:'sức khoẻ yếu dần',sub:'sick',tone:'bad',dur:[1,1],weight:0,privacy:0,chained:true},
 ];
 const KIND=Object.fromEntries(EVENT_KINDS.map(k=>[k.id,k])) as Record<string,EventKind>;
 /** Phần trăm mỗi ngày một NPC bắt đầu biến cố mới (khoảng 3,5 biến cố mỗi tháng cả nối tiếp), tối đa 2 biến cố cùng lúc. */
@@ -52,32 +54,35 @@ export const LIFE={startPct:10,maxActive:2,maxDur:20} as const;
 export interface NpcEvent{id:string;kind:string;start:number;end:number;tone:'good'|'bad'|'plain';vars:Record<string,string>}
 
 const roll=(world:string,npc:string,salt:string,n:number)=>mix(hash(`${world}:${npc}:${salt}`))%n;
-const fits=(k:EventKind,n:NpcProfile)=>!(k.age&&(n.age<k.age[0]||n.age>k.age[1]))&&!(k.roles&&!k.roles.includes(n.id));
+/** Khoá riêng cho từng người: người nối tiếp (đời từ 1) cùng mã vai nhưng đời sống khác. */
+const who=(n:NpcProfile)=>n.gen?`${n.id}~${n.gen}`:n.id;
+const fits=(k:EventKind,n:NpcProfile,day:number)=>{const age=ageAt(n.born,day);return!(k.age&&(age<k.age[0]||age>k.age[1]))&&!(k.roles&&!k.roles.includes(n.id))};
 /** Biến cố bắt đầu đúng ngày `day` (nếu có), xét giới hạn số biến cố đang diễn ra. */
 function startOn(world:string,n:NpcProfile,day:number,active:readonly NpcEvent[]):NpcEvent|null{
- if(active.length>=LIFE.maxActive||roll(world,n.id,`start:${day}`,100)>=LIFE.startPct)return null;
- const list=EVENT_KINDS.filter(k=>!k.chained&&fits(k,n)&&!active.some(a=>a.kind===k.id)),sum=list.reduce((t,k)=>t+k.weight*(n.fear==='Bị lừa'&&k.id==='scam'?3:1),0);if(!sum)return null;
- let r=roll(world,n.id,`kind:${day}`,sum),pick=list[0]!;for(const k of list){r-=k.weight*(n.fear==='Bị lừa'&&k.id==='scam'?3:1);if(r<0){pick=k;break}}
+ if(active.length>=LIFE.maxActive||roll(world,who(n),`start:${day}`,100)>=LIFE.startPct)return null;
+ const list=EVENT_KINDS.filter(k=>!k.chained&&fits(k,n,day)&&!active.some(a=>a.kind===k.id)),sum=list.reduce((t,k)=>t+k.weight*(n.fear==='Bị lừa'&&k.id==='scam'?3:1),0);if(!sum)return null;
+ let r=roll(world,who(n),`kind:${day}`,sum),pick=list[0]!;for(const k of list){r-=k.weight*(n.fear==='Bị lừa'&&k.id==='scam'?3:1);if(r<0){pick=k;break}}
  return make(world,n,pick,day)}
-function make(world:string,n:NpcProfile,k:EventKind,day:number):NpcEvent{const len=k.dur[0]+roll(world,n.id,`len:${k.id}:${day}`,k.dur[1]-k.dur[0]+1);
- return{id:`${n.id}:${k.id}:${day}`,kind:k.id,start:day,end:day+len,tone:k.tone,vars:{event:k.name,...(k.items?{item:k.items[roll(world,n.id,`item:${day}`,k.items.length)]!}:{})}}}
+function make(world:string,n:NpcProfile,k:EventKind,day:number):NpcEvent{const len=k.dur[0]+roll(world,who(n),`len:${k.id}:${day}`,k.dur[1]-k.dur[0]+1);
+ return{id:`${n.id}:${k.id}:${day}`,kind:k.id,start:day,end:day+len,tone:k.tone,vars:{event:k.name,...(k.items?{item:k.items[roll(world,who(n),`item:${day}`,k.items.length)]!}:{})}}}
 
 const lifeCache=new Map<string,NpcEvent[]>();
 /** Mọi biến cố của một NPC có ngày bắt đầu trong [from, to], kể cả biến cố nối tiếp. Tất định theo seed. */
 export function eventsBetween(world:string,n:NpcProfile,from:number,to:number):NpcEvent[]{
- const key=`${world}:${n.id}:${from}:${to}`,hit=lifeCache.get(key);if(hit)return hit;
+ const key=`${world}:${who(n)}:${from}:${to}`,hit=lifeCache.get(key);if(hit)return hit;
  const out:NpcEvent[]=[];const chain:NpcEvent[]=[];
  for(let d=Math.max(0,from-LIFE.maxDur*2);d<=to;d++){
-  for(const e of out.concat(chain).filter(e=>e.end===d)){const k=KIND[e.kind]!;if(k.next&&roll(world,n.id,`next:${e.id}`,100)<k.next[1]){const c=make(world,n,KIND[k.next[0]]!,d);chain.push(c)}}
+  for(const e of out.concat(chain).filter(e=>e.end===d)){const k=KIND[e.kind]!;if(k.next&&roll(world,who(n),`next:${e.id}`,100)<k.next[1]){const c=make(world,n,KIND[k.next[0]]!,d);chain.push(c)}}
   const active=[...out,...chain].filter(e=>e.start<=d&&d<e.end),e=startOn(world,n,d,active);if(e)out.push(e)}
  const all=[...out,...chain].filter(e=>e.start>=from&&e.start<=to).sort((a,b)=>a.start-b.start||a.id.localeCompare(b.id));
  if(lifeCache.size>400)lifeCache.clear();lifeCache.set(key,all);return all}
 /** Biến cố đang diễn ra của NPC vào ngày `day`. */
-export function eventsOn(world:string,n:NpcProfile,day:number){const block=Math.floor(day/30)*30;return eventsBetween(world,n,block-LIFE.maxDur*2,block+29).filter(e=>e.start<=day&&day<e.end)}
+export function eventsOn(world:string,n:NpcProfile,day:number){const block=Math.floor(day/30)*30,list=eventsBetween(world,n,block-LIFE.maxDur*2,block+29).filter(e=>e.start<=day&&day<e.end);
+ return n.frail!==undefined&&day>=n.frail?[...list,{id:`${n.id}:frail:${n.frail}`,kind:'frail',start:n.frail,end:day+1,tone:'bad' as const,vars:{event:'sức khoẻ yếu dần'}}]:list}
 
 /** Cảm xúc ngày (giữ nguyên trong ngày): theo biến cố đang diễn ra, tính cách và thời tiết. */
 export function moodOf(world:string,n:NpcProfile,day:number):Emotion{const ev=eventsOn(world,n,day),bad=ev.filter(e=>e.tone==='bad').length,good=ev.filter(e=>e.tone==='good').length;
- const r=roll(world,n.id,`mood:${day}`,100),t=n.traits,wet=['rain','storm'].includes(weatherOf(day));
+ const r=roll(world,who(n),`mood:${day}`,100),t=n.traits,wet=['rain','storm'].includes(weatherOf(day));
  if(bad){const sick=ev.some(e=>KIND[e.kind]!.sub==='sick'||e.kind==='overtime');return sick?(r<70?'tired':'sad'):t.includes('cau có')&&r<50?'annoyed':r<55?'sad':r<80?'tired':'annoyed'}
  if(good)return r<55?'happy':'excited';
  if(wet&&r<30)return'tired';const cheer=t.includes('vui vẻ')?25:0,grump=t.includes('cau có')?15:0;

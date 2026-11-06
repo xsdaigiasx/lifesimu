@@ -22,19 +22,19 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
  const [stallId,setStall]=useState<StallId|null>(null),[pick,setPick]=useState<IngredientId|null>(null),[qty,setQty]=useState(1),[note,setNote]=useState(''),[chat,setChat]=useState(false);
  const c=clockOf(state),rel=socialOf(state).relations,stall=STALLS.find(s=>s.id===stallId);
  if(!stall){const sellers:string[]=STALLS.map(s=>s.seller);return <div className="market">
-  <div className="market-stalls">{STALLS.map(s=>{const seller=castById(state,s.seller)!,here=presentAt(seller,state.day,c.minute,'market');return <button key={s.id} className={`market-stall market-stall-${s.id}`} onClick={()=>{setStall(s.id);setNote('');setChat(false)}}><span className="market-stall-art">{tileArt('market',s.id)?<img src={tileArt('market',s.id)} alt="" loading="lazy"/>:<Icon name={s.icon}/>}</span><strong>{s.name}</strong><small>{here?seller.name:'Người nhà trông quầy'}</small></button>})}</div>
+  <div className="market-stalls">{STALLS.map(s=>{const seller=castById(state,s.seller),here=!!seller&&presentAt(seller,state.day,c.minute,'market');return <button key={s.id} className={`market-stall market-stall-${s.id}`} onClick={()=>{setStall(s.id);setNote('');setChat(false)}}><span className="market-stall-art">{tileArt('market',s.id)?<img src={tileArt('market',s.id)} alt="" loading="lazy"/>:<Icon name={s.icon}/>}</span><strong>{s.name}</strong><small>{here?seller!.name:'Người nhà trông quầy'}</small></button>})}</div>
   {onTalk&&<PeopleHereFiltered state={state} exclude={sellers} onTalk={onTalk}/>}
  </div>}
- const seller=castById(state,stall.seller)!,here=presentAt(seller,state.day,c.minute,'market');
+ const seller=castById(state,stall.seller),here=!!seller&&presentAt(seller,state.day,c.minute,'market');
  const buy=(id:IngredientId)=>{const r=onAction({kind:'ingredient',id,qty});setNote(r.ok?`Đã mua ${qty} phần ${INGREDIENTS[id].name.toLowerCase()}.`:r.error);setPick(null)};
  
  return <div className="market">
   <header className="market-seller"><button className="market-back" aria-label="Về các quầy" onClick={()=>{setStall(null);setNote('')}}><Icon name="chevron-left"/></button>
-   <span className="market-avatar" style={{background:seller.tone}} aria-hidden="true"><NpcFace npc={seller}/></span>
-   <span className="market-seller-copy"><strong>{here?seller.name:stall.name}</strong><small>{here?stall.name:`${seller.name} về rồi, người nhà trông quầy`}</small>{here&&<span className="market-tier">{relationTier(rel[seller.id]?.score??0)}</span>}</span>
+   {seller&&<span className="market-avatar" style={{background:seller.tone}} aria-hidden="true"><NpcFace npc={seller}/></span>}
+   <span className="market-seller-copy"><strong>{here?seller!.name:stall.name}</strong><small>{here?stall.name:seller?`${seller.name} về rồi, người nhà trông quầy`:'Người nhà trông quầy'}</small>{here&&<span className="market-tier">{relationTier(rel[seller!.id]?.score??0)}</span>}</span>
    {here&&onTalk&&<button className="market-chat" aria-expanded={chat} onClick={()=>setChat(v=>!v)}>Hỏi chuyện</button>}
   </header>
-  {chat&&onTalk&&<PersonSheet state={state} id={seller.id} onTalk={onTalk} onClose={()=>setChat(false)}/>}
+  {chat&&onTalk&&seller&&<PersonSheet state={state} id={seller.id} onTalk={onTalk} onClose={()=>setChat(false)}/>}
   <div className="market-grid">{stall.items.map(id=>{const it=INGREDIENTS[id],late=isLate(state,id),price=marketPrice(state,id);return <article key={id} className="market-item">
    <span className="market-item-art" style={{background:ITEM_TONE[id]}}>{late&&<b className="late-badge" title="Hàng chiều: rẻ hơn, hạn ngắn hơn" aria-label="Hàng chiều"><Icon name="sunset"/></b>}<img src={ingredientArt(id)} alt="" loading="lazy" decoding="async"/></span><InfoButton spec={foodSpec(id)}/>
    <strong>{it.name}</strong>

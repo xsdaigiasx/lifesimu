@@ -1,4 +1,5 @@
 /** T75: Bản tin sáng. Hộp thoại tự mở một lần mỗi ngày game sau khi dậy; xem lại ở app Tin tức. */
+import {birthdaysOn,isPlayerBirthday,funeralsOf} from './lifecycle';
 import type {GameState} from './types';
 import {weatherOf,forecastOf,WEATHER_LABEL,type Weather} from './weather';
 import {inboxOf,unreadCount} from './inbox';
@@ -25,7 +26,7 @@ export type GoalId='task'|'study'|'chat'|'recipe'|'side'|'project';
 export interface Line{icon:string;text:string}
 export interface MorningState{seen:number;/** Mục tiêu tuần đang chạy: ngày thứ Hai và ba mục tiêu. */week?:{start:number;ids:GoalId[]};/** Mốc đầu tháng để làm báo cáo tháng. */month?:{key:string;worth:number;lv:Partial<Record<SkillId,number>>};/** Phần tổng kết tuần và tháng đã chốt của ngày `day`, để xem lại trong Tin tức. */recap?:{day:number;lines:Line[]};/** Sự kiện đáng nhớ (mỗi ngày tối đa một) để nhắc lại sau một năm. */memories?:{day:number;text:string}[]}
 export const MEMORY={keep:400,maxList:40,span:1};
-const MEMORABLE=(e:{key:string;title:string})=>/^(tier|probation|move|story|recipe|side-done):/.test(e.key)||(e.key.startsWith('project:')&&e.title==='Dự án hoàn thành');
+const MEMORABLE=(e:{key:string;title:string})=>/^(tier|probation|move|story|recipe|side-done|gone-died):/.test(e.key)||(e.key.startsWith('project:')&&e.title==='Dự án hoàn thành');
 export const WEEKLY={money:200000,mood:10};
 const GOALS:Record<GoalId,{text:string;target:number;ok:(s:GameState)=>boolean;hit:(e:{key:string;title:string})=>boolean}>={
  task:{text:'Làm 3 đầu việc ở công ty',target:3,ok:s=>officeOf(s).role==='employee',hit:e=>e.key.startsWith('task:')&&e.key.endsWith(':ok')},
@@ -108,6 +109,10 @@ export function morningOf(s:GameState):Morning{
  for(const p of ib.appts.filter(x=>x.status==='set'&&x.day===s.day).sort((x,y)=>x.minute-y.minute)){
   const h=String(Math.floor(p.minute/60)).padStart(2,'0'),m=String(p.minute%60).padStart(2,'0');
   agenda.push({icon:'people',text:`${h}:${m} Hẹn ${castById(s,p.npc)?.name??p.npc} tại ${places.find(x=>x.id===p.place)?.name??p.place}`})}
+ if(isPlayerBirthday(s,s.day))agenda.push({icon:'heart',text:'Hôm nay là sinh nhật bạn'});
+ for(const n of birthdaysOn(s,s.day))agenda.push({icon:'heart',text:`Hôm nay sinh nhật ${n.name}`});
+ for(const n of birthdaysOn(s,s.day+1))agenda.push({icon:'heart',text:`Mai sinh nhật ${n.name}`});
+ for(const g of funeralsOf(s))if(g.visit===undefined)agenda.push({icon:'people',text:`Đám tang ${nameOf(s,g.id)}, có thể đến viếng`});
  const r=rentOf(s);
  if(r.dueDay!==null&&r.dueDay!==undefined&&r.owed>0&&r.dueDay-s.day<=1)agenda.push({icon:'home',text:r.dueDay<=s.day?'Tiền trọ đang đến hạn':'Mai đến hạn tiền trọ'});
  for(const p of projectsOf(s).active.filter(x=>x.due-s.day<=1))agenda.push({icon:'note',text:`${p.title} ${p.due<=s.day?'hết hạn hôm nay':'hết hạn ngày mai'}`});

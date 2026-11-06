@@ -3,12 +3,12 @@ const Lf=require('../.test-build/domain/talk/npc-life'),N=require('../.test-buil
 const {engine}=require('../.test-build/domain/engine');const {clockOf}=require('../.test-build/domain/time');
 
 test('biến cố đời NPC: tất định theo seed; trung bình 2 đến 5 biến cố mỗi tháng; tối đa 2 cùng lúc; hợp tuổi và vai',()=>{
- const ids=new Set(Lf.EVENT_KINDS.map(k=>k.id));assert.equal(ids.size,30);
+ const ids=new Set(Lf.EVENT_KINDS.map(k=>k.id));assert.equal(ids.size,31);
  for(const k of Lf.EVENT_KINDS)if(k.next)assert.ok(ids.has(k.next[0]),k.id);
  let total=0,people=0;
  for(let w=0;w<30;w++){const world='life'+w;for(const n of N.buildRoster(world)){const ev=Lf.eventsBetween(world,n,30,389);people++;total+=ev.length;
   assert.deepEqual(ev,Lf.eventsBetween(world,n,30,389),'cùng seed cùng đời sống');
-  for(const e of ev){const k=Lf.EVENT_KINDS.find(x=>x.id===e.kind);if(!k.chained&&k.age)assert.ok(n.age>=k.age[0]&&n.age<=k.age[1],`${n.id} ${n.age} ${e.kind}`);if(k.roles)assert.ok(k.roles.includes(n.id));assert.ok(e.end>e.start)}
+  for(const e of ev){const k=Lf.EVENT_KINDS.find(x=>x.id===e.kind);if(!k.chained&&k.age){const a=N.ageAt(n.born,e.start);assert.ok(a>=k.age[0]&&a<=k.age[1],`${n.id} ${a} ${e.kind}`)};if(k.roles)assert.ok(k.roles.includes(n.id));assert.ok(e.end>e.start)}
   for(let d=30;d<390;d+=7)assert.ok(Lf.eventsOn(world,n,d).filter(e=>!Lf.EVENT_KINDS.find(k=>k.id===e.kind).chained).length<=2)}}
  const perMonth=total/people/12;assert.ok(perMonth>=2&&perMonth<=5,'mỗi tháng '+perMonth.toFixed(2));
 });

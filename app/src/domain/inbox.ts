@@ -1,6 +1,7 @@
 /** T20: tin nhắn và cuộc gọi trên điện thoại (chốt 04/11).
  * Nhắn tin không tốn giờ; gọi điện tốn 15 phút. Mỗi ngày tối đa 2 tin từ NPC, không tính vào 3 lần bắt chuyện trực tiếp.
  * Nhận lời đi ăn qua tin nhắn thì có hẹn: đến đúng nơi đúng giờ mới diễn ra và cộng điểm; lỡ hẹn thì mất điểm và người đó nhớ. */
+import {wishBirthday} from './lifecycle';
 import type {GameState,GameResult,PlaceId} from './types';
 import {castById,rosterOf,presentAt,inReach,isNpcId,FAMILY_IDS} from './npc';
 import {socialOf,adjustRelation} from './social';
@@ -19,7 +20,7 @@ import {buildReplies} from './talk/replies';
 import {notePrintsFor} from './talk/state';
 import {INTENTS,type After,type Intent} from './talk/types';
 
-export type MsgKind='mom-care'|'mom-aid'|'mom-gift'|'mom-recipe'|'invite'|'checkin'|'rent'|'missed'|'note';
+export type MsgKind='bday'|'mom-care'|'mom-aid'|'mom-gift'|'mom-recipe'|'invite'|'checkin'|'rent'|'missed'|'note';
 export interface Msg{id:string;day:number;minute:number;from:'npc'|'me';text:string;kind:MsgKind;replies?:string[];answered?:number;read?:boolean;recipe?:RecipeId;appt?:{day:number;minute:number;place:PlaceId};
  /** H6: tin ghép từ bộ sinh: ý định, hành động của từng lựa chọn trả lời, mã dữ kiện (để câu đáp sau cũng ghép) */talk?:{i:Intent;a:string[];f?:string}}
 export interface Queued extends Msg{npc:string}
@@ -114,7 +115,7 @@ export function replyMessage(s:GameState,id:string,msgId:string,choice:number):G
  if(m.kind==='invite'&&choice===0&&m.appt)n=recordJournal(n,`appt:a${seq}`,`Hẹn đi ăn với ${npc.name}`,`${placeName(m.appt.place)}, ${whenText(s.day,m.appt.day,m.appt.minute)}.`,id);return{ok:true,state:n}}
 
 /** Người chơi nhắn trước: hỏi thăm (mỗi người mỗi ngày một lần) hoặc rủ đi ăn tối mai. */
-export function sendMessage(s:GameState,id:string,kind:'hello'|'invite'):GameResult{const npc=castById(s,id);if(!npc||!(npc.family||scoreOf(s,id)>=10))return{ok:false,error:'Chưa có số của người này.'};const ib=inboxOf(s),seq=ib.seq+1,now=clockOf(s).minute,day=s.day;let n:GameState=s;const appts=[...ib.appts];let text:string,answer:string;
+export function sendMessage(s:GameState,id:string,kind:'hello'|'invite'|'bday'):GameResult{if(kind==='bday')return wishBirthday(s,id);const npc=castById(s,id);if(!npc||!(npc.family||scoreOf(s,id)>=10))return{ok:false,error:'Chưa có số của người này.'};const ib=inboxOf(s),seq=ib.seq+1,now=clockOf(s).minute,day=s.day;let n:GameState=s;const appts=[...ib.appts];let text:string,answer:string;
  if(kind==='hello'){if(ib.hello[id]===day)return{ok:false,error:'Hôm nay đã nhắn hỏi thăm rồi.'};text=id==='me'?'Dạo này mẹ khoẻ không?':say(s,id,T.hello);answer=id==='me'?'Mẹ khoẻ, con lo ăn uống đi.':sayAll(s,id,T.helloBack)[hash(`hi:${day}:${id}`)%3]!;n=adjustRelation(n,id,1,true,true)}
  else{if(npc.remote)return{ok:false,error:`${npc.name} ở quê xa.`};if(appts.some(a=>a.npc===id&&a.status==='set'))return{ok:false,error:'Đã có hẹn với người này rồi.'};text=say(s,id,T.ask(placeName('streetfood'),hhmm(1110)));const yes=hash(`inv:${day}:${id}`)%100<70;answer=yes?say(s,id,T.yes):say(s,id,T.no);if(yes)appts.push({id:`a${seq}`,npc:id,day:day+1,minute:1110,place:'streetfood',status:'set'})}
  const thread=[...(ib.threads[id]??[]),{id:`m${seq}:me`,day,minute:now,from:'me' as const,text,kind:'note' as const,read:true},{id:`m${seq}:re`,day,minute:now,from:'npc' as const,text:answer,kind:'note' as const,read:true}];

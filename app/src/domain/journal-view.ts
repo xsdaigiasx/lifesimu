@@ -1,4 +1,5 @@
 /** T19: cách hiển thị Nhật ký và hồ sơ NPC (chốt 04/11). Nhật ký tách khỏi Sổ thu chi. Thời gian ghi áng chừng. */
+import {knowsBirthday} from './lifecycle';
 import type {GameState} from './types';
 import type {JournalEntry} from './journal';
 import {castById,agoText,type NpcProfile} from './npc';
@@ -30,10 +31,10 @@ export function usualPlaces(n:NpcProfile){const by=new Map<string,string[]>();fo
 export function memoryText(m:Memory,name:string){const helped=m.tag==='help'||m.tag==='partial',refused=m.tag==='refuse'||m.tag==='dodge';const topic=m.topic;
  if(['xách đồ','trông quầy','sửa điện thoại'].includes(topic))return helped?`Giúp ${name} ${topic}`:refused?`Không giúp ${name} ${topic}`:`${name} nhờ ${topic}`;
  if(topic==='đi ăn chung')return`Đi ăn cùng ${name}`;if(topic==='chuyện riêng')return`Nghe ${name} kể chuyện riêng`;if(topic==='mượn tiền')return helped||m.tag==='full'||m.tag==='half'?`Cho ${name} mượn tiền`:`${name} hỏi mượn tiền`;
- if(topic==='dạy nấu ăn')return`${name} chỉ cách nấu ăn`;if(topic==='bị đòi nợ')return`Đòi ${name} trả nợ`;if(topic==='được xoá nợ')return`Xoá nợ cho ${name}`;if(topic==='chưa trả tiền mượn')return`${name} chưa trả tiền mượn`;if(topic==='chưa trả lời mẹ')return'Chưa trả lời tin nhắn của Mẹ';if(topic==='gặp lại')return`Gặp lại ${name}`;return topic.charAt(0).toUpperCase()+topic.slice(1)}
+ if(topic==='dạy nấu ăn')return`${name} chỉ cách nấu ăn`;if(topic==='bị đòi nợ')return`Đòi ${name} trả nợ`;if(topic==='được xoá nợ')return`Xoá nợ cho ${name}`;if(topic==='chưa trả tiền mượn')return`${name} chưa trả tiền mượn`;if(topic==='chưa trả lời mẹ')return'Chưa trả lời tin nhắn của Mẹ';if(topic==='gặp lại')return`Gặp lại ${name}`;if(topic==='quà sinh nhật')return`Tặng quà sinh nhật ${name}`;if(topic==='quên sinh nhật')return`Quên sinh nhật ${name}`;return topic.charAt(0).toUpperCase()+topic.slice(1)}
 /** Hồ sơ đầy đủ cho màn Quan hệ: chỉ những gì người chơi đã biết. */
 export function profileOf(s:GameState,id:string){const n=castById(s,id);if(!n)return null;const family=!!n.family,score=socialOf(s).relations[id]?.score??0,known=family||score>=10,st=storyOf(s);
- const facts:[string,string][]=known?[['Quê',n.origin],['Tính cách',n.traits.join(', ')],['Điểm nhấn',n.quirk]]:[];if(family||score>=30)facts.push(['Mong muốn',n.goal]);if(st.memories.some(m=>m.npc===id&&m.topic==='chuyện riêng'))facts.push(['Đang lo',n.fear]);
+ const facts:[string,string][]=known?[['Quê',n.origin],['Tính cách',n.traits.join(', ')],['Điểm nhấn',n.quirk]]:[];if(family||score>=30)facts.push(['Mong muốn',n.goal]);if(st.memories.some(m=>m.npc===id&&m.topic==='chuyện riêng'))facts.push(['Đang lo',n.fear]);if(knowsBirthday(s,id)){const b=dateAt(n.born);facts.push(['Sinh nhật',`${b.getUTCDate()}/${b.getUTCMonth()+1}, ${n.age} tuổi`])}
  const shared=st.memories.filter(m=>m.npc===id&&m.weight>=2).sort((a,b)=>b.day-a.day).slice(0,12).map(m=>({id:m.id,text:memoryText(m,n.name),when:agoText(s.day-m.day)}));
  const loans=st.loans.filter(l=>l.npc===id&&(!l.settled||l.settled==='unpaid')).map(l=>({amount:l.amount,late:s.day>l.due,days:Math.max(0,l.due-s.day)}));
  return{npc:n,score,known,facts,shared,loans,places:known&&!n.remote?usualPlaces(n):[],progress:family?{pct:100,next:''}:tierProgress(score)}}
