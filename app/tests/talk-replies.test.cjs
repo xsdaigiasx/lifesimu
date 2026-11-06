@@ -66,3 +66,7 @@ test('thói quen người chơi và lát cắt save',()=>{
  assert.equal(engine.valid({...s,talk:{...s.talk,log:[{d:20,n:'veg',a:'evil',x:'help'}]}}),false);assert.equal(engine.valid({...s,talk:{...s.talk,prints:{'ba-tu':[]}}}),false);
  assert.equal(Rp.playerAddress(N.castById({},'doctor')).call,'bác sĩ');
 });
+// 06/11: câu than không phải chuyện đau ốm thì không có lựa chọn "đi khám", "nghỉ đi", "bị lâu chưa"
+{const n=R.find(x=>x.id==='neighbor')??R[0],all=sub=>{const set=new Set();for(let i=0;i<60;i++)for(const o of Rp.buildReplies(ctx({npc:n,intent:'complain',tier:'close',seed:'c'+i,...(sub?{sub}:{})})))set.add(o.label);return[...set].join('|')};
+ const plain=all(),sick=all('sick');assert(!/khám|nghỉ đi|bị lâu chưa/.test(plain),plain);assert(/khám|nghỉ đi|bị lâu chưa/.test(sick),sick);assert(/rồi sao nữa|phụ/.test(plain),plain)}
+

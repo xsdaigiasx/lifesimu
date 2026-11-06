@@ -15,12 +15,17 @@ export const ACTIONS:readonly Action[]=['help','refuse','ask','advise','accept',
 export const ATTITUDE_NAME:Record<Attitude,string>={warm:'Ấm áp',blunt:'Thẳng thắn',joke:'Đùa',cold:'Lạnh nhạt',rude:'Khó chịu',dodge:'Né'};
 
 /** Một cách trả lời có thể có: thái độ, hành động, câu (chỗ trống {call}{Call} gọi NPC, {me}{Me} người chơi tự xưng), chi phí, điều kiện. */
+/** Chủ đề đau ốm, mệt (câu khuyên nghỉ, đi khám chỉ hợp các chủ đề này). */
+const HEALTH=['sick','tired'] as const;
 interface Template{a:Attitude;x:Action;text:string;/** chỉ hiện khi chủ đề dữ kiện của câu NPC thuộc danh sách */sub?:readonly string[];/** chỉ cho người bán (SELLERS) */seller?:boolean;minutes?:number;energy?:number;money?:number;need?:['communication'|'cooking'|'logic',number];minTier?:Tier}
 /** Chủ đề dữ kiện hợp câu "khao" (có tin vui lớn) và "để dành" (có tiền, lương): các câu này không hợp khi NPC chỉ khoe rau non hay con thi đậu. */
 const TREAT=['promotion','job','tier','probation','salary','company','project'],SAVE=['promotion','salary','money','job'];
 /** Hành động hợp với ý định của NPC (NPC Rủ thì có Nhận lời và Từ chối; NPC Than thì có Giúp, Khuyên, Hỏi thêm). */
 const BY_INTENT:Record<Intent,Template[]>={
- complain:[{a:'warm',x:'help',text:'{Call} nghỉ đi, để {me} giúp một tay',minutes:15,energy:5},{a:'blunt',x:'advise',text:'{Call} đi khám thử đi, để lâu không tốt',need:['communication',2]},{a:'warm',x:'ask',text:'Vậy hả {call}, bị lâu chưa'},{a:'joke',x:'ask',text:'Chắc tại trời đó {call}, kể {me} nghe coi',minTier:'close'},{a:'dodge',x:'silent',text:'Dạ... {me} đang vội'},{a:'cold',x:'silent',text:'Ừ'}],
+ /* 06/11 (ảnh chơi thử: than đá banh trúng cửa mà hiện "đi khám"): câu ốm mệt chỉ khi chuyện than là đau ốm, mệt; chuyện khác dùng câu chung */
+ complain:[{a:'warm',x:'help',text:'{Call} nghỉ đi, để {me} giúp một tay',minutes:15,energy:5,sub:HEALTH},{a:'blunt',x:'advise',text:'{Call} đi khám thử đi, để lâu không tốt',need:['communication',2],sub:HEALTH},{a:'warm',x:'ask',text:'Vậy hả {call}, bị lâu chưa',sub:HEALTH},{a:'joke',x:'ask',text:'Chắc tại trời đó {call}, kể {me} nghe coi',minTier:'close',sub:HEALTH},
+  {a:'warm',x:'help',text:'Để {me} phụ {call} một tay',minutes:15,energy:5},{a:'warm',x:'ask',text:'Vậy hả {call}, rồi sao nữa'},{a:'blunt',x:'advise',text:'{Call} đừng để bụng, chuyện nhỏ thôi',need:['communication',2]},{a:'joke',x:'ask',text:'{Call} than vậy là còn khỏe đó',minTier:'close'},
+  {a:'dodge',x:'silent',text:'Dạ... {me} đang vội'},{a:'cold',x:'silent',text:'Ừ'}],
  request:[{a:'warm',x:'help',text:'Được, để {me} làm cho',minutes:15,energy:5},{a:'blunt',x:'refuse',text:'Lần này {me} không giúp được, {call} thông cảm'},{a:'warm',x:'ask',text:'{Call} cần gấp không, để {me} tính'},{a:'dodge',x:'refuse',text:'Để bữa khác nha {call}'},{a:'rude',x:'refuse',text:'Sao cứ nhờ {me} hoài vậy'}],
  invite:[{a:'warm',x:'accept',text:'Đi chứ, {me} đi với {call}'},{a:'blunt',x:'refuse',text:'Bữa đó {me} bận rồi'},{a:'warm',x:'ask',text:'Mấy giờ vậy {call}'},{a:'joke',x:'accept',text:'{Call} bao thì {me} đi liền',minTier:'close'},{a:'dodge',x:'refuse',text:'Để {me} coi lại lịch đã'}],
  ask:[{a:'warm',x:'share',text:'Dạ cũng ổn, cảm ơn {call} hỏi thăm'},{a:'blunt',x:'share',text:'Thật ra dạo này {me} cũng hơi mệt'},{a:'warm',x:'ask',text:'Còn {call} dạo này sao rồi'},{a:'joke',x:'share',text:'Vẫn sống khoẻ, {call} yên tâm',minTier:'acquaint'},{a:'dodge',x:'silent',text:'Dạ cũng bình thường'},{a:'cold',x:'silent',text:'Cũng vậy thôi'}],
