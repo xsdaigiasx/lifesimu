@@ -4,11 +4,11 @@ Bản trước: `docs/history/HANDOVER-v0.35.md` (01/11), nhật ký 05/11 ở `
 
 ## PHIÊN MỚI BẮT ĐẦU Ở ĐÂY
 
-Trạng thái chốt 06/11 15:45: main 0.88.2, đã gộp #339 (tranh treo tường), #341 (H7c), #343 (sửa đo sim:npc, lượt cuối hội thoại), #344 (sim:talk); issue #338, #340, #342 đã đóng. Còn mở: PR #346 H7d nhóm chat (0.89.0, gộp được) đóng issue #345, và PR bàn giao này (chỉ tài liệu, gộp sau #346). Nhánh rác `claude/sim-npc-fix` (đã đổi tên thành `claude/342-sua-sim-npc`) không xoá được qua proxy (403), chủ dự án xoá tay trên GitHub nếu muốn.
+Trạng thái chốt 06/11 18:15: main 0.88.2. Chờ chủ dự án gộp theo thứ tự (mỗi PR dựng trên PR trước): #346 H7d nhóm chat (0.89.0), #347 bàn giao và tiến độ, #349 trả lời khi NPC than (0.89.1), #350 ưu tiên câu nhắc chuyện thật (0.89.2), #351 câu trả lời theo dạng câu NPC (0.89.3), #352 hội thoại dài (0.89.4), #353 số lựa chọn 2 đến 4 (0.89.5), PR bàn giao này (chỉ tài liệu). Nhánh rác `claude/sim-npc-fix` không xoá được qua proxy, chủ dự án xoá tay nếu muốn.
 
-**Tiến độ (TICKETS.md):** 90 ticket T: xong 53, một phần 11, gộp hoặc thay 4, hoãn 1 (T69), chưa làm 21. Bộ hội thoại H0 đến H7d xong; còn H8 cho Lô 3.
+**Việc kế tiếp, làm ngay: issue #354 đoạn tự diễn** (chủ dự án duyệt 06/11, thiết kế đầy đủ trong issue): chọn câu kéo dài chuyện thì hai người tự nói 4 đến 6 câu (10 phút) theo hướng của ý định và lựa chọn (than, khoe, hỏi thăm, báo tin, trêu, rủ, nhờ, xin lỗi), NPC chốt rồi người chơi chào; chữ hiện dần từng câu, chạm để nhanh; người chơi nói "Dạ", câu đáp ngắn để danh xưng cuối câu ("Rồi sao nữa chú", "Dạ, vậy hả bác"). Kết chuyện, lạnh nhạt thì không tự diễn. Gửi 30 câu mẫu trước khi viết đủ. Gợi ý chỗ nối: `director.answerTalk` (chỗ gọi `followNow` khi `CONTINUE`), dữ kiện từ `ctxNow`, rà bằng `scripts/talk-audit-long.cjs`.
 
-**Việc kế tiếp (theo mục 1a):** T86 phần điểm hoà thuận khu trọ (dùng cảnh nhóm, nhóm chat Khu trọ); T89 mạng xã hội (dùng `rumorsOn`, nhóm chat); H8 mở rộng `sim:talk` cho NPC ngẫu nhiên Lô 3; rồi T38 hiệu năng, T39 hồi quy và đóng gói Basic 1.0. Mỗi ticket: AskUserQuestion trước, 30 câu mẫu nếu có câu chữ mới. Chủ dự án 06/11: tranh treo tường cho nhà phố, biệt thự để sau (làm khi có ảnh vỏ nhà Codex #189).
+Sau đó: T86 điểm hoà thuận khu trọ, T89 mạng xã hội, H8, T38, T39. Tiến độ: 90 ticket T, xong 53, một phần 11, gộp hoặc thay 4, hoãn 1, chưa làm 21. Chủ dự án 06/11: tranh treo tường cho nhà phố, biệt thự để sau (khi có ảnh vỏ nhà Codex #189).
 
 ## 0. Tài liệu thiết kế nằm ở đâu (đọc trước, khỏi phải tìm lại)
 
