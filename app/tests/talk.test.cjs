@@ -56,12 +56,12 @@ test('bối cảnh: khuya chỉ nhắn tin từ Thân, người lớn tuổi kh�
  assert.equal(C.compose(ctx({channel:'call'})),null);assert.ok(C.compose(ctx({npc:by('me'),channel:'call',tier:'stranger'})));
 });
 
-test('chống lặp: mảnh 14 ngày, khung 3 ngày, cùng ý định và chủ đề 2 ngày; vân tay tối đa 40 mã',()=>{
+test('chống lặp: mảnh 14 ngày, khung 3 ngày, cùng ý định và chủ đề 2 ngày; vân tay tối đa 80 mã (#354: người nói nhiều mỗi ngày vẫn giữ đủ 14 ngày)',()=>{
  const a=C.compose(ctx({intents:['ask']}));let recent=C.notePrints([],a.prints,10);
  const b=C.compose(ctx({intents:['ask'],recent}));assert.notEqual(b.intent,'ask','cùng ý định và chủ đề trong 2 ngày');
  const c=C.compose(ctx({intents:['ask'],recent,day:12}));assert.equal(c.intent,'ask');assert.ok(c.pieces.every(p=>!a.pieces.includes(p))||c.frame!==a.frame,'không lặp mảnh, khung');
  for(const id of a.pieces)assert.ok(!c.pieces.includes(id),'mảnh chưa đủ 14 ngày: '+id);
- const many=C.notePrints([],Array.from({length:60},(_,i)=>'p:x'+i),5);assert.equal(many.length,40);assert.equal(C.notePrints(many,['f:z'],20).length,1,'quá 14 ngày thì xoá');
+ const many=C.notePrints([],Array.from({length:100},(_,i)=>'p:x'+i),5);assert.equal(many.length,80);assert.equal(C.notePrints(many,['f:z'],20).length,1,'quá 14 ngày thì xoá');
 });
 
 test('nối mảnh: dấu phẩy, viết hoa sau dấu câu, thêm dấu chấm',()=>{

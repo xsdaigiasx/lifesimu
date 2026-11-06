@@ -4,9 +4,11 @@ Bản trước: `docs/history/HANDOVER-v0.35.md` (01/11), nhật ký 05/11 ở `
 
 ## PHIÊN MỚI BẮT ĐẦU Ở ĐÂY
 
-Trạng thái chốt 06/11 18:15: main 0.88.2. Chờ chủ dự án gộp theo thứ tự (mỗi PR dựng trên PR trước): #346 H7d nhóm chat (0.89.0), #347 bàn giao và tiến độ, #349 trả lời khi NPC than (0.89.1), #350 ưu tiên câu nhắc chuyện thật (0.89.2), #351 câu trả lời theo dạng câu NPC (0.89.3), #352 hội thoại dài (0.89.4), #353 số lựa chọn 2 đến 4 (0.89.5), PR bàn giao này (chỉ tài liệu). Nhánh rác `claude/sim-npc-fix` không xoá được qua proxy, chủ dự án xoá tay nếu muốn.
+Trạng thái 06/11 19:30: main 0.89.5 (mọi PR trước đã gộp). PR #354 đoạn tự diễn (0.90.0) chờ gộp.
 
-**Việc kế tiếp, làm ngay: issue #354 đoạn tự diễn** (chủ dự án duyệt 06/11, chỉnh 18:14; thiết kế đầy đủ trong issue): chọn câu kéo dài chuyện thì không bấm thêm lượt, mà hiện **một câu dẫn chung chung kiểu kể chuyện** ("Hai người chạy bộ cùng nhau một hồi.", "Hai người đứng bên sạp nói chuyện qua lại một hồi.", "Bạn phụ chú dọn hàng, hai người vừa làm vừa nói chuyện."), đổi theo chỗ và việc, không viết thoại chi tiết; rồi NPC chốt một câu ("Nói chuyện với cháu vui ghê"), người chơi chào một câu ("Dạ, cháu đi nha cô"; giọng "Dạ", danh xưng cuối câu). 10 phút, chữ hiện dần từng dòng, chạm để nhanh. Kết chuyện, lạnh nhạt thì không có đoạn này. Gửi 30 câu mẫu (câu dẫn, câu chốt, câu chào) trước khi viết đủ. Gợi ý chỗ nối: `director.answerTalk` (chỗ gọi `followNow` khi `CONTINUE`), dữ kiện từ `ctxNow`, rà bằng `scripts/talk-audit-long.cjs`.
+**#354 đoạn tự diễn: xong, chờ gộp (0.90.0).** `talk/interlude.ts` (`sceneOf`): chọn Hỏi thêm, Kể chuyện mình (thái độ Ấm áp, Đùa), Giúp, làm lành thì không còn lượt 2, 3; hiện 4 dòng (câu vừa chọn, câu dẫn theo chỗ và việc, câu chốt NPC theo bậc, tuổi, ý định, câu chào "Dạ" với người lớn, "Ừ" với người cùng tuổi hoặc nhỏ hơn), tốn thêm 10 phút, cộng như một lượt Hỏi thêm. Tầng 1 ký ức nhẹ (chủ dự án duyệt 19:18): câu dẫn để lại ký ức trọng số 2 theo việc (chạy bộ cùng, ngồi hiên nói chuyện...), cùng chủ đề thì làm đậm, NPC nhắc bằng câu `cb:<chủ đề>` trong `lines.ts`. Câu rủ, câu nhờ tạm kết ngay. `PRINT_CAP` 40 lên 80 (người nói nhiều mỗi ngày vẫn giữ chống lặp 14 ngày). Giao diện `StoryDialog` hiện dần từng dòng 1 giây, chạm hiện hết. Câu đáp ngắn đưa danh xưng về cuối ("Vậy hả, rồi sao nữa cô"). Mẫu: `node scripts/talk-samples-scene.cjs 5 <seed>`.
+
+**Việc kế tiếp: issue #357** lời rủ thành hẹn thật, đi cùng, tầng 3 thành nếp (chủ dự án duyệt hướng, còn chờ chốt ai trả tiền và rủ cả nhóm).
 
 Sau đó: T86 điểm hoà thuận khu trọ, T89 mạng xã hội, H8, T38, T39. Tiến độ: 90 ticket T, xong 53, một phần 11, gộp hoặc thay 4, hoãn 1, chưa làm 21. Chủ dự án 06/11: tranh treo tường cho nhà phố, biệt thự để sau (khi có ảnh vỏ nhà Codex #189).
 

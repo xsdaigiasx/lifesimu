@@ -21,7 +21,7 @@ import {forgetMemories,reinforce,FORGET} from './talk/npc-life';
 import {chooseLine,lineById,fill,intentsWithLines} from './lines';
 import {answerNow,followNow,hasOwnLines,sayNow,replyCtxOf} from './talk/live';
 import {buildReplies,lineForm,resolveReply,setPrint,playerAddress,MAX_TURNS,CONTINUE} from './talk/replies';
-import {sceneOf,SCENE_MINUTES,type SceneKind,type SceneLine} from './talk/interlude';
+import {sceneOf,SCENE_MINUTES,SCENE_WEIGHT,type SceneKind,type SceneLine} from './talk/interlude';
 import {noteReplyFor,notePrintsFor} from './talk/state';
 import {receiveGift,isGiftItem,GIFT_MAX,giftText} from './gifts';
 import {INTENTS,PLAYER_TOPICS,CHANNELS,type After,type Channel,type Intent,type PlayerTopic} from './talk/types';
@@ -193,12 +193,14 @@ function answerTalk(s:GameState,p:PendingEvent,t:TalkLine,choice:number):GameRes
  n=adjustRelation(n,npc.id,r.relation,true,r.light);if(r.gift)n=receiveGift(n,r.gift[0],r.gift[1]);
  n=noteReplyFor(n,{d:s.day,n:npc.id,a:o.attitude,x:o.action});n=notePrintsFor(n,npc.id,[...t.prints,setPrint(npc.id,opts)]);
  /* #354: chọn câu kéo dài chuyện (Hỏi thêm, Giúp, Kể chuyện mình, nhận lời rủ, làm lành) thì hiện đoạn tự diễn thay cho lượt 2, 3: 10 phút, cộng như một lượt Hỏi thêm */
- const kind:SceneKind|undefined=r.gift||t.mode==='answer'||t.ch==='text'?undefined:o.action==='help'?'help':t.intent==='invite'&&(o.action==='accept'||o.action==='ask')?'invite':t.intent==='request'?undefined:t.intent==='apologize'&&o.action==='accept'&&o.attitude==='warm'?'forgive':CONTINUE.includes(o.action)&&(o.attitude==='warm'||o.attitude==='joke')?'talk':undefined;
- let scene:SceneLine[]|undefined;
+ const kind:SceneKind|undefined=r.gift||t.mode==='answer'||t.ch==='text'?undefined:o.action==='help'?'help':t.intent==='invite'||t.intent==='request'?undefined:t.intent==='apologize'&&o.action==='accept'&&o.attitude==='warm'?'forgive':CONTINUE.includes(o.action)&&(o.attitude==='warm'||o.attitude==='joke')?'talk':undefined;
+ let scene:SceneLine[]|undefined,sceneMem:string|undefined;
  if(kind&&clockOf(n).minute+SCENE_MINUTES<END){const x=spendTime(n,SCENE_MINUTES);if(x.ok){n=x.state;const more=resolveReply({...rc,turn:2},{id:'scene',attitude:'warm',action:'ask',label:'',minutes:0,energy:0,money:0,locked:false});n=adjustRelation(n,npc.id,more.relation,true,true);
-  scene=sceneOf({npc,kind,intent:t.intent,tier:rc.tier,channel:t.ch??'face',...(clockOf(s).location&&t.ch!=='call'?{place:clockOf(s).location}:{}),minute:clockOf(n).minute,seed:`scene:${p.key}`,said:o.label})}}
+  const sc0=sceneOf({npc,kind,intent:t.intent,tier:rc.tier,channel:t.ch??'face',...(clockOf(s).location&&t.ch!=='call'?{place:clockOf(s).location}:{}),minute:clockOf(n).minute,seed:`scene:${p.key}`,said:o.label});scene=sc0.lines;sceneMem=sc0.mem}}
  const next:TalkLine|undefined=undefined;
  const ns:StoryState=structuredClone(storyOf(n));delete ns.pending;if(next)ns.pending={...p,talk:next};
+ /* #354 tầng 1: đoạn tự diễn để lại ký ức nhẹ theo việc (cùng chủ đề thì nhắc lại cho đậm, không thêm dòng) */
+ if(sceneMem){const had=ns.memories.find(y=>y.npc===npc.id&&y.topic===sceneMem);if(had)ns.memories=ns.memories.map(y=>y===had?{...reinforce(y,s.day),day:s.day}:y);else{ns.seq++;ns.memories=[...ns.memories,{id:`m${ns.seq}`,day:s.day,npc:npc.id,motif:'greet',topic:sceneMem,tag:'scene',weight:SCENE_WEIGHT}]}}
  if(r.memory&&r.memory.weight>=FORGET.minWeight){ns.memories=[...ns.memories,{id:`m${ns.seq}`,day:s.day,npc:npc.id,motif:'greet',topic:r.memory.topic,tag:r.memory.tag,weight:r.memory.weight}];if(ns.memories.length>200){const drop=ns.memories.filter(x=>x.weight<4).sort((a,b)=>a.weight-b.weight||a.day-b.day)[0];if(drop)ns.memories=ns.memories.filter(x=>x!==drop)}}
  n={...n,story:ns};
  const text=r.gift?`Nhận ${giftText([r.gift])} của ${npc.name}.`:r.relation>=3?`${npc.name} vui hẳn.`:r.relation>0?`${npc.name} gật gù.`:r.relation<0?`${npc.name} hơi phật ý.`:'Hai người chào nhau rồi ai lo việc nấy.';
