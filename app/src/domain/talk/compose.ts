@@ -86,9 +86,12 @@ const fill=(text:string,vars:Record<string,string|number>)=>text.replace(VAR,(_,
 
 function tryFrame(c:TalkCtx,data:TalkData,frame:Frame,intent:Intent|null,fact:Fact|undefined,w:Want={}):Said|null{
  const vars=varsFor(c,fact),parts:string[]=[],ids:string[]=[];
+ let topical=false;
  for(const raw of frame.slots){const optional=raw.endsWith('?'),slot=raw.replace('?','') as Slot;
+  /* câu gọn (H6): mảnh tuỳ chọn bỏ khi câu đã đủ 3 phần hoặc dài; câu nhắc chuyện cụ thể đã mang cảm xúc nên bỏ ô cảm xúc */
+  if(optional&&(parts.length>=3||joinParts(parts).length>=LONG||(slot==='feel'&&topical)))continue;
   const cand=data.pieces.filter(p=>pieceFits(p,slot,intent,fact,c,vars,w)),p=pick(cand,`${c.seed}:${frame.id}:${slot}`,x=>(x.npc||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
-  if(!p){if(optional)continue;return null}parts.push(fill(p.text,vars));ids.push(p.id)}
+  if(!p){if(optional)continue;return null}if(slot==='body'&&p.topic)topical=true;parts.push(fill(p.text,vars));ids.push(p.id)}
  const text=joinParts(parts);if(!text)return null;
  const used=ids.map(id=>data.pieces.find(p=>p.id===id)!),gift=used.map(p=>p.gift).find(Boolean);
  /* câu đáp chủ đề: ý định lấy từ mảnh đầu có ghi (để chọn bộ trả lời), không có thì Kể tin */
@@ -96,6 +99,8 @@ function tryFrame(c:TalkCtx,data:TalkData,frame:Frame,intent:Intent|null,fact:Fa
  const tag=w.mode==='follow'?`t:${said}:${w.after}`:`t:${said}:${fact?.sub??'-'}`;
  return{...(gift?{gift}:{}),...(w.mode==='answer'&&!used.some(p=>p.intent)?{mode:'answer' as const}:{}),text,intent:said,fact,frame:frame.id,pieces:ids,prints:[...ids.map(id=>'p:'+id),'f:'+frame.id,tag]}}
 
+/** Câu từ 60 ký tự thì không thêm mảnh tuỳ chọn (tránh câu dài lê thê). */
+export const LONG=60;
 /** Câu chào ngắn theo giọng khi không ghép được gì (mảnh `open` không gắn ý định). */
 export function greeting(c:TalkCtx,data:TalkData=c.data??TALK):Said{const vars=varsFor(c),p=pick(data.pieces.filter(x=>pieceFits(x,'open',null,undefined,c,vars)),`${c.seed}:hi`,x=>(x.npc||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
  return p?{text:joinParts([fill(p.text,vars)]),intent:null,pieces:[p.id],prints:['p:'+p.id]}:{text:joinParts([fill('Chào {you}',vars)]),intent:null,pieces:[],prints:[]}}

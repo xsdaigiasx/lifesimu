@@ -81,7 +81,6 @@ P(F, 'body', 'dạo này {you} sao rồi, đi làm có ổn không', 'ask', answ
 P(F, 'body', 'vậy hả, dạo này {you} ăn uống được không', 'ask', answer='mine')
 P(F, 'body', '{you} cần gì cứ nói, {self} giúp được thì giúp', answer='favor', where=NOSELL)
 P(F, 'body', 'chuyện đó {you} hỏi đúng người rồi', answer='favor', minTier='acquaint', where=NOSELL)
-P(F, 'tail', 'vậy đó {you}', answer='health theirs')
 
 
 GOOD = 'happy excited'
@@ -200,7 +199,7 @@ P(N, 'body', 'lò bánh tăng giá mà {self} không dám tăng', 'complain')
 P(N, 'body', 'dậy từ bốn giờ làm pate, buồn ngủ ríu mắt', 'complain')
 P(N, 'body', 'mưa vầy ai ra đường mua bánh mì', 'complain', 'rain')
 P(N, 'body', '{self} mới sắm {item}', 'brag', 'buy')
-P(N, 'body', 'pate nhà {self} tự làm đó, không phải hàng chợ', 'brag')
+P(N, 'body', 'pate nhà {self} tự làm, khách nào ăn cũng khen', 'brag')
 P(N, 'body', 'bữa trước {you} ăn {dish} thấy sao', 'ask', 'food')
 P(N, 'body', '{you} ăn ngoài hoài vậy, không tự nấu hả', 'ask tease', 'eatout')
 P(N, 'body', 'chưa ăn sáng mà đi làm là đuối đó', 'ask', 'tired')

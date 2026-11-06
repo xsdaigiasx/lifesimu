@@ -575,15 +575,6 @@
 },
 {
 "id": "l2-053",
-"slot": "tail",
-"text": "vậy đó {you}",
-"answer": [
-"health",
-"theirs"
-]
-},
-{
-"id": "l2-054",
 "slot": "open",
 "text": "{You} đi đâu sớm vậy",
 "npc": "neighbor",
@@ -592,13 +583,13 @@
 ]
 },
 {
-"id": "l2-055",
+"id": "l2-054",
 "slot": "open",
 "text": "À {you}",
 "npc": "neighbor"
 },
 {
-"id": "l2-056",
+"id": "l2-055",
 "slot": "open",
 "text": "{You} ơi, lại đây {self} nói nghe",
 "npc": "neighbor",
@@ -609,7 +600,7 @@
 ]
 },
 {
-"id": "l2-057",
+"id": "l2-056",
 "slot": "open",
 "text": "Ủa {you} về rồi hả",
 "npc": "neighbor",
@@ -619,7 +610,7 @@
 ]
 },
 {
-"id": "l2-058",
+"id": "l2-057",
 "slot": "open",
 "text": "{You} ăn cơm chưa",
 "npc": "neighbor",
@@ -628,7 +619,7 @@
 ]
 },
 {
-"id": "l2-059",
+"id": "l2-058",
 "slot": "open",
 "text": "{You} ghé {self} chút",
 "npc": "neighbor",
@@ -637,7 +628,7 @@
 ]
 },
 {
-"id": "l2-060",
+"id": "l2-059",
 "slot": "body",
 "text": "cái chân {self} trở trời lại nhức",
 "npc": "neighbor",
@@ -653,7 +644,7 @@
 ]
 },
 {
-"id": "l2-061",
+"id": "l2-060",
 "slot": "body",
 "text": "đêm qua {self} ho cả đêm không ngủ được",
 "npc": "neighbor",
@@ -665,7 +656,7 @@
 ]
 },
 {
-"id": "l2-062",
+"id": "l2-061",
 "slot": "body",
 "text": "nhà vắng quá, con cái đi làm hết",
 "npc": "neighbor",
@@ -677,7 +668,7 @@
 ]
 },
 {
-"id": "l2-063",
+"id": "l2-062",
 "slot": "body",
 "text": "cả ngày {self} chỉ có cái tivi nói chuyện",
 "npc": "neighbor",
@@ -690,7 +681,7 @@
 "privacy": 1
 },
 {
-"id": "l2-064",
+"id": "l2-063",
 "slot": "body",
 "text": "người nhà {self} mấy bữa nay đau ốm",
 "npc": "neighbor",
@@ -708,7 +699,7 @@
 ]
 },
 {
-"id": "l2-065",
+"id": "l2-064",
 "slot": "body",
 "text": "giờ giá cái gì cũng lên",
 "npc": "neighbor",
@@ -717,7 +708,7 @@
 ]
 },
 {
-"id": "l2-066",
+"id": "l2-065",
 "slot": "body",
 "text": "đám nhỏ trong hẻm đá banh trúng cửa hoài",
 "npc": "neighbor",
@@ -726,7 +717,7 @@
 ]
 },
 {
-"id": "l2-067",
+"id": "l2-066",
 "slot": "body",
 "text": "{self} mới tập dưỡng sinh ngoài công viên, khoẻ ra hẳn",
 "npc": "neighbor",
@@ -738,7 +729,7 @@
 ]
 },
 {
-"id": "l2-068",
+"id": "l2-067",
 "slot": "body",
 "text": "chậu lan của {self} mới trổ bông",
 "npc": "neighbor",
@@ -750,7 +741,7 @@
 ]
 },
 {
-"id": "l2-069",
+"id": "l2-068",
 "slot": "body",
 "text": "cháu nội {self} mới lên chơi, vui gì đâu",
 "npc": "neighbor",
@@ -766,7 +757,7 @@
 ]
 },
 {
-"id": "l2-070",
+"id": "l2-069",
 "slot": "body",
 "text": "sáng nay {self} đi bộ được ba vòng hồ",
 "npc": "neighbor",
@@ -775,7 +766,7 @@
 ]
 },
 {
-"id": "l2-071",
+"id": "l2-070",
 "slot": "body",
 "text": "con {self} mới mua cho {self} {item}",
 "npc": "neighbor",
@@ -790,7 +781,7 @@
 ]
 },
 {
-"id": "l2-072",
+"id": "l2-071",
 "slot": "body",
 "text": "{you} mới dọn tới dãy trọ hả, quen chưa",
 "npc": "neighbor",
@@ -802,7 +793,7 @@
 ]
 },
 {
-"id": "l2-073",
+"id": "l2-072",
 "slot": "body",
 "text": "tối qua thấy {you} nấu {dish}, thơm lừng",
 "npc": "neighbor",
@@ -818,7 +809,7 @@
 ]
 },
 {
-"id": "l2-074",
+"id": "l2-073",
 "slot": "body",
 "text": "trông {you} phờ phạc quá, ngủ có đủ không",
 "npc": "neighbor",
@@ -830,7 +821,7 @@
 ]
 },
 {
-"id": "l2-075",
+"id": "l2-074",
 "slot": "body",
 "text": "{you} đang ốm mà còn đi đâu đó",
 "npc": "neighbor",
@@ -842,7 +833,7 @@
 ]
 },
 {
-"id": "l2-076",
+"id": "l2-075",
 "slot": "body",
 "text": "trời {weather} vầy nhớ mang áo mưa",
 "npc": "neighbor",
@@ -857,7 +848,7 @@
 ]
 },
 {
-"id": "l2-077",
+"id": "l2-076",
 "slot": "body",
 "text": "mai {weather} đó, phơi đồ nhớ lấy vô sớm",
 "npc": "neighbor",
@@ -872,7 +863,7 @@
 ]
 },
 {
-"id": "l2-078",
+"id": "l2-077",
 "slot": "body",
 "text": "nghe nói đầu hẻm sắp mở quán cà phê",
 "npc": "neighbor",
@@ -881,7 +872,7 @@
 ]
 },
 {
-"id": "l2-079",
+"id": "l2-078",
 "slot": "body",
 "text": "{holiday} phường có treo cờ, nhớ treo nghe",
 "npc": "neighbor",
@@ -896,7 +887,7 @@
 ]
 },
 {
-"id": "l2-080",
+"id": "l2-079",
 "slot": "body",
 "text": "{you} ăn uống kiểu gì mà ốm nhom vậy",
 "npc": "neighbor",
@@ -905,7 +896,7 @@
 ]
 },
 {
-"id": "l2-081",
+"id": "l2-080",
 "slot": "body",
 "text": "cái bóng đèn nhà {self} hư mà {self} leo không nổi",
 "npc": "neighbor",
@@ -914,7 +905,7 @@
 ]
 },
 {
-"id": "l2-082",
+"id": "l2-081",
 "slot": "ask",
 "text": "{you} thay giùm {self} được không",
 "npc": "neighbor",
@@ -923,7 +914,7 @@
 ]
 },
 {
-"id": "l2-083",
+"id": "l2-082",
 "slot": "ask",
 "text": "{you} xách giùm {self} bao gạo vô nhà được không",
 "npc": "neighbor",
@@ -932,7 +923,7 @@
 ]
 },
 {
-"id": "l2-084",
+"id": "l2-083",
 "slot": "ask",
 "text": "chiều nay ra công viên đánh cờ với {self} không",
 "npc": "neighbor",
@@ -941,7 +932,7 @@
 ]
 },
 {
-"id": "l2-085",
+"id": "l2-084",
 "slot": "body",
 "text": "hôm trước {self} la {you} hơi lớn tiếng",
 "npc": "neighbor",
@@ -950,7 +941,7 @@
 ]
 },
 {
-"id": "l2-086",
+"id": "l2-085",
 "slot": "feel",
 "text": "già rồi nó vậy",
 "npc": "neighbor",
@@ -959,7 +950,7 @@
 ]
 },
 {
-"id": "l2-087",
+"id": "l2-086",
 "slot": "tail",
 "text": "thôi {self} vô nhà đây",
 "npc": "neighbor",
@@ -970,7 +961,7 @@
 ]
 },
 {
-"id": "l2-088",
+"id": "l2-087",
 "slot": "tail",
 "text": "nhớ giữ sức khoẻ {p}",
 "npc": "neighbor",
@@ -979,7 +970,7 @@
 ]
 },
 {
-"id": "l2-089",
+"id": "l2-088",
 "slot": "body",
 "text": "muốn trồng cây thì để {self} chỉ, đất phải trộn tro",
 "npc": "neighbor",
@@ -988,7 +979,7 @@
 ]
 },
 {
-"id": "l2-090",
+"id": "l2-089",
 "slot": "body",
 "text": "tiệm sửa xe uy tín ở đầu đường, nói {self} giới thiệu",
 "npc": "neighbor",
@@ -997,13 +988,13 @@
 ]
 },
 {
-"id": "l2-091",
+"id": "l2-090",
 "slot": "open",
 "text": "Mua gì {you}",
 "npc": "meat"
 },
 {
-"id": "l2-092",
+"id": "l2-091",
 "slot": "open",
 "text": "{You} ơi, thịt mới về nè",
 "npc": "meat",
@@ -1013,7 +1004,7 @@
 ]
 },
 {
-"id": "l2-093",
+"id": "l2-092",
 "slot": "open",
 "text": "Lâu quá không thấy {you}",
 "npc": "meat",
@@ -1023,7 +1014,7 @@
 ]
 },
 {
-"id": "l2-094",
+"id": "l2-093",
 "slot": "open",
 "text": "{You} lại đây",
 "npc": "meat",
@@ -1032,7 +1023,7 @@
 ]
 },
 {
-"id": "l2-095",
+"id": "l2-094",
 "slot": "body",
 "text": "sáng nay bán hết sạch mẻ cá từ sớm",
 "npc": "meat",
@@ -1048,7 +1039,7 @@
 ]
 },
 {
-"id": "l2-096",
+"id": "l2-095",
 "slot": "body",
 "text": "dạo này ế quá, cá còn nguyên thau",
 "npc": "meat",
@@ -1066,7 +1057,7 @@
 ]
 },
 {
-"id": "l2-097",
+"id": "l2-096",
 "slot": "body",
 "text": "dậy từ ba giờ sáng đi lấy hàng, mỏi rã",
 "npc": "meat",
@@ -1075,7 +1066,7 @@
 ]
 },
 {
-"id": "l2-098",
+"id": "l2-097",
 "slot": "body",
 "text": "giá heo hơi lên mà khách cứ kêu đắt",
 "npc": "meat",
@@ -1084,7 +1075,7 @@
 ]
 },
 {
-"id": "l2-099",
+"id": "l2-098",
 "slot": "body",
 "text": "{self} bị cảm mà vẫn phải ra sạp",
 "npc": "meat",
@@ -1096,7 +1087,7 @@
 ]
 },
 {
-"id": "l2-100",
+"id": "l2-099",
 "slot": "body",
 "text": "con {self} sắp thi, lo muốn rụng tim",
 "npc": "meat",
@@ -1114,7 +1105,7 @@
 ]
 },
 {
-"id": "l2-101",
+"id": "l2-100",
 "slot": "body",
 "text": "con {self} mới thi đậu, mừng muốn khóc",
 "npc": "meat",
@@ -1130,7 +1121,7 @@
 ]
 },
 {
-"id": "l2-102",
+"id": "l2-101",
 "slot": "body",
 "text": "thịt ba rọi sáng nay đẹp lắm",
 "npc": "meat",
@@ -1139,7 +1130,7 @@
 ]
 },
 {
-"id": "l2-103",
+"id": "l2-102",
 "slot": "body",
 "text": "khách quen đặt trước nửa con heo",
 "npc": "meat",
@@ -1148,7 +1139,7 @@
 ]
 },
 {
-"id": "l2-104",
+"id": "l2-103",
 "slot": "body",
 "text": "mặt {you} xanh lè, ăn sáng chưa",
 "npc": "meat",
@@ -1160,7 +1151,7 @@
 ]
 },
 {
-"id": "l2-105",
+"id": "l2-104",
 "slot": "body",
 "text": "mưa vầy cá về ít, mai chắc lên giá",
 "npc": "meat",
@@ -1173,7 +1164,7 @@
 ]
 },
 {
-"id": "l2-106",
+"id": "l2-105",
 "slot": "body",
 "text": "nghe nói tuần sau thịt heo lên giá",
 "npc": "meat",
@@ -1182,7 +1173,7 @@
 ]
 },
 {
-"id": "l2-107",
+"id": "l2-106",
 "slot": "body",
 "text": "sạp {self} đông khách quá",
 "npc": "meat",
@@ -1191,7 +1182,7 @@
 ]
 },
 {
-"id": "l2-108",
+"id": "l2-107",
 "slot": "ask",
 "text": "{you} trông sạp giùm {self} chút được không",
 "npc": "meat",
@@ -1200,7 +1191,7 @@
 ]
 },
 {
-"id": "l2-109",
+"id": "l2-108",
 "slot": "ask",
 "text": "{you} khiêng phụ {self} thùng đá được không",
 "npc": "meat",
@@ -1209,7 +1200,7 @@
 ]
 },
 {
-"id": "l2-110",
+"id": "l2-109",
 "slot": "ask",
 "text": "trưa nay ăn bún riêu góc chợ với {self} không",
 "npc": "meat",
@@ -1218,7 +1209,7 @@
 ]
 },
 {
-"id": "l2-111",
+"id": "l2-110",
 "slot": "body",
 "text": "{you} mua có lạng thịt mà lựa nãy giờ",
 "npc": "meat",
@@ -1227,7 +1218,7 @@
 ]
 },
 {
-"id": "l2-112",
+"id": "l2-111",
 "slot": "body",
 "text": "bữa trước {self} thối lộn tiền cho {you}",
 "npc": "meat",
@@ -1236,7 +1227,7 @@
 ]
 },
 {
-"id": "l2-113",
+"id": "l2-112",
 "slot": "feel",
 "text": "mệt gì đâu",
 "npc": "meat",
@@ -1245,7 +1236,7 @@
 ]
 },
 {
-"id": "l2-114",
+"id": "l2-113",
 "slot": "feel",
 "text": "vui ghê",
 "npc": "meat",
@@ -1254,7 +1245,7 @@
 ]
 },
 {
-"id": "l2-115",
+"id": "l2-114",
 "slot": "tail",
 "text": "mua gì thì nói {self} lấy cho",
 "npc": "meat",
@@ -1265,7 +1256,7 @@
 ]
 },
 {
-"id": "l2-116",
+"id": "l2-115",
 "slot": "tail",
 "text": "thôi {self} bán tiếp đây",
 "npc": "meat",
@@ -1274,7 +1265,7 @@
 ]
 },
 {
-"id": "l2-117",
+"id": "l2-116",
 "slot": "body",
 "text": "sáng nay có cá lóc tươi rói, kho tộ là ngon",
 "npc": "meat",
@@ -1283,7 +1274,7 @@
 ]
 },
 {
-"id": "l2-118",
+"id": "l2-117",
 "slot": "body",
 "text": "ba rọi nay đẹp, luộc chấm mắm là hết sẩy",
 "npc": "meat",
@@ -1292,7 +1283,7 @@
 ]
 },
 {
-"id": "l2-119",
+"id": "l2-118",
 "slot": "body",
 "text": "nè {self} cho {you} thêm con cá nhỏ, về nấu canh",
 "npc": "meat",
@@ -1306,19 +1297,19 @@
 ]
 },
 {
-"id": "l2-120",
+"id": "l2-119",
 "slot": "open",
 "text": "Cần gì {you}",
 "npc": "grocery"
 },
 {
-"id": "l2-121",
+"id": "l2-120",
 "slot": "open",
 "text": "{You} ghé đó hả",
 "npc": "grocery"
 },
 {
-"id": "l2-122",
+"id": "l2-121",
 "slot": "open",
 "text": "{You} ơi",
 "npc": "grocery",
@@ -1328,7 +1319,7 @@
 ]
 },
 {
-"id": "l2-123",
+"id": "l2-122",
 "slot": "body",
 "text": "giờ người ta mua trên mạng hết, tạp hoá ế rề",
 "npc": "grocery",
@@ -1346,7 +1337,7 @@
 ]
 },
 {
-"id": "l2-124",
+"id": "l2-123",
 "slot": "body",
 "text": "mấy bữa nay bán chạy quá, phải nhập thêm hàng",
 "npc": "grocery",
@@ -1362,7 +1353,7 @@
 ]
 },
 {
-"id": "l2-125",
+"id": "l2-124",
 "slot": "body",
 "text": "ngồi cả ngày cái lưng {self} ê ẩm",
 "npc": "grocery",
@@ -1378,7 +1369,7 @@
 ]
 },
 {
-"id": "l2-126",
+"id": "l2-125",
 "slot": "body",
 "text": "chuột tối qua cắn rách bao gạo",
 "npc": "grocery",
@@ -1387,7 +1378,7 @@
 ]
 },
 {
-"id": "l2-127",
+"id": "l2-126",
 "slot": "body",
 "text": "mấy đứa nhỏ mua chịu rồi quên trả",
 "npc": "grocery",
@@ -1396,7 +1387,7 @@
 ]
 },
 {
-"id": "l2-128",
+"id": "l2-127",
 "slot": "body",
 "text": "con gái {self} dưới quê mới lên thăm",
 "npc": "grocery",
@@ -1412,7 +1403,7 @@
 ]
 },
 {
-"id": "l2-129",
+"id": "l2-128",
 "slot": "body",
 "text": "{self} bán ở chợ này hơn hai chục năm rồi",
 "npc": "grocery",
@@ -1421,7 +1412,7 @@
 ]
 },
 {
-"id": "l2-130",
+"id": "l2-129",
 "slot": "body",
 "text": "nước mắm nhà {self} là loại ngon nhất chợ",
 "npc": "grocery",
@@ -1430,7 +1421,7 @@
 ]
 },
 {
-"id": "l2-131",
+"id": "l2-130",
 "slot": "body",
 "text": "{you} làm gì mà mặt mũi bơ phờ vậy",
 "npc": "grocery",
@@ -1442,7 +1433,7 @@
 ]
 },
 {
-"id": "l2-132",
+"id": "l2-131",
 "slot": "body",
 "text": "gần {holiday} rồi, mua đồ cúng thì ghé {self}",
 "npc": "grocery",
@@ -1457,7 +1448,7 @@
 ]
 },
 {
-"id": "l2-133",
+"id": "l2-132",
 "slot": "body",
 "text": "mưa vầy gạo dễ ẩm, mua về nhớ đậy kỹ",
 "npc": "grocery",
@@ -1469,7 +1460,7 @@
 ]
 },
 {
-"id": "l2-134",
+"id": "l2-133",
 "slot": "body",
 "text": "nghe nói đường đầu chợ sắp đào lên làm cống",
 "npc": "grocery",
@@ -1478,7 +1469,7 @@
 ]
 },
 {
-"id": "l2-135",
+"id": "l2-134",
 "slot": "body",
 "text": "hàng mới về chất đầy kho",
 "npc": "grocery",
@@ -1487,7 +1478,7 @@
 ]
 },
 {
-"id": "l2-136",
+"id": "l2-135",
 "slot": "ask",
 "text": "{you} khuân phụ {self} mấy bao gạo được không",
 "npc": "grocery",
@@ -1496,7 +1487,7 @@
 ]
 },
 {
-"id": "l2-137",
+"id": "l2-136",
 "slot": "ask",
 "text": "{you} đọc giùm {self} cái hạn trên hộp sữa được không, chữ nhỏ quá",
 "npc": "grocery",
@@ -1505,7 +1496,7 @@
 ]
 },
 {
-"id": "l2-138",
+"id": "l2-137",
 "slot": "ask",
 "text": "chiều nay ghé uống ly trà đá với {self} không",
 "npc": "grocery",
@@ -1514,7 +1505,7 @@
 ]
 },
 {
-"id": "l2-139",
+"id": "l2-138",
 "slot": "body",
 "text": "{you} mua đồ toàn lựa loại rẻ nhất",
 "npc": "grocery",
@@ -1523,7 +1514,7 @@
 ]
 },
 {
-"id": "l2-140",
+"id": "l2-139",
 "slot": "body",
 "text": "bữa trước {self} đưa lộn chai nước tương cho {you}",
 "npc": "grocery",
@@ -1532,7 +1523,7 @@
 ]
 },
 {
-"id": "l2-141",
+"id": "l2-140",
 "slot": "feel",
 "text": "buồn lắm",
 "npc": "grocery",
@@ -1541,7 +1532,7 @@
 ]
 },
 {
-"id": "l2-142",
+"id": "l2-141",
 "slot": "tail",
 "text": "cần gì cứ ghé {self}",
 "npc": "grocery",
@@ -1552,7 +1543,7 @@
 ]
 },
 {
-"id": "l2-143",
+"id": "l2-142",
 "slot": "tail",
 "text": "thôi {self} dọn hàng đây",
 "npc": "grocery",
@@ -1561,7 +1552,7 @@
 ]
 },
 {
-"id": "l2-144",
+"id": "l2-143",
 "slot": "body",
 "text": "gạo mới về, nấu dẻo lắm",
 "npc": "grocery",
@@ -1570,7 +1561,7 @@
 ]
 },
 {
-"id": "l2-145",
+"id": "l2-144",
 "slot": "body",
 "text": "trứng gà ta sáng nay mới bỏ mối",
 "npc": "grocery",
@@ -1579,7 +1570,7 @@
 ]
 },
 {
-"id": "l2-146",
+"id": "l2-145",
 "slot": "body",
 "text": "{self} cho {you} mấy quả trứng nè, về chiên ăn",
 "npc": "grocery",
@@ -1593,19 +1584,19 @@
 ]
 },
 {
-"id": "l2-147",
+"id": "l2-146",
 "slot": "open",
 "text": "Như cũ hả {you}",
 "npc": "banhmi"
 },
 {
-"id": "l2-148",
+"id": "l2-147",
 "slot": "open",
 "text": "Ăn gì {you}",
 "npc": "banhmi"
 },
 {
-"id": "l2-149",
+"id": "l2-148",
 "slot": "open",
 "text": "Sáng nay sớm vậy {you}",
 "npc": "banhmi",
@@ -1614,7 +1605,7 @@
 ]
 },
 {
-"id": "l2-150",
+"id": "l2-149",
 "slot": "body",
 "text": "chưa tới bảy giờ đã bán hết trăm ổ",
 "npc": "banhmi",
@@ -1630,7 +1621,7 @@
 ]
 },
 {
-"id": "l2-151",
+"id": "l2-150",
 "slot": "body",
 "text": "nay vắng khách quá, bánh còn nguyên giỏ",
 "npc": "banhmi",
@@ -1648,7 +1639,7 @@
 ]
 },
 {
-"id": "l2-152",
+"id": "l2-151",
 "slot": "body",
 "text": "lò bánh tăng giá mà {self} không dám tăng",
 "npc": "banhmi",
@@ -1657,7 +1648,7 @@
 ]
 },
 {
-"id": "l2-153",
+"id": "l2-152",
 "slot": "body",
 "text": "dậy từ bốn giờ làm pate, buồn ngủ ríu mắt",
 "npc": "banhmi",
@@ -1666,7 +1657,7 @@
 ]
 },
 {
-"id": "l2-154",
+"id": "l2-153",
 "slot": "body",
 "text": "mưa vầy ai ra đường mua bánh mì",
 "npc": "banhmi",
@@ -1678,7 +1669,7 @@
 ]
 },
 {
-"id": "l2-155",
+"id": "l2-154",
 "slot": "body",
 "text": "{self} mới sắm {item}",
 "npc": "banhmi",
@@ -1693,16 +1684,16 @@
 ]
 },
 {
-"id": "l2-156",
+"id": "l2-155",
 "slot": "body",
-"text": "pate nhà {self} tự làm đó, không phải hàng chợ",
+"text": "pate nhà {self} tự làm, khách nào ăn cũng khen",
 "npc": "banhmi",
 "intent": [
 "brag"
 ]
 },
 {
-"id": "l2-157",
+"id": "l2-156",
 "slot": "body",
 "text": "bữa trước {you} ăn {dish} thấy sao",
 "npc": "banhmi",
@@ -1717,7 +1708,7 @@
 ]
 },
 {
-"id": "l2-158",
+"id": "l2-157",
 "slot": "body",
 "text": "{you} ăn ngoài hoài vậy, không tự nấu hả",
 "npc": "banhmi",
@@ -1730,7 +1721,7 @@
 ]
 },
 {
-"id": "l2-159",
+"id": "l2-158",
 "slot": "body",
 "text": "chưa ăn sáng mà đi làm là đuối đó",
 "npc": "banhmi",
@@ -1742,7 +1733,7 @@
 ]
 },
 {
-"id": "l2-160",
+"id": "l2-159",
 "slot": "body",
 "text": "đầu đường mới mở xe cà phê, ngon mà rẻ",
 "npc": "banhmi",
@@ -1751,7 +1742,7 @@
 ]
 },
 {
-"id": "l2-161",
+"id": "l2-160",
 "slot": "body",
 "text": "mai {weather} đó, ra sớm kẻo hết bánh",
 "npc": "banhmi",
@@ -1766,7 +1757,7 @@
 ]
 },
 {
-"id": "l2-162",
+"id": "l2-161",
 "slot": "body",
 "text": "khách đông quá {self} làm không kịp",
 "npc": "banhmi",
@@ -1775,7 +1766,7 @@
 ]
 },
 {
-"id": "l2-163",
+"id": "l2-162",
 "slot": "ask",
 "text": "{you} đưa giùm {self} mấy ổ cho khách được không",
 "npc": "banhmi",
@@ -1784,7 +1775,7 @@
 ]
 },
 {
-"id": "l2-164",
+"id": "l2-163",
 "slot": "ask",
 "text": "chiều {self} dọn hàng rồi đi uống cà phê, đi không",
 "npc": "banhmi",
@@ -1793,7 +1784,7 @@
 ]
 },
 {
-"id": "l2-165",
+"id": "l2-164",
 "slot": "body",
 "text": "ngày nào cũng ổ thịt nguội, không chán hả {you}",
 "npc": "banhmi",
@@ -1802,7 +1793,7 @@
 ]
 },
 {
-"id": "l2-166",
+"id": "l2-165",
 "slot": "body",
 "text": "bữa trước {self} quên bỏ ớt cho {you}",
 "npc": "banhmi",
@@ -1811,7 +1802,7 @@
 ]
 },
 {
-"id": "l2-167",
+"id": "l2-166",
 "slot": "tail",
 "text": "mai ghé nữa nha",
 "npc": "banhmi",
@@ -1822,7 +1813,7 @@
 ]
 },
 {
-"id": "l2-168",
+"id": "l2-167",
 "slot": "tail",
 "text": "ăn cho ngon nha {you}",
 "npc": "banhmi",
@@ -1832,7 +1823,7 @@
 ]
 },
 {
-"id": "l2-169",
+"id": "l2-168",
 "slot": "body",
 "text": "nay có pate gan mới làm, {you} thử không",
 "npc": "banhmi",
@@ -1841,7 +1832,7 @@
 ]
 },
 {
-"id": "l2-170",
+"id": "l2-169",
 "slot": "body",
 "text": "lấy thêm trứng ốp la ăn cho chắc bụng",
 "npc": "banhmi",
@@ -1850,7 +1841,7 @@
 ]
 },
 {
-"id": "l2-171",
+"id": "l2-170",
 "slot": "body",
 "text": "{self} cho {you} thêm cái trứng nè, đem về chiên",
 "npc": "banhmi",
@@ -1864,7 +1855,7 @@
 ]
 },
 {
-"id": "l2-172",
+"id": "l2-171",
 "slot": "body",
 "text": "rau muống sáng nay non lắm, xào tỏi là ngon",
 "npc": "veg",
@@ -1873,7 +1864,7 @@
 ]
 },
 {
-"id": "l2-173",
+"id": "l2-172",
 "slot": "body",
 "text": "cà chua mới hái, nấu canh chua là hợp",
 "npc": "veg",
@@ -1882,7 +1873,7 @@
 ]
 },
 {
-"id": "l2-174s",
+"id": "l2-173s",
 "slot": "open",
 "text": "{You} ơi, họp chút",
 "npc": "sen-pm",
@@ -1891,7 +1882,7 @@
 ]
 },
 {
-"id": "l2-174a",
+"id": "l2-173a",
 "slot": "open",
 "text": "{You} ơi, họp chút",
 "npc": "ant-pm",
@@ -1900,19 +1891,19 @@
 ]
 },
 {
-"id": "l2-175s",
+"id": "l2-174s",
 "slot": "open",
 "text": "Chào {you}",
 "npc": "sen-pm"
 },
 {
-"id": "l2-175a",
+"id": "l2-174a",
 "slot": "open",
 "text": "Chào {you}",
 "npc": "ant-pm"
 },
 {
-"id": "l2-176s",
+"id": "l2-175s",
 "slot": "open",
 "text": "{You} xong phần hôm qua chưa",
 "npc": "sen-pm",
@@ -1921,7 +1912,7 @@
 ]
 },
 {
-"id": "l2-176a",
+"id": "l2-175a",
 "slot": "open",
 "text": "{You} xong phần hôm qua chưa",
 "npc": "ant-pm",
@@ -1930,9 +1921,33 @@
 ]
 },
 {
-"id": "l2-177s",
+"id": "l2-176s",
 "slot": "body",
 "text": "khách dời lịch họp lần thứ ba rồi",
+"npc": "sen-pm",
+"intent": [
+"complain"
+],
+"topic": [
+"work"
+]
+},
+{
+"id": "l2-176a",
+"slot": "body",
+"text": "khách dời lịch họp lần thứ ba rồi",
+"npc": "ant-pm",
+"intent": [
+"complain"
+],
+"topic": [
+"work"
+]
+},
+{
+"id": "l2-177s",
+"slot": "body",
+"text": "sếp lớn muốn thêm tính năng mà hạn không đổi",
 "npc": "sen-pm",
 "intent": [
 "complain"
@@ -1944,7 +1959,7 @@
 {
 "id": "l2-177a",
 "slot": "body",
-"text": "khách dời lịch họp lần thứ ba rồi",
+"text": "sếp lớn muốn thêm tính năng mà hạn không đổi",
 "npc": "ant-pm",
 "intent": [
 "complain"
@@ -1956,277 +1971,253 @@
 {
 "id": "l2-178s",
 "slot": "body",
-"text": "sếp lớn muốn thêm tính năng mà hạn không đổi",
+"text": "{self} ngồi chia việc mà ai cũng kêu quá tải",
 "npc": "sen-pm",
 "intent": [
 "complain"
-],
-"topic": [
-"work"
 ]
 },
 {
 "id": "l2-178a",
 "slot": "body",
-"text": "sếp lớn muốn thêm tính năng mà hạn không đổi",
+"text": "{self} ngồi chia việc mà ai cũng kêu quá tải",
 "npc": "ant-pm",
 "intent": [
 "complain"
-],
-"topic": [
-"work"
 ]
 },
 {
 "id": "l2-179s",
 "slot": "body",
-"text": "{self} ngồi chia việc mà ai cũng kêu quá tải",
+"text": "tuần này {self} về tới nhà là con ngủ hết rồi",
 "npc": "sen-pm",
 "intent": [
 "complain"
+],
+"topic": [
+"work"
+],
+"age": [
+30,
+99
 ]
 },
 {
 "id": "l2-179a",
 "slot": "body",
-"text": "{self} ngồi chia việc mà ai cũng kêu quá tải",
+"text": "tuần này {self} về tới nhà là con ngủ hết rồi",
 "npc": "ant-pm",
 "intent": [
 "complain"
+],
+"topic": [
+"work"
+],
+"age": [
+30,
+99
 ]
 },
 {
 "id": "l2-180s",
 "slot": "body",
-"text": "tuần này {self} về tới nhà là con ngủ hết rồi",
+"text": "{self} vừa được giao thêm một nhóm",
 "npc": "sen-pm",
 "intent": [
-"complain"
+"brag"
 ],
 "topic": [
-"work"
-],
-"age": [
-30,
-99
+"promotion"
 ]
 },
 {
 "id": "l2-180a",
 "slot": "body",
-"text": "tuần này {self} về tới nhà là con ngủ hết rồi",
+"text": "{self} vừa được giao thêm một nhóm",
 "npc": "ant-pm",
 "intent": [
-"complain"
+"brag"
 ],
 "topic": [
-"work"
-],
-"age": [
-30,
-99
+"promotion"
 ]
 },
 {
 "id": "l2-181s",
 "slot": "body",
-"text": "{self} vừa được giao thêm một nhóm",
+"text": "dự án tháng trước khách khen nguyên buổi",
 "npc": "sen-pm",
 "intent": [
 "brag"
-],
-"topic": [
-"promotion"
 ]
 },
 {
 "id": "l2-181a",
 "slot": "body",
-"text": "{self} vừa được giao thêm một nhóm",
+"text": "dự án tháng trước khách khen nguyên buổi",
 "npc": "ant-pm",
 "intent": [
 "brag"
-],
-"topic": [
-"promotion"
 ]
 },
 {
 "id": "l2-182s",
 "slot": "body",
-"text": "dự án tháng trước khách khen nguyên buổi",
+"text": "thử việc tới đâu rồi {you}, có vướng gì không",
 "npc": "sen-pm",
 "intent": [
-"brag"
+"ask"
+],
+"topic": [
+"probation"
 ]
 },
 {
 "id": "l2-182a",
 "slot": "body",
-"text": "dự án tháng trước khách khen nguyên buổi",
+"text": "thử việc tới đâu rồi {you}, có vướng gì không",
 "npc": "ant-pm",
 "intent": [
-"brag"
+"ask"
+],
+"topic": [
+"probation"
 ]
 },
 {
 "id": "l2-183s",
 "slot": "body",
-"text": "thử việc tới đâu rồi {you}, có vướng gì không",
+"text": "lên {event} rồi thì nhận việc khó hơn nha",
 "npc": "sen-pm",
 "intent": [
 "ask"
 ],
 "topic": [
-"probation"
+"tier"
+],
+"needs": [
+"event"
 ]
 },
 {
 "id": "l2-183a",
 "slot": "body",
-"text": "thử việc tới đâu rồi {you}, có vướng gì không",
+"text": "lên {event} rồi thì nhận việc khó hơn nha",
 "npc": "ant-pm",
 "intent": [
 "ask"
 ],
 "topic": [
-"probation"
+"tier"
+],
+"needs": [
+"event"
 ]
 },
 {
 "id": "l2-184s",
 "slot": "body",
-"text": "lên {event} rồi thì nhận việc khó hơn nha",
+"text": "{you} mới vô {place} mà theo kịp nhịp ghê",
 "npc": "sen-pm",
 "intent": [
 "ask"
 ],
 "topic": [
-"tier"
+"job"
 ],
 "needs": [
-"event"
+"place"
 ]
 },
 {
 "id": "l2-184a",
 "slot": "body",
-"text": "lên {event} rồi thì nhận việc khó hơn nha",
+"text": "{you} mới vô {place} mà theo kịp nhịp ghê",
 "npc": "ant-pm",
 "intent": [
 "ask"
 ],
 "topic": [
-"tier"
+"job"
 ],
 "needs": [
-"event"
+"place"
 ]
 },
 {
 "id": "l2-185s",
 "slot": "body",
-"text": "{you} mới vô {place} mà theo kịp nhịp ghê",
+"text": "nhìn {you} đuối quá, làm xong phần này về sớm đi",
 "npc": "sen-pm",
 "intent": [
 "ask"
 ],
 "topic": [
-"job"
-],
-"needs": [
-"place"
+"tired"
 ]
 },
 {
 "id": "l2-185a",
 "slot": "body",
-"text": "{you} mới vô {place} mà theo kịp nhịp ghê",
+"text": "nhìn {you} đuối quá, làm xong phần này về sớm đi",
 "npc": "ant-pm",
 "intent": [
 "ask"
 ],
 "topic": [
-"job"
-],
-"needs": [
-"place"
+"tired"
 ]
 },
 {
 "id": "l2-186s",
 "slot": "body",
-"text": "nhìn {you} đuối quá, làm xong phần này về sớm đi",
+"text": "tuần sau có khách mới, cả nhóm chuẩn bị nha",
 "npc": "sen-pm",
 "intent": [
-"ask"
-],
-"topic": [
-"tired"
+"news"
 ]
 },
 {
 "id": "l2-186a",
 "slot": "body",
-"text": "nhìn {you} đuối quá, làm xong phần này về sớm đi",
+"text": "tuần sau có khách mới, cả nhóm chuẩn bị nha",
 "npc": "ant-pm",
 "intent": [
-"ask"
-],
-"topic": [
-"tired"
+"news"
 ]
 },
 {
 "id": "l2-187s",
 "slot": "body",
-"text": "tuần sau có khách mới, cả nhóm chuẩn bị nha",
+"text": "{holiday} công ty nghỉ, mọi người xếp việc trước nha",
 "npc": "sen-pm",
 "intent": [
 "news"
+],
+"topic": [
+"holiday"
+],
+"needs": [
+"holiday"
 ]
 },
 {
 "id": "l2-187a",
 "slot": "body",
-"text": "tuần sau có khách mới, cả nhóm chuẩn bị nha",
+"text": "{holiday} công ty nghỉ, mọi người xếp việc trước nha",
 "npc": "ant-pm",
 "intent": [
 "news"
+],
+"topic": [
+"holiday"
+],
+"needs": [
+"holiday"
 ]
 },
 {
 "id": "l2-188s",
-"slot": "body",
-"text": "{holiday} công ty nghỉ, mọi người xếp việc trước nha",
-"npc": "sen-pm",
-"intent": [
-"news"
-],
-"topic": [
-"holiday"
-],
-"needs": [
-"holiday"
-]
-},
-{
-"id": "l2-188a",
-"slot": "body",
-"text": "{holiday} công ty nghỉ, mọi người xếp việc trước nha",
-"npc": "ant-pm",
-"intent": [
-"news"
-],
-"topic": [
-"holiday"
-],
-"needs": [
-"holiday"
-]
-},
-{
-"id": "l2-189s",
 "slot": "body",
 "text": "phần báo cáo tuần {self} chưa kịp tổng hợp",
 "npc": "sen-pm",
@@ -2235,9 +2226,27 @@
 ]
 },
 {
-"id": "l2-189a",
+"id": "l2-188a",
 "slot": "body",
 "text": "phần báo cáo tuần {self} chưa kịp tổng hợp",
+"npc": "ant-pm",
+"intent": [
+"request"
+]
+},
+{
+"id": "l2-189s",
+"slot": "ask",
+"text": "{you} gom giùm {self} số liệu tiến độ được không",
+"npc": "sen-pm",
+"intent": [
+"request"
+]
+},
+{
+"id": "l2-189a",
+"slot": "ask",
+"text": "{you} gom giùm {self} số liệu tiến độ được không",
 "npc": "ant-pm",
 "intent": [
 "request"
@@ -2246,7 +2255,7 @@
 {
 "id": "l2-190s",
 "slot": "ask",
-"text": "{you} gom giùm {self} số liệu tiến độ được không",
+"text": "{you} ghi biên bản họp giùm {self} được không",
 "npc": "sen-pm",
 "intent": [
 "request"
@@ -2255,7 +2264,7 @@
 {
 "id": "l2-190a",
 "slot": "ask",
-"text": "{you} gom giùm {self} số liệu tiến độ được không",
+"text": "{you} ghi biên bản họp giùm {self} được không",
 "npc": "ant-pm",
 "intent": [
 "request"
@@ -2264,145 +2273,145 @@
 {
 "id": "l2-191s",
 "slot": "ask",
-"text": "{you} ghi biên bản họp giùm {self} được không",
+"text": "trưa nay cả nhóm ăn chung, {you} đi không",
 "npc": "sen-pm",
 "intent": [
-"request"
+"invite"
 ]
 },
 {
 "id": "l2-191a",
 "slot": "ask",
-"text": "{you} ghi biên bản họp giùm {self} được không",
+"text": "trưa nay cả nhóm ăn chung, {you} đi không",
 "npc": "ant-pm",
 "intent": [
-"request"
+"invite"
 ]
 },
 {
 "id": "l2-192s",
-"slot": "ask",
-"text": "trưa nay cả nhóm ăn chung, {you} đi không",
+"slot": "body",
+"text": "{you} họp mà ngáp ba lần rồi đó",
 "npc": "sen-pm",
 "intent": [
-"invite"
+"tease"
+],
+"topic": [
+"tired"
 ]
 },
 {
 "id": "l2-192a",
-"slot": "ask",
-"text": "trưa nay cả nhóm ăn chung, {you} đi không",
+"slot": "body",
+"text": "{you} họp mà ngáp ba lần rồi đó",
 "npc": "ant-pm",
 "intent": [
-"invite"
+"tease"
+],
+"topic": [
+"tired"
 ]
 },
 {
 "id": "l2-193s",
 "slot": "body",
-"text": "{you} họp mà ngáp ba lần rồi đó",
+"text": "hôm trước {self} dồn việc hết cho {you}",
 "npc": "sen-pm",
 "intent": [
-"tease"
-],
-"topic": [
-"tired"
+"apologize"
 ]
 },
 {
 "id": "l2-193a",
 "slot": "body",
-"text": "{you} họp mà ngáp ba lần rồi đó",
+"text": "hôm trước {self} dồn việc hết cho {you}",
 "npc": "ant-pm",
 "intent": [
-"tease"
-],
-"topic": [
-"tired"
+"apologize"
 ]
 },
 {
 "id": "l2-194s",
-"slot": "body",
-"text": "hôm trước {self} dồn việc hết cho {you}",
+"slot": "feel",
+"text": "đau đầu thiệt",
 "npc": "sen-pm",
 "intent": [
-"apologize"
+"complain"
 ]
 },
 {
 "id": "l2-194a",
-"slot": "body",
-"text": "hôm trước {self} dồn việc hết cho {you}",
+"slot": "feel",
+"text": "đau đầu thiệt",
 "npc": "ant-pm",
 "intent": [
-"apologize"
+"complain"
 ]
 },
 {
 "id": "l2-195s",
-"slot": "feel",
-"text": "đau đầu thiệt",
+"slot": "tail",
+"text": "có gì báo {self} sớm nha",
 "npc": "sen-pm",
 "intent": [
-"complain"
+"ask",
+"request"
 ]
 },
 {
 "id": "l2-195a",
-"slot": "feel",
-"text": "đau đầu thiệt",
+"slot": "tail",
+"text": "có gì báo {self} sớm nha",
 "npc": "ant-pm",
 "intent": [
-"complain"
+"ask",
+"request"
 ]
 },
 {
 "id": "l2-196s",
 "slot": "tail",
-"text": "có gì báo {self} sớm nha",
+"text": "thôi {self} đi họp đây",
 "npc": "sen-pm",
 "intent": [
-"ask",
-"request"
+"complain",
+"news",
+"brag"
 ]
 },
 {
 "id": "l2-196a",
 "slot": "tail",
-"text": "có gì báo {self} sớm nha",
-"npc": "ant-pm",
-"intent": [
-"ask",
-"request"
-]
-},
-{
-"id": "l2-197s",
-"slot": "tail",
 "text": "thôi {self} đi họp đây",
-"npc": "sen-pm",
+"npc": "ant-pm",
 "intent": [
 "complain",
 "news",
 "brag"
+]
+},
+{
+"id": "l2-197s",
+"slot": "body",
+"text": "phần đó {you} cứ hỏi, {self} chỉ cho",
+"npc": "sen-pm",
+"answer": [
+"favor"
 ]
 },
 {
 "id": "l2-197a",
-"slot": "tail",
-"text": "thôi {self} đi họp đây",
+"slot": "body",
+"text": "phần đó {you} cứ hỏi, {self} chỉ cho",
 "npc": "ant-pm",
-"intent": [
-"complain",
-"news",
-"brag"
+"answer": [
+"favor"
 ]
 },
 {
 "id": "l2-198s",
 "slot": "body",
-"text": "phần đó {you} cứ hỏi, {self} chỉ cho",
+"text": "muốn lên bậc thì làm chắc phần mình trước đã",
 "npc": "sen-pm",
 "answer": [
 "favor"
@@ -2411,7 +2420,7 @@
 {
 "id": "l2-198a",
 "slot": "body",
-"text": "phần đó {you} cứ hỏi, {self} chỉ cho",
+"text": "muốn lên bậc thì làm chắc phần mình trước đã",
 "npc": "ant-pm",
 "answer": [
 "favor"
@@ -2419,36 +2428,18 @@
 },
 {
 "id": "l2-199s",
-"slot": "body",
-"text": "muốn lên bậc thì làm chắc phần mình trước đã",
-"npc": "sen-pm",
-"answer": [
-"favor"
-]
-},
-{
-"id": "l2-199a",
-"slot": "body",
-"text": "muốn lên bậc thì làm chắc phần mình trước đã",
-"npc": "ant-pm",
-"answer": [
-"favor"
-]
-},
-{
-"id": "l2-200s",
 "slot": "open",
 "text": "Ê {you}",
 "npc": "sen-design"
 },
 {
-"id": "l2-200a",
+"id": "l2-199a",
 "slot": "open",
 "text": "Ê {you}",
 "npc": "ant-design"
 },
 {
-"id": "l2-201s",
+"id": "l2-200s",
 "slot": "open",
 "text": "{You} coi cái này nè",
 "npc": "sen-design",
@@ -2458,7 +2449,7 @@
 ]
 },
 {
-"id": "l2-201a",
+"id": "l2-200a",
 "slot": "open",
 "text": "{You} coi cái này nè",
 "npc": "ant-design",
@@ -2468,9 +2459,33 @@
 ]
 },
 {
-"id": "l2-202s",
+"id": "l2-201s",
 "slot": "body",
 "text": "khách chê màu xanh này không đủ xanh",
+"npc": "sen-design",
+"intent": [
+"complain"
+],
+"topic": [
+"work"
+]
+},
+{
+"id": "l2-201a",
+"slot": "body",
+"text": "khách chê màu xanh này không đủ xanh",
+"npc": "ant-design",
+"intent": [
+"complain"
+],
+"topic": [
+"work"
+]
+},
+{
+"id": "l2-202s",
+"slot": "body",
+"text": "sửa logo lần thứ bảy rồi",
 "npc": "sen-design",
 "intent": [
 "complain"
@@ -2482,7 +2497,7 @@
 {
 "id": "l2-202a",
 "slot": "body",
-"text": "khách chê màu xanh này không đủ xanh",
+"text": "sửa logo lần thứ bảy rồi",
 "npc": "ant-design",
 "intent": [
 "complain"
@@ -2494,215 +2509,209 @@
 {
 "id": "l2-203s",
 "slot": "body",
-"text": "sửa logo lần thứ bảy rồi",
+"text": "máy {self} mở file nặng là treo",
 "npc": "sen-design",
 "intent": [
 "complain"
-],
-"topic": [
-"work"
 ]
 },
 {
 "id": "l2-203a",
 "slot": "body",
-"text": "sửa logo lần thứ bảy rồi",
+"text": "máy {self} mở file nặng là treo",
 "npc": "ant-design",
 "intent": [
 "complain"
-],
-"topic": [
-"work"
 ]
 },
 {
 "id": "l2-204s",
 "slot": "body",
-"text": "máy {self} mở file nặng là treo",
+"text": "bản thiết kế mới của {self} được chọn rồi",
 "npc": "sen-design",
 "intent": [
-"complain"
+"brag"
+],
+"topic": [
+"promotion",
+"work"
 ]
 },
 {
 "id": "l2-204a",
 "slot": "body",
-"text": "máy {self} mở file nặng là treo",
+"text": "bản thiết kế mới của {self} được chọn rồi",
 "npc": "ant-design",
 "intent": [
-"complain"
+"brag"
+],
+"topic": [
+"promotion",
+"work"
 ]
 },
 {
 "id": "l2-205s",
 "slot": "body",
-"text": "bản thiết kế mới của {self} được chọn rồi",
+"text": "cuối tuần {self} đi vẽ ký hoạ ở phố cổ",
 "npc": "sen-design",
 "intent": [
 "brag"
 ],
 "topic": [
-"promotion",
-"work"
+"hobby"
 ]
 },
 {
 "id": "l2-205a",
 "slot": "body",
-"text": "bản thiết kế mới của {self} được chọn rồi",
+"text": "cuối tuần {self} đi vẽ ký hoạ ở phố cổ",
 "npc": "ant-design",
 "intent": [
 "brag"
 ],
 "topic": [
-"promotion",
-"work"
+"hobby"
 ]
 },
 {
 "id": "l2-206s",
 "slot": "body",
-"text": "cuối tuần {self} đi vẽ ký hoạ ở phố cổ",
+"text": "{self} mới mua {item}",
 "npc": "sen-design",
 "intent": [
 "brag"
 ],
 "topic": [
-"hobby"
+"buy"
+],
+"needs": [
+"item"
 ]
 },
 {
 "id": "l2-206a",
 "slot": "body",
-"text": "cuối tuần {self} đi vẽ ký hoạ ở phố cổ",
+"text": "{self} mới mua {item}",
 "npc": "ant-design",
 "intent": [
 "brag"
 ],
 "topic": [
-"hobby"
+"buy"
+],
+"needs": [
+"item"
 ]
 },
 {
 "id": "l2-207s",
 "slot": "body",
-"text": "{self} mới mua {item}",
+"text": "trưa nay {you} ăn {dish} hả, ngon không",
 "npc": "sen-design",
 "intent": [
-"brag"
+"ask"
 ],
 "topic": [
-"buy"
+"food"
 ],
 "needs": [
-"item"
+"dish"
 ]
 },
 {
 "id": "l2-207a",
 "slot": "body",
-"text": "{self} mới mua {item}",
+"text": "trưa nay {you} ăn {dish} hả, ngon không",
 "npc": "ant-design",
 "intent": [
-"brag"
+"ask"
 ],
 "topic": [
-"buy"
+"food"
 ],
 "needs": [
-"item"
+"dish"
 ]
 },
 {
 "id": "l2-208s",
 "slot": "body",
-"text": "trưa nay {you} ăn {dish} hả, ngon không",
+"text": "mắt {you} thâm như gấu trúc",
 "npc": "sen-design",
 "intent": [
-"ask"
+"ask",
+"tease"
 ],
 "topic": [
-"food"
-],
-"needs": [
-"dish"
+"tired"
 ]
 },
 {
 "id": "l2-208a",
 "slot": "body",
-"text": "trưa nay {you} ăn {dish} hả, ngon không",
+"text": "mắt {you} thâm như gấu trúc",
 "npc": "ant-design",
 "intent": [
-"ask"
+"ask",
+"tease"
 ],
 "topic": [
-"food"
-],
-"needs": [
-"dish"
+"tired"
 ]
 },
 {
 "id": "l2-209s",
 "slot": "body",
-"text": "mắt {you} thâm như gấu trúc",
+"text": "vô {place} rồi thấy sao {you}",
 "npc": "sen-design",
 "intent": [
-"ask",
-"tease"
+"ask"
 ],
 "topic": [
-"tired"
+"job"
+],
+"needs": [
+"place"
 ]
 },
 {
 "id": "l2-209a",
 "slot": "body",
-"text": "mắt {you} thâm như gấu trúc",
+"text": "vô {place} rồi thấy sao {you}",
 "npc": "ant-design",
 "intent": [
-"ask",
-"tease"
+"ask"
 ],
 "topic": [
-"tired"
+"job"
+],
+"needs": [
+"place"
 ]
 },
 {
 "id": "l2-210s",
 "slot": "body",
-"text": "vô {place} rồi thấy sao {you}",
+"text": "nghe nói tháng sau công ty làm lại trang chủ",
 "npc": "sen-design",
 "intent": [
-"ask"
-],
-"topic": [
-"job"
-],
-"needs": [
-"place"
+"news"
 ]
 },
 {
 "id": "l2-210a",
 "slot": "body",
-"text": "vô {place} rồi thấy sao {you}",
+"text": "nghe nói tháng sau công ty làm lại trang chủ",
 "npc": "ant-design",
 "intent": [
-"ask"
-],
-"topic": [
-"job"
-],
-"needs": [
-"place"
+"news"
 ]
 },
 {
 "id": "l2-211s",
 "slot": "body",
-"text": "nghe nói tháng sau công ty làm lại trang chủ",
+"text": "quán trà sữa dưới sảnh có món mới",
 "npc": "sen-design",
 "intent": [
 "news"
@@ -2711,7 +2720,7 @@
 {
 "id": "l2-211a",
 "slot": "body",
-"text": "nghe nói tháng sau công ty làm lại trang chủ",
+"text": "quán trà sữa dưới sảnh có món mới",
 "npc": "ant-design",
 "intent": [
 "news"
@@ -2720,24 +2729,6 @@
 {
 "id": "l2-212s",
 "slot": "body",
-"text": "quán trà sữa dưới sảnh có món mới",
-"npc": "sen-design",
-"intent": [
-"news"
-]
-},
-{
-"id": "l2-212a",
-"slot": "body",
-"text": "quán trà sữa dưới sảnh có món mới",
-"npc": "ant-design",
-"intent": [
-"news"
-]
-},
-{
-"id": "l2-213s",
-"slot": "body",
 "text": "{self} đang rối mấy cái màn hình này",
 "npc": "sen-design",
 "intent": [
@@ -2745,9 +2736,27 @@
 ]
 },
 {
-"id": "l2-213a",
+"id": "l2-212a",
 "slot": "body",
 "text": "{self} đang rối mấy cái màn hình này",
+"npc": "ant-design",
+"intent": [
+"request"
+]
+},
+{
+"id": "l2-213s",
+"slot": "ask",
+"text": "{you} bấm thử giùm {self} bản mẫu coi chỗ nào khó dùng được không",
+"npc": "sen-design",
+"intent": [
+"request"
+]
+},
+{
+"id": "l2-213a",
+"slot": "ask",
+"text": "{you} bấm thử giùm {self} bản mẫu coi chỗ nào khó dùng được không",
 "npc": "ant-design",
 "intent": [
 "request"
@@ -2756,137 +2765,137 @@
 {
 "id": "l2-214s",
 "slot": "ask",
-"text": "{you} bấm thử giùm {self} bản mẫu coi chỗ nào khó dùng được không",
+"text": "tan ca đi trà sữa không",
 "npc": "sen-design",
 "intent": [
-"request"
+"invite"
 ]
 },
 {
 "id": "l2-214a",
 "slot": "ask",
-"text": "{you} bấm thử giùm {self} bản mẫu coi chỗ nào khó dùng được không",
+"text": "tan ca đi trà sữa không",
 "npc": "ant-design",
 "intent": [
-"request"
+"invite"
 ]
 },
 {
 "id": "l2-215s",
-"slot": "ask",
-"text": "tan ca đi trà sữa không",
+"slot": "body",
+"text": "giao diện {you} làm toàn ô vuông xám",
 "npc": "sen-design",
 "intent": [
-"invite"
+"tease"
 ]
 },
 {
 "id": "l2-215a",
-"slot": "ask",
-"text": "tan ca đi trà sữa không",
+"slot": "body",
+"text": "giao diện {you} làm toàn ô vuông xám",
 "npc": "ant-design",
 "intent": [
-"invite"
+"tease"
 ]
 },
 {
 "id": "l2-216s",
 "slot": "body",
-"text": "giao diện {you} làm toàn ô vuông xám",
+"text": "bữa {self} gửi lộn bản cũ cho {you}",
 "npc": "sen-design",
 "intent": [
-"tease"
+"apologize"
 ]
 },
 {
 "id": "l2-216a",
 "slot": "body",
-"text": "giao diện {you} làm toàn ô vuông xám",
+"text": "bữa {self} gửi lộn bản cũ cho {you}",
 "npc": "ant-design",
 "intent": [
-"tease"
+"apologize"
 ]
 },
 {
 "id": "l2-217s",
-"slot": "body",
-"text": "bữa {self} gửi lộn bản cũ cho {you}",
+"slot": "feel",
+"text": "mệt muốn xỉu",
 "npc": "sen-design",
 "intent": [
-"apologize"
+"complain"
 ]
 },
 {
 "id": "l2-217a",
-"slot": "body",
-"text": "bữa {self} gửi lộn bản cũ cho {you}",
+"slot": "feel",
+"text": "mệt muốn xỉu",
 "npc": "ant-design",
 "intent": [
-"apologize"
+"complain"
 ]
 },
 {
 "id": "l2-218s",
-"slot": "feel",
-"text": "mệt muốn xỉu",
+"slot": "tail",
+"text": "nhớ góp ý thật nha",
 "npc": "sen-design",
 "intent": [
-"complain"
+"request"
 ]
 },
 {
 "id": "l2-218a",
-"slot": "feel",
-"text": "mệt muốn xỉu",
+"slot": "tail",
+"text": "nhớ góp ý thật nha",
 "npc": "ant-design",
 "intent": [
-"complain"
+"request"
 ]
 },
 {
 "id": "l2-219s",
 "slot": "tail",
-"text": "nhớ góp ý thật nha",
+"text": "thôi {self} vẽ tiếp đây",
 "npc": "sen-design",
 "intent": [
-"request"
+"complain",
+"brag",
+"news"
 ]
 },
 {
 "id": "l2-219a",
 "slot": "tail",
-"text": "nhớ góp ý thật nha",
-"npc": "ant-design",
-"intent": [
-"request"
-]
-},
-{
-"id": "l2-220s",
-"slot": "tail",
 "text": "thôi {self} vẽ tiếp đây",
-"npc": "sen-design",
+"npc": "ant-design",
 "intent": [
 "complain",
 "brag",
 "news"
+]
+},
+{
+"id": "l2-220s",
+"slot": "body",
+"text": "muốn trang trí phòng thì chọn hai màu chủ đạo thôi",
+"npc": "sen-design",
+"answer": [
+"favor"
 ]
 },
 {
 "id": "l2-220a",
-"slot": "tail",
-"text": "thôi {self} vẽ tiếp đây",
+"slot": "body",
+"text": "muốn trang trí phòng thì chọn hai màu chủ đạo thôi",
 "npc": "ant-design",
-"intent": [
-"complain",
-"brag",
-"news"
+"answer": [
+"favor"
 ]
 },
 {
 "id": "l2-221s",
 "slot": "body",
-"text": "muốn trang trí phòng thì chọn hai màu chủ đạo thôi",
+"text": "làm slide thì chữ to, ít chữ là đẹp",
 "npc": "sen-design",
 "answer": [
 "favor"
@@ -2895,7 +2904,7 @@
 {
 "id": "l2-221a",
 "slot": "body",
-"text": "muốn trang trí phòng thì chọn hai màu chủ đạo thôi",
+"text": "làm slide thì chữ to, ít chữ là đẹp",
 "npc": "ant-design",
 "answer": [
 "favor"
@@ -2903,24 +2912,6 @@
 },
 {
 "id": "l2-222s",
-"slot": "body",
-"text": "làm slide thì chữ to, ít chữ là đẹp",
-"npc": "sen-design",
-"answer": [
-"favor"
-]
-},
-{
-"id": "l2-222a",
-"slot": "body",
-"text": "làm slide thì chữ to, ít chữ là đẹp",
-"npc": "ant-design",
-"answer": [
-"favor"
-]
-},
-{
-"id": "l2-223s",
 "slot": "open",
 "text": "{You} ơi, lỗi nè",
 "npc": "sen-qa",
@@ -2930,7 +2921,7 @@
 ]
 },
 {
-"id": "l2-223a",
+"id": "l2-222a",
 "slot": "open",
 "text": "{You} ơi, lỗi nè",
 "npc": "ant-qa",
@@ -2940,21 +2931,45 @@
 ]
 },
 {
-"id": "l2-224s",
+"id": "l2-223s",
 "slot": "open",
 "text": "Chào {you}",
 "npc": "sen-qa"
 },
 {
-"id": "l2-224a",
+"id": "l2-223a",
 "slot": "open",
 "text": "Chào {you}",
 "npc": "ant-qa"
 },
 {
-"id": "l2-225s",
+"id": "l2-224s",
 "slot": "body",
 "text": "bản mới lỗi tùm lum, {self} báo cả chục cái",
+"npc": "sen-qa",
+"intent": [
+"complain"
+],
+"topic": [
+"work"
+]
+},
+{
+"id": "l2-224a",
+"slot": "body",
+"text": "bản mới lỗi tùm lum, {self} báo cả chục cái",
+"npc": "ant-qa",
+"intent": [
+"complain"
+],
+"topic": [
+"work"
+]
+},
+{
+"id": "l2-225s",
+"slot": "body",
+"text": "dev nói máy họ chạy được mà máy {self} thì không",
 "npc": "sen-qa",
 "intent": [
 "complain"
@@ -2966,7 +2981,7 @@
 {
 "id": "l2-225a",
 "slot": "body",
-"text": "bản mới lỗi tùm lum, {self} báo cả chục cái",
+"text": "dev nói máy họ chạy được mà máy {self} thì không",
 "npc": "ant-qa",
 "intent": [
 "complain"
@@ -2978,185 +2993,161 @@
 {
 "id": "l2-226s",
 "slot": "body",
-"text": "dev nói máy họ chạy được mà máy {self} thì không",
+"text": "ngồi bấm đi bấm lại một chỗ cả buổi",
 "npc": "sen-qa",
 "intent": [
 "complain"
-],
-"topic": [
-"work"
 ]
 },
 {
 "id": "l2-226a",
 "slot": "body",
-"text": "dev nói máy họ chạy được mà máy {self} thì không",
+"text": "ngồi bấm đi bấm lại một chỗ cả buổi",
 "npc": "ant-qa",
 "intent": [
 "complain"
-],
-"topic": [
-"work"
 ]
 },
 {
 "id": "l2-227s",
 "slot": "body",
-"text": "ngồi bấm đi bấm lại một chỗ cả buổi",
+"text": "{self} bắt được con lỗi khó nhất dự án",
 "npc": "sen-qa",
 "intent": [
-"complain"
+"brag"
+],
+"topic": [
+"work"
 ]
 },
 {
 "id": "l2-227a",
 "slot": "body",
-"text": "ngồi bấm đi bấm lại một chỗ cả buổi",
+"text": "{self} bắt được con lỗi khó nhất dự án",
 "npc": "ant-qa",
 "intent": [
-"complain"
+"brag"
+],
+"topic": [
+"work"
 ]
 },
 {
 "id": "l2-228s",
 "slot": "body",
-"text": "{self} bắt được con lỗi khó nhất dự án",
+"text": "tối qua {self} chạy được năm cây số ở công viên",
 "npc": "sen-qa",
 "intent": [
 "brag"
 ],
 "topic": [
-"work"
+"hobby"
 ]
 },
 {
 "id": "l2-228a",
 "slot": "body",
-"text": "{self} bắt được con lỗi khó nhất dự án",
+"text": "tối qua {self} chạy được năm cây số ở công viên",
 "npc": "ant-qa",
 "intent": [
 "brag"
 ],
 "topic": [
-"work"
+"hobby"
 ]
 },
 {
 "id": "l2-229s",
 "slot": "body",
-"text": "tối qua {self} chạy được năm cây số ở công viên",
+"text": "{you} cũng chạy bộ hả, bữa nào chạy chung",
 "npc": "sen-qa",
 "intent": [
-"brag"
+"ask"
 ],
 "topic": [
-"hobby"
+"fit"
 ]
 },
 {
 "id": "l2-229a",
 "slot": "body",
-"text": "tối qua {self} chạy được năm cây số ở công viên",
+"text": "{you} cũng chạy bộ hả, bữa nào chạy chung",
 "npc": "ant-qa",
 "intent": [
-"brag"
+"ask"
 ],
 "topic": [
-"hobby"
+"fit"
 ]
 },
 {
 "id": "l2-230s",
 "slot": "body",
-"text": "{you} cũng chạy bộ hả, bữa nào chạy chung",
+"text": "qua thử việc chưa {you}",
 "npc": "sen-qa",
 "intent": [
 "ask"
 ],
 "topic": [
-"fit"
+"probation"
 ]
 },
 {
 "id": "l2-230a",
 "slot": "body",
-"text": "{you} cũng chạy bộ hả, bữa nào chạy chung",
+"text": "qua thử việc chưa {you}",
 "npc": "ant-qa",
 "intent": [
 "ask"
 ],
 "topic": [
-"fit"
+"probation"
 ]
 },
 {
 "id": "l2-231s",
 "slot": "body",
-"text": "qua thử việc chưa {you}",
+"text": "tối {you} đi học hả, học gì vậy",
 "npc": "sen-qa",
 "intent": [
 "ask"
 ],
 "topic": [
-"probation"
+"study"
 ]
 },
 {
 "id": "l2-231a",
 "slot": "body",
-"text": "qua thử việc chưa {you}",
+"text": "tối {you} đi học hả, học gì vậy",
 "npc": "ant-qa",
 "intent": [
 "ask"
 ],
 "topic": [
-"probation"
+"study"
 ]
 },
 {
 "id": "l2-232s",
 "slot": "body",
-"text": "tối {you} đi học hả, học gì vậy",
+"text": "nghe nói bản phát hành dời qua tuần sau",
 "npc": "sen-qa",
 "intent": [
-"ask"
-],
-"topic": [
-"study"
+"news"
 ]
 },
 {
 "id": "l2-232a",
 "slot": "body",
-"text": "tối {you} đi học hả, học gì vậy",
+"text": "nghe nói bản phát hành dời qua tuần sau",
 "npc": "ant-qa",
 "intent": [
-"ask"
-],
-"topic": [
-"study"
+"news"
 ]
 },
 {
 "id": "l2-233s",
-"slot": "body",
-"text": "nghe nói bản phát hành dời qua tuần sau",
-"npc": "sen-qa",
-"intent": [
-"news"
-]
-},
-{
-"id": "l2-233a",
-"slot": "body",
-"text": "nghe nói bản phát hành dời qua tuần sau",
-"npc": "ant-qa",
-"intent": [
-"news"
-]
-},
-{
-"id": "l2-234s",
 "slot": "body",
 "text": "danh sách lỗi dài quá {self} làm không xuể",
 "npc": "sen-qa",
@@ -3165,9 +3156,27 @@
 ]
 },
 {
-"id": "l2-234a",
+"id": "l2-233a",
 "slot": "body",
 "text": "danh sách lỗi dài quá {self} làm không xuể",
+"npc": "ant-qa",
+"intent": [
+"request"
+]
+},
+{
+"id": "l2-234s",
+"slot": "ask",
+"text": "{you} kiểm lại giùm {self} mấy lỗi này sửa chưa được không",
+"npc": "sen-qa",
+"intent": [
+"request"
+]
+},
+{
+"id": "l2-234a",
+"slot": "ask",
+"text": "{you} kiểm lại giùm {self} mấy lỗi này sửa chưa được không",
 "npc": "ant-qa",
 "intent": [
 "request"
@@ -3176,137 +3185,119 @@
 {
 "id": "l2-235s",
 "slot": "ask",
-"text": "{you} kiểm lại giùm {self} mấy lỗi này sửa chưa được không",
+"text": "tối thứ năm chạy bộ ở công viên với {self} không",
 "npc": "sen-qa",
 "intent": [
-"request"
+"invite"
 ]
 },
 {
 "id": "l2-235a",
 "slot": "ask",
-"text": "{you} kiểm lại giùm {self} mấy lỗi này sửa chưa được không",
+"text": "tối thứ năm chạy bộ ở công viên với {self} không",
 "npc": "ant-qa",
 "intent": [
-"request"
+"invite"
 ]
 },
 {
 "id": "l2-236s",
-"slot": "ask",
-"text": "tối thứ năm chạy bộ ở công viên với {self} không",
+"slot": "body",
+"text": "{you} sửa một lỗi mà sinh ra hai lỗi khác",
 "npc": "sen-qa",
 "intent": [
-"invite"
+"tease"
 ]
 },
 {
 "id": "l2-236a",
-"slot": "ask",
-"text": "tối thứ năm chạy bộ ở công viên với {self} không",
+"slot": "body",
+"text": "{you} sửa một lỗi mà sinh ra hai lỗi khác",
 "npc": "ant-qa",
 "intent": [
-"invite"
+"tease"
 ]
 },
 {
 "id": "l2-237s",
 "slot": "body",
-"text": "{you} sửa một lỗi mà sinh ra hai lỗi khác",
+"text": "hôm trước {self} báo nhầm lỗi của {you}",
 "npc": "sen-qa",
 "intent": [
-"tease"
+"apologize"
 ]
 },
 {
 "id": "l2-237a",
 "slot": "body",
-"text": "{you} sửa một lỗi mà sinh ra hai lỗi khác",
+"text": "hôm trước {self} báo nhầm lỗi của {you}",
 "npc": "ant-qa",
 "intent": [
-"tease"
+"apologize"
 ]
 },
 {
 "id": "l2-238s",
-"slot": "body",
-"text": "hôm trước {self} báo nhầm lỗi của {you}",
+"slot": "tail",
+"text": "nhớ sửa sớm nha",
 "npc": "sen-qa",
 "intent": [
-"apologize"
+"request",
+"complain"
 ]
 },
 {
 "id": "l2-238a",
-"slot": "body",
-"text": "hôm trước {self} báo nhầm lỗi của {you}",
+"slot": "tail",
+"text": "nhớ sửa sớm nha",
 "npc": "ant-qa",
 "intent": [
-"apologize"
+"request",
+"complain"
 ]
 },
 {
 "id": "l2-239s",
 "slot": "tail",
-"text": "nhớ sửa sớm nha",
+"text": "thôi {self} kiểm tiếp đây",
 "npc": "sen-qa",
 "intent": [
-"request",
-"complain"
+"complain",
+"brag",
+"news"
 ]
 },
 {
 "id": "l2-239a",
 "slot": "tail",
-"text": "nhớ sửa sớm nha",
+"text": "thôi {self} kiểm tiếp đây",
 "npc": "ant-qa",
 "intent": [
-"request",
-"complain"
+"complain",
+"brag",
+"news"
 ]
 },
 {
 "id": "l2-240s",
-"slot": "tail",
-"text": "thôi {self} kiểm tiếp đây",
+"slot": "body",
+"text": "trước khi nộp thì tự bấm thử một lượt",
 "npc": "sen-qa",
-"intent": [
-"complain",
-"brag",
-"news"
+"answer": [
+"favor"
 ]
 },
 {
 "id": "l2-240a",
-"slot": "tail",
-"text": "thôi {self} kiểm tiếp đây",
+"slot": "body",
+"text": "trước khi nộp thì tự bấm thử một lượt",
 "npc": "ant-qa",
-"intent": [
-"complain",
-"brag",
-"news"
+"answer": [
+"favor"
 ]
 },
 {
 "id": "l2-241s",
-"slot": "body",
-"text": "trước khi nộp thì tự bấm thử một lượt",
-"npc": "sen-qa",
-"answer": [
-"favor"
-]
-},
-{
-"id": "l2-241a",
-"slot": "body",
-"text": "trước khi nộp thì tự bấm thử một lượt",
-"npc": "ant-qa",
-"answer": [
-"favor"
-]
-},
-{
-"id": "l2-242s",
 "slot": "body",
 "text": "lỗi lạ thì chụp màn hình gửi {self}, {self} coi cho",
 "npc": "sen-qa",
@@ -3315,7 +3306,7 @@
 ]
 },
 {
-"id": "l2-242a",
+"id": "l2-241a",
 "slot": "body",
 "text": "lỗi lạ thì chụp màn hình gửi {self}, {self} coi cho",
 "npc": "ant-qa",
