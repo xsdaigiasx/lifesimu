@@ -134,10 +134,14 @@ export function compose(c:TalkCtx):Said|null{const data=c.data??TALK,when=whenOf
  return c.needFact?null:greeting(c,data)}
 
 /** H6: NPC đáp tiếp sau lựa chọn của người chơi (Hỏi thêm, Giúp, Kể chuyện mình) ở lượt 2, 3; hoặc đáp tin nhắn trả lời. Dùng khung `follow`, mảnh có `after`; mảnh có chủ đề chỉ khi còn dữ kiện của câu trước. */
-export function followUp(c:TalkCtx,intent:Intent,after:After,fact?:Fact):Said|null{const data=c.data??TALK;
+export function followUp(c:TalkCtx,intent:Intent,after:After,fact?:Fact):Said|null{const data0=c.data??TALK;
+ /* 06/11: có câu nối riêng cho ý định này (theo lựa chọn vừa rồi) thì bỏ câu nối dùng chung ("từ từ mà tính" lọt vào lúc đang trêu) */
+ const own=data0.pieces.some(p=>p.after?.includes(after)&&p.intent?.includes(intent)),data=own?{...data0,pieces:data0.pieces.filter(p=>!(p.after?.includes(after)&&!p.intent))}:data0;
  if(!channelAllowed(c.channel,whenOf(c.minute),c.tier,c.npc.age,!!c.npc.family))return null;
- for(const frame of order(data.frames.filter(f=>f.mode==='follow'&&(!f.channel||f.channel.includes(c.channel))),`${c.seed}:follow`,f=>f.id)){const said=tryFrame(c,data,frame,intent,fact,{mode:'follow',after});if(said)return said}
+ for(const frame of order(data.frames.filter(f=>f.mode==='follow'&&(!f.channel||f.channel.includes(c.channel))),`${c.seed}:follow`,f=>f.id)){const said=tryFrame(c,data,frame,intent,fact,{mode:'follow',after});if(said)return{...said,text:dropStacked(said.text)}}
  return null}
+/** Câu nối lượt sau: gộp chữ đệm chồng nhau ("Thì đó, ừ," thành "Thì đó,"; "Ờ, ừ," thành "Ờ,"). */
+export const dropStacked=(t:string)=>t.replace(/^((?:Thì đó|Thì vậy đó|Ờ|Ừ|Ừa|Ờ thì)),\s+(?:ừ|ờ|ừa),\s+/u,'$1, ')
 
 /** H6: NPC đáp chủ đề người chơi tự mở lời. Hỏi thăm: chuyện của NPC hoặc chuyện chung; Hỏi chuyện của họ: chỉ biến cố đang có của NPC; Kể chuyện mình: NPC hỏi, trêu về chuyện của người chơi; Nhờ việc, hỏi mua bán: mảnh `answer`. Không ghép được thì dùng mảnh `answer` của chủ đề đó. */
 export const TOPIC_INTENTS:Record<PlayerTopic,{intents:Intent[];groups:TopicGroup[]}|null>={health:{intents:['complain','brag','news'],groups:['self','world']},theirs:{intents:['complain','brag','request'],groups:['self']},mine:{intents:['ask','tease'],groups:['player']},favor:null};

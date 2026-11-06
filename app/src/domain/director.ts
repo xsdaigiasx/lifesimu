@@ -202,7 +202,7 @@ function answerTalk(s:GameState,p:PendingEvent,t:TalkLine,choice:number):GameRes
  if(next||t.ch==='call')return{ok:true,state:n,text};// cuộc gọi đã ghi Nhật ký ở callNpc
  n=recordJournal(n,`story:${p.key}`,`${npc.name}: Trò chuyện`,`${turn>1?`${turn} lượt. `:''}${o.label}. ${text}`,npc.id);return{ok:true,state:n,text}}
 /** Bối cảnh lựa chọn của câu ghép đang chờ (lượt sau có seed riêng, bỏ lựa chọn đã chọn). */
-function talkCtxOf(s:GameState,npc:NpcProfile,p:PendingEvent,t:TalkLine){const turn=t.turn??1;return replyCtxOf(s,npc,t.intent,turn>1?`${p.key}:${turn}`:p.key,t.gift,{turn,...(t.mode?{mode:t.mode}:{}),...(t.skip?{skip:t.skip}:{}),...(t.fact?{fact:t.fact}:{}),...(lineForm(t.intent,t.text)?{form:lineForm(t.intent,t.text)}:{})})}
+function talkCtxOf(s:GameState,npc:NpcProfile,p:PendingEvent,t:TalkLine){const turn=t.turn??1;return replyCtxOf(s,npc,t.intent,turn>1?`${p.key}:${turn}`:p.key,t.gift,{turn,...(t.mode?{mode:t.mode}:{}),...(t.skip?{skip:t.skip}:{}),...(t.fact?{fact:t.fact}:{}),...(lineForm(t.intent,t.text,turn)?{form:lineForm(t.intent,t.text,turn)}:{})})}
 
 /** Qua ngày: trả hoặc quỵt nợ khi tới hạn, hao mòn quan hệ khi lâu không gặp (có sàn theo bậc đã đạt), dọn dữ liệu cũ. */
 export function settleStory(prev:GameState,next:GameState):GameState{let n=next;const st=structuredClone(storyOf(n));
