@@ -67,9 +67,9 @@ const order=<T,>(list:readonly T[],seed:string,key:(x:T)=>string)=>[...list].sor
 export const INTENT_WEIGHT:Record<Intent,number>={brag:1.2,complain:1,ask:1,invite:.7,request:1,news:.7,tease:1,apologize:.15};
 /** Khoe, Nhờ chuyện của chính NPC: hôm NPC không có biến cố thì vẫn nói được bằng mảnh không gắn chủ đề (H5, tránh hiếm). */
 const NO_FACT_OK:readonly Intent[]=['brag','request'];
-export const FRESH_BOOST=3;
+export const FRESH_BOOST=20;
 /** Mảnh nhắc đúng dữ kiện được ưu tiên hơn mảnh chung (câu bám chuyện thật, I.9). */
-export const TOPIC_BOOST=2;
+export const TOPIC_BOOST=6;
 const SORRY_SUBS=['missed','debt','harsh'];
 /** Xáo có trọng số theo seed (rút không hoàn lại, tất định). */
 const weighted=<T,>(list:readonly T[],seed:string,key:(x:T)=>string,w:(x:T)=>number)=>list.map(x=>({x,k:-Math.log((hash(`${seed}:${key(x)}`)%9973+1)/9974)/Math.max(1e-6,w(x))})).sort((a,b)=>a.k-b.k).map(o=>o.x);
@@ -130,6 +130,7 @@ export function followUp(c:TalkCtx,intent:Intent,after:After,fact?:Fact):Said|nu
 export const TOPIC_INTENTS:Record<PlayerTopic,{intents:Intent[];groups:TopicGroup[]}|null>={health:{intents:['complain','brag','news'],groups:['self','world']},theirs:{intents:['complain','brag','request'],groups:['self']},mine:{intents:['ask','tease'],groups:['player']},favor:null};
 export function answerTo(c:TalkCtx,topic:PlayerTopic):Said|null{const data=c.data??TALK,t=TOPIC_INTENTS[topic];
  if(!channelAllowed(c.channel,whenOf(c.minute),c.tier,c.npc.age,!!c.npc.family))return null;
- if(t){const said=compose({...c,intents:t.intents,groups:t.groups,needFact:true});if(said?.intent)return said}
+ /* câu đáp chủ đề do người chơi chọn: vân tay ý định ghi `u:` để không tính là NPC đã tự nói ý định đó (ưu tiên ý định mới vẫn chạy) */
+ if(t){const said=compose({...c,intents:t.intents,groups:t.groups,needFact:true});if(said?.intent)return{...said,prints:said.prints.map(k=>k.startsWith('t:')?'u'+k.slice(1):k)}}
  for(const frame of order(data.frames.filter(f=>f.mode==='answer'&&(!f.channel||f.channel.includes(c.channel))),`${c.seed}:answer`,f=>f.id)){const said=tryFrame(c,data,frame,null,undefined,{mode:'answer',answer:topic});if(said)return said}
  return null}

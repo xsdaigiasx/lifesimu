@@ -40,7 +40,7 @@ test('H5: tin nhắn Mẹ và em ghép từ bộ sinh, ghi vân tay; tất đị
 const LO2=['neighbor','meat','grocery','banhmi','sen-pm','ant-pm','sen-design','ant-design','sen-qa','ant-qa'];
 test('H6: Lô 2 có mảnh riêng cho 7 vai (đồng nghiệp ở cả hai công ty), mọi người Lô 1 và Lô 2 nói bằng bộ ghép',()=>{
  const own=C.TALK.pieces.filter(p=>p.id.startsWith('l2-'));
- for(const id of LO2)assert.ok(own.filter(p=>p.npc===id).length>=20,id);
+ for(const id of LO2)assert.ok(own.filter(p=>p.npc===id).length>=50,id);assert.ok(own.length>=600,'số mảnh Lô 2 '+own.length);
  const L=B('talk/live');for(const id of ['me','em','landlord','sen-dev','veg','courier',...LO2])assert.ok(L.hasOwnLines(id),id);
 });
 
