@@ -4,18 +4,26 @@ import type {GameState,GameResult} from '../domain/types';
 import {castById,relationTier} from '../domain/npc';
 import {socialOf} from '../domain/social';
 import {inboxOf,unreadCount,contactsOf,canCall} from '../domain/inbox';
+import {myGroups,visibleMsgs,groupUnread,groupReplies,membersOf} from '../domain/talk/groups';
+import {GROUP_NAME,type GroupId} from '../domain/talk/chat-data';
+const GROUP_ICON:Record<GroupId,string>={block:'home',work:'briefcase',family:'heart'};
 import {dayLabel,clockLabel} from '../domain/journal-view';
 import Icon from './Icon';
 import {birthdaysOn,wishedToday} from '../domain/lifecycle';
 const bdayToday=(s:GameState,id:string)=>!wishedToday(s,id)&&birthdaysOn(s,s.day).some(n=>n.id===id);
 
-export interface SocialHandlers{reply:(id:string,msgId:string,choice:number)=>GameResult;send:(id:string,kind:'hello'|'invite'|'bday')=>GameResult;call:(id:string)=>GameResult;read:(id:string)=>void}
+export interface SocialHandlers{/** H7d: nhóm chat */groupRead?:(g:GroupId)=>void;groupReply?:(g:GroupId,opt:string)=>GameResult;reply:(id:string,msgId:string,choice:number)=>GameResult;send:(id:string,kind:'hello'|'invite'|'bday')=>GameResult;call:(id:string)=>GameResult;read:(id:string)=>void}
 const tierName=(score:number,id:string)=>relationTier(score,id);
 const Avatar=({id,state}:{id:string;state:GameState})=>{const n=castById(state,id);return n?<span className="ps-avatar" style={{background:n.tone}} aria-hidden="true"><NpcFace npc={n}/></span>:null};
 
 /** T20: Tin nhắn dạng khung chat. Trả lời nhanh không ghi trước hệ quả; nhắn tin không tốn giờ. */
 export function Messages({state,h,openId,top}:{state:GameState;h:SocialHandlers;openId?:string;top?:ReactNode}){
  const [open,setOpen]=useState<string|null>(openId??null),[note,setNote]=useState('');const ib=inboxOf(state);
+ if(open?.startsWith('g:')){const g=open.slice(2) as GroupId,t=visibleMsgs(state,g),rep=groupReplies(state,g);
+  return <div className="ps-chat"><header className="ps-chat-head"><button className="ps-back" aria-label="Quay lại" onClick={()=>{setOpen(null);setNote('')}}><Icon name="chevron-left"/></button><span className="ps-avatar ps-group" aria-hidden="true"><Icon name={GROUP_ICON[g] as never}/></span><span><strong>{GROUP_NAME[g]}</strong><small>{membersOf(state,g).length+1} người</small></span></header>
+   <div className="ps-bubbles">{t.length?t.map((m,i)=>{const showDay=i===0||t[i-1]!.day!==m.day,who=m.from==='player'?null:castById(state,m.from);return <div key={m.id}>{showDay&&<p className="ps-day">{dayLabel(m.day,state.day)}</p>}<div className={`ps-bubble ${m.from==='player'?'me':'them'}`}>{who&&<b className="ps-from">{who.name}</b>}<p>{m.text}</p><small>{clockLabel(m.minute)}</small></div></div>}):<p className="ps-empty">Chưa có tin nhắn</p>}
+    {rep&&h.groupReply&&<div className="ps-replies">{rep.options.map(o=><button key={o.id} onClick={()=>{const r=h.groupReply!(g,o.id);setNote(r.ok?'':r.error)}}>{o.text}</button>)}</div>}</div>
+   {note&&<p className="ps-note" role="status">{note}</p>}</div>}
  if(open){const n=castById(state,open)!,t=ib.threads[open]??[],score=socialOf(state).relations[open]?.score??0;
   return <div className="ps-chat"><header className="ps-chat-head"><button className="ps-back" aria-label="Quay lại" onClick={()=>{setOpen(null);setNote('')}}><Icon name="chevron-left"/></button><Avatar state={state} id={open}/><span><strong>{n.name}</strong><small>{tierName(score,open)}</small></span></header>
    <div className="ps-bubbles">{t.length?t.map((m,i)=>{const showDay=i===0||t[i-1]!.day!==m.day;return <div key={m.id}>{showDay&&<p className="ps-day">{dayLabel(m.day,state.day)}</p>}<div className={`ps-bubble ${m.from==='me'?'me':'them'}`}><p>{m.text}</p><small>{clockLabel(m.minute)}</small></div>
@@ -25,7 +33,8 @@ export function Messages({state,h,openId,top}:{state:GameState;h:SocialHandlers;
  const ids=[...new Set([...Object.keys(ib.threads),...contactsOf(state).map(n=>n.id)])].filter(id=>castById(state,id));
  const last=(id:string)=>{const t=ib.threads[id];return t?.[t.length-1]};
  ids.sort((a,b)=>{const x=last(a),y=last(b);return (y?y.day*2000+y.minute:-1)-(x?x.day*2000+x.minute:-1)});
- return <>{top}<div className="ps-list">{ids.length?ids.map(id=>{const n=castById(state,id)!,m=last(id),u=unreadCount(state,id);return <button key={id} className="ps-row" onClick={()=>{setOpen(id);h.read(id)}}><Avatar state={state} id={id}/><span className="ps-row-copy"><strong>{n.name}</strong><small>{m?m.text:'Chưa có tin nhắn'}</small></span><span className="ps-row-side">{m&&<small>{dayLabel(m.day,state.day)}</small>}{u>0&&<b className="ps-badge">{u}</b>}</span></button>}):<p className="ps-empty">Chưa có ai trong danh bạ</p>}</div></>}
+ const groups=myGroups(state);
+ return <>{top}<div className="ps-list">{groups.map(g=>{const t=visibleMsgs(state,g),m=t[t.length-1],u=groupUnread(state,g),who=m&&m.from!=='player'?castById(state,m.from)?.name:'Bạn';return <button key={g} className="ps-row" onClick={()=>{setOpen('g:'+g);h.groupRead?.(g)}}><span className="ps-avatar ps-group" aria-hidden="true"><Icon name={GROUP_ICON[g] as never}/></span><span className="ps-row-copy"><strong>{GROUP_NAME[g]}</strong><small>{m?`${who}: ${m.text}`:'Chưa có tin nhắn'}</small></span><span className="ps-row-side">{m&&<small>{dayLabel(m.day,state.day)}</small>}{u>0&&<b className="ps-badge">{u}</b>}</span></button>})}{ids.length?ids.map(id=>{const n=castById(state,id)!,m=last(id),u=unreadCount(state,id);return <button key={id} className="ps-row" onClick={()=>{setOpen(id);h.read(id)}}><Avatar state={state} id={id}/><span className="ps-row-copy"><strong>{n.name}</strong><small>{m?m.text:'Chưa có tin nhắn'}</small></span><span className="ps-row-side">{m&&<small>{dayLabel(m.day,state.day)}</small>}{u>0&&<b className="ps-badge">{u}</b>}</span></button>}):groups.length?null:<p className="ps-empty">Chưa có ai trong danh bạ</p>}</div></>}
 
 /** T20: Gọi điện cho Mẹ và người từ bậc Thân; mỗi cuộc 15 phút, mỗi người mỗi ngày một lần. */
 export function Calls({state,h}:{state:GameState;h:SocialHandlers}){const [note,setNote]=useState('');const list=contactsOf(state),called=inboxOf(state).called;

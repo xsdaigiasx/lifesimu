@@ -58,3 +58,6 @@ button.ps-row{cursor:pointer}button.ps-row:hover{background:#eef3e6}
 .phone-stat-name svg{width:20px!important;height:20px!important;padding:5px;box-sizing:content-box;border-radius:9px;fill:none;stroke:currentColor}
 .phone-stat-name.gold svg{background:#f4ead3;color:#9a7a2e}.phone-stat-name.orange svg{background:#f6e3d6;color:#a6623c}.phone-stat-name.green svg{background:#e8eed9;color:#66773d}.phone-stat-name.teal svg{background:#dcebe6;color:#3f7466}.phone-stat-name.purple svg{background:#ebe4f0;color:#6f5a86}
 .pb-cash .pb-facts,.pb-cash .pb-facts span{color:#fff;opacity:1}.pb-cash .pb-facts svg{stroke:#fff;fill:none}
+/* H7d: nhóm chat */
+.ps-group{display:grid;place-items:center;background:#dfe9d6;color:#2f5a44}
+.ps-from{display:block;font-size:var(--fs-note,11px);color:#56685c;margin-bottom:2px}
