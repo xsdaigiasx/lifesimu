@@ -61,13 +61,13 @@ function run(seed,days){const rnd=rngOf(seed),lines=[],errors=[],follows={n:0,te
   const next={...s,day:s.day+1,clock:{...clockOf(s),minute:START,location:'home'}};s=D.settleStory(s,next)}
  return{seed,days,lines,errors,follows:{n:follows.n,uniq:follows.texts.size},topics:topics.n,valid:D.validStory(s.story,s.day)&&engine.valid(s)}}
 
-/** Số ý định cần trong tháng theo bậc chiếm đa số câu: Lạ chỉ được Khoe, Than, Hỏi, Kể tin, Xin lỗi (Xin lỗi để dành cho chuyện thật) nên cần đủ 4; từ Quen biết cần 6 trong 8. */
+/** Số ý định cần trong tháng theo bậc lúc đầu tháng: Lạ chỉ được Khoe, Than, Hỏi, Kể tin, Xin lỗi (Xin lỗi để dành cho chuyện thật) nên cần đủ 4; từ Quen biết cần 6 trong 8. */
 const NEED={hostile:3,stranger:4,acquaint:6,close:6,bestie:6};
 const mostTier=ls=>{const c={};for(const l of ls)c[l.tier]=(c[l.tier]||0)+1;return Object.entries(c).sort((a,b)=>b[1]-a[1])[0][0]};
 /* Câu đáp chủ đề người chơi mở: người chơi chọn chủ đề nên không tính vào chỉ tiêu I.9 (chỉ đếm số lần) */
 function summarize(runs0){const runs=runs0.map(r=>({...r,lines:r.lines.filter(l=>!l.topic)}));const per={},all={n:0,uniq:0,real:0,err:0};
  for(const r of runs){const seen=new Set();for(const l of r.lines){all.n++;if(!seen.has(l.text))all.uniq++;seen.add(l.text);if(l.real)all.real++;const x=per[l.npc]??={n:0,months:0,intents:[],real:0,byTier:{},low:[]};x.n++;if(l.real)x.real++}
-  all.err+=r.errors.length;const months=Math.max(1,r.days/30);for(const id of TALKERS){const ls=r.lines.filter(l=>l.npc===id);if(ls.length/months>=12){const x=per[id];x.months++;const k=new Set(ls.map(l=>l.intent)).size;x.intents.push(k);const t=mostTier(ls);(x.byTier[t]??=[]).push(k);if(k<NEED[t])x.low.push(`${id}:${r.seed} ${t} ${k}`)}}}
+  all.err+=r.errors.length;const months=Math.max(1,r.days/30);for(const id of TALKERS){const ls=r.lines.filter(l=>l.npc===id);if(ls.length/months>=12){const x=per[id];x.months++;const k=new Set(ls.map(l=>l.intent)).size;x.intents.push(k);const t=ls[0].tier;/* chủ dự án 06/11: mốc theo bậc lúc đầu tháng (câu đầu tiên), người lên bậc trong tháng không bị đòi mốc cao hơn */(x.byTier[t]??=[]).push(k);if(k<NEED[t])x.low.push(`${id}:${r.seed} ${t} ${k} [${[...new Set(ls.map(l=>l.intent))].join(" ")}]`)}}}
  return{all,per,runs:runs.length,invalid:runs.filter(r=>!r.valid).length,errors:runs.flatMap(r=>r.errors).slice(0,10)}}
 const pc=x=>(x*100).toFixed(1)+'%';
 function verdict(sum){const a=sum.all,v=[];
