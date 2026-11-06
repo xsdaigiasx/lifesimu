@@ -42,5 +42,10 @@ export function faceOf(n:Pick<NpcProfile,'id'|'gender'|'age'|'quirk'|'fullName'>
  if(g==='m'&&a!=='teen'&&roll('beard')<25){const b=EXTRAS.filter(e=>['mustache','beard-short','beard-grey'].includes(e.id)&&fits(e,g,a)&&(e.id==='beard-grey')===grey);if(b.length)extras.push(pick(b,`${k}:beard`).id)}
  if(g==='f'){if(roll('ear')<35)extras.push('earrings');if(!extras.includes('cap')&&roll('clip')<15)extras.push('hairclip')}
  return{base,outfit,hair,extras:extras.slice(0,2)}}
+/** Chỉnh vị trí lớp phụ kiện trên khung 256 px (dx, dy tính px, scale nhân), khớp `adjust` trong manifest (test kiểm). Mũ lưỡi trai vẽ nổi trên đầu nên hạ xuống 14 px. */
+export const EXTRA_ADJUST:Record<string,{dx:number;dy:number;scale:number}>={cap:{dx:0,dy:14,scale:1}};
+export const FRAME=256;
+/** Độ chỉnh của một lớp theo tên ảnh (`.../extra/cap.webp`), không có thì không chỉnh. */
+export const layerAdjust=(src:string)=>{const m=/\/extra\/([^/]+)\.webp$/.exec(src);return m?EXTRA_ADJUST[m[1]!]:undefined};
 /** Đường dẫn các lớp theo thứ tự chồng (nền, áo, tóc, phụ kiện). */
 export const faceLayers=(f:Face)=>[`base/${f.base}`,`outfit/${f.outfit}`,`hair/${f.hair}`,...f.extras.map(x=>`extra/${x}`)].map(p=>`${PORTRAIT_DIR}/${p}.webp`);

@@ -1,6 +1,6 @@
 import {useEffect,useRef,useState,type PointerEvent,type KeyboardEvent} from 'react';
 import {HOME_ITEMS,homeName,HOME_GRID,homeOf,homeError,rotateHomeObject,uidOf,type HomeObject,type HomeId} from '../domain/home';
-import {floorPoint,floorCell,floorPolygon,homeSize,blockedHomeCell,HOME_FLOOR,homeSafeEdgePath,homeAnchor,HOME_OUTER_FLOOR,homeArtFit} from '../domain/home-geometry';
+import {floorPoint,floorCell,floorPolygon,homeSize,blockedHomeCell,HOME_FLOOR,homeSafeEdgePath,homeAnchor,HOME_OUTER_FLOOR,homeArtFit,dragCell} from '../domain/home-geometry';
 import type {GameState,GameResult} from '../domain/types';
 import Icon from './Icon';
 import {HOME_ART,HOME_GROUND} from '../domain/home-art';
@@ -26,7 +26,7 @@ function spritePlace(i:HomeObject,items:HomeObject[]){const sp=spriteFor(i.id,i.
 const zOf=(i:HomeObject,items:HomeObject[])=>{if(i.id==='rug')return 2;if(i.mount==='wall')return 3;if(i.mount==='surface'){const parent=items.find(o=>uidOf(o)===i.parentId);if(!parent)return 200;const s=homeSize(parent);return Math.round((parent.x+s.w+parent.y+s.h)*10)+4}const {w,h}=homeSize(i);return Math.round((i.x+w+i.y+h)*10)+3};
 const BAR:{id:HomeId;icon:string}[]=[{id:'bed',icon:'moon'},{id:'desk',icon:'briefcase'}];
 const USE_ACTIONS:Partial<Record<HomeId,string[]>>={bed:['sleep','nap'],desk:['study','gig','play'],table:['kitchen'],fridge:['kitchen'],tv:['tv']};
-type Drag={pointer:number;id:string;offsetX:number;offsetY:number;startX:number;startY:number;moved:boolean;panAxis:'x'|'y'|null;candidate:HomeObject};
+type Drag={pointer:number;id:string;offsetX:number;offsetY:number;startX:number;startY:number;moved:boolean;panAxis:'x'|'y'|null;candidate:HomeObject;/** ô gần nhất đã đưa vào bản xem trước: chỉ vẽ lại phòng khi ô đổi (việc 6) */cell?:string};
 export default function Room({state,onSave,onSleep,onSkills,onServices,onUse}:{state:GameState;onUse:(k:'nap'|'gig'|'play'|'tv')=>GameResult;onServices:()=>void;onSkills:()=>void;onSleep:()=>void;onSave:(items:HomeObject[])=>GameResult}){
  const [editing,setEditing]=useState(false),[draft,setDraft]=useState<HomeObject[]>([]),[selected,setSelected]=useState<string>('bed'),[message,setMessage]=useState(''),[preview,setPreview]=useState<HomeObject|null>(null),[use,setUse]=useState<string|null>(null);
  const [view,setView]=useState({k:1,tx:0,ty:0}),vp=useRef<HTMLDivElement>(null),ptr=useRef(new Map<number,{x:number;y:number}>()),zs=useRef<{moved:number;pinch?:number;k0:number}|null>(null),viewRef=useRef(view);viewRef.current=view;
@@ -37,6 +37,8 @@ export default function Room({state,onSave,onSleep,onSkills,onServices,onUse}:{s
  const zup=(e:PointerEvent<HTMLDivElement>)=>{ptr.current.delete(e.pointerId);if(!ptr.current.size)setTimeout(()=>{zs.current=null},0)};
  useEffect(()=>{const el=vp.current;if(!el||editing)return;const wheel=(e:WheelEvent)=>{e.preventDefault();zoomBy(viewRef.current.k*(e.deltaY<0?1.12:.89))};el.addEventListener('wheel',wheel,{passive:false});return()=>el.removeEventListener('wheel',wheel)},[editing]);
  const scene=useRef<HTMLDivElement>(null),drag=useRef<Drag|null>(null),blockShelfClick=useRef(0);
+ /** Việc 6: tải sẵn ảnh mọi đồ ở cả bốn hướng khi vào chế độ Sắp xếp để kéo, xoay không bị chớp. */
+ useEffect(()=>{if(!editing)return;for(const i of homeOf(state).items)for(const r of [0,90,180,270]){const sp=spriteFor(i.id,i.tier,r);if(sp)new Image().src=sp.f}},[editing]);
  const items=editing?draft:homeOf(state).items,current=items.find(i=>uidOf(i)===selected);
  const previewItems=preview?draft.map(i=>uidOf(i)===uidOf(preview)?preview:i):draft;
  const previewError=preview?homeError(previewItems):null;
@@ -52,7 +54,7 @@ export default function Room({state,onSave,onSleep,onSkills,onServices,onUse}:{s
   const d=drag.current;if(!d||d.pointer!==e.pointerId)return;
   const dx=e.clientX-d.startX,dy=e.clientY-d.startY;
   if(d.panAxis){if(Math.hypot(dx,dy)<10)return;const pan=d.panAxis==='x'?Math.abs(dx):Math.abs(dy),cross=d.panAxis==='x'?Math.abs(dy):Math.abs(dx);if(pan>=cross){drag.current=null;blockShelfClick.current=Date.now()+450;return}d.panAxis=null;setSelected(d.id);setMessage('');e.currentTarget.setPointerCapture(e.pointerId)}
-  if(!d.moved&&Math.hypot(dx,dy)<4)return;d.moved=true;const p=point(e.clientX,e.clientY);if(d.candidate.id==='painting'){d.candidate={...d.candidate,x:0,y:Math.max(7,Math.min(8,Math.round(p.y*2)/2)),mount:'wall',wall:'left',placed:true};setPreview(d.candidate);return}d.candidate={...d.candidate,x:Math.round((p.x-d.offsetX)*2)/2,y:Math.round((p.y-d.offsetY)*2)/2,placed:true};setPreview(d.candidate);
+  if(!d.moved&&Math.hypot(dx,dy)<4)return;d.moved=true;const p=point(e.clientX,e.clientY);if(d.candidate.id==='painting'){const y=Math.max(7,Math.min(8,Math.round(p.y*2)/2)),key=`w${y}`;if(d.cell===key)return;d.cell=key;d.candidate={...d.candidate,x:0,y,mount:'wall',wall:'left',placed:true};setPreview(d.candidate);return}const c=dragCell(p,{x:d.offsetX,y:d.offsetY}),key=`${c.x},${c.y}`;if(d.cell===key)return;d.cell=key;d.candidate={...d.candidate,x:c.x,y:c.y,placed:true};setPreview(d.candidate);
  }
  function finish(e:PointerEvent<HTMLButtonElement>,cancel=false){const d=drag.current;if(!d||d.pointer!==e.pointerId)return;if(!cancel&&d.moved){const r=scene.current!.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)setMessage('Thả đồ trên sàn phòng.');else update(d.id,d.candidate)}drag.current=null;setPreview(null);if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId)}
  function keys(e:KeyboardEvent<HTMLButtonElement>,item:HomeObject){const delta:Record<string,[number,number]>={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};if(!editing||!delta[e.key])return;e.preventDefault();setSelected(uidOf(item));const [x,y]=delta[e.key];update(uidOf(item),{x:item.x+x,y:item.y+y})}

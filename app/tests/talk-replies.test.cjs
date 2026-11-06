@@ -4,13 +4,23 @@ const {engine}=require('../.test-build/domain/engine');const {INTENTS}=require('
 const R=N.buildRoster('replies'),by=id=>R.find(n=>n.id===id);
 const P=(o={})=>({energy:80,stress:20,mood:70,money:1e6,minute:600,end:1320,skills:{communication:3},...o});
 const ctx=(o={})=>({npc:by('landlord'),intent:'complain',tier:'close',day:20,seed:'s',player:P(),log:[],...o});
-const MATCH={complain:['help','advise','ask','silent'],request:['help','refuse','ask'],invite:['accept','refuse','ask'],ask:['share','ask','silent'],brag:['ask','advise','silent'],news:['ask','share','silent'],tease:['share','silent'],apologize:['accept','silent','refuse']};
+const MATCH={complain:['help','advise','ask','silent'],request:['help','refuse','ask'],invite:['accept','refuse','ask'],ask:['share','ask','silent'],brag:['ask','advise','share','accept','silent'],news:['ask','share','silent'],tease:['share','silent'],apologize:['accept','silent','refuse']};
 
 test('mỗi lượt 3 đến 4 lựa chọn, hành động hợp ý định, có cả tích cực và không tích cực, chữ đã điền',()=>{
  for(const intent of INTENTS)for(const tier of ['stranger','acquaint','close','bestie','hostile'])for(const n of R)for(let i=0;i<3;i++){const o=Rp.buildReplies(ctx({npc:n,intent,tier,seed:`${n.id}${i}`}));
   assert.ok(o.length>=3&&o.length<=4,`${intent} ${tier}: ${o.length}`);assert.equal(new Set(o.map(x=>x.id)).size,o.length);
   for(const x of o){assert.ok(MATCH[intent].includes(x.action),`${intent} ${x.action}`);assert.ok(!/[{}]/.test(x.label),x.label)}
   if(tier!=='hostile')assert.ok(o.some(x=>['cold','rude','dodge','blunt'].includes(x.attitude)),'có lựa chọn không chiều lòng')}
+});
+
+test('khoe: "khao" và "để dành" chỉ hợp tin vui lớn, tiền; người bán khoe hàng có bộ riêng',()=>{
+ const labels=(n,sub,k)=>{const set=new Set();for(let i=0;i<40;i++)for(const o of Rp.buildReplies(ctx({npc:n,intent:'brag',tier:'close',seed:`${n.id}${k}${i}`,...(sub?{sub}:{})})))set.add(o.label);return[...set].join('|')};
+ const me=by('landlord'),veg=by('veg');
+ for(const sub of [undefined,'family','study','buy','hobby'])assert.ok(!/khao|để dành/.test(labels(me,sub,'a')),'không hợp: '+sub);
+ assert.ok(/khao/.test(labels(me,'promotion','b')),'thăng chức thì có khao');assert.ok(/để dành/.test(labels(me,'salary','c')),'lương thì có để dành');
+ assert.ok(/Lấy cho/.test(labels(veg,undefined,'d'))&&/Nhìn ngon/.test(labels(veg,undefined,'e')),'người bán khoe hàng');
+ assert.ok(!/Lấy cho|Nhìn ngon/.test(labels(me,undefined,'f')),'người thường không có câu mua hàng');
+ assert.ok(!/khao|để dành/.test(labels(veg,undefined,'g')),'người bán khoe hàng không bị chúc khao');
 });
 
 test('không lặp nguyên bộ lựa chọn với cùng NPC trong 7 ngày',()=>{

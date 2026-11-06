@@ -27,3 +27,5 @@ export function homeAnchor(item:HomeObject,items:HomeObject[]){const {w,h}=homeS
 
 // Ảnh đồ vật vẽ cho ô lưới 10×10 cũ: giữ nguyên kích thước hiển thị khi ô to ra thành 1/8 sàn.
 export function homeArtFit(id:keyof typeof HOME_ITEMS,w:number,h:number){const base=LEGACY_SIZE[id]??HOME_ITEMS[id];return (base.w+base.h)/((w+h)*GRID_RATIO)}
+/** Việc 5: ô đặt đồ khi kéo = ô dưới ngón tay trừ độ lệch lúc bắt đầu kéo (không lấy mép ảnh), làm tròn về nửa ô. */
+export const dragCell=(pointer:{x:number;y:number},offset:{x:number;y:number})=>({x:Math.round((pointer.x-offset.x)*2)/2,y:Math.round((pointer.y-offset.y)*2)/2});
