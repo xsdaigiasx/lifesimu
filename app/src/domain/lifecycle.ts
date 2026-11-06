@@ -98,6 +98,7 @@ export function archive(s:GameState,role:string,aid:string):GameState{let n:Game
  if(n.story){const st=structuredClone(n.story);st.memories=st.memories.filter(m=>m.npc!==role);st.log=st.log.filter(l=>l.npc!==role);st.hooks=st.hooks.filter(h=>h.npc!==role);st.loans=st.loans.filter(l=>l.npc!==role);if(st.pending?.npc===role)delete st.pending;if(st.heard)delete st.heard[role];n.story=st}
  if(n.talk){const t=talkOf(n),prints={...t.prints};delete prints[role];n.talk={...t,prints,log:t.log.filter(l=>l.n!==role)}}
  if(n.gossip){const g=structuredClone(n.gossip);if(g.d)for(const k of Object.keys(g.d))if(k.split('|').includes(role))delete g.d[k];g.told=g.told.filter(t=>t.to!==role);if(g.pending&&(g.pending.a===role||g.pending.b===role))delete g.pending;n.gossip=g}
+ if(n.chats){const c=structuredClone(n.chats);c.appts=c.appts.filter(a=>a.from!==role);for(const g of Object.keys(c.msgs) as (keyof typeof c.msgs)[])c.msgs[g]=c.msgs[g]!.filter(m=>m.from!==role);n.chats=c}
  if(n.office?.met?.includes(role))n.office={...n.office,met:n.office.met.filter(x=>x!==role)};
  if(n.journal)n.journal=n.journal.map(e=>e.npcId===role?{...e,npcId:aid}:e);
  if(n.summary)n.summary={...n.summary,list:n.summary.list.map(x=>({...x,people:x.people.map(p=>p.id===role?{...p,id:aid}:p)}))};
