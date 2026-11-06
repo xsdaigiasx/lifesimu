@@ -1,3 +1,4 @@
+import type {TalkKind} from '../domain/director';
 import {tileArt} from './tile-art';
 import NpcFace from './NpcFace';
 import {InfoButton} from './ShopInfo';
@@ -17,7 +18,7 @@ export const ingredientArt=(id:IngredientId)=>`/assets/ingredients/${id}.webp`;
 export const ITEM_TONE:Record<IngredientId,string>={rice:'#f2e6c4',egg:'#f6e3b4',vegetable:'#d9ecc8',pork:'#f1d2cc',tofu:'#efe9dc',fish:'#d3e7e6'};
 
 /** Chợ chia theo quầy (chốt 04/11): màn đầu chọn quầy, vào quầy thấy người bán và lưới hàng có ảnh. Ảnh món ăn tạm là ô màu kèm biểu tượng tới khi có art. */
-export default function Market({state,stock,onAction,onTalk}:{state:GameState;stock:(id:IngredientId)=>number;onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,kind:'talk'|'meal')=>GameResult}){
+export default function Market({state,stock,onAction,onTalk}:{state:GameState;stock:(id:IngredientId)=>number;onAction:(a:LifeAction)=>GameResult;onTalk?:(id:string,kind:TalkKind)=>GameResult}){
  const [stallId,setStall]=useState<StallId|null>(null),[pick,setPick]=useState<IngredientId|null>(null),[qty,setQty]=useState(1),[note,setNote]=useState(''),[chat,setChat]=useState(false);
  const c=clockOf(state),rel=socialOf(state).relations,stall=STALLS.find(s=>s.id===stallId);
  if(!stall){const sellers:string[]=STALLS.map(s=>s.seller);return <div className="market">
@@ -49,4 +50,4 @@ export default function Market({state,stock,onAction,onTalk}:{state:GameState;st
   {note&&<p className="market-note" role="status">{note}</p>}
  </div>}
 
-function PeopleHereFiltered({state,exclude,onTalk}:{state:GameState;exclude:string[];onTalk:(id:string,kind:'talk'|'meal')=>GameResult}){const others=peopleHere(state,'market').filter(n=>!exclude.includes(n.id));return others.length?<PeopleHere state={state} place="market" onTalk={onTalk} only={others.map(n=>n.id)}/>:null}
+function PeopleHereFiltered({state,exclude,onTalk}:{state:GameState;exclude:string[];onTalk:(id:string,kind:TalkKind)=>GameResult}){const others=peopleHere(state,'market').filter(n=>!exclude.includes(n.id));return others.length?<PeopleHere state={state} place="market" onTalk={onTalk} only={others.map(n=>n.id)}/>:null}

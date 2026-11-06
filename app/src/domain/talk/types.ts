@@ -32,8 +32,16 @@ export interface Fact{id:string;topic:TopicGroup;
  /** ai được biết: mọi người, người có mặt hôm đó, hoặc danh sách NPC */knownBy:'all'|'present'|string[];
  vars:Record<string,string|number>}
 
-/** Khung theo ý định. Ô có dấu `?` ở cuối là tuỳ chọn, thiếu mảnh thì bỏ qua. */
-export interface Frame{id:string;intent:Intent;slots:string[];channel?:Channel[];weight?:number}
+/** H6: chủ đề người chơi tự mở lời: hỏi thăm sức khoẻ, công việc; kể chuyện mình; hỏi chuyện của họ; nhờ việc, hỏi mua bán. */
+export type PlayerTopic='health'|'mine'|'theirs'|'favor';
+export const PLAYER_TOPICS:readonly PlayerTopic[]=['health','mine','theirs','favor'];
+/** H6: hành động của người chơi ở lượt trước mà NPC đáp tiếp (Hỏi thêm, Giúp, Kể chuyện mình) hoặc gạt đi (tin nhắn: từ chối, im lặng, né). */
+export type After='ask'|'help'|'share'|'brush';
+export const AFTERS:readonly After[]=['ask','help','share','brush'];
+/** Kiểu khung đặc biệt: câu đáp tiếp lượt sau (`follow`) hoặc câu đáp chủ đề người chơi mở (`answer`). Khung thường không ghi. */
+export type FrameMode='follow'|'answer';
+/** Khung theo ý định. Ô có dấu `?` ở cuối là tuỳ chọn, thiếu mảnh thì bỏ qua. Khung `mode` dùng cho mọi ý định (không ghi `intent`). */
+export interface Frame{id:string;intent?:Intent;mode?:FrameMode;slots:string[];channel?:Channel[];weight?:number}
 export interface Piece{id:string;slot:Slot;text:string;
  intent?:Intent[];
  /** chủ đề con hoặc nhóm chủ đề của dữ kiện; không ghi là dùng chung */topic?:string[];
@@ -44,5 +52,7 @@ export interface Piece{id:string;slot:Slot;text:string;
  where?:PlaceId[];when?:When[];channel?:Channel[];
  /** tuổi NPC [từ, đến] */age?:[number,number];
  /** câu hứa cho đồ: món (mã trong danh mục quà) và số lượng, người chơi Nhận thì cho thật */gift?:[string,number];
- /** mảnh lạnh nhạt: chỉ dùng khi Bất hoà */cold?:boolean;weight?:number}
+ /** mảnh lạnh nhạt: chỉ dùng khi Bất hoà */cold?:boolean;weight?:number;
+ /** H6: mảnh đáp tiếp sau hành động này của người chơi (chỉ dùng trong khung `follow`) */after?:After[];
+ /** H6: mảnh đáp chủ đề người chơi mở (chỉ dùng trong khung `answer`) */answer?:PlayerTopic[]}
 export interface TalkData{frames:Frame[];pieces:Piece[]}

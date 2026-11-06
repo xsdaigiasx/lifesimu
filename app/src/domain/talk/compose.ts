@@ -3,15 +3,16 @@ import type {PlaceId} from '../types';
 import type {NpcProfile} from '../npc';
 import {hash} from '../shift';
 import {agoText} from '../npc';
-import type {Channel,Emotion,Fact,Frame,Intent,Piece,Slot,TalkData,Tier} from './types';
+import type {After,Channel,Emotion,Fact,Frame,FrameMode,Intent,Piece,PlayerTopic,Slot,TalkData,Tier,TopicGroup} from './types';
 import {INTENTS} from './types';
 import {channelAllowed,factFits,intentAllowed,privacyCap,tierRank,whenOf} from './axes';
 import framesData from './data/frames.json';
 import piecesData from './data/pieces.json';
 import lo1Data from './data/lo1.json';
+import lo2Data from './data/lo2.json';
 
 /** Kho khung và mảnh mặc định (kiểm bằng npm run talk:check). */
-export const TALK:TalkData={frames:framesData as Frame[],pieces:[...piecesData,...lo1Data] as Piece[]};
+export const TALK:TalkData={frames:framesData as Frame[],pieces:[...piecesData,...lo1Data,...lo2Data] as Piece[]};
 
 /** Vân tay chống lặp (I.7): mảnh 14 ngày, khung 3 ngày, ý định cùng chủ đề 2 ngày. Chỉ lưu mã, không lưu câu. */
 export interface Print{k:string;d:number}
@@ -24,9 +25,14 @@ export function notePrints(list:readonly Print[],keys:readonly string[],day:numb
 export interface TalkCtx{npc:NpcProfile;tier:Tier;mood:Emotion;channel:Channel;minute:number;place?:PlaceId;day:number;
  /** hạt giống của lượt nói (ví dụ ngày, giờ, mã NPC) */seed:string;
  facts:readonly Fact[];present?:readonly string[];recent?:readonly Print[];
- /** chỉ thử các ý định này (mặc định: mọi ý định) */intents?:readonly Intent[];data?:TalkData}
+ /** chỉ thử các ý định này (mặc định: mọi ý định) */intents?:readonly Intent[];data?:TalkData;
+ /** H6: chỉ dùng dữ kiện thuộc các nhóm chủ đề này */groups?:readonly TopicGroup[];
+ /** H6: bắt buộc nhắc dữ kiện (không nói câu chung, không chào); không có thì trả null */needFact?:boolean}
 export interface Said{text:string;intent:Intent|null;fact?:Fact;frame?:string;pieces:string[];prints:string[];
- /** món NPC vừa hứa cho (từ mảnh có `gift`) */gift?:[string,number]}
+ /** món NPC vừa hứa cho (từ mảnh có `gift`) */gift?:[string,number];
+ /** H6: câu đáp chủ đề người chơi mở bằng mảnh `answer` (lựa chọn trả lời dùng bộ khép chuyện) */mode?:'answer'}
+/** H6: lượt đặc biệt (đáp tiếp hoặc đáp chủ đề). */
+type Want={mode?:FrameMode;after?:After;answer?:PlayerTopic};
 
 /** Biến điền có sẵn ngoài dữ kiện: xưng hô, trợ từ, thời gian áng chừng. */
 export const ADDRESS_VARS=['self','you','Self','You','p'] as const;
@@ -35,9 +41,11 @@ const cap=(x:string)=>x.charAt(0).toUpperCase()+x.slice(1);
 const VAR=/\{([\p{L}_]+)\}/gu;
 export const varsIn=(text:string)=>[...text.matchAll(VAR)].map(m=>m[1]!);
 
-function pieceFits(p:Piece,slot:Slot,intent:Intent|null,fact:Fact|undefined,c:TalkCtx,vars:Record<string,unknown>){
+function pieceFits(p:Piece,slot:Slot,intent:Intent|null,fact:Fact|undefined,c:TalkCtx,vars:Record<string,unknown>,w:Want={}){
  if(p.slot!==slot)return false;
- if(intent?(p.intent&&!p.intent.includes(intent)):!!p.intent)return false;
+ if(w.mode==='follow'?!(w.after&&p.after?.includes(w.after)):!!p.after)return false;
+ if(w.mode==='answer'?!(w.answer&&p.answer?.includes(w.answer)):!!p.answer)return false;
+ if(w.mode!=='answer'&&(intent?(p.intent&&!p.intent.includes(intent)):!!p.intent))return false;
  if(p.topic&&!(fact&&(p.topic.includes(fact.sub)||p.topic.includes(fact.topic))))return false;
  if(p.emotion&&!p.emotion.includes(c.mood))return false;
  if(c.tier==='hostile'?!p.cold:p.cold)return false;
@@ -59,9 +67,9 @@ const order=<T,>(list:readonly T[],seed:string,key:(x:T)=>string)=>[...list].sor
 export const INTENT_WEIGHT:Record<Intent,number>={brag:1.2,complain:1,ask:1,invite:.7,request:1,news:.7,tease:1,apologize:.15};
 /** Khoe, Nhờ chuyện của chính NPC: hôm NPC không có biến cố thì vẫn nói được bằng mảnh không gắn chủ đề (H5, tránh hiếm). */
 const NO_FACT_OK:readonly Intent[]=['brag','request'];
-export const FRESH_BOOST=3;
+export const FRESH_BOOST=20;
 /** Mảnh nhắc đúng dữ kiện được ưu tiên hơn mảnh chung (câu bám chuyện thật, I.9). */
-export const TOPIC_BOOST=2;
+export const TOPIC_BOOST=6;
 const SORRY_SUBS=['missed','debt','harsh'];
 /** Xáo có trọng số theo seed (rút không hoàn lại, tất định). */
 const weighted=<T,>(list:readonly T[],seed:string,key:(x:T)=>string,w:(x:T)=>number)=>list.map(x=>({x,k:-Math.log((hash(`${seed}:${key(x)}`)%9973+1)/9974)/Math.max(1e-6,w(x))})).sort((a,b)=>a.k-b.k).map(o=>o.x);
@@ -76,15 +84,23 @@ export function joinParts(parts:readonly string[]){let out='';for(const raw of p
 function varsFor(c:TalkCtx,fact?:Fact):Record<string,string|number>{const n=c.npc;return{...(fact?.vars??{}),...(fact?{when:agoText(c.day-fact.day)}:{}),self:n.self,you:n.you,Self:cap(n.self),You:cap(n.you),p:PARTICLE[n.voiceKey]??'nha'}}
 const fill=(text:string,vars:Record<string,string|number>)=>text.replace(VAR,(_,k:string)=>String(vars[k]));
 
-function tryFrame(c:TalkCtx,data:TalkData,frame:Frame,intent:Intent,fact:Fact|undefined):Said|null{
+function tryFrame(c:TalkCtx,data:TalkData,frame:Frame,intent:Intent|null,fact:Fact|undefined,w:Want={}):Said|null{
  const vars=varsFor(c,fact),parts:string[]=[],ids:string[]=[];
+ let topical=false;
  for(const raw of frame.slots){const optional=raw.endsWith('?'),slot=raw.replace('?','') as Slot;
-  const cand=data.pieces.filter(p=>pieceFits(p,slot,intent,fact,c,vars)),p=pick(cand,`${c.seed}:${frame.id}:${slot}`,x=>(x.npc||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
-  if(!p){if(optional)continue;return null}parts.push(fill(p.text,vars));ids.push(p.id)}
+  /* câu gọn (H6): mảnh tuỳ chọn bỏ khi câu đã đủ 3 phần hoặc dài; câu nhắc chuyện cụ thể đã mang cảm xúc nên bỏ ô cảm xúc */
+  if(optional&&(parts.length>=3||joinParts(parts).length>=LONG||(slot==='feel'&&topical)))continue;
+  const cand=data.pieces.filter(p=>pieceFits(p,slot,intent,fact,c,vars,w)),p=pick(cand,`${c.seed}:${frame.id}:${slot}`,x=>(x.npc||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
+  if(!p){if(optional)continue;return null}if(slot==='body'&&p.topic)topical=true;parts.push(fill(p.text,vars));ids.push(p.id)}
  const text=joinParts(parts);if(!text)return null;
- const gift=ids.map(id=>data.pieces.find(p=>p.id===id)?.gift).find(Boolean);
- return{...(gift?{gift}:{}),text,intent,fact,frame:frame.id,pieces:ids,prints:[...ids.map(id=>'p:'+id),'f:'+frame.id,`t:${intent}:${fact?.sub??'-'}`]}}
+ const used=ids.map(id=>data.pieces.find(p=>p.id===id)!),gift=used.map(p=>p.gift).find(Boolean);
+ /* câu đáp chủ đề: ý định lấy từ mảnh đầu có ghi (để chọn bộ trả lời), không có thì Kể tin */
+ const said:Intent=intent??used.flatMap(p=>p.intent??[])[0]??'news';
+ const tag=w.mode==='follow'?`t:${said}:${w.after}`:`t:${said}:${fact?.sub??'-'}`;
+ return{...(gift?{gift}:{}),...(w.mode==='answer'&&!used.some(p=>p.intent)?{mode:'answer' as const}:{}),text,intent:said,fact,frame:frame.id,pieces:ids,prints:[...ids.map(id=>'p:'+id),'f:'+frame.id,tag]}}
 
+/** Câu từ 60 ký tự thì không thêm mảnh tuỳ chọn (tránh câu dài lê thê). */
+export const LONG=60;
 /** Câu chào ngắn theo giọng khi không ghép được gì (mảnh `open` không gắn ý định). */
 export function greeting(c:TalkCtx,data:TalkData=c.data??TALK):Said{const vars=varsFor(c),p=pick(data.pieces.filter(x=>pieceFits(x,'open',null,undefined,c,vars)),`${c.seed}:hi`,x=>(x.npc||x.voice?2:1)*(x.topic?TOPIC_BOOST:1));
  return p?{text:joinParts([fill(p.text,vars)]),intent:null,pieces:[p.id],prints:['p:'+p.id]}:{text:joinParts([fill('Chào {you}',vars)]),intent:null,pieces:[],prints:[]}}
@@ -92,13 +108,29 @@ export function greeting(c:TalkCtx,data:TalkData=c.data??TALK):Said{const vars=v
 /** Ghép một câu cho NPC (trục 6 → 4, 5 → 3 → 1 → 2 → khung và mảnh). Trả về null nếu bối cảnh không cho nói. */
 export function compose(c:TalkCtx):Said|null{const data=c.data??TALK,when=whenOf(c.minute);
  if(!channelAllowed(c.channel,when,c.tier,c.npc.age,!!c.npc.family))return null;
- const sorry=c.facts.some(f=>SORRY_SUBS.includes(f.sub)&&factFits(f,'apologize',c.tier,c.npc.id,c.present??[]));
+ const sorry=(c.groups?c.facts.filter(f=>c.groups!.includes(f.topic)):c.facts).some(f=>SORRY_SUBS.includes(f.sub)&&factFits(f,'apologize',c.tier,c.npc.id,c.present??[]));
  /* ý định chưa nói với người này trong 14 ngày được ưu tiên gấp đôi (đa dạng, I.9) */const said14=new Set((c.recent??[]).filter(x=>x.k.startsWith('t:')&&c.day-x.d<14).map(x=>x.k.split(':')[1]));
+ const facts0=c.groups?c.facts.filter(f=>c.groups!.includes(f.topic)):c.facts;
  const intents=weighted((c.intents??INTENTS).filter(i=>intentAllowed(i,c.tier,c.mood)),`${c.seed}:intent`,i=>i,i=>(i==='apologize'&&sorry?1.5:INTENT_WEIGHT[i])*(said14.has(i)?1:FRESH_BOOST));
  for(const intent of intents){
-  const facts=order(c.facts.filter(f=>factFits(f,intent,c.tier,c.npc.id,c.present??[])&&!used(c.recent??[],`t:${intent}:${f.sub}`,c.day)),`${c.seed}:fact:${intent}`,f=>f.id);
+  const facts=order(facts0.filter(f=>factFits(f,intent,c.tier,c.npc.id,c.present??[])&&!used(c.recent??[],`t:${intent}:${f.sub}`,c.day)),`${c.seed}:fact:${intent}`,f=>f.id);
   for(const fact of facts){
    const frames=order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:${fact.id}`,f=>f.id);
    for(const frame of frames){const said=tryFrame(c,data,frame,intent,fact);if(said)return said}}
-  if(NO_FACT_OK.includes(intent)&&!used(c.recent??[],`t:${intent}:-`,c.day))for(const frame of order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:-`,f=>f.id)){const said=tryFrame(c,data,frame,intent,undefined);if(said)return said}}
- return greeting(c,data)}
+  if(!c.needFact&&NO_FACT_OK.includes(intent)&&!used(c.recent??[],`t:${intent}:-`,c.day))for(const frame of order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:-`,f=>f.id)){const said=tryFrame(c,data,frame,intent,undefined);if(said)return said}}
+ return c.needFact?null:greeting(c,data)}
+
+/** H6: NPC đáp tiếp sau lựa chọn của người chơi (Hỏi thêm, Giúp, Kể chuyện mình) ở lượt 2, 3; hoặc đáp tin nhắn trả lời. Dùng khung `follow`, mảnh có `after`; mảnh có chủ đề chỉ khi còn dữ kiện của câu trước. */
+export function followUp(c:TalkCtx,intent:Intent,after:After,fact?:Fact):Said|null{const data=c.data??TALK;
+ if(!channelAllowed(c.channel,whenOf(c.minute),c.tier,c.npc.age,!!c.npc.family))return null;
+ for(const frame of order(data.frames.filter(f=>f.mode==='follow'&&(!f.channel||f.channel.includes(c.channel))),`${c.seed}:follow`,f=>f.id)){const said=tryFrame(c,data,frame,intent,fact,{mode:'follow',after});if(said)return said}
+ return null}
+
+/** H6: NPC đáp chủ đề người chơi tự mở lời. Hỏi thăm: chuyện của NPC hoặc chuyện chung; Hỏi chuyện của họ: chỉ biến cố đang có của NPC; Kể chuyện mình: NPC hỏi, trêu về chuyện của người chơi; Nhờ việc, hỏi mua bán: mảnh `answer`. Không ghép được thì dùng mảnh `answer` của chủ đề đó. */
+export const TOPIC_INTENTS:Record<PlayerTopic,{intents:Intent[];groups:TopicGroup[]}|null>={health:{intents:['complain','brag','news'],groups:['self','world']},theirs:{intents:['complain','brag','request'],groups:['self']},mine:{intents:['ask','tease'],groups:['player']},favor:null};
+export function answerTo(c:TalkCtx,topic:PlayerTopic):Said|null{const data=c.data??TALK,t=TOPIC_INTENTS[topic];
+ if(!channelAllowed(c.channel,whenOf(c.minute),c.tier,c.npc.age,!!c.npc.family))return null;
+ /* câu đáp chủ đề do người chơi chọn: vân tay ý định ghi `u:` để không tính là NPC đã tự nói ý định đó (ưu tiên ý định mới vẫn chạy) */
+ if(t){const said=compose({...c,intents:t.intents,groups:t.groups,needFact:true});if(said?.intent)return{...said,prints:said.prints.map(k=>k.startsWith('t:')?'u'+k.slice(1):k)}}
+ for(const frame of order(data.frames.filter(f=>f.mode==='answer'&&(!f.channel||f.channel.includes(c.channel))),`${c.seed}:answer`,f=>f.id)){const said=tryFrame(c,data,frame,null,undefined,{mode:'answer',answer:topic});if(said)return said}
+ return null}

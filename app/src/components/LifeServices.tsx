@@ -1,3 +1,4 @@
+import type {TalkKind} from '../domain/director';
 import {tileArt} from './tile-art';
 import {useState} from 'react';
 import PeopleHere from './PeopleHere';
@@ -20,7 +21,7 @@ import {ingredientArt,ITEM_TONE} from './Market';
 import {fridgeOf} from '../domain/home';
 import {Cabinet,Fridge,Meals} from './FoodStorage';
 const MEAL_ART:Record<EatOutId,{icon:string;tone:string}>={banhMi:{icon:'food',tone:'#f3e2c4'},comTam:{icon:'restaurant',tone:'#f6dccd'},pho:{icon:'cup',tone:'#e4ecd6'},setLunch:{icon:'restaurant',tone:'#efe3cf'},hotpot:{icon:'flame',tone:'#f6d9cf'},steak:{icon:'pan',tone:'#e9dccf'}};
-export default function LifeServices({state,place,onAction,onShop,onTalk}:{state:GameState;place:'home'|'market'|'bank'|'hospital'|'park'|'streetfood'|'restaurant'|'mall';onAction:(a:LifeAction)=>GameResult;onShop?:(a:ShopAction)=>GameResult;onTalk?:(id:string,kind:'talk'|'meal')=>GameResult}){
+export default function LifeServices({state,place,onAction,onShop,onTalk}:{state:GameState;place:'home'|'market'|'bank'|'hospital'|'park'|'streetfood'|'restaurant'|'mall';onAction:(a:LifeAction)=>GameResult;onShop?:(a:ShopAction)=>GameResult;onTalk?:(id:string,kind:TalkKind)=>GameResult}){
  const [page,setPage]=useState(place==='bank'?'savings':place==='home'?'menu':'recipes'),[notice,setNotice]=useState(''),[dish,setDish]=useState<EatOutId|null>(null),[qty,setQty]=useState(1),[amount,setAmount]=useState(500000),[term,setTerm]=useState<7|30|90>(30),[repayment,setRepayment]=useState(100000);const l=lifeOf(state);
  function run(a:LifeAction,message='Đã thực hiện.'){const r=onAction(a);setNotice(r.ok?message:r.error)}
  const go=(id:string)=>{setPage(id);setNotice('')};

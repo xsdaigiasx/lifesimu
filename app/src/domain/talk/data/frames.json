@@ -295,5 +295,61 @@
   "channel": [
    "text"
   ]
+ },
+ {
+  "id": "follow-1",
+  "mode": "follow",
+  "slots": [
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "follow-2",
+  "mode": "follow",
+  "slots": [
+   "open?",
+   "body"
+  ],
+  "channel": [
+   "face",
+   "call"
+  ]
+ },
+ {
+  "id": "follow-3",
+  "mode": "follow",
+  "slots": [
+   "body"
+  ],
+  "channel": [
+   "text"
+  ]
+ },
+ {
+  "id": "answer-1",
+  "mode": "answer",
+  "slots": [
+   "open?",
+   "body",
+   "tail?"
+  ],
+  "channel": [
+   "face"
+  ]
+ },
+ {
+  "id": "answer-2",
+  "mode": "answer",
+  "slots": [
+   "body"
+  ],
+  "channel": [
+   "face"
+  ]
  }
 ]

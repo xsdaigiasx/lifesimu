@@ -1,3 +1,4 @@
+import type {TalkKind} from './domain/director';
 import LifeServices from './components/LifeServices';
 import HouseView from './components/HouseView';
 import HouseVisit from './components/HouseVisit';
@@ -69,7 +70,7 @@ export default function App(){
  const doWorkAction=(action:WorkAction)=>{const r=workAction(liveState.current,action);if(r.ok)commitGame(r.state);return r};
  const doChat=(id:string,minutes:5|15)=>{const r=chatCoworker(liveState.current,id,minutes);if(r.ok)commitGame(r.state);return r};
  const social:SocialHandlers={reply:(id,m,c)=>{const r=replyMessage(liveState.current,id,m,c);if(r.ok)commitGame(r.state);else toast(r.error);return r},send:(id,k)=>{const r=sendMessage(liveState.current,id,k);if(r.ok)commitGame(r.state);else toast(r.error);return r},call:id=>{const r=callNpc(liveState.current,id);if(r.ok)commitGame(r.state);else toast(r.error);return r},read:id=>{const n=markRead(liveState.current,id);if(n!==liveState.current)commitGame(n)}};
- const doTalk=(id:string,kind:'talk'|'meal')=>{const r=startTalk(liveState.current,id,kind);if(r.ok)commitGame(r.state);return r};
+ const doTalk=(id:string,kind:TalkKind)=>{const r=startTalk(liveState.current,id,kind);if(r.ok)commitGame(r.state);return r};
  const doAnswer=(choice:number)=>{const r=answerEvent(liveState.current,choice);if(r.ok)commitGame(r.state);return r.ok?{ok:true,text:r.text}:{ok:false,error:r.error}};
  const doStudy=(id:SkillId,mode:StudyMode)=>{const r=studySkill(liveState.current,id,mode);if(r.ok)commitGame(r.state);return r};
  const doBuyOfficeItem=(id:string)=>{const r=buyOfficeItem(liveState.current,id);if(r.ok)commitGame(r.state);return r};

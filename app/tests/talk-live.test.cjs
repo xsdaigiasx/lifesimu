@@ -13,8 +13,8 @@ test('H5: trò chuyện với chủ trọ dùng câu ghép, lựa chọn thái �
  let s=ok(D.startTalk(at(20,1150,'home'),'landlord'));const p=D.storyOf(s).pending;
  if(!p.talk)return;// mô-típ khác (gặp lại, khất nợ) vẫn dùng câu cũ
  assert.equal(p.line,undefined);const ev=D.openEvent(s);assert.equal(ev.line,p.talk.text);assert.ok(ev.options.length>=3&&ev.options.length<=4);
- const i=ev.options.findIndex(o=>!o.locked);const n=ok(D.answerEvent(s,i));
- assert.equal(D.storyOf(n).pending,undefined);assert.equal(St.talkOf(n).log.length,1);assert.ok(St.printsOf(n,'landlord').some(x=>x.k.startsWith('p:')));
+ let n=s;for(let k=0;k<3&&D.storyOf(n).pending;k++)n=ok(D.answerEvent(n,D.openEvent(n).options.findIndex(o=>!o.locked)));
+ assert.equal(D.storyOf(n).pending,undefined);const turns=St.talkOf(n).log.length;assert.ok(turns>=1&&turns<=3,'số lượt '+turns);assert.ok(St.printsOf(n,'landlord').some(x=>x.k.startsWith('p:')));
  assert.ok(St.printsOf(n,'landlord').some(x=>x.k.startsWith('r:')),'ghi bộ lựa chọn');
  // gặp lại trong ngày (sau 60 phút): câu khác
  const again=D.startTalk({...n,clock:{...clockOf(n),minute:1215}},'landlord');if(again.ok&&D.storyOf(again.state).pending.talk)assert.notEqual(D.storyOf(again.state).pending.talk.text,p.talk.text);
@@ -35,4 +35,45 @@ test('H5: tin nhắn Mẹ và em ghép từ bộ sinh, ghi vân tay; tất đị
   for(const m of q){seen++;assert.ok(!/[{}]/.test(m.text),m.text);if(St.printsOf(s,m.npc).length)assert.ok(St.printsOf(s,m.npc).some(x=>x.k.startsWith('t:')));assert.ok(!m.replies||m.replies.length===2)}
   assert.deepEqual(I.settleInbox(at(d,420,'home')).inbox,s.inbox,'tất định')}
  assert.ok(seen>=8,'có tin của Mẹ hoặc em: '+seen);
+});
+
+const LO2=['neighbor','meat','grocery','banhmi','sen-pm','ant-pm','sen-design','ant-design','sen-qa','ant-qa'];
+test('H6: Lô 2 có mảnh riêng cho 7 vai (đồng nghiệp ở cả hai công ty), mọi người Lô 1 và Lô 2 nói bằng bộ ghép',()=>{
+ const own=C.TALK.pieces.filter(p=>p.id.startsWith('l2-'));
+ for(const id of LO2)assert.ok(own.filter(p=>p.npc===id).length>=50,id);assert.ok(own.length>=600,'số mảnh Lô 2 '+own.length);
+ const L=B('talk/live');for(const id of ['me','em','landlord','sen-dev','veg','courier',...LO2])assert.ok(L.hasOwnLines(id),id);
+});
+
+/** Trả lời đến hết chuyện, chọn lựa chọn mở được đầu tiên; trả về số lượt. */
+const finish=(s,pickAt=0)=>{let n=s,k=0;for(;k<4&&D.storyOf(n).pending;k++){const ev=D.openEvent(n),open=ev.options.map((o,i)=>o.locked?-1:i).filter(i=>i>=0);n=ok(D.answerEvent(n,open[Math.min(pickAt,open.length-1)]))}return{n,k}};
+test('H6: hội thoại nhiều lượt: Hỏi thêm, Giúp, Kể chuyện mình thì NPC đáp tiếp, tối đa 3 lượt, mỗi lượt tốn giờ',()=>{
+ let multi=0;
+ for(let d=20;d<60;d++){const s=at(d,960,'home'),r=D.startTalk(s,'neighbor');if(!r.ok||!D.storyOf(r.state).pending.talk)continue;
+  for(let i=0;i<4;i++){const ev=D.openEvent(r.state);if(i>=ev.options.length||ev.options[i].locked)continue;const n=ok(D.answerEvent(r.state,i)),p=D.storyOf(n).pending;
+   if(p){multi++;assert.equal(p.talk.turn,2);assert.equal(p.talk.said,ev.options[i].label,'hiện câu người chơi vừa nói');assert.ok(clockOf(n).minute>clockOf(r.state).minute,'tốn giờ');
+    const ev2=D.openEvent(n);assert.equal(ev2.said,ev.options[i].label);assert.ok(!ev2.options.some(o=>o.label===ev.options[i].label),'không lặp lựa chọn vừa chọn');
+    const {k}=finish(n);assert.ok(k<=2,'tối đa 3 lượt');assert.ok(engine.valid(n))}}}
+ assert.ok(multi>=5,'có hội thoại nhiều lượt: '+multi);
+});
+
+test('H6: người chơi tự mở lời theo chủ đề; Hỏi chuyện của họ cần Quen biết; người bán cho hỏi hàng',()=>{
+ const s=at(25,960,'home');assert.deepEqual(D.topicsFor(s,'neighbor'),['health','mine']);
+ assert.equal(D.startTalk(s,'neighbor','topic:theirs').ok,false);
+ for(const t of ['health','mine']){const n=ok(D.startTalk(s,'neighbor','topic:'+t)),p=D.storyOf(n).pending;assert.ok(p.talk,'câu ghép');assert.match(p.talk.said,/\S/);assert.ok(D.openEvent(n).options.length>=3);finish(n)}
+ const known={...s,social:{relations:{neighbor:{score:20,lastDay:25,minutes:0}},chatMinutesDay:0,chatDay:25}};assert.ok(D.topicsFor(known,'neighbor').includes('theirs'));
+ const m=at(25,480,'market');assert.ok(D.topicsFor(m,'meat').includes('favor'),'hỏi hàng không cần quen');const f=ok(D.startTalk(m,'meat','topic:favor'));assert.ok(D.storyOf(f).pending.talk.text.length>3);
+ assert.deepEqual(D.topicsFor(at(25,600,'hospital'),'doctor'),[],'người chưa có mảnh riêng không có chủ đề');
+});
+
+test('H6: gọi Mẹ mở cuộc nói chuyện ghép câu qua điện thoại; Nhật ký chỉ ghi một lần',()=>{
+ let opened=0;for(let d=10;d<30;d++){const r=I.callNpc(at(d,1200,'home'),'me');assert.ok(r.ok,r.error);const p=D.storyOf(r.state).pending;if(!p)continue;opened++;
+  assert.equal(p.talk.ch,'call');assert.equal(D.openEvent(r.state).motif,'Gọi điện');const {n}=finish(r.state);assert.equal(n.journal.filter(j=>j.title.startsWith('Gọi điện')||j.title.includes('Trò chuyện')).length,1)}
+ assert.ok(opened>=15,'cuộc gọi Mẹ ghép câu: '+opened);
+});
+
+test('H6: trả lời tin Mẹ ghép thì câu đáp cũng ghép, không còn chỗ trống',()=>{
+ let n=0;for(let d=3;d<60&&n<6;d++){let s=I.settleInbox(at(d,420,'home'));s=I.deliverDue({...s,clock:{...clockOf(s),minute:1430}}).state;
+  const m=(I.inboxOf(s).threads.me??[]).find(x=>x.talk&&x.answered===undefined);if(!m)continue;
+  for(const c of [0,1]){const r=ok(I.replyMessage(s,'me',m.id,c)),re=I.inboxOf(r).threads.me.at(-1);assert.equal(re.from,'npc');assert.ok(!/[{}]/.test(re.text),re.text)}n++}
+ assert.ok(n>=3,'tin Mẹ ghép có trả lời: '+n);
 });

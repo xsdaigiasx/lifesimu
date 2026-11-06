@@ -26,6 +26,8 @@ const BY_INTENT:Record<Intent,Template[]>={
  tease:[{a:'joke',x:'share',text:'Thì {call} cũng vậy chứ ai'},{a:'warm',x:'share',text:'Đúng là vậy thiệt, hì'},{a:'blunt',x:'share',text:'{Call} đừng trêu {me} nữa'},{a:'rude',x:'silent',text:'Không vui đâu'}],
  apologize:[{a:'warm',x:'accept',text:'Không sao đâu {call}, chuyện nhỏ mà'},{a:'blunt',x:'accept',text:'Lần sau {call} nhớ báo trước nha'},{a:'cold',x:'silent',text:'Ừ, biết rồi'},{a:'rude',x:'refuse',text:'{Me} không quên dễ vậy đâu'}],
 };
+/** H6: bộ khép chuyện cho câu NPC đáp chủ đề người chơi mở (Nhờ việc, hỏi mua bán, câu đáp chung): mọi lựa chọn là việc nhẹ. */
+const ANSWER:Template[]=[{a:'warm',x:'accept',text:'Dạ, {me} cảm ơn {call} nhiều'},{a:'warm',x:'share',text:'Vậy thì tốt rồi {call}'},{a:'joke',x:'share',text:'{Call} nói vậy là {me} yên tâm rồi',minTier:'acquaint'},{a:'blunt',x:'share',text:'Để {me} tính thêm đã'},{a:'dodge',x:'silent',text:'Dạ'},{a:'cold',x:'silent',text:'Ừ'}];
 /** Việc nhẹ chỉ đưa quan hệ tới 29 điểm (#240); Giúp, Nhận lời là việc có chủ đích. */
 export const LIGHT:readonly Action[]=['ask','share','silent','advise'];
 const BASE:Record<Action,number>={help:4,accept:3,ask:2,share:2,advise:2,refuse:0,silent:0};
@@ -45,7 +47,10 @@ export const REPEAT=[1,.6,.3] as const,REPEAT_DAYS=7,HELP_LIMIT=3,HELP_DAYS=14;
 export interface ReplyLog{d:number;n:string;a:Attitude;x:Action}
 export interface PlayerNow{energy:number;stress:number;mood:number;money:number;minute:number;end:number;skills:Partial<Record<'communication'|'cooking'|'logic',number>>}
 export interface ReplyCtx{npc:NpcProfile;intent:Intent;tier:Tier;day:number;seed:string;player:PlayerNow;log:readonly ReplyLog[];recent?:readonly Print[];
- /** NPC vừa hứa cho đồ: luôn có Nhận và Từ chối khéo */gift?:[string,number]}
+ /** NPC vừa hứa cho đồ: luôn có Nhận và Từ chối khéo */gift?:[string,number];
+ /** H6: câu NPC đáp chủ đề người chơi mở: dùng bộ khép chuyện */mode?:'answer';
+ /** H6: lượt thứ mấy của cuộc nói chuyện (từ 1) */turn?:number;
+ /** H6: lựa chọn đã chọn ở lượt trước (không lặp lại; đã Hỏi thêm hay Giúp thì không hỏi, giúp lần nữa) */skip?:readonly string[]}
 export interface ReplyOption{id:string;attitude:Attitude;action:Action;label:string;minutes:number;energy:number;money:number;
  /** thiếu kỹ năng, năng lượng, tiền hoặc giờ: hiện mờ */locked:boolean;need?:string}
 
@@ -54,12 +59,17 @@ const cap=(x:string)=>x.charAt(0).toUpperCase()+x.slice(1);
 export function playerAddress(n:NpcProfile){const call=n.self==='mình'?'bạn':n.self==='tôi'?(n.role==='Bác sĩ'?'bác sĩ':'anh'):n.self,me=n.you==='bạn'?'mình':n.you;return{call,me}}
 const fill=(t:string,n:NpcProfile)=>{const {call,me}=playerAddress(n);return t.replace(/\{(call|Call|me|Me)\}/g,(_,k:string)=>k==='call'?call:k==='Call'?cap(call):k==='me'?me:cap(me))};
 const optId=(i:Intent,t:Template)=>`${i}:${t.a}:${t.x}`;
+/** H6: lượt 2, 3 chỉ mở khi lựa chọn trước là Hỏi thêm, Giúp hoặc Kể chuyện mình; tối đa 3 lượt. */
+export const MAX_TURNS=3,CONTINUE:readonly Action[]=['ask','help','share'];
+/** H6: phần cộng quan hệ từ lượt 2 trở đi còn một nửa (nói dài không thành cách cày điểm). */
+export const LATER_TURN=.5;
 const SKILL_NAME={communication:'Giao tiếp',cooking:'Nấu ăn',logic:'Logic'} as const;
 
 /** Trạng thái người chơi: mệt hoặc căng thẳng cao thì Ấm áp tốn thêm năng lượng, Khó chịu dễ xuất hiện; tâm trạng tốt mới có Đùa (trừ khi NPC đang trêu). */
 const GIFT_OPTS:Template[]=[{a:'warm',x:'accept',text:'Dạ, {me} cảm ơn {call} nhiều'},{a:'blunt',x:'refuse',text:'Thôi {call} để bán đi, {me} còn'}];
 export function buildReplies(c:ReplyCtx):ReplyOption[]{if(c.gift){const rest=buildReplies({...c,gift:undefined}).filter(o=>o.action!=='accept'&&o.action!=='refuse').slice(0,2);return[...GIFT_OPTS.map(t=>({id:`gift:${t.a}:${t.x}`,attitude:t.a,action:t.x,label:fill(t.text,c.npc),minutes:0,energy:0,money:0,locked:false})),...rest]}const p=c.player,worn=p.energy<25||p.stress>=70,happy=p.mood>=60;
- let pool=BY_INTENT[c.intent].filter(t=>!t.minTier||tierRank(c.tier)>=tierRank(t.minTier)).filter(t=>t.a!=='joke'||happy||c.intent==='tease').filter(t=>t.a!=='rude'||worn||c.tier==='hostile');
+ const sk=new Set(c.skip??[]),skAct=new Set<string>([...sk].map(x=>x.split(':')[2]??'').filter(a=>a==='ask'||a==='help'));
+ let pool=(c.mode==='answer'?ANSWER:BY_INTENT[c.intent]).filter(t=>!sk.has(optId(c.intent,t))&&!skAct.has(t.x)).filter(t=>!t.minTier||tierRank(c.tier)>=tierRank(t.minTier)).filter(t=>t.a!=='joke'||happy||c.intent==='tease').filter(t=>t.a!=='rude'||worn||c.tier==='hostile');
  if(c.tier==='hostile')pool=pool.filter(t=>t.a!=='warm'||t.x!=='help');
  const rank=(t:Template)=>hash(`${c.seed}:${optId(c.intent,t)}`)%1000;
  // luôn có một lựa chọn tích cực và một lựa chọn không tích cực, phần còn lại rút theo seed
@@ -82,11 +92,11 @@ export function resolveReply(c:ReplyCtx,o:ReplyOption):ReplyResult{const t=c.npc
  if(o.attitude==='joke'&&c.intent==='brag')fit+=1;// người khoe thích được trêu
  if(o.attitude==='blunt'&&o.action==='refuse'&&t.includes('cẩn thận'))fit+=1;// từ chối thẳng được tôn trọng hơn né
  const recentSame=c.log.filter(l=>l.n===c.npc.id&&l.a===o.attitude&&c.day-l.d<REPEAT_DAYS).length,helps=c.log.filter(l=>l.n===c.npc.id&&l.x==='help'&&c.day-l.d<HELP_DAYS).length;
- let gain=BASE[o.action]+fit;if(gain>0)gain=Math.round(gain*REPEAT[Math.min(recentSame,2)]!*10)/10;
+ let gain=BASE[o.action]+fit;if(gain>0)gain=Math.round(gain*REPEAT[Math.min(recentSame,2)]!*((c.turn??1)>1?LATER_TURN:1)*10)/10;
  const reliant=o.action==='help'&&helps>=HELP_LIMIT-1;if(reliant&&gain>0&&t.includes('keo kiệt'))gain=Math.round(gain*.5*10)/10;// quen được giúp, lợi dụng
  const relation=Math.max(-6,Math.min(6,Math.round(gain)));
  const memory=o.action==='help'?{topic:'được giúp',tag:'help',weight:3}:o.attitude==='rude'?{topic:'bị nói nặng',tag:'rude',weight:3}:o.action==='refuse'&&c.intent==='request'&&tierRank(c.tier)>=3?{topic:'bị từ chối giúp',tag:'refuse',weight:2}:o.attitude==='dodge'&&c.intent==='complain'&&tierRank(c.tier)>=3?{topic:'bận không hỏi han',tag:'dodge',weight:2}:c.intent==='apologize'&&o.action==='accept'?{topic:'được bỏ qua',tag:'forgive',weight:3}:undefined;
- return{...(c.gift&&o.action==='accept'&&o.id.startsWith('gift:')?{gift:c.gift}:{}),relation,light:LIGHT.includes(o.action)||o.attitude==='joke',...(memory?{memory}:{}),minutes:o.minutes,energy:o.energy,fee:o.money,reliant}}
+ return{...(c.gift&&o.action==='accept'&&o.id.startsWith('gift:')?{gift:c.gift}:{}),relation,light:c.mode==='answer'||LIGHT.includes(o.action)||o.attitude==='joke',...(memory?{memory}:{}),minutes:o.minutes,energy:o.energy,fee:o.money,reliant}}
 
 /** Ghi lựa chọn vào nhật ký trả lời (giữ 30 ngày, tối đa 300 dòng). */
 export function noteReply(log:readonly ReplyLog[],r:ReplyLog):ReplyLog[]{return[...log.filter(l=>r.d-l.d<30),r].slice(-300)}

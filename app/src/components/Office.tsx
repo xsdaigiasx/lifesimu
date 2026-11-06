@@ -1,3 +1,4 @@
+import type {TalkKind} from '../domain/director';
 import NpcFace from './NpcFace';
 import OfficeCatalog from './OfficeCatalog';
 import OwnerFloor from './OwnerFloor';
@@ -40,7 +41,7 @@ export function People({state,onAction,knownOnly=false,title='Sảnh chờ',onBa
 export function Relations({state,onAction,initialId}:{state:GameState;onAction:(a:OfficeAction)=>GameResult;initialId?:string}){return <RelationsView state={state} initialId={initialId} />}
 
 type Page='hub'|'jobs'|'waiting'|'notices'|'rent'|'found'|'space'|'hire'|'projects'|'finance'|'payroll'|'payslip'|'hr'|'policy'|'equipment'|'decor'|'contract'|'staff'|'work'|'layout';
-export default function Office({state,onAction,onWork,onChat,onSkills,onLayout,onBuyItem,onTalk}:{state:GameState;onAction:(a:OfficeAction|CompanyAction|HiringAction|ProjectAction|HrAction|MgAction)=>GameResult;onWork:(a:WorkAction)=>GameResult;onChat:(id:string,minutes:5|15)=>GameResult;onSkills:()=>void;onLayout:(layout:OfficeLayout)=>GameResult;onBuyItem:(id:string)=>GameResult;onTalk?:(id:string,kind:'talk'|'meal')=>GameResult}){
+export default function Office({state,onAction,onWork,onChat,onSkills,onLayout,onBuyItem,onTalk}:{state:GameState;onAction:(a:OfficeAction|CompanyAction|HiringAction|ProjectAction|HrAction|MgAction)=>GameResult;onWork:(a:WorkAction)=>GameResult;onChat:(id:string,minutes:5|15)=>GameResult;onSkills:()=>void;onLayout:(layout:OfficeLayout)=>GameResult;onBuyItem:(id:string)=>GameResult;onTalk?:(id:string,kind:TalkKind)=>GameResult}){
  const [page,setPage]=useState<Page>(()=>officeOf(state).role==='employee'&&canEnterOffice(state)?'space':'hub'),[error,setError]=useState(''),[size,setSize]=useState<OfficeSize>('small'),[industry,setIndustry]=useState<Industry>('tech'),[name,setName]=useState('Công ty của tôi'),[confirm,setConfirm]=useState<OfficeAction|CompanyAction|null>(null),[term,setTerm]=useState<LeaseTerm>('month');
  const [slipBack,setSlipBack]=useState<Page>('space');const openSlip=(from:Page)=>{setSlipBack(from);go('payslip')};
  const wasWorking=useRef(!!state.work?.active);useEffect(()=>{const active=!!state.work?.active;if(wasWorking.current&&!active&&page==='work')setPage('space');wasWorking.current=active},[state.work?.active,page]);
