@@ -75,6 +75,8 @@ const NO_FACT_OK:readonly Intent[]=['brag','request'];
 export const FRESH_BOOST=20;
 /** Mảnh nhắc đúng dữ kiện được ưu tiên hơn mảnh chung (câu bám chuyện thật, I.9). */
 export const TOPIC_BOOST=6;
+/** Ý định có chuyện thật để nói nhân trọng số này (06/11). */
+export const FACT_BOOST=3;
 const SORRY_SUBS=['missed','debt','harsh'];
 /** H7a: dữ kiện lần gặp trước (town-data MET_SUBS), luôn thử trước khi chọn chuyện khác. */
 const FIRST_SUBS:readonly string[]=['met','metsame','metnew','back'];
@@ -118,7 +120,8 @@ export function compose(c:TalkCtx):Said|null{const data=c.data??TALK,when=whenOf
  const sorry=(c.groups?c.facts.filter(f=>c.groups!.includes(f.topic)):c.facts).some(f=>SORRY_SUBS.includes(f.sub)&&factFits(f,'apologize',c.tier,c.npc.id,c.present??[]));
  /* ý định chưa nói với người này trong 14 ngày được ưu tiên gấp đôi (đa dạng, I.9) */const said14=new Set((c.recent??[]).filter(x=>x.k.startsWith('t:')&&c.day-x.d<14).map(x=>x.k.split(':')[1]));
  const facts0=c.groups?c.facts.filter(f=>c.groups!.includes(f.topic)):c.facts;
- const intents=weighted((c.intents??INTENTS).filter(i=>intentAllowed(i,c.tier,c.mood)),`${c.seed}:intent`,i=>i,i=>(i==='apologize'&&sorry?1.5:INTENT_WEIGHT[i])*(said14.has(i)?1:FRESH_BOOST));
+ /* 06/11: ý định đang có chuyện thật để nói được ưu tiên (FACT_BOOST), để câu nhắc chuyện thật không tuỳ vào may rủi rút ý định */const hasFact=(i:Intent)=>facts0.some(f=>factFits(f,i,c.tier,c.npc.id,c.present??[])&&!used(c.recent??[],`t:${i}:${f.sub}`,c.day));
+ const intents=weighted((c.intents??INTENTS).filter(i=>intentAllowed(i,c.tier,c.mood)),`${c.seed}:intent`,i=>i,i=>(i==='apologize'&&sorry?1.5:INTENT_WEIGHT[i])*(said14.has(i)?1:FRESH_BOOST)*(hasFact(i)?FACT_BOOST:1));
  /* H7a: người lạ gặp lại nhớ lần trước: dữ kiện lần gặp trước của chính NPC này được thử trước (bỏ câu mở lời kiểu gặp lần đầu) */
  for(const fact of facts0.filter(f=>FIRST_SUBS.includes(f.sub)&&f.about===c.npc.id)){const only={...data,pieces:data.pieces.filter(p=>(p.slot!=='body'||!!p.topic?.includes(fact.sub))&&!(p.slot==='open'&&p.arch))};for(const intent of intents){if(!factFits(fact,intent,c.tier,c.npc.id,c.present??[])||used(c.recent??[],`t:${intent}:${fact.sub}`,c.day))continue;
   for(const frame of order(data.frames.filter(f=>f.intent===intent&&(!f.channel||f.channel.includes(c.channel))&&!used(c.recent??[],'f:'+f.id,c.day)),`${c.seed}:frame:${fact.id}`,f=>f.id)){const said=tryFrame(c,only,frame,intent,fact);if(said&&said.pieces.some(id=>data.pieces.find(p=>p.id===id)?.topic?.includes(fact.sub)))return said}}}
