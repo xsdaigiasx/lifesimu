@@ -4,7 +4,11 @@ Bản trước: `docs/history/HANDOVER-v0.35.md` (01/11), nhật ký 05/11 ở `
 
 ## PHIÊN MỚI BẮT ĐẦU Ở ĐÂY
 
-Trạng thái 06/11 chiều: chờ chủ dự án gộp theo thứ tự #339 (tranh treo tường, 0.87.2), #341 (H7c, 0.88.0), #343 (sửa đo sim:npc, lượt cuối hội thoại, 0.88.1), #344 (sim:talk mốc theo bậc đầu tháng, 0.88.2), PR H7d (0.89.0). Mỗi PR dựng trên PR trước. Việc kế tiếp: T86 phần điểm hoà thuận khu trọ, T89 mạng xã hội (dùng tin đồn, nhóm chat), rồi H8 mở rộng mô phỏng cho Lô 3 (mục 1a). Chủ dự án 06/11: tranh treo tường cho nhà phố, biệt thự để sau (làm khi có ảnh vỏ nhà Codex #189).
+Trạng thái chốt 06/11 15:45: main 0.88.2, đã gộp #339 (tranh treo tường), #341 (H7c), #343 (sửa đo sim:npc, lượt cuối hội thoại), #344 (sim:talk); issue #338, #340, #342 đã đóng. Còn mở: PR #346 H7d nhóm chat (0.89.0, gộp được) đóng issue #345, và PR bàn giao này (chỉ tài liệu, gộp sau #346). Nhánh rác `claude/sim-npc-fix` (đã đổi tên thành `claude/342-sua-sim-npc`) không xoá được qua proxy (403), chủ dự án xoá tay trên GitHub nếu muốn.
+
+**Tiến độ (TICKETS.md):** 90 ticket T: xong 53, một phần 11, gộp hoặc thay 4, hoãn 1 (T69), chưa làm 21. Bộ hội thoại H0 đến H7d xong; còn H8 cho Lô 3.
+
+**Việc kế tiếp (theo mục 1a):** T86 phần điểm hoà thuận khu trọ (dùng cảnh nhóm, nhóm chat Khu trọ); T89 mạng xã hội (dùng `rumorsOn`, nhóm chat); H8 mở rộng `sim:talk` cho NPC ngẫu nhiên Lô 3; rồi T38 hiệu năng, T39 hồi quy và đóng gói Basic 1.0. Mỗi ticket: AskUserQuestion trước, 30 câu mẫu nếu có câu chữ mới. Chủ dự án 06/11: tranh treo tường cho nhà phố, biệt thự để sau (làm khi có ảnh vỏ nhà Codex #189).
 
 ## 0. Tài liệu thiết kế nằm ở đâu (đọc trước, khỏi phải tìm lại)
 

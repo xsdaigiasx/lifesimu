@@ -1,8 +1,8 @@
 # Tiến độ ticket so với Kế hoạch
 
-Bảng cập nhật lần cuối 05/11/2026 (app 0.75.3, Kế hoạch bản rev 65); app hiện 0.87.1, các việc H0 đến H7a làm sau mốc đó xem `HANDOVER.md`. Sửa bảng này mỗi khi gộp PR của một ticket.
+Bảng cập nhật lần cuối 06/11/2026 (main 0.88.2; 0.89.0 sau khi gộp #346 H7d; Kế hoạch bản rev 65). Chi tiết kỹ thuật từng việc xem `HANDOVER.md`. Sửa bảng này mỗi khi gộp PR của một ticket.
 
-Xong 52, một phần 9, còn lại chưa làm, bỏ hoặc hoãn. Cột Tệp chỉ tệp trong `docs/plan/` có bảng ticket đó.
+Xong 53, một phần 11, gộp hoặc thay 4, hoãn 1, chưa làm 21 (tổng 90 ticket T). Bộ hội thoại H0 đến H7d xong (H7d chờ gộp #346); còn H8 mở rộng mô phỏng cho Lô 3. Cột Tệp chỉ tệp trong `docs/plan/` có bảng ticket đó.
 
 ## Thứ tự ưu tiên (đề xuất 05/11)
 
@@ -22,7 +22,7 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 
 **Nhóm 2: hoàn tất bản 1.0**
 
-> Bộ sinh hội thoại (`docs/design/HOI-THOAI.md`, ticket H0 đến H8) đã duyệt, đứng đầu nhóm này và thay T63, T64 (mục I.11). H0 dàn NPC theo seed: đã gộp (#307, 0.77.0). H1 khung và bộ ghép câu: đã gộp (#309, 0.78.0). H2 dữ kiện và ai được biết: đã gộp (#311, 0.79.0). H3 đời sống NPC và ký ức biết quên: đã gộp (#314, 0.80.0). H4 lựa chọn trả lời: đã gộp (#316, 0.81.0). Quà tặng thật: đã gộp (#320, 0.82.0). H5 Lô 1 (665 mảnh, nối trò chuyện và tin nhắn Mẹ, em) cùng H8 `sim:talk` cho Lô 1: đã gộp (#321, 0.83.0). Chân dung NPC ghép từ mảnh (#305): đã gộp (#322, 0.84.0). H6 Lô 2 (7 vai, 690 mảnh), hội thoại 3 lượt, tự mở lời theo chủ đề, gọi Mẹ và em ghép câu (#323): đã gộp (#324, 0.85.0). H7b tuổi, sinh nhật, vòng đời và người nối tiếp: đã gộp (#327, 0.86.0). H7 chia ba phần (chủ dự án duyệt 06/11): H7a NPC ngẫu nhiên PR chờ gộp (0.87.0), chờ duyệt 30 câu mẫu; tiếp theo H7c cảnh nhóm, quan hệ NPC với NPC, tin đồn; H7d nhóm chat.
+> Bộ sinh hội thoại (`docs/design/HOI-THOAI.md`, ticket H0 đến H8) đã duyệt, đứng đầu nhóm này và thay T63, T64 (mục I.11). H0 dàn NPC theo seed: đã gộp (#307, 0.77.0). H1 khung và bộ ghép câu: đã gộp (#309, 0.78.0). H2 dữ kiện và ai được biết: đã gộp (#311, 0.79.0). H3 đời sống NPC và ký ức biết quên: đã gộp (#314, 0.80.0). H4 lựa chọn trả lời: đã gộp (#316, 0.81.0). Quà tặng thật: đã gộp (#320, 0.82.0). H5 Lô 1 (665 mảnh, nối trò chuyện và tin nhắn Mẹ, em) cùng H8 `sim:talk` cho Lô 1: đã gộp (#321, 0.83.0). Chân dung NPC ghép từ mảnh (#305): đã gộp (#322, 0.84.0). H6 Lô 2 (7 vai, 690 mảnh), hội thoại 3 lượt, tự mở lời theo chủ đề, gọi Mẹ và em ghép câu (#323): đã gộp (#324, 0.85.0). H7b tuổi, sinh nhật, vòng đời và người nối tiếp: đã gộp (#327, 0.86.0). H7 chia ba phần (chủ dự án duyệt 06/11): H7a NPC ngẫu nhiên: đã gộp (#329, 0.87.0). Sửa giao diện việc 1 đến 7 (gồm tranh treo tường): đã gộp (#335, #339, 0.87.2). H7c cảnh nhóm, quan hệ NPC với NPC, tin đồn, giá chợ: đã gộp (#341, 0.88.0). Sửa đo `sim:npc`, lượt cuối hội thoại luôn có câu tử tế, `sim:talk` mốc theo bậc đầu tháng: đã gộp (#343, #344, 0.88.2). H7d nhóm chat: PR #346 chờ gộp (0.89.0). Còn H8 mở rộng mô phỏng hội thoại cho Lô 3.
 11. T63 Quan hệ NPC với NPC, tin đồn (bản nhẹ).
 12. T64 Cốt truyện đời NPC (phần mở đầu).
 13. T86 Cộng đồng khu trọ (bản nhẹ).
@@ -114,7 +114,7 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 | T60 | Công viên rèn luyện và chỉ số Thể lực | Xong | E-pham-vi-day-du |
 | T61 | Điện thoại mở rộng: báo, tin tức, giải trí | Một phần: tin tức, bản tin sáng; phần báo làm cùng T57, T58; phần giải trí theo T79 | E-pham-vi-day-du |
 | T62 | Mini game giải trí | Một phần: bầu cua; gộp với T79 (mini game dùng chung khung Arcade, lưu riêng) | E-pham-vi-day-du |
-| T63 | Đồ thị quan hệ NPC với NPC, tin đồn | Gộp vào H7c (cảnh nhóm, quan hệ NPC với NPC, tin đồn) | E-pham-vi-day-du |
+| T63 | Đồ thị quan hệ NPC với NPC, tin đồn | Xong qua H7c (#341, 0.88.0): quan hệ ẩn, tin đồn lan qua người quen, cảnh nhóm | E-pham-vi-day-du |
 | T64 | Cốt truyện đời NPC: dàn cố định và đường đời mẫu | Thay bằng H3 đời sống NPC, H7a mạch chuyện NPC ngẫu nhiên, H7b vòng đời | E-pham-vi-day-du |
 | T65 | Thành tựu mở rộng | Chưa làm | E-pham-vi-day-du |
 | T66 | Nâng cấp công ty | Chưa làm | E-pham-vi-day-du |
@@ -137,7 +137,7 @@ Nguyên tắc: làm nốt ticket đang dở trước, rồi tới phần còn th
 | T83 | Bối cảnh năm (biến động thế giới), làm cho một đời trước | Chưa làm | F-doi-nghe-online |
 | T84 | Thú cưng: chỉ số, chăm sóc, sự kiện, quy định nhà ở | Chưa làm; cần quy định nuôi thú theo loại nhà (T53) | G-y-tuong-giu-chan |
 | T85 | Sở thích trong nhà: đồ có điểm dùng, XP sở thích, bộ sưu tập | Một phần: điểm dùng đồ đã có (T28); còn XP sở thích, bộ sưu tập | G-y-tuong-giu-chan |
-| T86 | Cộng đồng khu trọ: hàng xóm, chủ trọ, điểm hoà thuận, sự kiện nhóm | Gộp: hàng xóm, sự kiện nhóm vào H7c, nhóm chat Khu trọ vào H7d; còn lại điểm hoà thuận khu trọ làm sau H7d | G-y-tuong-giu-chan |
+| T86 | Cộng đồng khu trọ: hàng xóm, chủ trọ, điểm hoà thuận, sự kiện nhóm | Một phần: hàng xóm, sự kiện nhóm (H7c #341), nhóm chat Khu trọ (H7d #346); còn điểm hoà thuận khu trọ | G-y-tuong-giu-chan |
 | T87 | Hồi ức một tháng và một năm trước, ghi chú tuần tuỳ chọn | Một phần: hôm nay năm ngoái (T75); phần còn lại nhỏ, gộp vào T88 | G-y-tuong-giu-chan |
 | T88 | Cuối tuần có kế hoạch và gợi ý trong bản tin sáng | Một phần: gợi ý thứ Sáu (T75); gồm phần còn lại T87; NPC rủ cuối tuần dùng ý định Rủ của hệ hội thoại | G-y-tuong-giu-chan |
 | T89 | Mạng xã hội trong game: bảng tin, bình luận câu mẫu, tin đồn lan | Làm sau H7d: dùng chung tin đồn (H7c) và khung tin nhắn nhóm (H7d) | G-y-tuong-giu-chan |
