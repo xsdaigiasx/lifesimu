@@ -1,5 +1,5 @@
 {
-  "version": "0.89.4",
+  "version": "0.89.5",
   "date": "2026-11-06",
   "deployment": "Cloudflare Workers Builds tự build từ nhánh main (thư mục app)",
   "handover": "docs/HANDOVER.md",

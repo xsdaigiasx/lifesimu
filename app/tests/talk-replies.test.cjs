@@ -6,9 +6,9 @@ const P=(o={})=>({energy:80,stress:20,mood:70,money:1e6,minute:600,end:1320,skil
 const ctx=(o={})=>({npc:by('landlord'),intent:'complain',tier:'close',day:20,seed:'s',player:P(),log:[],...o});
 const MATCH={complain:['help','advise','ask','share','silent'],request:['help','refuse','ask'],invite:['accept','refuse','ask'],ask:['share','ask','silent'],brag:['ask','advise','share','accept','silent'],news:['ask','share','silent'],tease:['share','silent'],apologize:['accept','silent','refuse']};
 
-test('mỗi lượt 3 đến 4 lựa chọn, hành động hợp ý định, có cả tích cực và không tích cực, chữ đã điền',()=>{
+test('mỗi lượt 2 đến 4 lựa chọn (ít câu hợp thì 2, chủ dự án 06/11), hành động hợp ý định, có cả tích cực và không tích cực, chữ đã điền',()=>{
  for(const intent of INTENTS)for(const tier of ['stranger','acquaint','close','bestie','hostile'])for(const n of R)for(let i=0;i<3;i++){const o=Rp.buildReplies(ctx({npc:n,intent,tier,seed:`${n.id}${i}`}));
-  assert.ok(o.length>=3&&o.length<=4,`${intent} ${tier}: ${o.length}`);assert.equal(new Set(o.map(x=>x.id)).size,o.length);
+  assert.ok(o.length>=2&&o.length<=4,`${intent} ${tier}: ${o.length}`);assert.equal(new Set(o.map(x=>x.id)).size,o.length);
   for(const x of o){assert.ok(MATCH[intent].includes(x.action),`${intent} ${x.action}`);assert.ok(!/[{}]/.test(x.label),x.label)}
   if(tier!=='hostile')assert.ok(o.some(x=>['cold','rude','dodge','blunt'].includes(x.attitude)),'có lựa chọn không chiều lòng')}
 });
