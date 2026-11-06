@@ -73,9 +73,10 @@ const pc=x=>(x*100).toFixed(1)+'%';
 function verdict(sum){const a=sum.all,v=[];
  v.push(['Từ 90% câu không trùng nguyên văn',a.n&&a.uniq/a.n>=.9,`${pc(a.uniq/a.n)} (${a.n} câu)`]);
  v.push(['0 câu nhắc dữ kiện sai',a.err===0,`${a.err} lỗi${sum.errors.length?': '+sum.errors.join('; '):''}`]);
- const freq=Object.entries(sum.per).filter(([,x])=>x.months);const low=freq.flatMap(([,x])=>x.low);
- v.push(['Người thường gặp có từ 6 trong 8 ý định mỗi tháng (Lạ: đủ 4 ý định được phép)',freq.length>0&&low.length===0,(freq.map(([id,x])=>`${id} ${Math.min(...x.intents)}–${Math.max(...x.intents)}`).join(', ')||'không ai đủ 12 câu')+(low.length?`; thiếu: ${low.join(', ')}`:'')]);
- v.push(['Từ 30% câu nhắc trạng thái người chơi hoặc biến cố thật',a.real/a.n>=.3,pc(a.real/a.n)]);
+ const freq=Object.entries(sum.per).filter(([,x])=>x.months);const low=freq.flatMap(([,x])=>x.low),allMonths=freq.reduce((a,[,x])=>a+x.months,0),okShare=allMonths?1-low.length/allMonths:0;
+ /* chủ dự án 06/11: mốc theo bậc đầu tháng; từ 95% số tháng đạt (thiếu lẻ một ý định là do may rủi trong tháng); câu nhắc chuyện thật từ 29% */
+ v.push([`Người thường gặp: từ 95% số tháng có từ 6 trong 8 ý định (Lạ: đủ 4 ý định được phép), đạt ${pc(okShare)}`,freq.length>0&&okShare>=.95,(freq.map(([id,x])=>`${id} ${Math.min(...x.intents)}–${Math.max(...x.intents)}`).join(', ')||'không ai đủ 12 câu')+(low.length?`; thiếu: ${low.join(', ')}`:'')]);
+ v.push(['Từ 29% câu nhắc trạng thái người chơi hoặc biến cố thật',a.real/a.n>=.29,pc(a.real/a.n)]);
  v.push(['Save story hợp lệ',sum.invalid===0,`${sum.invalid} lần sai`]);return v}
 
 function main(){const arg=n=>{const i=process.argv.indexOf('--'+n);return i>0?Number(process.argv[i+1]):undefined},days=arg('days')??30,seeds=arg('seeds')??30;
