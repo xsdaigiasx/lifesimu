@@ -1,4 +1,4 @@
-import {HOME_ITEMS,HOME_GRID,LEGACY_SIZE,homeBlocked, type HomeObject} from './home';
+import {HOME_ITEMS,HOME_GRID,LEGACY_SIZE,homeBlocked,wallAt,wallError,wallSlots,onWall, type HomeObject,type WallSlot} from './home';
 
 // Toạ độ phần trăm trên ảnh phòng trọ lô 6 (#89): room-master-storybook.webp 1448×1086, góc 2:1, ô 128×64 px, gốc sàn (724, 350).
 // Cùng hình chiếu với nội thất lô 5 nên đặt sprite thẳng theo điểm neo, không cần nắn ảnh.
@@ -22,10 +22,24 @@ export function alignHomeAxes(rightSlope:number,leftSlope:number){
  return {shearY:HOME_FLOOR.stepY/HOME_FLOOR.stepX-scaleY*rightSlope,scaleY};
 }
 
-export function homeAnchor(item:HomeObject,items:HomeObject[]){const {w,h}=homeSize(item);if(item.mount==='wall'){const p=item.wall==='right'?outerFloorPoint(item.x+1,0):outerFloorPoint(0,item.y+1);return {...p,y:p.y-12}}
+export function homeAnchor(item:HomeObject,items:HomeObject[]){const {w,h}=homeSize(item);if(item.mount==='wall')return wallPoint(item.wall??'left',wallAt(item),HOME_ITEMS[item.id].w);
  if(item.mount==='surface'){const parent=items.find(i=>(i.uid??i.id)===item.parentId);if(parent){const size=homeSize(parent),p=floorPoint(parent.x+size.w*(item.id==='lamp'?.27:.73),parent.y+size.h*.5);return {...p,y:p.y-7}}}return floorPoint(item.x+w/2,item.y+h/2)}
 
 // Ảnh đồ vật vẽ cho ô lưới 10×10 cũ: giữ nguyên kích thước hiển thị khi ô to ra thành 1/8 sàn.
 export function homeArtFit(id:keyof typeof HOME_ITEMS,w:number,h:number){const base=LEGACY_SIZE[id]??HOME_ITEMS[id];return (base.w+base.h)/((w+h)*GRID_RATIO)}
 /** Việc 5: ô đặt đồ khi kéo = ô dưới ngón tay trừ độ lệch lúc bắt đầu kéo (không lấy mép ảnh), làm tròn về nửa ô. */
 export const dragCell=(pointer:{x:number;y:number},offset:{x:number;y:number})=>({x:Math.round((pointer.x-offset.x)*2)/2,y:Math.round((pointer.y-offset.y)*2)/2});
+
+/** Việc 7: độ cao treo cố định (chủ dự án chốt 06/11): tâm khung cách sàn WALL_HANG px trên ảnh phòng, ngang tâm cửa sổ. */
+export const WALL_HANG=118;
+const lift=(px:number)=>px/ROOM_IMAGE.h*100;
+const wallFloor=(wall:'left'|'right',t:number)=>wall==='right'?outerFloorPoint(t,0):outerFloorPoint(0,t);
+/** Tâm đồ treo trên ảnh phòng (phần trăm). */
+export function wallPoint(wall:'left'|'right',at:number,len=2){const p=wallFloor(wall,at+len/2);return {x:p.x,y:p.y-lift(WALL_HANG)}}
+/** Khung sáng trên tường cho ô đang kéo tới (cao 128 px quanh tâm). */
+export function wallPolygon(wall:'left'|'right',at:number,len=2){const a=wallFloor(wall,at),b=wallFloor(wall,at+len),lo=lift(WALL_HANG-64),hi=lift(WALL_HANG+64);return [[a.x,a.y-lo],[b.x,b.y-lo],[b.x,b.y-hi],[a.x,a.y-hi]].map(p=>p.join(',')).join(' ')}
+/** Ô tường trống gần điểm chạm nhất (toạ độ phần trăm trên ảnh phòng); không còn ô trống thì null. */
+export function nearestWallSlot(item:HomeObject,items:HomeObject[],pt:{x:number;y:number}):WallSlot|null{
+ const len=HOME_ITEMS[item.id].w;let best:WallSlot|null=null,bestD=Infinity;
+ for(const s of wallSlots(item.id)){if(wallError(onWall(item,s),items))continue;const c=wallPoint(s.wall,s.at,len),d=((c.x-pt.x)*ROOM_IMAGE.w)**2+((c.y-pt.y)*ROOM_IMAGE.h)**2;if(d<bestD){bestD=d;best=s}}
+ return best}
