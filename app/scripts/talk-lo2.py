@@ -598,6 +598,20 @@ P(F, 'body', 'để {self} coi rồi chỉ cho', answer='favor', minTier='acquai
 
 # ---------- Gán mã, nhân đôi đồng nghiệp
 TEAM = ('pm', 'design', 'qa')
+# ---------- 06/11: thêm câu rủ, trêu, khoe cho người thường gặp còn ít (sim:talk thiếu ý định trong tháng). Thêm ở cuối để mã mảnh cũ không đổi.
+P('meat', 'ask', 'sáng mai uống cà phê đầu chợ với {self} không', 'invite')
+P('meat', 'ask', 'bữa nào rảnh đi chợ đêm với {self} cho vui không', 'invite')
+P('meat', 'body', 'lần nào {you} cũng hỏi giá rồi đi luôn', 'tease')
+P('meat', 'body', '{you} xách giỏ đi chợ nhìn ra dáng nội trợ ghê', 'tease')
+P('grocery', 'ask', 'tối rảnh qua coi đá banh với {self} không', 'invite')
+P('grocery', 'ask', 'sáng mai đi tập dưỡng sinh với {self} không', 'invite')
+P('grocery', 'body', '{you} mua mì gói hoài, coi chừng ốm nhom', 'tease')
+P('grocery', 'body', 'nhìn mặt {you} là biết lại thức khuya', 'tease')
+P('courier', 'body', '{you} lại quên mang dù rồi phải không', 'tease')
+P('courier', 'body', 'nhìn {you} ngái ngủ ghê', 'tease')
+P('courier', 'body', 'tuần này {self} chạy được hơn trăm đơn', 'brag')
+P('courier', 'ask', 'cuối tuần đi ăn ốc với {self} không', 'invite')
+
 out = []
 for i, p in enumerate(rows, 1):
     pid = 'l2-%03d' % i
