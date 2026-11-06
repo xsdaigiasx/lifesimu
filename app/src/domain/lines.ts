@@ -80,6 +80,19 @@ export const LINES:Line[]=[
  L('quirk:Nói câu nào cũng thêm ca dao','Ăn quả nhớ kẻ trồng cây, {you} nhớ không.'),
  L('quirk:Sưu tầm vé số trúng nhỏ','Hôm qua {self} lại trúng giải an ủi, cất vô hộp chung với mấy tấm kia.'),
  // Nhắc chuyện cũ (callback) theo chủ đề ký ức; tag-refuse là lần từng từ chối
+ // #357: nhắc lại lần đi cùng theo hẹn
+ L('cb:đi câu cá chung','{Ago} đi câu với {you} vui ghê, bữa nào đi nữa.'),
+ L('cb:đi câu cá chung','Bữa câu cá với {you}, {self} về nấu canh chua ngon ghê.'),
+ L('cb:đi uống nước chung','{Ago} ngồi uống nước với {you} vui ghê.'),
+ L('cb:đi uống nước chung','Bữa uống nước với {you}, {self} còn nhớ hoài.'),
+ L('cb:đánh cờ chung','{Ago} {you} đánh cờ cũng khá, bữa nào phục thù nha.'),
+ L('cb:đánh cờ chung','Từ bữa đánh cờ với {you}, {self} ngứa tay hoài.'),
+ L('cb:qua nhà chơi','{Ago} {you} ghé nhà chơi, cả nhà vui ghê.'),
+ L('cb:qua nhà chơi','Bữa {you} qua nhà, {self} còn kể hoài.'),
+ L('cb:chơi thể thao chung','{Ago} chơi với {you} đã ghê, bữa nào chơi nữa.'),
+ L('cb:chơi thể thao chung','Bữa chơi chung với {you} về ê ẩm mà vui.'),
+ L('cb:đi chơi chung','{Ago} đi chơi với {you} vui ghê.'),
+ L('cb:đi chơi chung','Bữa đi chơi với {you}, {self} còn nhớ hoài.'),
  // #354 tầng 1: nhắc lại đoạn tự diễn (ký ức nhẹ theo việc)
  L('cb:chạy bộ cùng','{Ago} chạy với {you} vui ghê, bữa nào chạy nữa nha.'),
  L('cb:chạy bộ cùng','Từ bữa chạy chung với {you}, {self} chạy đều hơn rồi.'),

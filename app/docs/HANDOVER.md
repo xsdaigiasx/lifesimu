@@ -4,11 +4,13 @@ Bản trước: `docs/history/HANDOVER-v0.35.md` (01/11), nhật ký 05/11 ở `
 
 ## PHIÊN MỚI BẮT ĐẦU Ở ĐÂY
 
-Trạng thái 06/11 19:30: main 0.89.5 (mọi PR trước đã gộp). PR #354 đoạn tự diễn (0.90.0) chờ gộp.
+Trạng thái 06/11 20:30: main 0.89.5. Chờ gộp theo thứ tự: #358 đoạn tự diễn (0.90.0), rồi PR #357 hẹn thật (0.91.0, dựng trên #358).
 
 **#354 đoạn tự diễn: xong, chờ gộp (0.90.0).** `talk/interlude.ts` (`sceneOf`): chọn Hỏi thêm, Kể chuyện mình (thái độ Ấm áp, Đùa), Giúp, làm lành thì không còn lượt 2, 3; hiện 4 dòng (câu vừa chọn, câu dẫn theo chỗ và việc, câu chốt NPC theo bậc, tuổi, ý định, câu chào "Dạ" với người lớn, "Ừ" với người cùng tuổi hoặc nhỏ hơn), tốn thêm 10 phút, cộng như một lượt Hỏi thêm. Tầng 1 ký ức nhẹ (chủ dự án duyệt 19:18): câu dẫn để lại ký ức trọng số 2 theo việc (chạy bộ cùng, ngồi hiên nói chuyện...), cùng chủ đề thì làm đậm, NPC nhắc bằng câu `cb:<chủ đề>` trong `lines.ts`. Câu rủ, câu nhờ tạm kết ngay. `PRINT_CAP` 40 lên 80 (người nói nhiều mỗi ngày vẫn giữ chống lặp 14 ngày). Giao diện `StoryDialog` hiện dần từng dòng 1 giây, chạm hiện hết. Câu đáp ngắn đưa danh xưng về cuối ("Vậy hả, rồi sao nữa cô"). Mẫu: `node scripts/talk-samples-scene.cjs 5 <seed>`.
 
-**Việc kế tiếp: issue #357** lời rủ thành hẹn thật, đi cùng, tầng 3 thành nếp (chủ dự án duyệt hướng, còn chờ chốt ai trả tiền và rủ cả nhóm).
+**#357 lời rủ thành hẹn thật: xong, chờ gộp sau #358 (0.91.0).** Chủ dự án chốt 06/11 19:27: NPC nói mình bao thì NPC trả, người chơi nói mình bao thì người chơi trả, còn lại ai nấy trả; chỉ người rủ đi; tới hẹn là sự kiện ngắn (chào, làm, chào về). `talk/outing.ts`: 63 mảnh rủ mang `plan` (lúc `PlanAt`, việc `OutAct` 10 loại, chỗ, `pay:'npc'` khi NPC mời); `talk-check` kiểm. Nhận lời: `addAppointment` (mỗi người một hẹn chờ), NPC chốt giờ 3 dòng; "Mấy giờ vậy" thành lượt 2 NPC nói giờ, chỗ rồi hỏi lại; rủ "ngồi xuống đánh một ván" thì vào luôn. Tới chỗ đúng giờ: `maybeStart` mở `pending.appt`, `answerOuting`: tốn giờ, tiền (`priceFor`), no, năng lượng theo việc, quan hệ +4, ký ức trọng số 3 theo việc (câu `cb:` mới); bỏ về thì −2 và hẹn tính lỡ. Mảnh `{self} bao` (`tail-007`) tính là NPC mời. Tầng 3 (`inbox.habitOf`, `HABIT`): 3 lần cùng việc trong 14 ngày thành nếp, thứ sáu NPC nhắn rủ cho thứ bảy (tin `invite` có `appt.act`); 2 lần liền từ chối hoặc lỡ thì thôi; từ chối lời rủ theo nếp −1. Lịch điện thoại có mục "Hẹn với mọi người". Hẹn xa tới 8 ngày (validator). Mẫu: `node scripts/talk-samples-outing.cjs 5 <seed>`.
+
+**Việc kế tiếp:** T86 điểm hoà thuận khu trọ, T89 mạng xã hội, H8, T38, T39.
 
 Sau đó: T86 điểm hoà thuận khu trọ, T89 mạng xã hội, H8, T38, T39. Tiến độ: 90 ticket T, xong 53, một phần 11, gộp hoặc thay 4, hoãn 1, chưa làm 21. Chủ dự án 06/11: tranh treo tường cho nhà phố, biệt thự để sau (khi có ảnh vỏ nhà Codex #189).
 

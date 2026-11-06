@@ -701,6 +701,7 @@
 },
 {
 "id": "l3-060",
+"plan": {"at": "tmr-morning", "act": "eat", "place": "streetfood"},
 "slot": "ask",
 "text": "mai ăn sáng chung với {self} không",
 "arch": [
@@ -731,6 +732,7 @@
 },
 {
 "id": "l3-063",
+"plan": {"at": "tmr-morning", "act": "run", "place": "park"},
 "slot": "ask",
 "text": "mai chạy chung với {self} không",
 "arch": [
@@ -813,6 +815,7 @@
 },
 {
 "id": "l3-071",
+"plan": {"at": "now", "act": "chess"},
 "slot": "ask",
 "text": "{you} ngồi xuống đánh với {self} một ván không",
 "arch": [
@@ -1359,6 +1362,7 @@
 },
 {
 "id": "l3-116",
+"plan": {"at": "evening", "act": "visit", "place": "home"},
 "slot": "ask",
 "text": "tối nay nấu chung với {self} cho vui không",
 "arch": [
@@ -1636,6 +1640,7 @@
 },
 {
 "id": "l3-142",
+"plan": {"at": "tmr-afternoon", "act": "walk", "place": "park"},
 "slot": "ask",
 "text": "chiều mai dắt chó đi dạo chung với {self} không",
 "arch": [

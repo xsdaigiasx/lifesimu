@@ -1,4 +1,7 @@
 /** H1: bộ kiểm tra kho khung và mảnh (HOI-THOAI I.6). Dữ liệu sai thì chặn (npm run talk:check, test). */
+import {PLAN_ATS,OUT_ACTS} from './outing';
+import {places as ALL_PLACES} from '../places';
+const PLACE_IDS:readonly string[]=ALL_PLACES.map(x=>x.id);
 import {isNpcId} from '../npc';
 import {archOf} from '../town-data';
 import {isGiftItem,GIFT_MAX} from '../gifts';
@@ -55,6 +58,7 @@ export function talkProblems(d:TalkData,opt:{minFramesPerIntent?:number}={}):str
   if(p.weight!==undefined&&!(p.weight>0))bad(`${at}: trọng số phải dương`);
   if(p.gift===undefined&&PROMISE.test(p.text??''))bad(`${at}: câu hứa cho đồ phải khai gift để cho thật`);
   if(p.gift!==undefined&&!(Array.isArray(p.gift)&&isGiftItem(p.gift[0])&&Number.isInteger(p.gift[1])&&p.gift[1]>=1&&p.gift[1]<=GIFT_MAX))bad(`${at}: quà phải là món có trong danh mục, 1 đến ${GIFT_MAX}`);
+  if(p.plan!==undefined&&!(p.intent?.includes('invite')&&p.slot==='ask'&&PLAN_ATS.includes(p.plan.at)&&OUT_ACTS.includes(p.plan.act)&&(p.plan.place===undefined||PLACE_IDS.includes(p.plan.place))&&(p.plan.pay===undefined||p.plan.pay==='npc')))bad(`${at}: kế hoạch hẹn sai (chỉ mảnh rủ ô ask, lúc, việc, chỗ hợp lệ)`);
   if(p.after!==undefined&&(!Array.isArray(p.after)||!p.after.length||p.after.some(x=>!AFTERS.includes(x))))bad(`${at}: after lạ`);
   if(p.answer!==undefined&&(!Array.isArray(p.answer)||!p.answer.length||p.answer.some(x=>!PLAYER_TOPICS.includes(x))))bad(`${at}: answer lạ`);
   if(p.after&&p.answer)bad(`${at}: không ghi cả after và answer`);
