@@ -45,6 +45,7 @@ export function talkProblems(d:TalkData,opt:{minFramesPerIntent?:number}={}):str
   if(p.arch!==undefined&&(!Array.isArray(p.arch)||!p.arch.length||p.arch.some(a=>!archOf(a))))bad(`${at}: kiểu người lạ`);
   if(p.arch&&p.npc)bad(`${at}: không ghi cả npc và arch`);
   if(p.tone!==undefined&&(!Array.isArray(p.tone)||!p.tone.length||p.tone.some(t=>!['good','bad','plain'].includes(t))))bad(`${at}: tông lạ`);
+  if(p.noArch!==undefined&&(!Array.isArray(p.noArch)||p.noArch.some(a=>!archOf(a))))bad(`${at}: kiểu người lạ`);
   if(p.tone&&!p.topic)bad(`${at}: mảnh có tông phải gắn chủ đề`);
   if(p.town!==undefined&&typeof p.town!=='boolean')bad(`${at}: town phải là true hoặc false`);
   if(p.age!==undefined&&!(Array.isArray(p.age)&&p.age.length===2&&p.age.every(Number.isInteger)&&p.age[0]<=p.age[1]))bad(`${at}: tuổi phải là [từ, đến]`);

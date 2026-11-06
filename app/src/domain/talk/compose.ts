@@ -56,6 +56,7 @@ function pieceFits(p:Piece,slot:Slot,intent:Intent|null,fact:Fact|undefined,c:Ta
  if(p.npc&&p.npc!==c.npc.id)return false;
  if(p.arch&&!(c.npc.arch&&p.arch.includes(c.npc.arch)))return false;
  if(p.tone&&!(fact&&p.tone.includes(fact.tone)))return false;
+ if(p.noArch&&c.npc.arch&&p.noArch.includes(c.npc.arch))return false;
  if(p.town!==undefined&&p.town!==!!c.npc.arch)return false;
  if(p.age&&(c.npc.age<p.age[0]||c.npc.age>p.age[1]))return false;
  if(p.where&&!(c.place&&p.where.includes(c.place)))return false;
