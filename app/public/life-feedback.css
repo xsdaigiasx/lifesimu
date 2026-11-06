@@ -23,7 +23,7 @@
 /* 04/11: ảnh Codex lô 1–3 */
 /* Chân dung ghép từ mảnh (#305): các lớp 256x256 chồng khít, phóng vào vùng đầu vai */
 .npc-face{position:relative;display:block;width:100%;height:100%;border-radius:50%;overflow:hidden}
-.npc-face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.25) translateY(4%);transform-origin:50% 40%}
+.npc-face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.25) translateY(4%) translate(var(--dx,0%),var(--dy,0%)) scale(var(--s,1));transform-origin:50% 40%}
 .market-avatar,.relations-avatar,.profile-avatar,.people-here-avatar,.story-avatar,.journal-avatar,.ps-avatar,.office-avatar,.ows-turn-avatar{overflow:hidden;padding:0}
 .meal-art img,.market-item-art img{width:84px;height:84px;object-fit:contain}
 .meal-grid .market-item.is-locked{opacity:.55}.meal-grid .market-item.is-locked img{filter:grayscale(.6)}

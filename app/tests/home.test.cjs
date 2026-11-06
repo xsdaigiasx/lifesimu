@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {floorPoint,floorCell,floorPolygon,homeSize,HOME_FLOOR,blockedHomeCell,HOME_OUTER_FLOOR,HOME_SAFE_MARGIN,outerFloorPoint,homeSafeEdgePath}=require('../.test-build/domain/home-geometry');
+const {floorPoint,floorCell,floorPolygon,homeSize,HOME_FLOOR,blockedHomeCell,HOME_OUTER_FLOOR,HOME_SAFE_MARGIN,outerFloorPoint,homeSafeEdgePath,dragCell}=require('../.test-build/domain/home-geometry');
 const {homeOf,homeError,saveHome}=require('../.test-build/domain/home');
 const {engine}=require('../.test-build/domain/engine');
 for(let x=0;x<=8;x++)for(let y=0;y<=8;y++){
@@ -72,4 +72,20 @@ console.log('PASS: rotation preserves footprint center exactly, half-cell collis
  assert.equal(crowded.length,5);assert.equal(homeError(crowded),null);
  assert.deepEqual(migrateHome(migrateHome(legacy)).map(i=>i.id),legacy.map(i=>i.id));
  console.log('PASS: save lưới 10×10 chuyển sang 8×8 giữ đủ đồ, hợp lệ, không chồng');
+}
+{
+ // Việc 5: kéo đồ. Ô đặt = ô dưới ngón tay trừ độ lệch lúc bắt đầu kéo; mọi ô của món (sau khi xoay) phải trong lưới 8×8, ngoài bếp, vệ sinh, không đè đồ khác.
+ const {HOME_ITEMS,HOME_GRID}=require('../.test-build/domain/home');
+ const item={id:'bed',x:3,y:4,rotation:0,placed:true},grab={x:3.6,y:4.3},offset={x:grab.x-item.x,y:grab.y-item.y};
+ assert.deepEqual(dragCell(grab,offset),{x:3,y:4},'chưa kéo thì đồ đứng yên');
+ for(const [dx,dy] of [[1,0],[0,2],[-1.5,1],[2.5,-2]]){const c=dragCell({x:grab.x+dx,y:grab.y+dy},offset);assert(Math.abs(c.x-(item.x+dx))<=.25&&Math.abs(c.y-(item.y+dy))<=.25,`kéo ${dx},${dy}`)}
+ const oracle=(id,x,y,rot)=>{const t=HOME_ITEMS[id],w=rot%180?t.h:t.w,h=rot%180?t.w:t.h;if(x<0||y<0||x+w>HOME_GRID||y+h>HOME_GRID)return false;for(let cx=Math.floor(x);cx<Math.ceil(x+w);cx++)for(let cy=Math.floor(y);cy<Math.ceil(y+h);cy++)if(blockedHomeCell(cx,cy))return false;return true};
+ let ok=0,bad=0;
+ for(const id of Object.keys(HOME_ITEMS)){if(id==='painting')continue;for(const rot of [0,90,180,270])for(let x=-1;x<=HOME_GRID+.5;x+=.5)for(let y=-1;y<=HOME_GRID+.5;y+=.5){
+  const want=oracle(id,x,y,rot),got=homeError([{id,x,y,rotation:rot,placed:true}])===null;assert.equal(got,want,`${id} ${rot}° tại ${x},${y}`);want?ok++:bad++}}
+ assert(ok>100&&bad>100,'quét đủ cả chỗ hợp lệ và không hợp lệ');
+ // chồng đồ: hai đồ chạm cạnh thì được, đè nhau thì lỗi, kể cả sau khi xoay
+ assert.equal(homeError([{id:'bed',x:3,y:3,rotation:0,placed:true},{id:'desk',x:3,y:3,rotation:0,placed:true}]),'Đồ đang chồng lên nhau.');
+ const bw=HOME_ITEMS.bed.w;assert.equal(homeError([{id:'bed',x:3,y:3,rotation:0,placed:true},{id:'desk',x:3+bw,y:3,rotation:0,placed:true}]),null);
+ console.log('PASS: kéo đồ: ô theo độ lệch lúc bắt đầu kéo, kiểm mọi ô sau khi xoay, quét '+(ok+bad)+' vị trí');
 }

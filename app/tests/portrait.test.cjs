@@ -8,6 +8,8 @@ test('bảng mảnh khớp manifest của Codex và mọi ảnh có thật',()=>
  for(const i of man.items)assert.ok(fs.existsSync(path.join(pub,'assets/portrait',i.layer,i.id+'.webp')),i.id);
 });
 
+test('độ chỉnh lớp phụ kiện trong portrait.ts khớp manifest',()=>{assert.deepEqual(P.EXTRA_ADJUST,man.adjust);assert.equal(P.FRAME,man.width);for(const k of Object.keys(man.adjust))assert.ok(man.items.some(i=>i.layer==='extra'&&i.id===k),k);assert.deepEqual(P.layerAdjust('/assets/portrait/extra/cap.webp'),{dx:0,dy:14,scale:1});assert.equal(P.layerAdjust('/assets/portrait/hair/f-bob.webp'),undefined)});
+
 test('mặt ghép theo hồ sơ: đúng giới, tuổi, áo hợp vai, người già tóc bạc, đủ ảnh, tất định, đa dạng',()=>{
  const seen=new Set();
  for(let k=0;k<30;k++)for(const n of N.buildRoster('mat'+k)){const f=P.faceOf(n),a=P.ageBand(n.age),g=n.gender==='female'?'f':'m';
