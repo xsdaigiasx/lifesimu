@@ -51,6 +51,8 @@ Trạng thái chốt 06/11 15:45: main 0.88.2, đã gộp #339 (tranh treo tư�
 
 ## 1b. Cập nhật 06/11 (H0 đến H7d, chi tiết kỹ thuật)
 
+- **Câu trả lời theo dạng câu NPC (0.89.3, tiếp #348).** Chủ dự án 06/11: câu trả lời của người chơi vẫn lạc quẻ. Rà 60 câu: lựa chọn chỉ theo ý định nên NPC hỏi "có nấu cơm không", "gặp ở công viên phải không" vẫn hiện câu hỏi thăm sức khoẻ; báo "mai trời nắng" hiện "rồi sao nữa". `replies.ts` `lineForm(intent, text)` nhận dạng từ chữ câu NPC: Hỏi (well, yesno, recog, choice, tip), Báo tin (weather, price, gossip); mẫu trả lời có `form`, câu lạnh nhạt riêng từng dạng; Than chuyện thường dùng câu chung (Nghe cực ghê, rồi sao nữa, ráng chút nữa). `director.talkCtxOf` truyền `form`. Kịch bản rà: chạy lại khi thêm Lô mới để soát câu trả lời.
+
 - **Trả lời khi NPC than và câu nhắc chuyện thật (issue #348, PR #349 0.89.1, PR nối sau 0.89.2).** Ảnh chơi thử 06/11: than đá banh trúng cửa mà hiện "đi khám". `replies.ts`: 4 câu ốm mệt của ý định Than gắn `sub:HEALTH` (sick, tired), thêm 4 câu chung. Đổi lựa chọn làm `sim:talk` dao động quanh mốc (28,8%); chủ dự án chọn tìm cách: `compose.ts` `FACT_BOOST` 3, ý định đang có chuyện thật để nói được ưu tiên khi rút ý định. 60 seed: 32,2% (`--fresh` 35,7%), mốc trở lại 30%, đa dạng ý định vẫn đạt, 0 câu nhắc sai; `sim:npc` đạt hết.
 
 - **H7d nhóm chat (issue #345, nhánh `claude/345-h7d-nhom-chat`, 0.89.0).** Chủ dự án duyệt 06/11 (AskUserQuestion) và duyệt 30 tin mẫu không sửa (`node scripts/talk-samples-chat.cjs`). Lát cắt tuỳ chọn mới `chats` (`validChats`, trong `OPTIONAL_SLICES`), save cũ mở được.

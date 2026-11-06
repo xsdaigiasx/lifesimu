@@ -4,7 +4,7 @@ const {engine}=require('../.test-build/domain/engine');const {INTENTS}=require('
 const R=N.buildRoster('replies'),by=id=>R.find(n=>n.id===id);
 const P=(o={})=>({energy:80,stress:20,mood:70,money:1e6,minute:600,end:1320,skills:{communication:3},...o});
 const ctx=(o={})=>({npc:by('landlord'),intent:'complain',tier:'close',day:20,seed:'s',player:P(),log:[],...o});
-const MATCH={complain:['help','advise','ask','silent'],request:['help','refuse','ask'],invite:['accept','refuse','ask'],ask:['share','ask','silent'],brag:['ask','advise','share','accept','silent'],news:['ask','share','silent'],tease:['share','silent'],apologize:['accept','silent','refuse']};
+const MATCH={complain:['help','advise','ask','share','silent'],request:['help','refuse','ask'],invite:['accept','refuse','ask'],ask:['share','ask','silent'],brag:['ask','advise','share','accept','silent'],news:['ask','share','silent'],tease:['share','silent'],apologize:['accept','silent','refuse']};
 
 test('mỗi lượt 3 đến 4 lựa chọn, hành động hợp ý định, có cả tích cực và không tích cực, chữ đã điền',()=>{
  for(const intent of INTENTS)for(const tier of ['stranger','acquaint','close','bestie','hostile'])for(const n of R)for(let i=0;i<3;i++){const o=Rp.buildReplies(ctx({npc:n,intent,tier,seed:`${n.id}${i}`}));
@@ -68,5 +68,13 @@ test('thói quen người chơi và lát cắt save',()=>{
 });
 // 06/11: câu than không phải chuyện đau ốm thì không có lựa chọn "đi khám", "nghỉ đi", "bị lâu chưa"
 {const n=R.find(x=>x.id==='neighbor')??R[0],all=sub=>{const set=new Set();for(let i=0;i<60;i++)for(const o of Rp.buildReplies(ctx({npc:n,intent:'complain',tier:'close',seed:'c'+i,...(sub?{sub}:{})})))set.add(o.label);return[...set].join('|')};
- const plain=all(),sick=all('sick');assert(!/khám|nghỉ đi|bị lâu chưa/.test(plain),plain);assert(/khám|nghỉ đi|bị lâu chưa/.test(sick),sick);assert(/rồi sao nữa|phụ/.test(plain),plain)}
+ const plain=all(),sick=all('sick');assert(!/khám|nghỉ đi|bị lâu chưa/.test(plain),plain);assert(/khám|nghỉ đi|bị lâu chưa/.test(sick),sick);assert(/rồi sao nữa|cực ghê/.test(plain),plain)}
 
+// 06/11: nhận dạng câu NPC để chọn bộ câu trả lời hợp (chủ dự án: câu trả lời lạc quẻ)
+{const F=(i,t)=>Rp.lineForm(i,t);
+ assert.equal(F('ask','Cháu nè, dạo này cháu có tự nấu cơm không?'),'yesno');assert.equal(F('ask','Mặt em quen quen, tuần trước gặp ngoài công viên phải không?'),'recog');
+ assert.equal(F('ask','Cháu ơi, cháu nhớ chú không, bữa gặp ngoài công viên đó.'),'recog');assert.equal(F('ask','Như cũ hả em, em ăn tại chỗ hay mang về, ăn cho ngon nha em.'),'choice');
+ assert.equal(F('ask','Dạo này cháu khỏe không?'),'well');assert.equal(F('ask','Trời râm mát vầy con đi làm nhớ mặc ấm.'),'tip');
+ assert.equal(F('news','Mai trời mưa đó.'),'weather');assert.equal(F('news','Nghe nói tuần sau thịt heo lên giá.'),'price');assert.equal(F('news','Đầu đường mới mở xe cà phê, ngon mà rẻ.'),'gossip');
+ const labels=(intent,form)=>{const set=new Set();for(let i=0;i<40;i++)for(const o of Rp.buildReplies(ctx({intent,tier:'close',seed:'f'+i,form})))set.add(o.label);return[...set].join('|')};
+ assert(!/hỏi thăm|hơi mệt/.test(labels('ask','yesno')));assert(/nhầm người|nhớ/.test(labels('ask','recog')));assert(!/rồi sao nữa/.test(labels('news','weather')));assert(/mua trước/.test(labels('news','price')))}
