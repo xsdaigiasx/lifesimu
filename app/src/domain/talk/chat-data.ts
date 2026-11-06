@@ -1,4 +1,4 @@
-/** H7d: câu nhóm chat. Biến: {self} người nói tự xưng (như với người chơi), {y} người đáp gọi người vừa nhắn (người nhỏ hơn đáp thì thêm "Dạ,"), {c} người được nhắc tới, {r} chuyện của người nói hoặc tin đồn,
+/** H7d: câu nhóm chat. Biến: {self} người nói tự xưng (như với người chơi), {you} người nói gọi người chơi, {y} người đáp gọi người vừa nhắn (người nhỏ hơn đáp thì thêm "Dạ,"), {c} người được nhắc tới, {r} chuyện của người nói hoặc tin đồn,
  * {thing} món sắp lên giá, {when} lúc hẹn ("tối nay"), {Place} chỗ hẹn. Câu viết thường đầu dòng, khi ghép tự viết hoa. */
 export type GroupId='block'|'work'|'family';
 export const GROUP_NAME:Record<GroupId,string>={block:'Khu trọ',work:'Đồng nghiệp',family:'Gia đình'};
@@ -14,6 +14,12 @@ export const CHAT_DAY:ChatLine[]=[
  {id:'cd-7',text:'hai đứa ăn uống đàng hoàng nha',g:['family'],who:['me']},
  {id:'cd-8',text:'trời trở lạnh rồi, nhớ mặc ấm nha',g:['family'],who:['me']},
  {id:'cd-9',text:'mẹ ơi con nhớ cơm mẹ nấu ghê',g:['family'],who:['em']},
+ {id:'cd-10',text:'ở quê mới mưa to, mẹ với em vẫn khỏe',g:['family'],who:['me']},
+ {id:'cd-11',text:'mẹ mới muối hũ dưa, bữa nào về lấy nha',g:['family'],who:['me']},
+ {id:'cd-12',text:'cuối tuần nhớ gọi về cho mẹ nha',g:['family'],who:['me']},
+ {id:'cd-13',text:'{you} ơi khi nào về quê',g:['family'],who:['em']},
+ {id:'cd-14',text:'mẹ nhắc {you} hoài kìa',g:['family'],who:['em']},
+ {id:'cd-15',text:'hôm nay em được điểm cao nè',g:['family'],who:['em']},
 ];
 /** Theo thời tiết hôm nay. */
 export const CHAT_WEATHER:Record<'rain'|'storm'|'sunny',ChatLine[]>={
