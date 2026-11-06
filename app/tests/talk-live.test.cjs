@@ -46,14 +46,19 @@ test('H6: Lô 2 có mảnh riêng cho 7 vai (đồng nghiệp ở cả hai công
 
 /** Trả lời đến hết chuyện, chọn lựa chọn mở được đầu tiên; trả về số lượt. */
 const finish=(s,pickAt=0)=>{let n=s,k=0;for(;k<4&&D.storyOf(n).pending;k++){const ev=D.openEvent(n),open=ev.options.map((o,i)=>o.locked?-1:i).filter(i=>i>=0);n=ok(D.answerEvent(n,open[Math.min(pickAt,open.length-1)]))}return{n,k}};
-test('H6: hội thoại nhiều lượt: Hỏi thêm, Giúp, Kể chuyện mình thì NPC đáp tiếp, tối đa 3 lượt, mỗi lượt tốn giờ',()=>{
- let multi=0;
+test('#354: chọn câu kéo dài chuyện thì hiện đoạn tự diễn (câu vừa nói, câu dẫn, câu chốt, câu chào), tốn thêm 10 phút, không còn lượt sau',()=>{
+ let scenes=0;
  for(let d=20;d<60;d++){const s=at(d,960,'home'),r=D.startTalk(s,'neighbor');if(!r.ok||!D.storyOf(r.state).pending.talk)continue;
-  for(let i=0;i<4;i++){const ev=D.openEvent(r.state);if(i>=ev.options.length||ev.options[i].locked)continue;const n=ok(D.answerEvent(r.state,i)),p=D.storyOf(n).pending;
-   if(p){multi++;assert.equal(p.talk.turn,2);assert.equal(p.talk.said,ev.options[i].label,'hiện câu người chơi vừa nói');assert.ok(clockOf(n).minute>clockOf(r.state).minute,'tốn giờ');
-    const ev2=D.openEvent(n);assert.equal(ev2.said,ev.options[i].label);assert.ok(!ev2.options.some(o=>o.label===ev.options[i].label),'không lặp lựa chọn vừa chọn');
-    const {k}=finish(n);assert.ok(k<=2,'tối đa 3 lượt');assert.ok(engine.valid(n))}}}
- assert.ok(multi>=5,'có hội thoại nhiều lượt: '+multi);
+  for(let i=0;i<4;i++){const ev=D.openEvent(r.state);if(i>=ev.options.length||ev.options[i].locked)continue;const a=D.answerEvent(r.state,i);assert.ok(a.ok,a.error);const n=a.state;assert.ok(engine.valid(n));
+   assert.equal(D.storyOf(n).pending,undefined,'không còn lượt sau');
+   if(a.scene){scenes++;assert.equal(a.scene.length,4);assert.equal(a.scene[0].text,ev.options[i].label,'mở bằng câu người chơi vừa chọn');assert.deepEqual(a.scene.map(l=>l.who),['me','narr','npc','me']);
+    assert.ok(a.scene.every(l=>!/[{}]/.test(l.text)),'không còn chỗ trống');assert.ok(D.storyOf(n).memories.some(m=>m.npc==='neighbor'&&m.tag==='scene'),'để lại ký ức nhẹ');assert.ok(clockOf(n).minute-clockOf(r.state).minute>=15,'tốn thêm 10 phút')}}}
+ assert.ok(scenes>=5,'có đoạn tự diễn: '+scenes);
+});
+test('#354 tầng 1: ký ức nhẹ cùng chủ đề không nhân dòng; câu rủ, câu nhờ không thành đoạn tự diễn',()=>{
+ let s=at(20,960,'home'),k=0;for(let d=20;d<70&&k<6;d++){s={...s,day:d,clock:{...clockOf(s),minute:960,location:'home'}};const r=D.startTalk(s,'neighbor');if(!r.ok||!D.storyOf(r.state).pending.talk)continue;const p=D.storyOf(r.state).pending,ev=D.openEvent(r.state);
+  for(let i=0;i<ev.options.length;i++){if(ev.options[i].locked)continue;const a=D.answerEvent(r.state,i);if(!a.ok)continue;if(['invite','request'].includes(p.talk.intent))assert.equal(a.scene,undefined);if(a.scene){k++;s=a.state;break}}}
+ const mine=D.storyOf(s).memories.filter(m=>m.npc==='neighbor'&&m.tag==='scene');assert.ok(mine.length>=1);assert.equal(new Set(mine.map(m=>m.topic)).size,mine.length,'mỗi chủ đề một dòng');
 });
 
 test('H6: người chơi tự mở lời theo chủ đề; Hỏi chuyện của họ cần Quen biết; người bán cho hỏi hàng',()=>{

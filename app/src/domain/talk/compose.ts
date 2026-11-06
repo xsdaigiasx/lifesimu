@@ -18,7 +18,7 @@ export const TALK:TalkData={frames:framesData as Frame[],pieces:[...piecesData,.
 /** Vân tay chống lặp (I.7): mảnh 14 ngày, khung 3 ngày, ý định cùng chủ đề 2 ngày. Chỉ lưu mã, không lưu câu. */
 export interface Print{k:string;d:number}
 export const PRINT_DAYS={p:14,f:3,t:2} as const;
-export const PRINT_CAP=40;
+export const PRINT_CAP=80;
 const used=(recent:readonly Print[],k:string,day:number)=>{const w=PRINT_DAYS[k[0] as keyof typeof PRINT_DAYS]??14;return recent.some(x=>x.k===k&&day-x.d<w)};
 /** Ghi thêm vân tay, bỏ mã quá 14 ngày, giữ tối đa 40 mã. */
 export function notePrints(list:readonly Print[],keys:readonly string[],day:number):Print[]{return[...list.filter(x=>day-x.d<14&&!keys.includes(x.k)),...keys.map(k=>({k,d:day}))].slice(-PRINT_CAP)}
