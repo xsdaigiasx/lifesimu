@@ -1,4 +1,6 @@
-# Next Day v0.35 (slogan: Một đời để sống)
+# Next Day (slogan: Một đời để sống)
+
+Bản hiện hành 0.87.0; số bản luôn lấy từ `version` trong `package.json`.
 
 Đọc docs/HANDOVER.md để biết trạng thái hiện hành và giới hạn.
 
