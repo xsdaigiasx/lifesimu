@@ -31,7 +31,8 @@ export interface Fact{id:string;topic:TopicGroup;
  /** 'player', mã NPC hoặc 'world' */about:string;
  day:number;tone:'good'|'bad'|'plain';private:0|1|2|3;
  /** ai được biết: mọi người, người có mặt hôm đó, hoặc danh sách NPC */knownBy:'all'|'present'|string[];
- vars:Record<string,string|number>}
+ vars:Record<string,string|number>;
+ /** #364: nhãn biến cố chính xác, không gộp bán ế/đắt hàng thành money. */tags?:string[]}
 
 /** H6: chủ đề người chơi tự mở lời: hỏi thăm sức khoẻ, công việc; kể chuyện mình; hỏi chuyện của họ; nhờ việc, hỏi mua bán. */
 export type PlayerTopic='health'|'mine'|'theirs'|'favor';

@@ -29,5 +29,5 @@ export function followNow(s:GameState,npc:NpcProfile,channel:Channel,seed:string
 export function answerNow(s:GameState,npc:NpcProfile,channel:Channel,seed:string,topic:PlayerTopic):Said|null{return answerTo(ctxNow(s,npc,channel,seed),topic)}
 
 /** Bối cảnh lựa chọn trả lời từ trạng thái người chơi. */
-export function replyCtxOf(s:GameState,npc:NpcProfile,intent:Intent,seed:string,gift?:[string,number],more:Pick<ReplyCtx,'mode'|'turn'|'skip'|'form'|'paid'>&{fact?:string}={}):ReplyCtx{const c=clockOf(s),k=s.skills,cash=s.money,{fact,...rest}=more,sub=fact?ctxNow(s,npc,'face',seed).facts.find(f=>f.id===fact)?.sub:undefined;
+export function replyCtxOf(s:GameState,npc:NpcProfile,intent:Intent,seed:string,gift?:[string,number],more:Pick<ReplyCtx,'thread'|'mode'|'turn'|'skip'|'form'|'paid'>&{fact?:string}={}):ReplyCtx{const c=clockOf(s),k=s.skills,cash=s.money,{fact,...rest}=more,sub=fact?ctxNow(s,npc,'face',seed).facts.find(f=>f.id===fact)?.sub:undefined;
  return{npc,intent,tier:tierFor(s,npc),day:s.day,seed,player:{energy:s.energy,stress:s.stress,mood:s.mood,money:cash,minute:c.minute,end:END,skills:{communication:k?.communication?.level??1,cooking:k?.cooking?.level??1,logic:k?.logic?.level??1}},log:talkOf(s).log,recent:printsOf(s,npc.id),...(gift?{gift}:{}),...(sub?{sub}:{}),...rest}}

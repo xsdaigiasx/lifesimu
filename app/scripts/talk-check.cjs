@@ -7,7 +7,9 @@ const arg=(k,d)=>{const i=process.argv.indexOf(k);return i<0?d:process.argv[i+1]
 {fs.mkdirSync(path.join(root,'.test-build'),{recursive:true});fs.writeFileSync(path.join(root,'.test-build/package.json'),'{"type":"commonjs"}');
  const r=spawnSync(process.execPath,['node_modules/typescript/bin/tsc','-p','tsconfig.tests.json'],{cwd:root,stdio:'inherit'});if(r.status)process.exit(r.status)}
 const C=require(path.join(root,'.test-build/domain/talk/compose')),K=require(path.join(root,'.test-build/domain/talk/check')),N=require(path.join(root,'.test-build/domain/npc'));
-const bad=K.talkProblems(C.TALK,{minFramesPerIntent:3});
+const Threads=require(path.join(root,'.test-build/domain/talk/threads'));
+const bad=[...K.talkProblems(C.TALK,{minFramesPerIntent:3}),...Threads.threadProblems()];
+console.log(`${Threads.THREAD_TOPICS.length} mạch, ${Threads.THREAD_TOPICS.reduce((n,t)=>n+t.beats.length,0)} câu có tag`);
 if(bad.length){console.error(`${bad.length} lỗi, dữ liệu bị chặn`);for(const b of bad)console.error('  - '+b);process.exit(1)}
 console.log(`OK ${C.TALK.frames.length} khung, ${C.TALK.pieces.length} mảnh`);
 const n=Number(arg('--samples',30)),R=N.buildRoster('mau'),moods=['happy','excited','neutral','tired','sad','annoyed'],tiers=['stranger','acquaint','close','bestie'];
