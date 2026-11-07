@@ -1,3 +1,4 @@
+import {furnitureFit} from '../domain/furniture-fit';
 import {useEffect,useRef,useState} from 'react';
 import type {GameState,GameResult} from '../domain/types';
 import {HOME_ITEMS,homeName,homeOf,type HomeId} from '../domain/home';
@@ -48,7 +49,7 @@ function FloorPlan({floor,art,tiers,picking,items,selected,view,setView,onCell,o
    {!art&&floor.stairs&&<g className="iso-stairs" pointerEvents="none">{Array.from({length:floor.stairs.h},(_,i)=><polygon key={i} points={quad(floor.stairs!.x,floor.stairs!.y+i,floor.stairs!.w,1,(floor.stairs!.h-i)*3)} fill="#d9d0c1" stroke="#b9ad99" strokeWidth={.6}/>)}</g>}
    {!art&&floor.rooms.map(r=><g key={r.id} pointerEvents="none"><polygon points={quad(r.x,r.y,r.w,r.h)} fill="none" stroke="#8d8270" strokeWidth={1.4}/><text x={P(r.x+r.w/2,r.y+r.h/2).x} y={P(r.x+r.w/2,r.y+r.h/2).y} className="iso-label">{r.name}</text></g>)}
    {sorted.map(p=>{const {w:iw,h:ih}=itemSize(p),sp=spriteFor(p.id,tiers[p.id],p.rotation),on=selected===p.id;
-    if(sp){const b=P(p.x+iw,p.y+ih);return <g key={p.id} className={`iso-item ${on?'is-selected':''}`} onClick={tap(()=>onItem(p.id))}>{on&&<polygon points={quad(p.x,p.y,iw,ih)} fill="#2f6b4f33" stroke="#2f6b4f" strokeWidth={1.2}/>}<image href={sp.f} x={b.x-sp.ax*PX} y={b.y-sp.ay*PX} width={sp.w*PX} height={sp.h*PX}/></g>}
+    if(sp){const b=P(p.x+iw/2,p.y+ih/2),fit=furnitureFit(sp,iw,ih),scale=PX*fit.scale;return <g key={p.id} className={`iso-item ${on?'is-selected':''}`} onClick={tap(()=>onItem(p.id))}>{on&&<polygon points={quad(p.x,p.y,iw,ih)} fill="#2f6b4f33" stroke="#2f6b4f" strokeWidth={1.2}/>}<image href={sp.f} x={b.x-fit.cx*scale} y={b.y-fit.cy*scale} width={sp.w*scale} height={sp.h*scale}/></g>}
     const z=CW*.55,tone=TONE[p.id]??'#b9c7b0',c=P(p.x+iw/2,p.y+ih/2,z);
     return <g key={p.id} className={`iso-item ${on?'is-selected':''}`} onClick={tap(()=>onItem(p.id))}>
      <polygon points={pts([P(p.x+iw,p.y),P(p.x+iw,p.y+ih),P(p.x+iw,p.y+ih,z),P(p.x+iw,p.y,z)])} fill={tone} opacity=".9"/>

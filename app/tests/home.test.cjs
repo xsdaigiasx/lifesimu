@@ -8,7 +8,7 @@ for(let x=0;x<=8;x++)for(let y=0;y<=8;y++){
  for(const width of [320,374,768]){const left=13,top=87;const q=floorCell(((left+p.x/100*width)-left)/width*100,((top+p.y/100*width)-top)/width*100);assert.equal(Math.round(q.x)+0,x);assert.equal(Math.round(q.y)+0,y)}
 }
 assert.equal(floorPolygon(2,3,2,4).split(' ').length,4);
-assert.deepEqual(homeSize({id:'bed',rotation:90}),{w:3,h:2});
+assert.deepEqual(homeSize({id:'bed',rotation:90}),{w:2,h:1});
 const s=engine.initial(),original=homeOf(s).items;
 const moved=original.map(i=>i.id==='bed'?{...i,x:3,y:4}:i);
 assert.equal(homeError(moved),null);const result=saveHome(s,moved);assert(result.ok);assert(engine.parse(JSON.stringify(result.state)));assert.equal(homeOf(s).items[0].x,0);
@@ -43,15 +43,15 @@ console.log('PASS: equal diamond axes, full floor corner coverage and old front-
 const {rotateHomeObject,validHome}=require('../.test-build/domain/home');
 const {HOME_GROUND}=require('../.test-build/domain/home-art');
 for(const id of Object.keys(HOME_GROUND))for(const rotation of [0,90]){
- const item={id,x:3.5,y:4,rotation,placed:true},before=homeSize(item),turned=rotateHomeObject(item),after=homeSize(turned);
- assert.deepEqual(floorPoint(item.x+before.w/2,item.y+before.h/2),floorPoint(turned.x+after.w/2,turned.y+after.h/2));
+ const item={id,x:3,y:4,rotation,placed:true},before=homeSize(item),turned=rotateHomeObject(item),after=homeSize(turned);
+ assert.deepEqual({x:turned.x,y:turned.y},{x:item.x,y:item.y});
  assert.deepEqual(rotateHomeObject(rotateHomeObject(rotateHomeObject(turned))),item,'xoay 4 lần về chỗ cũ');assert.equal(turned.rotation,rotation+90);
  const ground=HOME_GROUND[id][rotation?1:0];assert(ground.x>0&&ground.x<100&&ground.y>0&&ground.y<=100);
 }
 let half=homeOf(engine.initial()).items.map(i=>i.id==='desk'?{...i,x:4.5,y:5.5}:i);assert(validHome({items:half,grid:8}));assert(engine.parse(JSON.stringify({...engine.initial(),home:{items:half,grid:8}})));
 assert(homeError([{id:'plant',x:3,y:4,rotation:0,placed:true},{id:'lamp',x:3.5,y:4.5,rotation:0,placed:true}]));
 assert.equal(homeError([{id:'plant',x:3,y:4,rotation:0,placed:true},{id:'lamp',x:4,y:4,rotation:0,placed:true}]),null);
-console.log('PASS: rotation preserves footprint center exactly, half-cell collision/save support and separate ground-contact anchors');
+console.log('PASS: rotation preserves integer origin, half-cell collision/save support and separate ground-contact anchors');
 
 
 // Save cũ lưới 10×10: vẫn nạp được, đồ tự vào chỗ hợp lệ của lưới 8×8, không mất món nào.
@@ -78,7 +78,7 @@ console.log('PASS: rotation preserves footprint center exactly, half-cell collis
  const {HOME_ITEMS,HOME_GRID}=require('../.test-build/domain/home');
  const item={id:'bed',x:3,y:4,rotation:0,placed:true},grab={x:3.6,y:4.3},offset={x:grab.x-item.x,y:grab.y-item.y};
  assert.deepEqual(dragCell(grab,offset),{x:3,y:4},'chưa kéo thì đồ đứng yên');
- for(const [dx,dy] of [[1,0],[0,2],[-1.5,1],[2.5,-2]]){const c=dragCell({x:grab.x+dx,y:grab.y+dy},offset);assert(Math.abs(c.x-(item.x+dx))<=.25&&Math.abs(c.y-(item.y+dy))<=.25,`kéo ${dx},${dy}`)}
+ for(const [dx,dy] of [[1,0],[0,2],[-1.5,1],[2.5,-2]]){const c=dragCell({x:grab.x+dx,y:grab.y+dy},offset);assert(Math.abs(c.x-(item.x+dx))<=.5&&Math.abs(c.y-(item.y+dy))<=.5,`kéo ${dx},${dy}`)}
  const oracle=(id,x,y,rot)=>{const t=HOME_ITEMS[id],w=rot%180?t.h:t.w,h=rot%180?t.w:t.h;if(x<0||y<0||x+w>HOME_GRID||y+h>HOME_GRID)return false;for(let cx=Math.floor(x);cx<Math.ceil(x+w);cx++)for(let cy=Math.floor(y);cy<Math.ceil(y+h);cy++)if(blockedHomeCell(cx,cy))return false;return true};
  let ok=0,bad=0;
  for(const id of Object.keys(HOME_ITEMS)){if(id==='painting')continue;for(const rot of [0,90,180,270])for(let x=-1;x<=HOME_GRID+.5;x+=.5)for(let y=-1;y<=HOME_GRID+.5;y+=.5){
@@ -88,4 +88,27 @@ console.log('PASS: rotation preserves footprint center exactly, half-cell collis
  assert.equal(homeError([{id:'bed',x:3,y:3,rotation:0,placed:true},{id:'desk',x:3,y:3,rotation:0,placed:true}]),'Đồ đang chồng lên nhau.');
  const bw=HOME_ITEMS.bed.w;assert.equal(homeError([{id:'bed',x:3,y:3,rotation:0,placed:true},{id:'desk',x:3+bw,y:3,rotation:0,placed:true}]),null);
  console.log('PASS: kéo đồ: ô theo độ lệch lúc bắt đầu kéo, kiểm mọi ô sau khi xoay, quét '+(ok+bad)+' vị trí');
+}
+
+// Every tier/direction uses the source footprint, including asymmetric beds.
+{
+ const {furnitureFit}=require('../.test-build/domain/furniture-fit');
+ const sprites=require('../src/domain/furniture-sprites.json');
+ const {HOME_ITEMS}=require('../.test-build/domain/home');
+ for(const [key,sp] of Object.entries(sprites)){
+  const id=key.split('-')[0];if(id==='painting')continue;
+  const rot=/_[bd]$/.test(key),t=HOME_ITEMS[id],w=rot?t.h:t.w,h=rot?t.w:t.h;
+  const f=furnitureFit(sp,w,h);
+  assert(f.scale>0&&Number.isFinite(f.cx)&&Number.isFinite(f.cy),key);
+  assert(sp.fw*f.scale<=w*.9+1e-9&&sp.fh*f.scale<=h*.9+1e-9,key+' contact footprint fits');
+  // Project the source footprint center: it must land exactly on destination center.
+  assert.equal((sp.ax-(sp.fw-sp.fh)*32-f.cx)*f.scale,0);
+  assert.equal((sp.ay-(sp.fw+sp.fh)*16-f.cy)*f.scale,0);
+ }
+ assert.equal(HOME_ITEMS.bed.w*HOME_ITEMS.bed.h,2);
+ const {spriteBox,iso}=require('../.test-build/domain/office-plan');
+ const b=spriteBox({x:2,y:3},'chair'),c=iso(2.5,3.5);
+ assert.equal(b.width,96);assert.equal(b.left+b.width/2,c.x);
+ assert.equal(b.top+b.height-24,c.y);
+ console.log('PASS: all sprite tiers/directions fit centered footprints; bed two cells; chair inset');
 }

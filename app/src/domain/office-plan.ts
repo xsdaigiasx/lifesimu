@@ -71,6 +71,6 @@ export function buildPlan(size:OfficeSize,industry:Industry,seats:number):Office
 /** Toạ độ màn hình (px, chưa phóng) của một điểm trên sàn. */
 export const iso=(x:number,y:number)=>({x:(x-y)*TILE_W/2,y:(x+y)*TILE_H/2});
 /** Khung ảnh asset: rộng (w+d)×64, cao (w+d)×32 + h×32; mép trái thẳng góc trái chân đế, mép dưới ở đỉnh dưới. */
-export function spriteBox(p:{x:number;y:number},item:KitId){const k=KIT[item],width=(k.w+k.d)*TILE_W/2,height=(k.w+k.d)*TILE_H/2+k.h*Z_PX,left=iso(p.x,p.y+k.d).x,bottom=iso(p.x+k.w,p.y+k.d).y;return{left,top:bottom-height,width,height}}
+export function spriteBox(p:{x:number;y:number},item:KitId){const k=KIT[item],width=(k.w+k.d)*TILE_W/2,height=(k.w+k.d)*TILE_H/2+k.h*Z_PX,left=iso(p.x,p.y+k.d).x,bottom=iso(p.x+k.w,p.y+k.d).y;const scale=item==='chair'?.75:.9,center=iso(p.x+k.w/2,p.y+k.d/2);return{left:center.x+(left-center.x)*scale,top:center.y+(bottom-height-center.y)*scale,width:width*scale,height:height*scale}}
 /** Thứ tự vẽ: món ở sau (x+y nhỏ) vẽ trước. */
 export const depth=(p:{x:number;y:number;item:KitId})=>p.x+p.y+(KIT[p.item].w+KIT[p.item].d)/2;

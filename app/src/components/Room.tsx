@@ -1,3 +1,4 @@
+import {furnitureFit} from '../domain/furniture-fit';
 import {useEffect,useRef,useState,type PointerEvent,type KeyboardEvent} from 'react';
 import {HOME_ITEMS,homeName,HOME_GRID,homeOf,homeError,rotateHomeObject,uidOf,isWallItem,onWall,wallAt,wallSlots,type HomeObject,type HomeId} from '../domain/home';
 import {floorPoint,floorCell,floorPolygon,homeSize,blockedHomeCell,HOME_FLOOR,homeSafeEdgePath,homeAnchor,HOME_OUTER_FLOOR,homeArtFit,dragCell,wallPoint,wallPolygon,nearestWallSlot} from '../domain/home-geometry';
@@ -19,11 +20,12 @@ function rugView(item:HomeObject){
 }
 function RugArt({item}:{item:HomeObject}){const r=rugView(item);return <svg className="home-rug-art" viewBox={`0 0 ${r.width} ${r.height}`} aria-hidden="true"><defs><clipPath id="rug-texture-clip"><polygon points="556,104 1440,653 973,939 89,390"/></clipPath></defs><g transform={`matrix(${r.matrix})`}><image href={HOME_ART.rug[0].src} width="1536" height="1024" clipPath="url(#rug-texture-clip)"/></g></svg>}
 /** Nội thất lô 5: neo đỉnh dưới chân đế vào lưới phòng (cùng ô 128×64 px với ảnh phòng). */
-function spritePlace(i:HomeObject,items:HomeObject[]){const sp=spriteFor(i.id,i.tier,i.mount==='wall'?(i.wall==='left'?90:0):i.rotation);if(!sp)return null;const {w,h}=homeSize(i);let p=floorPoint(i.x+w,i.y+h);
+function spritePlace(i:HomeObject,items:HomeObject[]){const sp=spriteFor(i.id,i.tier,i.mount==='wall'?(i.wall==='left'?90:0):i.rotation);if(!sp)return null;const {w,h}=homeSize(i);const fit=furnitureFit(sp,w,h);let p=floorPoint(i.x+w/2,i.y+h/2);
  // Việc 7: neo ảnh tranh là tâm khung (furniture-sprites.json), đặt vào tâm ô tường ở độ cao treo cố định.
  if(i.mount==='wall')p=wallPoint(i.wall??'left',wallAt(i),HOME_ITEMS[i.id].w);
- if(i.mount==='surface'){const parent=items.find(o=>uidOf(o)===i.parentId);if(parent){const s=homeSize(parent),c=floorPoint(parent.x+s.w*(i.id==='lamp'?.3:.7)+.5,parent.y+s.h*.5+.5);p={x:c.x,y:c.y-(32*1.6)/ROOM_IMAGE.h*100}}}
- return {sp,style:{left:p.x+'%',top:p.y+'%',width:(sp.w/ROOM_IMAGE.w*100)+'%',transform:`translate(${-sp.ax/sp.w*100}%,${-sp.ay/sp.h*100}%)`}}}
+ if(i.mount==='surface'){const parent=items.find(o=>uidOf(o)===i.parentId);if(parent){const s=homeSize(parent),c=floorPoint(parent.x+s.w*(i.id==='lamp'?.3:.7),parent.y+s.h*.5);p={x:c.x,y:c.y-(32*1.6)/ROOM_IMAGE.h*100}}}
+ const wall=i.mount==='wall',scale=wall?1:fit.scale,ax=wall?sp.ax:fit.cx,ay=wall?sp.ay:fit.cy;
+ return {sp,style:{left:p.x+'%',top:p.y+'%',width:(sp.w*scale/ROOM_IMAGE.w*100)+'%',transform:`translate(${-ax/sp.w*100}%,${-ay/sp.h*100}%)`}}}
 const zOf=(i:HomeObject,items:HomeObject[])=>{if(i.id==='rug')return 2;if(i.mount==='wall')return 3;if(i.mount==='surface'){const parent=items.find(o=>uidOf(o)===i.parentId);if(!parent)return 200;const s=homeSize(parent);return Math.round((parent.x+s.w+parent.y+s.h)*10)+4}const {w,h}=homeSize(i);return Math.round((i.x+w+i.y+h)*10)+3};
 const BAR:{id:HomeId;icon:string}[]=[{id:'bed',icon:'moon'},{id:'desk',icon:'briefcase'}];
 const USE_ACTIONS:Partial<Record<HomeId,string[]>>={bed:['sleep','nap'],desk:['study','gig','play'],table:['kitchen'],fridge:['kitchen'],tv:['tv']};

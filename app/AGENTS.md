@@ -15,3 +15,13 @@
 10. Mua sắm (TTTM và điện thoại): màn đầu là các ô mục sản phẩm, không thanh tab; thanh trên chỉ có Giỏ hàng và Kho (điện thoại: Đơn hàng). Thẻ đồ có nút "i" mở bảng thông tin riêng theo loại (`domain/specs.ts`).
 
 Nguồn: chỉ đạo trực tiếp của chủ dự án ngày 30/10/2026. Đọc docs/HANDOVER.md trước khi tiếp tục.
+
+## Đặt nội thất — chốt 07/11/2026 (#366)
+
+- Phòng vẫn chia ô isometric 2:1. Vùng chiếm chỗ dùng ô nguyên, độc lập với khung PNG/WebP. Ghế 1×1 ô; giường đơn 1×2 ô, xoay thành 2×1.
+- Phần chân/đáy tiếp xúc sàn phải nằm trọn và căn giữa vùng ô chiếm chỗ, có khoảng hở với mép. Lưng ghế, tủ, đầu giường được vươn lên theo chiều cao; không ép toàn bộ ảnh vào hình thoi.
+- Đọc footprint nguồn `fw/fh` và neo `ax/ay` từ manifest. Đổi neo đỉnh dưới sang tâm chân đế rồi thu đồng đều theo cả hai trục footprint; không kéo méo ảnh hoặc lấy tâm khung ảnh làm tâm chân.
+- Render phòng trọ, nhà, preview kéo dùng cùng phép căn. Va chạm, lối đi và vùng chọn vẫn theo footprint đầy đủ, không theo alpha ảnh hay kích thước đã thu nhỏ.
+- Kéo thả bám ô nguyên. Xoay giữ góc gốc ô, đổi chiều footprint và kiểm tra biên/chồng đồ trước khi nhận. Không âm thầm đẩy đồ khác. Save nửa ô cũ vẫn đọc được; đồ đó bám lại ô nguyên khi kéo/xoay.
+- Đồ treo tường dùng neo tường riêng; đồ trên bàn neo theo mặt bàn, không cộng thêm nửa ô như đồ sàn.
+- Asset mới phải khai báo đúng chân đế cho từng hướng; kiểm tra đủ cấp đồ và bốn hướng. Renderer không thể sửa một ảnh vẽ sai phối cảnh. Bộ hiện tại giữ nguyên ảnh, thu chân đế 90%; ghế văn phòng 75%.
