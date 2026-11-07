@@ -1,3 +1,7 @@
+## 07/11 — #366: căn nội thất theo vùng ô
+
+Giường đổi thành 1×2 ô. Room/HouseView dùng `furniture-fit.ts` để đổi neo nguồn về tâm chân đế và thu đồng đều 90% theo footprint đích; văn phòng thu 90%, ghế 75%, kể cả hình dự phòng. Kéo bám ô nguyên, xoay giữ góc gốc và vẫn kiểm va chạm. Không xóa save: tọa độ nửa ô cũ tiếp tục đọc, bám ô khi thao tác lại. Quy tắc cập nhật ở AGENTS gốc và app. Ảnh gốc không thay; cần duyệt trực quan trên điện thoại trước khi merge.
+
 ## 06/11 — #364: hội thoại có tag (0.92.0, chờ duyệt PR)
 
 Bổ sung 18 mạch/174 câu trong `talk/thread-data.ts`, bộ chọn và validator `talk/threads.ts`. Biến cố đời NPC có tag chính xác và chi tiết tất định; câu hỏi truyền signal qua gặp mặt/gọi/tin nhắn. Giữ đoạn tự diễn ngắn, câu đáp bám câu hỏi. Không tự chạy bộ/ăn khi chỉ hỏi chuyện. Save cũ vẫn đọc; chưa chuyển toàn bộ kho mảnh cũ hay thêm cốt truyện nhiều ngày. Thiết kế và 30 mẫu: `docs/design/HOI-THOAI-TAGS.md`, `HOI-THOAI-TAGS-SAMPLES.md`. Kiểm thử mới `tests/talk-threads.test.cjs` được đăng ký trong npm test.
